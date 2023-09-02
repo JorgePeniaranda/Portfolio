@@ -1,0 +1,46 @@
+/* Colors */
+
+:root{
+  --home-primary-bg: #101010;
+  --home-primary-text: #fff;
+  --home-invert-text: #000;
+}
+
+.home-primary-bg{
+    background-color: var(--home-primary-bg);
+}
+.home-primary-text{
+    color: var(--home-primary-text);
+}
+.home-invert-text{
+    color: var(--home-invert-text);
+}
+
+.lol{
+    font-family: sans-serif;
+    font-weight: 600;
+    transition: ease all 400ms;
+    animation: 9s ease RGB infinite running alternate;
+}
+h1{
+    font-size: 3rem;
+    font-family: sans-serif;
+    font-weight: 600;
+}
+@keyframes RGB {
+    0% {
+        color: #f04dff;
+    }
+    25% {
+        color: #ff4d4d;
+    }
+    50% {
+        color: #ffc54d;
+    }
+    75% {
+        color: #6aed76;
+    }
+    100% {
+        color: #09f;
+    }
+}
