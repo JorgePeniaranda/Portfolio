@@ -1,0 +1,44 @@
+/* Colors */
+
+:root {
+  --home-primary-bg: #101010;
+  --home-primary-text: #fff;
+  --home-invert-text: #000;
+}
+
+.home-primary-bg {
+  background-color: var(--home-primary-bg);
+}
+
+.home-primary-text {
+  color: var(--home-primary-text);
+}
+
+.home-invert-text {
+  color: var(--home-invert-text);
+}
+
+/* span inside h1 in header */
+
+.Home__Header-animatedColor {
+  transition: 300s all ease;
+  animation: 10s rainbowColor-1 running infinite alternate;
+}
+
+@keyframes rainbowColor-1 {
+  0% {
+    color: #f04dff;
+  }
+  25% {
+    color: #ff4d4d;
+  }
+  50% {
+    color: #ffc54d;
+  }
+  75% {
+    color: #6aed76;
+  }
+  100% {
+    color: #09f;
+  }
+}

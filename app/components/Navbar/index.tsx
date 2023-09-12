@@ -1,6 +1,5 @@
 import React from "react";
-import { useTranslation } from "@/app/i18n";
-import { SwitchLenguage } from "@/components/SwitchLenguage/index";
+import { SwitchLenguage } from "./SwitchLenguage/index";
 import Image from "next/image";
 import Logo from "@/app/favicon.ico";
 

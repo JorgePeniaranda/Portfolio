@@ -1,5 +1,4 @@
 import React from "react";
-import "./style.css";
 
 export const Header = ({ children }: { children?: React.ReactNode }) => {
   return (
