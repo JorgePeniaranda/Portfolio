@@ -20,8 +20,8 @@ html,
 body {
   min-height: 100vh;
   min-width: 100vw;
-  height: max-content;
-  width: max-content;
+
+  overflow-x: hidden; /* to fix */
 }
 
 /* Transition all */
