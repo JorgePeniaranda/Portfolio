@@ -6,7 +6,7 @@ import { SwitchTheme } from "@/components/SwitchTheme";
 // import { GoUpButton } from "@/components/GoUpButton";
 import "./globals.css";
 
-const Baloo = localFont({ src: "./Baloo.ttf" });
+const Baloo = localFont({ src: "../public/font/Baloo.ttf" });
 
 export const metadata: Metadata = {
   title: "Jorge Peñaranda | Web Developer",
