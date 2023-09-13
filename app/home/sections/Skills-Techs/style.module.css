@@ -7,12 +7,13 @@
   padding: 3rem 0 3rem;
   border-radius: 0.375rem;
   user-select: none;
-
   margin-bottom: 10rem;
+  padding: 3rem 0;
 }
 
 .listSkills div h2 {
   font-size: 2.25rem;
+  margin-bottom: 1rem;
 }
 
 .listSkills div ul {
@@ -22,7 +23,6 @@
   margin: 0 auto;
   justify-content: center;
   align-items: center;
-  margin-top: 2rem;
   gap: 2rem;
 }
 
