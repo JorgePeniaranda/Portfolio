@@ -7,7 +7,7 @@ export default function About() {
       <ReadingTime className="w-3/4" />
       <div className="flex flex-col">
         <h1 className="text-5xl font-bold underline underline-offset-4">
-          About me
+          Sobre mi
         </h1>
         <p className="mt-2 tracking-wider text-lg">
           Apasionado por la programación y la creación de herramientas de código
