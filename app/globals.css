@@ -1,22 +1,35 @@
+/* Taildwind Exports */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Base light colors */
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --home-primary-bg: #ffffff;
+  --home-primary-text: #1a1a1a;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* Base dark colors */
+:root {
+  --home-primary-bg-dark: #101010;
+  --home-primary-text-dark: #e5e5e5;
 }
 
-html, body{
+/* Normalize */
+html,
+body {
   min-height: 100vh;
   min-width: 100vw;
+  height: max-content;
+  width: max-content;
+}
+
+/* Transition all */
+html * {
+  transition: 300ms all ease;
+}
+
+/* Text Style */
+h1 span {
+  font-weight: 800;
 }

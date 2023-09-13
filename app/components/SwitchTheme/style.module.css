@@ -1,0 +1,21 @@
+.SwitchDarkmode {
+  position: fixed;
+  left: 0;
+  bottom: 1.75rem;
+  padding: 0.5rem;
+  padding-left: 2rem;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  transform: translateX(-1rem);
+}
+
+.SwitchDarkmode:hover {
+  transform: translateX(0);
+}
+
+.SwitchDarkmode * {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: var(--home-primary-text-dark);
+  margin: 0;
+}

@@ -1,0 +1,43 @@
+.specialWord {
+  animation: 10s RGBColor running infinite alternate;
+}
+
+.specialSVG {
+  animation: 10s RGBSVG running infinite alternate;
+}
+
+@keyframes RGBColor {
+  0% {
+    color: #f04dff;
+  }
+  25% {
+    color: #ff4d4d;
+  }
+  50% {
+    color: #ffc54d;
+  }
+  75% {
+    color: #6aed76;
+  }
+  100% {
+    color: #09f;
+  }
+}
+
+@keyframes RGBSVG {
+  0% {
+    fill: #f04dff;
+  }
+  25% {
+    fill: #ff4d4d;
+  }
+  50% {
+    fill: #ffc54d;
+  }
+  75% {
+    fill: #6aed76;
+  }
+  100% {
+    fill: #09f;
+  }
+}

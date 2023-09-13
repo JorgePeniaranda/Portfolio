@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Navbar } from "./components/Navbar";
-import { Footer } from "./components/Footer";
+import localFont from "next/font/local";
+import { SwitchTheme } from "./components/SwitchTheme";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const Baloo = localFont({ src: "./Baloo.ttf" });
 
 export const metadata: Metadata = {
   title: "Jorge Peñaranda | Web Developer",
@@ -17,8 +16,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html>
-      <body className={inter.className}>{children}</body>
+    <html className="dark">
+      <body className={Baloo.className}>
+        {children}
+        <div id="fixed">
+          <SwitchTheme />
+        </div>
+      </body>
     </html>
   );
 }

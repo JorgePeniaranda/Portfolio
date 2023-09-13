@@ -1,21 +1,18 @@
 "use client";
 import React from "react";
-// import { languages } from "@/app/i18n/settings";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
+// import Link from "next/link";
 import { FiChevronDown } from "react-icons/fi";
-import "./style.css";
+import styles from "./style.module.css";
 
 export const SwitchLenguage = ({ lng }: { lng: string }) => {
   const lngList = ["ES", "EN", "BR"];
   return (
-    <div className="dropdown">
-      <button className="dropbtn">
+    <div className={styles.dropdown}>
+      <button className={styles.dropbtn}>
         {lng}
         <FiChevronDown />
       </button>
-
-      <div className="dropdown-content">
+      <div className={styles.dropdown_content}>
         <a href="https://www.google.com/">es</a>
         <a href="https://www.google.com/">br</a>
       </div>
