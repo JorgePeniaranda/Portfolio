@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { SwitchTheme } from "./components/SwitchTheme";
+import { SwitchTheme } from "@/components/SwitchTheme";
+// import { GoUpButton } from "@/components/GoUpButton";
 import "./globals.css";
 
 const Baloo = localFont({ src: "./Baloo.ttf" });
@@ -21,6 +22,7 @@ export default function RootLayout({
         {children}
         <div id="fixed">
           <SwitchTheme />
+          {/* <GoUpButton /> */}
         </div>
       </body>
     </html>
