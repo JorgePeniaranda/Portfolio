@@ -1,5 +1,5 @@
 import Logo from "./logo";
-import space from "./space";
+import Space from "./space";
 import ReadingTime from "./readingTime";
 
-export { Logo, space, ReadingTime };
+export { Logo, Space, ReadingTime };

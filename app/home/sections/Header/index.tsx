@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./style.module.css";
-import Space from "@/public/svg/space";
+import { Space } from "@/public/svg";
 
 export default function Header() {
   return (
