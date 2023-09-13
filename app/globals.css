@@ -20,8 +20,6 @@ html,
 body {
   min-height: 100vh;
   min-width: 100vw;
-
-  overflow-x: hidden; /* to fix */
 }
 
 /* Transition all */
@@ -32,4 +30,9 @@ html * {
 /* Text Style */
 h1 span {
   font-weight: 800;
+}
+
+/* ----------------- to fix ----------------- */
+body {
+  overflow-x: hidden;
 }

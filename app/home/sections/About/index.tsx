@@ -3,7 +3,7 @@ import React from "react";
 
 export default function About() {
   return (
-    <section className="w-full grid grid-cols-[55%_45%] items-center justify-center pt-20 pb-14">
+    <section className="w-full grid grid-cols-[55%_45%] items-center justify-center pt-20 pb-48">
       <ReadingTime className="w-3/4" />
       <div className="flex flex-col">
         <h1 className="text-5xl font-bold underline underline-offset-4">
