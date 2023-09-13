@@ -2,8 +2,8 @@ const space = ({
   className,
   className_DynamicBG,
 }: {
-  className: string;
-  className_DynamicBG: string;
+  className?: string;
+  className_DynamicBG?: string;
 }) => {
   return (
     <svg
