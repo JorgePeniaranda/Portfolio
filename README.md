@@ -7,7 +7,9 @@
 </p>
 
 <div align="center">
-    <img src="https://img.freepik.com/foto-gratis/fondo_53876-32170.jpg" alt="Screenshot" width="640" height="320">
+    <a href="https://jorgepeniaranda.me/" target="_blank">
+      <img src="./screenshot.png" alt="Screenshot" width="640" height="320">
+    </a>
 </div>
 
 ## Getting Started
