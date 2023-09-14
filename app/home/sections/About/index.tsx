@@ -19,7 +19,7 @@ export default function About() {
         <Link
           href="https://jorgepeniaranda.tech/"
           target="_blank"
-          className="mt-5 w-fit p-2 px-6 select-none text-center font-semibold rounded-md bg-primary-bg-dark text-primary-text-dark dark:bg-primary-bg dark:text-primary-text hover:brightness-75"
+          className="mt-5 w-fit p-2 px-6 select-none text-center font-semibold rounded-md bg-primary-dark text-secondary-dark dark:bg-primary dark:text-secondary hover:brightness-75"
         >
           Conocer Blog
         </Link>

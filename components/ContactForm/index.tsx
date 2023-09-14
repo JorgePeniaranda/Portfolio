@@ -36,7 +36,7 @@ export const ContactForm = ({ className }: { className?: string }) => {
       />
       <button
         type="submit"
-        className="bg-primary-bg-dark select-none text-primary-text-dark dark:bg-primary-bg dark:text-primary-text"
+        className="bg-primary-dark select-none text-secondary-dark dark:bg-primary dark:text-secondary"
       >
         Enviar
       </button>

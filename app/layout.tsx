@@ -23,7 +23,7 @@ export default function RootLayout({
       <body
         className={
           Baloo.className +
-          "  bg-primary-bg text-primery-text px-36 dark:bg-primary-bg-dark dark:text-primary-text-dark"
+          "  bg-primary text-primery-text px-36 dark:bg-primary-dark dark:text-secondary-dark"
         }
       >
         <Navbar lng={"es"} />

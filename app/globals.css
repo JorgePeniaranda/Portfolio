@@ -5,16 +5,23 @@
 
 /* Base light colors */
 :root {
-  --home-primary-bg: #ffffff;
-  --home-primary-text: #1a1a1a;
+  --primary: #ffffff;
+  --secondary: #1a1a1a;
 
   --gray-color: #a1a1aa;
 }
 
+/* 
+        "primary": "var(--home-primary)",
+        "primary-dark": "var(--home-primary-dark)",
+        "secondary": "var(--home-secondary)",
+        "secondary-dark": "var(--home-secondary-dark)"
+*/
+
 /* Base dark colors */
 :root {
-  --home-primary-bg-dark: #101010;
-  --home-primary-text-dark: #e5e5e5;
+  --primary-dark: #101010;
+  --secondary-dark: #e5e5e5;
 }
 
 /* Normalize */

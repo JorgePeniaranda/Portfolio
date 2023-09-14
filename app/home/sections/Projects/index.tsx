@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Projects() {
   return (
-    <section className="flex flex-wrap items-center justify-around text-end">
+    <section className="flex flex-wrap items-center justify-around text-end my-10">
       <div className="w-1/2 flex flex-col items-end">
         <h2 className="text-5xl select-none font-bold underline underline-offset-4">
           Proyectos
@@ -18,7 +18,7 @@ export default function Projects() {
         <Link
           href="/portfolio"
           target="_blank"
-          className="mt-5 w-fit p-2 px-6 select-none text-center font-semibold rounded-md bg-primary-bg-dark text-primary-text-dark dark:bg-primary-bg dark:text-primary-text hover:brightness-75"
+          className="mt-5 w-fit p-2 px-6 select-none text-center font-semibold rounded-md bg-primary-dark text-secondary-dark dark:bg-primary dark:text-secondary hover:brightness-75"
         >
           Conocer Proyectos
         </Link>

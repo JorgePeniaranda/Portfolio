@@ -27,7 +27,7 @@ export const GoUpButton = () => {
     <ImArrowUp2
       onClick={() => handleClick()}
       className={
-        "fixed bottom-7 right-7 bg-primary-bg-dark text-primary-text-dark dark:bg-white dark:text-primary-text w-11 h-11 p-3 text-2xl rounded-full cursor-pointer " +
+        "fixed bottom-7 right-7 bg-primary-dark text-secondary-dark dark:bg-white dark:text-secondary w-11 h-11 p-3 text-2xl rounded-full cursor-pointer " +
         (showGoUpBnt ? "opacity-1" : "opacity-0") +
         " " +
         styles.mainimage
