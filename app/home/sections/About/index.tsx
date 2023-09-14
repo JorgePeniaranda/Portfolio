@@ -7,7 +7,7 @@ export default function About() {
     <section className="w-full grid grid-cols-[55%_45%] items-center justify-center pt-20 pb-48">
       <ReadingTime className="w-3/4" />
       <div className="flex flex-col">
-        <h2 className="text-5xl font-bold underline underline-offset-4">
+        <h2 className="text-5xl select-none font-bold underline underline-offset-4">
           Sobre mi
         </h2>
         <p className="mt-2 tracking-wider text-lg">

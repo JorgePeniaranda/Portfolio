@@ -10,7 +10,7 @@ export default function Contact() {
         <Nature className="w-4/6" />
       </div>
       <div className="flex flex-col  w-1/2">
-        <h2 className="text-5xl font-bold underline underline-offset-4">
+        <h2 className="text-5xl font-bold select-none underline underline-offset-4">
           Contact
         </h2>
         <p className="mt-2 tracking-wider text-xl">
