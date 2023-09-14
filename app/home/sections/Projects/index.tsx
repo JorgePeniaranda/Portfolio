@@ -1,9 +1,10 @@
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Projects() {
   return (
-    <section className="flex flex-wrap items-center justify-around text-end pt-5">
+    <section className="flex flex-wrap items-center justify-around text-end">
       <div className="w-1/2 flex flex-col items-end">
         <h2 className="text-5xl font-bold underline underline-offset-4">
           Proyectos
@@ -14,13 +15,13 @@ export default function Projects() {
           galería de proyectos para conocer más sobre mi trabajo y enfoque en el
           desarrollo web.
         </p>
-        <a
-          href="https://jorgepeniaranda.tech/"
+        <Link
+          href="/portfolio"
           target="_blank"
           className="mt-5 w-fit p-2 px-6 select-none text-center font-semibold rounded-md bg-primary-bg-dark text-primary-text-dark dark:bg-primary-bg dark:text-primary-text hover:brightness-75"
         >
           Conocer Proyectos
-        </a>
+        </Link>
       </div>
       <Image
         src="/img/screenshotProjects.png"

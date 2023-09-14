@@ -1,5 +1,6 @@
-import { ReadingTime } from "@/public/svg";
 import React from "react";
+import Link from "next/link";
+import { ReadingTime } from "@/public/svg";
 
 export default function About() {
   return (
@@ -15,13 +16,13 @@ export default function About() {
           este emocionante campo. Disfruto compartiendo mi conocimiento a medida
           que avanzo en mi camino de aprendizaje.
         </p>
-        <a
+        <Link
           href="https://jorgepeniaranda.tech/"
           target="_blank"
           className="mt-5 w-fit p-2 px-6 select-none text-center font-semibold rounded-md bg-primary-bg-dark text-primary-text-dark dark:bg-primary-bg dark:text-primary-text hover:brightness-75"
         >
           Conocer Blog
-        </a>
+        </Link>
       </div>
     </section>
   );
