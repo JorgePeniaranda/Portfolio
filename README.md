@@ -8,7 +8,7 @@
 
 <div align="center">
     <a href="https://jorgepeniaranda.me/" target="_blank">
-      <img src="./screenshot.png" alt="Screenshot" width="640" height="320">
+      <img src="./screenshot.png" alt="Screenshot">
     </a>
 </div>
 
