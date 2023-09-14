@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./style.module.css";
-import { Space } from "@/public/svg";
+import { Rocket } from "@/public/svg";
 
 export default function Header() {
   return (
@@ -13,12 +13,12 @@ export default function Header() {
             innovación
           </span>
         </h1>
-        <p className="text-neutral-400 font-semibold text-xl select-text">
+        <p className="text-zinc-400  font-semibold text-xl select-text">
           Jorge Peñaranda / Web Developer
         </p>
       </div>
       <div className="flex items-center justify-center pb-32">
-        <Space
+        <Rocket
           className="w-full fill-red-950"
           className_DynamicBG={styles.specialSVG}
         />

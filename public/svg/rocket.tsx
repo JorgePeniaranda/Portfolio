@@ -1,4 +1,4 @@
-const Space = ({
+const Rocket = ({
   className,
   className_DynamicBG,
 }: {
@@ -222,4 +222,4 @@ const Space = ({
   );
 };
 
-export default Space;
+export default Rocket;

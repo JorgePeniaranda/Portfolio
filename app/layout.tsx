@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import { Navbar } from "@/components/Navbar";
 // import { Footer } from "@/components/Footer";
 import { SwitchTheme } from "@/components/SwitchTheme";
-// import { GoUpButton } from "@/components/GoUpButton";
+import { GoUpButton } from "@/components/GoUpButton";
 import "./globals.css";
 
 const Baloo = localFont({ src: "../public/font/Baloo.ttf" });

@@ -1,5 +1,6 @@
 import Logo from "./logo";
-import Space from "./space";
+import Rocket from "./rocket";
 import ReadingTime from "./readingTime";
+import Nature from "./Nature";
 
-export { Logo, Space, ReadingTime };
+export { Logo, Rocket, ReadingTime, Nature };

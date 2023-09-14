@@ -1,5 +1,5 @@
 import React from "react";
-import { Header, About, Skills, Projects } from "./sections";
+import { Header, About, Skills, Projects, Contact } from "./sections";
 
 export const HomePage = () => {
   return (
@@ -8,6 +8,7 @@ export const HomePage = () => {
       <About />
       <Skills />
       <Projects />
+      <Contact />
     </main>
   );
 };
