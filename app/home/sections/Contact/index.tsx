@@ -9,7 +9,7 @@ export default function Contact() {
       <div className="w-1/2 min-width-svgSize flex items-center justify-center p-3">
         <Nature className="w-4/6" />
       </div>
-      <div className="flex flex-col gap-2 w-1/2">
+      <div className="flex flex-col  w-1/2">
         <h2 className="text-5xl font-bold underline underline-offset-4">
           Contact
         </h2>

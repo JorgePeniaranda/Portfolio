@@ -16,11 +16,11 @@
 }
 
 .formStyle input {
-  width: calc(50% - 0.7rem); /* Width - Gap */
+  width: calc(50% - 0.35rem); /* Width - Gap */
 }
 
 .formStyle textarea {
-  width: calc(100% - 0.7rem); /* Width - Gap */
+  width: 100%;
   resize: vertical;
 }
 
