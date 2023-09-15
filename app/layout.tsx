@@ -31,7 +31,7 @@ export default function RootLayout({
         <Footer />
         <div id="fixed">
           <SwitchTheme />
-          {/* <GoUpButton /> */}
+          <GoUpButton />
         </div>
       </body>
     </html>
