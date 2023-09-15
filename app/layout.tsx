@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Navbar } from "@/components/Navbar";
-// import { Footer } from "@/components/Footer";
+import { Footer } from "@/components/Footer";
 import { SwitchTheme } from "@/components/SwitchTheme";
 import { GoUpButton } from "@/components/GoUpButton";
 import "./globals.css";
@@ -28,7 +28,7 @@ export default function RootLayout({
       >
         <Navbar lng={"es"} />
         {children}
-        {/* <Footer /> */}
+        <Footer />
         <div id="fixed">
           <SwitchTheme />
           {/* <GoUpButton /> */}
