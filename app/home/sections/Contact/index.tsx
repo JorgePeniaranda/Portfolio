@@ -6,10 +6,10 @@ import styles from "./style.module.css";
 export default function Contact() {
   return (
     <section className="flex flex-wrap-reverse justify-around pt-36 pb-32 items-center">
-      <div className="w-1/2 min-width-svgSize flex items-center justify-center p-3 max-md:w-[90%] max-md:mt-16">
-        <Nature className="w-4/6 max-md:w-full" />
+      <div className="w-[55%] min-width-svgSize flex items-center justify-center max-md:w-[90%] max-md:mt-16 pb-16">
+        <Nature className="w-4/6 pr-10 max-md:w-full" />
       </div>
-      <div className="flex flex-col w-1/2  max-md:w-[90%] max-md:items-center max-md:text-center">
+      <div className="flex flex-col w-[45%]  max-md:w-[90%] max-md:items-center max-md:text-center">
         <h2 className="text-5xl font-bold select-none underline underline-offset-4">
           Contact
         </h2>
