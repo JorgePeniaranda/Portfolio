@@ -18,9 +18,9 @@ import { RiNotionFill } from "react-icons/ri";
 export default function Skills() {
   return (
     <section
-      className={styles.listSkills + " bg-[#e5e7eb] dark:bg-[#1b1b1b] under"}
+      className={styles.listSkills + " bg-[#e5e7eb] dark:bg-[#1b1b1b] gap-16"}
     >
-      <div className="rounded-md">
+      <div>
         <h2>FrontEnd</h2>
         <ul>
           <li>

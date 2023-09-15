@@ -16,6 +16,6 @@
 .SwitchDarkmode * {
   width: 1.75rem;
   height: 1.75rem;
-  color: var(--home-secondary-dark);
+  color: var(--primary);
   margin: 0;
 }

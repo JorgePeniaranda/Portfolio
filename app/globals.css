@@ -11,13 +11,6 @@
   --gray-color: #a1a1aa;
 }
 
-/* 
-        "primary": "var(--home-primary)",
-        "primary-dark": "var(--home-primary-dark)",
-        "secondary": "var(--home-secondary)",
-        "secondary-dark": "var(--home-secondary-dark)"
-*/
-
 /* Base dark colors */
 :root {
   --primary-dark: #101010;
