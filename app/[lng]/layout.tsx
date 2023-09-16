@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { dir } from "i18next";
 import { languages } from "@/app/i18n/settings";
 import localFont from "next/font/local";
 import { Navbar } from "@/components/Navbar";
@@ -19,7 +18,7 @@ export const metadata: Metadata = {
   description:
     "Soy un apasionado desarrollador web con experiencia en desarrollo web. Mis habilidades incluyen React, Next.js, CSS, JavaScript, y más. ¡Visita mi portafolio para ver ejemplos de soluciones web responsivas y herramientas de código abierto que he creado!",
   alternates: {
-    canonical: "https://jorgepeniaranda.me/es",
+    canonical: "https://jorgepeniaranda.me",
     languages: {
       es: "https://jorgepeniaranda.me/es",
       en: "https://jorgepeniaranda.me/en",
