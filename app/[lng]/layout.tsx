@@ -18,11 +18,11 @@ export const metadata: Metadata = {
   description:
     "Soy un apasionado desarrollador web con experiencia en desarrollo web. Mis habilidades incluyen React, Next.js, CSS, JavaScript, y más. ¡Visita mi portafolio para ver ejemplos de soluciones web responsivas y herramientas de código abierto que he creado!",
   alternates: {
-    canonical: "https://jorgepeniaranda.me",
+    canonical: "/",
     languages: {
-      es: "https://jorgepeniaranda.me/es",
-      en: "https://jorgepeniaranda.me/en",
-      pt: "https://jorgepeniaranda.me/pt",
+      es: "/es",
+      en: "/en",
+      pt: "/pt",
     },
   },
   authors: {
@@ -36,8 +36,6 @@ export const metadata: Metadata = {
   generator: "Next.js",
   icons: "img/Logo-512x512.png",
   keywords: [
-    "Jorge",
-    "Peñaranda",
     "Desarrollo Web",
     "Desarrollador Web",
     "Programador",
