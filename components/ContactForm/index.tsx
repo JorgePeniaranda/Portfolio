@@ -2,7 +2,19 @@
 
 import emailjs from "@emailjs/browser";
 
-export const ContactForm = ({ className }: { className?: string }) => {
+export const ContactForm = ({
+  namePlaceHolder,
+  emailPlaceHolder,
+  messagePlaceHolder,
+  sendPlaceHolder,
+  className,
+}: {
+  namePlaceHolder: string;
+  emailPlaceHolder: string;
+  messagePlaceHolder: string;
+  sendPlaceHolder: string;
+  className?: string;
+}) => {
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -27,14 +39,14 @@ export const ContactForm = ({ className }: { className?: string }) => {
       <input
         type="text"
         name="name"
-        placeholder="Nombre..."
+        placeholder={`${namePlaceHolder}...`}
         className="border-secondary-dark dark:border-secondary text-gray-color focus:text-secondary dark:hover:text-secondary-dark focus:placeholder:text-secondary dark:focus:placeholder:text-secondary-dark"
         required
       />
       <input
         type="email"
         name="email"
-        placeholder="Email..."
+        placeholder={`${emailPlaceHolder}...`}
         className="border-secondary-dark dark:border-secondary text-gray-color focus:text-secondary dark:hover:text-secondary-dark focus:placeholder:text-secondary dark:focus:placeholder:text-secondary-dark"
         required
       />
@@ -42,7 +54,7 @@ export const ContactForm = ({ className }: { className?: string }) => {
         name="message"
         cols={30}
         rows={6}
-        placeholder="Mensaje..."
+        placeholder={`${messagePlaceHolder}...`}
         className="border-secondary-dark dark:border-secondary text-gray-color focus:text-secondary dark:hover:text-secondary-dark focus:placeholder:text-secondary dark:focus:placeholder:text-secondary-dark"
         required
       />
@@ -50,7 +62,7 @@ export const ContactForm = ({ className }: { className?: string }) => {
         type="submit"
         className="bg-primary-dark select-none text-secondary-dark dark:bg-primary dark:text-secondary"
       >
-        Enviar
+        {sendPlaceHolder}
       </button>
     </form>
   );

@@ -22,6 +22,21 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/[lng]/layout.js", "app/[lng]/layout.js", "app/i18n/settings.js", "app/i18n/settings.js", "app/i18n/settings.js", "app/i18n/index.js", "app/i18n/index.js", "components/SwitchLenguage/index.js", "ni18n.config.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "app/[lng]/layout.js",
+    "app/[lng]/layout.js",
+    "app/i18n/settings.js",
+    "app/i18n/settings.js",
+    "app/i18n/settings.js",
+    "app/i18n/index.js",
+    "app/i18n/index.js",
+    "components/SwitchLenguage/index.js",
+    "ni18n.config.ts",
+    "dictionaries/index.js"
+  ],
   "exclude": ["node_modules"]
 }

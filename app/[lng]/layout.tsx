@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { dir } from "i18next";
+import { languages } from "@/app/i18n/settings";
 import localFont from "next/font/local";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -6,7 +8,11 @@ import { SwitchTheme } from "@/components/SwitchTheme";
 import { GoUpButton } from "@/components/GoUpButton";
 import "./globals.css";
 
-const Baloo = localFont({ src: "../public/font/Baloo.ttf" });
+export async function generateStaticParams() {
+  return languages.map((lng) => ({ lng }));
+}
+
+const Baloo = localFont({ src: "../../public/font/Baloo.ttf" });
 
 export const metadata: Metadata = {
   title: "Jorge Peñaranda | Desarrollador Web",
@@ -76,11 +82,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params: { lng },
 }: {
   children: React.ReactNode;
+  params: {
+    lng: string;
+  };
 }) {
   return (
-    <html lang="es" className="dark">
+    <html lang={lng} className="dark">
       {/* Change when implementing i18n */}
       <body
         className={
@@ -88,7 +98,7 @@ export default function RootLayout({
           "  bg-primary text-secondary dark:bg-primary-dark dark:text-secondary-dark px-0 sm:px-24  2xl:px-36"
         }
       >
-        <Navbar lng={"es"} />
+        <Navbar lng={lng} />
         {children}
         <Footer />
         <div id="fixed">

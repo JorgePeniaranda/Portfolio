@@ -1,10 +1,14 @@
 "use client";
-// import Link from "next/link";
+import Link from "next/link";
+import { languages } from "@/app/i18n/settings";
+import { usePathname } from "next/navigation";
 import { FiChevronDown } from "react-icons/fi";
 import styles from "./style.module.css";
 
 export const SwitchLenguage = ({ lng }: { lng: string }) => {
-  const lngList = ["ES", "EN", "BR"];
+  const path = usePathname();
+  var pathWithoutLng = path.split(`/${lng}`);
+
   return (
     <div className={styles.dropdown}>
       <button className={styles.dropbtn}>
@@ -12,8 +16,20 @@ export const SwitchLenguage = ({ lng }: { lng: string }) => {
         <FiChevronDown />
       </button>
       <div className={styles.dropdown_content}>
-        <a href="https://www.google.com/">es</a>
-        <a href="https://www.google.com/">br</a>
+        {languages
+          .filter((l) => lng !== l)
+          .map((l: string) => {
+            return (
+              <Link
+                key={l}
+                href={`/${l}/${
+                  pathWithoutLng.length > 1 ? pathWithoutLng[1] : ""
+                }`}
+              >
+                {l}
+              </Link>
+            );
+          })}
       </div>
     </div>
   );
