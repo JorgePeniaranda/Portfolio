@@ -16,7 +16,6 @@ export const GoUpButton = () => {
   const handleScroll = () => {
     if (!!scrollY) setShowGoUpBnt(true);
     else setShowGoUpBnt(false);
-    console.log("%cscroll event", "color: red;");
   };
 
   const handleClick = () => {

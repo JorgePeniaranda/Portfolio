@@ -9,24 +9,27 @@ export default function Header() {
       <div className="flex flex-col justify-evenly w-[70%] max-sm:w-[90%] max-sm:text-center">
         <h1 className="text-7xl font-bold max-sm:text-5xl">
           Navegando hacia un futuro de{" "}
-          <span
+          <strong
             className={
               "text-7xl font-bold  max-sm:text-5xl " + styles.specialWord
             }
           >
             innovación
-          </span>
+          </strong>
         </h1>
         <p className="text-zinc-400  font-semibold text-xl select-text">
           Jorge Peñaranda / Web Developer
         </p>
       </div>
-      <div className="flex items-center justify-center pb-32 w-[30%] max-sm:w-[90%]">
+      <figure className="flex items-center justify-center pb-32 w-[30%] max-sm:w-[90%]">
         <Rocket
           className="w-full h-full fill-red-950"
           className_DynamicBG={styles.specialSVG}
         />
-      </div>
+        <figcaption className="text-center hidden">
+          Spacecraft in space
+        </figcaption>
+      </figure>
     </header>
   );
 }

@@ -16,6 +16,7 @@ export const SwitchTheme = ({ className }: { className?: string }) => {
   return (
     <button
       onClick={() => handleClick()}
+      aria-label="Switch theme"
       className={
         "bg-blue-600 dark:bg-amber-400 transition " +
         className +

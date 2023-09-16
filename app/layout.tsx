@@ -19,7 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className="dark">
+    <html lang="es" className="dark">
+      {/* Change when implementing i18n */}
       <body
         className={
           Baloo.className +

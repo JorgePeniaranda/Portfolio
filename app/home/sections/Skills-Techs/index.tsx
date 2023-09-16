@@ -20,7 +20,7 @@ export default function Skills() {
     <section
       className={styles.listSkills + " bg-[#e5e7eb] dark:bg-[#1b1b1b] gap-16"}
     >
-      <div>
+      <article>
         <h2>FrontEnd</h2>
         <ul>
           <li>
@@ -48,8 +48,8 @@ export default function Skills() {
             <DiSass />
           </li>
         </ul>
-      </div>
-      <div>
+      </article>
+      <article>
         <h2>BackEnd</h2>
         <ul>
           <li>
@@ -68,8 +68,8 @@ export default function Skills() {
             <TbBrandCSharp />
           </li>
         </ul>
-      </div>
-      <div>
+      </article>
+      <article>
         <h2>DevOps</h2>
         <ul>
           <li>
@@ -94,7 +94,7 @@ export default function Skills() {
             <TbBrandVscode />
           </li>
         </ul>
-      </div>
+      </article>
     </section>
   );
 }

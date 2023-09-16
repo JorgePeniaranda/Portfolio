@@ -5,10 +5,13 @@ import { ReadingTime } from "@/public/svg";
 export default function About() {
   return (
     <section className="w-full flex flex-wrap-reverse items-center justify-center pt-20 pb-48">
-      <div className="w-[55%] max-sm:w-[90%] max-md:mt-16">
+      <figure className="w-[55%] max-sm:w-[90%] max-md:mt-16">
         <ReadingTime className="w-3/4 max-sm:w-full max-md:mt-16" />
-      </div>
-      <div className="flex flex-col max-md:items-center max-md:text-center w-[45%] max-sm:w-[90%]">
+        <figcaption className="text-center hidden">
+          Someone reading on a comfy chair.
+        </figcaption>
+      </figure>
+      <article className="flex flex-col max-md:items-center max-md:text-center w-[45%] max-sm:w-[90%]">
         <h2 className="text-5xl select-none font-bold underline underline-offset-4">
           Sobre mi
         </h2>
@@ -25,7 +28,7 @@ export default function About() {
         >
           Conocer Blog
         </Link>
-      </div>
+      </article>
     </section>
   );
 }
