@@ -1,5 +1,6 @@
 import { useTranslation } from "@/app/i18n";
 import Image from "next/image";
+import Phone from "@/public/img/screenshotProjects.png";
 import Link from "next/link";
 
 export default async function Projects({ lng }: { lng: string }) {
@@ -22,7 +23,7 @@ export default async function Projects({ lng }: { lng: string }) {
       </article>
       <figure className="mt-16 w-[90%] md:mt-0 md:w-[55%]">
         <Image
-          src="/img/screenshotProjects.png"
+          src={Phone}
           className="w-full select-none pointer-events-none"
           width={800}
           height={600}
