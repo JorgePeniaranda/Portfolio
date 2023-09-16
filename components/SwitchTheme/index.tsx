@@ -1,15 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import { useTheme } from "@/hooks/useTheme";
 import { FiMoon, FiSun } from "react-icons/fi";
 import styles from "./style.module.css";
 
 export const SwitchTheme = ({ className }: { className?: string }) => {
-  const [darkMode, setDarkMode] = useState(true);
+  const { darkMode, setDarkMode } = useTheme(true);
 
   const handleClick = () => {
-    if (!!darkMode) document.documentElement.classList.remove("dark");
-    else document.documentElement.classList.add("dark");
     setDarkMode(!darkMode);
   };
 
