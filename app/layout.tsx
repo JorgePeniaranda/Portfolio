@@ -67,12 +67,11 @@ export const metadata: Metadata = {
     description:
       "Soy un apasionado desarrollador web con experiencia en diseño y desarrollo front-end y back-end. Mis habilidades incluyen HTML, CSS, JavaScript, React, Node.js y más. Explora mi portafolio para ver ejemplos de soluciones web responsivos y herramientas de código abierto que he creado. ¡Contáctame para llevar tu proyecto web al siguiente nivel!",
     card: "summary_large_image",
-    site: "@site",
-    creator: "@creator",
+    site: "@peniarandajorge",
+    creator: "@peniarandajorge",
     images: "img/Logo-512x512.png",
   },
   viewport: { width: "device-width", initialScale: 1 },
-  /* verification, */
 };
 
 export default function RootLayout({
@@ -86,7 +85,7 @@ export default function RootLayout({
       <body
         className={
           Baloo.className +
-          "  bg-primary text-primery-text px-36 dark:bg-primary-dark dark:text-secondary-dark max-sm:px-0 max-2xl:px-24"
+          "  bg-primary text-secondary dark:bg-primary-dark dark:text-secondary-dark px-0 sm:px-24  2xl:px-36"
         }
       >
         <Navbar lng={"es"} />

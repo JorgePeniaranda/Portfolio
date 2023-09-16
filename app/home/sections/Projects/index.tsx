@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Projects() {
   return (
     <section className="flex flex-wrap items-center justify-around text-end my-10">
-      <article className="w-[45%] flex flex-col items-end max-md:w-[90%] max-md:items-center max-md:text-center">
+      <article className="flex flex-col items-center text-center w-[90%] md:w-[45%] md:items-end md:text-end">
         <h2 className="text-5xl select-none font-bold underline underline-offset-4">
           Proyectos
         </h2>
@@ -22,7 +22,7 @@ export default function Projects() {
           Conocer Proyectos
         </Link>
       </article>
-      <figure className="w-[55%] max-md:w-[90%] max-md:mt-16">
+      <figure className="mt-16 w-[90%] md:mt-0 md:w-[55%]">
         <Image
           src="/img/screenshotProjects.png"
           className="w-full select-none pointer-events-none"

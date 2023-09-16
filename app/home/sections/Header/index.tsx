@@ -3,15 +3,13 @@ import { Rocket } from "@/public/svg";
 
 export default function Header() {
   return (
-    <header className="w-full min-h-[calc(100vh_-_9rem)] flex flex-wrap justify-around select-none max-sm:gap-16">
+    <header className="w-full min-h-[calc(100vh_-_9rem)] flex flex-wrap justify-around select-none gap-16 sm:gap-0">
       {/* h-[calc(100%_-_7.5rem)]: 100% - nav size */}
-      <div className="flex flex-col justify-evenly w-[70%] max-sm:w-[90%] max-sm:text-center">
-        <h1 className="text-7xl font-bold max-sm:text-5xl">
+      <div className="flex flex-col justify-evenly text-center md:text-start w-[90%] md:w-[70%]">
+        <h1 className="font-bold text-5xl sm:text-7xl">
           Navegando hacia un futuro de{" "}
           <strong
-            className={
-              "text-7xl font-bold  max-sm:text-5xl " + styles.specialWord
-            }
+            className={"font-bold text-5xl sm:text-7xl " + styles.specialWord}
           >
             innovación
           </strong>
@@ -20,7 +18,7 @@ export default function Header() {
           Jorge Peñaranda / Desarrollador Web
         </span>
       </div>
-      <figure className="flex items-center justify-center pb-32 w-[30%] max-sm:w-[90%]">
+      <figure className="flex items-center justify-center pb-32 w-[90%] sm:w-[30%]">
         <Rocket
           className="w-full h-full fill-red-950"
           className_DynamicBG={styles.specialSVG}
