@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 // import Link from "next/link";
 import { FiChevronDown } from "react-icons/fi";
 import styles from "./style.module.css";

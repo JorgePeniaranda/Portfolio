@@ -1,4 +1,3 @@
-import React from "react";
 import { ContactForm } from "@/components/ContactForm";
 import { Nature } from "@/public/svg";
 import styles from "./style.module.css";
@@ -15,9 +14,8 @@ export default function Contact() {
           Contact
         </h2>
         <p className="mt-2 tracking-wider text-xl">
-          Si deseas ponerte en contacto conmigo o tienes alguna pregunta, no
-          dudes en enviarme un mensaje. Estoy aquí para ayudarte y escuchar tus
-          ideas.
+          Si deseas contactarme o tienes alguna consulta, no dudes en enviarme
+          un mensaje. Estoy aquí para ayudarte y escuchar tus ideas.
         </p>
         <ContactForm className={styles.formStyle} />
       </article>

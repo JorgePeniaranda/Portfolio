@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./style.module.css";
 
 import { AiFillHtml5, AiFillGithub, AiFillGitlab } from "react-icons/ai";
@@ -24,28 +23,28 @@ export default function Skills() {
         <h2>FrontEnd</h2>
         <ul>
           <li>
-            <AiFillHtml5 />
+            <AiFillHtml5 arial-label="HTML5" />
           </li>
           <li>
-            <DiCss3 />
+            <DiCss3 arial-label="CSS3" />
           </li>
           <li>
-            <IoLogoJavascript />
+            <IoLogoJavascript arial-label="JavaScript" />
           </li>
           <li>
-            <BiLogoReact />
+            <BiLogoReact arial-label="React" />
           </li>
           <li>
-            <TbBrandNextjs />
+            <TbBrandNextjs arial-label="NextJS" />
           </li>
           <li>
-            <SiTypescript />
+            <SiTypescript arial-label="TypeScript" />
           </li>
           <li>
-            <SiTailwindcss />
+            <SiTailwindcss arial-label="TailWindCSS" />
           </li>
           <li>
-            <DiSass />
+            <DiSass arial-label="SASS" />
           </li>
         </ul>
       </article>
@@ -53,19 +52,19 @@ export default function Skills() {
         <h2>BackEnd</h2>
         <ul>
           <li>
-            <BiLogoNodejs />
+            <BiLogoNodejs arial-label="NodeJS" />
           </li>
           <li>
-            <BiLogoPhp />
+            <BiLogoPhp arial-label="PHP" />
           </li>
           <li>
-            <SiMysql />
+            <SiMysql arial-label="MySQL" />
           </li>
           <li>
-            <FaLaravel />
+            <FaLaravel arial-label="Laravel" />
           </li>
           <li>
-            <TbBrandCSharp />
+            <TbBrandCSharp arial-label="CSharp" />
           </li>
         </ul>
       </article>
@@ -73,25 +72,25 @@ export default function Skills() {
         <h2>DevOps</h2>
         <ul>
           <li>
-            <BiLogoGit />
+            <BiLogoGit arial-label="Git" />
           </li>
           <li>
-            <AiFillGithub />
+            <AiFillGithub arial-label="GitHub" />
           </li>
           <li>
-            <AiFillGitlab />
+            <AiFillGitlab arial-label="GitLab" />
           </li>
           <li>
-            <DiLinux />
+            <DiLinux arial-label="Linux" />
           </li>
           <li>
-            <FaTrello />
+            <FaTrello arial-label="Trello" />
           </li>
           <li>
-            <RiNotionFill />
+            <RiNotionFill arial-label="Notion" />
           </li>
           <li>
-            <TbBrandVscode />
+            <TbBrandVscode arial-label="Visual Studio Code" />
           </li>
         </ul>
       </article>

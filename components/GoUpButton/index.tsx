@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ImArrowUp2 } from "react-icons/im";
 import styles from "./style.module.css";
 

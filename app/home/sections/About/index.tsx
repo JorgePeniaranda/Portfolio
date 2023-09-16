@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import { ReadingTime } from "@/public/svg";
 
@@ -16,10 +15,10 @@ export default function About() {
           Sobre mi
         </h2>
         <p className="mt-2 tracking-wider text-lg">
-          Apasionado por la programación y la creación de herramientas de código
-          abierto y soluciones web. Siempre en busca de aprender y crecer en
-          este emocionante campo. Disfruto compartiendo mi conocimiento a medida
-          que avanzo en mi camino de aprendizaje.
+          Apasionado desarrollador web con experiencia en la creación de
+          herramientas de código abierto y soluciones web. Comprometido en
+          aprender y crecer constantemente en este emocionante campo, y
+          encantado de compartir mi conocimiento en el camino.
         </p>
         <Link
           href="https://jorgepeniaranda.tech/"

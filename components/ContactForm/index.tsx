@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import emailjs from "@emailjs/browser";
 
 export const ContactForm = ({ className }: { className?: string }) => {

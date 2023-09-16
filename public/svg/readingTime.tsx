@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function ReadingTime({ className }: { className?: string }) {
   return (
     <svg

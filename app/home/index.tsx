@@ -1,4 +1,3 @@
-import React from "react";
 import { Header, About, Skills, Projects, Contact } from "./sections";
 
 export const HomePage = () => {

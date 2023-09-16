@@ -24,6 +24,26 @@ body {
   min-width: 100vw;
 }
 
+/* Scrollbar */
+html::-webkit-scrollbar {
+  width: 10px;
+  height: 6px;
+}
+html::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: rgba(127, 127, 127, 0.1);
+}
+html::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgba(127, 127, 127, 0.2);
+}
+html::-webkit-scrollbar-thumb:hover {
+  background: rgba(127, 127, 127, 0.4);
+}
+html::-webkit-scrollbar-thumb:active {
+  background: rgba(127, 127, 127, 0.9);
+}
+
 /* Transition all */
 html * {
   transition: 300ms all ease;

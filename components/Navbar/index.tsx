@@ -1,4 +1,3 @@
-import React from "react";
 import { SwitchLenguage } from "../SwitchLenguage/index";
 import { Logo } from "@/public/svg";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import { SiGithub, SiLinktree, SiLinkedin } from "react-icons/si";
 
@@ -34,7 +33,7 @@ export const Footer = () => {
           </Link>
         </li>
       </ul>
-      <address>
+      <address className="not-italic">
         Power by{" "}
         <Link
           href="mailto:contact@jorgepeniaranda.me"

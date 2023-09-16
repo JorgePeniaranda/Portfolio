@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./style.module.css";
 import { Rocket } from "@/public/svg";
 
@@ -17,9 +16,9 @@ export default function Header() {
             innovación
           </strong>
         </h1>
-        <p className="text-zinc-400  font-semibold text-xl select-text">
-          Jorge Peñaranda / Web Developer
-        </p>
+        <span className="text-zinc-400  font-semibold text-xl select-text">
+          Jorge Peñaranda / Desarrollador Web
+        </span>
       </div>
       <figure className="flex items-center justify-center pb-32 w-[30%] max-sm:w-[90%]">
         <Rocket

@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,10 +9,10 @@ export default function Projects() {
           Proyectos
         </h2>
         <p className="mt-2 tracking-wider text-lg">
-          A lo largo de mi experiencia, he realizado diversos proyectos que
-          reflejan mi desempeño como programador. Los invito a visitar mi
-          galería de proyectos para conocer más sobre mi trabajo y enfoque en el
-          desarrollo web.
+          A lo largo de mi experiencia como programador web, he realizado
+          diversos proyectos que reflejan mi habilidad y pasión por el
+          desarrollo web. Les invito a explorar mi galería de proyectos para
+          conocer más sobre mi trabajo.
         </p>
         <Link
           href="/portfolio"
