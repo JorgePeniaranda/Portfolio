@@ -24,13 +24,26 @@ export const ContactForm = ({ className }: { className?: string }) => {
   };
   return (
     <form onSubmit={sendEmail} className={className}>
-      <input type="text" name="name" placeholder="Nombre..." required />
-      <input type="email" name="email" placeholder="Email..." required />
+      <input
+        type="text"
+        name="name"
+        placeholder="Nombre..."
+        className="border-secondary-dark dark:border-secondary text-gray-color focus:text-secondary dark:hover:text-secondary-dark focus:placeholder:text-secondary dark:focus:placeholder:text-secondary-dark"
+        required
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email..."
+        className="border-secondary-dark dark:border-secondary text-gray-color focus:text-secondary dark:hover:text-secondary-dark focus:placeholder:text-secondary dark:focus:placeholder:text-secondary-dark"
+        required
+      />
       <textarea
         name="message"
         cols={30}
         rows={6}
         placeholder="Mensaje..."
+        className="border-secondary-dark dark:border-secondary text-gray-color focus:text-secondary dark:hover:text-secondary-dark focus:placeholder:text-secondary dark:focus:placeholder:text-secondary-dark"
         required
       />
       <button

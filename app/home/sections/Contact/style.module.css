@@ -12,7 +12,7 @@
   color: var(--gray-color);
   padding: 0.76rem;
   outline: none;
-  border-bottom: 0.08rem solid var(--primary);
+  border-bottom: 0.08rem solid;
 }
 
 .formStyle input {
@@ -35,9 +35,4 @@
 
 .formStyle button:hover {
   filter: brightness(0.8);
-}
-
-.formStyle input:focus,
-.formStyle textarea:focus {
-  border-bottom: 0.1rem solid var(--primary);
 }
