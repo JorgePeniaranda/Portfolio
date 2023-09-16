@@ -1,7 +1,6 @@
 import { useTranslation } from "@/app/i18n";
 import { ContactForm } from "@/components/ContactForm";
 import { Nature } from "@/public/svg";
-import styles from "./style.module.css";
 
 export default async function Contact({ lng }: { lng: string }) {
   const { t } = await useTranslation(lng);
@@ -24,7 +23,6 @@ export default async function Contact({ lng }: { lng: string }) {
           emailPlaceHolder={t("contact-Email-placeholder")}
           messagePlaceHolder={t("contact-Message-placeholder")}
           sendPlaceHolder={t("contact-Send-placeholder")}
-          className={styles.formStyle}
         />
       </article>
     </section>

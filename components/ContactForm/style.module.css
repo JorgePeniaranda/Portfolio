@@ -29,10 +29,35 @@
   margin-top: 1.21rem;
   padding: 0.7rem 0 0.7rem;
   border-radius: 0.375rem;
+  display: flex;
+  justify-content: center;
+  text-align: center;
   font-size: 1.18rem;
   font-weight: 600;
 }
-
 .formStyle button:hover {
   filter: brightness(0.8);
+}
+
+.buttonError {
+  color: white !important;
+  background-color: red !important;
+  clip-path: circle(0% at 50% 50%);
+  animation: fill 1.5s ease-in forwards;
+}
+
+.buttonSuccess {
+  color: white !important;
+  background-color: green !important;
+  clip-path: circle(0% at 50% 50%);
+  animation: fill 1.5s ease-in forwards;
+}
+
+@keyframes fill {
+  0% {
+    clip-path: circle(20% at 50% 50%);
+  }
+  100% {
+    clip-path: circle(100% at 50% 50%);
+  }
 }
