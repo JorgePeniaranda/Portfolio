@@ -11,7 +11,7 @@ const Baloo = localFont({ src: "../public/font/Baloo.ttf" });
 export const metadata: Metadata = {
   title: "Jorge Peñaranda | Desarrollador Web",
   description:
-    "Soy un apasionado desarrollador web con experiencia en diseño y desarrollo front-end y back-end. Mis habilidades incluyen HTML, CSS, JavaScript, React, Node.js y más. Explora mi portafolio para ver ejemplos de soluciones web responsivos y herramientas de código abierto que he creado. ¡Contáctame para llevar tu proyecto web al siguiente nivel!",
+    "Soy un apasionado desarrollador web con experiencia en desarrollo web. Mis habilidades incluyen React, Next.js, CSS, JavaScript, y más. ¡Visita mi portafolio para ver ejemplos de soluciones web responsivas y herramientas de código abierto que he creado!",
   alternates: {
     canonical: "https://jorgepeniaranda.me",
     /* languages: {
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     url: "https://jorgepeniaranda.me",
     title: "Jorge Peñaranda | Desarrollador Web",
     description:
-      "Soy un apasionado desarrollador web con experiencia en diseño y desarrollo front-end y back-end. Mis habilidades incluyen HTML, CSS, JavaScript, React, Node.js y más. Explora mi portafolio para ver ejemplos de soluciones web responsivos y herramientas de código abierto que he creado. ¡Contáctame para llevar tu proyecto web al siguiente nivel!",
+      "Soy un apasionado desarrollador web con experiencia en desarrollo web. Mis habilidades incluyen React, Next.js, CSS, JavaScript, y más. ¡Visita mi portafolio para ver ejemplos de soluciones web responsivas y herramientas de código abierto que he creado!",
     siteName: "Jorge Peñaranda | Desarrollador Web",
     images: [
       {
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
   twitter: {
     title: "Jorge Peñaranda | Desarrollador Web",
     description:
-      "Soy un apasionado desarrollador web con experiencia en diseño y desarrollo front-end y back-end. Mis habilidades incluyen HTML, CSS, JavaScript, React, Node.js y más. Explora mi portafolio para ver ejemplos de soluciones web responsivos y herramientas de código abierto que he creado. ¡Contáctame para llevar tu proyecto web al siguiente nivel!",
+      "Soy un apasionado desarrollador web con experiencia en desarrollo web. Mis habilidades incluyen React, Next.js, CSS, JavaScript, y más. ¡Visita mi portafolio para ver ejemplos de soluciones web responsivas y herramientas de código abierto que he creado!",
     card: "summary_large_image",
     site: "@peniarandajorge",
     creator: "@peniarandajorge",
