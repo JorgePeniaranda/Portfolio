@@ -1,11 +1,9 @@
 import { HomePage } from "./home";
 
-const Home = ({ params: { lng } }: { params: { lng: string } }) => {
+export default function Home({ params: { lng } }: { params: { lng: string } }) {
   return (
     <>
       <HomePage lng={lng} />
     </>
   );
-};
-
-export default Home;
+}

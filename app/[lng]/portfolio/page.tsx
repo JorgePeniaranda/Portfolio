@@ -6,7 +6,7 @@ import { SwitchTheme } from "@/components/SwitchTheme";
 import { useState } from "react";
 import { AiFillFolderOpen } from "react-icons/ai";
 
-export const Portafolio = () => {
+export default function Portafolio() {
   const [show, setShow] = useState(false);
 
   const handleProject = () => {
@@ -116,6 +116,4 @@ export const Portafolio = () => {
       </div>
     </div>
   );
-};
-
-export default Portafolio;
+}
