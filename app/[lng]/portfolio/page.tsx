@@ -3,6 +3,7 @@
 import { GoUpButton } from "@/components/GoUpButton";
 import { ProjectModal } from "@/components/ProjectModal";
 import { SwitchTheme } from "@/components/SwitchTheme";
+import Image from "next/image";
 import { useState } from "react";
 import { AiFillFolderOpen } from "react-icons/ai";
 
@@ -39,72 +40,88 @@ export default function Portafolio() {
             className="w-52 h-52 hover:scale-105 cursor-pointer aspect-square"
             onClick={() => handleProject()}
           >
-            <img
-              src="https://files.merca20.com/uploads/2015/11/logo-4.jpg"
-              alt="Lego"
+            <Image
+              src="/img/example-project.jpg"
+              width={512}
+              height={512}
+              alt="Example"
             />
           </article>
           <article
             className="w-52 h-52 hover:scale-105 cursor-pointer aspect-square"
             onClick={() => handleProject()}
           >
-            <img
-              src="https://files.merca20.com/uploads/2015/11/logo-4.jpg"
-              alt="Lego"
+            <Image
+              src="/img/example-project.jpg"
+              width={512}
+              height={512}
+              alt="Example"
             />
           </article>
           <article
             className="w-52 h-52 hover:scale-105 cursor-pointer aspect-square"
             onClick={() => handleProject()}
           >
-            <img
-              src="https://files.merca20.com/uploads/2015/11/logo-4.jpg"
-              alt="Lego"
+            <Image
+              src="/img/example-project.jpg"
+              width={512}
+              height={512}
+              alt="Example"
             />
           </article>
           <article
             className="w-52 h-52 hover:scale-105 cursor-pointer aspect-square"
             onClick={() => handleProject()}
           >
-            <img
-              src="https://files.merca20.com/uploads/2015/11/logo-4.jpg"
-              alt="Lego"
+            <Image
+              src="/img/example-project.jpg"
+              width={512}
+              height={512}
+              alt="Example"
             />
           </article>
           <article
             className="w-52 h-52 hover:scale-105 cursor-pointer aspect-square"
             onClick={() => handleProject()}
           >
-            <img
-              src="https://files.merca20.com/uploads/2015/11/logo-4.jpg"
-              alt="Lego"
+            <Image
+              src="/img/example-project.jpg"
+              width={512}
+              height={512}
+              alt="Example"
             />
           </article>
           <article
             className="w-52 h-52 hover:scale-105 cursor-pointer aspect-square"
             onClick={() => handleProject()}
           >
-            <img
-              src="https://files.merca20.com/uploads/2015/11/logo-4.jpg"
-              alt="Lego"
+            <Image
+              src="/img/example-project.jpg"
+              width={512}
+              height={512}
+              alt="Example"
             />
           </article>
           <article
             className="w-52 h-52 hover:scale-105 cursor-pointer aspect-square"
             onClick={() => handleProject()}
           >
-            <img
-              src="https://files.merca20.com/uploads/2015/11/logo-4.jpg"
-              alt="Lego"
+            <Image
+              src="/img/example-project.jpg"
+              width={512}
+              height={512}
+              alt="Example"
             />
           </article>
           <article
             className="w-52 h-52 hover:scale-105 cursor-pointer aspect-square"
             onClick={() => handleProject()}
           >
-            <img
-              src="https://files.merca20.com/uploads/2015/11/logo-4.jpg"
-              alt="Lego"
+            <Image
+              src="/img/example-project.jpg"
+              width={512}
+              height={512}
+              alt="Example"
             />
           </article>
         </section>
