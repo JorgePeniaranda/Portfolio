@@ -15,7 +15,6 @@ export default async function Projects({ lng }: { lng: string }) {
         <p className="mt-2 tracking-wider text-lg">{t("projects-text")}</p>
         <Link
           href="/portfolio"
-          target="_blank"
           className="mt-5 w-fit p-2 px-6 select-none text-center font-semibold rounded-md bg-primary-dark text-secondary-dark dark:bg-primary dark:text-secondary hover:brightness-75"
         >
           {t("projects-button")}
