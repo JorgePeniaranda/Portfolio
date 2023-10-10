@@ -19,7 +19,7 @@ export default async function About({ lng }: { lng: string }) {
         </h2>
         <p className="mt-2 tracking-wider text-lg">{t("about-text")}</p>
         <Link
-          href="https://jorgepeniaranda.tech/"
+          href="https://dev.to/jorgepeniaranda"
           target="_blank"
           className="mt-5 w-fit p-2 px-6 select-none text-center font-semibold rounded-md bg-primary-dark text-secondary-dark dark:bg-primary dark:text-secondary hover:brightness-75"
         >
