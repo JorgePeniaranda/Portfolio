@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { ImArrowUp2 } from "react-icons/im";
-import styles from "./style.module.css";
 
 export const GoUpButton = () => {
   const [showGoUpBnt, setShowGoUpBnt] = useState(false);
@@ -27,9 +26,7 @@ export const GoUpButton = () => {
       onClick={() => handleClick()}
       className={
         "fixed bottom-7 right-7 bg-primary-dark text-secondary-dark dark:bg-white dark:text-secondary w-11 h-11 p-3 text-2xl rounded-full cursor-pointer " +
-        (showGoUpBnt ? "opacity-1" : "opacity-0") +
-        " " +
-        styles.mainimage
+        (showGoUpBnt ? "opacity-1" : "opacity-0")
       }
     />
   );
