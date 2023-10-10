@@ -3,8 +3,6 @@ import { languages } from "@/app/i18n/settings";
 import localFont from "next/font/local";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { SwitchTheme } from "@/components/SwitchTheme";
-import { GoUpButton } from "@/components/GoUpButton";
 import "./globals.css";
 
 export async function generateStaticParams() {
@@ -16,7 +14,7 @@ const Baloo = localFont({ src: "../../public/font/Baloo.ttf" });
 export const metadata: Metadata = {
   title: "Jorge Peñaranda | Desarrollador Web",
   description:
-    "Soy un apasionado desarrollador web con experiencia en desarrollo web. Mis habilidades incluyen React, Next.js, CSS, JavaScript, y más. ¡Visita mi portafolio para ver ejemplos de soluciones web responsivas y herramientas de código abierto que he creado!",
+    "Soy Jorge Peñaranda, un apasionado desarrollador web con experiencia en desarrollo web. Mis habilidades incluyen React, Next.js, CSS, JavaScript, y más. ¡Visita mi portafolio para ver ejemplos de soluciones web responsivas y herramientas de código abierto que he creado!",
   alternates: {
     canonical: "https://jorgepeniaranda.me/",
     languages: {
@@ -36,6 +34,7 @@ export const metadata: Metadata = {
   generator: "Next.js",
   icons: "/img/favicon.ico",
   keywords: [
+    "Jorge Peñaranda",
     "Desarrollo Web",
     "Desarrollador Web",
     "Programador",
@@ -98,10 +97,6 @@ export default function RootLayout({
         <Navbar lng={lng} />
         {children}
         <Footer />
-        <div id="fixed">
-          <SwitchTheme />
-          <GoUpButton />
-        </div>
       </body>
     </html>
   );
