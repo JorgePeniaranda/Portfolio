@@ -4,8 +4,16 @@ import { useTheme } from "@/hooks/useTheme";
 import { FiMoon, FiSun } from "react-icons/fi";
 import styles from "./style.module.css";
 
-export const SwitchTheme = ({ className }: { className?: string }) => {
-  const { darkMode, setDarkMode } = useTheme(true);
+export const SwitchTheme = ({
+  className,
+  initialTheme = true,
+  nameStorage = "DarkMode",
+}: {
+  className?: string;
+  initialTheme?: boolean;
+  nameStorage?: string;
+}) => {
+  const { darkMode, setDarkMode } = useTheme(initialTheme, nameStorage);
 
   const handleClick = () => {
     setDarkMode(!darkMode);

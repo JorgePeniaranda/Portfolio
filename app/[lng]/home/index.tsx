@@ -1,4 +1,6 @@
+import { SwitchTheme } from "@/components/SwitchTheme";
 import { Header, About, Skills, Projects, Contact } from "./sections";
+import { GoUpButton } from "@/components/GoUpButton";
 
 export const HomePage = ({ lng }: { lng: string }) => {
   return (
@@ -8,6 +10,10 @@ export const HomePage = ({ lng }: { lng: string }) => {
       <Skills /* lng={lng} */ />
       <Projects lng={lng} />
       <Contact lng={lng} />
+      <div id="fixed">
+        <SwitchTheme initialTheme={true} nameStorage="DarkMode-Home" />
+        <GoUpButton />
+      </div>
     </main>
   );
 };

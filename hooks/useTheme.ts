@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
 
-export const useTheme = (initialValue: boolean) => {
+export const useTheme = (initialValue: boolean, nameStorage: string) => {
   const [darkMode, setDarkMode] = useState(initialValue);
 
   const ChangeTheme = (newValue: boolean) => {
     setDarkMode(newValue);
-    localStorage.setItem("DarkMode", newValue.toString());
+    localStorage.setItem(nameStorage, newValue.toString());
   };
 
   useEffect(() => {
-    if (!localStorage.getItem("DarkMode"))
-      localStorage.setItem("DarkMode", initialValue.toString());
+    if (!localStorage.getItem(nameStorage))
+      localStorage.setItem(nameStorage, initialValue.toString());
     else
-      setDarkMode(localStorage.getItem("DarkMode") === "true" ? true : false);
-  }, []);
+      setDarkMode(localStorage.getItem(nameStorage) === "true" ? true : false);
+  }, [nameStorage, initialValue]);
 
   useEffect(() => {
     if (!darkMode) document.documentElement.classList.remove("dark");
