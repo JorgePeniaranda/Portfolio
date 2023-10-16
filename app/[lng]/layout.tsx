@@ -23,7 +23,7 @@ export async function generateMetadata({
     title: `Jorge Peñaranda | ${t("category")}`,
     description: t("page-description"),
     alternates: {
-      canonical: "https://jorgepeniaranda.me/en",
+      canonical: "https://jorgepeniaranda.me/",
       languages: {
         es: "https://jorgepeniaranda.me/es",
         en: "https://jorgepeniaranda.me/en",
