@@ -1,4 +1,13 @@
 {
+  "page-description": "I'm a passionate web developer with a background in web development. My skills include React, Next.js, CSS, JavaScript, and more - visit my portfolio to see examples of responsive web solutions and open source tools I've created!",
+  "page-keywords": {
+    "web-developement": "Web Development",
+    "web-developer": "Web Developer",
+    "programmer": "Programmer",
+    "web-solutions": "Web Solutions",
+    "tools": "Tools",
+    "open-source": "Open Source"
+  },
   "header-title": "Navigating towards a future of",
   "header-title-special": "innovation",
   "header-figure": "Spacecraft in space",

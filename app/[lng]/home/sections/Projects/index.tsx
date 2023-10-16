@@ -1,10 +1,10 @@
-import { useTranslation } from "@/app/i18n";
+import { serverSideTranslation } from "@/app/i18n";
 import Image from "next/image";
 import Phone from "@/public/img/screenshotProjects.png";
 import Link from "next/link";
 
 export default async function Projects({ lng }: { lng: string }) {
-  const { t } = await useTranslation(lng);
+  const { t } = await serverSideTranslation(lng);
 
   return (
     <section className="flex flex-wrap items-center justify-around text-end my-10">

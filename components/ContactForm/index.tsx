@@ -54,6 +54,7 @@ export const ContactForm = ({
         name="name"
         placeholder={`${namePlaceHolder}...`}
         className="border-secondary-dark dark:border-secondary text-gray-color focus:text-secondary dark:focus:text-secondary-dark focus:placeholder:text-secondary dark:focus:placeholder:text-secondary-dark"
+        autoComplete="name"
         required
       />
       <input
@@ -61,6 +62,7 @@ export const ContactForm = ({
         name="email"
         placeholder={`${emailPlaceHolder}...`}
         className="border-secondary-dark dark:border-secondary text-gray-color focus:text-secondary dark:focus:text-secondary-dark focus:placeholder:text-secondary dark:focus:placeholder:text-secondary-dark"
+        autoComplete="email"
         required
       />
       <textarea
@@ -69,6 +71,7 @@ export const ContactForm = ({
         rows={6}
         placeholder={`${messagePlaceHolder}...`}
         className="border-secondary-dark dark:border-secondary text-gray-color focus:text-secondary dark:focus:text-secondary-dark focus:placeholder:text-secondary dark:focus:placeholder:text-secondary-dark"
+        autoComplete="off"
         required
       />
       <button

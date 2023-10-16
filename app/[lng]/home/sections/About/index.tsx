@@ -1,9 +1,9 @@
-import { useTranslation } from "@/app/i18n";
+import { serverSideTranslation } from "@/app/i18n";
 import Link from "next/link";
 import { ReadingTime } from "@/public/svg";
 
 export default async function About({ lng }: { lng: string }) {
-  const { t } = await useTranslation(lng);
+  const { t } = await serverSideTranslation(lng);
 
   return (
     <section className="w-full flex flex-wrap-reverse items-center justify-center pt-20 pb-48">

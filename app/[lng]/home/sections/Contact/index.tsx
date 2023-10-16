@@ -1,9 +1,9 @@
-import { useTranslation } from "@/app/i18n";
+import { serverSideTranslation } from "@/app/i18n";
 import { ContactForm } from "@/components/ContactForm";
 import { Nature } from "@/public/svg";
 
 export default async function Contact({ lng }: { lng: string }) {
-  const { t } = await useTranslation(lng);
+  const { t } = await serverSideTranslation(lng);
 
   return (
     <section className="flex flex-wrap-reverse justify-around pt-36 pb-32 items-center">

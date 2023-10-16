@@ -1,9 +1,9 @@
-import { useTranslation } from "@/app/i18n";
+import { serverSideTranslation } from "@/app/i18n";
 import styles from "./style.module.css";
 import { Rocket } from "@/public/svg";
 
 export default async function Header({ lng }: { lng: string }) {
-  const { t } = await useTranslation(lng);
+  const { t } = await serverSideTranslation(lng);
 
   return (
     <header className="w-full min-h-[calc(100vh_-_9rem)] flex flex-wrap justify-around select-none gap-16 sm:gap-0">

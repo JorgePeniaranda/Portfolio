@@ -1,4 +1,13 @@
 {
+  "page-description": "Sou um desenvolvedor da Web apaixonado, com experiência em desenvolvimento da Web. Minhas habilidades incluem React, Next.js, CSS, JavaScript e muito mais. Confira meu portfólio para ver exemplos de soluções responsivas para a Web e ferramentas de código aberto que criei!",
+  "page-keywords": {
+    "web-developement": "Desenvolvimento Web",
+    "web-developer": "Desenvolvedor da Web",
+    "programmer": "Programador",
+    "web-solutions": "Soluções da Web",
+    "tools": "Ferramentas",
+    "open-source": "Código aberto"
+  },
   "header-title": "Navegando em direção a um futuro de",
   "header-title-special": "inovação",
   "header-figure": "Nave espacial no espaço",
