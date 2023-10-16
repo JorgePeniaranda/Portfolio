@@ -26,6 +26,7 @@ export async function generateMetadata({
       canonical: "https://jorgepeniaranda.me/en",
       languages: {
         es: "https://jorgepeniaranda.me/es",
+        // en: "https://jorgepeniaranda.me/en",
         pt: "https://jorgepeniaranda.me/pt",
       },
     },
