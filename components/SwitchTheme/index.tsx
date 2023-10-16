@@ -23,12 +23,8 @@ export const SwitchTheme = ({
     <button
       onClick={() => handleClick()}
       aria-label="Switch theme"
-      className={
-        "bg-blue-600 dark:bg-amber-400 transition " +
-        className +
-        " " +
-        styles.SwitchDarkmode
-      }
+      className={`bg-blue-600 dark:bg-amber-400 transition " +
+        ${className} ${styles.SwitchDarkmode}`}
     >
       {darkMode ? <FiSun /> : <FiMoon />}
     </button>
