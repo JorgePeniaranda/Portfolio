@@ -20,7 +20,7 @@ export default async function Skills({ lng }: { lng: string }) {
 
   return (
     <section
-      className={`${styles.listSkills} bg-[#e5e7eb] dark:bg-[#1b1b1b] gap-y-2 gap-x-16`}
+      className={`${styles.listSkills} bg-[#e5e7eb] dark:bg-[#1b1b1b] gap-y-7 gap-x-16`}
     >
       <h2>{t("skills-technology")}</h2>
       <article>
@@ -52,7 +52,7 @@ export default async function Skills({ lng }: { lng: string }) {
           </li>
         </ul>
       </article>
-      <article>
+      <article className="lg:border-x">
         <h3>BackEnd</h3>
         <ul>
           <li>
