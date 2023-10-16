@@ -21,7 +21,8 @@ export function middleware(req) {
     !languages.some((loc) => req.nextUrl.pathname.startsWith(`/${loc}`)) &&
     !req.nextUrl.pathname.startsWith("/_next") &&
     !req.nextUrl.pathname.startsWith("/img") &&
-    !req.nextUrl.pathname.startsWith("/manifest.json")
+    !req.nextUrl.pathname.startsWith("/manifest.json") &&
+    !req.nextUrl.pathname.startsWith("/sitemap.xml")
   ) {
     return NextResponse.redirect(
       new URL(`/${lng}${req.nextUrl.pathname}`, req.url)
