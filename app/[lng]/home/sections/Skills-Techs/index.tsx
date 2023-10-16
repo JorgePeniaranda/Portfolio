@@ -13,14 +13,18 @@ import { SiTailwindcss, SiTypescript, SiMysql } from "react-icons/si";
 import { TbBrandNextjs, TbBrandCSharp, TbBrandVscode } from "react-icons/tb";
 import { FaLaravel, FaTrello } from "react-icons/fa6";
 import { RiNotionFill } from "react-icons/ri";
+import { serverSideTranslation } from "@/app/i18n";
 
-export default function Skills() {
+export default async function Skills({ lng }: { lng: string }) {
+  const { t } = await serverSideTranslation(lng);
+
   return (
     <section
-      className={styles.listSkills + " bg-[#e5e7eb] dark:bg-[#1b1b1b] gap-16"}
+      className={`${styles.listSkills} bg-[#e5e7eb] dark:bg-[#1b1b1b] gap-y-2 gap-x-16`}
     >
+      <h2>{t("skills-technology")}</h2>
       <article>
-        <h2>FrontEnd</h2>
+        <h3>FrontEnd</h3>
         <ul>
           <li>
             <AiFillHtml5 arial-label="HTML5" />
@@ -49,7 +53,7 @@ export default function Skills() {
         </ul>
       </article>
       <article>
-        <h2>BackEnd</h2>
+        <h3>BackEnd</h3>
         <ul>
           <li>
             <BiLogoNodejs arial-label="NodeJS" />
@@ -69,7 +73,7 @@ export default function Skills() {
         </ul>
       </article>
       <article>
-        <h2>DevOps</h2>
+        <h3>DevOps</h3>
         <ul>
           <li>
             <BiLogoGit arial-label="Git" />

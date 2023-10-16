@@ -21,6 +21,7 @@ export default async function About({ lng }: { lng: string }) {
         <Link
           href="https://dev.to/jorgepeniaranda"
           target="_blank"
+          rel="noreferrer"
           className="mt-5 w-fit p-2 px-6 select-none text-center font-semibold rounded-md bg-primary-dark text-secondary-dark dark:bg-primary dark:text-secondary hover:brightness-75"
         >
           {t("about-button")}

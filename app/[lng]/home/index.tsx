@@ -7,7 +7,7 @@ export const HomePage = ({ lng }: { lng: string }) => {
     <main className="w-full">
       <Header lng={lng} />
       <About lng={lng} />
-      <Skills /* lng={lng} */ />
+      <Skills lng={lng} />
       <Projects lng={lng} />
       <Contact lng={lng} />
       <div id="fixed">

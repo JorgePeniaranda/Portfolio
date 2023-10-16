@@ -1,5 +1,5 @@
 {
-  "page-description": "Soy un apasionado desarrollador web con experiencia en desarrollo web. Mis habilidades incluyen React, Next.js, CSS, JavaScript, y más. ¡Visita mi portafolio para ver ejemplos de soluciones web responsivas y herramientas de código abierto que he creado!",
+  "page-description": "Desarrollador Web Front End con experiencia en JavaScript, CSS, React y Next.js. Descubre mis proyectos y soluciones web de código abierto.",
   "page-keywords": {
     "web-developement": "Desarrollo Web",
     "web-developer": "Desarrollador Web",
@@ -16,6 +16,7 @@
   "about-text": "Apasionado desarrollador web con experiencia en la creación de herramientas de código abierto y soluciones web. Comprometido en aprender y crecer constantemente en este emocionante campo, y encantado de compartir mi conocimiento en el camino.",
   "about-button": "Conocer Blog",
   "about-figure": "Alguien leyendo en un cómodo sillón",
+  "skills-technology": "Habilidades / Tecnologías",
   "projects-title": "Proyectos",
   "projects-text": "A lo largo de mi experiencia como programador web, he realizado diversos proyectos que reflejan mi habilidad y pasión por el desarrollo web. Les invito a explorar mi galería de proyectos para conocer más sobre mi trabajo.",
   "projects-button": "Conocer Proyectos",

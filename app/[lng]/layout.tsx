@@ -26,7 +26,7 @@ export async function generateMetadata({
       canonical: "https://jorgepeniaranda.me/en",
       languages: {
         es: "https://jorgepeniaranda.me/es",
-        // en: "https://jorgepeniaranda.me/en",
+        en: "https://jorgepeniaranda.me/en",
         pt: "https://jorgepeniaranda.me/pt",
       },
     },
@@ -77,6 +77,7 @@ export async function generateMetadata({
       { media: "(prefers-color-scheme: dark)", color: "#1a1a1a" },
       { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     ],
+    metadataBase: new URL("https://jorgepeniaranda.me"),
     twitter: {
       title: `Jorge Peñaranda | ${t("category")}`,
       description: t("page-description"),

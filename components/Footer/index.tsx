@@ -10,6 +10,7 @@ export const Footer = () => {
             href="https://github.com/jorgepeniaranda"
             aria-label="Github link"
             target="_blank"
+            rel="noreferrer"
           >
             <SiGithub className="hover:scale-125" />
           </Link>
@@ -19,6 +20,7 @@ export const Footer = () => {
             href="https://linktr.ee/jorgepeniaranda"
             aria-label="Linktree link"
             target="_blank"
+            rel="noreferrer"
           >
             <SiLinktree className="hover:scale-125" />
           </Link>
@@ -28,6 +30,7 @@ export const Footer = () => {
             href="https://www.linkedin.com/in/JorgePeniaranda/"
             aria-label="LinkedIn link"
             target="_blank"
+            rel="noreferrer"
           >
             <SiLinkedin className="hover:scale-125" />
           </Link>

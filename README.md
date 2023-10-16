@@ -13,12 +13,18 @@
 </div>
 
 ## Getting Started
+
 Instructions for downloading the project to your computer and running it functionally:
+
 ### Prerequisites
+
 You need the following programs before you start:
-* git: https://git-scm.com/downloads
-* npm: https://www.npmjs.com/package/download
+
+- git: https://git-scm.com/downloads
+- npm: https://www.npmjs.com/package/download
+
 ### Installation
+
 1. Clone the repo
    ```sh
    git clone https://github.com/JorgePeniaranda/Portfolio
@@ -35,6 +41,7 @@ You need the following programs before you start:
    ```sh
    npm run dev
    ```
+
 ## Tech Stack
 
 **Client:** React, TailwindCSS, i18n, TypeScript

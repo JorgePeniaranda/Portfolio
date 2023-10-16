@@ -22,7 +22,8 @@ export function middleware(req) {
     !req.nextUrl.pathname.startsWith("/_next") &&
     !req.nextUrl.pathname.startsWith("/img") &&
     !req.nextUrl.pathname.startsWith("/manifest.json") &&
-    !req.nextUrl.pathname.startsWith("/sitemap.xml")
+    !req.nextUrl.pathname.startsWith("/sitemap.xml") &&
+    !req.nextUrl.pathname.startsWith("/robots.txt")
   ) {
     return NextResponse.redirect(
       new URL(`/${lng}${req.nextUrl.pathname}`, req.url)
