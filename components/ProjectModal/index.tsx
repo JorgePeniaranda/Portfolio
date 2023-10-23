@@ -1,7 +1,8 @@
 import { IoCloseOutline } from "react-icons/io5";
 import { AiFillGithub, AiOutlineShareAlt, AiOutlineLink } from "react-icons/ai";
 import { Project } from "@/types";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import style from "./styles.module.css";
 
 export const ProjectModal = ({
   show,
@@ -13,6 +14,7 @@ export const ProjectModal = ({
   project: Project;
 }) => {
   const [currentImage, setCurrentImage] = useState(0);
+  const modal = useRef<HTMLDivElement>(null);
 
   const handlePrevImage = () => {
     if (currentImage > 0) {
@@ -26,10 +28,21 @@ export const ProjectModal = ({
     }
   };
 
+  const onClose = () => {
+    modal.current?.classList.add(style.modalClose);
+    setTimeout(() => {
+      setShow(!show);
+    }, 300);
+  };
+
   return (
     !show || (
       <div className="flex justify-center items-center fixed w-screen h-screen bg-[#00000096] top-0 bottom-0 left-0 right-0">
-        <div className="flex w-3/4 h-3/4 bg-white rounded-md ">
+        <div
+          className={`flex w-3/4 h-3/4 bg-white rounded-md ${style.projectModal}`}
+          ref={modal}
+          id="modal"
+        >
           <figure className="flex-[2_1] relative">
             <img
               src={project.images[currentImage]}
@@ -59,7 +72,7 @@ export const ProjectModal = ({
               a
               <IoCloseOutline
                 className="select-none cursor-pointer text-2xl absolute -right-7"
-                onClick={() => setShow(!show)}
+                onClick={() => onClose()}
               />
             </div>
             <h2 className="text-5xl font-semibold">{project.title}</h2>

@@ -1,0 +1,29 @@
+.projectModal {
+  animation: open 300ms ease forwards;
+}
+
+.modalClose {
+  animation: close 300ms ease forwards;
+}
+
+@keyframes open {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes close {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
