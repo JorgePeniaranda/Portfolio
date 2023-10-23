@@ -1,5 +1,6 @@
 import { IoCloseOutline } from "react-icons/io5";
 import { AiFillGithub, AiOutlineShareAlt, AiOutlineLink } from "react-icons/ai";
+import { GoChevronLeft, GoChevronRight } from "react-icons/go";
 import { Project } from "@/types";
 import { useRef, useState } from "react";
 import style from "./styles.module.css";
@@ -28,6 +29,10 @@ export const ProjectModal = ({
     }
   };
 
+  const handleNavigateImage = (index: number) => {
+    setCurrentImage(index);
+  };
+
   const onClose = () => {
     modal.current?.classList.add(style.modalClose);
     setTimeout(() => {
@@ -54,16 +59,28 @@ export const ProjectModal = ({
               className="absolute w-full h-full top-0 flex justify-between items-center px-5"
             >
               <button
-                className="text-3xl bg-black text-white flex p-3 w-10 h-10 leading-5 rounded-full opacity-60 hover:invert"
+                className="flex justify-center items-center bg-black text-white text-3xl p-2 w-10 h-10 leading-5 rounded-full opacity-60 hover:invert"
                 onClick={() => handlePrevImage()}
               >
-                {"<"}
+                <GoChevronLeft />
               </button>
+              <ul className="absolute bottom-5 left-0 right-0 flex gap-5 justify-center">
+                {project.images.map((image, index) => (
+                  <li key={index} onClick={() => handleNavigateImage(index)}>
+                    <span
+                      className={`flex w-3 h-3 rounded-full border border-white cursor-pointer hover:bg-white hover:scale-125 ${
+                        index === currentImage && "bg-white"
+                      }`}
+                      aria-label={`go to image ${index}`}
+                    />
+                  </li>
+                ))}
+              </ul>
               <button
-                className="text-3xl bg-black text-white flex p-3 w-10 h-10 leading-5 rounded-full opacity-60 hover:invert"
+                className="flex justify-center items-center bg-black text-white text-3xl p-2 w-10 h-10 leading-5 rounded-full opacity-60 hover:invert"
                 onClick={() => handleNextImage()}
               >
-                {">"}
+                <GoChevronRight />
               </button>
             </div>
           </figure>
