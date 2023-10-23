@@ -1,6 +1,6 @@
 import { serverSideTranslation } from "@/app/i18n";
 import Image from "next/image";
-import Phone from "@/public/img/screenshotProjects.png";
+import Phone from "@/public/img/screenshotProjects.webp";
 import Link from "next/link";
 
 export default async function Projects({ lng }: { lng: string }) {
