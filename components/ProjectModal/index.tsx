@@ -44,7 +44,7 @@ export const ProjectModal = ({
     !show || (
       <div className="flex justify-center items-center fixed w-screen h-screen bg-[#00000096] top-0 bottom-0 left-0 right-0">
         <div
-          className={`flex w-3/4 h-3/4 bg-white rounded-md ${style.projectModal}`}
+          className={`flex w-3/4 h-3/4 bg-primary dark:bg-primary-dark rounded-md ${style.projectModal}`}
           ref={modal}
           id="modal"
         >
@@ -90,6 +90,9 @@ export const ProjectModal = ({
               onClick={() => onClose()}
             />
             <h2 className="text-5xl font-semibold">{project.title}</h2>
+            {project.created && (
+              <span className="text-slate-500 mb-3">{project.created}</span>
+            )}
             <p className="text-xl flex-[4] break-words">
               {project.description}
             </p>
