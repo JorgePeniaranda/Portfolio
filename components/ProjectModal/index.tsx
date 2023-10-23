@@ -67,14 +67,11 @@ export const ProjectModal = ({
               </button>
             </div>
           </figure>
-          <div className="flex flex-col flex-1 px-10 overflow-y-auto">
-            <div className="sticky top-0 h-16 flex justify-end">
-              a
-              <IoCloseOutline
-                className="select-none cursor-pointer text-2xl absolute -right-7"
-                onClick={() => onClose()}
-              />
-            </div>
+          <div className="flex flex-col flex-1 pt-10 px-10 overflow-y-auto">
+            <IoCloseOutline
+              className="select-none cursor-pointer text-2xl absolute top-7 right-7 hover:scale-110"
+              onClick={() => onClose()}
+            />
             <h2 className="text-5xl font-semibold">{project.title}</h2>
             <p className="text-xl flex-[4] break-words">
               {project.description}
@@ -84,7 +81,9 @@ export const ProjectModal = ({
                 <li>
                   <a
                     href={project.links.live}
-                    className="flex p-2 bg-black text-white rounded-full"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex p-2 bg-black text-white rounded-full hover:scale-110"
                   >
                     <AiOutlineLink />
                   </a>
@@ -94,7 +93,9 @@ export const ProjectModal = ({
                 <li>
                   <a
                     href={project.links.github}
-                    className="flex p-2 bg-black text-white rounded-full"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex p-2 bg-black text-white rounded-full hover:scale-110"
                   >
                     <AiFillGithub />
                   </a>
@@ -103,7 +104,7 @@ export const ProjectModal = ({
               <li>
                 <a
                   href="https://www.google.com"
-                  className="flex p-2 bg-black text-white rounded-full"
+                  className="flex p-2 bg-black text-white rounded-full hover:scale-110"
                 >
                   <AiOutlineShareAlt />
                 </a>
