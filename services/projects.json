@@ -1,5 +1,6 @@
 {
   "Proyecto0": {
+    "iconURL": "/img/example-project.webp",
     "images": [
       "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph",
       "https://img.freepik.com/premium-photo/tranquil-scene-majestic-mountain-range-winter-wilderness-adventure-generated-by-artificial-intelligence_24911-92472.jpg",
@@ -15,6 +16,7 @@
     }
   },
   "Proyecto1": {
+    "iconURL": "/img/example-project.webp",
     "images": [
       "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph",
       "https://img.freepik.com/premium-photo/tranquil-scene-majestic-mountain-range-winter-wilderness-adventure-generated-by-artificial-intelligence_24911-92472.jpg",
@@ -30,6 +32,7 @@
     }
   },
   "Proyecto2": {
+    "iconURL": "/img/example-project.webp",
     "images": [
       "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph",
       "https://img.freepik.com/premium-photo/tranquil-scene-majestic-mountain-range-winter-wilderness-adventure-generated-by-artificial-intelligence_24911-92472.jpg",
@@ -45,6 +48,7 @@
     }
   },
   "Proyecto3": {
+    "iconURL": "/img/example-project.webp",
     "images": [
       "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph",
       "https://img.freepik.com/premium-photo/tranquil-scene-majestic-mountain-range-winter-wilderness-adventure-generated-by-artificial-intelligence_24911-92472.jpg",
@@ -60,6 +64,7 @@
     }
   },
   "Proyecto4": {
+    "iconURL": "/img/example-project.webp",
     "images": [
       "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph",
       "https://img.freepik.com/premium-photo/tranquil-scene-majestic-mountain-range-winter-wilderness-adventure-generated-by-artificial-intelligence_24911-92472.jpg",
@@ -75,6 +80,7 @@
     }
   },
   "Proyecto5": {
+    "iconURL": "/img/example-project.webp",
     "images": [
       "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph",
       "https://img.freepik.com/premium-photo/tranquil-scene-majestic-mountain-range-winter-wilderness-adventure-generated-by-artificial-intelligence_24911-92472.jpg",

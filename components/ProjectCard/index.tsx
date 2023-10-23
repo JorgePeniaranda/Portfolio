@@ -23,10 +23,10 @@ export const ProjectCard = ({ ProjectInfo }: Props) => {
         key={1}
       >
         <Image
-          src="/img/example-project.webp"
+          src={ProjectInfo.iconURL}
           width={512}
           height={512}
-          alt="Example"
+          alt={`${ProjectInfo.title}-Icon`}
         />
       </article>
       <ProjectModal

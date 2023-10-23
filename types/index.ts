@@ -1,4 +1,5 @@
 export interface Project {
+  iconURL: string;
   images: string[];
   title: string;
   description: string;
