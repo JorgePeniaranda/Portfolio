@@ -2,8 +2,9 @@ import { IoCloseOutline } from "react-icons/io5";
 import { AiFillGithub, AiOutlineShareAlt, AiOutlineLink } from "react-icons/ai";
 import { GoChevronLeft, GoChevronRight } from "react-icons/go";
 import { Project } from "@/types";
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import style from "./styles.module.css";
+import Image from "next/image";
 
 export const ProjectModal = ({
   show,
@@ -42,16 +43,18 @@ export const ProjectModal = ({
 
   return (
     !show || (
-      <div className="flex justify-center items-center fixed w-screen h-screen bg-[#00000096] top-0 bottom-0 left-0 right-0">
+      <div className="flex justify-center items-center fixed w-screen h-screen bg-[#00000096] top-0 bottom-0 left-0 right-0 z-50">
         <div
           className={`flex w-3/4 h-3/4 bg-primary dark:bg-primary-dark rounded-md ${style.projectModal}`}
           ref={modal}
           id="modal"
         >
           <figure className="flex-[2_1] relative">
-            <img
+            <Image
               src={project.images[currentImage]}
               alt={project.title}
+              width={1280}
+              height={802}
               className="w-full h-full object-cover"
             />
             <div
@@ -97,7 +100,7 @@ export const ProjectModal = ({
               {project.description}
             </p>
             <ul className="flex items-center flex-1 text-3xl gap-3 py-7">
-              {!project.links.live || (
+              {!project.links?.live || (
                 <li>
                   <a
                     href={project.links.live}
@@ -109,10 +112,10 @@ export const ProjectModal = ({
                   </a>
                 </li>
               )}
-              {!project.links.github || (
+              {!project.links?.github || (
                 <li>
                   <a
-                    href={project.links.github}
+                    href={project.links?.github}
                     target="_blank"
                     rel="noreferrer"
                     className="flex p-2 bg-black text-white rounded-full hover:scale-110"

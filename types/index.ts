@@ -4,10 +4,10 @@ export interface Project {
   images: string[];
   title: string;
   description: string;
-  links: ProjectLinks;
+  links?: ProjectLinks;
 }
 
 interface ProjectLinks {
-  live: string;
-  github: string;
+  live?: string;
+  github?: string;
 }

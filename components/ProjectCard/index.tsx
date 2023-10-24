@@ -20,6 +20,11 @@ export const ProjectCard = ({ ProjectInfo }: Props) => {
       <article
         className="w-52 h-52 hover:scale-105 cursor-pointer aspect-square"
         onClick={() => handleProject()}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") handleProject();
+        }}
+        tabIndex={0}
+        role="button"
         key={1}
       >
         <Image
