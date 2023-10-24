@@ -27,6 +27,7 @@ export const ProjectCard = ({ ProjectInfo }: Props) => {
           width={512}
           height={512}
           alt={`${ProjectInfo.title}-Icon`}
+          className="aspect-square object-cover"
         />
       </article>
       <ProjectModal
