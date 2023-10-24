@@ -64,10 +64,10 @@ export const ProjectModal = ({
               >
                 <GoChevronLeft />
               </button>
-              <ul className="absolute bottom-5 left-0 right-0 flex gap-5 justify-center">
+              <ul className="bg-[#101010b8] w-fit px-3 py-2 rounded-xl self-end mb-5 flex gap-5 justify-center">
                 {project.images.map((image, index) => (
                   <li key={index} onClick={() => handleNavigateImage(index)}>
-                    <span
+                    <button
                       className={`flex w-3 h-3 rounded-full border border-white cursor-pointer hover:bg-white hover:scale-125 ${
                         index === currentImage && "bg-white"
                       }`}
