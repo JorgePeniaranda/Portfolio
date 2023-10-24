@@ -1,99 +1,48 @@
 {
-  "Proyecto0": {
-    "iconURL": "/img/example-project.webp",
-    "created": "2020",
+  "GoldenDuck": {
+    "iconURL": "/img/projects-files/GoldenDuck/icon.webp",
+    "created": "2022",
     "images": [
-      "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph",
-      "https://img.freepik.com/premium-photo/tranquil-scene-majestic-mountain-range-winter-wilderness-adventure-generated-by-artificial-intelligence_24911-92472.jpg",
-      "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph",
-      "https://img.freepik.com/premium-photo/tranquil-scene-majestic-mountain-range-winter-wilderness-adventure-generated-by-artificial-intelligence_24911-92472.jpg",
-      "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph"
+      "/img/projects-files/GoldenDuck/screen-1.webp",
+      "/img/projects-files/GoldenDuck/screen-2.webp",
+      "/img/projects-files/GoldenDuck/screen-3.webp"
     ],
-    "title": "Proyecto0",
-    "description": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "title": "Golden Duck",
+    "description": "Una banca online donde podrá, no solo gestionar su dinero, sino que incluso invertirlo. Siempre llevando un registro de cuanto dinero es ingresado y cuanto dinero es gastado, contando con categorías para saber en qué lo gasta. También podrá pagar servicios, tales como servicios de Telefonía Móvil o servicios esenciales.",
     "links": {
-      "live": "a",
-      "github": "a"
+      "live": "https://goldenduck.netlify.app/",
+      "github": "https://github.com/JorgePeniaranda/GoldenDuck"
     }
   },
-  "Proyecto1": {
-    "iconURL": "/img/example-project.webp",
+  "Jildam": {
+    "iconURL": "/img/projects-files/Jildam/icon.webp",
+    "created": "2021",
     "images": [
-      "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph",
-      "https://img.freepik.com/premium-photo/tranquil-scene-majestic-mountain-range-winter-wilderness-adventure-generated-by-artificial-intelligence_24911-92472.jpg",
-      "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph",
-      "https://img.freepik.com/premium-photo/tranquil-scene-majestic-mountain-range-winter-wilderness-adventure-generated-by-artificial-intelligence_24911-92472.jpg",
-      "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph"
+      "/img/projects-files/Jildam/screen-1.webp",
+      "/img/projects-files/Jildam/screen-2.webp",
+      "/img/projects-files/Jildam/screen-3.webp"
     ],
-    "title": "Proyecto1",
-    "description": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "title": "Jildam",
+    "description": "Jildam es una aplicación de gestión de contraseñas centrada en personalizar la experiencia del usuario. Además de permitir gestionar y generar contraseñas de forma segura, también ofrece la posibilidad de personalizar tu perfil con información como tu nombre, apellidos, biografía y foto de perfil, como en un foro.",
     "links": {
-      "live": "a",
-      "github": "a"
+      "github": "https://github.com/JorgePeniaranda/Jildam.js"
     }
   },
-  "Proyecto2": {
-    "iconURL": "/img/example-project.webp",
+  "example": {
+    "iconURL": "/img/projects-files/example/icon.webp",
+    "created": "Sábado, 05 de agosto de 2006",
     "images": [
-      "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph",
-      "https://img.freepik.com/premium-photo/tranquil-scene-majestic-mountain-range-winter-wilderness-adventure-generated-by-artificial-intelligence_24911-92472.jpg",
-      "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph",
-      "https://img.freepik.com/premium-photo/tranquil-scene-majestic-mountain-range-winter-wilderness-adventure-generated-by-artificial-intelligence_24911-92472.jpg",
-      "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph"
+      "/img/projects-files/example/screen-1.webp",
+      "/img/projects-files/example/screen-2.webp",
+      "/img/projects-files/example/screen-3.webp",
+      "/img/projects-files/example/screen-4.webp",
+      "/img/projects-files/example/screen-5.webp"
     ],
-    "title": "Proyecto2",
-    "description": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "title": "Test",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ultrices, mi mattis gravida porttitor, nisi metus sodales nisi, maximus porttitor nibh sapien at tortor. Nulla tincidunt nisi ut mauris interdum, ac efficitur orci sollicitudin. Curabitur et tristique dui. Praesent eu ligula massa. Aenean tempus justo in nunc porta, vitae viverra est maximus. Maecenas pellentesque ornare urna sed ultricies. Sed scelerisque ante ipsum, at hendrerit metus rutrum sit amet. Etiam bibendum leo faucibus aliquet lobortis. Praesent eu ligula massa. Aenean tempus justo in nunc porta, vitae viverra est maximus. Maecenas pellentesque ornare urna sed ultricies. Sed scelerisque ante ipsum, at hendrerit metus rutrum sit amet. Etiam bibendum leo faucibus aliquet lobortis. Praesent eu ligula massa. Aenean tempus justo in nunc porta, vitae viverra est maximus. Maecenas pellentesque ornare urna sed ultricies. Sed scelerisque ante ipsum, at hendrerit metus rutrum sit amet. Etiam bibendum leo faucibus aliquet lobortis.",
     "links": {
-      "live": "a",
-      "github": "a"
-    }
-  },
-  "Proyecto3": {
-    "iconURL": "/img/example-project.webp",
-    "images": [
-      "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph",
-      "https://img.freepik.com/premium-photo/tranquil-scene-majestic-mountain-range-winter-wilderness-adventure-generated-by-artificial-intelligence_24911-92472.jpg",
-      "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph",
-      "https://img.freepik.com/premium-photo/tranquil-scene-majestic-mountain-range-winter-wilderness-adventure-generated-by-artificial-intelligence_24911-92472.jpg",
-      "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph"
-    ],
-    "title": "Proyecto3",
-    "description": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-    "links": {
-      "live": "a",
-      "github": "a"
-    }
-  },
-  "Proyecto4": {
-    "iconURL": "/img/example-project.webp",
-    "images": [
-      "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph",
-      "https://img.freepik.com/premium-photo/tranquil-scene-majestic-mountain-range-winter-wilderness-adventure-generated-by-artificial-intelligence_24911-92472.jpg",
-      "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph",
-      "https://img.freepik.com/premium-photo/tranquil-scene-majestic-mountain-range-winter-wilderness-adventure-generated-by-artificial-intelligence_24911-92472.jpg",
-      "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph"
-    ],
-    "title": "Proyecto4",
-    "description": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-    "links": {
-      "live": "a",
-      "github": "a"
-    }
-  },
-  "Proyecto5": {
-    "iconURL": "/img/example-project.webp",
-    "images": [
-      "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph",
-      "https://img.freepik.com/premium-photo/tranquil-scene-majestic-mountain-range-winter-wilderness-adventure-generated-by-artificial-intelligence_24911-92472.jpg",
-      "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph",
-      "https://img.freepik.com/premium-photo/tranquil-scene-majestic-mountain-range-winter-wilderness-adventure-generated-by-artificial-intelligence_24911-92472.jpg",
-      "https://img.freepik.com/foto-gratis/pintura-lago-montana-montana-al-fondo_188544-9126.jpg?size=626&ext=jpg&ga=GA1.1.1016474677.1696809600&semt=sph"
-    ],
-    "title": "Proyecto5",
-    "description": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-    "links": {
-      "live": "a",
-      "github": "a"
+      "live": "https://jorgepeniaranda.tech/",
+      "github": "https://jorgepeniaranda.tech/"
     }
   }
 }
