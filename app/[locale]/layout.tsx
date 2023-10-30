@@ -9,10 +9,6 @@ import { lenguagesSupported } from "@/consts";
 
 const Baloo = Baloo_2({ preload: true, subsets: ["latin"] });
 
-export function generateStaticParams() {
-  return lenguagesSupported.map((locale) => ({ locale }));
-}
-
 export async function generateMetadata({
   params: { locale },
 }: {
