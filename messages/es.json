@@ -1,0 +1,44 @@
+{
+  "About": {
+    "button": "Conocer Blog",
+    "figure": "Alguien leyendo en un cómodo sillón",
+    "text": "Apasionado desarrollador web con experiencia en la creación de herramientas de código abierto y soluciones web. Comprometido en aprender y crecer constantemente en este emocionante campo, y encantado de compartir mi conocimiento en el camino.",
+    "title": "Sobre Mi"
+  },
+  "Contact": {
+    "Email-placeholder": "Correo",
+    "figure": "Paisaje",
+    "Message-placeholder": "Mensaje",
+    "Name-placeholder": "Nombre",
+    "Send-placeholder": "Enviar",
+    "text": "Si deseas contactarme o tienes alguna consulta, no dudes en enviarme un mensaje. Estoy aquí para ayudarte y escuchar tus ideas.",
+    "title": "Contacto"
+  },
+  "Header": {
+    "category": "Desarrollador Web",
+    "figure": "Nave espacial en el espacio",
+    "title": "Navegando hacia un futuro de",
+    "title-special": "innovación"
+  },
+  "Metadata": {
+    "category": "Desarrollador Web",
+    "page-description": "Desarrollador Web Front End con experiencia en JavaScript, CSS, React y Next.js. Descubre mis proyectos y soluciones web de código abierto.",
+    "page-keywords": {
+      "open-source": "Código abierto",
+      "programmer": "Programador",
+      "tools": "Herramientas",
+      "web-developement": "Desarrollo Web",
+      "web-developer": "Desarrollador Web",
+      "web-solutions": "Soluciones web"
+    }
+  },
+  "Projects": {
+    "button": "Conocer Proyectos",
+    "figure": "Ejemplos de proyectos personales",
+    "text": "A lo largo de mi experiencia como programador web, he realizado diversos proyectos que reflejan mi habilidad y pasión por el desarrollo web. Les invito a explorar mi galería de proyectos para conocer más sobre mi trabajo.",
+    "title": "Proyectos"
+  },
+  "Skills": {
+    "technology": "Habilidades / Tecnologías"
+  }
+}

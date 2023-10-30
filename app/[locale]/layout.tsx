@@ -1,23 +1,25 @@
 import type { Metadata } from "next";
-import { languages } from "@/app/i18n/settings";
-import { serverSideTranslation } from "@/app/i18n";
-import localFont from "next/font/local";
+import { Baloo_2 } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import "./globals.css";
+import { notFound } from "next/navigation";
+import { createTranslator } from "next-intl";
+import { lenguagesSupported } from "@/consts";
 
-export async function generateStaticParams() {
-  return languages.map((lng) => ({ lng }));
+const Baloo = Baloo_2({ preload: true, subsets: ["latin"] });
+
+export function generateStaticParams() {
+  return lenguagesSupported.map((locale) => ({ locale }));
 }
 
-const Baloo = localFont({ src: "../../public/font/Baloo.ttf" });
-
 export async function generateMetadata({
-  params: { lng },
+  params: { locale },
 }: {
-  params: { lng: string };
+  params: { locale: string };
 }): Promise<Metadata> {
-  const { t } = await serverSideTranslation(lng);
+  const messages = (await import(`../../messages/${locale}.json`)).default;
+  const t = createTranslator({ locale, messages, namespace: "Metadata" });
 
   return {
     title: `Jorge Peñaranda | ${t("category")}`,
@@ -92,23 +94,25 @@ export async function generateMetadata({
 
 export default function RootLayout({
   children,
-  params: { lng },
+  params: { locale },
 }: {
   children: React.ReactNode;
   params: {
-    lng: string;
+    locale: string;
   };
 }) {
+  const isValidLocale = lenguagesSupported.some((cur) => cur === locale);
+  if (!isValidLocale) notFound();
+
   return (
-    <html lang={lng} className="dark">
-      {/* Change when implementing i18n */}
+    <html lang={locale} className="dark">
       <body
         className={
           Baloo.className +
           "  bg-primary text-secondary dark:bg-primary-dark dark:text-secondary-dark px-0 sm:px-24  2xl:px-36"
         }
       >
-        <Navbar lng={lng} />
+        <Navbar lng={locale} />
         {children}
         <Footer />
       </body>

@@ -1,9 +1,9 @@
 "use client";
 import Link from "next/link";
-import { languages } from "@/app/i18n/settings";
 import { usePathname } from "next/navigation";
 import { FiChevronDown } from "react-icons/fi";
 import styles from "./style.module.css";
+import { lenguagesSupported } from "@/consts";
 
 export const SwitchLenguage = ({ lng }: { lng: string }) => {
   const path = usePathname();
@@ -16,7 +16,7 @@ export const SwitchLenguage = ({ lng }: { lng: string }) => {
         <FiChevronDown />
       </button>
       <div className={styles.dropdown_content}>
-        {languages
+        {lenguagesSupported
           .filter((l) => lng !== l)
           .map((l: string) => {
             return (

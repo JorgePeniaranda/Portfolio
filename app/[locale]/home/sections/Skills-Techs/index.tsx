@@ -13,16 +13,16 @@ import { SiTailwindcss, SiTypescript, SiMysql } from "react-icons/si";
 import { TbBrandNextjs, TbBrandCSharp, TbBrandVscode } from "react-icons/tb";
 import { FaLaravel, FaTrello } from "react-icons/fa6";
 import { RiNotionFill } from "react-icons/ri";
-import { serverSideTranslation } from "@/app/i18n";
+import { useTranslations } from "next-intl";
 
-export default async function Skills({ lng }: { lng: string }) {
-  const { t } = await serverSideTranslation(lng);
+export default function Skills() {
+  const t = useTranslations("Skills");
 
   return (
     <section
       className={`${styles.listSkills} bg-[#e5e7eb] dark:bg-[#1b1b1b] gap-y-7 gap-x-16`}
     >
-      <h2>{t("skills-technology")}</h2>
+      <h2>{t("technology")}</h2>
       <article>
         <h3>FrontEnd</h3>
         <ul>
