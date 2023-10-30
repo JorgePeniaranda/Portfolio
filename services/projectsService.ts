@@ -1,7 +1,7 @@
-import projects from "./projects.json";
+import projects from './projects.json'
 
-function fetchData() {
-  return Object.entries(projects);
+function fetchData () {
+  return Object.entries(projects)
 }
 
-export { fetchData };
+export { fetchData }

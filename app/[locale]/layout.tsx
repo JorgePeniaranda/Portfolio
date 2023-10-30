@@ -1,111 +1,111 @@
-import type { Metadata } from "next";
-import { Baloo_2 } from "next/font/google";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import "./globals.css";
-import { notFound } from "next/navigation";
-import { createTranslator } from "next-intl";
-import { lenguagesSupported } from "@/consts";
+import type { Metadata } from 'next'
+import { Baloo_2 as baloo } from 'next/font/google'
+import { Navbar } from '@/components/Navbar'
+import { Footer } from '@/components/Footer'
+import './globals.css'
+import { notFound } from 'next/navigation'
+import { createTranslator } from 'next-intl'
+import { lenguagesSupported } from '@/consts'
 
-const Baloo = Baloo_2({ preload: true, subsets: ["latin"] });
+const Baloo = baloo({ preload: true, subsets: ['latin'] })
 
-export async function generateMetadata({
-  params: { locale },
+export async function generateMetadata ({
+  params: { locale }
 }: {
   params: { locale: string };
 }): Promise<Metadata> {
-  const messages = (await import(`../../messages/${locale}.json`)).default;
-  const t = createTranslator({ locale, messages, namespace: "Metadata" });
+  const messages = (await import(`../../messages/${locale}.json`)).default
+  const t = createTranslator({ locale, messages, namespace: 'Metadata' })
 
   return {
-    title: `Jorge Peñaranda | ${t("category")}`,
-    description: t("page-description"),
+    title: `Jorge Peñaranda | ${t('category')}`,
+    description: t('page-description'),
     alternates: {
-      canonical: "https://jorgepeniaranda.me/en",
+      canonical: 'https://jorgepeniaranda.me',
       languages: {
-        es: "https://jorgepeniaranda.me/es",
-        en: "https://jorgepeniaranda.me/en",
-        pt: "https://jorgepeniaranda.me/pt",
-      },
+        es: 'https://jorgepeniaranda.me/es',
+        en: 'https://jorgepeniaranda.me/en',
+        pt: 'https://jorgepeniaranda.me/pt'
+      }
     },
     authors: {
-      name: "Jorge Peñaranda",
-      url: "https://linktr.ee/jorgepeniaranda",
+      name: 'Jorge Peñaranda',
+      url: 'https://linktr.ee/jorgepeniaranda'
     },
-    category: t("category"),
-    classification: t("category"),
-    colorScheme: "dark",
-    creator: "Jorge Peñaranda",
-    generator: "Next.js",
-    icons: "/img/favicon.ico",
+    category: t('category'),
+    classification: t('category'),
+    colorScheme: 'dark',
+    creator: 'Jorge Peñaranda',
+    generator: 'Next.js',
+    icons: '/img/favicon.ico',
     keywords: [
-      "Jorge Peñaranda",
-      t("page-keywords.web-developement"),
-      t("page-keywords.web-developer"),
-      t("page-keywords.programmer"),
-      t("page-keywords.web-solutions"),
-      t("page-keywords.tools"),
-      t("page-keywords.open-source"),
-      "Front End",
-      "JavaScript",
-      "TypeScript",
-      "CSS",
-      "React",
-      "Next.js",
-      "Tailwind",
-      "SASS",
+      'Jorge Peñaranda',
+      t('page-keywords.web-developement'),
+      t('page-keywords.web-developer'),
+      t('page-keywords.programmer'),
+      t('page-keywords.web-solutions'),
+      t('page-keywords.tools'),
+      t('page-keywords.open-source'),
+      'Front End',
+      'JavaScript',
+      'TypeScript',
+      'CSS',
+      'React',
+      'Next.js',
+      'Tailwind',
+      'SASS'
     ],
-    manifest: "/manifest.json",
+    manifest: '/manifest.json',
     formatDetection: { telephone: false },
     openGraph: {
-      type: "website",
-      url: "https://jorgepeniaranda.me",
-      title: `Jorge Peñaranda | ${t("category")}`,
-      description: t("page-description"),
+      type: 'website',
+      url: 'https://jorgepeniaranda.me',
+      title: `Jorge Peñaranda | ${t('category')}`,
+      description: t('page-description'),
       images: [
         {
-          url: "/img/favicon.ico",
-        },
-      ],
+          url: '/img/favicon.ico'
+        }
+      ]
     },
-    publisher: "Vercel",
-    referrer: "no-referrer-when-downgrade",
+    publisher: 'Vercel',
+    referrer: 'no-referrer-when-downgrade',
     robots: { index: true, follow: true },
     themeColor: [
-      { media: "(prefers-color-scheme: dark)", color: "#1a1a1a" },
-      { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+      { media: '(prefers-color-scheme: dark)', color: '#1a1a1a' },
+      { media: '(prefers-color-scheme: light)', color: '#ffffff' }
     ],
-    metadataBase: new URL("https://jorgepeniaranda.me"),
+    metadataBase: new URL('https://jorgepeniaranda.me'),
     twitter: {
-      title: `Jorge Peñaranda | ${t("category")}`,
-      description: t("page-description"),
-      card: "summary_large_image",
-      site: "@peniarandajorge",
-      creator: "@peniarandajorge",
-      images: "/img/favicon.ico",
+      title: `Jorge Peñaranda | ${t('category')}`,
+      description: t('page-description'),
+      card: 'summary_large_image',
+      site: '@peniarandajorge',
+      creator: '@peniarandajorge',
+      images: '/img/favicon.ico'
     },
-    viewport: { width: "device-width", initialScale: 1 },
-  };
+    viewport: { width: 'device-width', initialScale: 1 }
+  }
 }
 
-export default function RootLayout({
+export default function RootLayout ({
   children,
-  params: { locale },
+  params: { locale }
 }: {
   children: React.ReactNode;
   params: {
     locale: string;
   };
 }) {
-  const isValidLocale = lenguagesSupported.some((cur) => cur === locale);
-  if (!isValidLocale) notFound();
+  const isValidLocale = lenguagesSupported.some((cur) => cur === locale)
+  if (!isValidLocale) notFound()
 
   return (
-    <html lang={locale} className="dark">
+    <html lang={locale} className='dark'>
       <body
         className={
           Baloo.className +
-          "  bg-primary text-secondary dark:bg-primary-dark dark:text-secondary-dark px-0 sm:px-24  2xl:px-36"
+          '  bg-primary text-secondary dark:bg-primary-dark dark:text-secondary-dark px-0 sm:px-24  2xl:px-36'
         }
       >
         <Navbar lng={locale} />
@@ -113,5 +113,5 @@ export default function RootLayout({
         <Footer />
       </body>
     </html>
-  );
+  )
 }

@@ -1,13 +1,13 @@
-"use client";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { FiChevronDown } from "react-icons/fi";
-import styles from "./style.module.css";
-import { lenguagesSupported } from "@/consts";
+'use client'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { FiChevronDown } from 'react-icons/fi'
+import styles from './style.module.css'
+import { lenguagesSupported } from '@/consts'
 
 export const SwitchLenguage = ({ lng }: { lng: string }) => {
-  const path = usePathname();
-  var pathWithoutLng = path.split(`/${lng}`);
+  const path = usePathname()
+  const pathWithoutLng = path.split(`/${lng}`)
 
   return (
     <div className={styles.dropdown}>
@@ -23,14 +23,14 @@ export const SwitchLenguage = ({ lng }: { lng: string }) => {
               <Link
                 key={l}
                 href={`/${l}/${
-                  pathWithoutLng.length > 1 ? pathWithoutLng[1] : ""
+                  pathWithoutLng.length > 1 ? pathWithoutLng[1] : ''
                 }`}
               >
                 {l}
               </Link>
-            );
+            )
           })}
       </div>
     </div>
-  );
-};
+  )
+}
