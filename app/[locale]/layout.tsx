@@ -6,6 +6,7 @@ import './globals.css'
 import { notFound } from 'next/navigation'
 import { createTranslator } from 'next-intl'
 import { lenguagesSupported } from '@/consts'
+import { ReactNode } from 'react'
 
 const Baloo = baloo({ preload: true, subsets: ['latin'] })
 
@@ -92,7 +93,7 @@ export default function RootLayout ({
   children,
   params: { locale }
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   params: {
     locale: string;
   };

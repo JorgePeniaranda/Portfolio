@@ -2,7 +2,7 @@ import { IoCloseOutline } from 'react-icons/io5'
 import { AiFillGithub, AiOutlineShareAlt, AiOutlineLink } from 'react-icons/ai'
 import { GoChevronLeft, GoChevronRight } from 'react-icons/go'
 import { Project } from '@/types'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import style from './styles.module.css'
 import Image from 'next/image'
 

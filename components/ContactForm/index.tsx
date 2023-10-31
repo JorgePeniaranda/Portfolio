@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, FormEvent } from 'react'
 import emailjs from '@emailjs/browser'
 import styles from './style.module.css'
 import { MdOutlineDoneAll, MdError } from 'react-icons/md'
@@ -21,7 +21,7 @@ export const ContactForm = ({
   const [done, setDone] = useState(false)
   const [error, setError] = useState(false)
 
-  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+  const sendEmail = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!done && !error) {
       emailjs
@@ -43,6 +43,7 @@ export const ContactForm = ({
             (e.target as HTMLFormElement)
               .getElementsByTagName('button')[0]
               .classList.add(styles.buttonError)
+            console.log(error)
           }
         )
     }
