@@ -5,6 +5,7 @@
 
 /* Base light colors */
 :root {
+  --testPrimary: oklch(56.53% 0.118 252);
   --primary: #ffffff;
   --secondary: #1a1a1a;
 
@@ -20,36 +21,21 @@
 /* Normalize */
 html,
 body {
-  min-height: 100vh;
+  min-height: 100%;
   min-width: 100%;
 }
 
-/* Scrollbar */
-html::-webkit-scrollbar {
-  width: 10px;
-  height: 6px;
-}
-html::-webkit-scrollbar-track {
-  border-radius: 10px;
-  background: rgba(127, 127, 127, 0.1);
-}
-html::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background: rgba(127, 127, 127, 0.2);
-}
-html::-webkit-scrollbar-thumb:hover {
-  background: rgba(127, 127, 127, 0.4);
-}
-html::-webkit-scrollbar-thumb:active {
-  background: rgba(127, 127, 127, 0.9);
+body * {
+  animation: open 500ms ease reverse;
 }
 
-/* Transition all */
-html * {
-  transition: 300ms all ease;
-}
-
-/* Text Style */
-h1 span {
-  font-weight: 800;
+@keyframes open {
+  0% {
+    transform: translate(0);
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
 }

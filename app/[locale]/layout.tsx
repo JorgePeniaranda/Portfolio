@@ -6,7 +6,8 @@ import './globals.css'
 import { notFound } from 'next/navigation'
 import { createTranslator } from 'next-intl'
 import { lenguagesSupported } from '@/consts'
-import { ReactNode } from 'react'
+import { ReactNode, Suspense } from 'react'
+import Loading from './loading'
 
 const Baloo = baloo({ preload: true, subsets: ['latin'] })
 
@@ -22,9 +23,9 @@ export async function generateMetadata ({
     title: `Jorge Peñaranda | ${t('category')}`,
     description: t('page-description'),
     alternates: {
-      canonical: 'https://jorgepeniaranda.me',
+      canonical: 'https://jorgepeniaranda.me/',
       languages: {
-        es: 'https://jorgepeniaranda.me/es',
+        es: 'https://jorgepeniaranda.me/',
         en: 'https://jorgepeniaranda.me/en',
         pt: 'https://jorgepeniaranda.me/pt'
       }
@@ -109,9 +110,11 @@ export default function RootLayout ({
           '  bg-primary text-secondary dark:bg-primary-dark dark:text-secondary-dark px-0 sm:px-24  2xl:px-36'
         }
       >
-        <Navbar lng={locale} />
-        {children}
-        <Footer />
+        <Suspense fallback={<Loading />}>
+          <Navbar lng={locale} />
+          {children}
+          <Footer />
+        </Suspense>
       </body>
     </html>
   )
