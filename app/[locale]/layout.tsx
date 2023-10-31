@@ -8,6 +8,8 @@ import { createTranslator } from 'next-intl'
 import { lenguagesSupported } from '@/consts'
 import { ReactNode, Suspense } from 'react'
 import Loading from './loading'
+import { SwitchTheme } from '@/components/SwitchTheme'
+import { GoUpButton } from '@/components/GoUpButton'
 
 const Baloo = baloo({ preload: true, subsets: ['latin'] })
 
@@ -114,6 +116,10 @@ export default function RootLayout ({
           <Navbar lng={locale} />
           {children}
           <Footer />
+          <div id='fixed'>
+            <SwitchTheme initialTheme={false} nameStorage='DarkMode-Portfolio' />
+            <GoUpButton />
+          </div>
         </Suspense>
       </body>
     </html>

@@ -25,17 +25,17 @@ body {
   min-width: 100%;
 }
 
-body * {
-  animation: open 500ms ease reverse;
+body *:not(#fixed) {
+  animation: appear 0.25s 0.2s both;
 }
 
-@keyframes open {
+@keyframes appear {
   0% {
-    transform: translate(0);
-    opacity: 1;
-  }
-  75% {
     opacity: 0;
-    transform: translateY(15px);
+    translate: 0 100%;
+  }
+  100% {
+    opacity: 1;
+    translate: 0;
   }
 }

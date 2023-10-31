@@ -32,10 +32,6 @@ export default function Portafolio () {
           ))}
         </section>
       </main>
-      <div id='fixed'>
-        <SwitchTheme initialTheme={false} nameStorage='DarkMode-Portfolio' />
-        <GoUpButton />
-      </div>
     </div>
   )
 }
