@@ -3,7 +3,6 @@
   height: 50px;
   position: relative;
   animation: flippx 1s infinite linear;
-  z-index: 100;
 }
 .loader:before {
   content: "";
