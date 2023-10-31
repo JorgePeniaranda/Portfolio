@@ -32,6 +32,9 @@
       "web-solutions": "Soluções da Web"
     }
   },
+  "NotFound": {
+    "404": "Página não encontrada"
+  },
   "Projects": {
     "button": "Sobre o Proyectos",
     "figure": "Exemplos de projetos pessoais",
