@@ -1,0 +1,133 @@
+---
+import Article from "../../components/article-with-image/Article.astro";
+import Nature from "../../svg/Nature.astro";
+---
+
+<Article title="Contacto" alignText="right">
+  <figure class="flex-1 flex justify-center" slot="after">
+    <Nature />
+    <figcaption class="text-center hidden">Paisaje</figcaption>
+  </figure>
+  <p class="mt-2 tracking-wider text-lg">
+    Si deseas contactarme o tienes alguna consulta, no dudes en enviarme un mensaje. Estoy aquí para ayudarte y escuchar tus ideas.
+  </p>
+  <form class="formStyle">
+      <input
+        type='text'
+        name='name'
+        placeholder="Nombre"
+        class='border-secondary-dark dark:border-secondary text-gray-color focus:text-secondary dark:focus:text-secondary-dark focus:placeholder:text-secondary dark:focus:placeholder:text-secondary-dark'
+        autoComplete='name'
+        required
+      />
+      <input
+        type='email'
+        name='email'
+        placeholder="Correo"
+        class='border-secondary-dark dark:border-secondary text-gray-color focus:text-secondary dark:focus:text-secondary-dark focus:placeholder:text-secondary dark:focus:placeholder:text-secondary-dark'
+        autoComplete='email'
+        required
+      />
+      <textarea
+        name='message'
+        cols={30}
+        rows={6}
+        placeholder="Mensaje"
+        class='border-secondary-dark dark:border-secondary text-gray-color focus:text-secondary dark:focus:text-secondary-dark focus:placeholder:text-secondary dark:focus:placeholder:text-secondary-dark'
+        autoComplete='off'
+        required
+      />
+      <button
+        type='submit'
+        class='bg-primary-dark select-none text-secondary-dark dark:bg-slate-300 dark:text-secondary '
+      >
+        Enviar
+      </button>
+    </form>
+</Article>
+<style>
+  .formStyle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 0.7rem;
+}
+
+.formStyle input,
+.formStyle textarea {
+  background-color: transparent;
+  font-size: 1.2rem;
+  color: var(--gray-color);
+  padding: 0.76rem;
+  outline: none;
+  border-bottom: 0.08rem solid;
+}
+
+.formStyle input {
+  width: calc(50% - 0.35rem); /* Width - Gap */
+}
+
+.formStyle textarea {
+  width: 100%;
+  resize: vertical;
+}
+
+.formStyle button {
+  width: 100%;
+  margin-top: 1.21rem;
+  padding: 0.7rem 0 0.7rem;
+  border-radius: 0.375rem;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.18rem;
+  font-weight: 600;
+}
+.formStyle button:hover {
+  filter: brightness(0.8);
+}
+
+.buttonError {
+  color: white !important;
+  background-color: red !important;
+  animation: fill 750ms ease-in forwards;
+}
+
+.buttonSuccess {
+  color: white !important;
+  background-color: green !important;
+  animation: fill 750ms ease-in forwards;
+}
+
+@keyframes fill {
+  0% {
+    clip-path: circle(5% at 50% 50%);
+  }
+  100% {
+    clip-path: circle(100% at 50% 50%);
+  }
+}
+
+</style>
+
+<!-- 
+
+
+      <figure className='flex items-center pb-16 mt-16 justify-center w-[90%] md:w-[55%] md:mt-0'>
+        <figcaption className='text-center hidden'>{t('figure')}</figcaption>
+        <Nature className='w-full md:w-4/6 pr-0 md:pr-10' />
+      </figure>
+      <article className='flex flex-col items-center text-center w-[90%] md:w-[45%] md:items-start md:text-start'>
+        <h2 className='text-5xl font-bold select-none underline underline-offset-4'>
+          {t('title')}
+        </h2>
+        <p className='mt-2 tracking-wider text-xl'>{t('text')}</p>
+        <ContactForm
+          namePlaceHolder={t('Name-placeholder')}
+          emailPlaceHolder={t('Email-placeholder')}
+          messagePlaceHolder={t('Message-placeholder')}
+          sendPlaceHolder={t('Send-placeholder')}
+        />
+      </article>
+
+ -->
