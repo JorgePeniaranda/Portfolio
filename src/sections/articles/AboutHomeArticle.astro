@@ -4,11 +4,11 @@ import ReadingTime from "../../svg/ReadingTime.astro";
 ---
 
 <Article title="Sobre Mi" alignText="right">
-  <figure class="flex-1 flex justify-center" slot="after">
+  <figure slot="after">
     <ReadingTime />
-    <figcaption class="text-center hidden">coso</figcaption>
+    <figcaption>coso</figcaption>
   </figure>
-  <p class="mt-2 tracking-wider text-lg">
+  <p>
     Apasionado desarrollador web con experiencia en la creación de herramientas
     de código abierto y soluciones web. Comprometido en aprender y crecer
     constantemente en este emocionante campo, y encantado de compartir mi
@@ -18,8 +18,48 @@ import ReadingTime from "../../svg/ReadingTime.astro";
     href="https://dev.to/jorgepeniaranda"
     target="_blank"
     rel="noreferrer"
-    class="mt-5 w-fit p-2 px-6 select-none text-center font-semibold rounded-md bg-primary-dark text-secondary-dark dark:bg-slate-300 dark:text-secondary hover:brightness-75"
   >
     Conocer Blog
   </a>
 </Article>
+<style>
+  figure{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  figcaption{
+    text-align: center;
+    display: none;
+  }
+  
+  p{
+    margin-top: 0.5rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    letter-spacing: 0.025em;
+  }
+  
+  a {
+    margin-top: 1.25rem;
+    width: fit-content;
+    padding: 0.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    user-select: none;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 0.375rem;
+    background-color: var(--white);
+    color: var(--color-secondary-dark);
+    /* Para dark mode */
+    /* background-color: var(--color-slate-300); */
+    /* color: var(--color-secondary); */
+    transition: all 0.3s;
+  }
+  
+  a:hover {
+      filter: brightness(75%);
+  }
+</style>

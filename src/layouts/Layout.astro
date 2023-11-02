@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from "astro:transitions";
 import Navbar from "../components/navbar/Navbar.astro";
 import Footer from "../components/footer/Footer.astro";
 interface Props {
@@ -17,48 +18,50 @@ const { title } = Astro.props;
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <ViewTransitions />
   </head>
   <body>
     <Navbar />
     <slot />
     <Footer />
-  </body>
-</html>
-<style is:global>
-  :root {
-    --bg-color: oklch(25.44% 0 0);
+    <style is:global>
+      :root {
+        --bg-color: oklch(25.44% 0 0);
+        --white: red;
 
-    --border-footer: rgb(94, 94, 94);
-    --border-footer-dark: rgb(255, 0, 0);
+        --border-footer: rgb(94, 94, 94);
+        --border-footer-dark: rgb(255, 0, 0);
 
-    --rgb-color-1: #f04dff;
-    --rgb-color-2: #ff4d4d;
-    --rgb-color-3: #ffc54d;
-    --rgb-color-4: #6aed76;
-    --rgb-color-5: #09f;
+        --rgb-color-1: #f04dff;
+        --rgb-color-2: #ff4d4d;
+        --rgb-color-3: #ffc54d;
+        --rgb-color-4: #6aed76;
+        --rgb-color-5: #09f;
 
-    --nav-height: 9rem;
-  }
-  html {
-    /* 
+        --nav-height: 9rem;
+      }
+      html {
+        /* 
     background-image: linear-gradient(to top, #bac8e0 0%, #6a85b6 100%);
     background-repeat: no-repeat;
     background-size: cover; 
     */
 
-    background: #101010;
-    color-scheme: dark light;
-  }
+        background: #101010;
+        color-scheme: dark light;
+      }
 
-  body {
-    width: 100%;
-    min-height: 100vh;
-  }
+      body {
+        width: 100%;
+        min-height: 100vh;
+      }
 
-  /* Screen "MD" */
-  @media (min-width: 768px) {
-    body {
-      padding: 0 10rem;
-    }
-  }
-</style>
+      /* Screen "MD" */
+      @media (min-width: 768px) {
+        body {
+          padding: 0 10rem;
+        }
+      }
+    </style>
+  </body>
+</html>
