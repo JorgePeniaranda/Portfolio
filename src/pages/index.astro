@@ -1,33 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Header from "../components/headers/home-header/Header.astro";
-import Article from "../components/article-with-image/Article.astro";
-import ReadingTime from "../svg/ReadingTime.astro";
+import Header from "../sections/headers/home-header/Header.astro";
+import About from "../sections/articles/HomeAboutArticle.astro";
 ---
 
 <Layout title="Jorge Peñaranda">
   <Header />
   <!-- <aside>sadsadsa</aside> -->
   <main>
-    <Article title="Sobre Mi" alignText="right">
-      <figure class="flex-1 flex justify-center" slot="after">
-        <ReadingTime />
-        <figcaption class="text-center hidden">coso</figcaption>
-      </figure>
-      <p class="mt-2 tracking-wider text-lg">
-        Apasionado desarrollador web con experiencia en la creación de
-        herramientas de código abierto y soluciones web. Comprometido en
-        aprender y crecer constantemente en este emocionante campo, y encantado
-        de compartir mi conocimiento en el camino.
-      </p>
-      <a
-        href="https://dev.to/jorgepeniaranda"
-        target="_blank"
-        rel="noreferrer"
-        class="mt-5 w-fit p-2 px-6 select-none text-center font-semibold rounded-md bg-primary-dark text-secondary-dark dark:bg-slate-300 dark:text-secondary hover:brightness-75"
-      >
-        Conocer Blog
-      </a>
-    </Article>
+    <About />
   </main>
 </Layout>
