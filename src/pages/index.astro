@@ -1,8 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Header from "../components/header/homeHeader/header.astro";
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Jorge Peñaranda">
   <nav
     class="w-full flex items-center justify-around text-xl h-36 sm:justify-between"
   >
@@ -14,29 +15,7 @@ import Layout from "../layouts/Layout.astro";
     </a>
     <div class="flex items-center justify-center"></div>
   </nav>
-  <header
-    class="w-full h-full flex flex-wrap justify-around items-center gap-16 sm:gap-0 pb-36"
-  >
-    <article
-      class="w-[90%] h-2/3 grid grid-rows-2 items-center text-center md:text-start md:flex-[2]"
-    >
-      <p
-        class="flex-1 font-bold text-5xl sm:text-7xl special-text"
-        special-word="innovación"
-      >
-        Navegando hacia un futuro de
-      </p>
-      <h1 class="flex-1 text-zinc-400 font-semibold text-xl select-text">
-        Jorge Peñaranda / Desarrollador Web
-      </h1>
-    </article>
-    <figure class="flex items-center justify-center pb-32 w-[90%] sm:flex-1">
-      <img src="/favicon.svg" alt="" />
-      <figcaption class="text-center hidden">
-        Nave espacial en el espacio
-      </figcaption>
-    </figure>
-  </header>
+  <Header />
   <aside></aside>
   <main>
     <article>
@@ -54,50 +33,3 @@ import Layout from "../layouts/Layout.astro";
   </main>
   <footer></footer>
 </Layout>
-<style>
-  /* Header */
-  .special-text:after {
-    content: attr(special-word);
-    animation: 10s RGBColor running infinite alternate;
-  }
-
-  .specialSVG {
-    animation: 10s RGBSVG running infinite alternate;
-  }
-
-  @keyframes RGBColor {
-    0% {
-      color: #f04dff;
-    }
-    25% {
-      color: #ff4d4d;
-    }
-    50% {
-      color: #ffc54d;
-    }
-    75% {
-      color: #6aed76;
-    }
-    100% {
-      color: #09f;
-    }
-  }
-
-  @keyframes RGBSVG {
-    0% {
-      fill: #f04dff;
-    }
-    25% {
-      fill: #ff4d4d;
-    }
-    50% {
-      fill: #ffc54d;
-    }
-    75% {
-      fill: #6aed76;
-    }
-    100% {
-      fill: #09f;
-    }
-  }
-</style>
