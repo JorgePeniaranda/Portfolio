@@ -25,7 +25,7 @@ body {
   min-width: 100%;
 }
 
-body *:not(#fixed) {
+body *:not(#fixed, .testing-removeAppear, .testing-removeAppear *) {
   animation: appear 0.25s 0.2s both;
 }
 
