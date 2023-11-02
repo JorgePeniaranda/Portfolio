@@ -1,6 +1,6 @@
 <nav>
   <a href="/" aria-label="Go Home">
-    <img src="/Logo-512x512.png" />
+    <img src="/Logo-512x512.png" alt="Logo" />
   </a>
   <div class="flex items-center justify-center"></div>
 </nav>
@@ -13,16 +13,18 @@
     justify-content: space-around;
   }
 
+  nav a:hover {
+    transform: scale(1.1);
+  }
+
+  nav a img {
+    height: calc(var(--nav-height) - 1rem);
+  }
+
   /* Screen "SM" */
   @media (min-width: 640px) {
     nav {
       justify-content: space-between;
-    }
-    nav a:hover {
-      transform: scale(1.1);
-    }
-    nav a img {
-      height: calc(var(--nav-height) - 1rem);
     }
   }
 </style>
