@@ -1,0 +1,23 @@
+{
+  "name": "Jorge Peñaranda's Portfolio",
+  "short_name": "JorgePeñaranda Portfolio",
+  "description": "Desarrollador Web Front End con experiencia en JavaScript, CSS, React y Next.js. Descubre mis proyectos y soluciones web de código abierto.",
+  "start_url": "/",
+  "display": "fullscreen",
+  "background_color": "#1a1a1a",
+  "theme_color": "#1a1a1a",
+  "icons": [
+    {
+      "src": "/img/Logo-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/img/Logo-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
