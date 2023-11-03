@@ -1,5 +1,6 @@
 ---
 import Article from "../../components/articles/ArticleWithImage.astro";
+import LinkButton from "../../components/buttons/LinkButton.astro";
 import ReadingTime from "../../svg/ReadingTime.astro";
 ---
 
@@ -14,9 +15,13 @@ import ReadingTime from "../../svg/ReadingTime.astro";
     constantemente en este emocionante campo, y encantado de compartir mi
     conocimiento en el camino.
   </p>
-  <a href="https://dev.to/jorgepeniaranda" target="_blank" rel="noreferrer">
+  <LinkButton
+    url="https://dev.to/jorgepeniaranda"
+    target="_blank"
+    rel="noreferrer"
+  >
     Conocer Blog
-  </a>
+  </LinkButton>
 </Article>
 <style>
   figure {
@@ -31,27 +36,5 @@ import ReadingTime from "../../svg/ReadingTime.astro";
     font-size: 1.125rem;
     line-height: 1.75rem;
     letter-spacing: 0.025em;
-  }
-
-  a {
-    margin-top: 1.25rem;
-    width: fit-content;
-    padding: 0.5rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    user-select: none;
-    text-align: center;
-    font-weight: 600;
-    border-radius: 0.375rem;
-    background-color: var(--primary-light);
-    color: var(--primary-dark);
-    /* Para dark mode */
-    /* background-color: var(--color-slate-300); */
-    /* color: var(--color-secondary); */
-    transition: all 0.3s;
-  }
-
-  a:hover {
-    filter: brightness(75%);
   }
 </style>

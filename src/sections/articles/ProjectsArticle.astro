@@ -1,5 +1,6 @@
 ---
 import Article from "../../components/articles/ArticleWithImage.astro";
+import LinkButton from "../../components/buttons/LinkButton.astro";
 import ProjectCard from "../../components/cards/ProjectCard.astro";
 ---
 
@@ -20,9 +21,13 @@ import ProjectCard from "../../components/cards/ProjectCard.astro";
     proyectos que reflejan mi habilidad y pasión por el desarrollo web. Les
     invito a explorar mi galería de proyectos para conocer más sobre mi trabajo.
   </p>
-  <a href="https://jorgepeniaranda.tech/" target="_blank" rel="noreferrer"
-    >Conocer Proyectos</a
+  <LinkButton
+    url="https://jorgepeniaranda.tech/"
+    target="_blank"
+    rel="noreferrer"
   >
+    Conocer Proyectos
+  </LinkButton>
 </Article>
 <style>
   ul {
@@ -42,19 +47,5 @@ import ProjectCard from "../../components/cards/ProjectCard.astro";
     letter-spacing: 0.1em;
     font-size: 1.125rem;
     max-width: 80rem;
-  }
-
-  a {
-    font-size: 1.2rem;
-    margin-top: 2rem;
-    padding: 0.7rem 1.2rem;
-    border-radius: 1rem;
-    background-color: var(--primary-light);
-    color: var(--primary-dark);
-    transition: transform 0.2s ease-in-out;
-  }
-
-  a:hover {
-    transform: scale(1.1);
   }
 </style>
