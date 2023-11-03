@@ -1,55 +1,133 @@
 ---
 import HTML from '../../svg/HTML.astro'
+import CSS from '../../svg/CSS.astro'
+import Javascript from '../../svg/Javascript.astro'
+import React from '../../svg/React.astro'
+import Nextjs from '../../svg/Nextjs.astro'
+import Typescript from '../../svg/Typescript.astro'
+import Tailwind from '../../svg/Tailwind.astro'
+import SASS from '../../svg/SASS.astro'
+import AstroIcon from '../../svg/Astro.astro'
+import Nodejs from '../../svg/Nodejs.astro'
+import PHP from '../../svg/PHP.astro'
+import MySQL from '../../svg/MySQL.astro'
+import Laravel from '../../svg/Laravel.astro'
+import CSharp from '../../svg/CSharp.astro'
+import Git from '../../svg/Git.astro'
+import Github from '../../svg/Github.astro'
+import Gitlab from '../../svg/Gitlab.astro'
+import Linux from '../../svg/Linux.astro'
+import Trello from '../../svg/Trello.astro'
+import Notion from '../../svg/Notion.astro'
+import VSCode from '../../svg/VSCode.astro'
 ---
 
-<section id="ListStack">
+<section>
     <article>
-        <h2>Titre</h2>
+        <h2>FrontEnd</h2>
         <ul>
             <li>
               <HTML/>
             </li>
-        </ul>
-    </article>
-    <article>
-        <h2>Titre</h2>
-        <ul>
             <li>
+              <CSS/>
+            </li>
+            <li>
+              <Javascript/>
+            </li>
+            <li>
+              <React/>
+            </li>
+            <li>
+              <Nextjs/>
+            </li>
+            <li>
+              <Typescript/>
+            </li>
+            <li>
+              <Tailwind/>
+            </li>
+            <li>
+              <SASS/>
+            </li>
+            <li>
+              <AstroIcon/>
             </li>
         </ul>
     </article>
     <article>
-        <h2>Titre</h2>
+        <h2>BackEnd</h2>
         <ul>
             <li>
+              <Nodejs/>
+            </li>
+            <li>
+              <PHP/>
+            </li>
+            <li>
+              <MySQL/>
+            </li>
+            <li>
+              <Laravel/>
+            </li>
+            <li>
+              <CSharp/>
+            </li>
+        </ul>
+    </article>
+    <article>
+        <h2>DevOps</h2>
+        <ul>
+            <li>
+              <Git/>
+            </li>
+            <li>
+              <Github/>
+            </li>
+            <li>
+              <Gitlab/>
+            </li>
+            <li>
+              <Linux/>
+            </li>
+            <li>
+              <Trello/>
+            </li>
+            <li>
+              <Notion/>
+            </li>
+            <li>
+              <VSCode/>
             </li>
         </ul>
     </article>
 </section>
 <style>
-#ListStack {
+section {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  text-align: center;
-  border-radius: 0.375rem;
-  user-select: none;
+  border-radius: 1.375rem;
   margin: 10rem 0 12.5rem;
   padding: 4rem 0;
+  background-color: #1b1b1b;
+  gap: 4rem 2rem;
 }
 
-#ListStack h2 {
+h2 {
   width: 100%;
   font-weight: 500;
   font-size: 2.5rem;
+  text-align: center;
   margin-bottom: 1rem;
 }
 
-#ListStack article {
+article {
+  min-width: 15rem;
   flex: 1;
 }
 
-#ListStack article ul {
+ul {
   display: flex;
   flex-wrap: wrap;
   max-width: 15rem;
@@ -59,13 +137,14 @@ import HTML from '../../svg/HTML.astro'
   gap: 2rem;
 }
 
-#ListStack article ul li {
-  font-size: 3.5rem;
+li {
+  width: 3.5rem;
+  height: 3.5rem;
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
 }
 
-#ListStack article ul li:hover {
+li:hover {
   transform: scale(1.2);
 }
 </style>
