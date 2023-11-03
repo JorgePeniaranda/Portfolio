@@ -5,7 +5,7 @@ interface Props {
   rel?: string;
   width?: "min" | "max" | "fit" | "full" | number;
 }
-const { url, target, rel } = Astro.props;
+const { url, target, rel, width } = Astro.props;
 ---
 
 <a
@@ -17,7 +17,7 @@ const { url, target, rel } = Astro.props;
     Astro.props.width === "max" && "w-max",
     Astro.props.width === "fit" && "w-fit",
     Astro.props.width === "full" && "w-full",
-    typeof Astro.props.width === "number" && `w-${Astro.props.width}`,
+    typeof Astro.props.width === "number" && `w-${width}`,
   ]}
   ]}
 >

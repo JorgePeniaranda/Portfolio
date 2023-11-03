@@ -3,11 +3,19 @@ interface Props {
   title: string;
   text: string;
   figCaption?: string;
+  textColor?: string;
+  backgroundColor?: string;
 }
-const { title, text, figCaption } = Astro.props;
+const {
+  title,
+  text,
+  figCaption,
+  textColor = "var(--primary-light)",
+  backgroundColor = "var(--primary-dark)",
+} = Astro.props;
 ---
 
-<article>
+<article class={`text-[${textColor}] bg-[${backgroundColor}]`}>
   <figure>
     <slot />
     <figcaption>{figCaption || "Project-Image"}</figcaption>
@@ -24,7 +32,6 @@ const { title, text, figCaption } = Astro.props;
     flex-direction: column;
     width: 23rem;
     min-height: 28rem;
-    background: #2563eb;
     text-align: center;
     border-radius: 2rem;
     user-select: none;

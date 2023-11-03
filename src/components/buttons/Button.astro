@@ -1,12 +1,14 @@
 ---
 interface Props {
-  type?: string;
+  type?: "submit" | "reset" | "button" | null | undefined;
   width?: "min" | "max" | "fit" | "full" | number;
 }
 const { type, width } = Astro.props;
 ---
 
-<button type={type}  class:list={[
+<button
+  type={type}
+  class:list={[
     Astro.props.width === "min" && "w-min",
     Astro.props.width === "max" && "w-max",
     Astro.props.width === "fit" && "w-fit",

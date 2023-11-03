@@ -13,7 +13,7 @@ const { id, title, alignText, wrapDirection } = Astro.props;
   class:list={[
     {
       "flex-wrap-reverse": wrapDirection === "reverse",
-      "flex-wrap": wrapDirection === "normal" || !wrapDirection,
+      "flex-wrap": wrapDirection === "normal",
     },
   ]}
 >
