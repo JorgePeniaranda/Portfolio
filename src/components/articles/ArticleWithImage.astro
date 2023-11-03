@@ -8,8 +8,8 @@ const { title, alignText, wrapDirection } = Astro.props;
 ---
 
 <section
+  class="sm:col-start-auto"
   class:list={[
-    "w-full flex gap-16 items-center pt-20 pb-48",
     {
       "flex-wrap-reverse": wrapDirection === "reverse",
       "flex-wrap": wrapDirection === "normal" || !wrapDirection,
@@ -19,7 +19,6 @@ const { title, alignText, wrapDirection } = Astro.props;
   <slot name="after" />
   <article
     class:list={[
-      "flex flex-1 flex-col items-center text-center w-[90%] sm:w-[45%]",
       {
         "lg:text-right lg:items-end": alignText === "left",
         "lg:text-center lg:items-center": alignText === "center",
@@ -27,7 +26,7 @@ const { title, alignText, wrapDirection } = Astro.props;
       },
     ]}
   >
-    <h2 class="text-5xl select-none font-bold underline underline-offset-4">
+    <h2>
       {title}
     </h2>
     <slot />
@@ -35,7 +34,23 @@ const { title, alignText, wrapDirection } = Astro.props;
   <slot name="before" />
 </section>
 <style>
+  section {
+    width: 100%;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    padding-bottom: 20rem;
+  }
   article {
+    flex: 1;
     min-width: 20rem;
+    display: flex;
+    flex-direction: column;
+  }
+  h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
 </style>

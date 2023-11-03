@@ -3,30 +3,12 @@ import Article from "../../components/articles/ArticleWithImage.astro";
 import ProjectCard from "../../components/cards/ProjectCard.astro";
 ---
 
-<Article title="Proyectos" alignText="center">
+<Article title="Proyectos" alignText="left">
   <ul slot="before">
     <li>
       <ProjectCard
         title="Golden Duck"
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ornare enim ut magna blandit posuere. Nulla congue risus pulvinar dolor auctor consequat."
-        figCaption="GoldenDuck-Logo"
-      >
-        <img src="/assets/img/GoldenDuck.webp" alt="GoldenDuck-Logo" />
-      </ProjectCard>
-    </li>
-    <li>
-      <ProjectCard
-        title="Proyecto"
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ornare enim ut magna blandit posuere. Nulla congue risus pulvinar dolor auctor consequat."
-        figCaption="GoldenDuck-Logo"
-      >
-        <img src="/assets/img/GoldenDuck.webp" alt="GoldenDuck-Logo" />
-      </ProjectCard>
-    </li>
-    <li>
-      <ProjectCard
-        title="Golden Duck"
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ornare enim ut magna blandit posuere. Nulla congue risus pulvinar dolor auctor consequat.t magna blandit posuere. Nulla congue risus pulvinar dolor auctor consequat.t magna blandit posuere."
         figCaption="GoldenDuck-Logo"
       >
         <img src="/assets/img/GoldenDuck.webp" alt="GoldenDuck-Logo" />
@@ -45,10 +27,10 @@ import ProjectCard from "../../components/cards/ProjectCard.astro";
 <style>
   ul {
     display: flex;
-    width: 100%;
     justify-content: center;
     min-width: 20rem;
     gap: 1rem;
+    flex: 1;
   }
 
   img {
