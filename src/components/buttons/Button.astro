@@ -1,18 +1,12 @@
 ---
 interface Props {
-  url: string;
-  target?: string;
-  rel?: string;
+  type?: string;
   width?: "min" | "max" | "fit" | "full" | number;
 }
-const { url, target, rel } = Astro.props;
+const { type, width } = Astro.props;
 ---
 
-<a
-  href={url}
-  target={target}
-  rel={rel}
-  class:list={[
+<button type={type}  class:list={[
     Astro.props.width === "min" && "w-min",
     Astro.props.width === "max" && "w-max",
     Astro.props.width === "fit" && "w-fit",
@@ -22,9 +16,9 @@ const { url, target, rel } = Astro.props;
   ]}
 >
   <slot />
-</a>
+</button>
 <style>
-  a {
+  button {
     margin-top: 1.25rem;
     padding: 0.5rem 1.5rem;
     user-select: none;
@@ -36,12 +30,12 @@ const { url, target, rel } = Astro.props;
     transition: all 0.3s;
   }
 
-  a:hover {
-    transform: scale(1.1);
+  button:hover {
+    transform: scale(1.05);
   }
 
   /* Darkmode */
-  html.dark a {
+  html.dark button {
     background-color: var(--primary-dark);
     color: var(--primary-light);
   }

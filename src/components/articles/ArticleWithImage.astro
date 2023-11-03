@@ -1,10 +1,11 @@
 ---
 interface Props {
+  id?: string;
   title: string;
   alignText?: "left" | "center" | "right";
   wrapDirection?: "normal" | "reverse";
 }
-const { title, alignText, wrapDirection } = Astro.props;
+const { id, title, alignText, wrapDirection } = Astro.props;
 ---
 
 <section
@@ -26,7 +27,7 @@ const { title, alignText, wrapDirection } = Astro.props;
       },
     ]}
   >
-    <h2>
+    <h2 id={id}>
       {title}
     </h2>
     <slot />

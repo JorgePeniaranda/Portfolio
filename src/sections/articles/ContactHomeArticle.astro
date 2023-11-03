@@ -1,8 +1,9 @@
 ---
 import Article from "../../components/articles/ArticleWithImage.astro";
+import Button from "../../components/buttons/Button.astro";
 ---
 
-<Article title="Contacto" alignText="center">
+<Article id="contact" title="Contacto" alignText="center">
   <p>
     Si deseas contactarme o tienes alguna consulta, no dudes en enviarme un
     mensaje. Estoy aquí para ayudarte y escuchar tus ideas.
@@ -29,7 +30,7 @@ import Article from "../../components/articles/ArticleWithImage.astro";
       placeholder="Mensaje"
       autocomplete="off"
       required></textarea>
-    <button type="submit"> Enviar</button>
+    <Button type="submit" width="full"> Enviar</Button>
   </form>
 </Article>
 <style>
