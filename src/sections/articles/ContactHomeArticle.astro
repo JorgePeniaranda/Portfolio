@@ -9,78 +9,78 @@ import Nature from "../../svg/Nature.astro";
     <figcaption>Paisaje</figcaption>
   </figure>
   <p>
-    Si deseas contactarme o tienes alguna consulta, no dudes en enviarme un mensaje. Estoy aquí para ayudarte y escuchar tus ideas.
+    Si deseas contactarme o tienes alguna consulta, no dudes en enviarme un
+    mensaje. Estoy aquí para ayudarte y escuchar tus ideas.
   </p>
   <form id="ContactForm">
-      <input
-        type='text'
-        name='name'
-        placeholder="Nombre"
-        autoComplete='name'
-        required
-      />
-      <input
-        type='email'
-        name='email'
-        placeholder="Correo"
-        autoComplete='email'
-        required
-      />
-      <textarea
-        name='message'
-        cols={30}
-        rows={6}
-        placeholder="Mensaje"
-        autoComplete='off'
-        required
-      />
-      <button
-        type='submit'
-      >
-        Enviar
-      </button>
-    </form>
+    <input
+      type="text"
+      name="name"
+      placeholder="Nombre"
+      autocomplete="name"
+      required
+    />
+    <input
+      type="email"
+      name="email"
+      placeholder="Correo"
+      autocomplete="email"
+      required
+    />
+    <textarea
+      name="message"
+      cols={30}
+      rows={6}
+      placeholder="Mensaje"
+      autocomplete="off"
+      required></textarea>
+    <button type="submit"> Enviar</button>
+  </form>
 </Article>
 <style>
   figure {
-      display: flex;
-      flex: 1;
-      justify-content: center;
+    display: flex;
+    flex: 1;
+    justify-content: center;
   }
 
   figcaption {
-      text-align: center;
-      display: none;
+    text-align: center;
+    display: none;
   }
 
   p {
-      margin-top: 0.5rem;
-      letter-spacing: 0.1em;
-      font-size: 1.125rem;
+    margin-top: 0.5rem;
+    letter-spacing: 0.1em;
+    font-size: 1.125rem;
   }
 
-  input[type='text'], input[type='email'], textarea {
-      border-color: var(--color-secondary-dark);
-      color: var(--color-gray);
-      transition: all 0.15s ease-in-out;
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    border-color: var(--color-secondary-dark);
+    color: var(--color-gray);
+    transition: all 0.15s ease-in-out;
   }
 
-  input[type='text']:focus, input[type='email']:focus, textarea:focus {
-      color: var(--color-secondary);
-      outline: none;
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  textarea:focus {
+    color: var(--color-secondary);
+    outline: none;
   }
 
-  button[type='submit'] {
-      background-color: var(--white);
-      user-select: none;
-      color: var(--text-dark);
-      transition: all 0.3s;
+  button[type="submit"] {
+    background-color: var(--white);
+    user-select: none;
+    color: var(--text-dark);
+    transition: all 0.3s;
   }
 
-  button[type='submit']:hover {
-      filter: brightness(75%);
+  button[type="submit"]:hover {
+    filter: brightness(75%);
   }
-  
+
   #ContactForm {
     display: flex;
     flex-wrap: wrap;
@@ -142,5 +142,4 @@ import Nature from "../../svg/Nature.astro";
       clip-path: circle(100% at 50% 50%);
     }
   }
-
 </style>
