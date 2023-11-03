@@ -1,0 +1,41 @@
+---
+interface Props {
+  title: string;
+  alignText?: "left" | "center" | "right";
+  wrapDirection?: "normal" | "reverse";
+}
+const { title, alignText, wrapDirection } = Astro.props;
+---
+
+<section
+  class:list={[
+    "w-full flex gap-16 items-center pt-20 pb-48",
+    {
+      "flex-wrap-reverse": wrapDirection === "reverse",
+      "flex-wrap": wrapDirection === "normal" || !wrapDirection,
+    },
+  ]}
+>
+  <slot name="after" />
+  <article
+    class:list={[
+      "flex flex-1 flex-col items-center text-center w-[90%] sm:w-[45%]",
+      {
+        "lg:text-right lg:items-end": alignText === "left",
+        "lg:text-center lg:items-center": alignText === "center",
+        "lg:text-left lg:items-start": alignText === "right",
+      },
+    ]}
+  >
+    <h2 class="text-5xl select-none font-bold underline underline-offset-4">
+      {title}
+    </h2>
+    <slot />
+  </article>
+  <slot name="before" />
+</section>
+<style>
+  article {
+    min-width: 20rem;
+  }
+</style>

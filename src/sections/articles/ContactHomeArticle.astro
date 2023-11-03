@@ -1,9 +1,9 @@
 ---
-import Article from "../../components/article-with-image/Article.astro";
+import Article from "../../components/articles/ArticleWithImage.astro";
 import Nature from "../../svg/Nature.astro";
 ---
 
-<Article title="Contacto" alignText="right">
+<Article title="Contacto" alignText="right" wrapDirection="reverse">
   <figure slot="after">
     <Nature />
     <figcaption>Paisaje</figcaption>
@@ -43,11 +43,6 @@ import Nature from "../../svg/Nature.astro";
     flex: 1;
     justify-content: center;
     min-width: 20rem;
-  }
-
-  figcaption {
-    text-align: center;
-    display: none;
   }
 
   p {
