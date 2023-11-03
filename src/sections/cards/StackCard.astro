@@ -1,0 +1,159 @@
+---
+import HTML from "../../svg/HTML.astro";
+import CSS from "../../svg/CSS.astro";
+import Javascript from "../../svg/Javascript.astro";
+import React from "../../svg/React.astro";
+import Nextjs from "../../svg/Nextjs.astro";
+import Typescript from "../../svg/Typescript.astro";
+import Tailwind from "../../svg/Tailwind.astro";
+import SASS from "../../svg/SASS.astro";
+import AstroIcon from "../../svg/Astro.astro";
+import Nodejs from "../../svg/Nodejs.astro";
+import PHP from "../../svg/PHP.astro";
+import MySQL from "../../svg/MySQL.astro";
+import Laravel from "../../svg/Laravel.astro";
+import CSharp from "../../svg/CSharp.astro";
+import Git from "../../svg/Git.astro";
+import Github from "../../svg/Github.astro";
+import Gitlab from "../../svg/Gitlab.astro";
+import Linux from "../../svg/Linux.astro";
+import Trello from "../../svg/Trello.astro";
+import Notion from "../../svg/Notion.astro";
+import VSCode from "../../svg/VSCode.astro";
+---
+
+<section id="stack">
+  <article>
+    <h2>FrontEnd</h2>
+    <ul>
+      <li>
+        <HTML />
+      </li>
+      <li>
+        <CSS />
+      </li>
+      <li>
+        <Javascript />
+      </li>
+      <li>
+        <React />
+      </li>
+      <li>
+        <Nextjs />
+      </li>
+      <li>
+        <Typescript />
+      </li>
+      <li>
+        <Tailwind />
+      </li>
+      <li>
+        <SASS />
+      </li>
+      <li>
+        <AstroIcon />
+      </li>
+    </ul>
+  </article>
+  <article>
+    <h2>BackEnd</h2>
+    <ul>
+      <li>
+        <Nodejs />
+      </li>
+      <li>
+        <PHP />
+      </li>
+      <li>
+        <MySQL />
+      </li>
+      <li>
+        <Laravel />
+      </li>
+      <li>
+        <CSharp />
+      </li>
+    </ul>
+  </article>
+  <article>
+    <h2>DevOps</h2>
+    <ul>
+      <li>
+        <Git />
+      </li>
+      <li>
+        <Github />
+      </li>
+      <li>
+        <Gitlab />
+      </li>
+      <li>
+        <Linux />
+      </li>
+      <li>
+        <Trello />
+      </li>
+      <li>
+        <Notion />
+      </li>
+      <li>
+        <VSCode />
+      </li>
+    </ul>
+  </article>
+</section>
+<style>
+  section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    border-radius: 1.375rem;
+    margin: 10rem 0 12.5rem;
+    padding: 4rem 0;
+    background-color: #21212185;
+    gap: 4rem 2rem;
+    margin-bottom: 20rem;
+  }
+
+  h2 {
+    width: 100%;
+    font-weight: 500;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  article {
+    min-width: 15rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 1rem;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 15rem;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  li {
+    width: 3.5rem;
+    height: 3.5rem;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  li:hover {
+    transform: scale(1.2);
+  }
+
+  /* Darkmode */
+  html.dark section {
+    background-color: #c4c4c494;
+  }
+</style>

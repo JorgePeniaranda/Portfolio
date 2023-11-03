@@ -1,0 +1,82 @@
+---
+import Github from "../../svg/Github.astro";
+import Linktree from "../../svg/Linktree.astro";
+import Linkedin from "../../svg/Linkedin.astro";
+---
+
+<footer>
+  <ul>
+    <li>
+      <a
+        href="https://github.com/jorgepeniaranda"
+        aria-label="Github link"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <Github />
+      </a>
+    </li>
+    <li>
+      <a
+        href="https://linktr.ee/jorgepeniaranda"
+        aria-label="Linktree link"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <Linktree />
+      </a>
+    </li>
+    <li>
+      <a
+        href="https://www.linkedin.com/in/JorgePeniaranda/"
+        aria-label="LinkedIn link"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <Linkedin />
+      </a>
+    </li>
+  </ul>
+  <address>
+    Power by{" "}
+    <a href="mailto:contact@jorgepeniaranda.me"> Jorge Peñaranda</a>
+  </address>
+</footer>
+<style>
+  footer {
+    width: 100%;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 2px solid var(--border-footer);
+    padding-top: 1rem;
+  }
+  ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
+    font-size: 0.5rem;
+  }
+  li,
+  a {
+    width: 2.5rem;
+    height: 2.5rem;
+    transition: transform 0.2s ease-in-out;
+  }
+  li:hover {
+    transform: scale(1.2);
+  }
+  address {
+    font-style: unset;
+  }
+  address a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  address a:hover {
+    filter: brightness(0.7);
+  }
+</style>

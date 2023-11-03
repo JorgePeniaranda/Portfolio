@@ -1,0 +1,59 @@
+---
+import Article from "../../components/articles/ArticleWithImage.astro";
+import LinkButton from "../../components/buttons/LinkButton.astro";
+import ProjectCard from "../../components/cards/ProjectCard.astro";
+---
+
+<Article id="projects" title="Proyectos" alignText="left">
+  <ul slot="before">
+    <li>
+      <ProjectCard
+        title="Golden Duck"
+        textColor="oklch(92.94%_0_0)"
+        backgroundColor="oklch(50.89%_0.2015_276.35)"
+        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ornare enim ut magna blandit posuere. Nulla congue risus pulvinar dolor auctor consequat."
+        figCaption="GoldenDuck-Logo"
+      >
+        <img
+          src="/assets/img/GoldenDuck.webp"
+          width="512"
+          height="512"
+          alt="GoldenDuck-Logo"
+        />
+      </ProjectCard>
+    </li>
+  </ul>
+  <p>
+    A lo largo de mi experiencia como programador web, he realizado diversos
+    proyectos que reflejan mi habilidad y pasión por el desarrollo web. Los
+    invito a explorar mi galería de proyectos para conocer más sobre mi trabajo.
+  </p>
+  <LinkButton
+    url="https://jorgepeniaranda.tech/"
+    target="_blank"
+    rel="noreferrer"
+    width="fit"
+  >
+    Conocer Proyectos
+  </LinkButton>
+</Article>
+<style>
+  ul {
+    display: flex;
+    justify-content: center;
+    min-width: 20rem;
+    gap: 1rem;
+    flex: 1;
+  }
+
+  img {
+    max-width: 15rem;
+  }
+
+  p {
+    margin-top: 0.5rem;
+    letter-spacing: 0.1em;
+    font-size: 1.125rem;
+    max-width: 80rem;
+  }
+</style>

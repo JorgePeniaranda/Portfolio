@@ -1,0 +1,44 @@
+---
+interface Props {
+  type?: "submit" | "reset" | "button" | null | undefined;
+  width?: "min" | "max" | "fit" | "full" | number;
+}
+const { type, width } = Astro.props;
+---
+
+<button
+  type={type}
+  class:list={[
+    Astro.props.width === "min" && "w-min",
+    Astro.props.width === "max" && "w-max",
+    Astro.props.width === "fit" && "w-fit",
+    Astro.props.width === "full" && "w-full",
+    typeof Astro.props.width === "number" && `w-${Astro.props.width}`,
+  ]}
+  ]}
+>
+  <slot />
+</button>
+<style>
+  button {
+    margin-top: 1.25rem;
+    padding: 0.5rem 1.5rem;
+    user-select: none;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 0.375rem;
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+  }
+
+  /* Darkmode */
+  html.dark button {
+    background-color: var(--primary-dark);
+    color: var(--primary-light);
+  }
+</style>

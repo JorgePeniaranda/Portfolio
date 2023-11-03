@@ -1,0 +1,41 @@
+---
+import Article from "../../components/articles/ArticleWithImage.astro";
+import LinkButton from "../../components/buttons/LinkButton.astro";
+import ReadingTime from "../../svg/ReadingTime.astro";
+---
+
+<Article id="about" title="Sobre Mi" alignText="right" wrapDirection="reverse">
+  <figure slot="after">
+    <ReadingTime />
+    <figcaption>coso</figcaption>
+  </figure>
+  <p>
+    Apasionado desarrollador web con experiencia en la creación de herramientas
+    de código abierto y soluciones web. Comprometido en aprender y crecer
+    constantemente en este emocionante campo, y encantado de compartir mi
+    conocimiento en el camino.
+  </p>
+  <LinkButton
+    url="https://dev.to/jorgepeniaranda"
+    target="_blank"
+    rel="noreferrer"
+    width="fit"
+  >
+    Conocer Blog
+  </LinkButton>
+</Article>
+<style>
+  figure {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    min-width: 20rem;
+  }
+
+  p {
+    margin-top: 0.5rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    letter-spacing: 0.025em;
+  }
+</style>

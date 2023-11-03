@@ -1,0 +1,105 @@
+---
+import Rocket from "../../svg/RGBRocket.astro";
+---
+
+<header id="header">
+  <article>
+    <p class="special-text" special-word="innovación">
+      Navegando hacia un futuro de
+    </p>
+    <h1>Jorge Peñaranda / Desarrollador Web</h1>
+  </article>
+  <figure>
+    <Rocket className_DynamicBG="specialSVG" />
+    <figcaption>Nave espacial en el espacio</figcaption>
+  </figure>
+
+  <style>
+    header {
+      width: 100%;
+      min-height: calc(100vh - var(--nav-height));
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    article {
+      width: 100%;
+      text-align: center;
+    }
+
+    .special-text {
+      font-weight: 600;
+      font-size: 3rem;
+      line-height: 1;
+    }
+
+    .special-text:after {
+      content: attr(special-word);
+      animation: 10s RGBColor running infinite alternate;
+    }
+
+    article h1 {
+      flex: 1;
+      filter: brightness(0.75);
+      font-weight: 400;
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+    }
+
+    figure {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 8rem;
+      width: 90%;
+      min-width: 20rem;
+    }
+
+    @keyframes RGBColor {
+      0% {
+        color: var(--rgb-color-1);
+      }
+      25% {
+        color: var(--rgb-color-2);
+      }
+      50% {
+        color: var(--rgb-color-3);
+      }
+      75% {
+        color: var(--rgb-color-4);
+      }
+      100% {
+        color: var(--rgb-color-5);
+      }
+    }
+
+    path.specialSVG {
+      animation: 10s RGBSVG running infinite alternate;
+    }
+
+    /* Screen "SM" */
+    @media (min-width: 640px) {
+      .special-text {
+        font-size: 4.5rem;
+      }
+      figure {
+        flex: 1;
+      }
+    }
+
+    /* Screen "MD" */
+    @media (min-width: 768px) {
+      article {
+        height: 66%;
+        flex: 2;
+        display: grid;
+        grid-template-rows: repeat(2, minmax(0, 1fr));
+        align-items: center;
+        text-align: start;
+      }
+    }
+  </style>
+</header>
