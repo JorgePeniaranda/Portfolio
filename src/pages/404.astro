@@ -1,0 +1,36 @@
+---
+import Layout from "../layouts/Layout.astro";
+import NotFound from "../svg/NotFound.astro";
+---
+
+<Layout title="404 - Not found">
+  <figure>
+    <a href="/">
+      <NotFound />
+    </a>
+    <figcaption>Página no encontrada</figcaption>
+  </figure>
+</Layout>
+<style>
+  figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - var(--nav-height));
+  }
+
+  a {
+    height: 80%;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  a:hover {
+    transform: scale(1.1);
+  }
+
+  figcaption {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+  }
+</style>
