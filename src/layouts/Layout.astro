@@ -27,7 +27,10 @@ const { title } = Astro.props;
     <style is:global>
       :root {
         --bg-color: oklch(25.44% 0 0);
-        --white: red;
+
+        --white: oklch(100% 0 0);
+        --text-light: oklch(100% 0 0);
+        --text-dark: oklch(0% 0 0);
 
         --border-footer: rgb(94, 94, 94);
         --border-footer-dark: rgb(255, 0, 0);
