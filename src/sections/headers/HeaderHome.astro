@@ -17,7 +17,7 @@ import Rocket from "../../svg/RGBRocket.astro";
   <style>
     header {
       width: 100%;
-      height: calc(100vh - var(--nav-height));
+      min-height: calc(100vh - var(--nav-height));
       display: flex;
       flex-wrap: wrap;
       justify-content: space-around;
@@ -55,6 +55,7 @@ import Rocket from "../../svg/RGBRocket.astro";
       justify-content: center;
       padding-bottom: 8rem;
       width: 90%;
+      min-width: 20rem;
     }
 
     figure figcaption {
