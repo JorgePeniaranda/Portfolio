@@ -1,0 +1,125 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import BlogPost from "../../layouts/BlogPost.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+type Props = CollectionEntry<"blog">;
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<BlogPost {...post.data}>
+  <Content />
+</BlogPost>
+<style is:global>
+  /*
+  The CSS in this style tag is based off of Bear Blog's default CSS.
+  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
+  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
+ */
+
+  body {
+    font-size: 20px;
+    line-height: 1.7;
+  }
+  h1 {
+    font-size: 3.052em;
+  }
+  h2 {
+    font-size: 2.441em;
+  }
+  h3 {
+    font-size: 1.953em;
+  }
+  h4 {
+    font-size: 1.563em;
+  }
+  h5 {
+    font-size: 1.25em;
+  }
+  strong,
+  b {
+    font-weight: 700;
+  }
+  p {
+    margin-bottom: 1em;
+  }
+  table {
+    width: 100%;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  code {
+    padding: 2px 5px;
+    background-color: rgb(var(--gray-light));
+    border-radius: 2px;
+  }
+  pre {
+    padding: 1.5em;
+    border-radius: 8px;
+  }
+  pre > code {
+    all: unset;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul li {
+    width: calc(50% - 1rem);
+  }
+  ul li:first-child {
+    width: 100%;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  ul li:first-child img {
+    width: 100%;
+  }
+  ul li:first-child .title {
+    font-size: 2.369rem;
+  }
+  ul li img {
+    margin-bottom: 0.5rem;
+    border-radius: 12px;
+  }
+  ul li a {
+    display: block;
+  }
+  ul li a:hover h4,
+  ul li a:hover .date {
+    color: rgb(var(--accent));
+  }
+  ul a:hover img {
+    box-shadow: var(--box-shadow);
+  }
+  @media (max-width: 720px) {
+    ul {
+      gap: 0.5em;
+    }
+    ul li {
+      width: 100%;
+      text-align: center;
+    }
+    ul li:first-child {
+      margin-bottom: 0;
+    }
+    ul li:first-child .title {
+      font-size: 1.563em;
+    }
+  }
+</style>

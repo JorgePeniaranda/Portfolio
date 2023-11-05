@@ -1,103 +1,19 @@
 ---
 import { ViewTransitions } from "astro:transitions";
-import Navbar from "../components/navbar/Navbar.astro";
-import Footer from "../components/footer/Footer.astro";
+import BaseHead from "../components/heads/BaseHead.astro";
+import Navbar from "../components/navbars/Navbar.astro";
+import Footer from "../components/footers/Footer.astro";
 interface Props {
   title: string;
+  description: string;
 }
-
-const { title } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>
 <html class="dark" lang="es">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
-    <meta name="viewport" content="width=device-width" />
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="https://jorgepeniaranda.me/favicon.ico"
-    />
-    <meta name="generator" content={Astro.generator} />
-    <meta
-      name="description"
-      content="Desarrollador Web Front End con experiencia en JavaScript, CSS, React y Next.js. Descubre mis proyectos y soluciones web de código abierto."
-    />
-    <link rel="canonical" href="https://jorgepeniaranda.me/" />
-    <meta name="category" content="Desarrollador Web" />
-    <meta name="classification" content="Desarrollador Web" />
-    <meta name="color-scheme" content="dark" />
-    <meta name="creator" content="Jorge Peñaranda" />
-    <link
-      rel="icon"
-      href="https://jorgepeniaranda.me/assets/img/Logo-192x192.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      href="https://jorgepeniaranda.me/assets/img/Logo-192x192.png"
-    />
-    <meta
-      name="keywords"
-      content="
-      'Código abierto',
-      'Programador',
-      'Herramientas',
-      'Desarrollo Web',
-      'Desarrollador Web',
-      'Soluciones web'
-      'Front End',
-      'JavaScript',
-      'TypeScript',
-      'CSS',
-      'React',
-      'Next.js',
-      'Tailwind',
-      'SASS'"
-    />
-    <link rel="manifest" href="https://jorgepeniaranda.me/manifest.json" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://jorgepeniaranda.me" />
-    <meta
-      property="og:site_name"
-      content="Jorge Peñaranda |Desarrollador Web"
-    />
-    <meta property="og:title" content="Jorge Peñaranda |Desarrollador Web" />
-    <meta
-      property="og:description"
-      content="Desarrollador Web Front End con experiencia en JavaScript, CSS, React y Next.js. Descubre mis proyectos y soluciones web de código abierto."
-    />
-    <meta
-      property="og:image"
-      content="https://jorgepeniaranda.me/assets/img/Logo-512x512.png"
-    />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="publisher" content="Vercel" />
-    <meta name="robots" content="index, follow" />
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: dark)"
-      content="#1a1a1a"
-    />
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: light)"
-      content="#ffffff"
-    />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="https://jorgepeniaranda.me/" />
-    <meta name="twitter:creator" content="@peniarandajorge" />
-    <meta name="twitter:title" content="Jorge Peñaranda |Desarrollador Web" />
-    <meta
-      name="twitter:description"
-      content="Desarrollador Web Front End con experiencia en JavaScript, CSS, React y Next.js. Descubre mis proyectos y soluciones web de código abierto."
-    />
-    <meta
-      name="twitter:image"
-      content="https://jorgepeniaranda.me/assets/img/Logo-512x512.png"
-    />
-    <title>{title}</title>
+    <BaseHead title={title} description={description} />
     <ViewTransitions />
   </head>
   <body>
@@ -108,6 +24,7 @@ const { title } = Astro.props;
       :root {
         --primary-dark: oklch(0 0 0);
         --primary-light: oklch(100% 0 0);
+        --gray: 96, 115, 159;
 
         --border-footer: rgb(94, 94, 94);
 
