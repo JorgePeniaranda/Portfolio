@@ -6,13 +6,7 @@ interface Props {
   textColor?: string;
   backgroundColor?: string;
 }
-const {
-  title,
-  text,
-  figCaption,
-  textColor = "var(--primary-light)",
-  backgroundColor = "var(--primary-dark)",
-} = Astro.props;
+const { title, text, figCaption, textColor, backgroundColor } = Astro.props;
 ---
 
 <article class={`text-[${textColor}] bg-[${backgroundColor}]`}>
@@ -35,6 +29,8 @@ const {
     text-align: center;
     border-radius: 2rem;
     user-select: none;
+    background-color: var(--primary-dark);
+    color: var(--primary-light);
     cursor: grab;
   }
 

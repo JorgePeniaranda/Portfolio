@@ -1,48 +1,49 @@
 ---
 import AsideDrawer from "../../components/aside/AsideDrawer.astro";
 ---
-<AsideDrawer>
-    <ul>
-        <li>
-            <a href="#header">» Cabecera</a>
-        </li>
-        <li>
-            <a href="#about">» Sobre mi</a>
-        </li>
-        <li>
-            <a href="#stack">» Skills</a>
-        </li>
-        <li>
-            <a href="#projects">» Proyectos</a>
-        </li>
-        <li>
-            <a href="#contact">» Contactar</a>
-        </li>
-    </ul>
+
+<AsideDrawer title="Índice">
+  <ul>
+    <li>
+      <a href="#header">» Cabecera</a>
+    </li>
+    <li>
+      <a href="#about">» Sobre mi</a>
+    </li>
+    <li>
+      <a href="#stack">» Skills</a>
+    </li>
+    <li>
+      <a href="#projects">» Proyectos</a>
+    </li>
+    <li>
+      <a href="#contact">» Contactar</a>
+    </li>
+  </ul>
 </AsideDrawer>
 <style>
-    ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    
-    li {
-        width: 100%;
-        font-size: 1.5rem;
-        transition: background 0.2s ease-in-out;
-        border-radius: 0.5rem;
-    }
-    
-    li:hover {
-        background: #ffffff36;
-    }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
 
-    a{
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        padding: 0.75rem 1rem;
-    }
+  li {
+    width: 100%;
+    font-size: 1.5rem;
+    transition: background 0.2s ease-in-out;
+    border-radius: 0.5rem;
+  }
+
+  li:hover {
+    background: #ffffff36;
+  }
+
+  a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+  }
 </style>
