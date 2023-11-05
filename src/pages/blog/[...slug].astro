@@ -29,6 +29,11 @@ const { Content } = await post.render();
     font-size: 20px;
     line-height: 1.7;
   }
+  main {
+    width: 960px;
+    margin: auto;
+    padding-bottom: 5em;
+  }
   h1 {
     font-size: 3.052em;
   }
@@ -70,42 +75,6 @@ const { Content } = await post.render();
   }
   pre > code {
     all: unset;
-  }
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  ul li {
-    width: calc(50% - 1rem);
-  }
-  ul li:first-child {
-    width: 100%;
-    margin-bottom: 1rem;
-    text-align: center;
-  }
-  ul li:first-child img {
-    width: 100%;
-  }
-  ul li:first-child .title {
-    font-size: 2.369rem;
-  }
-  ul li img {
-    margin-bottom: 0.5rem;
-    border-radius: 12px;
-  }
-  ul li a {
-    display: block;
-  }
-  ul li a:hover h4,
-  ul li a:hover .date {
-    color: rgb(var(--accent));
-  }
-  ul a:hover img {
-    box-shadow: var(--box-shadow);
   }
   @media (max-width: 720px) {
     ul {
