@@ -1,0 +1,49 @@
+:root {
+  --primary-dark: oklch(0 0 0);
+  --primary-light: oklch(100% 0 0);
+  --gray: 96, 115, 159;
+
+  --border-footer: rgb(94, 94, 94);
+
+  --rgb-color-1: #f04dff;
+  --rgb-color-2: #ff4d4d;
+  --rgb-color-3: #ffc54d;
+  --rgb-color-4: #6aed76;
+  --rgb-color-5: #09f;
+
+  --nav-height: 10rem;
+}
+
+html {
+  background: var(--primary-dark);
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  /* 
+          background-image: linear-gradient(to top, #bac8e0 0%, #6a85b6 100%);
+          background-repeat: no-repeat;
+          background-size: cover; 
+        */
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+}
+
+figure figcaption {
+  text-align: center;
+  display: none;
+}
+
+/* Screen "MD" */
+@media (min-width: 768px) {
+  body {
+    padding: 0 10rem;
+  }
+}
+
+/* Darkmode */
+html.dark {
+  color-scheme: light;
+  background-color: white;
+}
