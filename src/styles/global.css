@@ -15,14 +15,14 @@
 }
 
 html {
-  background: var(--primary-dark);
-  color-scheme: dark;
+  background: var(--primary-light);
+  color-scheme: light;
   scroll-behavior: smooth;
   /* 
-          background-image: linear-gradient(to top, #bac8e0 0%, #6a85b6 100%);
-          background-repeat: no-repeat;
-          background-size: cover; 
-        */
+    background-image: linear-gradient(to top, #bac8e0 0%, #6a85b6 100%);
+    background-repeat: no-repeat;
+    background-size: cover; 
+  */
 }
 
 body {
@@ -44,6 +44,6 @@ figure figcaption {
 
 /* Darkmode */
 html.dark {
-  color-scheme: light;
-  background-color: white;
+  color-scheme: dark;
+  background-color: var(--primary-dark);
 }
