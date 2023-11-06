@@ -6,16 +6,23 @@
   --black: oklch(0% 0 0);
   --gray: oklch(90.36% 0.009 278.28);
 
-  --border-footer: rgb(94, 94, 94);
+  --border-footer: oklch(50% 0 0);
 
-  --rgb-color-1: #f04dff;
-  --rgb-color-2: #ff4d4d;
-  --rgb-color-3: #ffc54d;
-  --rgb-color-4: #6aed76;
-  --rgb-color-5: #09f;
+  --rgb-color-1: oklch(66.32% 0.27379970837809603 324.27877091262536);
+  --rgb-color-2: oklch(67.05% 0.21457188634405316 25.039656026515278);
+  --rgb-color-3: oklch(81.45% 0.14799303814736775 82.26721560286067);
+  --rgb-color-4: oklch(73.44% 0.197 145.27);
+  --rgb-color-5: oklch(63.65% 0.1576 248.8066094258165);
 
   --nav-height: 10rem;
   --x-padding: 10rem;
+}
+
+@font-face {
+  font-family: "Baloo";
+  src: url("/fonts/Baloo.ttf");
+  font-style: normal;
+  font-display: swap;
 }
 
 html {
@@ -25,6 +32,7 @@ html {
 }
 
 body {
+  font-family: "Baloo";
   width: 100%;
   min-height: 100vh;
 }
