@@ -24,12 +24,12 @@ const { title, text, figCaption, textColor, backgroundColor } = Astro.props;
   article {
     display: flex;
     flex-direction: column;
-    width: 23rem;
+    max-width: 20rem;
     min-height: 28rem;
     text-align: center;
     border-radius: 2rem;
     user-select: none;
-    background-color: var(--primary-dark);
+    background-color: oklch(48.73% 0.103 265.34);
     color: var(--primary-light);
     cursor: grab;
   }

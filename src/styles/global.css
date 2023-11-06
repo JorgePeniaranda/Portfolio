@@ -1,7 +1,10 @@
 :root {
-  --primary-dark: oklch(0 0 0);
+  --primary-dark: oklch(17.06% 0 360);
   --primary-light: oklch(100% 0 0);
-  --gray: 96, 115, 159;
+
+  --white: oklch(100% 0 0);
+  --black: oklch(0% 0 0);
+  --gray: oklch(90.36% 0.009 278.28);
 
   --border-footer: rgb(94, 94, 94);
 
@@ -12,17 +15,13 @@
   --rgb-color-5: #09f;
 
   --nav-height: 10rem;
+  --x-padding: 10rem;
 }
 
 html {
   background: var(--primary-light);
   color-scheme: light;
   scroll-behavior: smooth;
-  /* 
-    background-image: linear-gradient(to top, #bac8e0 0%, #6a85b6 100%);
-    background-repeat: no-repeat;
-    background-size: cover; 
-  */
 }
 
 body {
@@ -35,11 +34,17 @@ figure figcaption {
   display: none;
 }
 
-/* Screen "MD" */
-@media (min-width: 768px) {
-  body {
-    padding: 0 10rem;
-  }
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(90, 90, 90);
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
 }
 
 /* Darkmode */

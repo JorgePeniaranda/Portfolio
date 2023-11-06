@@ -6,12 +6,13 @@ import Footer from "../components/footers/Footer.astro";
 interface Props {
   title: string;
   description: string;
+  theme: "light" | "dark";
 }
-const { title, description } = Astro.props;
+const { title, description, theme } = Astro.props;
 ---
 
 <!doctype html>
-<html class="dark" lang="es">
+<html class={theme} lang="es">
   <head>
     <BaseHead title={title} description={description} />
     <ViewTransitions />

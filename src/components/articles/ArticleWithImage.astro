@@ -9,6 +9,7 @@ const { id, title, alignText, wrapDirection } = Astro.props;
 ---
 
 <section
+  id={id}
   class="sm:col-start-auto"
   class:list={[
     {
@@ -20,6 +21,7 @@ const { id, title, alignText, wrapDirection } = Astro.props;
   <slot name="after" />
   <article
     class:list={[
+      "max-lg:text-center max-lg:items-center",
       {
         "lg:text-right lg:items-end": alignText === "left",
         "lg:text-center lg:items-center": alignText === "center",
@@ -27,7 +29,7 @@ const { id, title, alignText, wrapDirection } = Astro.props;
       },
     ]}
   >
-    <h2 id={id}>
+    <h2>
       {title}
     </h2>
     <slot />
@@ -40,7 +42,7 @@ const { id, title, alignText, wrapDirection } = Astro.props;
     display: flex;
     gap: 2rem;
     align-items: center;
-    padding-bottom: 20rem;
+    padding: 10rem 0;
   }
   article {
     flex: 1;
