@@ -1,16 +1,28 @@
 ---
-import Wave from "../../svg/Wave.astro";
+import Rocket from "../../svg/RGBRocket.astro";
+import ArrowBottom from "../../svg/ArrowBottom.astro";
 ---
 
 <header id="header">
   <article>
-    <p>Hola 👋, Soy</p>
-    <h1>Jorge Peñaranda</h1>
-    <h2>Desarrollador Web</h2>
+    <h1>Desarrollador Web</h1>
+    <h2>Jorge Peñaranda</h2>
+    <p>
+      ¡Hola 👋, soy Jorge Peñaranda! Un desarrollador web apasionado por crear
+      soluciones digitales que no solo funcionen, ¡sino que se sientan geniales!
+      Siempre estoy buscando maneras de mejorar y aprender nuevas habilidades
+      para mantenerme actualizado en este siempre cambiante mundo tecnológico.
+      Mi objetivo es proporcionar sitios web y aplicaciones que no solo cumplan
+      con tus necesidades, sino que también te sorprendan gratamente. 🚀
+    </p>
   </article>
-  <div id="waves">
-    <Wave />
-  </div>
+  <figure>
+    <Rocket className_DynamicBG="specialSVG" />
+    <figcaption>Nave espacial en el espacio</figcaption>
+  </figure>
+  <a href="#about" id="ArrowBottom">
+    <ArrowBottom />
+  </a>
 </header>
 <style>
   header {
@@ -18,53 +30,43 @@ import Wave from "../../svg/Wave.astro";
     min-height: calc(100vh - var(--nav-height));
     display: flex;
     flex-wrap: wrap;
-    position: relative;
     justify-content: space-around;
     align-items: center;
-    gap: 4rem;
-    font-family: sans-serif;
+    padding: 0 var(--x-padding);
   }
 
   article {
     width: 100%;
     text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding-bottom: calc(var(--nav-height) + 5rem);
-    gap: 0.9rem;
+    padding-bottom: var(--nav-height);
   }
 
-  article p {
-    font-size: 1.45rem;
+  article h1,
+  article h2 {
+    user-select: none;
   }
 
   article h1 {
-    font-weight: 800;
-    font-size: 6.25rem;
-    word-wrap: break-word;
-    width: 35rem;
-    line-height: 1;
-    animation: rgb-color 5s infinite alternate;
+    flex: 1;
+    filter: brightness(0.75);
+    font-weight: 600;
+    font-size: 2rem;
+    animation: RGBText 10s infinite alternate;
   }
 
   article h2 {
-    font-size: 1.45rem;
+    font-size: 3.8rem;
     font-weight: 700;
+    line-height: 1.3;
   }
 
-  #waves {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: fit-content;
-    color: var(--primary-dark);
-    transform: translateY(10%);
+  article p {
+    max-width: 100%;
+    font-size: 1.3rem;
+    line-height: 1.8rem;
   }
 
-  @keyframes rgb-color {
+  @keyframes RGBText {
     0% {
       color: var(--rgb-color-1);
     }
@@ -82,10 +84,64 @@ import Wave from "../../svg/Wave.astro";
     }
   }
 
+  figure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: var(--nav-height);
+    width: 100%;
+    min-width: 20rem;
+    animation: float 10s infinite alternate;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-3rem);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  a#ArrowBottom {
+    position: absolute;
+    width: 3rem;
+    bottom: 2rem;
+    animation: ArrowBottom 3s infinite alternate;
+    animation-delay: 2s;
+  }
+
+  @keyframes ArrowBottom {
+    0% {
+      transform: translateY(1rem);
+    }
+    15% {
+      transform: translateY(0);
+    }
+    30% {
+      transform: translateY(1rem);
+    }
+    45% {
+      transform: translateY(0);
+    }
+  }
+
   /* Screen "MD" */
   @media (min-width: 768px) {
-    header {
-      padding: 0 var(--x-padding);
+    figure {
+      flex: 1;
+    }
+    article {
+      flex: 2;
+      display: grid;
+      align-items: center;
+      text-align: start;
+    }
+    article p {
+      max-width: 90%;
     }
   }
 </style>
