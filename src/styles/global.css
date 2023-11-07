@@ -32,7 +32,7 @@ html {
 }
 
 body {
-  font-family: "Baloo";
+  font-family: "Baloo", Helvetica;
   width: 100%;
   min-height: 100vh;
 }
