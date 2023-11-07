@@ -20,7 +20,7 @@
 
 @font-face {
   font-family: "Baloo";
-  src: url("/fonts/Baloo.ttf");
+  src: url("/fonts/Baloo.woff2") format("woff2");
   font-style: normal;
   font-display: swap;
 }
@@ -32,7 +32,7 @@ html {
 }
 
 body {
-  font-family: "Baloo", Helvetica;
+  font-family: Baloo, sans-serif;
   width: 100%;
   min-height: 100vh;
 }
