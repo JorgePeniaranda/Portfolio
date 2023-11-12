@@ -1,5 +1,6 @@
 ---
 import AsideDrawer from "../../components/aside/AsideDrawer.astro";
+import ThemeSelector from "../../components/ReactComponents/ThemeSelector/ThemeSelector.tsx";
 ---
 
 <AsideDrawer title="Índice">
@@ -20,6 +21,9 @@ import AsideDrawer from "../../components/aside/AsideDrawer.astro";
       <a href="#contact">» Contactar</a>
     </li>
   </ul>
+  <div id="ThemeSelector">
+    <ThemeSelector client:visible/>
+  </div>
 </AsideDrawer>
 <style>
   ul {
@@ -45,5 +49,12 @@ import AsideDrawer from "../../components/aside/AsideDrawer.astro";
     display: flex;
     align-items: center;
     padding: 0.75rem 1rem;
+  }
+
+  #ThemeSelector {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
   }
 </style>

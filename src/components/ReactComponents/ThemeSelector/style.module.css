@@ -1,0 +1,43 @@
+.ThemeSelector {
+  margin: auto;
+  width: fit-content;
+  position: relative;
+  & ul {
+    position: absolute;
+    bottom: calc(100% + 1rem);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: oklch(27.15% 0.005 286.03);
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 2rem);
+    grid-template-rows: repeat(auto-fit, 2rem);
+    grid-gap: 1rem;
+    animation: open 0.5s ease-in-out;
+    & li {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      cursor: pointer;
+      &[id="active"] {
+        cursor: default;
+        outline: 0.2rem solid var(--gray);
+      }
+      &:hover:not([id="active"]) {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+@keyframes open {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}

@@ -23,6 +23,19 @@ import ReadingTime from "../../svg/ReadingTime.astro";
     display: flex;
     justify-content: center;
     min-width: 20rem;
+    animation: float 12s infinite alternate;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(1rem);
+    }
+    50% {
+      transform: translateY(-2rem);
+    }
+    100% {
+      transform: translateY(1rem);
+    }
   }
 
   p {

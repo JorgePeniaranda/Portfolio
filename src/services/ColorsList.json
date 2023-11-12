@@ -1,0 +1,41 @@
+{
+  "themes": [
+    {
+      "color": "white",
+      "schemeColor": "light",
+      "active": true
+    },
+    {
+      "color": "black",
+      "schemeColor": "dark"
+    },
+    {
+      "color": "gray",
+      "schemeColor": "light"
+    },
+    {
+      "color": "red",
+      "schemeColor": "dark"
+    },
+    {
+      "color": "yellow",
+      "schemeColor": "light"
+    },
+    {
+      "color": "green",
+      "schemeColor": "dark"
+    },
+    {
+      "color": "cyan",
+      "schemeColor": "light"
+    },
+    {
+      "color": "blue",
+      "schemeColor": "light"
+    },
+    {
+      "color": "pink",
+      "schemeColor": "light"
+    }
+  ]
+}
