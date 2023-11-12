@@ -16,20 +16,11 @@ import Logo from "../../svg/Logo.astro";
     align-items: center;
     justify-content: space-around;
     padding: 0 1rem;
-  }
-
-  nav a:hover {
-    transform: scale(1.1);
-  }
-
-  nav a {
-    height: calc(var(--nav-height) - 1rem);
-  }
-
-  /* Screen "SM" */
-  @media (min-width: 640px) {
-    nav {
-      justify-content: space-between;
+    & a {
+      height: calc(var(--nav-height) - 1rem);
+      &:hover {
+        transform: scale(1.1);
+      }
     }
   }
 
@@ -37,6 +28,7 @@ import Logo from "../../svg/Logo.astro";
   @media (min-width: 768px) {
     nav {
       padding: 0 var(--x-padding);
+      justify-content: space-between;
     }
   }
 </style>

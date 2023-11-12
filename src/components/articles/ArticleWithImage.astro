@@ -43,18 +43,18 @@ const { id, title, alignText, wrapDirection } = Astro.props;
     gap: 2rem;
     align-items: center;
     padding: 10rem 0;
-  }
-  article {
-    flex: 1;
-    min-width: 20rem;
-    display: flex;
-    flex-direction: column;
-  }
-  h2 {
-    font-size: 3rem;
-    font-weight: 700;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    user-select: none;
+    & article {
+      flex: 1;
+      min-width: 20rem;
+      display: flex;
+      flex-direction: column;
+      & h2 {
+        font-size: 3rem;
+        font-weight: 700;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        user-select: none;
+      }
+    }
   }
 </style>

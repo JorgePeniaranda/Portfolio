@@ -23,33 +23,30 @@ const { title } = Astro.props;
     z-index: 50;
     transition: transform 0.5s ease;
     padding: 3rem 1.5rem;
-  }
-
-  aside::before {
-    content: ">";
-    background-color: var(--gray);
-    position: absolute;
-    right: -2rem;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 4.5rem;
-    width: 2.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 0 1.2rem 1.2rem 0;
-    font-size: 2rem;
-    cursor: pointer;
-  }
-
-  aside:hover {
-    transform: translateX(0);
-  }
-
-  h1 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    height: 5rem;
+    &::before {
+      content: ">";
+      background-color: var(--gray);
+      position: absolute;
+      right: -2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 4.5rem;
+      width: 2.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 0 1.2rem 1.2rem 0;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+    &:hover {
+      transform: translateX(0);
+    }
+    & h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      height: 5rem;
+    }
   }
 
   /* Screen "LG" */

@@ -39,9 +39,6 @@ import VSCode from "../../svg/VSCode.astro";
         <React />
       </li>
       <li>
-        <Nextjs />
-      </li>
-      <li>
         <Typescript />
       </li>
       <li>
@@ -59,10 +56,13 @@ import VSCode from "../../svg/VSCode.astro";
     <h2>BackEnd</h2>
     <ul>
       <li>
-        <Nodejs />
+        <Nextjs />
       </li>
       <li>
         <PHP />
+      </li>
+      <li>
+        <Nodejs />
       </li>
       <li>
         <MySQL />
@@ -113,48 +113,38 @@ import VSCode from "../../svg/VSCode.astro";
     padding: 4rem 0;
     gap: 4rem 2rem;
     margin-bottom: 20rem;
-  }
-
-  h2 {
-    width: 100%;
-    font-weight: 500;
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 1rem;
-    user-select: none;
-  }
-
-  article {
-    min-width: 15rem;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    gap: 1rem;
-  }
-
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 15rem;
-    margin: 0 auto;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  li {
-    width: 3.5rem;
-    height: 3.5rem;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
-  }
-
-  li:hover {
-    transform: scale(1.2);
-  }
-
-  /* Darkmode */
-  html.dark section {
-    background-color: oklch(25% 0 0 / 50%);
+    & h2 {
+      width: 100%;
+      font-weight: 500;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      user-select: none;
+    }
+    & article {
+      min-width: 15rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 1rem;
+      & ul {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 15rem;
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        & li {
+          width: 3.5rem;
+          height: 3.5rem;
+          cursor: pointer;
+          transition: transform 0.2s ease-in-out;
+          &:hover {
+            transform: scale(1.2);
+          }
+        }
+      }
+    }
   }
 </style>
