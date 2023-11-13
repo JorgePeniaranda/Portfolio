@@ -2,7 +2,7 @@
   margin: auto;
   width: fit-content;
   position: relative;
-  & ul {
+  > ul {
     position: absolute;
     bottom: calc(100% + 1rem);
     left: 50%;
@@ -15,7 +15,7 @@
     grid-template-rows: repeat(auto-fit, 2rem);
     grid-gap: 1rem;
     animation: open 0.5s ease-in-out;
-    & li {
+    > li {
       width: 2rem;
       height: 2rem;
       border-radius: 50%;

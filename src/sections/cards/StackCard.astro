@@ -113,21 +113,21 @@ import VSCode from "../../svg/VSCode.astro";
     padding: 4rem 0;
     gap: 4rem 2rem;
     margin-bottom: 20rem;
-    & h2 {
-      width: 100%;
-      font-weight: 500;
-      font-size: 2.5rem;
-      text-align: center;
-      margin-bottom: 1rem;
-      user-select: none;
-    }
-    & article {
+    > article {
       min-width: 15rem;
       display: flex;
       flex-direction: column;
       flex: 1;
       gap: 1rem;
-      & ul {
+      > h2 {
+        width: 100%;
+        font-weight: 500;
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 1rem;
+        user-select: none;
+      }
+      > ul {
         display: flex;
         flex-wrap: wrap;
         max-width: 15rem;
@@ -135,7 +135,7 @@ import VSCode from "../../svg/VSCode.astro";
         justify-content: center;
         align-items: center;
         gap: 2rem;
-        & li {
+        > li {
           width: 3.5rem;
           height: 3.5rem;
           cursor: pointer;

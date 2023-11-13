@@ -52,30 +52,30 @@ import Linkedin from "../../svg/Linkedin.astro";
     align-items: center;
     border-top: 2px solid var(--border-footer);
     padding-top: 1rem;
-    & ul {
+    > ul {
       display: flex;
       justify-content: space-around;
       align-items: center;
       width: 50%;
       font-size: 0.5rem;
-      & li{
-        & a {
+      > li{
+        > a {
           width: 2.5rem;
           height: 2.5rem;
           transition: transform 0.2s ease-in-out;
         }
-        & address {
-          font-style: unset;
-          & a {
-            text-decoration: underline;
-            text-underline-offset: 2px;
-            &:hover {
-              filter: brightness(0.7);
-            }
-          }
-        }
         &:hover {
           transform: scale(1.2);
+        }
+      }
+    }
+    > address {
+      font-style: unset;
+      > a {
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        &:hover {
+          filter: brightness(0.7);
         }
       }
     }

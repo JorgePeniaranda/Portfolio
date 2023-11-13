@@ -46,40 +46,27 @@ import Button from "../../components/buttons/Button.astro";
     flex-wrap: wrap;
     gap: 0.7rem;
     margin-top: 0.7rem;
-    & input,
-    textarea {
+    > input, > textarea {
       background-color: transparent;
       font-size: 1.2rem;
       padding: 0.76rem;
       outline: none;
       border-bottom: 0.08rem solid currentColor;
     }
-    & input {
+    > input {
       width: calc(50% - 0.35rem); /* Width - Gap */
     }
-    & textarea {
+    > textarea {
       width: 100%;
       resize: vertical;
     }
-    & button {
-      width: 100%;
-      margin-top: 1.21rem;
-      padding: 0.7rem 0 0.7rem;
-      border-radius: 0.375rem;
-      background-color: var(--primary-light);
-      color: var(--primary-dark);
-      text-align: center;
-      font-size: 1.18rem;
-      font-weight: 600;
-      & button:hover {
-        transform: scale(1.05);
-      }
-      & .buttonError {
+    > button {
+      &.buttonError {
         color: white !important;
         background-color: red !important;
         animation: fill 750ms ease-in forwards;
       }
-      & .buttonSuccess {
+      &.buttonSuccess {
         color: white !important;
         background-color: green !important;
         animation: fill 750ms ease-in forwards;
