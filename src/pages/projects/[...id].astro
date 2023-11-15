@@ -1,0 +1,177 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import type { GetStaticPaths } from "astro";
+import { fetchProjects } from "../../services/services.ts";
+import {type Project} from "../../types/index.ts";
+
+const { id } = Astro.params;
+const projects:[string, Project][] = fetchProjects();
+const project:[string, Project] = projects[projects.findIndex((project) => project[0] === id)];
+
+export const getStaticPaths = (() => {
+    const projects = fetchProjects();
+    return projects.map((project) => {
+        return {
+            params: {
+                id: project[0],
+            },
+        };
+    });
+}) satisfies GetStaticPaths;
+---
+
+<Layout
+  title="Jorge Peñaranda | Desarrollador Web"
+  description="Apasionado desarrollador web con experiencia en la creación de herramientas de código abierto y soluciones web. Comprometido en aprender y crecer constantemente en este emocionante campo, y encantado de compartir mi conocimiento en el camino."
+>
+    <header>
+        <span>
+            <a id="GoBack" href="/projects">
+                <svg width="32" height="32" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M10 22L0 12L10 2l1.775 1.775L3.55 12l8.225 8.225L10 22Z"/>
+                </svg>
+                Volver
+            </a>
+        </span>
+        <picture>
+            <img src={project[1].iconURL} alt={`${project[0]}-Icon`} transition:name={`${project[0]} icon project`}>
+        </picture>
+        <article>
+            <h1>{project[1].title}</h1>
+            <p>{project[1].description}</p>
+        </article>
+        <ul>
+            {
+                !!project[1].links.live && (
+                    <li>
+                        <a href={project[1].links.live} target="_blank" rel="noreferrer">
+                            <svg width="32" height="32" viewBox="0 0 16 16">
+                                <path fill="currentColor" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539a6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068c.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539a6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855c.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
+                            </svg>
+                        </a>
+                    </li>
+                )
+            }
+            {
+                !!project[1].links.github && (
+                    <li>
+                        <a href={project[1].links.github} target="_blank" rel="noreferrer">
+                            <svg width="32" height="32" viewBox="0 0 16 16">
+                                <path fill="currentColor" fill-rule="evenodd" d="M7.976 0A7.977 7.977 0 0 0 0 7.976c0 3.522 2.3 6.507 5.431 7.584c.392.049.538-.196.538-.392v-1.37c-2.201.49-2.69-1.076-2.69-1.076c-.343-.93-.881-1.175-.881-1.175c-.734-.489.048-.489.048-.489c.783.049 1.224.832 1.224.832c.734 1.223 1.859.88 2.3.685c.048-.538.293-.88.489-1.076c-1.762-.196-3.621-.881-3.621-3.964c0-.88.293-1.566.832-2.153c-.05-.147-.343-.978.098-2.055c0 0 .685-.196 2.201.832c.636-.196 1.322-.245 2.007-.245s1.37.098 2.006.245c1.517-1.027 2.202-.832 2.202-.832c.44 1.077.146 1.908.097 2.104a3.16 3.16 0 0 1 .832 2.153c0 3.083-1.86 3.719-3.62 3.915c.293.244.538.733.538 1.467v2.202c0 .196.146.44.538.392A7.984 7.984 0 0 0 16 7.976C15.951 3.572 12.38 0 7.976 0z" clip-rule="evenodd"/>
+                            </svg>
+                        </a>
+                    </li>
+                )
+            }
+            <li>
+                <a href="share" target="_blank" rel="noreferrer">
+                    <svg width="32" height="32" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M18 22q-1.25 0-2.125-.875T15 19q0-.175.025-.363t.075-.337l-7.05-4.1q-.425.375-.95.588T6 15q-1.25 0-2.125-.875T3 12q0-1.25.875-2.125T6 9q.575 0 1.1.213t.95.587l7.05-4.1q-.05-.15-.075-.337T15 5q0-1.25.875-2.125T18 2q1.25 0 2.125.875T21 5q0 1.25-.875 2.125T18 8q-.575 0-1.1-.212t-.95-.588L8.9 11.3q.05.15.075.338T9 12q0 .175-.025.363T8.9 12.7l7.05 4.1q.425-.375.95-.587T18 16q1.25 0 2.125.875T21 19q0 1.25-.875 2.125T18 22Z"/>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </header>
+    <main>
+        <figure>
+            <img src={project[1].images[0]} alt={`${project[0]} image preview`}>
+        </figure>
+    </main>
+</Layout>
+<style>
+    header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem .6rem;
+        margin: 1rem 2rem 3rem 2rem;
+        > span{
+            width: 100%;
+            > a#GoBack{
+                display: flex;
+                align-items: center;
+                font-size: 1.3rem;
+                transition: transform 200ms ease-in-out;
+                > svg {
+                    width: 2rem;
+                    height: 2rem;
+                }
+                &:hover{
+                    transform: translateX(-.5rem);
+                }
+            }
+        }
+        > picture{
+            max-width: 15rem;
+            max-height: 15rem;
+            flex: 1;
+            padding: 1rem;
+            aspect-ratio: 1 / 1;
+            > img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 1.3rem;
+            }
+        }
+        > article {
+            padding: 1rem;
+            flex: 3;
+            > h1 {
+                font-size: 2.75rem;
+                font-weight: 600;
+                margin: 0;
+            }
+            > p {
+                font-size: 1.4rem;
+                font-weight: 400;
+                margin: 0;
+            }
+        }
+        > ul{
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            > li {
+                list-style: none;
+                > a{
+                    display: flex;
+                    border-radius: 50%;
+                    background-color: var(--primary-dark);
+                    transition: transform 100ms ease-in-out;
+                    color: var(--white);
+                    padding: .65rem;
+                    > svg {
+                        width: 2rem;
+                        height: 2rem;
+                    }
+                    &:hover{
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        
+        }
+    }
+    main{
+        margin-bottom: 5rem;
+        > figure {
+            width: 80%;
+            margin: auto;
+            aspect-ratio: 16 / 9;
+            > img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+    /* Screen "MD" */
+    @media (min-width: 768px) {
+        header, main {
+        padding: 0 var(--x-padding);
+        }
+    }
+</style>

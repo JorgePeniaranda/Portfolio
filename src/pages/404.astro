@@ -21,20 +21,17 @@ import NotFound from "../svg/NotFound.astro";
     align-items: center;
     justify-content: center;
     height: calc(100vh - var(--nav-height));
-  }
-
-  a {
+    > a {
     height: 80%;
     transition: transform 0.2s ease-in-out;
+    &:hover {
+      transform: scale(1.1);
+    }
   }
-
-  a:hover {
-    transform: scale(1.1);
-  }
-
-  figcaption {
-    display: block;
-    margin-top: 1rem;
-    font-size: 1.5rem;
+    > figcaption {
+      display: block;
+      margin-top: 1rem;
+      font-size: 1.5rem;
+    }
   }
 </style>

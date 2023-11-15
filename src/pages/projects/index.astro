@@ -1,0 +1,114 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { fetchProjects } from "../../services/services.ts";
+import {type Project} from "../../types/index.ts";
+
+const projects:[string, Project][] = fetchProjects();
+---
+
+<Layout
+  title="Jorge Peñaranda | Desarrollador Web"
+  description="Apasionado desarrollador web con experiencia en la creación de herramientas de código abierto y soluciones web. Comprometido en aprender y crecer constantemente en este emocionante campo, y encantado de compartir mi conocimiento en el camino."
+>
+<main id="container">
+  <header>
+    <h1>Portafolio de Proyectos</h1>
+    <svg width="32" height="32" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M22 8H7.85q-1.55 0-2.7.975T4 11.45V18l1.975-6.575q.2-.65.738-1.038T7.9 10h12.9q1.025 0 1.613.813t.312 1.762l-1.8 6q-.2.65-.738 1.038T19 20H4q-.825 0-1.413-.588T2 18V6q0-.825.588-1.413T4 4h5.175q.4 0 .763.15t.637.425L12 6h8q.825 0 1.413.588T22 8Z"/>
+    </svg>
+  </header>
+  <aside>
+    <ul>
+      <li>- Categoria 1</li>
+      <li>- Categoria 2</li>
+      <li>- Categoria 3</li>
+      <li>- Categoria 4</li>
+      <li>- Categoria 5</li>
+    </ul>
+  </aside>
+  <section>
+    {
+      projects.map((project) => (
+        <article>
+          <a href={`/projects/${project[0]}`} aria-label="proyecto">
+            <img src={project[1].iconURL} alt="proyecto" transition:name={`${project[0]} icon project`}>
+          </a>
+        </article>
+      ))
+    }
+  </section>
+</main>
+</Layout>
+<style>
+  main#container{
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "header header"
+      "aside section";
+    > header{
+      grid-area: header;
+      width: 100%;
+      background-color: var(--primary-dark);
+      color: var(--primary-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2.75rem 3rem;
+      margin-bottom: 2rem;
+      > h1{
+        font-size: 3.8rem;
+        font-weight: 700;
+        user-select: none;
+      }
+      > svg{
+        width: 5rem;
+        height: 5rem;
+      }
+    }
+    > aside{
+      grid-area: aside;
+      border-right: 1px solid var(--border-1);
+      > ul{
+        display: grid;
+        gap: .5rem;
+        padding-inline: 2rem 5rem;
+        > li{
+          font-size: 1.3rem;
+          list-style: none;
+          cursor: pointer;
+        }
+      }
+    }
+    > section{
+      grid-area: section;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+      grid-template-rows: repeat(auto-fit, minmax(10rem, 1fr));
+      gap: 2rem;
+      padding: 0 2rem;
+      > article{
+        background-color: var(--primary-light);
+        aspect-ratio: 1/1;
+        transition: transform .2s ease-in-out;
+        > a > img{
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 1.7rem;
+        }
+        &:hover{
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+  /* Screen "MD" */
+  @media (min-width: 768px) {
+    main#container {
+      padding: 0 var(--x-padding);
+    }
+  }
+</style>

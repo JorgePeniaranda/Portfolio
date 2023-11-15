@@ -1,0 +1,48 @@
+{
+  "GoldenDuck": {
+    "title": "Golden Duck",
+    "iconURL": "/assets/img/projects-files/GoldenDuck/icon.webp",
+    "created": "2022",
+    "images": [
+      "/assets/img/projects-files/GoldenDuck/screen-1.webp",
+      "/assets/img/projects-files/GoldenDuck/screen-2.webp",
+      "/assets/img/projects-files/GoldenDuck/screen-3.webp"
+    ],
+    "description": "Una banca online donde podrá, no solo gestionar su dinero, sino que incluso invertirlo. Siempre llevando un registro de cuanto dinero es ingresado y cuanto dinero es gastado, contando con categorías para saber en qué lo gasta. También podrá pagar servicios, tales como servicios de Telefonía Móvil o servicios esenciales.",
+    "links": {
+      "live": "https://goldenduck.netlify.app/",
+      "github": "https://github.com/JorgePeniaranda/GoldenDuck"
+    }
+  },
+  "Jildam": {
+    "title": "Jildam",
+    "iconURL": "/assets/img/projects-files/Jildam/icon.webp",
+    "created": "2021",
+    "images": [
+      "/assets/img/projects-files/Jildam/screen-1.webp",
+      "/assets/img/projects-files/Jildam/screen-2.webp",
+      "/assets/img/projects-files/Jildam/screen-3.webp"
+    ],
+    "description": "Jildam es una aplicación de gestión de contraseñas centrada en personalizar la experiencia del usuario. Además de permitir gestionar y generar contraseñas de forma segura, también ofrece la posibilidad de personalizar tu perfil con información como tu nombre, apellidos, biografía y foto de perfil, como en un foro.",
+    "links": {
+      "github": "https://github.com/JorgePeniaranda/Jildam.js"
+    }
+  },
+  "example": {
+    "title": "Test",
+    "iconURL": "/assets/img/projects-files/example/icon.webp",
+    "created": "Sábado, 05 de agosto de 2006",
+    "images": [
+      "/assets/img/projects-files/example/screen-1.webp",
+      "/assets/img/projects-files/example/screen-2.webp",
+      "/assets/img/projects-files/example/screen-3.webp",
+      "/assets/img/projects-files/example/screen-4.webp",
+      "/assets/img/projects-files/example/screen-5.webp"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ultrices, mi mattis gravida porttitor, nisi metus sodales nisi, maximus porttitor nibh sapien at tortor. Nulla tincidunt nisi ut mauris interdum, ac efficitur orci sollicitudin. Curabitur et tristique dui. Praesent eu ligula massa. Aenean tempus justo in nunc porta, vitae viverra est maximus. Maecenas pellentesque ornare urna sed ultricies. Sed scelerisque ante ipsum, at hendrerit metus rutrum sit amet. Etiam bibendum leo faucibus aliquet lobortis. Praesent eu ligula massa. Aenean tempus justo in nunc porta, vitae viverra est maximus. Maecenas pellentesque ornare urna sed ultricies. Sed scelerisque ante ipsum, at hendrerit metus rutrum sit amet. Etiam bibendum leo faucibus aliquet lobortis. Praesent eu ligula massa. Aenean tempus justo in nunc porta, vitae viverra est maximus. Maecenas pellentesque ornare urna sed ultricies. Sed scelerisque ante ipsum, at hendrerit metus rutrum sit amet. Etiam bibendum leo faucibus aliquet lobortis.",
+    "links": {
+      "live": "https://jorgepeniaranda.tech/",
+      "github": "https://jorgepeniaranda.tech/"
+    }
+  }
+}
