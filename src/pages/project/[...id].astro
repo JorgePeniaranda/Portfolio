@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import ImageCarousel from "../../components/ReactComponents/ImageCarousel/ImageCarousel";
 import type { GetStaticPaths } from "astro";
 import { fetchProjects } from "../../services/services.ts";
 import {type Project} from "../../types/index.ts";
@@ -73,9 +74,7 @@ export const getStaticPaths = (() => {
         </ul>
     </header>
     <main>
-        <figure>
-            <img src={project[1].images[0]} alt={`${project[0]} image preview`}>
-        </figure>
+        <ImageCarousel imagesURL={project[1].images} titleProject={project[0]} client:visible/>
     </main>
 </Layout>
 <style>
@@ -153,19 +152,6 @@ export const getStaticPaths = (() => {
                 }
             }
         
-        }
-    }
-    main{
-        margin-bottom: 5rem;
-        > figure {
-            width: 80%;
-            margin: auto;
-            aspect-ratio: 16 / 9;
-            > img {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-            }
         }
     }
     /* Screen "MD" */
