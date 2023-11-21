@@ -24,6 +24,7 @@ const posts = (await getCollection("blog")).sort(
                   height={360}
                   src={post.data.heroImage}
                   alt=""
+                  transition:name={`${post.data.title} blog image`}
                 />
                 <h4 class="title">{post.data.title}</h4>
                 <p class="date">
