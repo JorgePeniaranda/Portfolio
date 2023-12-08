@@ -4,18 +4,18 @@ import Text from "../../components/text/Text.astro";
 ---
 
 <section>
-    <article id="about">
-        <Text />
-    </article>
-    <article id="projects">
-        <Text />
-    </article>
-    <article id="blog">
-        <Text />
-    </article>
-    <article id="contact">
-        <Text />
-    </article>
+    <a href="/" id="about">
+        <Text>Acerca</Text>
+    </a>
+    <a href="/" id="projects">
+        <Text>Proyectos</Text>
+    </a>
+    <a href="/" id="blog">
+        <Text>Blog</Text>
+    </a>
+    <a href="/" id="contact">
+        <Text>Contactar</Text>
+    </a>
 </section>
 <style>
     section {
@@ -24,26 +24,78 @@ import Text from "../../components/text/Text.astro";
         grid-template-areas:
             "about projects projects"
             "blog blog contact";
-        > article {
-            height: 20rem;
+        > a {
+            height: 25rem;
             padding: 1rem;
             border: 1px solid #ccc;
+            position: relative;
+            > p {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                user-select: none;
+                font-size: 3rem;
+                font-weight: 600;
+                color: var(--white);
+                z-index: 10;
+            }
             &#about{
-                background-color: yellow;
+                background-color: #15803d;
                 grid-area: about;
             }
             &#projects{
-                background-color: blue;
+                background-color: #ff6347;
                 grid-area: projects;
             }
             &#blog{
-                background-color: purple;
+                background-color: #0276B1;
                 grid-area: blog;
             }
             &#contact{
-                background-color: green;
+                background-color: #6b21a8;
                 grid-area: contact;
             }
+            &:hover {
+                &::after{
+                    content: "";
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    position: absolute;
+                    background: rgba(39, 39, 39, 0.356);
+                    animation: openCard .9s ease-in-out forwards;
+                }
+                &::before{
+                    content: "";
+                    height: 100%;
+                    top: 0;
+                    right: 0;
+                    position: absolute;
+                    background: rgba(39, 39, 39, 0.356);
+                    animation: openCard .9s ease forwards;
+                }
+            }
+        }
+    }
+    @keyframes openCard {
+        from {
+            opacity: .2;
+            width: 0%;
+        }
+        to {
+            opacity: 1;
+            width: 50%;
+        }
+    }
+    @keyframes openText {
+        from {
+            opacity: 0;
+            transform: translate(-50%, -50%) translateY(2rem);
+        }
+        to {
+            opacity: 1;
+            transform: translate(-50%, -50%) translateY(0);
         }
     }
 </style>
