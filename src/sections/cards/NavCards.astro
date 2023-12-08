@@ -1,0 +1,49 @@
+---
+import Text from "../../components/text/Text.astro";
+
+---
+
+<section>
+    <article id="about">
+        <Text />
+    </article>
+    <article id="projects">
+        <Text />
+    </article>
+    <article id="blog">
+        <Text />
+    </article>
+    <article id="contact">
+        <Text />
+    </article>
+</section>
+<style>
+    section {
+        display: grid;
+        margin-top: 7rem;
+        grid-template-areas:
+            "about projects projects"
+            "blog blog contact";
+        > article {
+            height: 20rem;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            &#about{
+                background-color: yellow;
+                grid-area: about;
+            }
+            &#projects{
+                background-color: blue;
+                grid-area: projects;
+            }
+            &#blog{
+                background-color: purple;
+                grid-area: blog;
+            }
+            &#contact{
+                background-color: green;
+                grid-area: contact;
+            }
+        }
+    }
+</style>
