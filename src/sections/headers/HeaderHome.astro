@@ -136,4 +136,11 @@ import Navbar from "../../components/navbars/Navbar.astro";
     if (sun?.style) sun.style.marginTop = value * 0.8 + 'px';
     if (birds?.style) birds.style.marginTop = value * 0.5 + 'px';
   })
+
+  window.addEventListener("mousemove", (e) => {
+    let x = e.clientX / window.innerWidth;
+    let y = e.clientY / window.innerHeight;
+    
+    if (birds?.style) birds.style.transform = "translate(-" + x * 50 + "px, -" + y * 50 + "px)";
+  });
 </script>
