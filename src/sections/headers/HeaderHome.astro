@@ -69,6 +69,7 @@ import Sun from "../../svg/draws/Sun.astro";
         position: absolute;
         top: 5%;
         right: 10%;
+        animation: goUp 1.2s ease;
       }
     }
     > div#birds{
@@ -78,20 +79,22 @@ import Sun from "../../svg/draws/Sun.astro";
       width: 100%;
       height: 100%;
       z-index: 30;
-      > svg:nth-child(1) {
-        position: absolute;
-        top: 23%;
-        left: 21%;
-      }
-      > svg:nth-child(2) {
-        position: absolute;
-        bottom: 17%;
-        right: 45%;
-      }
-      > svg:nth-child(3) {
-        position: absolute;
-        top: 20%;
-        right: 35%;
+      > svg{
+        &:nth-child(1) {
+          position: absolute;
+          top: 23%;
+          left: 21%;
+        }
+        &:nth-child(2) {
+          position: absolute;
+          bottom: 17%;
+          right: 45%;
+        }
+        &:nth-child(3) {
+          position: absolute;
+          top: 20%;
+          right: 35%;
+        }
       }
     }
     > div#mountains{
@@ -101,18 +104,30 @@ import Sun from "../../svg/draws/Sun.astro";
       width: 100%;
       height: 100%;
       z-index: 50;
-      > svg:first-child {
-        position: absolute;
-        bottom: 0;
-        left: 0;
+      > svg{
+        animation: goUp 1s ease;
+        animation-delay: 200ms;
+        &:first-child {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+        }
+        &:last-child {
+          position: absolute;
+          display: flex;
+          justify-content: flex-end;
+          bottom: 0;
+          right: 0;
+        }
       }
-      > svg:last-child {
-        position: absolute;
-        display: flex;
-        justify-content: flex-end;
-        bottom: 0;
-        right: 0;
-      }
+    }
+  }
+  @keyframes goUp {
+    0% {
+      transform: translateY(40%);
+    }
+    100% {
+      transform: translateY(0%);
     }
   }
 </style>
