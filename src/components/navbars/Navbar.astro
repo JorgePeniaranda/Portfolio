@@ -3,11 +3,12 @@ import Logo from "../../svg/logos/Logo.astro";
 
 interface Props{
   color?: string;
+  fixed?: boolean;
 }
-const { color } = Astro.props;
+const { color, fixed = false } = Astro.props;
 ---
 
-<nav style={`color: ${color};`}>
+<nav style={`color: ${color};position:${fixed ? "absolute" : ""};`}>
   <ul>
     <li>
       <a href="/">Acerca</a>
@@ -30,7 +31,6 @@ const { color } = Astro.props;
   nav {
     width: 100%;
     height: var(--nav-height);
-    position: absolute;
     z-index: 100;
     padding: 0 1rem;
     > ul{
