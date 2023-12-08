@@ -19,12 +19,6 @@
 
   --border-1: oklch(50% 0 0);
 
-  --rgb-color-1: oklch(66.32% 0.27379970837809603 324.27877091262536);
-  --rgb-color-2: oklch(67.05% 0.21457188634405316 25.039656026515278);
-  --rgb-color-3: oklch(81.45% 0.14799303814736775 82.26721560286067);
-  --rgb-color-4: oklch(73.44% 0.197 145.27);
-  --rgb-color-5: oklch(63.65% 0.1576 248.8066094258165);
-
   --nav-height: 10rem;
   --x-padding: 11rem;
 }
@@ -51,7 +45,7 @@
 }
 
 html {
-  background: var(--primary-light);
+  background: var(--dominant);
   color-scheme: light;
   scroll-behavior: smooth;
 }
