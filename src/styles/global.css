@@ -38,14 +38,14 @@
 
 @font-face {
   font-family: "ZillaSlabHighlight";
-  src: url("/fonts/ZillaSlabHighlight.ttf");
+  src: url("/fonts/ZillaSlabHighlight.woff2") format("woff2");
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "AlfaSlabOne";
-  src: url("/fonts/AlfaSlabOne.ttf");
+  src: url("/fonts/AlfaSlabOne.woff2") format("woff2");
   font-style: normal;
   font-display: swap;
 }
