@@ -61,8 +61,12 @@ const { color = "var(--white)" } = Astro.props;
       align-items: center;
       width: 50%;
       font-size: 0.5rem;
-      > li:hover {
-        transform: scale(1.2);
+      
+      > li svg{
+        transition: transform .3s ease;
+        &:hover {
+          transform: translateY(-0.75rem);
+        }
       }
     }
     > address {
@@ -70,8 +74,9 @@ const { color = "var(--white)" } = Astro.props;
       > a {
         text-decoration: underline;
         text-underline-offset: 2px;
+        transition: font-size .3s ease;
         &:hover {
-          filter: brightness(0.7);
+          font-size: 1.1rem;
         }
       }
     }
