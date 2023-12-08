@@ -3,7 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import ImageCarousel from "../../components/ReactComponents/ImageCarousel/ImageCarousel";
 import type { GetStaticPaths } from "astro";
 import { fetchProjects } from "../../services/services.ts";
-import {type Project} from "../../types/index.ts";
+import {type Project} from "../../types/index";
 
 const { id } = Astro.params;
 const projects:[string, Project][] = fetchProjects();
