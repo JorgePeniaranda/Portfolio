@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../sections/headers/HeaderHome.astro";
 import Presentation from "../sections/articles/Presentation.astro";
+import StackCard from "../sections/cards/StackCard.astro";
 ---
 
 <Layout
@@ -12,16 +13,18 @@ import Presentation from "../sections/articles/Presentation.astro";
   <Header />
   <main>
     <Presentation />
+    <StackCard />
   </main>
 </Layout>
 <style>
   main{
     background-color: var(--dominant);
+    padding-bottom: 10rem;
   }
   /* Screen "MD" */
   @media (min-width: 768px) {
     main {
-      padding: 0 var(--x-padding);
+      padding-inline: var(--x-padding);
     }
   }
 </style>
