@@ -1,25 +1,51 @@
 ---
 import Logo from "../../svg/Logo.astro";
+
+interface Props{
+  color?: string;
+}
+const { color } = Astro.props;
 ---
 
-<nav>
-  <a href="/" aria-label="Go Home">
-    <Logo />
-  </a>
-  <div class="flex items-center justify-center cursor-pointer">es</div>
+<nav style={`color: ${color};`}>
+  <ul>
+    <li>
+      <a href="/">Acerca</a>
+    </li>
+    <li>
+      <a href="/">Proyectos</a>
+    </li>
+    <li id="logo">
+      <Logo />
+    </li>
+    <li>
+      <a href="/">Blog</a>
+    </li>
+    <li>
+      <a href="/">Contacto</a>
+    </li>
+  </ul>
 </nav>
 <style>
   nav {
     width: 100%;
     height: var(--nav-height);
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+    position: absolute;
+    z-index: 100;
     padding: 0 1rem;
-    > a {
-      height: calc(var(--nav-height) - 1rem);
-      &:hover {
-        transform: scale(1.1);
+    > ul{
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      align-items: center;
+      height: 100%;
+      > li{
+        font-size: 1.5rem;
+        user-select: none;
+      }
+      > li#logo{
+        width: 10rem;
+        height: 10rem;
       }
     }
   }
@@ -27,8 +53,7 @@ import Logo from "../../svg/Logo.astro";
   /* Screen "MD" */
   @media (min-width: 768px) {
     nav {
-      padding: 0 var(--x-padding);
-      justify-content: space-between;
+      justify-content: space-around;
     }
   }
 </style>

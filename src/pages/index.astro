@@ -1,7 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header from "../sections/headers/HeaderHome.astro";
-import Aside from "../sections/asides/AsideIndex.astro";
 import About from "../sections/articles/AboutHomeArticle.astro";
 import Stacks from "../sections/cards/StackCard.astro";
 import Projects from "../sections/articles/ProjectsArticle.astro";
@@ -11,9 +10,9 @@ import Contact from "../sections/articles/ContactHomeArticle.astro";
 <Layout
   title="Jorge Peñaranda | Desarrollador Web"
   description="Apasionado desarrollador web con experiencia en la creación de herramientas de código abierto y soluciones web. Comprometido en aprender y crecer constantemente en este emocionante campo, y encantado de compartir mi conocimiento en el camino."
+  withNavbar={false}
 >
   <Header />
-  <Aside />
   <main>
     <About />
     <Stacks />
@@ -22,6 +21,9 @@ import Contact from "../sections/articles/ContactHomeArticle.astro";
   </main>
 </Layout>
 <style is:global>
+  main{
+    background-color: var(--dominant);
+  }
   /* Screen "MD" */
   @media (min-width: 768px) {
     main {

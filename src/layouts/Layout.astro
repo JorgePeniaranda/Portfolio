@@ -6,8 +6,9 @@ import Footer from "../components/footers/Footer.astro";
 interface Props {
   title: string;
   description: string;
+  withNavbar?: boolean;
 }
-const { title, description } = Astro.props;
+const { title, description, withNavbar = true } = Astro.props;
 ---
 
 <!doctype html>
@@ -17,7 +18,7 @@ const { title, description } = Astro.props;
     <ViewTransitions />
   </head>
   <body id="top">
-    <Navbar />
+    { withNavbar && <Navbar />}
     <slot />
     <Footer />
   </body>
