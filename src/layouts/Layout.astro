@@ -17,7 +17,7 @@ const { title, description, withNavbar = true } = Astro.props;
     <BaseHead title={title} description={description} />
     <ViewTransitions />
   </head>
-  <body id="top">
+  <body>
     { withNavbar && <Navbar />}
     <slot />
     <Footer />

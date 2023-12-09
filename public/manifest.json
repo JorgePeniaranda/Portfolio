@@ -4,8 +4,8 @@
   "description": "Desarrollador Web Front End con experiencia en JavaScript, CSS, React y Next.js. Descubre mis proyectos y soluciones web de código abierto.",
   "start_url": "/",
   "display": "fullscreen",
-  "background_color": "#1a1a1a",
-  "theme_color": "#1a1a1a",
+  "background_color": "#bf5454",
+  "theme_color": "#bf5454",
   "icons": [
     {
       "src": "https://jorgepeniaranda.me/assets/img/Logo-192x192.png",
