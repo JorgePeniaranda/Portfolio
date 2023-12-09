@@ -1,5 +1,5 @@
 ---
-import SubSubTitle from "../../components/text/SubSubTitle.astro";
+import SubTitle from "../../components/text/SubTitle.astro";
 import HTML from "../../svg/logos/techs/HTML.astro";
 import CSS from "../../svg/logos/techs/CSS.astro";
 import Javascript from "../../svg/logos/techs/Javascript.astro";
@@ -25,7 +25,7 @@ import VSCode from "../../svg/logos/techs/VSCode.astro";
 
 <section id="stack">
   <article>
-    <SubSubTitle textAlign="center">FrontEnd</SubSubTitle>
+    <SubTitle textAlign="center">FrontEnd</SubTitle>
     <ul>
       <li>
         <HTML />
@@ -54,7 +54,7 @@ import VSCode from "../../svg/logos/techs/VSCode.astro";
     </ul>
   </article>
   <article>
-    <SubSubTitle textAlign="center">BackEnd</SubSubTitle>
+    <SubTitle textAlign="center">BackEnd</SubTitle>
     <ul>
       <li>
         <Nextjs />
@@ -77,7 +77,7 @@ import VSCode from "../../svg/logos/techs/VSCode.astro";
     </ul>
   </article>
   <article>
-    <SubSubTitle textAlign="center">DevOps</SubSubTitle>
+    <SubTitle textAlign="center">DevOps</SubTitle>
     <ul>
       <li>
         <Git />
@@ -115,6 +115,9 @@ import VSCode from "../../svg/logos/techs/VSCode.astro";
       align-items: center;
       flex-direction: column;
       gap: 1rem;
+      > h2{
+        font-size: 2.3rem;
+      }
       > ul {
         max-width: 15rem;
         display: flex;
