@@ -99,7 +99,7 @@ import Sun from "../../svg/draws/Sun.astro";
     }
     > div#mountains{
       position: absolute;
-      bottom: ;
+      bottom: 0;
       left: 0;
       width: 100%;
       height: 100%;
@@ -108,11 +108,15 @@ import Sun from "../../svg/draws/Sun.astro";
         animation: goUp 1s ease;
         animation-delay: 200ms;
         &:first-child {
+          width: 40vw;
+          height: fit-content;
           position: absolute;
           bottom: 0;
           left: 0;
         }
         &:last-child {
+          width: 40vw;
+          height: fit-content;
           position: absolute;
           display: flex;
           justify-content: flex-end;
@@ -128,6 +132,17 @@ import Sun from "../../svg/draws/Sun.astro";
     }
     100% {
       transform: translateY(0%);
+    }
+  }
+  /* Screen "MD" */
+  @media (max-width: 768px) {
+    header{
+      > article h2 {
+        font-size: 3rem;
+      }
+      > div#sun, div#birds{
+        display: none;
+      }
     }
   }
 </style>

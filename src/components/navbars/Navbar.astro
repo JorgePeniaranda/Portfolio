@@ -76,4 +76,14 @@ const { color, fixed = false } = Astro.props;
       justify-content: space-around;
     }
   }
+
+  /* Screen "MD" */
+  @media (max-width: 768px) {
+    nav ul{
+      justify-content: space-around;
+      > li:not(#logo, li:last-child) {
+        display: none;
+      }
+    }
+  }
 </style>
