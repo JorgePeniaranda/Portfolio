@@ -5,11 +5,12 @@ import Linkedin from "../../svg/logos/techs/Linkedin.astro";
 
 interface Props{
   color?: string;
+  backgroundColor?: string;
 }
-const { color = "var(--white)" } = Astro.props;
+const { color = "var(--white)", backgroundColor = "var(--black)" } = Astro.props;
 ---
 
-<footer style={`color: ${color};`}>
+<footer style={`color: ${color};background-color: ${backgroundColor};`}>
   <ul>
     <li>
       <a
