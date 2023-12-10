@@ -8,7 +8,7 @@ interface Props{
 const { color, fixed = false } = Astro.props;
 ---
 
-<nav style={`color: ${color};position:${fixed ? "absolute" : ""};`}>
+<nav style={`${color ? `color: ${color};`: ""}${fixed ? "position:absolute;" : ""}`}>
   <ul>
     <li>
       <a href="/">Acerca</a>
