@@ -2,7 +2,7 @@
 import Layout from "../../layouts/index.astro";
 import ImageCarousel from "../../components/ReactComponents/ImageCarousel/ImageCarousel";
 import type { GetStaticPaths } from "astro";
-import { fetchProjects } from "../../services/services.ts";
+import { fetchProjects } from "../../services/services";
 import {type Project} from "../../types/index";
 
 const { id } = Astro.params;
@@ -138,7 +138,7 @@ export const getStaticPaths = (() => {
                 > a{
                     display: flex;
                     border-radius: 50%;
-                    background-color: var(--primary-dark);
+                    background-color: var(--black);
                     transition: transform 100ms ease-in-out;
                     color: var(--white);
                     padding: .65rem;
