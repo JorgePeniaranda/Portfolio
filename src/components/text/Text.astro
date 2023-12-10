@@ -1,11 +1,4 @@
----
-interface Props{
-    textAlign?: 'left' | 'center' | 'right';
-}
-const {textAlign = "left"} = Astro.props;
----
-
-<p style={`text-align:${textAlign}`}>
+<p>
     <slot/>
 </p>
 <style>
