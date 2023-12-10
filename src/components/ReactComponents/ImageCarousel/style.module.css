@@ -40,10 +40,10 @@
       width: 1rem;
       height: 1rem;
       border-radius: 50%;
-      border: #000 solid 1px;
       transition: transform 0.1s linear;
+      background-color: #c1c1c1bb;
       &[class="active"] {
-        background-color: var(--primary-dark);
+        background-color: #09090bbb;
       }
       &:hover:not([class="active"]) {
         cursor: pointer;
