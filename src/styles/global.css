@@ -1,7 +1,4 @@
 :root {
-  --primary-dark: oklch(17.06% 0 360);
-  --primary-light: oklch(100% 0 0);
-
   --dominant: #f2f3f4;
   --primary: #bf5454;
   --details: #9efccc;
@@ -16,8 +13,6 @@
   --white: oklch(100% 0 0);
   --black: oklch(0% 0 0);
   --gray: oklch(90.36% 0.009 278.28);
-
-  --border-1: oklch(50% 0 0);
 
   --nav-height: 10rem;
   --x-padding: 15rem;
