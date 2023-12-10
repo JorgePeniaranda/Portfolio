@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/index.astro";
-import ContactForm from "../../sections/form/ContactForm.astro";
+import ContactForm from "../../sections/form/ContactForm.tsx";
 import Title from "../../components/text/Title.astro";
 ---
 
@@ -10,7 +10,7 @@ import Title from "../../components/text/Title.astro";
 >
   <main>
     <Title>Contactar</Title>
-    <ContactForm/>
+    <ContactForm SERVICE_ID={import.meta.env.EMAILJS_SERVICE_KEY} TEMPLATE_ID={import.meta.env.EMAILJS_TEMPLATE_KEY} PUBLIC_KEY={import.meta.env.EMAILJS_PUBLIC_KEY} client:load/>
   </main>
 </Layout>
 <style>
