@@ -10,7 +10,7 @@
     ],
     "description": "Una banca online donde podrá, no solo gestionar su dinero, sino que incluso invertirlo. Siempre llevando un registro de cuanto dinero es ingresado y cuanto dinero es gastado, contando con categorías para saber en qué lo gasta. También podrá pagar servicios, tales como servicios de Telefonía Móvil o servicios esenciales.",
     "links": {
-      "live": "https://goldenduck.vercel.app/signin",
+      "live": "https://goldenduck.vercel.app",
       "github": "https://github.com/JorgePeniaranda/GoldenDuck"
     }
   },
