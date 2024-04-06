@@ -1,6 +1,37 @@
 {
   "name": "jorgepeniaranda",
   "version": "2.0.0",
+  "private": true,
+  "description": "Jorge Peñaranda's Portfolio",
+  "author": "Jorge Peñaranda",
+  "license": "GPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/JorgePeniaranda/Portfolio/issues"
+  },
+  "homepage": "https://github.com/JorgePeniaranda/Portfolio#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JorgePeniaranda/Portfolio.git"
+  },
+  "keywords": [
+    "astro",
+    "javascript",
+    "typescript",
+    "react",
+    "tailwind",
+    "css"
+  ],
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
   "dependencies": {
     "@astrojs/check": "0.5.10",
     "@astrojs/mdx": "2.2.4",
@@ -15,14 +46,6 @@
     "sweetalert2": "11.10.7",
     "tailwindcss": "3.4.3"
   },
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "type": "module",
   "devDependencies": {
     "@types/react": "^18.2.74",
     "@types/react-dom": "^18.2.24",
