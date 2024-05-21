@@ -1,9 +1,16 @@
+---
+interface Props extends astroHTML.JSX.SVGAttributes {}
+
+const { ...props } = Astro.props;
+---
+
 <svg
   data-name="Layer 1"
   width="1100.02"
   height="811.41"
   fill="currentColor"
   viewBox="0 0 1100.02 811.41"
+  {...props}
   ><defs
     ><linearGradient
       id="785c60ff-874e-47fc-85e9-4f7317d8d736-232"

@@ -1,20 +1,24 @@
 ---
 import { ViewTransitions } from "astro:transitions";
 import BaseHead from "../components/head/BaseHead.astro";
+import { DEFAULT_LANG } from "../constants/config";
 interface Props {
   title: string;
   description: string;
+  lang?: string;
+  body?: astroHTML.JSX.HTMLAttributes;
+  html?: astroHTML.JSX.HtmlHTMLAttributes;
 }
-const { title, description } = Astro.props;
+const { title, description, lang = DEFAULT_LANG, body, html } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang} {...html}>
   <head>
     <BaseHead title={title} description={description} />
     <ViewTransitions />
   </head>
-  <body class="w-screen h-screen antialiased">
+  <body class={`w-screen h-screen antialiased`} {...body}>
     <slot />
   </body>
 </html>
