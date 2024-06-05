@@ -1,10 +1,10 @@
 ---
-import MountainLeft from "../../assets/svg/draws/MountainLeft.astro";
-import MountainRight from "../../assets/svg/draws/MountainRight.astro";
-import Bird1 from "../../assets/svg/draws/Bird-1.astro";
-import Bird2 from "../../assets/svg/draws/Bird-2.astro";
-import Bird3 from "../../assets/svg/draws/Bird-3.astro";
-import Sun from "../../assets/svg/draws/Sun.astro";
+import MountainLeft from '../../assets/svg/draws/MountainLeft.astro'
+import MountainRight from '../../assets/svg/draws/MountainRight.astro'
+import Bird1 from '../../assets/svg/draws/Bird-1.astro'
+import Bird2 from '../../assets/svg/draws/Bird-2.astro'
+import Bird3 from '../../assets/svg/draws/Bird-3.astro'
+import Sun from '../../assets/svg/draws/Sun.astro'
 ---
 
 <header id="header">
@@ -13,16 +13,16 @@ import Sun from "../../assets/svg/draws/Sun.astro";
     <h1>Jorge Peñaranda | Desarrollador web</h1>
   </article>
   <div id="mountains" class="landscape">
-      <MountainLeft/>
-      <MountainRight/>
+    <MountainLeft />
+    <MountainRight />
   </div>
   <div id="birds" class="landscape">
-      <Bird1/>
-      <Bird2/>
-      <Bird3/>
+    <Bird1 />
+    <Bird2 />
+    <Bird3 />
   </div>
   <div id="sun" class="landscape">
-    <Sun/>
+    <Sun />
   </div>
 </header>
 <script>
@@ -31,23 +31,23 @@ import Sun from "../../assets/svg/draws/Sun.astro";
   const birds: HTMLElement | null = document.querySelector('header > div#birds')
 
   window.addEventListener('scroll', () => {
-    let value = window.scrollY;
-    
-    if (text?.style) text.style.marginTop = value * 0.5 + 'px';
-    if (sun?.style) sun.style.marginTop = value * 0.8 + 'px';
-    if (birds?.style) birds.style.marginTop = value * 0.5 + 'px';
+    let value = window.scrollY
+
+    if (text?.style) text.style.marginTop = value * 0.5 + 'px'
+    if (sun?.style) sun.style.marginTop = value * 0.8 + 'px'
+    if (birds?.style) birds.style.marginTop = value * 0.5 + 'px'
   })
 
-  window.addEventListener("mousemove", (e) => {
-    let x = e.clientX / window.innerWidth;
-    let y = e.clientY / window.innerHeight;
-    
-    if (birds?.style) birds.style.transform = "translate(-" + x * 50 + "px, -" + y * 50 + "px)";
-  });
+  window.addEventListener('mousemove', e => {
+    let x = e.clientX / window.innerWidth
+    let y = e.clientY / window.innerHeight
+
+    if (birds?.style) birds.style.transform = 'translate(-' + x * 50 + 'px, -' + y * 50 + 'px)'
+  })
 </script>
 <style>
-  header{
-    background: url("/assets/img/wave-1.svg") var(--primary);
+  header {
+    background: url('/assets/img/wave-1.svg') var(--primary);
     background-attachment: fixed;
     background-position: bottom;
     background-repeat: no-repeat;
@@ -56,7 +56,7 @@ import Sun from "../../assets/svg/draws/Sun.astro";
     width: 100%;
     height: 100vh;
     z-index: -1;
-    > article{
+    > article {
       width: 60%;
       position: absolute;
       top: 50%;
@@ -66,35 +66,35 @@ import Sun from "../../assets/svg/draws/Sun.astro";
       user-select: none;
       color: var(--dominant);
       z-index: 40;
-      > h2{
+      > h2 {
         font-size: 6rem;
-        font-family: "AlfaSlabOne";
+        font-family: 'AlfaSlabOne';
         margin-bottom: 5rem;
       }
-      > h1{
+      > h1 {
         font-size: 2rem;
-        font-family: "ZillaSlabHighlight";
+        font-family: 'ZillaSlabHighlight';
       }
     }
-    > div.landscape{
+    > div.landscape {
       position: absolute;
       width: 100%;
       height: 100%;
       top: 0;
       left: 0;
     }
-    > div#sun{
+    > div#sun {
       z-index: 20;
-      > svg{
+      > svg {
         position: absolute;
         top: 5%;
         right: 10%;
         animation: goUp 1.2s ease;
       }
     }
-    > div#birds{
+    > div#birds {
       z-index: 30;
-      > svg{
+      > svg {
         &:nth-child(1) {
           position: absolute;
           top: 23%;
@@ -112,9 +112,9 @@ import Sun from "../../assets/svg/draws/Sun.astro";
         }
       }
     }
-    > div#mountains{
+    > div#mountains {
       z-index: 50;
-      > svg{
+      > svg {
         animation: goUp 1s ease;
         animation-delay: 200ms;
         &:first-child {
@@ -146,11 +146,12 @@ import Sun from "../../assets/svg/draws/Sun.astro";
   }
   /* Screen "MD" */
   @media (max-width: 768px) {
-    header{
+    header {
       > article h2 {
         font-size: 3rem;
       }
-      > div#sun, div#birds{
+      > div#sun,
+      div#birds {
         display: none;
       }
     }

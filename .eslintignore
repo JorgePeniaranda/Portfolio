@@ -1,9 +1,9 @@
-node_modules/
-coverage/
-.vscode/
-.github/
-.astro/
-public/
+node_modules
+coverage
+.vscode
+.github
+.astro
+public
 
 eslint.config.mjs
 postcss.config.mjs

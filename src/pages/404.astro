@@ -1,12 +1,9 @@
 ---
-import Layout from "../components/layouts/base.astro";
-import NotFound from "../assets/svg/draws/NotFound.astro";
+import Layout from '../components/layouts/base.astro'
+import NotFound from '../assets/svg/draws/NotFound.astro'
 ---
 
-<Layout
-  title="Not found"
-  description="Página no encontrada"
->
+<Layout title="Not found" description="Página no encontrada">
   <figure>
     <a href="/">
       <NotFound />
@@ -22,12 +19,12 @@ import NotFound from "../assets/svg/draws/NotFound.astro";
     justify-content: center;
     height: calc(100vh - var(--nav-height));
     > a {
-    height: 80%;
-    transition: transform 0.2s ease-in-out;
-    &:hover {
-      transform: scale(1.1);
+      height: 80%;
+      transition: transform 0.2s ease-in-out;
+      &:hover {
+        transform: scale(1.1);
+      }
     }
-  }
     > figcaption {
       display: block;
       margin-top: 1rem;

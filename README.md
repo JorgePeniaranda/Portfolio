@@ -1,4 +1,3 @@
-
 <h1 align="center">
    👋 Jorge Peñaranda's Portfolio
 </h1>
@@ -28,7 +27,8 @@ Hello! I'm a passionate web developer with boundless creativity and an unwaverin
 ## 🚀 Deployment
 
 You need the following programs before you start:
-* npm: https://www.npmjs.com/package/download
+
+- npm: https://www.npmjs.com/package/download
 
 To deploy this project run
 
