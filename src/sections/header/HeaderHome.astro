@@ -13,33 +13,33 @@ import Sun from '../../assets/svg/draws/Sun.astro'
     <h1>Jorge Peñaranda | Desarrollador web</h1>
   </article>
   <div id="mountains" class="landscape">
-  <MountainLeft />
-  <MountainRight />
-</div>
-<div id="birds" class="landscape">
-<Bird1 />
-<Bird2 />
-  <Bird3 />
+    <MountainLeft />
+    <MountainRight />
+  </div>
+  <div id="birds" class="landscape">
+    <Bird1 />
+    <Bird2 />
+    <Bird3 />
   </div>
   <div id="sun" class="landscape">
     <Sun />
   </div>
 </header>
 <script>
-const text: HTMLElement | null = document.querySelector('header > article')
-const sun: HTMLElement | null = document.querySelector('header > div#sun')
-const birds: HTMLElement | null = document.querySelector('header > div#birds')
+  const text: HTMLElement | null = document.querySelector('header > article')
+  const sun: HTMLElement | null = document.querySelector('header > div#sun')
+  const birds: HTMLElement | null = document.querySelector('header > div#birds')
 
-window.addEventListener('scroll', () => {
-let value = window.scrollY
+  window.addEventListener('scroll', () => {
+    let value = window.scrollY
 
-if (text?.style) text.style.marginTop = value * 0.5 + 'px'
-if (sun?.style) sun.style.marginTop = value * 0.8 + 'px'
-if (birds?.style) birds.style.marginTop = value * 0.5 + 'px'
-})
+    if (text?.style) text.style.marginTop = value * 0.5 + 'px'
+    if (sun?.style) sun.style.marginTop = value * 0.8 + 'px'
+    if (birds?.style) birds.style.marginTop = value * 0.5 + 'px'
+  })
 
-window.addEventListener('mousemove', e => {
-let x = e.clientX / window.innerWidth
+  window.addEventListener('mousemove', e => {
+    let x = e.clientX / window.innerWidth
     let y = e.clientY / window.innerHeight
 
     if (birds?.style) birds.style.transform = 'translate(-' + x * 50 + 'px, -' + y * 50 + 'px)'
