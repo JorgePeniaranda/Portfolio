@@ -1,0 +1,24 @@
+---
+import { SEO } from "astro-seo";
+import { ViewTransitions } from "astro:transitions";
+import {SEO_INFO} from "../../constants/seo";
+import "../../styles/global.css";
+
+interface Props{
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <ViewTransitions />
+    <SEO  {...SEO_INFO} title={title} description={description}/>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

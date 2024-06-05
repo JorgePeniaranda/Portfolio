@@ -1,12 +1,10 @@
 import { defineConfig } from "astro/config";
-import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
-
 import react from "@astrojs/react";
+import { ORIGINAL_URL } from "./src/constants/seo";
 
-// https://astro.build/config
 export default defineConfig({
-  site: "https://jorgepeniaranda.me",
-  integrations: [tailwind(), mdx(), sitemap(), react()]
+  site: ORIGINAL_URL,
+  integrations: [tailwind(), sitemap(), react()]
 });

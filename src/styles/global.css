@@ -19,47 +19,34 @@
 }
 
 @font-face {
-  font-family: "Baloo";
-  src: url("/fonts/Baloo.woff2") format("woff2");
+  font-family: 'Baloo';
+  src: url('/fonts/Baloo.woff2') format('woff2');
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "ZillaSlabHighlight";
-  src: url("/fonts/ZillaSlabHighlight.woff2") format("woff2");
+  font-family: 'ZillaSlabHighlight';
+  src: url('/fonts/ZillaSlabHighlight.woff2') format('woff2');
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "AlfaSlabOne";
-  src: url("/fonts/AlfaSlabOne.woff2") format("woff2");
+  font-family: 'AlfaSlabOne';
+  src: url('/fonts/AlfaSlabOne.woff2') format('woff2');
   font-style: normal;
   font-display: swap;
 }
 
-html {
-  background: var(--dominant);
-  color-scheme: light;
-  scroll-behavior: smooth;
-}
-
+html,
 body {
   font-family: Baloo, sans-serif;
-  width: 100%;
-  min-height: 100vh;
+  width: 100dvw;
+  height: 100dvh;
 }
 
-figure figcaption {
-  text-align: center;
-  display: none;
-}
-
-::-webkit-scrollbar {
-  width: 12px;
-}
-
+/* DEFAULT SCROLLBAR STYLE */
 ::-webkit-scrollbar-thumb {
   background-color: oklch(74.63% 0 0 / 73.89%);
   border-radius: 1px;
