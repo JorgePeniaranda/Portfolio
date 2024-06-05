@@ -3,22 +3,27 @@ import { SEO } from 'astro-seo'
 import { ViewTransitions } from 'astro:transitions'
 import { SEO_INFO } from '../../constants/seo'
 import '../../styles/global.css'
+import { DEFAULT_LANG } from '../../constants/common'
+import { formatClassNames } from '../../helpers/class-names'
 
 interface Props {
   title?: string
   description?: string
+  lang?: string
+  body?: astroHTML.JSX.HTMLAttributes
+  html?: astroHTML.JSX.HtmlHTMLAttributes
 }
 
-const { title, description } = Astro.props
+const { title, description, lang = DEFAULT_LANG, body, html } = Astro.props
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang} {...html}>
   <head>
-    <ViewTransitions />
     <SEO {...SEO_INFO} title={title} description={description} />
+    <ViewTransitions />
   </head>
-  <body>
+  <body class={formatClassNames("w-screen h-screen antialiased", body?.class)} {...body}>
     <slot />
   </body>
 </html>
