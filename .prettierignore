@@ -4,6 +4,7 @@ coverage/
 .github/
 .astro/
 public/
+dist/
 
 eslint.config.mjs
 postcss.config.mjs
