@@ -4,12 +4,12 @@
 
 Hello! I'm a passionate web developer with boundless creativity and an unwavering commitment to excellence in code. I design and develop websites that are not only visually appealing but also highly functional and user-friendly. My focus is on creating stunning and effective online experiences.
 
-![App Screenshot](https://github.com/JorgePeniaranda/Portfolio/blob/main/screenshot.png)
+![App Screenshot](./public/banner.png)
 
 ## 🧰 Tech Stack
 
 <div align="center">
-  <img src="https://astro.build/favicon.svg" height="40" alt="react logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/astro/astro-original.svg" height="40" alt="react logo"  />
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="40" alt="react logo"  />
   <img width="12" />
@@ -17,11 +17,13 @@ Hello! I'm a passionate web developer with boundless creativity and an unwaverin
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" height="40" alt="css3 logo"  />
   <img width="12" />
-  <img src="https://tailwindcss.com/favicons/favicon-32x32.png?v=3" height="40" alt="tailwindcss logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" height="40" alt="tailwindcss logo"  />
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="40" alt="javascript logo"  />
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" height="40" alt="typescript logo"  />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/eslint/eslint-original.svg" height="40" alt="eslint logo"  />
 </div>
 
 ## 🚀 Deployment

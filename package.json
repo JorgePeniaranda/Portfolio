@@ -47,8 +47,8 @@
   },
   "devDependencies": {
     "@eslint/compat": "1.0.3",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
     "@typescript-eslint/parser": "7.12.0",
     "@vercel/style-guide": "6.0.0",
     "babel-plugin-react-compiler": "0.0.0-experimental-938cd9a-20240601",
@@ -63,7 +63,7 @@
     "postcss-nesting": "12.1.5",
     "prettier": "3.3.1",
     "prettier-plugin-astro": "0.14.0",
-    "typescript": "^5.4.5",
+    "typescript": "5.4.5",
     "typescript-eslint": "7.12.0"
   }
 }
