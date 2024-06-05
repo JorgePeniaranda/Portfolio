@@ -1,4 +1,4 @@
-import globals from 'globals'
+// import globals from 'globals'
 import tseslint from 'typescript-eslint'
 import eslintPluginReact from 'eslint-plugin-react'
 import eslintPluginReactHooks from 'eslint-plugin-react-hooks'
@@ -13,7 +13,7 @@ import eslintPluginAstro from 'eslint-plugin-astro'
 export default [
   // Ignores configuration
   {
-    ignores: ['node_modules', '.astro', 'out', 'coverage', '.idea']
+    ignores: ['node_modules', '.astro', '.github', 'public', 'dist', 'coverage', '.idea', 'src/env.d.ts' ]
   },
   // General configuration
   {
@@ -40,10 +40,10 @@ export default [
           jsx: true
         }
       },
-      globals: {
-        ...globals.browser,
-        ...globals.serviceworker
-      }
+      // globals: {
+      //   ...globals.browser,
+      //   ...globals.serviceworker
+      // }
     },
     settings: {
       react: {
@@ -154,22 +154,11 @@ export default [
     plugins: {
       ...eslintPluginAstro.configs.recommended
     },
-    overrides: [
-      {
-        files: ["*.astro"],
-        parser: "astro-eslint-parser",
-        parserOptions: {
-          parser: "@typescript-eslint/parser",
-          extraFileExtensions: [".astro"],
-          project: "./tsconfig.eslint.json"
-        },
-      }
-    ],
-    languageOptions: {
-      globals: {
-        ...globals.node,
-        ...globals.browser
-      }
-    }
+    // languageOptions: {
+    //   globals: {
+    //     ...globals.node,
+    //     ...globals.browser
+    //   }
+    // }
   }
 ]
