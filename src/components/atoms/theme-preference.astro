@@ -10,6 +10,8 @@
     }
     const theme = localStorage.getItem(THEME.STORAGE_KEY) || THEME.LIGHT
 
-    document.documentElement.classList[theme === THEME.DARK ? 'add' : 'remove']("dark")
+    document.documentElement.classList[theme === THEME.DARK ? 'add' : 'remove'](
+      'dark'
+    )
   })()
 </script>

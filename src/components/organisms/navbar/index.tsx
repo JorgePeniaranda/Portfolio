@@ -82,7 +82,7 @@ export function Navbar({items}: {items: INavbarLink[][]}) {
             {theme !== "dark" && theme !== "light" && (
               <Loader
                 aria-label="dark"
-                className="animate-spin size-3/5 text-neutral-500 transition dark:text-neutral-300"
+                className="size-3/5 animate-spin text-neutral-500 transition dark:text-neutral-300"
               />
             )}
             <span className="sr-only">Toggle theme</span>

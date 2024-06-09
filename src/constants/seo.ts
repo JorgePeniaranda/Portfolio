@@ -1,19 +1,21 @@
 import type {Props as SEOProps} from "astro-seo";
-import { DEFAULT_LANG } from "./common";
-import { ENV } from "./env";
+
+import {DEFAULT_LANG} from "./common";
+import {ENV} from "./env";
 
 export const ORIGINAL_URL = ENV.base_url;
 
 export const SITE_INFO = {
   name: "Jorge Peñaranda",
   defaultTitle: `Jorge Peñaranda | Desarrollador Web`,
-  description: "Desarrollador Web Front End con experiencia en JavaScript, CSS, React y Next.js. Descubre mis proyectos y soluciones web de código abierto.",
+  description:
+    "Desarrollador Web Front End con experiencia en JavaScript, CSS, React y Next.js. Descubre mis proyectos y soluciones web de código abierto.",
   language: DEFAULT_LANG,
   url: ORIGINAL_URL,
   icon_folder: `${ORIGINAL_URL}/icons`,
   banner: `${ORIGINAL_URL}/assets/images/banner.png`,
   color: "#bf5454",
-}
+};
 
 export const SEO_INFO: SEOProps = {
   canonical: ORIGINAL_URL,
@@ -193,7 +195,7 @@ export const SEO_INFO: SEOProps = {
         name: "color-scheme",
         content: "dark light",
       },
-    ]
+    ],
   },
   nofollow: false,
   noindex: false,

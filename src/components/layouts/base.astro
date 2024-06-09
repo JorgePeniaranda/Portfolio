@@ -21,10 +21,14 @@ interface Props {
 const { title, description, lang = DEFAULT_LANG, body, html } = Astro.props
 ---
 
-    <!DOCTYPE html>
-    <html lang={lang} {...html}>
+<!doctype html>
+<html lang={lang} {...html}>
   <head>
-    <SEO {...SEO_INFO} title={title} description={description ?? SEO_INFO.description} />
+    <SEO
+      {...SEO_INFO}
+      title={title}
+      description={description ?? SEO_INFO.description}
+    />
     <ViewTransitions />
     <ThemePreference />
   </head>
