@@ -25,11 +25,12 @@ export function Navbar({items}: {items: INavbarLink[][]}) {
       className="fixed bottom-6 left-1/2 z-50 flex h-14 -translate-x-1/2 items-center justify-evenly space-x-3 rounded-3xl bg-neutral-50/90 p-3 ring-1 ring-neutral-300 backdrop-blur-2xl transition dark:bg-neutral-950/50 dark:ring-neutral-700"
       onMouseLeave={() => mouseX.set(Infinity)}
       onMouseMove={(e) => mouseX.set(e.pageX)}
+      aria-label="Main navigation"
     >
       {/* ========= NAVEGATION LINKS ITEMS =========   */}
       {items.map((section, index) => (
         <Fragment key={crypto.randomUUID()}>
-          <ul className="flex items-center justify-center space-x-3">
+          <ul className="flex items-center justify-center space-x-3" aria-label="Link List">
             {section.map(({label, link, icon, ...props}) => {
               const Icon = icons[icon];
 
@@ -60,7 +61,7 @@ export function Navbar({items}: {items: INavbarLink[][]}) {
       {items.length > 0 && <NavbarSeparator />}
 
       {/* ========= NAVEGATION BUTTONS ITEMS =========   */}
-      <ul className="flex items-center justify-center space-x-3">
+      <ul className="flex items-center justify-center space-x-3" aria-label="Site Configuration Buttons">
         <NavbarItem mouseX={mouseX}>
           <button
             className="grid size-full place-items-center rounded-full"
@@ -132,6 +133,7 @@ function NavbarItem({mouseX, children}: {mouseX: MotionValue<number>; children?:
       ref={ref}
       className="flex aspect-square items-center justify-center rounded-full border border-neutral-100 bg-neutral-100 text-center transition dark:border-neutral-700 dark:bg-neutral-900/80"
       style={{width}}
+      aria-label="Navigation Item"
     >
       {children}
     </motion.li>
