@@ -6,10 +6,8 @@ import playformCompress from "@playform/compress";
 import icon from "astro-icon";
 import robotsTxt from "astro-robots-txt";
 
-import { ORIGINAL_URL } from "./src/constants/seo";
-
 // https://astro.build/config
 export default defineConfig({
-  site: ORIGINAL_URL,
+  site: "https://jorgepeniaranda.dev.ar",
   integrations: [tailwind(), sitemap(), react(), playformCompress(), icon(), robotsTxt()]
 });

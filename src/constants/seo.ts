@@ -1,8 +1,8 @@
 import type {Props as SEOProps} from "astro-seo";
 import { DEFAULT_LANG } from "./common";
+import { ENV } from "./env";
 
-type URLFormat = `${"http" | "https"}://${string}`;
-export const ORIGINAL_URL: URLFormat = "http://localhost:4322";
+export const ORIGINAL_URL = ENV.base_url;
 
 export const SITE_INFO = {
   name: "Jorge Peñaranda",
