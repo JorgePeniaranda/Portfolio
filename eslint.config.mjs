@@ -9,6 +9,7 @@ import eslintPluginJsxA11y from 'eslint-plugin-jsx-a11y'
 import vercelStyleGuideTypescript from '@vercel/style-guide/eslint/typescript'
 import vercelStyleGuideReact from '@vercel/style-guide/eslint/rules/react'
 import eslintPluginAstro from 'eslint-plugin-astro'
+import tailwind from "eslint-plugin-tailwindcss";
 
 export default [
   // Ignores configuration
@@ -160,5 +161,9 @@ export default [
     //     ...globals.browser
     //   }
     // }
-  }
+  },
+  // Tailwind CSS configuration
+  ...[
+    ...tailwind.configs["flat/recommended"],
+  ]
 ]
