@@ -42,7 +42,8 @@ import Sun from '../../assets/svg/draws/Sun.astro'
     let x = e.clientX / window.innerWidth
     let y = e.clientY / window.innerHeight
 
-    if (birds?.style) birds.style.transform = 'translate(-' + x * 50 + 'px, -' + y * 50 + 'px)'
+    if (birds?.style)
+      birds.style.transform = 'translate(-' + x * 50 + 'px, -' + y * 50 + 'px)'
   })
 </script>
 <style>
