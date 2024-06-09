@@ -28,10 +28,10 @@ export function Navbar({items}: {items: INavbarLink[][]}) {
       aria-label="Main navigation"
     >
       {/* ========= NAVEGATION LINKS ITEMS =========   */}
-      {items.map((section, index) => (
+      {items.map((section, sectionIndex) => (
         <Fragment key={crypto.randomUUID()}>
           <ul className="flex items-center justify-center space-x-3" aria-label="Link List">
-            {section.map(({label, link, icon, ...props}) => {
+            {section.map(({label, link, icon, ...props}, itemIndex) => {
               const Icon = icons[icon];
 
               return (
@@ -43,9 +43,10 @@ export function Navbar({items}: {items: INavbarLink[][]}) {
                           aria-label={label}
                           className="grid size-full place-items-center rounded-full"
                           href={link}
+                          accessKey={label[0].toLowerCase()}
                           {...props}
                         >
-                          <Icon className="size-3/5 text-neutral-500 transition dark:text-neutral-300" />
+                          <Icon className="size-3/5 text-neutral-500 transition dark:text-neutral-300" aria-label={`${label} Icon`} />
                         </a>
                       </TooltipTrigger>
                       <TooltipContent>{label}</TooltipContent>
@@ -55,7 +56,7 @@ export function Navbar({items}: {items: INavbarLink[][]}) {
               );
             })}
           </ul>
-          {index < items.length - 1 && <NavbarSeparator />}
+          {sectionIndex < items.length - 1 && <NavbarSeparator />}
         </Fragment>
       ))}
       {items.length > 0 && <NavbarSeparator />}
@@ -67,6 +68,7 @@ export function Navbar({items}: {items: INavbarLink[][]}) {
             className="grid size-full place-items-center rounded-full"
             type="button"
             onClick={toggleTheme}
+            accessKey="t"
           >
             {theme === "light" && (
               <Sun
@@ -94,6 +96,7 @@ export function Navbar({items}: {items: INavbarLink[][]}) {
             className="grid size-full place-items-center rounded-full"
             type="button"
             onClick={toggleSound}
+            accessKey="m"
           >
             {sound ? (
               <Volume2
