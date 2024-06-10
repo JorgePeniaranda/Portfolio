@@ -4,8 +4,7 @@ import { ViewTransitions } from 'astro:transitions'
 import { DEFAULT_LANG } from '../../constants/common'
 import { NAVBAR_ITEMS } from '../../constants/navbar'
 import { SEO_INFO } from '../../constants/seo'
-import { formatClassNames } from '../../helpers/class-names'
-import '../../styles/global.css'
+import { cn } from '../../helpers/class-names'
 import '../../styles/globals.css'
 import ThemePreference from '../atoms/theme-preference.astro'
 import { Navbar } from '../organisms/navbar'
@@ -32,11 +31,8 @@ const { title, description, lang = DEFAULT_LANG, body, html } = Astro.props
     <ViewTransitions />
     <ThemePreference />
   </head>
-  <body
-    class={formatClassNames('w-screen h-screen antialiased', body?.class)}
-    {...body}
-  >
-    <Navbar items={NAVBAR_ITEMS} client:idle />
+  <body class={cn('w-screen h-screen antialiased', body?.class)} {...body}>
+    <Navbar items={NAVBAR_ITEMS} client:idle transition:name="main-navbar" />
     <slot />
   </body>
 </html>

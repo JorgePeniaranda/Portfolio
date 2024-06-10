@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --dominant: #f2f3f4;
   --primary: #bf5454;
