@@ -31,7 +31,7 @@ export function Navbar({items}: {items: INavbarLink[][]}) {
       {items.map((section, sectionIndex) => (
         <Fragment key={crypto.randomUUID()}>
           <ul aria-label="Link List" className="flex items-center justify-center space-x-3">
-            {section.map(({label, link, icon, ...props}, itemIndex) => {
+            {section.map(({label, link, icon, ...props}) => {
               const Icon = icons[icon];
 
               return (
@@ -40,7 +40,6 @@ export function Navbar({items}: {items: INavbarLink[][]}) {
                     <Tooltip delayDuration={0}>
                       <TooltipTrigger asChild>
                         <a
-                          accessKey={label[0].toLowerCase()}
                           aria-label={label}
                           className="grid size-full place-items-center rounded-full"
                           href={link}
@@ -71,7 +70,6 @@ export function Navbar({items}: {items: INavbarLink[][]}) {
       >
         <NavbarItem mouseX={mouseX}>
           <button
-            accessKey="t"
             className="grid size-full place-items-center rounded-full"
             type="button"
             onClick={toggleTheme}
@@ -99,7 +97,6 @@ export function Navbar({items}: {items: INavbarLink[][]}) {
         </NavbarItem>
         <NavbarItem mouseX={mouseX}>
           <button
-            accessKey="m"
             className="grid size-full place-items-center rounded-full"
             type="button"
             onClick={toggleSound}

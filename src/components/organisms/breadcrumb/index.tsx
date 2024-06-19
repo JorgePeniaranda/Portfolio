@@ -1,20 +1,15 @@
-import {ChevronDown, Slash} from "lucide-react";
+import type {LucideIcon} from "lucide-react";
+
 import React from "react";
 
 import {
-  Breadcrumb,
+  Breadcrumb as UIBreadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "../../ui/breadcrumb";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "../..//ui/dropdown-menu";
 
 //#region TYPES
 export interface IBreadCrumb {
@@ -23,50 +18,52 @@ export interface IBreadCrumb {
 }
 //#endregion
 
-//#region BREADCRUMB COMPONENT
-interface Props extends React.HTMLAttributes<HTMLElement> {
+//#region BREADCRUMB
+interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
   items: IBreadCrumb[];
   Separator?: LucideIcon;
 }
 
-export function Breadcrumb({items, Separator, ...props}: Props) {
+export function Breadcrumb({items, Separator, ...props}: BreadcrumbProps) {
   return (
-    <Breadcrumb {...props}>
+    <UIBreadcrumb {...props}>
       <BreadcrumbList>
         {items.map((item, index) => {
-          let Item;
-
-          if (item.href !== undefined) {
-            Item = function () {
-              return (
-                <BreadcrumbItem>
-                  <BreadcrumbLink asChild>
-                    <a href={item.href}>{item.label}</a>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-              );
-            };
-          } else {
-            Item = function () {
-              return (
-                <BreadcrumbItem>
-                  <BreadcrumbPage>{item.label}</BreadcrumbPage>
-                </BreadcrumbItem>
-              );
-            };
-          }
-
           return (
-            <>
-              <Item />
+            <React.Fragment key={item.label}>
+              <CustomBreadcrumbItem item={item} />
               {index !== items.length - 1 && (
                 <BreadcrumbSeparator>{Separator ? <Separator /> : null}</BreadcrumbSeparator>
               )}
-            </>
+            </React.Fragment>
           );
         })}
       </BreadcrumbList>
-    </Breadcrumb>
+    </UIBreadcrumb>
+  );
+}
+//#endregion
+
+//#region BREADCRUMBITEM
+interface CustomBreadcrumbItemProps extends React.HTMLAttributes<HTMLElement> {
+  item: IBreadCrumb;
+}
+
+export function CustomBreadcrumbItem({item, ...props}: CustomBreadcrumbItemProps) {
+  if (item.href !== undefined) {
+    return (
+      <BreadcrumbItem {...props}>
+        <BreadcrumbLink asChild>
+          <a href={item.href}>{item.label}</a>
+        </BreadcrumbLink>
+      </BreadcrumbItem>
+    );
+  }
+
+  return (
+    <BreadcrumbItem {...props}>
+      <BreadcrumbPage>{item.label}</BreadcrumbPage>
+    </BreadcrumbItem>
   );
 }
 //#endregion

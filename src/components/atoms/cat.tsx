@@ -1,4 +1,4 @@
-import {Loader, RotateCcw, SplineIcon} from "lucide-react";
+import {Loader, RotateCcw} from "lucide-react";
 import {useState, type HTMLAttributes} from "react";
 
 import {cn} from "../../helpers/class-names";
@@ -41,9 +41,9 @@ export function CatAsAService(props: HTMLAttributes<HTMLDivElement>) {
       </picture>
       {!loading && (
         <button
-          accessKey="r"
           aria-label="Find new cat"
           className="rounded-lg bg-neutral-200/80 p-2 text-neutral-500 shadow-2xl dark:bg-neutral-800 dark:text-neutral-400"
+          type="button"
           onClick={handleClick}
         >
           <RotateCcw

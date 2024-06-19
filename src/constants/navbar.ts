@@ -1,7 +1,7 @@
 import type {INavbarLink} from "../components/organisms/navbar";
 
 /**
- * NAVBAR_ITEMS:
+ * @NAVBAR_ITEMS
  * - Sections are separated by first-level arrays. ej: [ [], [] ]
  * - Each section is an array of links. ej: [ {}, {}, {} ]
  * - Each link is an object with the following properties:
@@ -65,4 +65,4 @@ export const NAVBAR_ITEMS: INavbarLink[][] = [
       referrerPolicy: "no-referrer",
     },
   ],
-] as const;
+];

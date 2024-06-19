@@ -1,14 +1,12 @@
 ---
 import Layout from '../../../components/layouts/base.astro'
+import { ProjectAccordion } from '../../../components/organisms/accordion/project-accordion'
 import {
   Breadcrumb,
   type IBreadCrumb
 } from '../../../components/organisms/breadcrumb'
-import {
-  type IProject,
-  ProjectStatus,
-  ProjectStack
-} from '../../../types/project.d'
+import { ProjectDetailsStyles } from '../../../constants/styles'
+import { ProjectStack, type IProject } from '../../../types/project.d'
 
 export function getStaticPaths() {
   return [
@@ -20,11 +18,71 @@ export function getStaticPaths() {
 
 // const { name } = Astro.params;
 
-const { name, stack, status }: IProject = {
+const { name, stack, status, accordion }: IProject = {
   name: 'Golden Duck',
   status: 'En Desarrollo',
-  stack: 'Full-Stack'
-} as const
+  stack: 'Full-Stack',
+  accordion: {
+    goals: [
+      {
+        id: crypto.randomUUID(),
+        value:
+          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum laborum, accusamus odit nam eius accusantium dolorem id sequi corrupti excepturi quae sunt doloremque aspernatur nihil tenetur repudiandae impedit magni reiciendis molestias quibusdam rerum, praesentium voluptatem omnis?'
+      },
+      {
+        id: crypto.randomUUID(),
+        value:
+          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum laborum, accusamus odit nam eius accusantium dolorem id sequi corrupti excepturi quae sunt doloremque aspernatur nihil tenetur repudiandae impedit magni reiciendis molestias quibusdam rerum, praesentium voluptatem omnis?'
+      }
+    ],
+    technologies: [
+      {
+        id: crypto.randomUUID(),
+        value: 'Web: Next.js, React, Tailwind'
+      },
+      {
+        id: crypto.randomUUID(),
+        value: 'Back-End: Nest.js (Api-Rest / GraphQL)'
+      },
+      {
+        id: crypto.randomUUID(),
+        value: 'Mobile: React Native'
+      },
+      {
+        id: crypto.randomUUID(),
+        value: 'Desktop: Electron, React'
+      }
+    ],
+    contribution: [
+      {
+        id: crypto.randomUUID(),
+        value:
+          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum laborum, accusamus odit nam eius accusantium dolorem id sequi corrupti excepturi quae sunt doloremque aspernatur nihil tenetur repudiandae impedit magni reiciendis molestias quibusdam rerum, praesentium voluptatem omnis?'
+      },
+      {
+        id: crypto.randomUUID(),
+        value:
+          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum laborum, accusamus odit nam eius accusantium dolorem id sequi corrupti excepturi quae sunt doloremque aspernatur nihil tenetur repudiandae impedit magni reiciendis molestias quibusdam rerum, praesentium voluptatem omnis?'
+      }
+    ],
+    collaborators: [
+      {
+        id: crypto.randomUUID(),
+        github: 'trujilloszitai'
+      },
+      {
+        id: crypto.randomUUID(),
+        github: 'EitanMohorade'
+      },
+      {
+        id: crypto.randomUUID(),
+        github: 'Fedelgado'
+      }
+    ]
+  }
+}
+
+const { StackStyle, StatusStyle } = ProjectDetailsStyles
 
 const BreadCrumbItems: IBreadCrumb[] = [
   {
@@ -34,20 +92,7 @@ const BreadCrumbItems: IBreadCrumb[] = [
   {
     label: name
   }
-] as const
-
-const StatusStyle = {
-  [ProjectStatus['Terminado']]: 'text-green-500',
-  [ProjectStatus['En Desarrollo']]: 'text-yellow-500',
-  [ProjectStatus['Pausado']]: 'text-red-500'
-} as const
-
-const StackStyle = {
-  [ProjectStack['Full-Stack']]: 'bg-red-500/70 text-white dark:bg-red-500',
-  [ProjectStack['Back-End']]: 'bg-blue-500/70 text-white dark:bg-blue-500',
-  [ProjectStack['Front-End']]: 'bg-green-500/70 text-white dark:bg-green-500',
-  default: 'bg-gray-500/70 text-white dark:bg-gray-500'
-} as const
+]
 ---
 
 <Layout
@@ -93,6 +138,9 @@ const StackStyle = {
           consequuntur modi eaque quam voluptatem minima, eius aliquid
           dignissimos.
         </p>
+      </article>
+      <article class="mt-5">
+        <ProjectAccordion data={accordion} client:load />
       </article>
     </section>
     <section class="flex-1"></section>
