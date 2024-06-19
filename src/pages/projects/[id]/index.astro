@@ -1,0 +1,100 @@
+---
+import Layout from '../../../components/layouts/base.astro'
+import {
+  Breadcrumb,
+  type IBreadCrumb
+} from '../../../components/organisms/breadcrumb'
+import {
+  type IProject,
+  ProjectStatus,
+  ProjectStack
+} from '../../../types/project.d'
+
+export function getStaticPaths() {
+  return [
+    { params: { id: 'GoldenDuck', name: 'Golden Duck' } },
+    { params: { id: 'asdx', name: 'rover' } },
+    { params: { id: 'asdd', name: 'spot' } }
+  ]
+}
+
+// const { name } = Astro.params;
+
+const { name, stack, status }: IProject = {
+  name: 'Golden Duck',
+  status: 'En Desarrollo',
+  stack: 'Full-Stack'
+} as const
+
+const BreadCrumbItems: IBreadCrumb[] = [
+  {
+    label: 'Proyectos',
+    href: '/projects'
+  },
+  {
+    label: name
+  }
+] as const
+
+const StatusStyle = {
+  [ProjectStatus['Terminado']]: 'text-green-500',
+  [ProjectStatus['En Desarrollo']]: 'text-yellow-500',
+  [ProjectStatus['Pausado']]: 'text-red-500'
+} as const
+
+const StackStyle = {
+  [ProjectStack['Full-Stack']]: 'bg-red-500/70 text-white dark:bg-red-500',
+  [ProjectStack['Back-End']]: 'bg-blue-500/70 text-white dark:bg-blue-500',
+  [ProjectStack['Front-End']]: 'bg-green-500/70 text-white dark:bg-green-500',
+  default: 'bg-gray-500/70 text-white dark:bg-gray-500'
+} as const
+---
+
+<Layout
+  body={{
+    class: 'bg-background dark:bg-background-dark py-14 px-16 space-y-4'
+  }}
+>
+  <header>
+    <Breadcrumb items={BreadCrumbItems} />
+  </header>
+  <main class="flex text-black dark:text-white">
+    <section class="flex-1">
+      <article>
+        <h1 class="scroll-m-20 text-5xl font-extrabold tracking-tight">
+          Golden Duck
+        </h1>
+        <div class="flex gap-2 items-center font-light text-lg my-2">
+          <h2 class="leading-none font-medium" class:list={StatusStyle[status]}>
+            {status}
+          </h2>
+          <small class="leading-none p-1 rounded-md text-base"
+            >2021 - Actualidad</small
+          >
+          <h3
+            class="leading-none font-medium rounded-md p-1 text-base"
+            class:list={[
+              StackStyle[stack],
+              {
+                [StackStyle['default']]:
+                  !Object.keys(ProjectStack).includes(stack)
+              }
+            ]}
+          >
+            {stack}
+          </h3>
+        </div>
+        <p class="text-pretty">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum
+          laborum, accusamus odit nam eius accusantium dolorem id sequi corrupti
+          excepturi quae sunt doloremque aspernatur nihil tenetur repudiandae
+          impedit magni reiciendis molestias quibusdam rerum, praesentium
+          voluptatem omnis? Vitae ducimus consequatur quia aspernatur,
+          consequuntur modi eaque quam voluptatem minima, eius aliquid
+          dignissimos.
+        </p>
+      </article>
+    </section>
+    <section class="flex-1"></section>
+  </main>
+</Layout>

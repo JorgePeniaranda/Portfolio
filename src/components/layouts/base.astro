@@ -32,7 +32,7 @@ const { title, description, lang = DEFAULT_LANG, body, html } = Astro.props
     <ThemePreference />
   </head>
   <body class={cn('w-screen h-screen antialiased', body?.class)} {...body}>
-    <Navbar items={NAVBAR_ITEMS} client:idle transition:name="main-navbar" />
     <slot />
+    <Navbar items={NAVBAR_ITEMS} client:idle transition:name="main-navbar" />
   </body>
 </html>
