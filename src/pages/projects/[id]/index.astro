@@ -1,5 +1,5 @@
 ---
-import { Earth, Folder, Github } from 'lucide-react'
+import { Earth, Code } from 'lucide-react'
 import Layout from '../../../components/layouts/base.astro'
 import { ProjectAccordion } from '../../../components/organisms/accordion/project-accordion'
 import {
@@ -8,6 +8,7 @@ import {
 } from '../../../components/organisms/breadcrumb'
 import { ProjectDetailsStyles } from '../../../constants/styles'
 import { ProjectStack, type IProject } from '../../../types/project.d'
+import { Button } from '../../../components/ui/button'
 
 export function getStaticPaths() {
   return [
@@ -79,7 +80,11 @@ const { name, stack, status, accordion }: IProject = {
         id: crypto.randomUUID(),
         github: 'Fedelgado'
       }
-    ]
+    ],
+    resources: {
+      demoURL: 'https://goldenduck.netlify.app/',
+      repositoryURL: 'https://github.com/JorgePeniaranda/GoldenDuck'
+    }
   }
 }
 
@@ -143,19 +148,10 @@ const BreadCrumbItems: IBreadCrumb[] = [
       <article class="mt-5 flex-1">
         <ProjectAccordion data={accordion} client:load />
       </article>
-      <ul aria-label="Related Links">
-        <li>
-          <a href="/">
-            <Earth />
-            <Folder />
-            <Folder />
-          </a>
-        </li>
-      </ul>
     </section>
     <section class="flex flex-1 relative justify-center items-center">
       <article class="sticky top-0 justify-center items-center flex">
-        <img src="https://i.imgur.com/3XaNdIU.gif" alt="GoldenDuck" id="video" class="w-3/4">
+        En Proceso...
       </article>
     </section>
   </main>

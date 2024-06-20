@@ -26,7 +26,8 @@ export interface IProjectAccordion {
     id: string;
     value: string;
   }[];
-  collaborators: IProjectColaborator[];
+  collaborators?: IProjectColaborator[];
+  resources: IProjectResources;
 }
 
 /**
@@ -37,6 +38,11 @@ export interface IProjectAccordion {
 export interface IProjectColaborator {
   id: string;
   github: string;
+}
+
+export interface IProjectResources {
+  repositoryURL: string;
+  demoURL: string;
 }
 
 export const ProjectStatus = {

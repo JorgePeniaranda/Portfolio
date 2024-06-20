@@ -13,7 +13,7 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
 }
 
 export function ProjectAccordion({
-  data: {goals, technologies, contribution, collaborators, ...props},
+  data: {goals, technologies, contribution, collaborators, resources, ...props},
 }: Props) {
   return (
     <UIAccordion className="w-full" type="multiple" {...props}>
@@ -48,15 +48,46 @@ export function ProjectAccordion({
           ))}
         </AccordionContent>
       </AccordionItem>
-      <AccordionItem value="collaborators">
-        <AccordionTrigger>Colaboradores</AccordionTrigger>
+      {collaborators !== undefined && (
+        <AccordionItem value="collaborators">
+          <AccordionTrigger>Colaboradores</AccordionTrigger>
+          <AccordionContent>
+            <ul className="space-y-3 pl-5">
+              {collaborators.map((collaborator) => (
+                <li key={`collaborator_${collaborator.id}`}>
+                  <GithubUser username={collaborator.github} />
+                </li>
+              ))}
+            </ul>
+          </AccordionContent>
+        </AccordionItem>
+      )}
+      <AccordionItem value="resources">
+        <AccordionTrigger>Recursos</AccordionTrigger>
         <AccordionContent>
           <ul className="space-y-3 pl-5">
-            {collaborators.map((collaborator) => (
-              <li key={`collaborator_${collaborator.id}`}>
-                <GithubUser username={collaborator.github} />
-              </li>
-            ))}
+            <li aria-label="Code Link">
+              <span className="font-bold">Código: </span>
+              <a
+                className="text-blue-700"
+                href={resources.repositoryURL}
+                rel="noopener noreferrer"
+                target="__blank"
+              >
+                {resources.repositoryURL}
+              </a>
+            </li>
+            <li aria-label="Demo Link">
+              <span className="font-bold">Demo: </span>
+              <a
+                className="text-blue-700"
+                href={resources.demoURL}
+                rel="noopener noreferrer"
+                target="__blank"
+              >
+                {resources.demoURL}
+              </a>
+            </li>
           </ul>
         </AccordionContent>
       </AccordionItem>
