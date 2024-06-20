@@ -31,7 +31,7 @@ const { title, description, lang = DEFAULT_LANG, body, html } = Astro.props
     <ViewTransitions />
     <ThemePreference />
   </head>
-  <body class={cn('w-screen h-screen antialiased', body?.class)} {...body}>
+  <body class={cn('w-screen min-h-screen antialiased', body?.class)} {...body}>
     <slot />
     <Navbar items={NAVBAR_ITEMS} client:idle transition:name="main-navbar" />
   </body>

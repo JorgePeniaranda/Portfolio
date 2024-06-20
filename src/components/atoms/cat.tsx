@@ -1,41 +1,47 @@
-import {Loader, RotateCcw} from "lucide-react";
-import {useState, type HTMLAttributes} from "react";
+import { Loader, RotateCcw } from 'lucide-react'
+import { useState, type HTMLAttributes } from 'react'
 
-import {cn} from "../../helpers/class-names";
+import { cn } from '../../helpers/class-names'
 
-const CAT_URLs = ["https://cataas.com/cat/gif", "https://cataas.com/cat"];
+const CAT_URLs = ['https://cataas.com/cat/gif', 'https://cataas.com/cat']
 
 export function CatAsAService(props: HTMLAttributes<HTMLDivElement>) {
-  const [loading, setLoading] = useState(true);
-  const [currentURL, setCurrentURL] = useState("https://cataas.com/cat/gif");
+  const [loading, setLoading] = useState(true)
+  const [currentURL, setCurrentURL] = useState('https://cataas.com/cat/gif')
 
   const onLoad = () => {
-    setLoading(false);
-  };
+    setLoading(false)
+  }
 
   const handleClick = () => {
-    const randomURL = CAT_URLs[Math.floor(Math.random() * CAT_URLs.length)];
-    const params = `?size=square&${Date.now()}`;
+    const randomURL = CAT_URLs[Math.floor(Math.random() * CAT_URLs.length)]
+    const params = `?size=square&${Date.now()}`
 
-    setCurrentURL(randomURL + params);
-    setLoading(true);
-  };
+    setCurrentURL(randomURL + params)
+    setLoading(true)
+  }
 
   return (
     <div
-      className={cn("flex flex-col items-center justify-center gap-5", props.className)}
+      className={cn(
+        'flex flex-col items-center justify-center gap-5',
+        props.className
+      )}
       {...props}
     >
       <picture className="flex size-72 items-center justify-center rounded">
         {loading ? (
-          <Loader aria-label="loader" className="size-10 animate-spin text-black dark:text-white" />
+          <Loader
+            aria-label="loader"
+            className="size-10 animate-spin text-black dark:text-white"
+          />
         ) : null}
         <img
           alt="cat"
           aria-label="Cat ❤️"
           className="size-72 rounded-lg bg-cover bg-no-repeat object-cover"
           src={currentURL}
-          style={{display: loading ? "none" : "block"}}
+          style={{ display: loading ? 'none' : 'block' }}
           onLoad={onLoad}
         />
       </picture>
@@ -53,5 +59,5 @@ export function CatAsAService(props: HTMLAttributes<HTMLDivElement>) {
         </button>
       )}
     </div>
-  );
+  )
 }

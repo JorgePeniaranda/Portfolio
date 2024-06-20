@@ -1,8 +1,16 @@
 export interface IProject {
-  name: string;
-  status: (typeof ProjectStatus)[keyof typeof ProjectStatus];
-  stack: (typeof ProjectStack)[keyof typeof ProjectStack];
-  accordion: IProjectAccordion;
+  key: string
+  name: string
+  status: (typeof ProjectStatus)[keyof typeof ProjectStatus]
+  stack: (typeof ProjectStack)[keyof typeof ProjectStack]
+  accordion: IProjectAccordion
+}
+
+export interface IProjectCard {
+  key: string
+  name: string
+  logoURL: string
+  primaryColor: string
 }
 
 /**
@@ -15,19 +23,19 @@ export interface IProject {
  */
 export interface IProjectAccordion {
   goals: {
-    id: string;
-    value: string;
-  }[];
+    id: string
+    value: string
+  }[]
   technologies: {
-    id: string;
-    value: string;
-  }[];
+    id: string
+    value: string
+  }[]
   contribution: {
-    id: string;
-    value: string;
-  }[];
-  collaborators?: IProjectColaborator[];
-  resources: IProjectResources;
+    id: string
+    value: string
+  }[]
+  collaborators?: IProjectColaborator[]
+  resources: IProjectResources
 }
 
 /**
@@ -36,23 +44,23 @@ export interface IProjectAccordion {
  * }
  */
 export interface IProjectColaborator {
-  id: string;
-  github: string;
+  id: string
+  github: string
 }
 
 export interface IProjectResources {
-  repositoryURL: string;
-  demoURL: string;
+  repositoryURL: string
+  demoURL: string
 }
 
 export const ProjectStatus = {
-  "Terminado": "Terminado",
-  "En Desarrollo": "En Desarrollo",
-  "Pausado": "Pausado",
-} as const;
+  'Terminado': 'Terminado',
+  'En Desarrollo': 'En Desarrollo',
+  'Pausado': 'Pausado'
+} as const
 
 export const ProjectStack = {
-  "Full-Stack": "Full-Stack",
-  "Back-End": "Back-End",
-  "Front-End": "Front-End",
-} as const;
+  'Full-Stack': 'Full-Stack',
+  'Back-End': 'Back-End',
+  'Front-End': 'Front-End'
+} as const

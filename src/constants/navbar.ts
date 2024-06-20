@@ -1,4 +1,5 @@
-import type {INavbarLink} from "../components/organisms/navbar";
+import type { INavbarLink } from '../components/organisms/navbar'
+import { PERSONAL_ACCOUNTS } from './external'
 
 /**
  * @NAVBAR_ITEMS
@@ -17,52 +18,52 @@ import type {INavbarLink} from "../components/organisms/navbar";
 export const NAVBAR_ITEMS: INavbarLink[][] = [
   [
     {
-      icon: "Home",
-      label: "Home",
-      link: "/",
+      icon: 'Home',
+      label: 'Home',
+      link: '/'
     },
     {
-      icon: "Fingerprint",
-      label: "About",
-      link: "/about",
+      icon: 'Fingerprint',
+      label: 'About',
+      link: '/about'
     },
     {
-      icon: "Layers",
-      label: "Stack",
-      link: "/stack",
+      icon: 'Layers',
+      label: 'Stack',
+      link: '/stack'
     },
     {
-      icon: "Construction",
-      label: "Projects",
-      link: "/projects",
+      icon: 'Construction',
+      label: 'Projects',
+      link: '/projects'
     },
     {
-      icon: "Rss",
-      label: "Blog",
-      link: "/blog",
-    },
+      icon: 'Rss',
+      label: 'Blog',
+      link: '/blog'
+    }
   ],
   [
     {
-      icon: "Github",
-      label: "GitHub",
-      link: "https://github.com/jorgepeniaranda",
-      target: "_blank",
-      referrerPolicy: "no-referrer",
+      icon: 'Github',
+      label: 'GitHub',
+      link: PERSONAL_ACCOUNTS.github.url,
+      target: '_blank',
+      referrerPolicy: 'no-referrer'
     },
     {
-      icon: "Linkedin",
-      label: "Linkedin",
-      link: "https://www.linkedin.com/in/jorgepeniaranda/",
-      target: "_blank",
-      referrerPolicy: "no-referrer",
+      icon: 'Linkedin',
+      label: 'Linkedin',
+      link: PERSONAL_ACCOUNTS.linkedin.url,
+      target: '_blank',
+      referrerPolicy: 'no-referrer'
     },
     {
-      icon: "Instagram",
-      label: "Instagram",
-      link: "https://www.instagram.com/jorgepeniaranda",
-      target: "_blank",
-      referrerPolicy: "no-referrer",
-    },
-  ],
-];
+      icon: 'Instagram',
+      label: 'Instagram',
+      link: PERSONAL_ACCOUNTS.instagram.url,
+      target: '_blank',
+      referrerPolicy: 'no-referrer'
+    }
+  ]
+]

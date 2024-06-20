@@ -1,11 +1,105 @@
 ---
 import Layout from '../../components/layouts/base.astro'
+import Github from '../../assets/svg/logos/Github.astro'
+import Gitlab from '../../assets/svg/logos/Gitlab.astro'
+import Codewars from '../../assets/svg/logos/Codewars.astro'
+import { PERSONAL_ACCOUNTS } from '../../constants/external'
+import ProjectCard from '../../components/molecules/cards/project-card.astro'
+import type { IProjectCard } from '../../types/project'
+
+const Projects: IProjectCard[] = [
+  {
+    key: 'GoldenDuck',
+    name: 'Golden Duck',
+    logoURL:
+      'https://goldenduck.netlify.app/static/media/GoldenDuckLogo.4844f846449afc856719.png',
+    primaryColor: '#4f46e5'
+  },
+  {
+    key: 'Jildam',
+    name: 'Jildam',
+    logoURL:
+      'https://raw.githubusercontent.com/MaximoBrandi/Jildam/main/public/assets/img/jildam_icon.png',
+    primaryColor: '#444'
+  }
+]
 ---
 
-<Layout>
-  <main>
-    <section>
-      <article>hola</article>
+<Layout
+  body={{
+    class: 'bg-background dark:bg-background-dark container'
+  }}
+  title="Proyectos"
+>
+  <main class="w-full h-full py-10 space-y-10">
+    <section class="flex flex-col items-center pt-16 gap-6">
+      <article class="w-max flex flex-col text-center items-center">
+        <img
+          src={PERSONAL_ACCOUNTS.github.image}
+          alt="Jorge Peñaranda Github Profile Picture"
+          class="w-24 h-24 rounded-full"
+        />
+        <h1 class="text-4xl font-bold">Proyectos</h1>
+        <h2 class="text-muted-foreground">@{PERSONAL_ACCOUNTS.github.username}</h2>
+      </article>
+      <article>
+        <ul class="flex gap-7" aria-label="Code Accounts Links">
+          <li aria-label="Github">
+            <a
+              href={PERSONAL_ACCOUNTS.github.url}
+              class="flex w-max h-max p-2"
+              target="_blank"
+              referrerpolicy="no-referrer"
+            >
+              <Github
+                class="w-8 h-8 fill-red-[#ff4d4d] transition-transform hover:-translate-y-2"
+                aria-label="Github Icon"
+              />
+              <span class="sr-only">Github</span>
+            </a>
+          </li>
+          <li aria-label="Gitlab">
+            <a
+              href={PERSONAL_ACCOUNTS.gitlab.url}
+              class="flex w-max h-max p-2"
+              target="_blank"
+              referrerpolicy="no-referrer"
+            >
+              <Gitlab
+                class="w-8 h-8 fill-red-[#ff4d4d] transition-transform hover:-translate-y-2"
+                aria-label="Gitlab Icon"
+              />
+              <span class="sr-only">Gitlab</span>
+            </a>
+          </li>
+          <li aria-label="Codewars">
+            <a
+              href={PERSONAL_ACCOUNTS.codewars.url}
+              class="flex w-max h-max p-2"
+              target="_blank"
+              referrerpolicy="no-referrer"
+            >
+              <Codewars
+                class="w-8 h-8 fill-red-[#ff4d4d] transition-transform hover:-translate-y-2"
+                aria-label="Codewars Icon"
+              />
+              <span class="sr-only">Codewars</span>
+            </a>
+          </li>
+        </ul>
+      </article>
+    </section>
+    <section class="grid gap-6 md:grid-cols-3 lg:grid-cols-4 py-4 h-full justify-center">
+      {
+        Projects.map(project => (
+          <ProjectCard
+            key={project.key}
+            name={project.name}
+            logoURL={project.logoURL}
+            primaryColor={project.primaryColor}
+          />
+        ))
+      }
     </section>
   </main>
 </Layout>
