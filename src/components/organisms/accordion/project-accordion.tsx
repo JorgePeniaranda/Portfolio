@@ -51,7 +51,7 @@ export function ProjectAccordion({
       <AccordionItem value="collaborators">
         <AccordionTrigger>Colaboradores</AccordionTrigger>
         <AccordionContent>
-          <ul className="space-y-3 pl-7">
+          <ul className="space-y-3 pl-5">
             {collaborators.map((collaborator) => (
               <li key={`collaborator_${collaborator.id}`}>
                 <GithubUser username={collaborator.github} />

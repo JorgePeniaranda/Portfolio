@@ -1,4 +1,5 @@
 ---
+import { Earth, Folder, Github } from 'lucide-react'
 import Layout from '../../../components/layouts/base.astro'
 import { ProjectAccordion } from '../../../components/organisms/accordion/project-accordion'
 import {
@@ -103,8 +104,8 @@ const BreadCrumbItems: IBreadCrumb[] = [
   <header>
     <Breadcrumb items={BreadCrumbItems} />
   </header>
-  <main class="flex text-black dark:text-white">
-    <section class="flex-1">
+  <main class="flex text-black dark:text-white h-full">
+    <section class="flex-1 flex flex-col h-full">
       <article>
         <h1 class="scroll-m-20 text-5xl font-extrabold tracking-tight">
           Golden Duck
@@ -139,10 +140,23 @@ const BreadCrumbItems: IBreadCrumb[] = [
           dignissimos.
         </p>
       </article>
-      <article class="mt-5">
+      <article class="mt-5 flex-1">
         <ProjectAccordion data={accordion} client:load />
       </article>
+      <ul aria-label="Related Links">
+        <li>
+          <a href="/">
+            <Earth />
+            <Folder />
+            <Folder />
+          </a>
+        </li>
+      </ul>
     </section>
-    <section class="flex-1"></section>
+    <section class="flex flex-1 relative justify-center items-center">
+      <article class="sticky top-0 justify-center items-center flex">
+        <img src="https://i.imgur.com/3XaNdIU.gif" alt="GoldenDuck" id="video" class="w-3/4">
+      </article>
+    </section>
   </main>
 </Layout>
