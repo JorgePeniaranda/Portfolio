@@ -40,7 +40,9 @@ const Projects: IProjectCard[] = [
           class="w-24 h-24 rounded-full"
         />
         <h1 class="text-4xl font-bold">Proyectos</h1>
-        <h2 class="text-muted-foreground">@{PERSONAL_ACCOUNTS.github.username}</h2>
+        <h2 class="text-muted-foreground">
+          @{PERSONAL_ACCOUNTS.github.username}
+        </h2>
       </article>
       <article>
         <ul class="flex gap-7" aria-label="Code Accounts Links">
@@ -89,7 +91,9 @@ const Projects: IProjectCard[] = [
         </ul>
       </article>
     </section>
-    <section class="grid gap-6 md:grid-cols-3 lg:grid-cols-4 py-4 h-full justify-center">
+    <section
+      class="grid gap-6 md:grid-cols-3 lg:grid-cols-4 py-4 h-full justify-center"
+    >
       {
         Projects.map(project => (
           <ProjectCard
