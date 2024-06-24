@@ -2,7 +2,9 @@
   "name": "Jorge Peñaranda's Portfolio",
   "short_name": "JorgePeñaranda",
   "start_url": "/",
-  "display": "fullscreen",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "any",
   "background_color": "#ffffff",
   "theme_color": "#bf5454",
   "icons": [
@@ -65,6 +67,20 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/images/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/assets/images/screenshot-mobile.png",
+      "sizes": "375x667",
+      "type": "image/png",
+      "form_factor": "narrow"
     }
   ],
   "scope": "/",
