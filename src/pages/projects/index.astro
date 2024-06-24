@@ -9,12 +9,12 @@ import { ENV } from '../../constants/env'
 import { PERSONAL_ACCOUNTS } from '../../constants/external'
 import type { IProject } from '../../types/project'
 
-const Projects: IProject[] = await axios.get<IProject[]>(`${ENV.base_url}/api/projects/sort-all.json`)
+const Projects: IProject[] = await axios
+  .get<IProject[]>(`${ENV.base_url}/api/projects/sort-all.json`)
   .then(response => response.data)
   .catch(() => {
-    return [] as IProject[];
+    return [] as IProject[]
   })
-
 ---
 
 <Layout
