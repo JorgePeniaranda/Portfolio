@@ -1,0 +1,130 @@
+[
+  {
+    "key":"GoldenDuck",
+    "name":"Golden Duck",
+    "status":"En Desarrollo",
+    "stack":"Full-Stack",
+    "accordion":{
+       "goals":[
+          {
+             "id":"crypto.randomUUID()",
+             "value":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum laborum, accusamus odit nam eius accusantium dolorem id sequi corrupti excepturi quae sunt doloremque aspernatur nihil tenetur repudiandae impedit magni reiciendis molestias quibusdam rerum, praesentium voluptatem omnis?"
+          },
+          {
+             "id":"crypto.randomUUID()",
+             "value":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum laborum, accusamus odit nam eius accusantium dolorem id sequi corrupti excepturi quae sunt doloremque aspernatur nihil tenetur repudiandae impedit magni reiciendis molestias quibusdam rerum, praesentium voluptatem omnis?"
+          }
+       ],
+       "technologies":[
+          {
+             "id":"crypto.randomUUID()",
+             "value":"Web: Next.js, React, Tailwind"
+          },
+          {
+             "id":"crypto.randomUUID()",
+             "value":"Back-End: Nest.js (Api-Rest / GraphQL)"
+          },
+          {
+             "id":"crypto.randomUUID()",
+             "value":"Mobile: React Native"
+          },
+          {
+             "id":"crypto.randomUUID()",
+             "value":"Desktop: Electron, React"
+          }
+       ],
+       "contribution":[
+          {
+             "id":"crypto.randomUUID()",
+             "value":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum laborum, accusamus odit nam eius accusantium dolorem id sequi corrupti excepturi quae sunt doloremque aspernatur nihil tenetur repudiandae impedit magni reiciendis molestias quibusdam rerum, praesentium voluptatem omnis?"
+          },
+          {
+             "id":"crypto.randomUUID()",
+             "value":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum laborum, accusamus odit nam eius accusantium dolorem id sequi corrupti excepturi quae sunt doloremque aspernatur nihil tenetur repudiandae impedit magni reiciendis molestias quibusdam rerum, praesentium voluptatem omnis?"
+          }
+       ],
+       "collaborators":[
+          {
+             "id":"crypto.randomUUID()",
+             "github":"trujilloszitai"
+          },
+          {
+             "id":"crypto.randomUUID()",
+             "github":"EitanMohorade"
+          },
+          {
+             "id":"crypto.randomUUID()",
+             "github":"Fedelgado"
+          }
+       ],
+       "resources":{
+          "demoURL":"https://goldenduck.netlify.app/",
+          "repositoryURL":"https://github.com/JorgePeniaranda/GoldenDuck"
+       }
+    }
+ },
+ {
+  "key":"GoldenDuck2",
+  "name":"Golden Duck",
+  "status":"En Desarrollo",
+  "stack":"Full-Stack",
+  "accordion":{
+     "goals":[
+        {
+           "id":"crypto.randomUUID()",
+           "value":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum laborum, accusamus odit nam eius accusantium dolorem id sequi corrupti excepturi quae sunt doloremque aspernatur nihil tenetur repudiandae impedit magni reiciendis molestias quibusdam rerum, praesentium voluptatem omnis?"
+        },
+        {
+           "id":"crypto.randomUUID()",
+           "value":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum laborum, accusamus odit nam eius accusantium dolorem id sequi corrupti excepturi quae sunt doloremque aspernatur nihil tenetur repudiandae impedit magni reiciendis molestias quibusdam rerum, praesentium voluptatem omnis?"
+        }
+     ],
+     "technologies":[
+        {
+           "id":"crypto.randomUUID()",
+           "value":"Web: Next.js, React, Tailwind"
+        },
+        {
+           "id":"crypto.randomUUID()",
+           "value":"Back-End: Nest.js (Api-Rest / GraphQL)"
+        },
+        {
+           "id":"crypto.randomUUID()",
+           "value":"Mobile: React Native"
+        },
+        {
+           "id":"crypto.randomUUID()",
+           "value":"Desktop: Electron, React"
+        }
+     ],
+     "contribution":[
+        {
+           "id":"crypto.randomUUID()",
+           "value":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum laborum, accusamus odit nam eius accusantium dolorem id sequi corrupti excepturi quae sunt doloremque aspernatur nihil tenetur repudiandae impedit magni reiciendis molestias quibusdam rerum, praesentium voluptatem omnis?"
+        },
+        {
+           "id":"crypto.randomUUID()",
+           "value":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum laborum, accusamus odit nam eius accusantium dolorem id sequi corrupti excepturi quae sunt doloremque aspernatur nihil tenetur repudiandae impedit magni reiciendis molestias quibusdam rerum, praesentium voluptatem omnis?"
+        }
+     ],
+     "collaborators":[
+        {
+           "id":"crypto.randomUUID()",
+           "github":"trujilloszitai"
+        },
+        {
+           "id":"crypto.randomUUID()",
+           "github":"EitanMohorade"
+        },
+        {
+           "id":"crypto.randomUUID()",
+           "github":"Fedelgado"
+        }
+     ],
+     "resources":{
+        "demoURL":"https://goldenduck.netlify.app/",
+        "repositoryURL":"https://github.com/JorgePeniaranda/GoldenDuck"
+     }
+  }
+}
+]
