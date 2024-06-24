@@ -1,0 +1,103 @@
+---
+import axios from 'axios'
+import Layout from '../../../components/layouts/base.astro'
+import { ProjectAccordion } from '../../../components/organisms/accordion/project-accordion'
+import {
+Breadcrumb,
+type IBreadCrumb
+} from '../../../components/organisms/breadcrumb'
+import { ENV } from '../../../constants/env'
+import { ProjectDetailsStyles } from '../../../constants/styles'
+import { ProjectStack, type IProject } from '../../../types/project.d'
+
+export async function getStaticPaths() {
+  const projects = await axios.get<IProject[]>(`${ENV.base_url}/api/projects/all.json`)
+  .then((response) => {
+    return response.data;
+  })
+  .catch(() => {
+    return [] as IProject[];
+  })
+
+  const paths = projects.map((project) => ({
+    params: { key: project.key },
+    props: project
+  }));
+
+  return paths
+}
+
+const { key, name, stack, status, accordion } = Astro.props;
+
+const { StackStyle, StatusStyle } = ProjectDetailsStyles
+
+const BreadCrumbItems: IBreadCrumb[] = [
+  {
+    label: 'Proyectos',
+    href: '/projects'
+  },
+  {
+    label: name
+  }
+]
+---
+
+<Layout
+  body={{
+    class: 'bg-background dark:bg-background-dark py-14 px-16 space-y-4'
+  }}
+  title={name}
+>
+  <header>
+    <Breadcrumb items={BreadCrumbItems} />
+  </header>
+  <main class="flex text-black dark:text-white h-full">
+    <section class="flex-1 flex flex-col h-full">
+      <article>
+        <h1
+          class="scroll-m-20 text-5xl font-extrabold tracking-tight"
+          transition:name={`${key} Title`}
+        >
+          {name}
+        </h1>
+        <div class="flex gap-2 items-center font-light text-lg my-2">
+          <h2 class="leading-none font-medium" class:list={StatusStyle[status]}>
+            {status}
+          </h2>
+          <small class="leading-none p-1 rounded-md text-base"
+            >2021 - Actualidad</small
+          >
+          <h3
+            class="leading-none font-medium rounded-md p-1 text-base"
+            class:list={[
+              StackStyle[stack],
+              {
+                [StackStyle['default']]:
+                  !Object.keys(ProjectStack).includes(stack)
+              }
+            ]}
+          >
+            {stack}
+          </h3>
+        </div>
+        <p class="text-pretty">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum
+          laborum, accusamus odit nam eius accusantium dolorem id sequi corrupti
+          excepturi quae sunt doloremque aspernatur nihil tenetur repudiandae
+          impedit magni reiciendis molestias quibusdam rerum, praesentium
+          voluptatem omnis? Vitae ducimus consequatur quia aspernatur,
+          consequuntur modi eaque quam voluptatem minima, eius aliquid
+          dignissimos.
+        </p>
+      </article>
+      <article class="mt-5 flex-1">
+        <ProjectAccordion data={accordion} client:load />
+      </article>
+    </section>
+    <section class="flex flex-1 relative justify-center items-center">
+      <article class="sticky top-0 justify-center items-center flex">
+        En Proceso...
+      </article>
+    </section>
+  </main>
+</Layout>

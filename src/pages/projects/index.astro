@@ -1,28 +1,20 @@
 ---
-import Layout from '../../components/layouts/base.astro'
+import axios from 'axios'
+import Codewars from '../../assets/svg/logos/Codewars.astro'
 import Github from '../../assets/svg/logos/Github.astro'
 import Gitlab from '../../assets/svg/logos/Gitlab.astro'
-import Codewars from '../../assets/svg/logos/Codewars.astro'
-import { PERSONAL_ACCOUNTS } from '../../constants/external'
+import Layout from '../../components/layouts/base.astro'
 import ProjectCard from '../../components/molecules/cards/project-card.astro'
-import type { IProjectCard } from '../../types/project'
+import { ENV } from '../../constants/env'
+import { PERSONAL_ACCOUNTS } from '../../constants/external'
+import type { IProject } from '../../types/project'
 
-const Projects: IProjectCard[] = [
-  {
-    key: 'GoldenDuck',
-    name: 'Golden Duck',
-    logoURL:
-      'https://goldenduck.netlify.app/static/media/GoldenDuckLogo.4844f846449afc856719.png',
-    primaryColor: '#4f46e5'
-  },
-  {
-    key: 'Jildam',
-    name: 'Jildam',
-    logoURL:
-      'https://raw.githubusercontent.com/MaximoBrandi/Jildam/main/public/assets/img/jildam_icon.png',
-    primaryColor: '#444'
-  }
-]
+const Projects: IProject[] = await axios.get<IProject[]>(`${ENV.base_url}/api/projects/sort-all.json`)
+  .then(response => response.data)
+  .catch(() => {
+    return [] as IProject[];
+  })
+
 ---
 
 <Layout

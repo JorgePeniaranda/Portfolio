@@ -1,16 +1,21 @@
-import type { APIRoute } from "astro"
-import Projects from '../../../data/projects.json'
-import type { IProject } from "../../../types/project"
+import type {APIRoute} from "astro";
+import type {IProject} from "../../../types/project";
 
-const propertiesToKeep: Array<keyof IProject> = ["name"]
+import Projects from "../../../data/projects.json";
 
-export const GET: APIRoute = ({ params, request }) => {
-  const projects = (Projects as IProject[]).map(project => {
-    return propertiesToKeep.reduce((acc, propertie) => {
-      acc[propertie] = project[propertie]
-      return acc
-    }, {} as Record<keyof IProject, IProject[keyof IProject]>)
-  })
+const propertiesToKeep: Array<keyof IProject> = ["key", "name", "logoURL", "primaryColor"];
 
-  return Response.json(projects)
-}
+export const GET: APIRoute = () => {
+  const projects = (Projects as IProject[]).map((project) => {
+    return propertiesToKeep.reduce(
+      (acc, propertie) => {
+        acc[propertie] = project[propertie];
+
+        return acc;
+      },
+      {} as Record<keyof IProject, IProject[keyof IProject]>,
+    );
+  });
+
+  return Response.json(projects);
+};
