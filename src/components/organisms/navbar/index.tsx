@@ -5,6 +5,7 @@ import {Fragment, useRef} from "react";
 import useSound from "../../../hooks/useSound";
 import useTheme from "../../../hooks/useTheme";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "../../ui/tooltip";
+import {NavbarAnimationConfig} from "../../../constants/styles";
 
 //#region TYPES
 export interface INavbarLink extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {
@@ -123,7 +124,7 @@ export function Navbar({items}: {items: INavbarLink[][]}) {
 
 //#region NAVBAR ITEM
 function NavbarItem({mouseX, children}: {mouseX: MotionValue<number>; children?: React.ReactNode}) {
-  const ref = useRef();
+  const ref = useRef<HTMLLIElement>(null);
 
   const distance = useTransform(mouseX, (val) => {
     const bounds = ref.current?.getBoundingClientRect() ?? {x: 0, width: 0};
@@ -131,8 +132,12 @@ function NavbarItem({mouseX, children}: {mouseX: MotionValue<number>; children?:
     return val - bounds.x - bounds.width / 2;
   });
 
-  const widthSync = useTransform(distance, [-150, 0, 150], [40, 100, 40]);
-  const width = useSpring(widthSync, {mass: 0.1, stiffness: 150, damping: 12});
+  const widthSync = useTransform(
+    distance,
+    NavbarAnimationConfig.transform.inputRange,
+    NavbarAnimationConfig.transform.outputRange,
+  );
+  const width = useSpring(widthSync, NavbarAnimationConfig.spring);
 
   return (
     <motion.li
