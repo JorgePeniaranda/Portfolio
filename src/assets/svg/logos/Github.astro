@@ -1,11 +1,12 @@
 ---
+import {cn} from "../../../helpers/class-names";
 interface Props extends astroHTML.JSX.SVGAttributes {}
 
 const { ...props } = Astro.props
 ---
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" {...props}
-  ><g fill="#181616"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" class={cn("fill-[#181616]", props.class)} {...props}
+  ><g fill="inherit"
     ><path
       fill-rule="evenodd"
       clip-rule="evenodd"
