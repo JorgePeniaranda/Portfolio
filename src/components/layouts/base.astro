@@ -1,0 +1,38 @@
+---
+import { SEO } from 'astro-seo'
+import { ViewTransitions } from 'astro:transitions'
+import { DEFAULT_LANG } from '../../constants/common'
+import { NAVBAR_ITEMS } from '../../constants/navbar'
+import { SEO_INFO } from '../../constants/seo'
+import { cn } from '../../helpers/class-names'
+import '../../styles/globals.css'
+import ThemePreference from '../atoms/theme-preference.astro'
+import { Navbar } from '../organisms/navbar'
+
+interface Props {
+  title?: string
+  description?: string
+  lang?: string
+  body?: astroHTML.JSX.HTMLAttributes
+  html?: astroHTML.JSX.HtmlHTMLAttributes
+}
+
+const { title, description, lang = DEFAULT_LANG, body, html } = Astro.props
+---
+
+<!doctype html>
+<html lang={lang} {...html}>
+  <head>
+    <SEO
+      {...SEO_INFO}
+      title={title}
+      description={description ?? SEO_INFO.description}
+    />
+    <ViewTransitions />
+    <ThemePreference />
+  </head>
+  <body class={cn('w-screen min-h-screen antialiased font-Baloo', body?.class)} {...body}>
+    <slot />
+    <Navbar items={NAVBAR_ITEMS} client:idle transition:name="main-navbar" />
+  </body>
+</html>

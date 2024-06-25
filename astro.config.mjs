@@ -1,12 +1,13 @@
 import { defineConfig } from "astro/config";
-import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
-
 import react from "@astrojs/react";
+import playformCompress from "@playform/compress";
+import icon from "astro-icon";
+import robotsTxt from "astro-robots-txt";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://jorgepeniaranda.me",
-  integrations: [tailwind(), mdx(), sitemap(), react()]
+  site: "https://jorgepeniaranda.dev.ar",
+  integrations: [tailwind(), sitemap(), react(), playformCompress(), icon(), robotsTxt()]
 });

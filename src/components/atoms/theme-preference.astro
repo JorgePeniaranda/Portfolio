@@ -1,0 +1,17 @@
+<!-- apply theme preferences to avoid flickering  -->
+<script is:inline>
+  ;(function () {
+    const THEME = {
+      LIGHT: 'light',
+      DARK: 'dark',
+      CLASSNAME: 'dark',
+      STORAGE_KEY: 'theme',
+      ELEMENT_CLASS: document.documentElement.classList
+    }
+    const theme = localStorage.getItem(THEME.STORAGE_KEY) || THEME.LIGHT
+
+    document.documentElement.classList[theme === THEME.DARK ? 'add' : 'remove'](
+      'dark'
+    )
+  })()
+</script>

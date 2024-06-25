@@ -1,0 +1,13 @@
+node_modules/*
+coverage/*
+.vscode/*
+.github/*
+.astro/*
+public/*
+dist/*
+
+eslint.config.mjs
+postcss.config.mjs
+tailwind.config.mjs
+astro.config.mjs
+tsconfig.json

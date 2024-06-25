@@ -1,0 +1,28 @@
+---
+import type { IProjectCard } from '../../../types/project'
+
+interface Props extends IProjectCard {}
+
+const { key, logoURL, name, primaryColor } = Astro.props
+---
+
+<article>
+  <a
+    href={`/projects/${key}`}
+    class="relative break-inside-avoid px-5 py-3 flex items-center max-w-xs h-24 rounded-lg overflow-hidden transition-transform hover:scale-110"
+    style={{ backgroundColor: primaryColor }}
+  >
+    <h3
+      class="text-4xl font-bold tracking-tight text-white"
+      transition:name=`${key} Title`
+    >
+      {name}
+    </h3>
+    <img
+      src={logoURL}
+      alt={`${key} Logo`}
+      transition:name=`${key} Logo`
+      class="-right-5 absolute h-full w-auto opacity-75"
+    />
+  </a>
+</article>

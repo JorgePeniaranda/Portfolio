@@ -1,33 +1,38 @@
 ---
-import Layout from "../layouts/index.astro";
-import Header from "../sections/header/HeaderHome.astro";
-import Presentation from "../sections/articles/Presentation.astro";
-import StackCard from "../sections/card/StackCard.astro";
-import NavCards from "../sections/card/NavCard.astro";
+import Layout from '../components/layouts/base.astro'
+import MountainLeft from '../assets/svg/draws/MountainLeft.astro'
+import MountainRight from '../assets/svg/draws/MountainRight.astro'
+import Bird1 from '../assets/svg/draws/Bird-1.astro'
+import Bird2 from '../assets/svg/draws/Bird-2.astro'
+import Bird3 from '../assets/svg/draws/Bird-3.astro'
+import Sun from '../assets/svg/draws/Sun.astro'
+import Wave from '../assets/svg/draws/wave-1.astro'
 ---
 
-<Layout
-  title="Jorge Peñaranda | Desarrollador Web"
-  description="Apasionado desarrollador web con experiencia en la creación de herramientas de código abierto y soluciones web. Comprometido en aprender y crecer constantemente en este emocionante campo, y encantado de compartir mi conocimiento en el camino."
-  footerBackgroundColor="var(--primary)"
-  withNavbar={false}
->
-  <Header />
-  <main>
-    <Presentation />
-    <StackCard />
-    <NavCards />
-  </main>
+<Layout>
+  <header id="header" class="w-full h-screen">
+    <figure class="w-full h-full flex items-end -z-50 bg-primary">
+      <Wave class="w-full" aria-label="wave"/>
+      <figcaption class="sr-only fixed">Background Wave</figcaption>
+    </figure>
+    <article class="w-2/3 absolute top-1/2 left-1/2 text-center select-none text-white transform -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10">
+      <h2 class="text-5xl lg:text-8xl mb-20 font-AlfaSlabOne !leading-normal">Páginas unicas con diseños increibles</h2>
+      <h1 class="text-4xl font-ZillaSlabHighlight">Jorge Peñaranda | Desarrollador web</h1>
+    </article>
+    <figure>
+      <MountainLeft aria-label="Left mountain" class='w-2/5 h-fit absolute bottom-0 left-0' />
+      <MountainRight aria-label="Right mountain" class='w-2/5 h-fit absolute bottom-0 right-0' />
+      <figcaption class="sr-only">Mountains svg</figcaption>
+    </figure>
+    <figure class="hidden md:inline">
+      <Bird1 aria-label="Bird 1" class="absolute top-[23%] left-[21%]" />
+      <Bird2 aria-label="Bird 2" class="absolute bottom-[17%] right-[45%]" />
+      <Bird3 aria-label="Bird 3" class="absolute top-[20%] right-[35%]" />
+      <figcaption class="sr-only">Birds</figcaption>
+    </figure>
+    <figure class="hidden md:inline">
+      <Sun aria-label="sun" class="absolute top-[5%] right-[10%]"/>
+      <figcaption class="sr-only">Sun</figcaption>
+    </figure>
+  </header>
 </Layout>
-<style>
-  main{
-    background-color: var(--dominant);
-    padding-bottom: 10rem;
-  }
-  /* Screen "MD" */
-  @media (min-width: 768px) {
-    main {
-      padding-inline: var(--x-padding);
-    }
-  }
-</style>

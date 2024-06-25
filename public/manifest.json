@@ -1,23 +1,89 @@
 {
   "name": "Jorge Peñaranda's Portfolio",
-  "short_name": "JorgePeñaranda Portfolio",
-  "description": "Desarrollador Web Front End con experiencia en JavaScript, CSS, React y Next.js. Descubre mis proyectos y soluciones web de código abierto.",
+  "short_name": "JorgePeñaranda",
   "start_url": "/",
-  "display": "fullscreen",
-  "background_color": "#bf5454",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "any",
+  "background_color": "#ffffff",
   "theme_color": "#bf5454",
   "icons": [
     {
-      "src": "https://jorgepeniaranda.me/assets/img/Logo-192x192.png",
-      "sizes": "192x192",
+      "src": "/icons/16x16.png",
+      "sizes": "16x16",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "https://jorgepeniaranda.me/assets/img/Logo-512x512.png",
+      "src": "/icons/32x32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/64x64.png",
+      "sizes": "64x64",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/76x76.png",
+      "sizes": "76x76",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/180x180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/196x196.png",
+      "sizes": "196x196",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/228x228.png",
+      "sizes": "228x228",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/256x256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable"
     }
-  ]
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/images/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/assets/images/screenshot-mobile.png",
+      "sizes": "375x667",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "scope": "/",
+  "description": "Desarrollador Web Front End con experiencia en JavaScript, CSS, React y Next.js. Descubre mis proyectos y soluciones web de código abierto.",
+  "categories": ["Desarrollador Web", "Front End", "JavaScript", "CSS", "React", "Next.js"]
 }
