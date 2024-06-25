@@ -74,6 +74,11 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      fontFamily: {
+        'Baloo': ["Baloo", "ui-sans-serif", "system-ui", "sans-serif"],
+        'ZillaSlabHighlight': ["ZillaSlabHighlight", "monospace"],
+        'AlfaSlabOne': ["AlfaSlabOne", "fantasy", "cursive"],
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],
