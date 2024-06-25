@@ -6,11 +6,11 @@ export const getEnvValue = (envName: string, defaultValue?: string): string => {
   }
 
   if (typeof defaultValue === "string") {
-    console.warn("Using default value for environment variable", envName, defaultValue);
+    // console.warn("Using default value for environment variable", envName, defaultValue);
 
     return defaultValue;
   }
 
-  console.error("Environment variable not found", envName);
+  // console.error("Environment variable not found", envName);
   throw new Error("Environment variable not found: " + envName);
 };
