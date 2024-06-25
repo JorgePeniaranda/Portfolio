@@ -1,5 +1,19 @@
 import {ProjectStack, ProjectStatus} from "../types/project.d";
 
+//#region Navbar
+export const NavbarAnimationConfig = {
+  transform: {
+    inputRange: [-150, 0, 150],
+    outputRange: [40, 100, 40],
+  },
+  spring: {
+    mass: 0.1,
+    stiffness: 150,
+    damping: 12,
+  },
+};
+//#endregion
+
 //#region Project-Details styles
 const StatusStyle = {
   [ProjectStatus["Terminado"]]: "text-green-500",
