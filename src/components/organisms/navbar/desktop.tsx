@@ -1,22 +1,16 @@
+import type {INavbarSection} from "./navbar";
+
 import {MotionValue, motion, useMotionValue, useSpring, useTransform} from "framer-motion";
 import {Loader, Moon, Sun, Volume2, VolumeX, icons} from "lucide-react";
 import {Fragment, useRef} from "react";
 
+import {NavbarAnimationConfig} from "../../../constants/styles";
 import useSound from "../../../hooks/useSound";
 import useTheme from "../../../hooks/useTheme";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "../../ui/tooltip";
-import {NavbarAnimationConfig} from "../../../constants/styles";
-
-//#region TYPES
-export interface INavbarLink extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {
-  icon: keyof typeof icons;
-  label: string;
-  link: string;
-}
-//#endregion
 
 //#region NAVBAR
-export function Navbar({items}: {items: INavbarLink[][]}) {
+export function DesktopNavbar({items}: {items: INavbarSection[]}) {
   const {theme, toggleTheme} = useTheme();
   const {sound, toggleSound} = useSound();
   const mouseX = useMotionValue(Infinity);
@@ -24,7 +18,7 @@ export function Navbar({items}: {items: INavbarLink[][]}) {
   return (
     <motion.nav
       aria-label="Main navigation"
-      className="fixed bottom-6 left-1/2 z-50 flex h-14 -translate-x-1/2 items-center justify-evenly space-x-3 rounded-3xl bg-neutral-50/90 p-3 ring-1 ring-neutral-300 backdrop-blur-2xl transition dark:bg-neutral-950/50 dark:ring-neutral-700"
+      className="fixed bottom-6 left-1/2 z-50 hidden h-14 -translate-x-1/2 items-center justify-evenly space-x-3 rounded-3xl bg-neutral-50/90 p-3 ring-1 ring-neutral-300 backdrop-blur-2xl transition dark:bg-neutral-950/50 dark:ring-neutral-700 md:flex"
       onMouseLeave={() => mouseX.set(Infinity)}
       onMouseMove={(e) => mouseX.set(e.pageX)}
     >
@@ -32,7 +26,7 @@ export function Navbar({items}: {items: INavbarLink[][]}) {
       {items.map((section, sectionIndex) => (
         <Fragment key={crypto.randomUUID()}>
           <ul aria-label="Link List" className="flex items-center justify-center space-x-3">
-            {section.map(({label, link, icon, ...props}) => {
+            {section.items.map(({label, link, icon, ...props}) => {
               const Icon = icons[icon];
 
               return (
@@ -71,6 +65,7 @@ export function Navbar({items}: {items: INavbarLink[][]}) {
       >
         <NavbarItem mouseX={mouseX}>
           <button
+            aria-label="Toggle theme"
             className="grid size-full place-items-center rounded-full"
             type="button"
             onClick={toggleTheme}
@@ -93,11 +88,19 @@ export function Navbar({items}: {items: INavbarLink[][]}) {
                 className="size-3/5 animate-spin text-neutral-500 transition dark:text-neutral-300"
               />
             )}
-            <span className="sr-only">Toggle theme</span>
+            <span className="sr-only">
+              Current:
+              <b>
+                {theme === "light" && "Light"}
+                {theme === "dark" && "Dark"}
+                {theme !== "dark" && theme !== "light" && "Loading"}
+              </b>
+            </span>
           </button>
         </NavbarItem>
         <NavbarItem mouseX={mouseX}>
           <button
+            aria-label="Toggle sound"
             className="grid size-full place-items-center rounded-full"
             type="button"
             onClick={toggleSound}
@@ -113,7 +116,10 @@ export function Navbar({items}: {items: INavbarLink[][]}) {
                 className="size-3/5 text-neutral-500 transition dark:text-neutral-300"
               />
             )}
-            <span className="sr-only">Toggle theme</span>
+            <span className="sr-only">
+              Current:
+              <b>{sound ? "Sound On" : "Sound Off"}</b>
+            </span>
           </button>
         </NavbarItem>
       </ul>

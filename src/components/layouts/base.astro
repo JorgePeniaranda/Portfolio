@@ -7,7 +7,8 @@ import { SEO_INFO } from '../../constants/seo'
 import { cn } from '../../helpers/class-names'
 import '../../styles/globals.css'
 import ThemePreference from '../atoms/theme-preference.astro'
-import { Navbar } from '../organisms/navbar'
+import { DesktopNavbar } from '../organisms/navbar/desktop'
+import { MobileNavbar } from '../organisms/navbar/mobile'
 
 interface Props {
   title?: string
@@ -36,6 +37,17 @@ const { title, description, lang = DEFAULT_LANG, body, html } = Astro.props
     {...body}
   >
     <slot />
-    <Navbar items={NAVBAR_ITEMS} client:idle transition:name="main-navbar" />
+    <DesktopNavbar
+      items={NAVBAR_ITEMS}
+      client:idle
+      transition:name="main-desktop-navbar"
+    />
+    <div class="h-16 flex md:hidden">
+      <MobileNavbar
+        items={NAVBAR_ITEMS}
+        client:idle
+        transition:name="main-mobile-navbar"
+      />
+    </div>
   </body>
 </html>
