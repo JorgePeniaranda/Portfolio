@@ -24,7 +24,7 @@ export const NAVBAR_ITEMS: INavbarSection[] = [
     label: "Site Navegation",
     items: [
       {
-        icon: "Home",
+        icon: "House",
         label: "Home",
         link: "/",
       },
