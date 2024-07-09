@@ -119,6 +119,28 @@ export const SEO_INFO: SEOProps = {
         href: `${SITE_INFO.icon_folder}/196x196.png`,
         sizes: "196x196",
       },
+      // Font Preload
+      {
+        rel: "preload",
+        href: `${ORIGINAL_URL}/assets/fonts/Baloo.woff2`,
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
+      {
+        rel: "preload",
+        href: `${ORIGINAL_URL}/assets/fonts/ZillaSlabHighlight.woff2`,
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
+      {
+        rel: "preload",
+        href: `${ORIGINAL_URL}/assets/fonts/AlfaSlabOne.woff2`,
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
     ],
     meta: [
       {
