@@ -19,7 +19,7 @@ export function MobileNavbar({items}: {items: INavbarSection[]}) {
   return (
     <nav
       aria-label="Main navigation"
-      className="fixed bottom-0 z-50 flex h-16 w-full items-center justify-around space-x-3 bg-neutral-100 p-4 ring-1 ring-neutral-300 dark:bg-neutral-950/50 dark:ring-neutral-700 md:hidden"
+      className="fixed bottom-0 z-50 flex h-16 w-full items-center justify-around space-x-3 bg-neutral-100 p-4 ring-1 ring-neutral-300 dark:bg-neutral-900 dark:ring-neutral-700 md:hidden"
     >
       {/* ========= NAVEGATION LINKS ITEMS =========   */}
       {items.map((section) => {
