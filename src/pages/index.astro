@@ -7,42 +7,102 @@ import Bird2 from '../assets/svg/draws/Bird-2.astro'
 import Bird3 from '../assets/svg/draws/Bird-3.astro'
 import Sun from '../assets/svg/draws/Sun.astro'
 import Wave from '../assets/svg/draws/wave-1.astro'
+import Logo from '../assets/svg/logos/Logo.astro'
+import {TextWritter} from '../components/atoms/text-writter'
+
+const TITLE_WORD_LIST = [
+  'Resultados',
+  'Soluciones',
+  'Innovaciones',
+  'Creaciones',
+  'Proyectos',
+  'Logros',
+  'Aplicaciones',
+  'Mejoras',
+  'El éxito'
+] 
 ---
 
-<Layout>
+<Layout
+  body={{
+    class: 'bg-gradient-to-r from-rose-200 to-teal-200'
+  }}
+>
+  <nav class="h-max px-20 pt-2 flex justify-between items-center">
+    <Logo class="w-28 aspect-square" />
+    <ul class="flex gap-4">
+      <li>
+        <a href="/about" class="text-black hover:text-primary transition-colors"
+          >Acerca de mi</a
+        >
+      </li>
+      <span>/</span>
+      <li>
+        <a href="/stack" class="text-black hover:text-primary transition-colors"
+          >Stack</a
+        >
+      </li>
+    </ul>
+  </nav>
   <header
     id="header"
-    class="w-full min-h-screen flex justify-center items-center relative"
+    class="flex flex-col gap-1 items-center text-center h-max my-14 mb-20"
+  >
+    <h1 class="sr-only">
+      Portfolio de Full-Stack Developer especializado en Front-End y Back-End
+    </h1>
+    <h2 class="font-medium text-6xl">
+      De tus ideas a <b class="text-primary">
+        <TextWritter wordList={TITLE_WORD_LIST} client:load/>
+      </b>
+    </h2>
+    <p class="max-w-2xl text-xl">
+      ¿Buscas soluciones web prácticas y efectivas? Descubre cómo mi experiencia
+      puede darle a tus proyectos el impulso que necesitan para destacar.
+    </p>
+    <a
+      href="/projects"
+      class="bg-primary font-semibold text-2xl text-white px-5 mt-10 py-2.5 rounded-md hover:scale-105 transition-transform"
+      >Conoce mis Proyectos</a
+    >
+  </header>
+  <section
+    class="w-9/12 flex justify-center items-center relative mx-auto rounded-2xl cursor-zoom-in hover:scale-105 transition-transform"
     aria-label="Header Illustration"
   >
     <figure
-      class="w-full h-full flex items-end -z-50 bg-primary absolute bottom-0"
+      class="w-full h-full flex items-end -z-50 bg-primary rounded-[inherit] absolute bottom-0"
     >
-      <Wave class="w-full" aria-label="wave" />
+      <Wave
+        class="w-full rounded-bl-[inherit] rounded-br-[inherit]"
+        aria-label="wave"
+      />
       <figcaption class="sr-only fixed">Background Wave</figcaption>
     </figure>
     <article
       class="w-2/3 text-center select-none text-white pointer-events-none z-40 py-20"
     >
-      <h2
+      <h5
         class="text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-20 font-AlfaSlabOne !leading-normal"
       >
         Páginas unicas con diseños increibles
-      </h2>
-      <h1
+      </h5>
+      <h4
         class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-ZillaSlabHighlight"
       >
         Jorge Peñaranda | Desarrollador web
-      </h1>
+      </h4>
     </article>
-    <figure class="w-full h-full absolute bottom-0 z-30">
+    <figure
+      class="w-full h-full absolute bottom-0 z-30 rounded-bl-[inherit] rounded-br-[inherit]"
+    >
       <MountainLeft
         aria-label="Left mountain"
-        class="w-2/5 h-fit absolute bottom-0 left-0"
+        class="w-2/5 h-fit absolute bottom-0 left-0 rounded-bl-[inherit]"
       />
       <MountainRight
         aria-label="Right mountain"
-        class="w-2/5 h-fit absolute bottom-0 right-0"
+        class="w-2/5 h-fit absolute bottom-0 right-0 rounded-br-[inherit]"
       />
       <figcaption class="sr-only">Mountains</figcaption>
     </figure>
@@ -56,5 +116,45 @@ import Wave from '../assets/svg/draws/wave-1.astro'
       <Sun aria-label="sun" class="absolute top-[5%] right-[10%]" />
       <figcaption class="sr-only">Sun</figcaption>
     </figure>
-  </header>
+  </section>
+  <!-- <section class="mt-20 mb-40 flex flex-col justify-center items-center">
+    <h3 class="text-4xl text-center font-bold">¡Hablemos!</h3>
+    <form
+      class="grid grid-cols-2 grid-rows-[auto_1fr] gap-y-2 gap-x-5 w-3/6 mt-4"
+      id="contact-form"
+    >
+      <label class="flex flex-col text-zinc-500 text-xs">
+        Nombre:
+        <input
+          type="text"
+          name="name"
+          class="border-2 border-zinc-200 px-2 py-1"
+          placeholder="Nombre..."
+        />
+      </label>
+      <label class="flex flex-col text-zinc-500 text-xs">
+        Correo:
+        <input
+          type="email"
+          name="email"
+          class="border-2 border-zinc-200 px-2 py-1"
+          placeholder="example@email.com"
+        />
+      </label>
+      <label class="flex flex-col col-span-2 text-zinc-500 text-xs">
+        Mensaje:
+        <textarea
+          name="message"
+          rows="5"
+          class="border-2 border-zinc-200 resize-y p-2"
+          placeholder="Hola, me gustaria hablar sobre..."></textarea>
+      </label>
+      <button
+        type="submit"
+        class="bg-black text-white col-span-2 py-1.5 rounded-sm text-sm mt-3 transition-colors hover:bg-primary cursor-pointer"
+      >
+        Enviar
+      </button>
+    </form>
+  </section> -->
 </Layout>

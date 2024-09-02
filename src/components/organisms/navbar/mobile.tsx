@@ -1,20 +1,28 @@
-import type {INavbarSection} from "./navbar";
+import type { INavbarSection } from './navbar'
 
-import {Loader, Moon, Settings, Sun, Volume2, VolumeX, icons} from "lucide-react";
+import {
+  Loader,
+  Moon,
+  Settings,
+  Sun,
+  Volume2,
+  VolumeX,
+  icons
+} from 'lucide-react'
 
-import useSound from "../../../hooks/useSound";
-import useTheme from "../../../hooks/useTheme";
+import useSound from '../../../hooks/useSound'
+import useTheme from '../../../hooks/useTheme'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "../../ui/dropdown-menu";
+  DropdownMenuTrigger
+} from '../../ui/dropdown-menu'
 
-export function MobileNavbar({items}: {items: INavbarSection[]}) {
-  const {theme, toggleTheme} = useTheme();
-  const {sound, toggleSound} = useSound();
+export function MobileNavbar({ items }: { items: INavbarSection[] }) {
+  const { theme, toggleTheme } = useTheme()
+  const { sound, toggleSound } = useSound()
 
   return (
     <nav
@@ -22,8 +30,8 @@ export function MobileNavbar({items}: {items: INavbarSection[]}) {
       className="fixed bottom-0 z-50 flex h-16 w-full items-center justify-around space-x-3 bg-neutral-100 p-4 ring-1 ring-neutral-300 dark:bg-neutral-900 dark:ring-neutral-700 md:hidden"
     >
       {/* ========= NAVEGATION LINKS ITEMS =========   */}
-      {items.map((section) => {
-        const SectionIcon = icons[section.icon];
+      {items.map(section => {
+        const SectionIcon = icons[section.icon]
 
         return (
           <DropdownMenu key={crypto.randomUUID()}>
@@ -34,8 +42,8 @@ export function MobileNavbar({items}: {items: INavbarSection[]}) {
               <DropdownMenuLabel asChild>
                 <span>{section.label}</span>
               </DropdownMenuLabel>
-              {section.items.map(({label, link, icon, ...props}) => {
-                const ItemIcon = icons[icon];
+              {section.items.map(({ label, link, icon, ...props }) => {
+                const ItemIcon = icons[icon]
 
                 return (
                   <DropdownMenuItem key={crypto.randomUUID()} asChild>
@@ -44,11 +52,11 @@ export function MobileNavbar({items}: {items: INavbarSection[]}) {
                       <span>{label}</span>
                     </a>
                   </DropdownMenuItem>
-                );
+                )
               })}
             </DropdownMenuContent>
           </DropdownMenu>
-        );
+        )
       })}
 
       {/* ========= NAVEGATION BUTTONS ITEMS =========   */}
@@ -67,28 +75,28 @@ export function MobileNavbar({items}: {items: INavbarSection[]}) {
               type="button"
               onClick={toggleTheme}
             >
-              {theme === "light" && (
+              {theme === 'light' && (
                 <Sun
                   aria-label="light"
                   className="mr-2 size-4 text-neutral-500 transition dark:text-neutral-300"
                 />
               )}
-              {theme === "dark" && (
+              {theme === 'dark' && (
                 <Moon
                   aria-label="dark"
                   className="mr-2 size-4 text-neutral-500 transition dark:text-neutral-300"
                 />
               )}
-              {theme !== "dark" && theme !== "light" && (
+              {theme !== 'dark' && theme !== 'light' && (
                 <Loader
                   aria-label="loading"
                   className="mr-2 size-4 animate-spin text-neutral-500 transition dark:text-neutral-300"
                 />
               )}
               <span>
-                {theme === "light" && "Activar Modo Oscuro"}
-                {theme === "dark" && "Activar Modo Claro"}
-                {theme !== "dark" && theme !== "light" && "Cargando..."}
+                {theme === 'light' && 'Activar Modo Oscuro'}
+                {theme === 'dark' && 'Activar Modo Claro'}
+                {theme !== 'dark' && theme !== 'light' && 'Cargando...'}
               </span>
             </button>
           </DropdownMenuItem>
@@ -110,11 +118,11 @@ export function MobileNavbar({items}: {items: INavbarSection[]}) {
                   className="mr-2 size-4 text-neutral-500 transition dark:text-neutral-300"
                 />
               )}
-              <span>{sound ? "Desactivar Sonido" : "Activar Sonido"}</span>
+              <span>{sound ? 'Desactivar Sonido' : 'Activar Sonido'}</span>
             </button>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </nav>
-  );
+  )
 }

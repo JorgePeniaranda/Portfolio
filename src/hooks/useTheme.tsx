@@ -1,38 +1,38 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from 'react'
 
-import {DEFAULT_THEME} from "../constants/common";
-import {ChangeTheme} from "../helpers/change-theme";
-import {themeStorage} from "../services/theme-storage";
-import {themesArray, type ITheme} from "../types/theme.d";
+import { DEFAULT_THEME } from '../constants/common'
+import { ChangeTheme } from '../helpers/change-theme'
+import { themeStorage } from '../services/theme-storage'
+import { themesArray, type ITheme } from '../types/theme.d'
 
 export default function useTheme() {
-  const [theme, setTheme] = useState<ITheme>();
+  const [theme, setTheme] = useState<ITheme>()
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => {
+    setTheme(prevTheme => {
       if (prevTheme === undefined) {
-        return DEFAULT_THEME;
+        return DEFAULT_THEME
       }
 
-      const currentIndex = themesArray.indexOf(prevTheme);
-      const nextIndex = (currentIndex + 1) % themesArray.length;
+      const currentIndex = themesArray.indexOf(prevTheme)
+      const nextIndex = (currentIndex + 1) % themesArray.length
 
-      return themesArray[nextIndex];
-    });
-  };
+      return themesArray[nextIndex]
+    })
+  }
 
   useEffect(() => {
-    setTheme(themeStorage.get());
-  }, []);
+    setTheme(themeStorage.get())
+  }, [])
 
   useEffect(() => {
     if (theme !== undefined) {
-      ChangeTheme(theme);
+      ChangeTheme(theme)
     }
-  }, [theme]);
+  }, [theme])
 
   return {
     theme,
-    toggleTheme,
-  };
+    toggleTheme
+  }
 }
