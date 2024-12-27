@@ -9,6 +9,16 @@ import {
   Accordion as UIAccordion,
 } from "../../ui/accordion";
 
+//#region TYPES
+/**
+ * The props for the ProjectAccordion component.
+ * @param contributions - A list of contributions made to the project.
+ * @param goals - A list of goals for the project.
+ * @param techStack - A list of technologies used in the project.
+ * @param collaborators - A list of collaborators in the project.
+ * @param githubUrl - The GitHub repository URL of the project.
+ * @param demoUrl - The demo URL of the project.
+ */
 interface Props {
   contributions: {
     id: number;
@@ -23,7 +33,19 @@ interface Props {
   githubUrl: Project["githubUrl"];
   demoUrl: Project["demoUrl"];
 }
+//#endregion
 
+//#region PROJECT ACCORDION
+/**
+ * A component that renders project details in an accordion format.
+ * It includes sections for goals, technologies, contributions, collaborators, and resources.
+ * @param contributions - A list of contributions made to the project.
+ * @param goals - A list of goals for the project.
+ * @param techStack - A list of technologies used in the project.
+ * @param collaborators - A list of collaborators in the project.
+ * @param githubUrl - The GitHub repository URL of the project.
+ * @param demoUrl - The demo URL of the project.
+ */
 export function ProjectAccordion({
   collaborators,
   demoUrl,
@@ -34,6 +56,7 @@ export function ProjectAccordion({
 }: Props) {
   return (
     <UIAccordion className="w-full" type="multiple">
+      {/* Render goals section if there are goals */}
       {goals.length ? (
         <AccordionItem value="goals">
           <AccordionTrigger>Objetivos</AccordionTrigger>
@@ -47,6 +70,8 @@ export function ProjectAccordion({
           </AccordionContent>
         </AccordionItem>
       ) : null}
+
+      {/* Render tech stack section if there are technologies */}
       {techStack.length > 0 && (
         <AccordionItem value="technologies">
           <AccordionTrigger>Tecnologías</AccordionTrigger>
@@ -59,6 +84,8 @@ export function ProjectAccordion({
           </AccordionContent>
         </AccordionItem>
       )}
+
+      {/* Render contributions section if there are contributions */}
       {contributions.length > 0 && (
         <AccordionItem value="contribution">
           <AccordionTrigger>¿Qué aporté?</AccordionTrigger>
@@ -71,6 +98,8 @@ export function ProjectAccordion({
           </AccordionContent>
         </AccordionItem>
       )}
+
+      {/* Render collaborators section if there are collaborators */}
       {collaborators.length > 0 && (
         <AccordionItem value="collaborators">
           <AccordionTrigger>Colaboradores</AccordionTrigger>
@@ -85,6 +114,8 @@ export function ProjectAccordion({
           </AccordionContent>
         </AccordionItem>
       )}
+
+      {/* Render resources section if GitHub or demo URL is defined */}
       {(isDefined(githubUrl) || isDefined(demoUrl)) && (
         <AccordionItem value="resources">
           <AccordionTrigger>Recursos</AccordionTrigger>
@@ -123,3 +154,4 @@ export function ProjectAccordion({
     </UIAccordion>
   );
 }
+//#endregion

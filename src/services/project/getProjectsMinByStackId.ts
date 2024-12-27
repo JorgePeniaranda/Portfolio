@@ -1,14 +1,14 @@
 import type {Project, Stack} from "@prisma/client";
 
 import {isNotDefined} from "../../helpers/guards/is-defined";
-import {prisma} from "../../helpers/client/prisma-client";
+import {databaseClient} from "../../helpers/client/prisma";
 
 export async function getProjectsMinByStackId({
   idStack,
 }: {
   idStack: Stack["id"];
 }): Promise<Pick<Project, "id" | "name" | "key">[]> {
-  const data = await prisma.stack.findUnique({
+  const data = await databaseClient.stack.findUnique({
     where: {
       id: idStack,
     },

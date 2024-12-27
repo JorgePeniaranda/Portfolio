@@ -1,52 +1,41 @@
 import type {ISoundState} from "../../types/common.d";
 
 import {create} from "zustand";
+import {persist} from "zustand/middleware";
 
-import {DEFAULT_SOUND_STATE} from "../../constants/common";
-import {isNotDefined} from "../../helpers/guards/is-defined";
+import {DEFAULT_SOUND_STATE, SOUND_STORE_KEY} from "../../constants/common";
 
-export interface ISoundStore {
-  isSoundEnabled: ISoundState;
-  setSoundEnabled: (newState: ISoundState) => void;
-  toggleSound: () => void;
-  resetSound: () => void;
+// Define the shape of the store's state.
+export interface ISoundStoreState {
+  isSoundEnabled: ISoundState; // Boolean indicating if sound is enabled or not.
 }
 
-export const useSoundStore = create<ISoundStore>((set) => ({
-  isSoundEnabled: (() => {
-    if (typeof window === "undefined") {
-      return DEFAULT_SOUND_STATE;
-    }
+// Define the actions available in the store.
+export interface ISoundStoreActions {
+  toggleSound: () => void; // Toggles the sound on or off.
+  resetSound: () => void; // Resets the sound state to its default.
+}
 
-    const storedSound = localStorage.getItem("isSoundEnabled");
+// Create the sound store using Zustand and enable persistence.
+export const useSoundStore = create(
+  persist<ISoundStoreState & ISoundStoreActions>(
+    (set) => ({
+      isSoundEnabled: DEFAULT_SOUND_STATE, // Initial sound state.
 
-    if (isNotDefined(storedSound)) {
-      return DEFAULT_SOUND_STATE;
-    }
+      // Toggles the sound state between enabled and disabled.
+      toggleSound: () => {
+        set((state) => ({
+          isSoundEnabled: !state.isSoundEnabled, // Toggle the sound state.
+        }));
+      },
 
-    const storedSoundParsed = JSON.parse(storedSound);
-
-    if (typeof storedSound !== "boolean") {
-      return DEFAULT_SOUND_STATE;
-    }
-
-    return storedSoundParsed;
-  })(),
-  setSoundEnabled: (newState: ISoundState) => {
-    localStorage.setItem("isSoundEnabled", JSON.stringify(newState)); // Persist sound state to localStorage
-    set({isSoundEnabled: newState});
-  },
-  toggleSound: () => {
-    set((state) => {
-      const newSoundState = !state.isSoundEnabled;
-
-      localStorage.setItem("isSoundEnabled", JSON.stringify(newSoundState)); // Persist toggle state
-
-      return {isSoundEnabled: newSoundState};
-    });
-  },
-  resetSound: () => {
-    localStorage.setItem("isSoundEnabled", JSON.stringify(true)); // Persist reset to default
-    set({isSoundEnabled: DEFAULT_SOUND_STATE});
-  },
-}));
+      // Resets the sound state to the default value.
+      resetSound: () => {
+        set({isSoundEnabled: DEFAULT_SOUND_STATE});
+      },
+    }),
+    {
+      name: SOUND_STORE_KEY, // Persist the store's state under this key.
+    },
+  ),
+);
