@@ -85,39 +85,41 @@ export function ProjectAccordion({
           </AccordionContent>
         </AccordionItem>
       )}
-      <AccordionItem value="resources">
-        <AccordionTrigger>Recursos</AccordionTrigger>
-        <AccordionContent>
-          <ul className="space-y-3 pl-5">
-            {isDefined(githubUrl) ? (
-              <li aria-label="Code Link">
-                <span className="font-bold">Código: </span>
-                <a
-                  className="text-blue-700"
-                  href={githubUrl}
-                  rel="noopener noreferrer"
-                  target="__blank"
-                >
-                  {githubUrl}
-                </a>
-              </li>
-            ) : null}
-            {isDefined(demoUrl) ? (
-              <li aria-label="Demo Link">
-                <span className="font-bold">Demo: </span>
-                <a
-                  className="text-blue-700"
-                  href={demoUrl}
-                  rel="noopener noreferrer"
-                  target="__blank"
-                >
-                  {demoUrl}
-                </a>
-              </li>
-            ) : null}
-          </ul>
-        </AccordionContent>
-      </AccordionItem>
+      {(isDefined(githubUrl) || isDefined(demoUrl)) && (
+        <AccordionItem value="resources">
+          <AccordionTrigger>Recursos</AccordionTrigger>
+          <AccordionContent>
+            <ul className="space-y-3 pl-5">
+              {isDefined(githubUrl) ? (
+                <li aria-label="Code Link">
+                  <span className="font-bold">Código: </span>
+                  <a
+                    className="text-blue-700"
+                    href={githubUrl}
+                    rel="noopener noreferrer"
+                    target="__blank"
+                  >
+                    {githubUrl}
+                  </a>
+                </li>
+              ) : null}
+              {isDefined(demoUrl) ? (
+                <li aria-label="Demo Link">
+                  <span className="font-bold">Demo: </span>
+                  <a
+                    className="text-blue-700"
+                    href={demoUrl}
+                    rel="noopener noreferrer"
+                    target="__blank"
+                  >
+                    {demoUrl}
+                  </a>
+                </li>
+              ) : null}
+            </ul>
+          </AccordionContent>
+        </AccordionItem>
+      )}
     </UIAccordion>
   );
 }
