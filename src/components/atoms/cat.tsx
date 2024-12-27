@@ -1,7 +1,7 @@
 import {Loader, RotateCcw} from "lucide-react";
 import {useState, type HTMLAttributes} from "react";
 
-import {cn} from "../../helpers/classnames";
+import {cn} from "../../helpers/common/classnames";
 
 const CAT_URLs = ["https://cataas.com/cat/gif", "https://cataas.com/cat"];
 
