@@ -18,6 +18,7 @@ interface Props {
   html?: astroHTML.JSX.HtmlHTMLAttributes
 }
 
+// Extract props passed to the Astro component
 const { title, description, lang = DEFAULT_LANG, body, html } = Astro.props
 ---
 
