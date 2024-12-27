@@ -1,4 +1,4 @@
-import {ProjectStack, ProjectStatus} from "../types/project.d";
+import type {ProjectStack, ProjectStatus} from "@prisma/client";
 
 //#region Navbar
 export const NavbarAnimationConfig = {
@@ -15,17 +15,16 @@ export const NavbarAnimationConfig = {
 //#endregion
 
 //#region Project-Details styles
-const StatusStyle = {
-  [ProjectStatus["Terminado"]]: "text-green-500",
-  [ProjectStatus["En Desarrollo"]]: "text-yellow-500",
-  [ProjectStatus["Pausado"]]: "text-red-500",
+const StatusStyle: Record<ProjectStatus, string> = {
+  FINISHED: "text-green-500",
+  IN_PROGRESS: "text-yellow-500",
+  STALLED: "text-red-500",
 } as const;
 
-const StackStyle = {
-  [ProjectStack["Full-Stack"]]: "bg-red-500/70 text-white dark:bg-red-500",
-  [ProjectStack["Back-End"]]: "bg-blue-500/70 text-white dark:bg-blue-500",
-  [ProjectStack["Front-End"]]: "bg-green-500/70 text-white dark:bg-green-500",
-  default: "bg-gray-500/70 text-white dark:bg-gray-500",
+const StackStyle: Record<ProjectStack, string> = {
+  FULL_STACK: "bg-red-500/70 text-white dark:bg-red-500",
+  BACK_END: "bg-blue-500/70 text-white dark:bg-blue-500",
+  FRONT_END: "bg-green-500/70 text-white dark:bg-green-500",
 } as const;
 
 export const ProjectDetailsStyles = {

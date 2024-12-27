@@ -1,26 +1,31 @@
 ---
-import axios from 'axios'
 import Layout from '../../../components/layouts/base.astro'
 import { ProjectAccordion } from '../../../components/organisms/accordion/project-accordion'
 import {
   Breadcrumb,
   type IBreadCrumb
 } from '../../../components/organisms/breadcrumb'
-import { ENV } from '../../../constants/env'
 import { ProjectDetailsStyles } from '../../../constants/styles'
-import { ProjectStack, type IProject } from '../../../types/project.d'
+import { getAllProjectsWithStackAndCollaborators } from '../../../services/project/getAllProjectsWithStackAndCollaborators'
+import {
+  PROJECT_STACK_TRANSCRIPTIONS,
+  PROJECT_STATUS_TRANSCRIPTIONS
+} from '../../../constants/transcriptions'
+import { fromArrayStringToArrayObjectWithIdAndValue } from '../../../mappers/common/fromArrayStringToArrayObjectWithIdAndValue'
 
 export async function getStaticPaths() {
-  const projects = await axios
-    .get<IProject[]>(`${ENV.base_url}/api/projects/all.json`)
-    .then(response => {
-      return response.data
-    })
-    .catch(() => {
-      return [] as IProject[]
-    })
+  const projects = await getAllProjectsWithStackAndCollaborators()
 
-  const paths = projects.map(project => ({
+  // Map the projects to add the goals and contributions as an array of objects
+  const mappedProjects = projects.map(project => ({
+    ...project,
+    goals: fromArrayStringToArrayObjectWithIdAndValue(project.goals),
+    contributions: fromArrayStringToArrayObjectWithIdAndValue(
+      project.contributions
+    )
+  }))
+
+  const paths = mappedProjects.map(project => ({
     params: { key: project.key },
     props: project
   }))
@@ -28,7 +33,7 @@ export async function getStaticPaths() {
   return paths
 }
 
-const { key, name, stack, status, accordion } = Astro.props
+const project = Astro.props
 
 const { StackStyle, StatusStyle } = ProjectDetailsStyles
 
@@ -38,7 +43,7 @@ const BreadCrumbItems: IBreadCrumb[] = [
     href: '/projects'
   },
   {
-    label: name
+    label: project.name
   }
 ]
 ---
@@ -47,7 +52,7 @@ const BreadCrumbItems: IBreadCrumb[] = [
   body={{
     class: 'bg-background dark:bg-background-dark'
   }}
-  title={name}
+  title={project.name}
 >
   <div class="py-14 px-16 space-y-4">
     <header>
@@ -58,31 +63,25 @@ const BreadCrumbItems: IBreadCrumb[] = [
         <article>
           <h1
             class="scroll-m-20 text-5xl font-extrabold tracking-tight"
-            transition:name={`${key} Title`}
+            transition:name={`${project.key} Title`}
           >
-            {name}
+            {project.name}
           </h1>
           <div class="flex gap-2 items-center font-light text-lg my-2">
             <h2
               class="leading-none font-medium"
-              class:list={StatusStyle[status]}
+              class:list={StatusStyle[project.status]}
             >
-              {status}
+              {PROJECT_STATUS_TRANSCRIPTIONS[project.status]}
             </h2>
             <small class="leading-none p-1 rounded-md text-base"
               >2021 - Actualidad</small
             >
             <h3
               class="leading-none font-medium rounded-md p-1 text-base"
-              class:list={[
-                StackStyle[stack],
-                {
-                  [StackStyle['default']]:
-                    !Object.keys(ProjectStack).includes(stack)
-                }
-              ]}
+              class:list={[StackStyle[project.stack]]}
             >
-              {stack}
+              {PROJECT_STACK_TRANSCRIPTIONS[project.stack]}
             </h3>
           </div>
           <p class="text-pretty">
@@ -96,7 +95,15 @@ const BreadCrumbItems: IBreadCrumb[] = [
           </p>
         </article>
         <article class="mt-5 flex-1">
-          <ProjectAccordion data={accordion} client:load />
+          <ProjectAccordion
+            collaborators={project.collaborators}
+            goals={project.goals}
+            contributions={project.contributions}
+            demoUrl={project.demoUrl}
+            githubUrl={project.githubUrl}
+            techStack={project.techStacks}
+            client:load
+          />
         </article>
       </section>
       <section class="flex flex-1 relative justify-center items-center">

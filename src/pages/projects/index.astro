@@ -1,17 +1,9 @@
 ---
-import axios from 'axios'
 import Layout from '../../components/layouts/base.astro'
 import { ProjectCard } from '../../components/molecules/cards/project-card'
-import { ENV } from '../../constants/env'
-import { PERSONAL_ACCOUNTS } from '../../constants/external'
-import type { IProject } from '../../types/project'
+import { getAllProjectMin } from '../../services/project/getAllStackMin'
 
-const Projects: IProject[] = await axios
-  .get<IProject[]>(`${ENV.base_url}/api/projects/sort-all.json`)
-  .then(response => response.data)
-  .catch(() => {
-    return [] as IProject[]
-  })
+const Projects = await getAllProjectMin()
 ---
 
 <Layout
@@ -30,9 +22,9 @@ const Projects: IProject[] = await axios
       {
         Projects.map(project => (
           <ProjectCard
-            key={project.key}
+            projectKey={project.key}
             name={project.name}
-            logoURL={project.logoURL}
+            logoURL={project.logoUrl}
             primaryColor={project.primaryColor}
             client:load
           />

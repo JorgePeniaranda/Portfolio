@@ -1,19 +1,24 @@
-import type {IProjectCard} from "./project-card.d";
-
 import React from "react";
 import {Heart, HeartOff} from "lucide-react";
 
 import {useProjectLikedStore} from "../../../services/storage/liked-projects";
 
-export function ProjectCard({key, name, logoURL, primaryColor}: IProjectCard) {
+export interface Props {
+  projectKey: string;
+  name: string;
+  logoURL: string;
+  primaryColor: string;
+}
+
+export function ProjectCard({projectKey, name, logoURL, primaryColor}: Props) {
   const {addLikedProject, checkLikedProject, removeLikedProject} = useProjectLikedStore();
 
-  const isLiked = checkLikedProject(key);
+  const isLiked = checkLikedProject(projectKey);
   const handleClickHeart = () => {
     if (isLiked) {
-      removeLikedProject(key);
+      removeLikedProject(projectKey);
     } else {
-      addLikedProject(key);
+      addLikedProject(projectKey);
     }
   };
 
@@ -24,7 +29,7 @@ export function ProjectCard({key, name, logoURL, primaryColor}: IProjectCard) {
         style={{backgroundColor: primaryColor}}
       >
         <h3 className="text-4xl font-bold tracking-tight text-white">{name}</h3>
-        <img alt={`${key} Logo`} className="w-40" src={logoURL} />
+        <img alt={`${projectKey} Logo`} className="w-40" src={logoURL} />
         <p className="col-span-2">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt repellat eos dolor
           deserunt optio modi dicta ut animi laborum accusantium, praesentium recusandae quibusdam,
@@ -40,6 +45,7 @@ export function ProjectCard({key, name, logoURL, primaryColor}: IProjectCard) {
             )}
           </button>
         </div>
+        <a href={`/projects/${projectKey}`}>conocer</a>
       </p>
     </article>
   );
