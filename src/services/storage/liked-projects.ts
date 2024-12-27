@@ -1,23 +1,54 @@
+import type {Project} from "@prisma/client";
+
 import {create} from "zustand";
 
+import {PROJECT_LIKED_STORE_KEY} from "../../constants/common";
+import {isNotDefined} from "../../helpers/guards/is-defined";
+
 export interface IProjectLikedStore {
-  likedKeyProjects: string[];
-  addLikedProject(key: string): void;
-  removeLikedProject(key: string): void;
-  checkLikedProject(key: string): boolean;
+  likedKeyProjects: Project["key"][];
+  setLikedProjects(likedProjects: Project["key"][]): void;
+  addLikedProject(key: Project["key"]): void;
+  removeLikedProject(key: Project["key"]): void;
+  checkLikedProject(key: Project["key"]): boolean;
 }
 
 export const useProjectLikedStore = create<IProjectLikedStore>((set, get) => ({
-  likedKeyProjects: [],
-  addLikedProject(key: string) {
-    set((state) => ({likedKeyProjects: [...state.likedKeyProjects, key]}));
+  likedKeyProjects: (() => {
+    if (typeof window === "undefined") {
+      return [];
+    }
+
+    const storedProjectLiked = localStorage.getItem(PROJECT_LIKED_STORE_KEY);
+
+    if (isNotDefined(storedProjectLiked)) {
+      return [];
+    }
+
+    const storedProjectLikedParsed = JSON.parse(storedProjectLiked);
+
+    if (!Array.isArray(storedProjectLikedParsed)) {
+      return [];
+    }
+
+    return storedProjectLikedParsed;
+  })(),
+  setLikedProjects(likedProjects: Project["key"][]) {
+    set(() => ({likedKeyProjects: likedProjects}));
+    localStorage.setItem(PROJECT_LIKED_STORE_KEY, JSON.stringify(likedProjects));
   },
-  removeLikedProject(key: string) {
-    set((state) => ({
-      likedKeyProjects: state.likedKeyProjects.filter((likedID) => likedID !== key),
-    }));
+  addLikedProject(key: Project["key"]) {
+    const store = get();
+
+    store.setLikedProjects([...store.likedKeyProjects, key]);
   },
-  checkLikedProject(key: string) {
+  removeLikedProject(key: Project["key"]) {
+    const store = get();
+    const newLikedProjects = store.likedKeyProjects.filter((projectKey) => projectKey !== key);
+
+    store.setLikedProjects(newLikedProjects);
+  },
+  checkLikedProject(key: Project["key"]) {
     return get().likedKeyProjects.includes(key);
   },
 }));

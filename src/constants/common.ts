@@ -14,5 +14,7 @@ export const THEME_STORE_KEY = "theme";
 
 export const SOUND_STORE_KEY = "isSoundEnabled";
 
+export const PROJECT_LIKED_STORE_KEY = "likedProjects";
+
 export const THEME_CLASSNAME = "dark";
 //#endregion

@@ -37,9 +37,10 @@ export const useSoundStore = create<ISoundStore>((set, get) => ({
     set({isSoundEnabled: newState});
   },
   toggleSound: () => {
-    const newSoundState = !get().isSoundEnabled;
+    const store = get();
+    const newSoundState = !store.isSoundEnabled;
 
-    get().setSoundEnabled(newSoundState);
+    store.setSoundEnabled(newSoundState);
   },
   resetSound: () => {
     get().setSoundEnabled(DEFAULT_SOUND_STATE);

@@ -44,11 +44,12 @@ export const useThemeStore = create<IThemeStore>((set, get) => ({
     get().setTheme(DEFAULT_THEME);
   },
   toggleTheme: () => {
-    const currentIndex = themesArray.indexOf(get().theme);
+    const store = get();
+    const currentIndex = themesArray.indexOf(store.theme);
     const validIndex = currentIndex !== -1 ? currentIndex : 0;
 
     const nextIndex = (validIndex + 1) % themesArray.length;
 
-    get().setTheme(themesArray[nextIndex]);
+    store.setTheme(themesArray[nextIndex]);
   },
 }));
