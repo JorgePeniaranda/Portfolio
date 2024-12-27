@@ -9,7 +9,5 @@ export async function getProjectById({id}: {id: Project["id"]}): Promise<Project
     },
   });
 
-  console.log({data});
-
   return data;
 }
