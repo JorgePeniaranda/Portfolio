@@ -99,9 +99,9 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
+      "tsc --noEmit",
       "eslint --fix",
-      "prettier --write",
-      "tsc --noEmit"
+      "prettier --write"
     ]
   }
 }
