@@ -27,27 +27,72 @@ Hello! I'm a passionate web developer with boundless creativity and an unwaverin
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/eslint/eslint-original.svg" height="40" alt="eslint logo"  />
 </div>
 
+## 🔄 Git Flow
+
+This project follows the **Git Flow** workflow for efficient development and deployment.
+
+### Main branches:
+- **`main`**: The **Release Candidate (RC)** branch, containing code ready for final testing and static build generation for production.
+- **`develop`**: The development branch where new features and improvements are implemented.
+- **`production`**: Contains the generated static files ready for production. It is updated when the code in `main` is ready for deployment.
+
+### Workflow:
+1. **Work in `develop`**: Create feature branches from `develop` to work on new functionality.
+   ```sh
+   git checkout develop
+   git checkout -b feature/my-new-feature
+   ```
+2. Release preparation: When develop is ready for testing, create a main (RC) branch for final testing.
+```sh
+git checkout develop
+git checkout -b release/v1.0.0
+```
+3. Production deployment: After merging into main, generate static files and push them to production.
+```sh
+npm run build  # Generates static files
+git checkout production
+git add dist/  # Ensure static files are in dist/
+git commit -m "Deploy to production"
+git push origin production
+```
+4. Branch integration: Keep branches updated with periodic merges from develop to main and from main to production.
+
+```sh
+git checkout develop
+git pull origin develop
+git checkout main
+git merge develop
+git push origin main
+
+# When ready to deploy:
+git checkout production
+git pull origin production
+git merge main
+git push origin production
+```
+
+
 ## 🚀 Deployment
 
 You need the following programs before you start:
 
 - npm: https://www.npmjs.com/package/download
 
-To deploy this project run
+To deploy this project run:
 
 1. Clone the repo
    ```sh
    git clone https://github.com/JorgePeniaranda/Portfolio
    ```
 2. Navigate to the project
-   ```sh
-   cd ./Portfolio
-   ```
+```sh
+cd ./Portfolio
+```
 3. Install NPM packages
-   ```sh
-   npm install
-   ```
+```sh
+npm install
+```
 4. Execute the project
-   ```sh
-   npm run dev
-   ```
+```sh
+npm run dev
+```
