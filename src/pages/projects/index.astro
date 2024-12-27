@@ -1,10 +1,7 @@
 ---
 import axios from 'axios'
-import Codewars from '../../assets/svg/logos/Codewars.astro'
-import Github from '../../assets/svg/logos/Github.astro'
-import Gitlab from '../../assets/svg/logos/Gitlab.astro'
 import Layout from '../../components/layouts/base.astro'
-import ProjectCard from '../../components/molecules/cards/project-card.astro'
+import {ProjectCard} from '../../components/molecules/cards/project-card'
 import { ENV } from '../../constants/env'
 import { PERSONAL_ACCOUNTS } from '../../constants/external'
 import type { IProject } from '../../types/project'
@@ -24,67 +21,13 @@ const Projects: IProject[] = await axios
   title="Proyectos"
 >
   <main class="w-full h-full py-10 space-y-10 container">
-    <section class="flex flex-col items-center pt-16 gap-6">
+    <!-- <section class="flex flex-col items-center gap-6">
       <article class="w-max flex flex-col text-center items-center">
-        <img
-          src={PERSONAL_ACCOUNTS.github.image}
-          alt="Jorge Peñaranda Github Profile Picture"
-          class="w-24 h-24 rounded-full"
-        />
-        <h1 class="text-4xl font-bold">Proyectos</h1>
-        <h2 class="text-muted-foreground">
-          @{PERSONAL_ACCOUNTS.github.username}
-        </h2>
+        <h1 class="sr-only">Proyectos de Jorge Peñaranda</h1>
       </article>
-      <article>
-        <ul class="flex gap-7" aria-label="Code Accounts Links">
-          <li aria-label="Github">
-            <a
-              href={PERSONAL_ACCOUNTS.github.url}
-              class="flex w-max h-max p-2"
-              target="_blank"
-              referrerpolicy="no-referrer"
-            >
-              <Github
-                class="w-8 h-8 fill-red-[#ff4d4d] transition-transform hover:-translate-y-2"
-                aria-label="Github Icon"
-              />
-              <span class="sr-only">Github</span>
-            </a>
-          </li>
-          <li aria-label="Gitlab">
-            <a
-              href={PERSONAL_ACCOUNTS.gitlab.url}
-              class="flex w-max h-max p-2"
-              target="_blank"
-              referrerpolicy="no-referrer"
-            >
-              <Gitlab
-                class="w-8 h-8 fill-red-[#ff4d4d] transition-transform hover:-translate-y-2"
-                aria-label="Gitlab Icon"
-              />
-              <span class="sr-only">Gitlab</span>
-            </a>
-          </li>
-          <li aria-label="Codewars">
-            <a
-              href={PERSONAL_ACCOUNTS.codewars.url}
-              class="flex w-max h-max p-2"
-              target="_blank"
-              referrerpolicy="no-referrer"
-            >
-              <Codewars
-                class="w-8 h-8 fill-red-[#ff4d4d] transition-transform hover:-translate-y-2"
-                aria-label="Codewars Icon"
-              />
-              <span class="sr-only">Codewars</span>
-            </a>
-          </li>
-        </ul>
-      </article>
-    </section>
+    </section> -->
     <section
-      class="grid gap-6 md:grid-cols-3 lg:grid-cols-4 py-4 h-full justify-center"
+      class="flex gap-6 h-full justify-center"
     >
       {
         Projects.map(project => (
@@ -93,6 +36,7 @@ const Projects: IProject[] = await axios
             name={project.name}
             logoURL={project.logoURL}
             primaryColor={project.primaryColor}
+            client:load
           />
         ))
       }
