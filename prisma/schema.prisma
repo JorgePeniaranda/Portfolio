@@ -15,6 +15,7 @@ datasource db {
 
 model Project {
   id               Int           @id @default(autoincrement())
+  key              String        @unique
   name             String
   description      String
   goals            String
