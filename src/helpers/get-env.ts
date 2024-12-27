@@ -1,3 +1,5 @@
+import {devConsoleLog} from "./dev-console-log";
+
 export const getEnvValue = (envName: string, defaultValue?: string): string => {
   const envValue = import.meta.env[envName];
 
@@ -6,11 +8,17 @@ export const getEnvValue = (envName: string, defaultValue?: string): string => {
   }
 
   if (typeof defaultValue === "string") {
-    // console.warn("Using default value for environment variable", envName, defaultValue);
+    devConsoleLog({
+      message: `Environment variable not found: ${envName}, using default value: ${defaultValue}`,
+      type: "warn",
+    });
 
     return defaultValue;
   }
 
-  // console.error("Environment variable not found", envName);
+  devConsoleLog({
+    message: `Environment variable not found: ${envName}`,
+    type: "error",
+  });
   throw new Error("Environment variable not found: " + envName);
 };
