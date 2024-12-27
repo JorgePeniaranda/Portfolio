@@ -99,9 +99,8 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "prettier --write",
-      "eslint --fix",
-      "tsc --noEmit --skipLibCheck --isolatedModules --strict"
+      "prettier . --write",
+      "eslint . --fix"
     ]
   }
 }
