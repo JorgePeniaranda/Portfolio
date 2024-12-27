@@ -1,4 +1,4 @@
-import type {ITheme} from "../types/theme";
+import type {ISoundState, ITheme} from "../types/common.d";
 
 export const DEFAULT_LANG = "es";
 
@@ -8,7 +8,11 @@ export const DEFAULT_LANG = "es";
  */
 export const DEFAULT_THEME: ITheme = "light";
 
-export const THEME_STORAGE_KEY = "theme";
+export const DEFAULT_SOUND_STATE: ISoundState = true;
+
+export const THEME_STORE_KEY = "theme";
+
+export const SOUND_STORE_KEY = "isSoundEnabled";
 
 export const THEME_CLASSNAME = "dark";
 //#endregion

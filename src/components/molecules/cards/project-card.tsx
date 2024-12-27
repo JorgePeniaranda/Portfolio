@@ -1,11 +1,12 @@
 import type {IProjectCard} from "./project-card.d";
 
+import React from "react";
 import {Heart, HeartOff} from "lucide-react";
 
-import {useProjectLikedStorage} from "../../../services/storage/liked-projects";
+import {useProjectLikedStore} from "../../../services/storage/liked-projects";
 
 export function ProjectCard({key, name, logoURL, primaryColor}: IProjectCard) {
-  const {addLikedProject, checkLikedProject, removeLikedProject} = useProjectLikedStorage();
+  const {addLikedProject, checkLikedProject, removeLikedProject} = useProjectLikedStore();
 
   const isLiked = checkLikedProject(key);
   const handleClickHeart = () => {

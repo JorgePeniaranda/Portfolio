@@ -6,3 +6,5 @@ export const themes = {
 export const themesArray = Object.values(themes);
 
 export type ITheme = (typeof themes)[keyof typeof themes];
+
+export type ISoundState = boolean;

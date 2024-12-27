@@ -1,8 +1,13 @@
-import type {IProjectLikedStorage} from "./liked-projects.d";
-
 import {create} from "zustand";
 
-export const useProjectLikedStorage = create<IProjectLikedStorage>((set, get) => ({
+export interface IProjectLikedStore {
+  likedKeyProjects: string[];
+  addLikedProject(key: string): void;
+  removeLikedProject(key: string): void;
+  checkLikedProject(key: string): boolean;
+}
+
+export const useProjectLikedStore = create<IProjectLikedStore>((set, get) => ({
   likedKeyProjects: [],
   addLikedProject(key: string) {
     set((state) => ({likedKeyProjects: [...state.likedKeyProjects, key]}));

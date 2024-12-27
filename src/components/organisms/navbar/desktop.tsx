@@ -1,18 +1,19 @@
 import type {INavbarSection} from "./navbar";
 
+import React from "react";
 import {MotionValue, motion, useMotionValue, useSpring, useTransform} from "framer-motion";
 import {Loader, Moon, Sun, Volume2, VolumeX, icons} from "lucide-react";
 import {Fragment, useRef} from "react";
 
 import {NavbarAnimationConfig} from "../../../constants/styles";
-import useSound from "../../../hooks/useSound";
-import useTheme from "../../../hooks/useTheme";
+import {useSoundStore} from "../../../services/storage/sound";
+import {useThemeStore} from "../../../services/storage/theme";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "../../ui/tooltip";
 
 //#region NAVBAR
 export function DesktopNavbar({items}: {items: INavbarSection[]}) {
-  const {theme, toggleTheme} = useTheme();
-  const {sound, toggleSound} = useSound();
+  const {theme, toggleTheme} = useThemeStore();
+  const {isSoundEnabled, toggleSound} = useSoundStore();
   const mouseX = useMotionValue(Infinity);
 
   return (
@@ -105,7 +106,7 @@ export function DesktopNavbar({items}: {items: INavbarSection[]}) {
             type="button"
             onClick={toggleSound}
           >
-            {sound ? (
+            {isSoundEnabled ? (
               <Volume2
                 aria-label="system"
                 className="size-3/5 text-neutral-500 transition dark:text-neutral-300"
@@ -118,7 +119,7 @@ export function DesktopNavbar({items}: {items: INavbarSection[]}) {
             )}
             <span className="sr-only">
               Current:
-              <b>{sound ? "Sound On" : "Sound Off"}</b>
+              <b>{isSoundEnabled ? "Sound On" : "Sound Off"}</b>
             </span>
           </button>
         </NavbarItem>

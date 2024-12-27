@@ -1,9 +1,10 @@
 import type {INavbarSection} from "./navbar";
 
+import React from "react";
 import {Loader, Moon, Settings, Sun, Volume2, VolumeX, icons} from "lucide-react";
 
-import useSound from "../../../hooks/useSound";
-import useTheme from "../../../hooks/useTheme";
+import {useSoundStore} from "../../../services/storage/sound";
+import {useThemeStore} from "../../../services/storage/theme";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,8 +14,8 @@ import {
 } from "../../ui/dropdown-menu";
 
 export function MobileNavbar({items}: {items: INavbarSection[]}) {
-  const {theme, toggleTheme} = useTheme();
-  const {sound, toggleSound} = useSound();
+  const {theme, toggleTheme} = useThemeStore();
+  const {isSoundEnabled, toggleSound} = useSoundStore();
 
   return (
     <nav
@@ -99,7 +100,7 @@ export function MobileNavbar({items}: {items: INavbarSection[]}) {
               type="button"
               onClick={toggleSound}
             >
-              {sound ? (
+              {isSoundEnabled ? (
                 <Volume2
                   aria-label="system"
                   className="mr-2 size-4 text-neutral-500 transition dark:text-neutral-300"
@@ -110,7 +111,7 @@ export function MobileNavbar({items}: {items: INavbarSection[]}) {
                   className="mr-2 size-4 text-neutral-500 transition dark:text-neutral-300"
                 />
               )}
-              <span>{sound ? "Desactivar Sonido" : "Activar Sonido"}</span>
+              <span>{isSoundEnabled ? "Desactivar Sonido" : "Activar Sonido"}</span>
             </button>
           </DropdownMenuItem>
         </DropdownMenuContent>
