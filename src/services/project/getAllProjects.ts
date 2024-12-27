@@ -1,7 +1,7 @@
 import type {Project} from "@prisma/client";
 
-import {prisma} from "../../helpers/client/prisma-client";
+import {databaseClient} from "../../helpers/client/prisma";
 
 export async function getAllProjects(): Promise<Project[]> {
-  return await prisma.project.findMany();
+  return await databaseClient.project.findMany();
 }

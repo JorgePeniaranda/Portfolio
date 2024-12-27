@@ -1,6 +1,6 @@
 import type {Colaborator, Stack} from "@prisma/client";
 
-import {prisma} from "../../helpers/client/prisma-client";
+import {databaseClient} from "../../helpers/client/prisma";
 import {isNotDefined} from "../../helpers/guards/is-defined";
 
 export async function getColaboratorsByProjectId({
@@ -8,7 +8,7 @@ export async function getColaboratorsByProjectId({
 }: {
   id: Stack["id"];
 }): Promise<Colaborator[] | null> {
-  const data = await prisma.project.findUnique({
+  const data = await databaseClient.project.findUnique({
     where: {
       id,
     },

@@ -5,11 +5,11 @@ import {PrismaClient} from "@prisma/client";
  *
  * @see https://www.prisma.io/docs/orm/prisma-client
  * @example
- * import {prisma} from "./helpers/client/prisma-client";
+ * import {databaseClient} from "./helpers/client/prisma";
  *
  * async function main() {
- *  const allProjects = await prisma.project.findMany();
+ *  const allProjects = await databaseClient.project.findMany();
  *  console.dir(allProjects, {depth: null});
  * }
  */
-export const prisma = new PrismaClient();
+export const databaseClient = new PrismaClient();
