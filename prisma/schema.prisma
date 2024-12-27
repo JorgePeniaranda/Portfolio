@@ -13,18 +13,25 @@ enum ProjectStatus {
   STALLED
 }
 
+enum ProjectStack {
+  FRONT_END
+  BACK_END
+  FULL_STACK
+}
+
 model Project {
   id               Int           @id @default(autoincrement())
   key              String        @unique
   name             String
   status           ProjectStatus
+  stack            ProjectStack
   startDate        DateTime      @map("start_date")
   endDate          DateTime?     @map("end_date")
   description      String
   goals            String[]
-  whatContribution String?       @map("what_contribution")
-  logoUrl          String?       @map("logo_url")
-  primaryColor     String?       @map("primary_color")
+  contributions String[]       @map("contribution")
+  logoUrl          String       @map("logo_url")
+  primaryColor     String       @map("primary_color")
   demoUrl          String?       @map("demo_url")
   githubUrl        String?       @map("github_url")
   techStacks       Stack[]       @relation("ProjectStacks")
