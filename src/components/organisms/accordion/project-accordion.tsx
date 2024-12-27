@@ -1,26 +1,19 @@
-import type { IProjectAccordion } from '../../../types/project'
+import type {IProjectAccordion} from "./project-accordion.d";
 
-import GithubUser from '../../atoms/github-user'
+import GithubUser from "../../atoms/github-user";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  Accordion as UIAccordion
-} from '../../ui/accordion'
+  Accordion as UIAccordion,
+} from "../../ui/accordion";
 
 interface Props extends React.HTMLAttributes<HTMLElement> {
-  data: IProjectAccordion
+  data: IProjectAccordion;
 }
 
 export function ProjectAccordion({
-  data: {
-    goals,
-    technologies,
-    contribution,
-    collaborators,
-    resources,
-    ...props
-  }
+  data: {goals, technologies, contribution, collaborators, resources, ...props},
 }: Props) {
   return (
     <UIAccordion className="w-full" type="multiple" {...props}>
@@ -28,7 +21,7 @@ export function ProjectAccordion({
         <AccordionTrigger>Objetivos</AccordionTrigger>
         <div />
         <AccordionContent className="space-y-3">
-          {goals.map(goal => (
+          {goals.map((goal) => (
             <p key={`goal_${goal.id}`} className="text-pretty">
               {goal.value}
             </p>
@@ -39,7 +32,7 @@ export function ProjectAccordion({
         <AccordionTrigger>Tecnologías</AccordionTrigger>
         <AccordionContent>
           <ul className="list-disc pl-4">
-            {technologies.map(technology => (
+            {technologies.map((technology) => (
               <li key={`technology_${technology.id}`}>{technology.value}</li>
             ))}
           </ul>
@@ -48,7 +41,7 @@ export function ProjectAccordion({
       <AccordionItem value="contribution">
         <AccordionTrigger>¿Qué aporté?</AccordionTrigger>
         <AccordionContent className="space-y-3">
-          {contribution.map(contribution => (
+          {contribution.map((contribution) => (
             <p key={`contribution_${contribution.id}`} className="text-pretty">
               {contribution.value}
             </p>
@@ -60,7 +53,7 @@ export function ProjectAccordion({
           <AccordionTrigger>Colaboradores</AccordionTrigger>
           <AccordionContent>
             <ul className="space-y-3 pl-5">
-              {collaborators.map(collaborator => (
+              {collaborators.map((collaborator) => (
                 <li key={`collaborator_${collaborator.id}`}>
                   <GithubUser username={collaborator.github} />
                 </li>
@@ -103,5 +96,5 @@ export function ProjectAccordion({
         </AccordionContent>
       </AccordionItem>
     </UIAccordion>
-  )
+  );
 }
