@@ -1,14 +1,14 @@
 // .prettierrc.mjs
 /** @type {import("prettier").Config} */
 export default {
-  plugins: ['prettier-plugin-astro'],
+  plugins: ["prettier-plugin-astro"],
   overrides: [
     {
-      files: '*.astro',
+      files: "*.astro",
       options: {
-        parser: 'astro'
-      }
-    }
+        parser: "astro",
+      },
+    },
   ],
   experimentalTernaries: false,
   printWidth: 80,
@@ -16,11 +16,11 @@ export default {
   useTabs: false,
   semi: false,
   singleQuote: true,
-  quoteProps: 'consistent',
+  quoteProps: "consistent",
   jsxSingleQuote: false,
-  trailingComma: 'none',
+  trailingComma: "none",
   bracketSpacing: true,
   bracketSameLine: false,
-  arrowParens: 'avoid',
-  endOfLine: 'lf'
-}
+  arrowParens: "avoid",
+  endOfLine: "lf",
+};

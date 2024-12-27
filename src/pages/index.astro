@@ -8,7 +8,7 @@ import Bird3 from '../assets/svg/draws/Bird-3.astro'
 import Sun from '../assets/svg/draws/Sun.astro'
 import Wave from '../assets/svg/draws/wave-1.astro'
 import Logo from '../assets/svg/logos/Logo.astro'
-import {TextWritter} from '../components/atoms/text-writter'
+import { TextWritter } from '../components/atoms/text-writter'
 
 const TITLE_WORD_LIST = [
   'Resultados',
@@ -20,7 +20,7 @@ const TITLE_WORD_LIST = [
   'Aplicaciones',
   'Mejoras',
   'El éxito'
-] 
+]
 ---
 
 <Layout
@@ -53,7 +53,7 @@ const TITLE_WORD_LIST = [
     </h1>
     <h2 class="font-medium text-6xl">
       De tus ideas a <b class="text-primary">
-        <TextWritter wordList={TITLE_WORD_LIST} client:load/>
+        <TextWritter wordList={TITLE_WORD_LIST} client:load />
       </b>
     </h2>
     <p class="max-w-2xl text-xl">

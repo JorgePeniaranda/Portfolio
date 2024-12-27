@@ -1,7 +1,7 @@
 ---
 import axios from 'axios'
 import Layout from '../../components/layouts/base.astro'
-import {ProjectCard} from '../../components/molecules/cards/project-card'
+import { ProjectCard } from '../../components/molecules/cards/project-card'
 import { ENV } from '../../constants/env'
 import { PERSONAL_ACCOUNTS } from '../../constants/external'
 import type { IProject } from '../../types/project'
@@ -26,9 +26,7 @@ const Projects: IProject[] = await axios
         <h1 class="sr-only">Proyectos de Jorge Peñaranda</h1>
       </article>
     </section> -->
-    <section
-      class="flex gap-6 h-full justify-center"
-    >
+    <section class="flex gap-6 h-full justify-center">
       {
         Projects.map(project => (
           <ProjectCard

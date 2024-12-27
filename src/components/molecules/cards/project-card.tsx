@@ -18,7 +18,7 @@ export function ProjectCard({key, name, logoURL, primaryColor}: IProjectCard) {
 
   return (
     <article className="flex h-[35rem] w-[30rem]">
-      <a
+      <p
         className="grid size-full grid-cols-2 grid-rows-[auto_1fr_auto] rounded-3xl transition-transform hover:-translate-y-4"
         style={{backgroundColor: primaryColor}}
       >
@@ -39,7 +39,7 @@ export function ProjectCard({key, name, logoURL, primaryColor}: IProjectCard) {
             )}
           </button>
         </div>
-      </a>
+      </p>
     </article>
   );
 }

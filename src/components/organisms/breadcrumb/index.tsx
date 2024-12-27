@@ -1,6 +1,6 @@
-import type { LucideIcon } from 'lucide-react'
+import type {LucideIcon} from "lucide-react";
 
-import React from 'react'
+import React from "react";
 
 import {
   Breadcrumb as UIBreadcrumb,
@@ -8,23 +8,23 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
-  BreadcrumbSeparator
-} from '../../ui/breadcrumb'
+  BreadcrumbSeparator,
+} from "../../ui/breadcrumb";
 
 //#region TYPES
 export interface IBreadCrumb {
-  label: string
-  href?: string
+  label: string;
+  href?: string;
 }
 //#endregion
 
 //#region BREADCRUMB
 interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
-  items: IBreadCrumb[]
-  Separator?: LucideIcon
+  items: IBreadCrumb[];
+  Separator?: LucideIcon;
 }
 
-export function Breadcrumb({ items, Separator, ...props }: BreadcrumbProps) {
+export function Breadcrumb({items, Separator, ...props}: BreadcrumbProps) {
   return (
     <UIBreadcrumb {...props}>
       <BreadcrumbList>
@@ -33,28 +33,23 @@ export function Breadcrumb({ items, Separator, ...props }: BreadcrumbProps) {
             <React.Fragment key={item.label}>
               <CustomBreadcrumbItem item={item} />
               {index !== items.length - 1 && (
-                <BreadcrumbSeparator>
-                  {Separator ? <Separator /> : null}
-                </BreadcrumbSeparator>
+                <BreadcrumbSeparator>{Separator ? <Separator /> : null}</BreadcrumbSeparator>
               )}
             </React.Fragment>
-          )
+          );
         })}
       </BreadcrumbList>
     </UIBreadcrumb>
-  )
+  );
 }
 //#endregion
 
 //#region BREADCRUMBITEM
 interface CustomBreadcrumbItemProps extends React.HTMLAttributes<HTMLElement> {
-  item: IBreadCrumb
+  item: IBreadCrumb;
 }
 
-export function CustomBreadcrumbItem({
-  item,
-  ...props
-}: CustomBreadcrumbItemProps) {
+export function CustomBreadcrumbItem({item, ...props}: CustomBreadcrumbItemProps) {
   if (item.href !== undefined) {
     return (
       <BreadcrumbItem {...props}>
@@ -62,13 +57,13 @@ export function CustomBreadcrumbItem({
           <a href={item.href}>{item.label}</a>
         </BreadcrumbLink>
       </BreadcrumbItem>
-    )
+    );
   }
 
   return (
     <BreadcrumbItem {...props}>
       <BreadcrumbPage>{item.label}</BreadcrumbPage>
     </BreadcrumbItem>
-  )
+  );
 }
 //#endregion

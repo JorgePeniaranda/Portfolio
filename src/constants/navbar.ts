@@ -1,6 +1,6 @@
-import type { INavbarSection } from '../components/organisms/navbar/navbar'
+import type {INavbarSection} from "../components/organisms/navbar/navbar";
 
-import { PERSONAL_ACCOUNTS } from './external'
+import {PERSONAL_ACCOUNTS} from "./external";
 
 /**
  * @description
@@ -20,61 +20,61 @@ import { PERSONAL_ACCOUNTS } from './external'
 
 export const NAVBAR_ITEMS: INavbarSection[] = [
   {
-    icon: 'Map',
-    label: 'Site Navegation',
+    icon: "Map",
+    label: "Site Navegation",
     items: [
       {
-        icon: 'House',
-        label: 'Home',
-        link: '/'
+        icon: "House",
+        label: "Home",
+        link: "/",
       },
       {
-        icon: 'Fingerprint',
-        label: 'About',
-        link: '/about'
+        icon: "Fingerprint",
+        label: "About",
+        link: "/about",
       },
       {
-        icon: 'Layers',
-        label: 'Stack',
-        link: '/stack'
+        icon: "Layers",
+        label: "Stack",
+        link: "/stack",
       },
       {
-        icon: 'Construction',
-        label: 'Projects',
-        link: '/projects'
+        icon: "Construction",
+        label: "Projects",
+        link: "/projects",
       },
       {
-        icon: 'Rss',
-        label: 'Blog',
-        link: '/blog'
-      }
-    ]
+        icon: "Rss",
+        label: "Blog",
+        link: "/blog",
+      },
+    ],
   },
   {
-    icon: 'Link',
-    label: 'Social Links',
+    icon: "Link",
+    label: "Social Links",
     items: [
       {
-        icon: 'Github',
-        label: 'GitHub',
+        icon: "Github",
+        label: "GitHub",
         link: PERSONAL_ACCOUNTS.github.url,
-        target: '_blank',
-        referrerPolicy: 'no-referrer'
+        target: "_blank",
+        referrerPolicy: "no-referrer",
       },
       {
-        icon: 'Linkedin',
-        label: 'Linkedin',
+        icon: "Linkedin",
+        label: "Linkedin",
         link: PERSONAL_ACCOUNTS.linkedin.url,
-        target: '_blank',
-        referrerPolicy: 'no-referrer'
+        target: "_blank",
+        referrerPolicy: "no-referrer",
       },
       {
-        icon: 'Instagram',
-        label: 'Instagram',
+        icon: "Instagram",
+        label: "Instagram",
         link: PERSONAL_ACCOUNTS.instagram.url,
-        target: '_blank',
-        referrerPolicy: 'no-referrer'
-      }
-    ]
-  }
-]
+        target: "_blank",
+        referrerPolicy: "no-referrer",
+      },
+    ],
+  },
+];
