@@ -1,6 +1,6 @@
 import {devConsoleLog} from "./dev-console-log";
 
-export const getEnvValue = (envName: string, defaultValue?: string): string => {
+export function getEnvValue(envName: string, defaultValue?: string): string {
   const envValue = import.meta.env[envName];
 
   if (typeof envValue === "string" && envValue.length > 0) {
@@ -21,4 +21,4 @@ export const getEnvValue = (envName: string, defaultValue?: string): string => {
     type: "error",
   });
   throw new Error("Environment variable not found: " + envName);
-};
+}

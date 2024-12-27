@@ -2,7 +2,7 @@ import type {IProjectCard} from "./project-card.d";
 
 import {Heart, HeartOff} from "lucide-react";
 
-import {useProjectLikedStorage} from "../../../storage/liked-projects";
+import {useProjectLikedStorage} from "../../../services/storage/liked-projects";
 
 export function ProjectCard({key, name, logoURL, primaryColor}: IProjectCard) {
   const {addLikedProject, checkLikedProject, removeLikedProject} = useProjectLikedStorage();

@@ -1,6 +1,6 @@
-import {THEME_CLASSNAME} from "../constants/common";
-import {themeStorage} from "../services/theme-storage";
-import {themes, type ITheme} from "../types/theme.d";
+import {THEME_CLASSNAME} from "../../constants/common";
+import {themeStorage} from "../../services/storage/theme-storage";
+import {themes, type ITheme} from "../../types/theme";
 
 export function ChangeTheme(theme: ITheme): void {
   const htmlClassList = document.documentElement.classList;

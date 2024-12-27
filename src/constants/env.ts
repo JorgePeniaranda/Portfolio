@@ -1,4 +1,4 @@
-import {getEnvValue} from "../helpers/get-env";
+import {getEnvValue} from "../helpers/common/get-env";
 
 const isProduction = import.meta.env.PROD;
 

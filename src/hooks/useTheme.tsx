@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 
 import {DEFAULT_THEME} from "../constants/common";
-import {ChangeTheme} from "../helpers/change-theme";
+import {ChangeTheme} from "../helpers/common/change-theme";
 import {themeStorage} from "../services/theme-storage";
 import {themesArray, type ITheme} from "../types/theme.d";
 
