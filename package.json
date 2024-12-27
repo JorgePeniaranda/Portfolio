@@ -99,9 +99,9 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "tsc --noEmit",
+      "prettier --write",
       "eslint --fix",
-      "prettier --write"
+      "tsc --noEmit --skipLibCheck --isolatedModules --strict"
     ]
   }
 }
