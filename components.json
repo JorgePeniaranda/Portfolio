@@ -12,6 +12,6 @@
   },
   "aliases": {
     "components": "src/components",
-    "utils": "src/helper/common/classnames"
+    "utils": "src/helpers/common/classnames"
   }
 }

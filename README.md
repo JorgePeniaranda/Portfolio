@@ -28,6 +28,8 @@ Hello! I'm a passionate web developer with boundless creativity and an unwaverin
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/eslint/eslint-original.svg" height="40" alt="eslint logo"  />
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg" height="40" alt="prisma logo" />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" height="40" alt="postgresql logo" />
 </div>
 
 ## 🔄 Git Flow
@@ -43,10 +45,12 @@ This project follows the **Git Flow** workflow for efficient development and dep
 ### Workflow:
 
 1. **Work in `develop`**: Create feature branches from `develop` to work on new functionality.
-   ```sh
-   git checkout develop
-   git checkout -b feature/my-new-feature
-   ```
+
+```sh
+git checkout develop
+git checkout -b feature/my-new-feature
+```
+
 2. Release preparation: When develop is ready for testing, create a main (RC) branch for final testing.
 
 ```sh
@@ -89,9 +93,11 @@ You need the following programs before you start:
 To deploy this project run:
 
 1. Clone the repo
-   ```sh
-   git clone https://github.com/JorgePeniaranda/Portfolio
-   ```
+
+```sh
+git clone https://github.com/JorgePeniaranda/Portfolio
+```
+
 2. Navigate to the project
 
 ```sh

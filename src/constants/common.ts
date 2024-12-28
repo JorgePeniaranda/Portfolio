@@ -37,6 +37,13 @@ export const THEME_STORE_KEY = "theme";
 export const SOUND_STORE_KEY = "isSoundEnabled";
 
 /**
+ * The key used to store the secret code in the local storage.
+ *
+ * @constant {string}
+ */
+export const SECRET_CODE_STORE_KEY = "secretCode";
+
+/**
  * The key used to store the list of liked projects in the local storage.
  *
  * @constant {string}

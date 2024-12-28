@@ -9,6 +9,7 @@ import '../../styles/globals.css'
 import ThemePreference from '../atoms/theme-preference.astro'
 import { DesktopNavbar } from '../organisms/navbar/desktop'
 import { MobileNavbar } from '../organisms/navbar/mobile'
+import { Toaster } from '../ui/toaster'
 
 interface Props {
   title?: string
@@ -50,5 +51,6 @@ const { title, description, lang = DEFAULT_LANG, body, html } = Astro.props
         transition:name="main-mobile-navbar"
       />
     </div>
+    <Toaster client:idle />
   </body>
 </html>
