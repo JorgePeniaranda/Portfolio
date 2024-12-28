@@ -9,4 +9,5 @@ const isProduction = import.meta.env.PROD;
  */
 export const ENV = {
   base_url: isProduction ? getEnvValue("SITE") : "http://localhost:4321",
+  secret_code: getEnvValue("PUBLIC_SECRET_CODE", "7421"),
 } as const;
