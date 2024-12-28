@@ -13,10 +13,18 @@ enum ProjectStatus {
   STALLED
 }
 
-enum ProjectStack {
+enum StackCategory {
   FRONT_END
   BACK_END
   FULL_STACK
+}
+
+enum StackType {
+  LANGUAGE
+  FRAMEWORK
+  LIBRARY
+  DATABASE
+  TOOL
 }
 
 model Project {
@@ -24,7 +32,7 @@ model Project {
   key           String        @unique
   name          String
   status        ProjectStatus
-  stack         ProjectStack
+  stack         StackCategory
   startDate     DateTime      @map("start_date")
   endDate       DateTime?     @map("end_date")
   description   String
@@ -41,13 +49,33 @@ model Project {
 }
 
 model Stack {
-  id          Int       @id @default(autoincrement())
+  id          Int             @id @default(autoincrement())
   name        String
   description String
-  iconUrl     String    @map("icon_url")
-  projects    Project[] @relation("ProjectStacks")
-  createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
+  category    StackCategory?
+  type        StackType?
+  iconUrl     String          @map("icon_url")
+  projects    Project[]       @relation("ProjectStacks")
+  createdAt   DateTime        @default(now()) @map("created_at")
+  updatedAt   DateTime        @default(now()) @updatedAt @map("updated_at")
+
+  // Relation for stacks originating from this stack
+  relatedFrom RelatedStack[]  @relation("RelatedStacksFrom")
+
+  // Relation for stacks pointing to this stack
+  relatedTo   RelatedStack[]  @relation("RelatedStacksTo")
+}
+
+model RelatedStack {
+  id         Int    @id @default(autoincrement())
+  fromStack  Int
+  toStack    Int
+
+  // Relation with Stack as the source
+  fromStackStack Stack @relation("RelatedStacksFrom", fields: [fromStack], references: [id])
+
+  // Relation with Stack as the destination
+  toStackStack   Stack @relation("RelatedStacksTo", fields: [toStack], references: [id])
 }
 
 model Colaborator {
