@@ -84,9 +84,9 @@ export function ProjectCardsManager({
   }, [projects, stackFilter, statusFilter, sortType, likedKeyProjects]);
 
   return (
-    <div className="mb-28 mt-16 flex flex-col gap-8">
+    <div className="mt-16 flex flex-col gap-8">
       {/* Filters for sorting and project attributes */}
-      <ul className="flex w-full items-center justify-center gap-10">
+      <ul className="flex w-full items-center justify-center gap-10 overflow-x-auto">
         {/* Sort filter */}
         <li className="flex items-center gap-2">
           <label className="whitespace-nowrap text-sm text-gray-400/80" htmlFor="sort-select">
@@ -174,7 +174,7 @@ export function ProjectCardsManager({
       </ul>
 
       {/* Render sorted project cards */}
-      <section className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:gap-8 xl:grid-cols-3">
+      <section className="grid max-w-full grid-cols-1 gap-2 md:grid-cols-2 lg:gap-8 xl:grid-cols-3">
         {sortedProjects.map((project) => (
           <ProjectCard
             key={project.key}

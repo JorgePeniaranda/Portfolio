@@ -42,7 +42,7 @@ export function ProjectCard({projectKey, name, logoURL}: Props) {
   return (
     <article className="group flex flex-col justify-between rounded-lg shadow-sm">
       <a
-        className="relative aspect-video overflow-hidden rounded-t-lg bg-black"
+        className="relative flex aspect-video overflow-hidden rounded-t-lg bg-black"
         href={`/projects/${projectKey}`}
       >
         <span className="sr-only">{`${name} details`}</span>

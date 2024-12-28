@@ -15,7 +15,7 @@ const Projects = await getAllProjectMin()
   }}
   title="Proyectos"
 >
-  <main class="w-full h-full space-y-10 container">
+  <main class="w-full h-full space-y-10 container mb-28">
     <nav class="h-max pt-2 flex justify-between items-center">
       <Logo class="w-28 aspect-square" />
       <a
@@ -26,7 +26,7 @@ const Projects = await getAllProjectMin()
           class="ease absolute top-1/2 h-0 w-80 origin-center -translate-x-20 rotate-45 bg-primary transition-all duration-300 group-hover:h-64 group-hover:-translate-y-32"
         ></span>
         <span
-          class="ease relative text-primary transition duration-300 group-hover:text-white flex gap-2"
+          class="ease relative text-primary transition duration-300 group-hover:text-white flex gap-2 max-sm:text-xs max-sm:text-center items-center"
         >
           ¿Te interesa mi stack?
           <ArrowRight />
@@ -34,11 +34,11 @@ const Projects = await getAllProjectMin()
       </a>
     </nav>
     <section class="flex flex-col items-center gap-6">
-      <article class="w-max flex flex-col text-center items-center gap-2.5">
+      <article class="w-full flex flex-col text-center items-center gap-2.5">
         <h1 class="text-4xl font-semibold">Mis Proyectos</h1>
-        <p class="text-lg text-gray-600 max-w-2xl">
+        <p class="text-lg text-gray-600 max-w-2xl max-sm:text-sm">
           Una colección de proyectos en los que he trabajado, tanto por mi
-          cuenta como en colaboración con otros. Cada uno tiene su propia
+          cuenta como en colaboración con otros colegas. Cada uno tiene su propia
           historia y enfoque.
         </p>
       </article>
