@@ -17,16 +17,13 @@ import {ProjectSortType, type IProjectSortType} from "../../../types/project.d";
  * The list is sorted such that liked projects appear first.
  *
  * @param {object} props - The component props.
- * @param {Array<Pick<Project, "id" | "key" | "name" | "logoUrl" | "primaryColor">>} props.projects - The list of projects to display.
+ * @param {Array<Pick<Project, "id" | "key" | "name" | "logoUrl">>} props.projects - The list of projects to display.
  * @returns {JSX.Element} A sorted list of project cards.
  */
 export function ProjectCardsManager({
   projects,
 }: {
-  projects: Pick<
-    Project,
-    "id" | "key" | "name" | "logoUrl" | "primaryColor" | "stack" | "status"
-  >[];
+  projects: Pick<Project, "id" | "key" | "name" | "logoUrl" | "stack" | "status">[];
 }) {
   // Retrieves the list of liked projects from the store
   const {likedKeyProjects} = useProjectLikedStore();
@@ -53,18 +50,23 @@ export function ProjectCardsManager({
     // Sort projects based on the selected sort type
     newProjects = newProjects.sort((a, b) => {
       if (sortType === "liked") {
+        const getLikedIndex = (key: string) => likedKeyProjects.indexOf(key);
+
         const aIsLiked = likedKeyProjects.includes(a.key); // Check if project a is liked
         const bIsLiked = likedKeyProjects.includes(b.key); // Check if project b is liked
 
+        // If both projects have the same liked status (both liked or neither liked), compare their index in likedKeyProjects
+        if (aIsLiked === bIsLiked) {
+          return getLikedIndex(a.key) - getLikedIndex(b.key); // Maintain the original order based on likedKeyProjects
+        }
+
+        // If a is liked and b is not, a should appear first
         if (aIsLiked && !bIsLiked) {
-          return -1; // a should appear before b
+          return -1;
         }
 
-        if (!aIsLiked && bIsLiked) {
-          return 1; // b should appear before a
-        }
-
-        return 0; // Keep the current order if both have the same liked status
+        // If b is liked and a is not, b should appear first
+        return 1;
       }
 
       if (sortType === "A-Z") {
@@ -82,7 +84,7 @@ export function ProjectCardsManager({
   }, [projects, stackFilter, statusFilter, sortType, likedKeyProjects]);
 
   return (
-    <section className="mb-28 mt-16 flex flex-col gap-8">
+    <div className="mb-28 mt-16 flex flex-col gap-8">
       {/* Filters for sorting and project attributes */}
       <ul className="flex w-full items-center justify-center gap-10">
         {/* Sort filter */}
@@ -172,15 +174,16 @@ export function ProjectCardsManager({
       </ul>
 
       {/* Render sorted project cards */}
-      {sortedProjects.map((project) => (
-        <ProjectCard
-          key={project.key}
-          logoURL={project.logoUrl}
-          name={project.name}
-          primaryColor={project.primaryColor}
-          projectKey={project.key}
-        />
-      ))}
-    </section>
+      <section className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:gap-8 xl:grid-cols-3">
+        {sortedProjects.map((project) => (
+          <ProjectCard
+            key={project.key}
+            logoURL={project.logoUrl}
+            name={project.name}
+            projectKey={project.key}
+          />
+        ))}
+      </section>
+    </div>
   );
 }

@@ -16,7 +16,6 @@ export interface Props {
   projectKey: string;
   name: string;
   logoURL: string;
-  primaryColor: string;
 }
 
 /**
@@ -24,7 +23,7 @@ export interface Props {
  * @param {Props} props - The props for the component.
  * @returns {JSX.Element} The rendered component.
  */
-export function ProjectCard({projectKey, name, logoURL, primaryColor}: Props) {
+export function ProjectCard({projectKey, name, logoURL}: Props) {
   // Destructure functions for managing the liked projects state
   const {addLikedProject, checkLikedProject, removeLikedProject} = useProjectLikedStore();
 
@@ -41,36 +40,25 @@ export function ProjectCard({projectKey, name, logoURL, primaryColor}: Props) {
   };
 
   return (
-    <article className="flex h-[35rem] w-[30rem]">
-      <p
-        className="grid size-full grid-cols-2 grid-rows-[auto_1fr_auto] rounded-3xl transition-transform hover:-translate-y-4"
-        style={{backgroundColor: primaryColor}} // Set background color dynamically
+    <article className="group flex flex-col justify-between rounded-lg shadow-sm">
+      <a
+        className="relative aspect-video overflow-hidden rounded-t-lg bg-black"
+        href={`/projects/${projectKey}`}
       >
-        <h3 className="text-4xl font-bold tracking-tight text-white">{name}</h3>{" "}
-        {/* Project name */}
-        <img alt={`${projectKey} Logo`} className="w-40" src={logoURL} /> {/* Project logo */}
-        <p className="col-span-2">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt repellat eos dolor
-          deserunt optio modi dicta ut animi laborum accusantium, praesentium recusandae quibusdam,
-          in aspernatur. Unde debitis eius facere nam.
-        </p>{" "}
-        {/* Placeholder description */}
-        <div className="col-span-2 flex justify-between px-5 py-6">
-          <h4>Full-Stack</h4> {/* Project tech stack label */}
-          <button aria-label={isLiked ? "Remove from liked" : "Add to liked"} type="button">
-            {/* Conditionally render filled or empty heart based on the liked state */}
-            {isLiked ? (
-              <HeartOff className="text-red-500" onClick={handleClickHeart} />
-            ) : (
-              <Heart className="text-red-500" onClick={handleClickHeart} />
-            )}
-          </button>
-        </div>
-        <a className="text-blue-600" href={`/projects/${projectKey}`}>
-          Conocer
-        </a>{" "}
-        {/* Link to project details page */}
-      </p>
+        <span className="sr-only">{`${name} details`}</span>
+        <img alt={name} className="size-full" src={logoURL} />
+      </a>
+      <div className="flex h-1/5 items-center justify-between rounded-b-lg bg-gray-200 p-4">
+        <h3 className="font-medium tracking-tight text-gray-500">{name}</h3>{" "}
+        <button aria-label={isLiked ? "Remove from liked" : "Add to liked"} type="button">
+          {/* Conditionally render filled or empty heart based on the liked state */}
+          {isLiked ? (
+            <HeartOff className="size-5 text-red-500" onClick={handleClickHeart} />
+          ) : (
+            <Heart className="size-5 text-gray-500" onClick={handleClickHeart} />
+          )}
+        </button>
+      </div>
     </article>
   );
 }

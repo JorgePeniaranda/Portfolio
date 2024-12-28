@@ -3,7 +3,7 @@ import type {Project} from "@prisma/client";
 import {databaseClient} from "../../helpers/client/prisma";
 
 export async function getAllProjectMin(): Promise<
-  Pick<Project, "id" | "key" | "name" | "logoUrl" | "primaryColor" | "stack" | "status">[]
+  Pick<Project, "id" | "key" | "name" | "logoUrl" | "stack" | "status">[]
 > {
   return await databaseClient.project.findMany({
     select: {
@@ -11,7 +11,6 @@ export async function getAllProjectMin(): Promise<
       key: true,
       name: true,
       logoUrl: true,
-      primaryColor: true,
       stack: true,
       status: true,
     },
