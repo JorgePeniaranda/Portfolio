@@ -1,8 +1,9 @@
 import {REGEXP_ONLY_DIGITS} from "input-otp";
 import {ScanFace} from "lucide-react";
-import {useMemo, useState} from "react";
+import {useState} from "react";
 
 import {useToast} from "../../../hooks/use-toast";
+import {useSecretCodeStore} from "../../../services/storage/secret-code";
 import {Button} from "../../ui/button";
 import {
   Dialog,
@@ -13,18 +14,32 @@ import {
   DialogTrigger,
 } from "../../ui/dialog";
 import {InputOTP, InputOTPSlot} from "../../ui/input-otp";
-import {ENV} from "../../../constants/env";
 
+/**
+ * Component that displays an interactive button to open a modal for entering a secret code.
+ * If the entered code is correct, it shows a success message.
+ *
+ * @returns {JSX.Element} JSX element representing the button and interactive modal.
+ */
 export function SecretButton() {
-  const secretCode = ENV.secret_code;
+  // Retrieves the stored secret code and initializes the state for the entered value.
+  const {secretCode} = useSecretCodeStore();
   const [value, setValue] = useState(`${secretCode[0]}`);
+
+  // Hook to display toast messages.
   const {toast} = useToast();
 
+  /**
+   * Handles the validation of the entered code.
+   * - If the code is incorrect, displays an error message.
+   * - If the code is correct, displays a success message.
+   * - TO-DO: Redirect to the secret dashboard.
+   */
   const handleSubmit = () => {
     if (secretCode !== value) {
       toast({
-        title: "Código Incorrecto",
-        description: "¡Arrr! El código secreto no es el correcto. ¡Vuelve a intentarlo!",
+        title: "Código incorrecto",
+        description: "¡Arrr! El código secreto no es correcto. ¡Inténtalo de nuevo!",
         variant: "destructive",
       });
 
@@ -32,10 +47,10 @@ export function SecretButton() {
     }
 
     toast({
-      title: "Código Correcto",
-      description:
-        "¡Felicidades! Has descubierto el código secreto. ¡Bienvenido al dashboard secreto!",
+      title: "Código correcto",
+      description: "Enhorabuena. Has descubierto el código secreto. Bienvenido al panel secreto.",
       variant: "default",
+      className: "bg-green-500",
     });
 
     return; // TO-DO: redirect to the secret dashboard
@@ -43,6 +58,7 @@ export function SecretButton() {
 
   return (
     <Dialog>
+      {/* Button to open the modal */}
       <DialogTrigger className="hover: flex items-center gap-2 rounded-lg bg-[#580001] px-3 py-2 text-white shadow-sm">
         Acá se esconde algo
         <ScanFace />
@@ -60,15 +76,16 @@ export function SecretButton() {
           className="flex w-full flex-col gap-5"
           onSubmit={(event) => {
             handleSubmit();
-            event.preventDefault();
+            event.preventDefault(); // Prevents the default form behavior.
           }}
         >
+          {/* Input field for the secret code */}
           <div className="mx-auto">
             <InputOTP
               maxLength={4}
               pattern={REGEXP_ONLY_DIGITS}
               value={value}
-              onChange={(value) => setValue(value)}
+              onChange={(value) => setValue(value)} // Updates the state with the entered value.
             >
               <InputOTPSlot className="size-11" index={0} />
               <InputOTPSlot className="size-11" index={1} />
@@ -76,6 +93,7 @@ export function SecretButton() {
               <InputOTPSlot className="size-11" index={3} />
             </InputOTP>
           </div>
+          {/* Button to submit the form */}
           <Button className="bg-[#282828] text-white hover:bg-[#323232]" type="submit">
             Probar Código Secreto
           </Button>
