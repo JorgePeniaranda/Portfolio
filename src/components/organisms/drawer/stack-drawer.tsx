@@ -40,7 +40,7 @@ export function StackDrawer({
             <img
               alt={`${stack.name} stack logo`}
               className="aspect-square size-10 rounded-sm"
-              src={stack.iconUrl}
+              src={`${stack.iconUrl} logo`}
             />
             <h3 className="text-4xl font-bold">{stack.name}</h3>
             <DrawerClose className="absolute right-0 top-0 p-2">
@@ -64,15 +64,15 @@ export function StackDrawer({
                 {stack.projects.map((project) => (
                   <li key={project.id}>
                     <a
-                      className="flex items-center transition-all ease-linear hover:translate-x-2"
+                      className="flex items-center space-x-1 transition-all ease-linear hover:translate-x-2"
                       href={`/projects/${project.key}`}
                       rel="noreferrer"
                       target="_blank"
                     >
                       <img
                         alt={`${project.name} logo`}
-                        className="aspect-square w-14 rounded-sm"
-                        src={project.logoUrl}
+                        className="aspect-square size-14 rounded-sm"
+                        src={`${project.logoUrl} logo`}
                       />
                       <h5 className="whitespace-nowrap text-xl">{project.name}</h5>
                     </a>
