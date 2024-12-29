@@ -53,6 +53,8 @@ export function SecretButton() {
       className: "bg-green-500",
     });
 
+    window.location.href = "/vault"; // Redirects to the secret dashboard.
+
     return; // TO-DO: redirect to the secret dashboard
   };
 
