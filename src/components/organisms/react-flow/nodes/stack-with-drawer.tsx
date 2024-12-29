@@ -1,7 +1,5 @@
 import type {Project, Stack} from "@prisma/client";
 
-import {StackDrawer} from "../../drawer/stack-drawer";
-
 /**
  * Component that wraps the `StackDrawer` and provides a visual trigger for opening it.
  *
@@ -23,16 +21,14 @@ export function StackWithDrawerNode({
   };
 }) {
   return (
-    <StackDrawer
-      stack={data.stackData}
-      triggerChild={
-        <div className="flex aspect-square items-center justify-center rounded-full border-2 border-stone-400 bg-white p-2 shadow-md">
-          {/* Trigger element displaying the stack icon */}
-          <img alt={data.label} className="h-7" src={data.iconUrl} />
-          {/* Accessible label for screen readers */}
-          <span className="sr-only">{data.label}</span>
-        </div>
-      }
-    />
+    <a
+      className="flex aspect-square items-center justify-center rounded-full border-2 border-stone-400 bg-white p-2 shadow-md"
+      href={`/stack/${data.stackData.id}`}
+    >
+      {/* Trigger element displaying the stack icon */}
+      <img alt={data.label} className="h-7" src={data.iconUrl} />
+      {/* Accessible label for screen readers */}
+      <span className="sr-only">{data.label}</span>
+    </a>
   );
 }
