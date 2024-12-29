@@ -37,7 +37,7 @@ model Project {
   endDate       DateTime?     @map("end_date")
   description   String
   goals         String[]
-  contributions String[]      @map("contribution")
+  contributions String[]
   logoUrl       String        @map("logo_url")
   primaryColor  String        @map("primary_color")
   demoUrl       String?       @map("demo_url")
@@ -49,33 +49,33 @@ model Project {
 }
 
 model Stack {
-  id          Int             @id @default(autoincrement())
+  id          Int            @id @default(autoincrement())
   name        String
   description String
   category    StackCategory?
   type        StackType?
-  iconUrl     String          @map("icon_url")
-  projects    Project[]       @relation("ProjectStacks")
-  createdAt   DateTime        @default(now()) @map("created_at")
-  updatedAt   DateTime        @default(now()) @updatedAt @map("updated_at")
+  iconUrl     String         @map("icon_url")
+  projects    Project[]      @relation("ProjectStacks")
+  createdAt   DateTime       @default(now()) @map("created_at")
+  updatedAt   DateTime       @default(now()) @updatedAt @map("updated_at")
 
   // Relation for stacks originating from this stack
-  relatedFrom RelatedStack[]  @relation("RelatedStacksFrom")
+  relatedFrom RelatedStack[] @relation("RelatedStacksFrom")
 
   // Relation for stacks pointing to this stack
-  relatedTo   RelatedStack[]  @relation("RelatedStacksTo")
+  relatedTo RelatedStack[] @relation("RelatedStacksTo")
 }
 
 model RelatedStack {
-  id         Int    @id @default(autoincrement())
-  fromStack  Int
-  toStack    Int
+  id        Int @id @default(autoincrement())
+  fromStack Int @map("from_stack")
+  toStack   Int @map("to_stack")
 
   // Relation with Stack as the source
   fromStackStack Stack @relation("RelatedStacksFrom", fields: [fromStack], references: [id])
 
   // Relation with Stack as the destination
-  toStackStack   Stack @relation("RelatedStacksTo", fields: [toStack], references: [id])
+  toStackStack Stack @relation("RelatedStacksTo", fields: [toStack], references: [id])
 }
 
 model Colaborator {

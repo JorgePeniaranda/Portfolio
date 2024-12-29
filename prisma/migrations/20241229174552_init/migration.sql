@@ -18,7 +18,7 @@ CREATE TABLE "Project" (
     "end_date" TIMESTAMP(3),
     "description" TEXT NOT NULL,
     "goals" TEXT[],
-    "contribution" TEXT[],
+    "contributions" TEXT[],
     "logo_url" TEXT NOT NULL,
     "primary_color" TEXT NOT NULL,
     "demo_url" TEXT,
@@ -46,8 +46,8 @@ CREATE TABLE "Stack" (
 -- CreateTable
 CREATE TABLE "RelatedStack" (
     "id" SERIAL NOT NULL,
-    "fromStack" INTEGER NOT NULL,
-    "toStack" INTEGER NOT NULL,
+    "from_stack" INTEGER NOT NULL,
+    "to_stack" INTEGER NOT NULL,
 
     CONSTRAINT "RelatedStack_pkey" PRIMARY KEY ("id")
 );
@@ -93,10 +93,10 @@ CREATE INDEX "_ProjectStacks_B_index" ON "_ProjectStacks"("B");
 CREATE INDEX "_ProjectColaborators_B_index" ON "_ProjectColaborators"("B");
 
 -- AddForeignKey
-ALTER TABLE "RelatedStack" ADD CONSTRAINT "RelatedStack_fromStack_fkey" FOREIGN KEY ("fromStack") REFERENCES "Stack"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "RelatedStack" ADD CONSTRAINT "RelatedStack_from_stack_fkey" FOREIGN KEY ("from_stack") REFERENCES "Stack"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "RelatedStack" ADD CONSTRAINT "RelatedStack_toStack_fkey" FOREIGN KEY ("toStack") REFERENCES "Stack"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "RelatedStack" ADD CONSTRAINT "RelatedStack_to_stack_fkey" FOREIGN KEY ("to_stack") REFERENCES "Stack"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_ProjectStacks" ADD CONSTRAINT "_ProjectStacks_A_fkey" FOREIGN KEY ("A") REFERENCES "Project"("id") ON DELETE CASCADE ON UPDATE CASCADE;
