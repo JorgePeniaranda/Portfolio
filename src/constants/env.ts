@@ -1,4 +1,5 @@
 import {getEnvValue} from "../helpers/common/get-env";
+import packageJson from "../../package.json";
 
 // Check if the environment is production based on the `import.meta.env.PROD` value
 const isProduction = import.meta.env.PROD;
@@ -10,4 +11,5 @@ const isProduction = import.meta.env.PROD;
 export const ENV = {
   base_url: isProduction ? getEnvValue("SITE") : "http://localhost:4321",
   secret_code: getEnvValue("PUBLIC_SECRET_CODE", "7421"),
+  appVersion: packageJson.version,
 } as const;
