@@ -81,7 +81,9 @@ export function ProjectAccordion({
                 <li key={`technology_${stack.id}`}>
                   <a
                     className="text-blue-500 hover:text-blue-600 dark:hover:text-blue-400"
-                    href={`/stack/${stack.id}`}
+                    href={`/stack/${stack.key}`}
+                    rel="noopener noreferrer"
+                    target="__blank"
                   >
                     {stack.name}
                   </a>

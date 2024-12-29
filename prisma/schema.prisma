@@ -50,6 +50,7 @@ model Project {
 
 model Stack {
   id          Int            @id @default(autoincrement())
+  key         String         @unique
   name        String
   description String
   category    StackCategory?

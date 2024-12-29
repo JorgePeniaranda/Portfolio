@@ -23,7 +23,7 @@ export function StackWithDrawerNode({
   return (
     <a
       className="flex aspect-square items-center justify-center rounded-full border-2 border-stone-400 bg-white p-2 shadow-md"
-      href={`/stack/${data.stackData.id}`}
+      href={`/stack/${data.stackData.key}`}
     >
       {/* Trigger element displaying the stack icon */}
       <img alt={data.label} className="h-7" src={data.iconUrl} />
