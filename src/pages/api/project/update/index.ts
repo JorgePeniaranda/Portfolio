@@ -21,18 +21,7 @@ export const PUT: APIRoute = ({request}) => {
       const validationResult = ProjectUpdateSchema.parse(body);
 
       const response = await databaseClient.project.update({
-        data: {
-          name: validationResult.name,
-          description: validationResult.description,
-          status: validationResult.status as ProjectStatus,
-          startDate: validationResult.startDate,
-          endDate: validationResult.endDate,
-          githubUrl: validationResult.githubUrl,
-          key: validationResult.key,
-          stack: validationResult.stack as StackCategory,
-          logoUrl: validationResult.logoUrl,
-          primaryColor: validationResult.primaryColor,
-        },
+        data: validationResult,
         where: {id: validationResult.id},
       });
 

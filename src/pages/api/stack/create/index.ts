@@ -20,14 +20,7 @@ export const POST: APIRoute = ({request}) => {
       const body = await request.json();
       const validationResult = StackCreateSchema.parse(body);
       const response = await databaseClient.stack.create({
-        data: {
-          key: validationResult.key,
-          name: validationResult.name,
-          description: validationResult.description,
-          category: validationResult.category as StackCategory,
-          type: validationResult.type as StackType,
-          iconUrl: validationResult.iconUrl,
-        },
+        data: validationResult,
       });
 
       return {

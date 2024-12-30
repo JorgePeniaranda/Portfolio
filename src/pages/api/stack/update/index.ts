@@ -1,4 +1,3 @@
-import type {StackCategory, StackType} from "@prisma/client";
 import type {APIRoute} from "astro";
 
 import {databaseClient} from "../../../../helpers/client/prisma";
@@ -21,14 +20,7 @@ export const PUT: APIRoute = ({request}) => {
       const validationResult = StackUpdateSchema.parse(body);
 
       const response = await databaseClient.stack.update({
-        data: {
-          key: validationResult.key,
-          name: validationResult.name,
-          description: validationResult.description,
-          category: validationResult.category as StackCategory,
-          type: validationResult.type as StackType,
-          iconUrl: validationResult.iconUrl,
-        },
+        data: validationResult,
         where: {id: validationResult.id},
       });
 
