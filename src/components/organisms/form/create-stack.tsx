@@ -23,24 +23,24 @@ export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) 
   });
 
   const onSubmit = async (values: StackCreateSchema) => {
-    const createResponse = {
+    const response = {
       success: false,
       message: "",
     };
 
-    if (createResponse.success) {
+    if (response.success) {
       form.reset();
       toast({
         title: "Stack creado",
-        description: createResponse.message,
+        description: response.message,
         className: "bg-green-500",
       });
     }
 
-    if (!createResponse.success) {
+    if (!response.success) {
       toast({
         title: "Error al crear stack",
-        description: createResponse.message,
+        description: response.message,
         className: "bg-red-500",
       });
     }
@@ -161,7 +161,7 @@ export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) 
           />
           <FormField
             control={form.control}
-            name="description"
+            name="iconUrl"
             render={({field}) => (
               <FormItem>
                 <FormLabel>URL de icono</FormLabel>

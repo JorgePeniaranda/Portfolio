@@ -29,24 +29,24 @@ export function UpdateStackForm({
   });
 
   const onSubmit = async (values: StackCreateSchema) => {
-    const createResponse = {
+    const response = {
       success: false,
       message: "",
     };
 
-    if (createResponse.success) {
+    if (response.success) {
       form.reset();
       toast({
         title: "Stack actualizado",
-        description: createResponse.message,
+        description: response.message,
         className: "bg-green-500",
       });
     }
 
-    if (!createResponse.success) {
+    if (!response.success) {
       toast({
         title: "Error al actualizar stack",
-        description: createResponse.message,
+        description: response.message,
         className: "bg-red-500",
       });
     }

@@ -25,21 +25,21 @@ export function UpdateCollaboratorForm({
   });
 
   const onSubmit = async (values: CollaboratorUpdateSchema) => {
-    const createResponse = await putCollaborator(values);
+    const response = await putCollaborator(values);
 
-    if (createResponse.success) {
+    if (response.success) {
       form.reset();
       toast({
         title: "Colaborador actualizado",
-        description: createResponse.message,
+        description: response.message,
         className: "bg-green-500",
       });
     }
 
-    if (!createResponse.success) {
+    if (!response.success) {
       toast({
         title: "Error al actualizar colaborador",
-        description: createResponse.message,
+        description: response.message,
         className: "bg-red-500",
       });
     }

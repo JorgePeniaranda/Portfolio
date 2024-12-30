@@ -20,21 +20,21 @@ export function CreateCollaboratorForm({disableForm = false}: {disableForm?: boo
   });
 
   const onSubmit = async (values: CollaboratorCreateSchema) => {
-    const createResponse = await postCollaborator(values);
+    const response = await postCollaborator(values);
 
-    if (createResponse.success) {
+    if (response.success) {
       form.reset();
       toast({
         title: "Colaborador creado",
-        description: createResponse.message,
+        description: response.message,
         className: "bg-green-500",
       });
     }
 
-    if (!createResponse.success) {
+    if (!response.success) {
       toast({
         title: "Error al crear colaborador",
-        description: createResponse.message,
+        description: response.message,
         className: "bg-red-500",
       });
     }
