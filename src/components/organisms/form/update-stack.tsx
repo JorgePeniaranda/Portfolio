@@ -3,18 +3,18 @@ import {StackCategory, StackType, type Stack} from "@prisma/client";
 import {Save} from "lucide-react";
 import {useForm} from "react-hook-form";
 
+import {StackUpdateSchema} from "../../../schemas/stack/update";
 import {
   STACK_CATEGORY_TRANSCRIPTIONS,
   STACK_TYPE_TRANSCRIPTIONS,
 } from "../../../constants/transcriptions";
 import {useToast} from "../../../hooks/use-toast";
-import {StackCreateSchema} from "../../../schemas/stack/create";
+import {putStack} from "../../../services/stack/putStack";
 import {Button} from "../../ui/button";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
 import {Input} from "../../ui/input";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
 import {Textarea} from "../../ui/textarea";
-import {putStack} from "../../../services/stack/putStack";
 
 export function UpdateStackForm({
   defaultValues,
@@ -24,12 +24,12 @@ export function UpdateStackForm({
   disableForm?: boolean;
 }) {
   const {toast} = useToast();
-  const form = useForm<StackCreateSchema>({
-    resolver: zodResolver(StackCreateSchema),
+  const form = useForm<StackUpdateSchema>({
+    resolver: zodResolver(StackUpdateSchema),
     defaultValues: defaultValues,
   });
 
-  const onSubmit = async (values: StackCreateSchema) => {
+  const onSubmit = async (values: StackUpdateSchema) => {
     const response = await putStack(values);
 
     if (response.success) {
