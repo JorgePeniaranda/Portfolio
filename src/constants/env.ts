@@ -9,6 +9,8 @@ const isProduction = import.meta.env.PROD;
  * @constant {object}
  */
 export const ENV = {
+  isProduction,
+  isDevelopment: import.meta.env.DEV,
   base_url: isProduction ? getEnvValue("SITE") : "http://localhost:4321",
   secret_code: getEnvValue("PUBLIC_SECRET_CODE", "7421"),
   appVersion: packageJson.version,
