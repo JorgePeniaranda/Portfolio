@@ -5,6 +5,7 @@ const stackCategoryValues = Object.values(StackCategory) as [string, ...string[]
 const stackTypeValues = Object.values(StackCategory) as [string, ...string[]];
 
 export const StackUpdateSchema = z.object({
+  id: z.number(),
   key: z.string().min(1),
   name: z.string().min(1),
   description: z.string().min(1),
