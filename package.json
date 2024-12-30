@@ -68,6 +68,7 @@
     "astro-icon": "1.1.5",
     "astro-robots-txt": "1.0.0",
     "astro-seo": "0.8.4",
+    "axios": "1.7.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "2.1.1",
     "framer-motion": "11.15.0",
