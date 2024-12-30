@@ -58,3 +58,5 @@ export const PROJECT_LIKED_STORE_KEY = "likedProjects";
 export const THEME_CLASSNAME = "dark";
 
 //#endregion
+
+export const MIN_DATA_FORMAT = "DD-MM-YYYY";
