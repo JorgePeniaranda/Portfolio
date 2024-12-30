@@ -2,12 +2,12 @@
 import Layout from '../../../../../../components/layouts/base.astro'
 import { DashboardLayout } from '../../../../../../components/layouts/dashboard-layout'
 import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../../../constants/breadcrumb'
-import { getAllColaborator } from '../../../../../../services/colaborator/getAllColaborator'
+import { getAllCollaborator } from '../../../../../../services/collaborator/getAllCollaborator'
 import { UpdateCollaboratorForm } from '../../../../../../components/organisms/form/update-collaborator'
 import { ENV } from '../../../../../../constants/env'
 
 export async function getStaticPaths() {
-  const collaborators = await getAllColaborator()
+  const collaborators = await getAllCollaborator()
 
   const paths = collaborators.map(stack => ({
     params: { id: stack.id },

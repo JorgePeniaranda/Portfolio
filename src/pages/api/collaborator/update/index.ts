@@ -19,7 +19,7 @@ export const PUT: APIRoute = ({request}) => {
       const body = await request.json();
       const validationResult = CollaboratorUpdateSchema.parse(body);
 
-      const response = await databaseClient.colaborator.update({
+      const response = await databaseClient.collaborator.update({
         data: validationResult,
         where: {id: validationResult.id},
       });

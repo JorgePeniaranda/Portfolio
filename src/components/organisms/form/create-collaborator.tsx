@@ -7,7 +7,7 @@ import {
   CollaboratorCreateDefaultValues,
   CollaboratorCreateSchema,
 } from "../../../schemas/collaborator/create";
-import {postCollaborator} from "../../../services/colaborator/postCollaborator";
+import {postCollaborator} from "../../../services/collaborator/postCollaborator";
 import {Button} from "../../ui/button";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
 import {Input} from "../../ui/input";

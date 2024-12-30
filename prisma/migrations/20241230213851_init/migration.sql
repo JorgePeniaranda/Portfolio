@@ -32,6 +32,7 @@ CREATE TABLE "Project" (
 -- CreateTable
 CREATE TABLE "Stack" (
     "id" SERIAL NOT NULL,
+    "key" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "category" "StackCategory",
@@ -53,7 +54,7 @@ CREATE TABLE "RelatedStack" (
 );
 
 -- CreateTable
-CREATE TABLE "Colaborator" (
+CREATE TABLE "Collaborator" (
     "id" SERIAL NOT NULL,
     "nickname" TEXT NOT NULL,
     "github_username" TEXT,
@@ -61,7 +62,7 @@ CREATE TABLE "Colaborator" (
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "Colaborator_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Collaborator_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -84,7 +85,10 @@ CREATE TABLE "_ProjectColaborators" (
 CREATE UNIQUE INDEX "Project_key_key" ON "Project"("key");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Colaborator_nickname_key" ON "Colaborator"("nickname");
+CREATE UNIQUE INDEX "Stack_key_key" ON "Stack"("key");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Collaborator_nickname_key" ON "Collaborator"("nickname");
 
 -- CreateIndex
 CREATE INDEX "_ProjectStacks_B_index" ON "_ProjectStacks"("B");
@@ -105,7 +109,7 @@ ALTER TABLE "_ProjectStacks" ADD CONSTRAINT "_ProjectStacks_A_fkey" FOREIGN KEY 
 ALTER TABLE "_ProjectStacks" ADD CONSTRAINT "_ProjectStacks_B_fkey" FOREIGN KEY ("B") REFERENCES "Stack"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_ProjectColaborators" ADD CONSTRAINT "_ProjectColaborators_A_fkey" FOREIGN KEY ("A") REFERENCES "Colaborator"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_ProjectColaborators" ADD CONSTRAINT "_ProjectColaborators_A_fkey" FOREIGN KEY ("A") REFERENCES "Collaborator"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_ProjectColaborators" ADD CONSTRAINT "_ProjectColaborators_B_fkey" FOREIGN KEY ("B") REFERENCES "Project"("id") ON DELETE CASCADE ON UPDATE CASCADE;

@@ -3,9 +3,9 @@ import Layout from '../../../../components/layouts/base.astro'
 import { DashboardLayout } from '../../../../components/layouts/dashboard-layout'
 import { CollaboratorTable } from '../../../../components/organisms/table/collaborators'
 import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../constants/breadcrumb'
-import { getAllColaborator } from '../../../../services/colaborator/getAllColaborator'
+import { getAllCollaborator } from '../../../../services/collaborator/getAllCollaborator'
 
-const collaborators = await getAllColaborator()
+const collaborators = await getAllCollaborator()
 ---
 
 <Layout title="Panel de Control">

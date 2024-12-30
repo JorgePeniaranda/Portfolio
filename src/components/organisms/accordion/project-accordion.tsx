@@ -1,4 +1,4 @@
-import type {Colaborator, Project, Stack} from "@prisma/client";
+import type {Collaborator, Project, Stack} from "@prisma/client";
 
 import {isDefined} from "../../../helpers/guards/is-defined";
 import GithubUser from "../../atoms/github-user";
@@ -29,7 +29,7 @@ interface Props {
     value: string;
   }[];
   techStack: Stack[];
-  collaborators: Colaborator[];
+  collaborators: Collaborator[];
   githubUrl: Project["githubUrl"];
   demoUrl: Project["demoUrl"];
 }

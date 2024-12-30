@@ -1,4 +1,3 @@
-import type {StackCategory, StackType} from "@prisma/client";
 import type {APIRoute} from "astro";
 
 import {databaseClient} from "../../../../helpers/client/prisma";

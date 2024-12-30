@@ -1,4 +1,4 @@
-import type {Colaborator} from "@prisma/client";
+import type {Collaborator} from "@prisma/client";
 
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
@@ -7,7 +7,7 @@ import {CollaboratorUpdateSchema} from "../../../schemas/collaborator/update";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
 import {Input} from "../../ui/input";
 
-export function ShowCollaboratorForm({defaultValues}: {defaultValues: Colaborator}) {
+export function ShowCollaboratorForm({defaultValues}: {defaultValues: Collaborator}) {
   const form = useForm<CollaboratorUpdateSchema>({
     resolver: zodResolver(CollaboratorUpdateSchema),
     defaultValues: defaultValues,

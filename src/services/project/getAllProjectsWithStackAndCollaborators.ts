@@ -1,4 +1,4 @@
-import type {Colaborator, Project, Stack} from "@prisma/client";
+import type {Collaborator, Project, Stack} from "@prisma/client";
 
 import {databaseClient} from "../../helpers/client/prisma";
 
@@ -6,7 +6,7 @@ export async function getAllProjectsWithStackAndCollaborators(): Promise<
   Array<
     Project & {
       techStacks: Array<Stack>;
-      collaborators: Array<Colaborator>;
+      collaborators: Array<Collaborator>;
     }
   >
 > {

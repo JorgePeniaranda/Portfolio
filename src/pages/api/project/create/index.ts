@@ -1,5 +1,4 @@
 import type {APIRoute} from "astro";
-import type {ProjectStatus, StackCategory} from "@prisma/client";
 
 import {databaseClient} from "../../../../helpers/client/prisma";
 import {RequestHandler} from "../../../../helpers/common/request-handler";

@@ -8,7 +8,7 @@ import {
 } from "../../../constants/transcriptions";
 import {isDefined} from "../../../helpers/guards/is-defined";
 import {useProjectLikedStore} from "../../../services/storage/liked-projects";
-import {ProjectSortType, type ProjectSortType} from "../../../types/project.d";
+import {ProjectSortType} from "../../../types/project.d";
 import {ProjectCard} from "../../molecules/cards/project-card";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
 
