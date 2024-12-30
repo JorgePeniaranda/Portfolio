@@ -1,16 +1,21 @@
 ---
 import Layout from '../../../../components/layouts/base.astro'
 import { DashboardLayout } from '../../../../components/layouts/dashboard-layout'
+import { CollaboratorTable } from '../../../../components/organisms/table/collaborators'
 import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../constants/breadcrumb'
+import { getAllColaborator } from '../../../../services/colaborator/getAllColaborator'
+
+const collaborators = await getAllColaborator()
 ---
 
 <Layout title="Panel de Control">
   <DashboardLayout
-    breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/collaborators']}
+    breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/projects']}
     client:load
   >
-    <main class="w-full h-full flex flex-col pt-7 pl-7">
+    <main class="w-full h-full flex flex-col pt-7 pl-7 container mx-auto">
       <h1 class="text-4xl font-medium">Colaboradores</h1>
+      <CollaboratorTable data={collaborators} client:load />
     </main>
   </DashboardLayout>
 </Layout>

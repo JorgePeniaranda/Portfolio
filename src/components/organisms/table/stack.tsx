@@ -1,16 +1,21 @@
-import type {Project} from "@prisma/client";
+import type {Stack} from "@prisma/client";
 import type {ColumnDef, Table} from "@tanstack/react-table";
 
 import moment from "moment";
 
 import {MIN_DATA_FORMAT} from "../../../constants/common";
+import {
+  STACK_CATEGORY_TRANSCRIPTIONS,
+  STACK_TYPE_TRANSCRIPTIONS,
+} from "../../../constants/transcriptions";
+import {isNotDefined} from "../../../helpers/guards/is-defined";
 import {Input} from "../../ui/input";
 import {DataTable} from "../data-table";
 import {selectionColumnDef} from "../data-table/column-def/selection";
 import {DataTableColumnHeader} from "../data-table/column/dropdown";
 
-const columns: Array<ColumnDef<Project>> = [
-  selectionColumnDef<Project>(),
+const columns: Array<ColumnDef<Stack>> = [
+  selectionColumnDef<Stack>(),
   {
     id: "id",
     accessorKey: "id",
@@ -33,76 +38,41 @@ const columns: Array<ColumnDef<Project>> = [
     },
   },
   {
-    id: "status",
-    accessorKey: "status",
+    id: "description",
+    accessorKey: "description",
     header({column}) {
-      return <DataTableColumnHeader column={column} title="Estado" />;
+      return <DataTableColumnHeader column={column} title="Descripción" />;
     },
   },
   {
-    id: "stack",
-    accessorKey: "stack",
+    id: "category",
+    accessorKey: "category",
     header({column}) {
-      return <DataTableColumnHeader column={column} title="Stack" />;
-    },
-  },
-  {
-    id: "startDate",
-    accessorKey: "startDate",
-    header({column}) {
-      return <DataTableColumnHeader column={column} title="Fecha de inicio" />;
+      return <DataTableColumnHeader column={column} title="Categoria" />;
     },
     cell({row}) {
-      return moment(row.original.startDate).format(MIN_DATA_FORMAT);
-    },
-  },
-  {
-    id: "endDate",
-    accessorKey: "endDate",
-    header({column}) {
-      return <DataTableColumnHeader column={column} title="Fecha de fin" />;
-    },
-    cell({row}) {
-      return moment(row.original.endDate).format(MIN_DATA_FORMAT);
-    },
-  },
-  {
-    id: "primaryColor",
-    accessorKey: "primaryColor",
-    header({column}) {
-      return <DataTableColumnHeader column={column} title="Color primario" />;
-    },
-  },
-  {
-    id: "demoUrl",
-    accessorKey: "demoUrl",
-    header({column}) {
-      return <DataTableColumnHeader column={column} title="Demo URL" />;
-    },
-    cell({row}) {
-      const value = row.original.demoUrl ?? "#";
+      if (
+        isNotDefined(row.original?.category) ||
+        !(row.original?.category in STACK_CATEGORY_TRANSCRIPTIONS)
+      ) {
+        return "Sin categoría";
+      }
 
-      return (
-        <a href={value} rel="noreferrer" target="_blank">
-          {value}
-        </a>
-      );
+      return STACK_CATEGORY_TRANSCRIPTIONS[row.original.category];
     },
   },
   {
-    id: "githubUrl",
-    accessorKey: "githubUrl",
+    id: "type",
+    accessorKey: "type",
     header({column}) {
-      return <DataTableColumnHeader column={column} title="GitHub URL" />;
+      return <DataTableColumnHeader column={column} title="Tipo" />;
     },
     cell({row}) {
-      const value = row.original.demoUrl ?? "#";
+      if (isNotDefined(row.original?.type) || !(row.original?.type in STACK_TYPE_TRANSCRIPTIONS)) {
+        return "Sin categoría";
+      }
 
-      return (
-        <a href={value} rel="noreferrer" target="_blank">
-          {value}
-        </a>
-      );
+      return STACK_TYPE_TRANSCRIPTIONS[row.original.type];
     },
   },
   {
@@ -127,7 +97,7 @@ const columns: Array<ColumnDef<Project>> = [
   },
 ];
 
-export function ProjectTable({data}: {data: Project[]}) {
+export function StackTable({data}: {data: Stack[]}) {
   return <DataTable HeaderComponent={TableHeaderComponent} columns={columns} data={data} />;
 }
 
