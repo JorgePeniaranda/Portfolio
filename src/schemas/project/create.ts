@@ -1,8 +1,14 @@
 import {ProjectStatus, StackCategory} from "@prisma/client";
 import {z} from "zod";
 
-const stackCategoryValues = Object.values(StackCategory) as [string, ...string[]];
-const projectStatusValues = Object.values(ProjectStatus) as [string, ...string[]];
+const stackCategoryValues = Object.values(StackCategory) as [
+  (typeof StackCategory)[keyof typeof StackCategory],
+  ...(typeof StackCategory)[keyof typeof StackCategory][],
+];
+const projectStatusValues = Object.values(ProjectStatus) as [
+  (typeof ProjectStatus)[keyof typeof ProjectStatus],
+  ...(typeof ProjectStatus)[keyof typeof ProjectStatus][],
+];
 
 export const ProjectCreateSchema = z.object({
   key: z.string().min(1),
