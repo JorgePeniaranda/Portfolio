@@ -36,8 +36,8 @@ model Project {
   startDate     DateTime       @map("start_date")
   endDate       DateTime?      @map("end_date")
   description   String
-  goals         String[]
-  contributions String[]
+  goals         String
+  contributions String
   logoUrl       String         @map("logo_url")
   primaryColor  String         @map("primary_color")
   demoUrl       String?        @map("demo_url")
