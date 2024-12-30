@@ -1,4 +1,4 @@
-import {ProjectStack, ProjectStatus, type Project} from "@prisma/client";
+import {ProjectStatus, StackCategory, type Project} from "@prisma/client";
 import {useMemo, useState} from "react";
 
 import {useProjectLikedStore} from "../../../services/storage/liked-projects";
@@ -30,7 +30,7 @@ export function ProjectCardsManager({
 
   // State for sorting type, stack filter, and status filter
   const [sortType, setSortType] = useState<IProjectSortType>("liked");
-  const [stackFilter, setStackFilter] = useState<ProjectStack>();
+  const [stackFilter, setStackFilter] = useState<StackCategory>();
   const [statusFilter, setStatusFilter] = useState<ProjectStatus>();
 
   // Memoized sorting of projects based on filters and sort type
@@ -123,7 +123,7 @@ export function ProjectCardsManager({
           </label>
           <Select
             value={stackFilter}
-            onValueChange={(value: ProjectStack) => {
+            onValueChange={(value: StackCategory) => {
               setStackFilter(value); // Update the stack filter
             }}
           >
@@ -131,13 +131,13 @@ export function ProjectCardsManager({
               <SelectValue placeholder="Filtrar por stack" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value={ProjectStack.FULL_STACK}>
+              <SelectItem value={StackCategory.FULL_STACK}>
                 {PROJECT_STACK_TRANSCRIPTIONS.FULL_STACK}
               </SelectItem>
-              <SelectItem value={ProjectStack.FRONT_END}>
+              <SelectItem value={StackCategory.FRONT_END}>
                 {PROJECT_STACK_TRANSCRIPTIONS.FRONT_END}
               </SelectItem>
-              <SelectItem value={ProjectStack.BACK_END}>
+              <SelectItem value={StackCategory.BACK_END}>
                 {PROJECT_STACK_TRANSCRIPTIONS.BACK_END}
               </SelectItem>
             </SelectContent>

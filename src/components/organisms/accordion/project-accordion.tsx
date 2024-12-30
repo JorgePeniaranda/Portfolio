@@ -78,7 +78,16 @@ export function ProjectAccordion({
           <AccordionContent>
             <ul className="list-disc pl-4">
               {techStack.map((stack) => (
-                <li key={`technology_${stack.id}`}>{stack.name}</li>
+                <li key={`technology_${stack.id}`}>
+                  <a
+                    className="text-blue-500 hover:text-blue-600 dark:hover:text-blue-400"
+                    href={`/stack/${stack.key}`}
+                    rel="noopener noreferrer"
+                    target="__blank"
+                  >
+                    {stack.name}
+                  </a>
+                </li>
               ))}
             </ul>
           </AccordionContent>
