@@ -1,3 +1,13 @@
+/**
+ * @description Breadcrumb template for the dashboard
+ * - This object is used to generate the breadcrumb in the dashboard layout.
+ * - The object is structured as follows:
+ * > key: URL path.
+ * > value: Array of objects with the following properties:
+ * > title: Breadcrumb title.
+ * > url: Breadcrumb URL.
+ * - To implement, it is necessary to pass one of the arrays to the dashboard layout component to be rendered.
+ */
 export const DASHBOARD_BREADCRUMB_TEMPLATE: Record<
   string,
   Array<{
