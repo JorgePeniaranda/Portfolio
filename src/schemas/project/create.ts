@@ -5,17 +5,17 @@ const stackCategoryValues = Object.values(StackCategory) as [string, ...string[]
 const projectStatusValues = Object.values(ProjectStatus) as [string, ...string[]];
 
 export const ProjectCreateSchema = z.object({
-  key: z.string(),
-  name: z.string(),
+  key: z.string().min(1),
+  name: z.string().min(1),
   status: z.enum(projectStatusValues),
   stack: z.enum(stackCategoryValues),
   startDate: z.date(),
   endDate: z.date().optional().nullable(),
-  description: z.string(),
-  goals: z.string().array(),
-  contributions: z.string().array(),
-  logoURl: z.string(),
-  primaryColor: z.string(),
+  description: z.string().min(1),
+  goals: z.string().min(1).array(),
+  contributions: z.string().min(1).array(),
+  logoURl: z.string().min(1),
+  primaryColor: z.string().min(1),
   demoUrl: z.string().optional().nullable(),
   githubUrl: z.string().optional().nullable(),
 });

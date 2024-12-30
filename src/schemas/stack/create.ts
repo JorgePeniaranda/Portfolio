@@ -5,12 +5,12 @@ const stackCategoryValues = Object.values(StackCategory) as [string, ...string[]
 const stackTypeValues = Object.values(StackCategory) as [string, ...string[]];
 
 export const StackCreateSchema = z.object({
-  key: z.string(),
-  name: z.string(),
-  description: z.string(),
+  key: z.string().min(1),
+  name: z.string().min(1),
+  description: z.string().min(1),
   category: z.enum(stackCategoryValues).optional().nullable(),
   type: z.enum(stackTypeValues).optional().nullable(),
-  iconUrl: z.string(),
+  iconUrl: z.string().min(1),
 });
 
 export type StackCreateSchema = z.infer<typeof StackCreateSchema>;
