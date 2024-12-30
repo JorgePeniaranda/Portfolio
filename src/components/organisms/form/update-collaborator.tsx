@@ -38,7 +38,7 @@ export function UpdateCollaboratorForm({
 
     if (!createResponse.success) {
       toast({
-        title: "Error al crear colaborador",
+        title: "Error al actualizar colaborador",
         description: createResponse.message,
         className: "bg-red-500",
       });
@@ -48,7 +48,7 @@ export function UpdateCollaboratorForm({
   return (
     <Form {...form}>
       <form className="space-y-8" onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <FormField
             control={form.control}
             name="nickname"
