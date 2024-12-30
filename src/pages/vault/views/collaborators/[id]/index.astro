@@ -1,7 +1,22 @@
 ---
 import Layout from '../../../../../components/layouts/base.astro'
 import { DashboardLayout } from '../../../../../components/layouts/dashboard-layout'
+import { ShowCollaboratorForm } from '../../../../../components/organisms/form/show-collaborator'
 import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../../constants/breadcrumb'
+import { getAllColaborator } from '../../../../../services/colaborator/getAllColaborator'
+
+export async function getStaticPaths() {
+  const collaborators = await getAllColaborator()
+
+  const paths = collaborators.map(stack => ({
+    params: { id: stack.id },
+    props: stack
+  }))
+
+  return paths
+}
+
+const collaborator = Astro.props
 ---
 
 <Layout title="Panel de Control">
@@ -11,8 +26,9 @@ import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../../constants/breadcru
     ]}
     client:load
   >
-    <main class="w-full h-full flex flex-col pt-7 pl-7 container mx-auto">
-      <!-- <h1 class="text-4xl font-medium"></h1> -->
+    <main class="w-full h-full flex flex-col pt-7 pl-7 container mx-auto gap-5">
+      <h1 class="text-4xl font-medium">Detalles de Colaborador</h1>
+      <ShowCollaboratorForm defaultValues={collaborator} client:load />
     </main>
   </DashboardLayout>
 </Layout>
