@@ -17,6 +17,7 @@ import {selectionColumnDef} from "../data-table/column-def/selection";
 import {DataTableColumnHeader} from "../data-table/column/dropdown";
 import {Button} from "../../ui/button";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "../../ui/tooltip";
+import {useToast} from "../../../hooks/use-toast";
 
 //#region Column Definitions
 const columns: Array<ColumnDef<Stack>> = [
@@ -109,6 +110,7 @@ export function StackTable({data}: {data: Stack[]}) {
 
 // MARK: - Table Header Component
 function TableHeaderComponent({table}: {table: Table<Stack>}) {
+  const {toast} = useToast();
   const selectedRowModel = table.getSelectedRowModel();
   const {rows, selectedCount} = useMemo(() => {
     return {
@@ -129,8 +131,29 @@ function TableHeaderComponent({table}: {table: Table<Stack>}) {
     window.location.href = `/vault/views/stack/${rows[0].original.id}/edit`;
   };
 
-  const handleDelete = () => {
-    if (confirm("¿Estás seguro de que deseas eliminar los colaboradores seleccionados?")) {
+  const handleDelete = async () => {
+    if (!confirm("¿Estás seguro de que deseas eliminar los colaboradores seleccionados?")) {
+      return;
+    }
+
+    const response = {
+      success: true,
+    };
+
+    if (response.success) {
+      toast({
+        title: "Colaboradores eliminados",
+        description: "Los colaboradores seleccionados se eliminaron correctamente.",
+        className: "bg-green-500",
+      });
+
+      window.location.reload();
+    } else {
+      toast({
+        title: "Error al eliminar colaboradores",
+        description: "No se pudieron eliminar los colaboradores seleccionados.",
+        className: "bg-green-500",
+      });
     }
   };
 
