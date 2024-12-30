@@ -13,6 +13,7 @@ import {DataTable} from "../data-table";
 import {selectionColumnDef} from "../data-table/column-def/selection";
 import {DataTableColumnHeader} from "../data-table/column/dropdown";
 
+//#region Column Definitions
 const columns: Array<ColumnDef<Project>> = [
   selectionColumnDef<Project>(),
   {
@@ -130,11 +131,14 @@ const columns: Array<ColumnDef<Project>> = [
     },
   },
 ];
+//#endregion
 
+// MARK: - Collaborator Table
 export function ProjectTable({data}: {data: Project[]}) {
   return <DataTable HeaderComponent={TableHeaderComponent} columns={columns} data={data} />;
 }
 
+// MARK: - Table Header Component
 function TableHeaderComponent({table}: {table: Table<Project>}) {
   const selectedRowModel = table.getSelectedRowModel();
   const {rows, selectedCount} = useMemo(() => {

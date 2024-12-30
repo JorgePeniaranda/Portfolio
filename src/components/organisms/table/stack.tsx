@@ -18,6 +18,7 @@ import {DataTableColumnHeader} from "../data-table/column/dropdown";
 import {Button} from "../../ui/button";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "../../ui/tooltip";
 
+//#region Column Definitions
 const columns: Array<ColumnDef<Stack>> = [
   selectionColumnDef<Stack>(),
   {
@@ -101,10 +102,12 @@ const columns: Array<ColumnDef<Stack>> = [
   },
 ];
 
+// MARK: - Collaborator Table
 export function StackTable({data}: {data: Stack[]}) {
   return <DataTable HeaderComponent={TableHeaderComponent} columns={columns} data={data} />;
 }
 
+// MARK: - Table Header Component
 function TableHeaderComponent({table}: {table: Table<Stack>}) {
   const selectedRowModel = table.getSelectedRowModel();
   const {rows, selectedCount} = useMemo(() => {
