@@ -1,10 +1,13 @@
 import type {Project} from "@prisma/client";
 import type {ColumnDef, Table} from "@tanstack/react-table";
 
+import {Eye, Pen, Plus, Trash} from "lucide-react";
 import moment from "moment";
 
 import {MIN_DATA_FORMAT} from "../../../constants/common";
+import {Button} from "../../ui/button";
 import {Input} from "../../ui/input";
+import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "../../ui/tooltip";
 import {DataTable} from "../data-table";
 import {selectionColumnDef} from "../data-table/column-def/selection";
 import {DataTableColumnHeader} from "../data-table/column/dropdown";
@@ -141,6 +144,68 @@ function TableHeaderComponent<TData>({table}: {table: Table<TData>}) {
         value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
         onChange={(event) => table.getColumn("name")?.setFilterValue(event.target.value)}
       />
+      <ul className="ml-auto flex items-center space-x-2">
+        <li>
+          <TooltipProvider>
+            <Tooltip delayDuration={0}>
+              <TooltipTrigger asChild>
+                <Button
+                  className="size-max rounded-full bg-lime-600 p-2 text-white hover:bg-lime-700 hover:text-white dark:text-white dark:hover:bg-lime-500"
+                  variant="outline"
+                >
+                  <Plus className="size-5" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Crear</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </li>
+        <li>
+          <TooltipProvider>
+            <Tooltip delayDuration={0}>
+              <TooltipTrigger asChild>
+                <Button
+                  className="size-max rounded-full bg-blue-500 p-2 text-white hover:bg-blue-600 hover:text-white dark:text-white dark:hover:bg-blue-400"
+                  variant="outline"
+                >
+                  <Eye className="size-5" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Ver detalles</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </li>
+        <li>
+          <TooltipProvider>
+            <Tooltip delayDuration={0}>
+              <TooltipTrigger asChild>
+                <Button
+                  className="size-max rounded-full bg-gray-500 p-2 text-white hover:bg-gray-600 hover:text-white dark:text-white dark:hover:bg-gray-400"
+                  variant="outline"
+                >
+                  <Pen className="size-5" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Editar</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </li>
+        <li>
+          <TooltipProvider>
+            <Tooltip delayDuration={0}>
+              <TooltipTrigger asChild>
+                <Button
+                  className="size-max rounded-full bg-red-500 p-2 text-white hover:bg-red-600 hover:text-white dark:text-white dark:hover:bg-red-400"
+                  variant="outline"
+                >
+                  <Trash className="size-5" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Eliminar</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </li>
+      </ul>
     </div>
   );
 }
