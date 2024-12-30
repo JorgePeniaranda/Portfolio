@@ -8,26 +8,21 @@ import {
   AccordionTrigger,
   Accordion as UIAccordion,
 } from "../../ui/accordion";
+import {MessageDisplay} from "../../atoms/message-display";
 
 //#region TYPES
 /**
  * The props for the ProjectAccordion component.
- * @param contributions - A list of contributions made to the project.
- * @param goals - A list of goals for the project.
+ * @param contributions - A description of the contributions made to the project.
+ * @param goals - A description of the goals for the project.
  * @param techStack - A list of technologies used in the project.
  * @param collaborators - A list of collaborators in the project.
  * @param githubUrl - The GitHub repository URL of the project.
  * @param demoUrl - The demo URL of the project.
  */
 interface Props {
-  contributions: {
-    id: number;
-    value: string;
-  }[];
-  goals: {
-    id: number;
-    value: string;
-  }[];
+  contributions: string;
+  goals: string;
   techStack: Stack[];
   collaborators: Collaborator[];
   githubUrl: Project["githubUrl"];
@@ -39,8 +34,8 @@ interface Props {
 /**
  * A component that renders project details in an accordion format.
  * It includes sections for goals, technologies, contributions, collaborators, and resources.
- * @param contributions - A list of contributions made to the project.
- * @param goals - A list of goals for the project.
+ * @param contributions - A description of the contributions made to the project.
+ * @param goals - A description of the goals for the project.
  * @param techStack - A list of technologies used in the project.
  * @param collaborators - A list of collaborators in the project.
  * @param githubUrl - The GitHub repository URL of the project.
@@ -57,16 +52,14 @@ export function ProjectAccordion({
   return (
     <UIAccordion className="w-full" type="multiple">
       {/* Render goals section if there are goals */}
-      {goals.length ? (
+      {isDefined(goals) ? (
         <AccordionItem value="goals">
           <AccordionTrigger>Objetivos</AccordionTrigger>
           <div />
           <AccordionContent className="space-y-3">
-            {goals.map((goal) => (
-              <p key={`goal_${goal.id}`} className="text-pretty">
-                {goal.value}
-              </p>
-            ))}
+            <p>
+              <MessageDisplay message={goals} />
+            </p>
           </AccordionContent>
         </AccordionItem>
       ) : null}
@@ -95,15 +88,13 @@ export function ProjectAccordion({
       )}
 
       {/* Render contributions section if there are contributions */}
-      {contributions.length > 0 && (
+      {isDefined(contributions) && (
         <AccordionItem value="contribution">
           <AccordionTrigger>¿Qué aporté?</AccordionTrigger>
           <AccordionContent className="space-y-3">
-            {contributions.map((contribution) => (
-              <p key={`contribution_${contribution.id}`} className="text-pretty">
-                {contribution.value}
-              </p>
-            ))}
+            <p>
+              <MessageDisplay message={contributions} />
+            </p>
           </AccordionContent>
         </AccordionItem>
       )}
