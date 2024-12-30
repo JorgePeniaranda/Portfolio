@@ -33,6 +33,54 @@ export const DASHBOARD_BREADCRUMB_TEMPLATE: Record<
       title: "Proyectos",
     },
   ],
+  "/vault/views/projects/create": [
+    {
+      title: "Panel de control",
+      url: "/vault",
+    },
+    {
+      title: "Vistas",
+    },
+    {
+      title: "Proyectos",
+      url: "/vault/views/projects",
+    },
+    {
+      title: "Crear",
+    },
+  ],
+  "/vault/views/projects/edit": [
+    {
+      title: "Panel de control",
+      url: "/vault",
+    },
+    {
+      title: "Vistas",
+    },
+    {
+      title: "Proyectos",
+      url: "/vault/views/projects",
+    },
+    {
+      title: "Editar",
+    },
+  ],
+  "/vault/views/projects/details": [
+    {
+      title: "Panel de control",
+      url: "/vault",
+    },
+    {
+      title: "Vistas",
+    },
+    {
+      title: "Proyectos",
+      url: "/vault/views/projects",
+    },
+    {
+      title: "Detalles",
+    },
+  ],
   "/vault/views/stack": [
     {
       title: "Panel de control",
@@ -45,6 +93,54 @@ export const DASHBOARD_BREADCRUMB_TEMPLATE: Record<
       title: "Stack",
     },
   ],
+  "/vault/views/stack/create": [
+    {
+      title: "Panel de control",
+      url: "/vault",
+    },
+    {
+      title: "Vistas",
+    },
+    {
+      title: "Stack",
+      url: "/vault/stack/collaborators",
+    },
+    {
+      title: "Crear",
+    },
+  ],
+  "/vault/views/stack/edit": [
+    {
+      title: "Panel de control",
+      url: "/vault",
+    },
+    {
+      title: "Vistas",
+    },
+    {
+      title: "Stack",
+      url: "/vault/stack/collaborators",
+    },
+    {
+      title: "Editar",
+    },
+  ],
+  "/vault/views/stack/details": [
+    {
+      title: "Panel de control",
+      url: "/vault",
+    },
+    {
+      title: "Vistas",
+    },
+    {
+      title: "Stack",
+      url: "/vault/stack/collaborators",
+    },
+    {
+      title: "Detalles",
+    },
+  ],
   "/vault/views/collaborators": [
     {
       title: "Panel de control",
@@ -55,6 +151,54 @@ export const DASHBOARD_BREADCRUMB_TEMPLATE: Record<
     },
     {
       title: "Colaboradores",
+    },
+  ],
+  "/vault/views/collaborators/create": [
+    {
+      title: "Panel de control",
+      url: "/vault",
+    },
+    {
+      title: "Vistas",
+    },
+    {
+      title: "Colaboradores",
+      url: "/vault/views/collaborators",
+    },
+    {
+      title: "Crear",
+    },
+  ],
+  "/vault/views/collaborators/edit": [
+    {
+      title: "Panel de control",
+      url: "/vault",
+    },
+    {
+      title: "Vistas",
+    },
+    {
+      title: "Colaboradores",
+      url: "/vault/views/collaborators",
+    },
+    {
+      title: "Editar",
+    },
+  ],
+  "/vault/views/collaborators/details": [
+    {
+      title: "Panel de control",
+      url: "/vault",
+    },
+    {
+      title: "Vistas",
+    },
+    {
+      title: "Colaboradores",
+      url: "/vault/views/collaborators",
+    },
+    {
+      title: "Detalles",
     },
   ],
   "/vault/design/stack-flow": [
