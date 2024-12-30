@@ -12,7 +12,10 @@ import {selectionColumnDef} from "../data-table/column-def/selection";
 import {DataTableColumnHeader} from "../data-table/column/dropdown";
 import {Button} from "../../ui/button";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "../../ui/tooltip";
+import {deleteCollaborator} from "../../../services/colaborator/deleteCollaborator";
+import {useToast} from "../../../hooks/use-toast";
 
+//#region Column Definitions
 const columns: Array<ColumnDef<Colaborator>> = [
   selectionColumnDef<Colaborator>(),
   {
@@ -64,12 +67,16 @@ const columns: Array<ColumnDef<Colaborator>> = [
     },
   },
 ];
+//#endregion
 
+// MARK: - Collaborator Table
 export function CollaboratorTable({data}: {data: Colaborator[]}) {
   return <DataTable HeaderComponent={TableHeaderComponent} columns={columns} data={data} />;
 }
 
+// MARK: - Table Header Component
 function TableHeaderComponent({table}: {table: Table<Colaborator>}) {
+  const {toast} = useToast();
   const selectedRowModel = table.getSelectedRowModel();
   const {rows, selectedCount} = useMemo(() => {
     return {
@@ -90,8 +97,27 @@ function TableHeaderComponent({table}: {table: Table<Colaborator>}) {
     window.location.href = `/vault/views/collaborators/${rows[0].original.id}/edit`;
   };
 
-  const handleDelete = () => {
-    if (confirm("¿Estás seguro de que deseas eliminar los colaboradores seleccionados?")) {
+  const handleDelete = async () => {
+    if (!confirm("¿Estás seguro de que deseas eliminar los colaboradores seleccionados?")) {
+      return;
+    }
+
+    const response = await deleteCollaborator(rows.map((row) => row.original.id));
+
+    if (response.success) {
+      toast({
+        title: "Colaboradores eliminados",
+        description: "Los colaboradores seleccionados se eliminaron correctamente.",
+        className: "bg-green-500",
+      });
+
+      window.location.reload();
+    } else {
+      toast({
+        title: "Error al eliminar colaboradores",
+        description: "No se pudieron eliminar los colaboradores seleccionados.",
+        className: "bg-green-500",
+      });
     }
   };
 
