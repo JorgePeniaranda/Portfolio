@@ -1,6 +1,8 @@
 import {ProjectStatus, StackCategory} from "@prisma/client";
 import {z} from "zod";
 
+import {isHexadecimal} from "../../helpers/guards/is-hexadecimal";
+
 const stackCategoryValues = Object.values(StackCategory) as [
   (typeof StackCategory)[keyof typeof StackCategory],
   ...(typeof StackCategory)[keyof typeof StackCategory][],
@@ -16,13 +18,15 @@ export const ProjectUpdateSchema = z.object({
   name: z.string().min(1),
   status: z.enum(projectStatusValues),
   stack: z.enum(stackCategoryValues),
-  startDate: z.date(),
-  endDate: z.date().optional().nullable(),
+  startDate: z.coerce.date(),
+  endDate: z.coerce.date().optional().nullable(),
   description: z.string().min(1),
-  goals: z.string().min(1).array(),
-  contributions: z.string().min(1).array(),
+  goals: z.string().min(1),
+  contributions: z.string().min(1),
   logoUrl: z.string().min(1),
-  primaryColor: z.string().min(1),
+  primaryColor: z.string().refine(isHexadecimal, {
+    message: "Invalid hex color format. Expected format: #RRGGBB or #RGB",
+  }),
   demoUrl: z.string().optional().nullable(),
   githubUrl: z.string().optional().nullable(),
 });
