@@ -135,6 +135,16 @@ export function ProjectTable({data}: {data: Project[]}) {
 }
 
 function TableHeaderComponent<TData>({table}: {table: Table<TData>}) {
+  // const {getSelectedRowModel} = table;
+
+  const handleCreate = () => {};
+
+  const handleView = () => {};
+
+  const handleEdit = () => {};
+
+  const handleDelete = () => {};
+
   return (
     <div className="flex items-center py-4">
       <Input
@@ -152,6 +162,7 @@ function TableHeaderComponent<TData>({table}: {table: Table<TData>}) {
                 <Button
                   className="size-max rounded-full bg-lime-600 p-2 text-white hover:bg-lime-700 hover:text-white dark:text-white dark:hover:bg-lime-500"
                   variant="outline"
+                  onClick={handleCreate}
                 >
                   <Plus className="size-5" />
                 </Button>
@@ -167,6 +178,7 @@ function TableHeaderComponent<TData>({table}: {table: Table<TData>}) {
                 <Button
                   className="size-max rounded-full bg-blue-500 p-2 text-white hover:bg-blue-600 hover:text-white dark:text-white dark:hover:bg-blue-400"
                   variant="outline"
+                  onClick={handleView}
                 >
                   <Eye className="size-5" />
                 </Button>
@@ -182,6 +194,7 @@ function TableHeaderComponent<TData>({table}: {table: Table<TData>}) {
                 <Button
                   className="size-max rounded-full bg-gray-500 p-2 text-white hover:bg-gray-600 hover:text-white dark:text-white dark:hover:bg-gray-400"
                   variant="outline"
+                  onClick={handleEdit}
                 >
                   <Pen className="size-5" />
                 </Button>
@@ -197,6 +210,7 @@ function TableHeaderComponent<TData>({table}: {table: Table<TData>}) {
                 <Button
                   className="size-max rounded-full bg-red-500 p-2 text-white hover:bg-red-600 hover:text-white dark:text-white dark:hover:bg-red-400"
                   variant="outline"
+                  onClick={handleDelete}
                 >
                   <Trash className="size-5" />
                 </Button>
