@@ -11,6 +11,7 @@ import {
 import {cn} from "../../../helpers/common/classnames";
 import {useToast} from "../../../hooks/use-toast";
 import {ProjectCreateDefaultValues, ProjectCreateSchema} from "../../../schemas/project/create";
+import {postProject} from "../../../services/project/postProject";
 import {Button} from "../../ui/button";
 import {Calendar} from "../../ui/calendar";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
@@ -27,10 +28,7 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
   });
 
   const onSubmit = async (values: ProjectCreateSchema) => {
-    const response = {
-      success: false,
-      message: "",
-    };
+    const response = await postProject(values);
 
     if (response.success) {
       form.reset();

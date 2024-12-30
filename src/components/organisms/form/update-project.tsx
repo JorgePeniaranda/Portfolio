@@ -18,6 +18,7 @@ import {Textarea} from "../../ui/textarea";
 import {Popover, PopoverContent, PopoverTrigger} from "../../ui/popover";
 import {cn} from "../../../helpers/common/classnames";
 import {Calendar} from "../../ui/calendar";
+import {putProject} from "../../../services/project/putProject";
 
 export function UpdateProjectForm({
   defaultValues,
@@ -33,10 +34,7 @@ export function UpdateProjectForm({
   });
 
   const onSubmit = async (values: ProjectUpdateSchema) => {
-    const response = {
-      success: false,
-      message: "",
-    };
+    const response = await putProject(values);
 
     if (response.success) {
       form.reset();

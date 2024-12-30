@@ -18,6 +18,7 @@ import {DataTableColumnHeader} from "../data-table/column/dropdown";
 import {Button} from "../../ui/button";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "../../ui/tooltip";
 import {useToast} from "../../../hooks/use-toast";
+import {deleteStack} from "../../../services/stack/deleteStack";
 
 //#region Column Definitions
 const columns: Array<ColumnDef<Stack>> = [
@@ -136,9 +137,7 @@ function TableHeaderComponent({table}: {table: Table<Stack>}) {
       return;
     }
 
-    const response = {
-      success: true,
-    };
+    const response = await deleteStack(rows.map((row) => row.original.id));
 
     if (response.success) {
       toast({

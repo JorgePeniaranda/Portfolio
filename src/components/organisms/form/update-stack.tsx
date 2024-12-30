@@ -14,6 +14,7 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "..
 import {Input} from "../../ui/input";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
 import {Textarea} from "../../ui/textarea";
+import {putStack} from "../../../services/stack/putStack";
 
 export function UpdateStackForm({
   defaultValues,
@@ -29,10 +30,7 @@ export function UpdateStackForm({
   });
 
   const onSubmit = async (values: StackCreateSchema) => {
-    const response = {
-      success: false,
-      message: "",
-    };
+    const response = await putStack(values);
 
     if (response.success) {
       form.reset();
