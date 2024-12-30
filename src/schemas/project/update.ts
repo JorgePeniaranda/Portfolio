@@ -5,6 +5,7 @@ const stackCategoryValues = Object.values(StackCategory) as [string, ...string[]
 const projectStatusValues = Object.values(ProjectStatus) as [string, ...string[]];
 
 export const ProjectUpdateSchema = z.object({
+  id: z.number(),
   key: z.string().min(1),
   name: z.string().min(1),
   status: z.enum(projectStatusValues),
@@ -14,7 +15,7 @@ export const ProjectUpdateSchema = z.object({
   description: z.string().min(1),
   goals: z.string().min(1).array(),
   contributions: z.string().min(1).array(),
-  logoURl: z.string().min(1),
+  logoUrl: z.string().min(1),
   primaryColor: z.string().min(1),
   demoUrl: z.string().optional().nullable(),
   githubUrl: z.string().optional().nullable(),

@@ -285,7 +285,7 @@ export function UpdateProjectForm({
           />
           <FormField
             control={form.control}
-            name="logoURl"
+            name="logoUrl"
             render={({field}) => (
               <FormItem>
                 <FormLabel>URL de logo</FormLabel>
