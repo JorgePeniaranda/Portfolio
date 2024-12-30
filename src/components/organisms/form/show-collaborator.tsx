@@ -1,11 +1,9 @@
 import type {Colaborator} from "@prisma/client";
 
 import {zodResolver} from "@hookform/resolvers/zod";
-import {Save} from "lucide-react";
 import {useForm} from "react-hook-form";
 
 import {CollaboratorUpdateSchema} from "../../../schemas/collaborator/update";
-import {Button} from "../../ui/button";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
 import {Input} from "../../ui/input";
 
@@ -18,7 +16,7 @@ export function ShowCollaboratorForm({defaultValues}: {defaultValues: Colaborato
   return (
     <Form {...form}>
       <form className="space-y-8">
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <FormField
             control={form.control}
             name="nickname"

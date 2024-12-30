@@ -43,7 +43,7 @@ export function CreateCollaboratorForm({disableForm = false}: {disableForm?: boo
   return (
     <Form {...form}>
       <form className="space-y-8" onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <FormField
             control={form.control}
             name="nickname"
