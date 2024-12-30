@@ -4,4 +4,4 @@ export const ProjectSortType = {
   Z_A: "Z-A",
 } as const;
 
-export type IProjectSortType = (typeof ProjectSortType)[keyof typeof ProjectSortType];
+export type ProjectSortType = (typeof ProjectSortType)[keyof typeof ProjectSortType];

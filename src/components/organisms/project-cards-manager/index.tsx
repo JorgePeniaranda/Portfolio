@@ -8,7 +8,7 @@ import {
 } from "../../../constants/transcriptions";
 import {isDefined} from "../../../helpers/guards/is-defined";
 import {useProjectLikedStore} from "../../../services/storage/liked-projects";
-import {ProjectSortType, type IProjectSortType} from "../../../types/project.d";
+import {ProjectSortType, type ProjectSortType} from "../../../types/project.d";
 import {ProjectCard} from "../../molecules/cards/project-card";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
 
@@ -29,7 +29,7 @@ export function ProjectCardsManager({
   const {likedKeyProjects} = useProjectLikedStore();
 
   // State for sorting type, stack filter, and status filter
-  const [sortType, setSortType] = useState<IProjectSortType>("liked");
+  const [sortType, setSortType] = useState<ProjectSortType>("liked");
   const [stackFilter, setStackFilter] = useState<StackCategory>();
   const [statusFilter, setStatusFilter] = useState<ProjectStatus>();
 
@@ -95,7 +95,7 @@ export function ProjectCardsManager({
           <Select
             defaultValue={sortType}
             value={sortType}
-            onValueChange={(value: IProjectSortType) => {
+            onValueChange={(value: ProjectSortType) => {
               setSortType(value); // Update the sort type
             }}
           >

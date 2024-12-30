@@ -1,5 +1,5 @@
 import type {StackCategory, ProjectStatus, StackType} from "@prisma/client";
-import type {IProjectSortType} from "../types/project.d";
+import type {ProjectSortType} from "../types/project.d";
 
 /**
  * A record that maps each `ProjectStatus` to a human-readable string translation.
@@ -45,7 +45,7 @@ export const STACK_TYPE_TRANSCRIPTIONS: Record<StackType, string> = {
  * // Example usage:
  * const sort = PROJECT_SORT_TRANSCRIPTIONS.LIKES; // "Favoritos"
  */
-export const PROJECT_SORT_TRANSCRIPTIONS: Record<IProjectSortType, string> = {
+export const PROJECT_SORT_TRANSCRIPTIONS: Record<ProjectSortType, string> = {
   "liked": "Favoritos",
   "A-Z": "A-Z",
   "Z-A": "Z-A",
