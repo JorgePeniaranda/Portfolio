@@ -1,4 +1,4 @@
-import type {StackCategory, ProjectStatus} from "@prisma/client";
+import type {StackCategory, ProjectStatus, StackType} from "@prisma/client";
 import type {IProjectSortType} from "../types/project.d";
 
 /**
@@ -21,12 +21,20 @@ export const PROJECT_STATUS_TRANSCRIPTIONS: Record<ProjectStatus, string> = {
  * @constant {Record<StackCategory, string>}
  * @example
  * // Example usage:
- * const stack = PROJECT_STACK_TRANSCRIPTIONS.FULL_STACK; // "Full-Stack"
+ * const stack = STACK_CATEGORY_TRANSCRIPTIONS.FULL_STACK; // "Full-Stack"
  */
-export const PROJECT_STACK_TRANSCRIPTIONS: Record<StackCategory, string> = {
+export const STACK_CATEGORY_TRANSCRIPTIONS: Record<StackCategory, string> = {
   FULL_STACK: "Full-Stack", // Full-stack development
   BACK_END: "Back-End", // Back-end development
   FRONT_END: "Front-End", // Front-end development
+} as const;
+
+export const STACK_TYPE_TRANSCRIPTIONS: Record<StackType, string> = {
+  DATABASE: "Base de datos",
+  FRAMEWORK: "Framework",
+  LANGUAGE: "Lenguaje",
+  LIBRARY: "Librería",
+  TOOL: "Herramienta",
 } as const;
 
 /**

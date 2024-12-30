@@ -3,7 +3,7 @@ import {useMemo, useState} from "react";
 
 import {
   PROJECT_SORT_TRANSCRIPTIONS,
-  PROJECT_STACK_TRANSCRIPTIONS,
+  STACK_CATEGORY_TRANSCRIPTIONS,
   PROJECT_STATUS_TRANSCRIPTIONS,
 } from "../../../constants/transcriptions";
 import {isDefined} from "../../../helpers/guards/is-defined";
@@ -132,13 +132,13 @@ export function ProjectCardsManager({
             </SelectTrigger>
             <SelectContent>
               <SelectItem value={StackCategory.FULL_STACK}>
-                {PROJECT_STACK_TRANSCRIPTIONS.FULL_STACK}
+                {STACK_CATEGORY_TRANSCRIPTIONS.FULL_STACK}
               </SelectItem>
               <SelectItem value={StackCategory.FRONT_END}>
-                {PROJECT_STACK_TRANSCRIPTIONS.FRONT_END}
+                {STACK_CATEGORY_TRANSCRIPTIONS.FRONT_END}
               </SelectItem>
               <SelectItem value={StackCategory.BACK_END}>
-                {PROJECT_STACK_TRANSCRIPTIONS.BACK_END}
+                {STACK_CATEGORY_TRANSCRIPTIONS.BACK_END}
               </SelectItem>
             </SelectContent>
           </Select>
