@@ -3,12 +3,12 @@ import type {LucideIcon} from "lucide-react";
 import React from "react";
 
 import {
-  Breadcrumb as UIBreadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
+  Breadcrumb as UIBreadcrumb,
 } from "../../ui/breadcrumb";
 
 //#region TYPES

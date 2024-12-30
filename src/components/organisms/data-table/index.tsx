@@ -6,17 +6,14 @@ import {
   getSortedRowModel,
   useReactTable,
   type ColumnDef,
-  type ColumnFiltersState,
   type Table as ITable,
-  type SortingState,
 } from "@tanstack/react-table";
 import {ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight} from "lucide-react";
-import {useState} from "react";
 
+import {isDefined} from "../../../helpers/guards/is-defined";
 import {Button} from "../../ui/button";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "../../ui/table";
-import {isDefined} from "../../../helpers/guards/is-defined";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

@@ -1,4 +1,3 @@
-import React from "react";
 import {Heart, HeartOff} from "lucide-react";
 
 // Importing custom hook for managing the liked projects state

@@ -1,16 +1,16 @@
 import {ProjectStatus, StackCategory, type Project} from "@prisma/client";
 import {useMemo, useState} from "react";
 
-import {useProjectLikedStore} from "../../../services/storage/liked-projects";
-import {ProjectCard} from "../../molecules/cards/project-card";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
 import {
   PROJECT_SORT_TRANSCRIPTIONS,
   PROJECT_STACK_TRANSCRIPTIONS,
   PROJECT_STATUS_TRANSCRIPTIONS,
 } from "../../../constants/transcriptions";
 import {isDefined} from "../../../helpers/guards/is-defined";
+import {useProjectLikedStore} from "../../../services/storage/liked-projects";
 import {ProjectSortType, type IProjectSortType} from "../../../types/project.d";
+import {ProjectCard} from "../../molecules/cards/project-card";
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
 
 /**
  * Component that renders a list of project cards, sorted by favorites.
