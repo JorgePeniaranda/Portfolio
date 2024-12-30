@@ -3,6 +3,7 @@ import type {ColumnDef, Table} from "@tanstack/react-table";
 
 import moment from "moment";
 import {Eye, Pen, Plus, Trash} from "lucide-react";
+import {useMemo} from "react";
 
 import {MIN_DATA_FORMAT} from "../../../constants/common";
 import {
@@ -104,16 +105,31 @@ export function StackTable({data}: {data: Stack[]}) {
   return <DataTable HeaderComponent={TableHeaderComponent} columns={columns} data={data} />;
 }
 
-function TableHeaderComponent<TData>({table}: {table: Table<TData>}) {
-  // const {getSelectedRowModel} = table;
+function TableHeaderComponent({table}: {table: Table<Stack>}) {
+  const selectedRowModel = table.getSelectedRowModel();
+  const {rows, selectedCount} = useMemo(() => {
+    return {
+      ...selectedRowModel,
+      selectedCount: selectedRowModel.rows.length ?? 0,
+    };
+  }, [selectedRowModel]);
 
-  const handleCreate = () => {};
+  const handleCreate = () => {
+    window.location.href = "/vault/views/stack/create";
+  };
 
-  const handleView = () => {};
+  const handleView = () => {
+    window.location.href = `/vault/views/stack/${rows[0].original.id}`;
+  };
 
-  const handleEdit = () => {};
+  const handleEdit = () => {
+    window.location.href = `/vault/views/stack/${rows[0].original.id}/edit`;
+  };
 
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    if (confirm("¿Estás seguro de que deseas eliminar los colaboradores seleccionados?")) {
+    }
+  };
 
   return (
     <div className="flex items-center py-4">
@@ -131,6 +147,7 @@ function TableHeaderComponent<TData>({table}: {table: Table<TData>}) {
               <TooltipTrigger asChild>
                 <Button
                   className="size-max rounded-full bg-lime-600 p-2 text-white hover:bg-lime-700 hover:text-white dark:text-white dark:hover:bg-lime-500"
+                  disabled={selectedCount !== 0}
                   variant="outline"
                   onClick={handleCreate}
                 >
@@ -147,6 +164,7 @@ function TableHeaderComponent<TData>({table}: {table: Table<TData>}) {
               <TooltipTrigger asChild>
                 <Button
                   className="size-max rounded-full bg-blue-500 p-2 text-white hover:bg-blue-600 hover:text-white dark:text-white dark:hover:bg-blue-400"
+                  disabled={selectedCount !== 1}
                   variant="outline"
                   onClick={handleView}
                 >
@@ -163,6 +181,7 @@ function TableHeaderComponent<TData>({table}: {table: Table<TData>}) {
               <TooltipTrigger asChild>
                 <Button
                   className="size-max rounded-full bg-gray-500 p-2 text-white hover:bg-gray-600 hover:text-white dark:text-white dark:hover:bg-gray-400"
+                  disabled={selectedCount !== 1}
                   variant="outline"
                   onClick={handleEdit}
                 >
@@ -179,6 +198,7 @@ function TableHeaderComponent<TData>({table}: {table: Table<TData>}) {
               <TooltipTrigger asChild>
                 <Button
                   className="size-max rounded-full bg-red-500 p-2 text-white hover:bg-red-600 hover:text-white dark:text-white dark:hover:bg-red-400"
+                  disabled={selectedCount <= 0}
                   variant="outline"
                   onClick={handleDelete}
                 >
