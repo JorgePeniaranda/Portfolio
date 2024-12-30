@@ -301,6 +301,25 @@ export function UpdateProjectForm({
           />
           <FormField
             control={form.control}
+            name="primaryColor"
+            render={({field}) => (
+              <FormItem>
+                <FormLabel>Color Primario</FormLabel>
+                <FormControl>
+                  <Input
+                    disabled={disableForm}
+                    placeholder="Color Primario"
+                    type="color"
+                    {...field}
+                    value={field.value === null ? undefined : field.value}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name="demoUrl"
             render={({field}) => (
               <FormItem>
