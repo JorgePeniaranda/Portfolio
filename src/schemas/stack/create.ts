@@ -19,7 +19,7 @@ export const StackCreateDefaultValues: StackCreateSchema = {
   key: "",
   name: "",
   description: "",
-  category: "",
-  type: "",
+  category: null,
+  type: null,
   iconUrl: "",
 };
