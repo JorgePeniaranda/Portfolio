@@ -79,6 +79,17 @@ const columns: Array<ColumnDef<Project>> = [
     header({column}) {
       return <DataTableColumnHeader column={column} title="Color primario" />;
     },
+    cell({row}) {
+      return (
+        <div className="flex items-center gap-1">
+          <div
+            className="size-5 rounded-full"
+            style={{backgroundColor: row.original.primaryColor}}
+          />
+          <span>({row.original.primaryColor})</span>
+        </div>
+      );
+    },
   },
   {
     id: "demoUrl",
