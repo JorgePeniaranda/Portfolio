@@ -1,4 +1,4 @@
-import type {ProjectStack, ProjectStatus} from "@prisma/client";
+import type {ProjectStatus, StackCategory} from "@prisma/client";
 
 //#region Navbar
 
@@ -39,11 +39,11 @@ const StatusStyle: Record<ProjectStatus, string> = {
 
 /**
  * Defines the style for each project stack using Tailwind CSS classes.
- * The styles are mapped to the `ProjectStack` enum values.
+ * The styles are mapped to the `StackCategory` enum values.
  *
- * @constant {Record<ProjectStack, string>}
+ * @constant {Record<StackCategory, string>}
  */
-const StackStyle: Record<ProjectStack, string> = {
+const StackStyle: Record<StackCategory, string> = {
   FULL_STACK: "bg-red-500/70 text-white dark:bg-red-500", // Full-stack style (red background)
   BACK_END: "bg-blue-500/70 text-white dark:bg-blue-500", // Back-end style (blue background)
   FRONT_END: "bg-green-500/70 text-white dark:bg-green-500", // Front-end style (green background)
@@ -54,7 +54,7 @@ const StackStyle: Record<ProjectStack, string> = {
  *
  * @constant {object} ProjectDetailsStyles
  * @property {Record<ProjectStatus, string>} StatusStyle - Styles for project statuses.
- * @property {Record<ProjectStack, string>} StackStyle - Styles for project stacks.
+ * @property {Record<StackCategory, string>} StackStyle - Styles for project stacks.
  */
 export const ProjectDetailsStyles = {
   StatusStyle,

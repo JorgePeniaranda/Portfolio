@@ -1,16 +1,16 @@
 import {ProjectStatus, StackCategory, type Project} from "@prisma/client";
 import {useMemo, useState} from "react";
 
-import {useProjectLikedStore} from "../../../services/storage/liked-projects";
-import {ProjectCard} from "../../molecules/cards/project-card";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
 import {
   PROJECT_SORT_TRANSCRIPTIONS,
-  PROJECT_STACK_TRANSCRIPTIONS,
+  STACK_CATEGORY_TRANSCRIPTIONS,
   PROJECT_STATUS_TRANSCRIPTIONS,
 } from "../../../constants/transcriptions";
 import {isDefined} from "../../../helpers/guards/is-defined";
-import {ProjectSortType, type IProjectSortType} from "../../../types/project.d";
+import {useProjectLikedStore} from "../../../services/storage/liked-projects";
+import {ProjectSortType, type ProjectSortType} from "../../../types/project.d";
+import {ProjectCard} from "../../molecules/cards/project-card";
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
 
 /**
  * Component that renders a list of project cards, sorted by favorites.
@@ -29,7 +29,7 @@ export function ProjectCardsManager({
   const {likedKeyProjects} = useProjectLikedStore();
 
   // State for sorting type, stack filter, and status filter
-  const [sortType, setSortType] = useState<IProjectSortType>("liked");
+  const [sortType, setSortType] = useState<ProjectSortType>("liked");
   const [stackFilter, setStackFilter] = useState<StackCategory>();
   const [statusFilter, setStatusFilter] = useState<ProjectStatus>();
 
@@ -95,7 +95,7 @@ export function ProjectCardsManager({
           <Select
             defaultValue={sortType}
             value={sortType}
-            onValueChange={(value: IProjectSortType) => {
+            onValueChange={(value: ProjectSortType) => {
               setSortType(value); // Update the sort type
             }}
           >
@@ -132,13 +132,13 @@ export function ProjectCardsManager({
             </SelectTrigger>
             <SelectContent>
               <SelectItem value={StackCategory.FULL_STACK}>
-                {PROJECT_STACK_TRANSCRIPTIONS.FULL_STACK}
+                {STACK_CATEGORY_TRANSCRIPTIONS.FULL_STACK}
               </SelectItem>
               <SelectItem value={StackCategory.FRONT_END}>
-                {PROJECT_STACK_TRANSCRIPTIONS.FRONT_END}
+                {STACK_CATEGORY_TRANSCRIPTIONS.FRONT_END}
               </SelectItem>
               <SelectItem value={StackCategory.BACK_END}>
-                {PROJECT_STACK_TRANSCRIPTIONS.BACK_END}
+                {STACK_CATEGORY_TRANSCRIPTIONS.BACK_END}
               </SelectItem>
             </SelectContent>
           </Select>

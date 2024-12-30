@@ -6,12 +6,12 @@ import {
   type IBreadCrumb
 } from '../../../components/organisms/breadcrumb'
 import { ProjectDetailsStyles } from '../../../constants/styles'
-import { getAllProjectsWithStackAndCollaborators } from '../../../services/project/getAllProjectsWithStackAndCollaborators'
 import {
-  PROJECT_STACK_TRANSCRIPTIONS,
+  STACK_CATEGORY_TRANSCRIPTIONS,
   PROJECT_STATUS_TRANSCRIPTIONS
 } from '../../../constants/transcriptions'
 import { fromArrayStringToArrayObjectWithIdAndValue } from '../../../mappers/common/fromArrayStringToArrayObjectWithIdAndValue'
+import { getAllProjectsWithStackAndCollaborators } from '../../../services/project/getAllProjectsWithStackAndCollaborators'
 
 export async function getStaticPaths() {
   const projects = await getAllProjectsWithStackAndCollaborators()
@@ -81,7 +81,7 @@ const BreadCrumbItems: IBreadCrumb[] = [
               class="leading-none font-medium rounded-md p-1 text-base"
               class:list={[StackStyle[project.stack]]}
             >
-              {PROJECT_STACK_TRANSCRIPTIONS[project.stack]}
+              {STACK_CATEGORY_TRANSCRIPTIONS[project.stack]}
             </h3>
           </div>
           <p class="text-pretty">

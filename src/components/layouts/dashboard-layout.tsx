@@ -1,12 +1,13 @@
 import {ChevronRight, Database} from "lucide-react";
 
 import {ENV} from "../../constants/env";
+import {DASHBOARD_NAVBAR_ITEMS} from "../../constants/navbar";
+import {isDefined} from "../../helpers/guards/is-defined";
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
   BreadcrumbSeparator,
 } from "../ui/breadcrumb";
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "../ui/collapsible";
@@ -27,9 +28,17 @@ import {
   SidebarRail,
   SidebarTrigger,
 } from "../ui/sidebar";
-import {DASHBOARD_NAVBAR_ITEMS} from "../../constants/navbar";
 
-export function DashboardLayout({children}: {children?: React.ReactNode}) {
+export function DashboardLayout({
+  children,
+  breadcrumb,
+}: {
+  children?: React.ReactNode;
+  breadcrumb?: Array<{
+    title: string;
+    url?: string;
+  }>;
+}) {
   return (
     <SidebarProvider>
       <Sidebar>
@@ -89,17 +98,21 @@ export function DashboardLayout({children}: {children?: React.ReactNode}) {
         <header className="sticky top-0 flex h-16 shrink-0 items-center gap-2 border-b bg-background px-4">
           <SidebarTrigger className="-ml-1" />
           <Separator className="mr-2 h-4" orientation="vertical" />
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink>Panel de Control</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator className="hidden md:block" />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Inicio</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+          {/* Show breadcrumb if is defined */}
+          {isDefined(breadcrumb) &&
+            breadcrumb?.length > 0 &&
+            breadcrumb.map((item, index) => (
+              <Breadcrumb key={item.title}>
+                <BreadcrumbList>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href={item.url}>{item.title}</BreadcrumbLink>
+                  </BreadcrumbItem>
+                  {index < breadcrumb.length - 1 && (
+                    <BreadcrumbSeparator className="hidden md:block" />
+                  )}
+                </BreadcrumbList>
+              </Breadcrumb>
+            ))}
         </header>
         {children}
       </SidebarInset>

@@ -1,6 +1,5 @@
 import type {INavbarSection} from "./navbar";
 
-import React from "react";
 import {Loader, Moon, Settings, Sun, Volume2, VolumeX, icons} from "lucide-react";
 
 import {useSoundStore} from "../../../services/storage/sound";

@@ -1,4 +1,4 @@
-import type {ISoundState, ITheme} from "../types/common.d";
+import type {ISoundState, theme} from "../types/common.d";
 
 export const DEFAULT_LANG = "es";
 
@@ -11,7 +11,7 @@ export const DEFAULT_LANG = "es";
  *
  * @constant {ITheme}
  */
-export const DEFAULT_THEME: ITheme = "light";
+export const DEFAULT_THEME: theme = "light";
 
 /**
  * Default sound state for the application.
@@ -58,3 +58,5 @@ export const PROJECT_LIKED_STORE_KEY = "likedProjects";
 export const THEME_CLASSNAME = "dark";
 
 //#endregion
+
+export const MIN_DATA_FORMAT = "DD-MM-YYYY";

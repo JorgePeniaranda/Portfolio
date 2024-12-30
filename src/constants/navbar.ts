@@ -115,68 +115,30 @@ export const DASHBOARD_NAVBAR_ITEMS: {
       ],
     },
     {
-      title: "Proyectos",
+      title: "Vistas",
       url: "#",
       items: [
         {
-          title: "View",
-          url: "#",
+          title: "Proyectos",
+          url: "/vault/views/project",
         },
         {
-          title: "Insert",
-          url: "#",
+          title: "Stack",
+          url: "/vault/views/stack",
         },
         {
-          title: "Update",
-          url: "#",
-        },
-        {
-          title: "Relaciones",
-          url: "#",
+          title: "Colaboradores",
+          url: "/vault/views/collaborators",
         },
       ],
     },
     {
-      title: "Stack",
+      title: "Diseño",
       url: "#",
       items: [
         {
-          title: "View",
-          url: "#",
-        },
-        {
-          title: "Insert",
-          url: "#",
-        },
-        {
-          title: "Update",
-          url: "#",
-        },
-        {
-          title: "Relaciones",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Colaboradores",
-      url: "#",
-      items: [
-        {
-          title: "View",
-          url: "#",
-        },
-        {
-          title: "Insert",
-          url: "#",
-        },
-        {
-          title: "Update",
-          url: "#",
-        },
-        {
-          title: "Relaciones",
-          url: "#",
+          title: "Stack flow",
+          url: "/vault/design/stack-flow",
         },
       ],
     },

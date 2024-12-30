@@ -1,0 +1,37 @@
+---
+import Layout from '../../../../../../components/layouts/base.astro'
+import { DashboardLayout } from '../../../../../../components/layouts/dashboard-layout'
+import { UpdateStackForm } from '../../../../../../components/organisms/form/update-stack'
+import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../../../constants/breadcrumb'
+import { ENV } from '../../../../../../constants/env'
+import { getAllStack } from '../../../../../../services/stack/getAllStack'
+
+export async function getStaticPaths() {
+  const stacks = await getAllStack()
+
+  const paths = stacks.map(stack => ({
+    params: { id: stack.id },
+    props: stack
+  }))
+
+  return paths
+}
+
+const stack = Astro.props
+---
+
+<Layout title="Panel de Control">
+  <DashboardLayout
+    breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/projects/edit']}
+    client:load
+  >
+    <main class="w-full h-full flex flex-col pt-7 pl-7 container mx-auto gap-5">
+      <h1 class="text-4xl font-medium">Editar Stack</h1>
+      <UpdateStackForm
+        defaultValues={stack}
+        disableForm={ENV.isProduction}
+        client:load
+      />
+    </main>
+  </DashboardLayout>
+</Layout>

@@ -1,9 +1,8 @@
 import type {INavbarSection} from "./navbar";
 
-import React from "react";
 import {MotionValue, motion, useMotionValue, useSpring, useTransform} from "framer-motion";
 import {Loader, Moon, Sun, Volume2, VolumeX, icons} from "lucide-react";
-import {Fragment, useRef} from "react";
+import React, {Fragment, useRef} from "react";
 
 import {NavbarAnimationConfig} from "../../../constants/styles";
 import {useSoundStore} from "../../../services/storage/sound";

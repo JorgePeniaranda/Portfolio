@@ -1,0 +1,21 @@
+---
+import Layout from '../../../../components/layouts/base.astro'
+import { DashboardLayout } from '../../../../components/layouts/dashboard-layout'
+import { ProjectTable } from '../../../../components/organisms/table/project'
+import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../constants/breadcrumb'
+import { getAllProjects } from '../../../../services/project/getAllProjects'
+
+const projects = await getAllProjects()
+---
+
+<Layout title="Panel de Control">
+  <DashboardLayout
+    breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/projects']}
+    client:load
+  >
+    <main class="w-full h-full flex flex-col pt-7 pl-7 container mx-auto">
+      <h1 class="text-4xl font-medium">Proyectos</h1>
+      <ProjectTable data={projects} client:load />
+    </main>
+  </DashboardLayout>
+</Layout>

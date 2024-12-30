@@ -1,7 +1,7 @@
 import type {Project, Stack} from "@prisma/client";
 
-import * as React from "react";
 import {X} from "lucide-react";
+import * as React from "react";
 import {Drawer as DrawerPrimitive} from "vaul";
 
 import {Drawer, DrawerClose, DrawerContent, DrawerTrigger} from "../../../components/ui/drawer";

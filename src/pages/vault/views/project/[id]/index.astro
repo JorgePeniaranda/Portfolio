@@ -1,0 +1,32 @@
+---
+import Layout from '../../../../../components/layouts/base.astro'
+import { DashboardLayout } from '../../../../../components/layouts/dashboard-layout'
+import { ShowProjectForm } from '../../../../../components/organisms/form/show-project'
+import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../../constants/breadcrumb'
+import { getAllProjects } from '../../../../../services/project/getAllProjects'
+
+export async function getStaticPaths() {
+  const projects = await getAllProjects()
+
+  const paths = projects.map(stack => ({
+    params: { id: stack.id },
+    props: stack
+  }))
+
+  return paths
+}
+
+const project = Astro.props
+---
+
+<Layout title="Panel de Control">
+  <DashboardLayout
+    breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/projects/details']}
+    client:load
+  >
+    <main class="w-full h-full flex flex-col pt-7 pl-7 container mx-auto gap-5">
+      <h1 class="text-4xl font-medium">Detalles de Proyecto</h1>
+      <ShowProjectForm defaultValues={project} client:load />
+    </main>
+  </DashboardLayout>
+</Layout>

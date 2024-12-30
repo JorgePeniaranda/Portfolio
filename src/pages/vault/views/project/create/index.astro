@@ -1,0 +1,19 @@
+---
+import Layout from '../../../../../components/layouts/base.astro'
+import { DashboardLayout } from '../../../../../components/layouts/dashboard-layout'
+import { CreateProjectForm } from '../../../../../components/organisms/form/create-project'
+import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../../constants/breadcrumb'
+import { ENV } from '../../../../../constants/env'
+---
+
+<Layout title="Panel de Control">
+  <DashboardLayout
+    breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/projects/create']}
+    client:load
+  >
+    <main class="w-full h-full flex flex-col pt-7 pl-7 container mx-auto gap-5">
+      <h1 class="text-4xl font-medium">Crear Proyecto</h1>
+      <CreateProjectForm disableForm={ENV.isProduction} client:load />
+    </main>
+  </DashboardLayout>
+</Layout>

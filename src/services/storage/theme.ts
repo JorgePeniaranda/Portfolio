@@ -2,11 +2,11 @@ import {create} from "zustand";
 import {persist} from "zustand/middleware";
 
 import {DEFAULT_THEME, THEME_CLASSNAME, THEME_STORE_KEY} from "../../constants/common";
-import {themes, themesArray, type ITheme} from "../../types/common.d";
+import {themes, themesArray, type theme} from "../../types/common.d";
 
 // Define the shape of the store's state.
 export interface IThemeStoreState {
-  theme: ITheme;
+  theme: theme;
 }
 
 // Define the actions available in the store.
@@ -49,7 +49,7 @@ export const useThemeStore = create<IThemeStoreState & IThemeStoreActions>()(
  * Gets the next theme in the list of available themes.
  * If the current theme is not found, it defaults to the first theme in the list.
  */
-function getNextTheme(currentTheme: ITheme): ITheme {
+function getNextTheme(currentTheme: theme): theme {
   const currentIndex = themesArray.indexOf(currentTheme);
   const validIndex = currentIndex !== -1 ? currentIndex : 0;
 
@@ -61,7 +61,7 @@ function getNextTheme(currentTheme: ITheme): ITheme {
  * Updates the theme class in the `<html>` element.
  * Adds or removes the appropriate class based on the selected theme.
  */
-function updateHTMLTheme(theme: ITheme) {
+function updateHTMLTheme(theme: theme) {
   const htmlClassList = document.documentElement.classList;
 
   if (theme === themes.light) {
