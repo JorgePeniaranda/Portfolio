@@ -11,4 +11,7 @@ export default defineConfig({
   site: "https://jorgepeniaranda.dev.ar",
   integrations: [tailwind(), sitemap(), react(), playformCompress(), icon(), robotsTxt()],
   compressHTML: true,
+  build: {
+    assets: 'static',
+  }
 });
