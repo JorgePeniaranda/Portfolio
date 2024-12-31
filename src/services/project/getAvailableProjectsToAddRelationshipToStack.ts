@@ -9,7 +9,7 @@ export async function getAvailableProjectsToAddRelationshipToStack({
 }): Promise<Pick<Project, "id" | "name" | "logoUrl">[]> {
   return await databaseClient.project.findMany({
     where: {
-      techStacks: {
+      associatedStacks: {
         none: {
           id: idStack,
         },

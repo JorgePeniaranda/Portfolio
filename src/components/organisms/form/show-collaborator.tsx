@@ -7,10 +7,10 @@ import {CollaboratorUpdateSchema} from "../../../schemas/collaborator/update";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
 import {Input} from "../../ui/input";
 
-export function ShowCollaboratorForm({defaultValues}: {defaultValues: Collaborator}) {
+export function ShowCollaboratorForm({currentCollaborator}: {currentCollaborator: Collaborator}) {
   const form = useForm<CollaboratorUpdateSchema>({
     resolver: zodResolver(CollaboratorUpdateSchema),
-    defaultValues: defaultValues,
+    defaultValues: currentCollaborator,
   });
 
   return (

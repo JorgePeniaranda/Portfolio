@@ -23,7 +23,7 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../
 export function ProjectCardsManager({
   projects,
 }: {
-  projects: Pick<Project, "id" | "key" | "name" | "logoUrl" | "stack" | "status">[];
+  projects: Pick<Project, "id" | "key" | "name" | "logoUrl" | "stackCategory" | "status">[];
 }) {
   // Retrieves the list of liked projects from the store
   const {likedKeyProjects} = useProjectLikedStore();
@@ -39,7 +39,7 @@ export function ProjectCardsManager({
 
     // Filter by stack
     if (isDefined(stackFilter)) {
-      newProjects = newProjects.filter((project) => project.stack === stackFilter);
+      newProjects = newProjects.filter((project) => project.stackCategory === stackFilter);
     }
 
     // Filter by status

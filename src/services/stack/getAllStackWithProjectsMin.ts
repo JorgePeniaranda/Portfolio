@@ -5,13 +5,13 @@ import {databaseClient} from "../../helpers/client/prisma";
 export async function getAllStackWithProjectsMin(): Promise<
   Array<
     Stack & {
-      projects: Pick<Project, "id" | "key" | "name" | "logoUrl">[];
+      associatedProjects: Pick<Project, "id" | "key" | "name" | "logoUrl">[];
     }
   >
 > {
   return await databaseClient.stack.findMany({
     include: {
-      projects: {
+      associatedProjects: {
         select: {
           id: true,
           key: true,

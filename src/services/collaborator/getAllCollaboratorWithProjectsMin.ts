@@ -5,13 +5,13 @@ import {databaseClient} from "../../helpers/client/prisma";
 export async function getAllCollaboratorWithProjectsMin(): Promise<
   Array<
     Collaborator & {
-      project: Pick<Project, "id" | "name" | "logoUrl">[];
+      associatedProjects: Pick<Project, "id" | "name" | "logoUrl">[];
     }
   >
 > {
   return await databaseClient.collaborator.findMany({
     include: {
-      project: {
+      associatedProjects: {
         select: {
           id: true,
           name: true,

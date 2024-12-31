@@ -13,7 +13,7 @@ export async function getProjectsMinByStackId({
       id: idStack,
     },
     select: {
-      projects: {
+      associatedProjects: {
         select: {
           id: true,
           name: true,
@@ -27,5 +27,5 @@ export async function getProjectsMinByStackId({
     return [];
   }
 
-  return data.projects;
+  return data.associatedProjects;
 }

@@ -6,23 +6,22 @@ import {useForm} from "react-hook-form";
 
 import {useToast} from "../../../hooks/use-toast";
 import {CollaboratorUpdateSchema} from "../../../schemas/collaborator/update";
+import {patchDeleteRelationWithProjectFromCollaborator} from "../../../services/collaborator/patchDeleteRelationWithProjectFromStack";
 import {putCollaborator} from "../../../services/collaborator/putCollaborator";
 import {Button} from "../../ui/button";
+import {Card, CardHeader} from "../../ui/card";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
 import {Input} from "../../ui/input";
-import {Card, CardHeader} from "../../ui/card";
-import {patchDeleteRelationWithCollaboratorFromProject} from "../../../services/project/patchDeleteRelationWithCollaboratorFromProject";
-import {patchDeleteRelationWithProjectFromCollaborator} from "../../../services/collaborator/patchDeleteRelationWithProjectFromStack";
 
 import {RelationshipCollaboratorWithProject} from "./relationship-collaborator-with-project";
 
 export function UpdateCollaboratorForm({
-  defaultValues,
+  currentCollaborator,
   disableForm,
   availableProjects,
 }: {
-  defaultValues: Collaborator & {
-    project: Pick<Project, "id" | "name" | "logoUrl">[];
+  currentCollaborator: Collaborator & {
+    associatedProjects: Pick<Project, "id" | "name" | "logoUrl">[];
   };
   availableProjects: Pick<Project, "id" | "name" | "logoUrl">[];
   disableForm?: boolean;
@@ -30,7 +29,7 @@ export function UpdateCollaboratorForm({
   const {toast} = useToast();
   const form = useForm<CollaboratorUpdateSchema>({
     resolver: zodResolver(CollaboratorUpdateSchema),
-    defaultValues: defaultValues,
+    defaultValues: currentCollaborator,
   });
 
   const onSubmit = async (values: CollaboratorUpdateSchema) => {
@@ -56,7 +55,7 @@ export function UpdateCollaboratorForm({
 
   const onRemoveProject = async (idProject: number) => {
     const response = await patchDeleteRelationWithProjectFromCollaborator({
-      idFrom: defaultValues.id,
+      idFrom: currentCollaborator.id,
       idTo: idProject,
     });
 
@@ -145,7 +144,7 @@ export function UpdateCollaboratorForm({
         <div className="mx-5 mt-5">
           <h3 className="text-3xl font-medium">Proyectos</h3>
           <ul className="mt-4 flex flex-wrap gap-4">
-            {defaultValues.project.map((project) => (
+            {currentCollaborator.associatedProjects.map((project) => (
               <li key={project.id}>
                 <Card className="my-5 flex flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
                   <CardHeader className="relative flex items-center gap-2">
@@ -172,7 +171,7 @@ export function UpdateCollaboratorForm({
               <RelationshipCollaboratorWithProject
                 availableProject={availableProjects}
                 disableForm={disableForm}
-                idFrom={defaultValues.id}
+                idFrom={currentCollaborator.id}
               />
             </li>
           </ul>

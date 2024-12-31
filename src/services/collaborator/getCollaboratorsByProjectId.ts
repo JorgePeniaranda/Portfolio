@@ -13,7 +13,7 @@ export async function getCollaboratorsByProjectId({
       id,
     },
     select: {
-      collaborators: true,
+      associatedCollaborators: true,
     },
   });
 
@@ -21,5 +21,5 @@ export async function getCollaboratorsByProjectId({
     return null;
   }
 
-  return data.collaborators;
+  return data.associatedCollaborators;
 }

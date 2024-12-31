@@ -9,7 +9,7 @@ export async function getAvailableCollaboratorsToAddRelationshipToProject({
 }): Promise<Pick<Collaborator, "id" | "nickname" | "githubUsername">[]> {
   return await databaseClient.collaborator.findMany({
     where: {
-      project: {
+      associatedProjects: {
         none: {
           id: idProject,
         },

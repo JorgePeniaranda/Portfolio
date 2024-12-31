@@ -12,10 +12,10 @@ import {Input} from "../../ui/input";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
 import {Textarea} from "../../ui/textarea";
 
-export function ShowStackForm({defaultValues}: {defaultValues: Stack}) {
+export function ShowStackForm({currentStack}: {currentStack: Stack}) {
   const form = useForm<StackCreateSchema>({
     resolver: zodResolver(StackCreateSchema),
-    defaultValues: defaultValues,
+    defaultValues: currentStack,
   });
 
   return (

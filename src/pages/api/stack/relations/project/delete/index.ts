@@ -20,7 +20,7 @@ export const PATCH: APIRoute = ({request}) => {
 
       const response = await databaseClient.stack.update({
         data: {
-          projects: {
+          associatedProjects: {
             disconnect: {
               id: validationResult.idTo,
             },

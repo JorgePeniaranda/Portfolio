@@ -70,9 +70,9 @@ const BreadCrumbItems: IBreadCrumb[] = [
             >
             <h3
               class="leading-none font-medium rounded-md p-1 text-base"
-              class:list={[StackStyle[project.stack]]}
+              class:list={[StackStyle[project.stackCategory]]}
             >
-              {STACK_CATEGORY_TRANSCRIPTIONS[project.stack]}
+              {STACK_CATEGORY_TRANSCRIPTIONS[project.stackCategory]}
             </h3>
           </div>
           <p class="text-pretty">
@@ -81,12 +81,12 @@ const BreadCrumbItems: IBreadCrumb[] = [
         </article>
         <article class="mt-5 flex-1">
           <ProjectAccordion
-            collaborators={project.collaborators}
+            collaborators={project.associatedCollaborators}
             goals={project.goals}
             contributions={project.contributions}
             demoUrl={project.demoUrl}
             githubUrl={project.githubUrl}
-            techStack={project.techStacks}
+            stackCategory={project.associatedStacks}
             client:load
           />
         </article>

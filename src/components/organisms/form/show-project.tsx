@@ -18,10 +18,10 @@ import {Popover, PopoverContent, PopoverTrigger} from "../../ui/popover";
 import {cn} from "../../../helpers/common/classnames";
 import {Calendar} from "../../ui/calendar";
 
-export function ShowProjectForm({defaultValues}: {defaultValues: Project}) {
+export function ShowProjectForm({currentProject}: {currentProject: Project}) {
   const form = useForm<ProjectUpdateSchema>({
     resolver: zodResolver(ProjectUpdateSchema),
-    defaultValues: defaultValues,
+    defaultValues: currentProject,
   });
 
   return (

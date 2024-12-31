@@ -5,7 +5,7 @@ import {Plus} from "lucide-react";
 import {useForm} from "react-hook-form";
 
 import {useToast} from "../../../hooks/use-toast";
-import {patchAddRelationWithCollaboratorFromProject} from "../../../services/project/patchAddRelationWithCollaboratorFromProject";
+import {patchAddRelationWithProjectFromCollaborator} from "../../../services/collaborator/patchAddRelationWithProjectFromStack";
 import {Button} from "../../ui/button";
 import {
   Dialog,
@@ -18,7 +18,6 @@ import {
 } from "../../ui/dialog";
 import {Form, FormControl, FormField, FormItem} from "../../ui/form";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
-import {patchAddRelationWithProjectFromCollaborator} from "../../../services/collaborator/patchAddRelationWithProjectFromStack";
 
 export function RelationshipCollaboratorWithProject({
   idFrom,

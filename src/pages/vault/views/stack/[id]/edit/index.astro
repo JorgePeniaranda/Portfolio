@@ -32,7 +32,7 @@ const availableProjects = await getAvailableProjectsToAddRelationshipToStack({
     <main class="w-full h-full flex flex-col pt-7 pl-7 container mx-auto gap-5">
       <h1 class="text-4xl font-medium">Editar Stack</h1>
       <UpdateStackForm
-        defaultValues={stack}
+        currentStack={stack}
         disableForm={ENV.isProduction}
         availableProjects={availableProjects}
         client:load

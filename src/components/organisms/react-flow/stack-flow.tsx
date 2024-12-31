@@ -12,7 +12,7 @@ import {StackWithDrawerNode} from "./nodes/stack-with-drawer";
  *
  * @param {Object} props - Component properties.
  * @param {Array<Stack & {
- *   projects: Pick<Project, "id" | "key" | "name" | "logoUrl">[];
+ *   associatedProjects: Pick<Project, "id" | "key" | "name" | "logoUrl">[];
  *   relatedFrom: { toStackStack: Stack }[];
  *   relatedTo: { fromStackStack: Stack }[];
  * }>} props.stacks - List of stacks including their relationships and related projects.
@@ -23,7 +23,7 @@ export async function StackFlow({
 }: {
   stacks: Array<
     Stack & {
-      projects: Pick<Project, "id" | "key" | "name" | "logoUrl">[];
+      associatedProjects: Pick<Project, "id" | "key" | "name" | "logoUrl">[]; // TO-DO: Not used
       relatedFrom: {
         toStackStack: Stack;
       }[];

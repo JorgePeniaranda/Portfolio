@@ -26,7 +26,7 @@ const stack = Astro.props
   >
     <main class="w-full h-full flex flex-col pt-7 pl-7 container mx-auto gap-5">
       <h1 class="text-4xl font-medium">Detalles de Stack</h1>
-      <ShowStackForm defaultValues={stack} client:load />
+      <ShowStackForm currentStack={stack} client:load />
     </main>
   </DashboardLayout>
 </Layout>

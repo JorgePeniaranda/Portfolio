@@ -3,31 +3,30 @@ import {StackCategory, StackType, type Project, type Stack} from "@prisma/client
 import {Save, X} from "lucide-react";
 import {useForm} from "react-hook-form";
 
-import {StackUpdateSchema} from "../../../schemas/stack/update";
 import {
   STACK_CATEGORY_TRANSCRIPTIONS,
   STACK_TYPE_TRANSCRIPTIONS,
 } from "../../../constants/transcriptions";
 import {useToast} from "../../../hooks/use-toast";
+import {StackUpdateSchema} from "../../../schemas/stack/update";
+import {patchDeleteRelationWithProjectFromStack} from "../../../services/stack/patchDeleteRelationWithProjectFromStack";
 import {putStack} from "../../../services/stack/putStack";
 import {Button} from "../../ui/button";
+import {Card, CardHeader} from "../../ui/card";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
 import {Input} from "../../ui/input";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
 import {Textarea} from "../../ui/textarea";
-import {Card, CardHeader} from "../../ui/card";
-import {patchDeleteRelationWithStackFromProject} from "../../../services/project/patchDeleteRelationWithStackFromProject";
-import {patchDeleteRelationWithProjectFromStack} from "../../../services/stack/patchDeleteRelationWithProjectFromStack";
 
 import {RelationshipStackWithProject} from "./relationship-stack-with-project";
 
 export function UpdateStackForm({
-  defaultValues,
+  currentStack,
   disableForm,
   availableProjects,
 }: {
-  defaultValues: Stack & {
-    projects: Pick<Project, "id" | "name" | "logoUrl">[];
+  currentStack: Stack & {
+    associatedProjects: Pick<Project, "id" | "name" | "logoUrl">[];
   };
   availableProjects: Pick<Project, "id" | "name" | "logoUrl">[];
   disableForm?: boolean;
@@ -35,7 +34,7 @@ export function UpdateStackForm({
   const {toast} = useToast();
   const form = useForm<StackUpdateSchema>({
     resolver: zodResolver(StackUpdateSchema),
-    defaultValues: defaultValues,
+    defaultValues: currentStack,
   });
 
   const onSubmit = async (values: StackUpdateSchema) => {
@@ -61,7 +60,7 @@ export function UpdateStackForm({
 
   const onRemoveProject = async (idProject: number) => {
     const response = await patchDeleteRelationWithProjectFromStack({
-      idFrom: defaultValues.id,
+      idFrom: currentStack.id,
       idTo: idProject,
     });
 
@@ -228,7 +227,7 @@ export function UpdateStackForm({
         <div className="mx-5 mt-5">
           <h3 className="text-3xl font-medium">Proyectos</h3>
           <ul className="mt-4 flex flex-wrap gap-4">
-            {defaultValues.projects.map((project) => (
+            {currentStack.associatedProjects.map((project) => (
               <li key={project.id}>
                 <Card className="my-5 flex flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
                   <CardHeader className="relative flex items-center gap-2">
@@ -255,7 +254,7 @@ export function UpdateStackForm({
               <RelationshipStackWithProject
                 availableProject={availableProjects}
                 disableForm={disableForm}
-                idFrom={defaultValues.id}
+                idFrom={currentStack.id}
               />
             </li>
           </ul>

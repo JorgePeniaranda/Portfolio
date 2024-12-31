@@ -18,7 +18,7 @@ import {isDefined, isNotDefined} from "../../../helpers/guards/is-defined";
  * @param {Object} [props.returnToSiteOnClose] - Optional configuration for URL navigation when the drawer is closed.
  * @param {string} props.returnToSiteOnClose.site - The URL to navigate to when the drawer is closed.
  * @param {boolean} props.returnToSiteOnClose.keepState - Flag to indicate if the application state should be preserved when navigating to `site`.
- * @param {Stack & {projects: Pick<Project, "id" | "key" | "name" | "logoUrl">[]}} props.stack - Stack data to be displayed in the drawer, including associated projects.
+ * @param {Stack & {associatedProjects: Pick<Project, "id" | "key" | "name" | "logoUrl">[]}} props.stack - Stack data to be displayed in the drawer, including associated projects.
  */
 export function StackDrawer({
   triggerChild,
@@ -33,7 +33,7 @@ export function StackDrawer({
     keepState: boolean;
   };
   stack: Stack & {
-    projects: Pick<Project, "id" | "key" | "name" | "logoUrl">[];
+    associatedProjects: Pick<Project, "id" | "key" | "name" | "logoUrl">[];
   };
 }) {
   const handleDrawerClose = () => {
@@ -85,11 +85,11 @@ export function StackDrawer({
           )}
 
           {/* Related projects (if any) */}
-          {stack.projects.length > 0 && (
+          {stack.associatedProjects.length > 0 && (
             <article className="space-y-1">
               <h4 className="font-bold underline underline-offset-2">Proyectos relacionados:</h4>
               <ul>
-                {stack.projects.map((project) => (
+                {stack.associatedProjects.map((project) => (
                   <li key={project.id}>
                     <a
                       className="flex items-center transition-all ease-linear hover:translate-x-2"

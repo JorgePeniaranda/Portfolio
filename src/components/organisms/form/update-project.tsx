@@ -34,14 +34,14 @@ import {RelationshipProjectWithCollaborator} from "./relationship-project-with-c
 import {RelationshipProjectWithStack} from "./relationship-project-with-stack";
 
 export function UpdateProjectForm({
-  defaultValues,
+  currentProject,
   disableForm,
   availableStacks,
   availableCollaborators,
 }: {
-  defaultValues: Project & {
-    techStacks: Array<Stack>;
-    collaborators: Array<Collaborator>;
+  currentProject: Project & {
+    associatedStacks: Array<Stack>;
+    associatedCollaborators: Array<Collaborator>;
   };
   disableForm?: boolean;
   availableStacks: Pick<Stack, "id" | "name" | "iconUrl">[];
@@ -50,7 +50,7 @@ export function UpdateProjectForm({
   const {toast} = useToast();
   const form = useForm<ProjectUpdateSchema>({
     resolver: zodResolver(ProjectUpdateSchema),
-    defaultValues: defaultValues,
+    defaultValues: currentProject,
   });
 
   const onSubmit = async (values: ProjectUpdateSchema) => {
@@ -76,7 +76,7 @@ export function UpdateProjectForm({
 
   const onRemoveCollaborator = async (collaboratorId: number) => {
     const response = await patchDeleteRelationWithCollaboratorFromProject({
-      idFrom: defaultValues.id,
+      idFrom: currentProject.id,
       idTo: collaboratorId,
     });
 
@@ -99,7 +99,7 @@ export function UpdateProjectForm({
 
   const onRemoveStack = async (stackId: number) => {
     const response = await patchDeleteRelationWithStackFromProject({
-      idFrom: defaultValues.id,
+      idFrom: currentProject.id,
       idTo: stackId,
     });
 
@@ -435,7 +435,7 @@ export function UpdateProjectForm({
         <div className="mx-5 mt-5">
           <h3 className="text-3xl font-medium">Stack</h3>
           <ul className="mt-4 flex flex-wrap gap-4">
-            {defaultValues.techStacks.map((stack) => (
+            {currentProject.associatedStacks.map((stack) => (
               <li key={stack.id}>
                 <Card className="my-5 flex w-max flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
                   <CardHeader className="relative">
@@ -460,7 +460,7 @@ export function UpdateProjectForm({
             <li>
               <RelationshipProjectWithStack
                 availableStacks={availableStacks}
-                idFrom={defaultValues.id}
+                idFrom={currentProject.id}
               />
             </li>
           </ul>
@@ -468,7 +468,7 @@ export function UpdateProjectForm({
         <div className="mx-5 mt-5">
           <h3 className="text-3xl font-medium">Colaboradores</h3>
           <ul className="mt-4 flex flex-wrap gap-4">
-            {defaultValues.collaborators.map((collaborator) => (
+            {currentProject.associatedCollaborators.map((collaborator) => (
               <li key={collaborator.id}>
                 <Card className="my-5 flex w-max flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
                   <CardHeader className="relative flex items-center gap-2">
@@ -496,7 +496,7 @@ export function UpdateProjectForm({
               <RelationshipProjectWithCollaborator
                 availableCollaborators={availableCollaborators}
                 disableForm={disableForm}
-                idFrom={defaultValues.id}
+                idFrom={currentProject.id}
               />
             </li>
           </ul>

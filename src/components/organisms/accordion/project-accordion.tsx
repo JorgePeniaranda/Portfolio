@@ -15,7 +15,7 @@ import {MessageDisplay} from "../../atoms/message-display";
  * The props for the ProjectAccordion component.
  * @param contributions - A description of the contributions made to the project.
  * @param goals - A description of the goals for the project.
- * @param techStack - A list of technologies used in the project.
+ * @param stackCategory - A list of technologies used in the project.
  * @param collaborators - A list of collaborators in the project.
  * @param githubUrl - The GitHub repository URL of the project.
  * @param demoUrl - The demo URL of the project.
@@ -23,7 +23,7 @@ import {MessageDisplay} from "../../atoms/message-display";
 interface Props {
   contributions: string;
   goals: string;
-  techStack: Stack[];
+  stackCategory: Stack[];
   collaborators: Collaborator[];
   githubUrl: Project["githubUrl"];
   demoUrl: Project["demoUrl"];
@@ -36,7 +36,7 @@ interface Props {
  * It includes sections for goals, technologies, contributions, collaborators, and resources.
  * @param contributions - A description of the contributions made to the project.
  * @param goals - A description of the goals for the project.
- * @param techStack - A list of technologies used in the project.
+ * @param stackCategory - A list of technologies used in the project.
  * @param collaborators - A list of collaborators in the project.
  * @param githubUrl - The GitHub repository URL of the project.
  * @param demoUrl - The demo URL of the project.
@@ -46,7 +46,7 @@ export function ProjectAccordion({
   demoUrl,
   githubUrl,
   goals,
-  techStack,
+  stackCategory,
   contributions,
 }: Props) {
   return (
@@ -65,12 +65,12 @@ export function ProjectAccordion({
       ) : null}
 
       {/* Render tech stack section if there are technologies */}
-      {techStack.length > 0 && (
+      {stackCategory.length > 0 && (
         <AccordionItem value="technologies">
           <AccordionTrigger>Tecnologías</AccordionTrigger>
           <AccordionContent>
             <ul className="list-disc pl-4">
-              {techStack.map((stack) => (
+              {stackCategory.map((stack) => (
                 <li key={`technology_${stack.id}`}>
                   <a
                     className="text-blue-500 hover:text-blue-600 dark:hover:text-blue-400"

@@ -9,7 +9,7 @@ export async function getAvailableStacksToAddRelationshipToProject({
 }): Promise<Pick<Stack, "id" | "name" | "iconUrl">[]> {
   return await databaseClient.stack.findMany({
     where: {
-      projects: {
+      associatedProjects: {
         none: {
           id: idProject,
         },
