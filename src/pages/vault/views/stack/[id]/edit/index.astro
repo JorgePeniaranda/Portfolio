@@ -4,10 +4,11 @@ import { DashboardLayout } from '../../../../../../components/layouts/dashboard-
 import { UpdateStackForm } from '../../../../../../components/organisms/form/update-stack'
 import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../../../constants/breadcrumb'
 import { ENV } from '../../../../../../constants/env'
-import { getAllStack } from '../../../../../../services/stack/getAllStack'
+import { getAvailableProjectsToAddRelationshipToStack } from '../../../../../../services/project/getAvailableProjectsToAddRelationshipToStack'
+import { getAllStackWithProjectsMin } from '../../../../../../services/stack/getAllStackWithProjectsMin'
 
 export async function getStaticPaths() {
-  const stacks = await getAllStack()
+  const stacks = await getAllStackWithProjectsMin()
 
   const paths = stacks.map(stack => ({
     params: { id: stack.id },
@@ -18,6 +19,9 @@ export async function getStaticPaths() {
 }
 
 const stack = Astro.props
+const availableProjects = await getAvailableProjectsToAddRelationshipToStack({
+  idStack: stack.id
+})
 ---
 
 <Layout title="Editar de stack">
@@ -30,6 +34,7 @@ const stack = Astro.props
       <UpdateStackForm
         defaultValues={stack}
         disableForm={ENV.isProduction}
+        availableProjects={availableProjects}
         client:load
       />
     </main>
