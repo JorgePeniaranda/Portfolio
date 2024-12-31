@@ -3,7 +3,9 @@ import Layout from '../../../../../components/layouts/base.astro'
 import { DashboardLayout } from '../../../../../components/layouts/dashboard-layout'
 import { ShowCollaboratorForm } from '../../../../../components/organisms/form/show-collaborator'
 import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../../constants/breadcrumb'
+import { ENV } from '../../../../../constants/env'
 import { getAllCollaborator } from '../../../../../services/collaborator/getAllCollaborator'
+import { getCollaboratorById } from '../../../../../services/collaborator/getCollaboratorById'
 
 export async function getStaticPaths() {
   const collaborators = await getAllCollaborator()
@@ -16,7 +18,19 @@ export async function getStaticPaths() {
   return paths
 }
 
-const collaborator = Astro.props
+let collaborator
+if (ENV.isServerSideEnable) {
+  collaborator = await getCollaboratorById({ id: Number(Astro.params.id) })
+} else {
+  collaborator = Astro.props
+}
+
+if (!collaborator) {
+  return {
+    status: 404,
+    error: new Error('Collaborator not found')
+  }
+}
 ---
 
 <Layout title="Detalle de Colaborador">

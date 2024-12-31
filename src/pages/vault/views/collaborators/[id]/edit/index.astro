@@ -6,6 +6,7 @@ import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../../../constants/bread
 import { ENV } from '../../../../../../constants/env'
 import { getAllCollaboratorWithProjectsMin } from '../../../../../../services/collaborator/getAllCollaboratorWithProjectsMin'
 import { getAvailableProjectsToAddRelationshipToCollaborators } from '../../../../../../services/project/getAvailableProjectsToAddRelationshipToCollaborators'
+import { getCollaboratorWithProjectsMinById } from '../../../../../../services/collaborator/getCollaboratorWithProjectsMinById'
 
 export async function getStaticPaths() {
   const collaborators = await getAllCollaboratorWithProjectsMin()
@@ -18,7 +19,22 @@ export async function getStaticPaths() {
   return paths
 }
 
-const collaborator = Astro.props
+let collaborator
+if (ENV.isServerSideEnable) {
+  collaborator = await getCollaboratorWithProjectsMinById({
+    id: Number(Astro.params.id)
+  })
+} else {
+  collaborator = Astro.props
+}
+
+if (!collaborator) {
+  return {
+    status: 404,
+    error: new Error('Collaborator not found')
+  }
+}
+
 const availableProjects =
   await getAvailableProjectsToAddRelationshipToCollaborators({
     idStack: collaborator.id

@@ -6,12 +6,14 @@ import {
   Breadcrumb,
   type IBreadCrumb
 } from '../../../components/organisms/breadcrumb'
+import { ENV } from '../../../constants/env'
 import { ProjectDetailsStyles } from '../../../constants/styles'
 import {
   PROJECT_STATUS_TRANSCRIPTIONS,
   STACK_CATEGORY_TRANSCRIPTIONS
 } from '../../../constants/transcriptions'
 import { getAllProjectsWithStackAndCollaborators } from '../../../services/project/getAllProjectsWithStackAndCollaborators'
+import { getProjectWithStackAndCollaboratorsByKey } from '../../../services/project/getProjectWithStackAndCollaboratorsByKey'
 
 export async function getStaticPaths() {
   const projects = await getAllProjectsWithStackAndCollaborators()
@@ -24,7 +26,21 @@ export async function getStaticPaths() {
   return paths
 }
 
-const project = Astro.props
+let project
+if (ENV.isServerSideEnable) {
+  project = await getProjectWithStackAndCollaboratorsByKey({
+    key: Astro.params.key
+  })
+} else {
+  project = Astro.props
+}
+
+if (!project) {
+  return {
+    status: 404,
+    error: new Error('Project not found')
+  }
+}
 
 const { StackStyle, StatusStyle } = ProjectDetailsStyles
 

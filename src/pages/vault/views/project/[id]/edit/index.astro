@@ -6,6 +6,7 @@ import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../../../constants/bread
 import { ENV } from '../../../../../../constants/env'
 import { getAvailableCollaboratorsToAddRelationshipToProject } from '../../../../../../services/collaborator/getAvailableCollaboratorsToAddRelationshipToProject'
 import { getAllProjectsWithStackAndCollaborators } from '../../../../../../services/project/getAllProjectsWithStackAndCollaborators'
+import { getProjectWithStackAndCollaboratorsById } from '../../../../../../services/project/getProjectWithStackAndCollaboratorsById'
 import { getAvailableStacksToAddRelationshipToProject } from '../../../../../../services/stack/getAvailableStacksToAddRelationshipToProject'
 
 export async function getStaticPaths() {
@@ -19,7 +20,22 @@ export async function getStaticPaths() {
   return paths
 }
 
-const project = Astro.props
+let project
+if (ENV.isServerSideEnable) {
+  project = await getProjectWithStackAndCollaboratorsById({
+    id: Number(Astro.params.id)
+  })
+} else {
+  project = Astro.props
+}
+
+if (!project) {
+  return {
+    status: 404,
+    error: new Error('Project not found')
+  }
+}
+
 const availableStacks = await getAvailableStacksToAddRelationshipToProject({
   idProject: project.id
 })
