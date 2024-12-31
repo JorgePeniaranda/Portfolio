@@ -33,7 +33,7 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
     if (response.success) {
       form.reset();
       toast({
-        title: "Stack creado",
+        title: "Proyecto creado",
         description: response.message,
         className: "bg-green-500",
       });
@@ -41,7 +41,7 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
 
     if (!response.success) {
       toast({
-        title: "Error al crear stack",
+        title: "Error al crear proyecto",
         description: response.message,
         className: "bg-red-500",
       });
