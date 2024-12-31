@@ -21,12 +21,12 @@ export const PATCH: APIRoute = ({request}) => {
       const response = await databaseClient.project.update({
         data: {
           collaborators: {
-            connect: {
-              id: validationResult.to,
+            disconnect: {
+              id: validationResult.idTo,
             },
           },
         },
-        where: {id: validationResult.from},
+        where: {id: validationResult.idFrom},
       });
 
       return {

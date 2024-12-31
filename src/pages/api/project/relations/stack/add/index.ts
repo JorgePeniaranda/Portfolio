@@ -22,11 +22,11 @@ export const PATCH: APIRoute = ({request}) => {
         data: {
           techStacks: {
             connect: {
-              id: validationResult.to,
+              id: validationResult.idTo,
             },
           },
         },
-        where: {id: validationResult.from},
+        where: {id: validationResult.idFrom},
       });
 
       return {
