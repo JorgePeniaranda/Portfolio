@@ -5,6 +5,7 @@ import Layout from '../../components/layouts/base.astro'
 import { StackFlow } from '../../components/organisms/react-flow/stack-flow'
 import { getAllStackWithRelationsAndProjectsMin } from '../../services/stack/getAllStackWithRelationsAndProjectsMin'
 import { getDistinctCategories } from '../../services/stack/getDistinctCategories'
+import { SecretCodeHint } from '../../components/atoms/secret-code-hint'
 
 const stacksWithProjectsMin = await getAllStackWithRelationsAndProjectsMin()
 const stackCategories = await getDistinctCategories()
@@ -36,7 +37,10 @@ const stackCategories = await getDistinctCategories()
     </nav>
     <section class="flex flex-col items-center gap-6">
       <article class="w-full flex flex-col text-center items-center gap-2.5">
-        <h1 class="text-4xl font-semibold">Mi stack</h1>
+        <div class="flex gap-2">
+          <h1 class="text-4xl font-semibold">Mi stack</h1>
+          <SecretCodeHint position={2} client:visible />
+        </div>
         <p class="text-lg text-gray-600 max-w-2xl max-sm:text-sm">
           A lo largo de mi carrera, he desarrollado un conjunto de tecnologías
           que me permiten crear soluciones innovadoras y eficientes. Mi stack
