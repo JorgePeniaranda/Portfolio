@@ -6,6 +6,7 @@ import {Drawer as DrawerPrimitive} from "vaul";
 
 import {Drawer, DrawerClose, DrawerContent, DrawerTrigger} from "../../../components/ui/drawer";
 import {isDefined, isNotDefined} from "../../../helpers/guards/is-defined";
+import {MessageDisplay} from "../../atoms/message-display";
 
 /**
  * Component that renders an interactive drawer to display detailed information about a Stack.
@@ -79,27 +80,31 @@ export function StackDrawer({
           {/* Stack description (if defined) */}
           {isDefined(stack.description) && (
             <article>
-              <h4 className="font-bold underline underline-offset-2">Descripción:</h4>
-              <p className="text-pretty indent-4">{stack.description}</p>
+              <h4 className="text-lg font-bold underline underline-offset-2">Descripción:</h4>
+              <p className="text-pretty indent-4">
+                <MessageDisplay message={stack.description} />
+              </p>
             </article>
           )}
 
           {/* Related projects (if any) */}
           {stack.associatedProjects.length > 0 && (
             <article className="space-y-1">
-              <h4 className="font-bold underline underline-offset-2">Proyectos relacionados:</h4>
-              <ul>
+              <h4 className="text-lg font-bold underline underline-offset-2">
+                Proyectos relacionados:
+              </h4>
+              <ul className="flex flex-col gap-2">
                 {stack.associatedProjects?.map((project) => (
                   <li key={project.id}>
                     <a
-                      className="flex items-center transition-all ease-linear hover:translate-x-2"
+                      className="flex items-center gap-2 rounded-md transition-all ease-linear hover:translate-x-2"
                       href={`/projects/${project.key}`}
                       rel="noreferrer"
                       target="_blank"
                     >
                       <img
                         alt={`${project.name} logo`}
-                        className="aspect-square size-14 rounded-sm"
+                        className="size-14 rounded-full"
                         src={project.logoUrl}
                       />
                       <h5 className="whitespace-nowrap text-xl">{project.name}</h5>
