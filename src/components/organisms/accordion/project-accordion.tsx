@@ -9,6 +9,7 @@ import {
   Accordion as UIAccordion,
 } from "../../ui/accordion";
 import {MessageDisplay} from "../../atoms/message-display";
+import {isNoEmptyString} from "../../../helpers/guards/is-no-empty-string";
 
 //#region TYPES
 /**
@@ -52,7 +53,7 @@ export function ProjectAccordion({
   return (
     <UIAccordion className="w-full" type="multiple">
       {/* Render goals section if there are goals */}
-      {isDefined(goals) ? (
+      {isDefined(goals) && isNoEmptyString(goals) ? (
         <AccordionItem value="goals">
           <AccordionTrigger>Objetivos</AccordionTrigger>
           <div />
@@ -88,7 +89,7 @@ export function ProjectAccordion({
       )}
 
       {/* Render contributions section if there are contributions */}
-      {isDefined(contributions) && (
+      {isDefined(contributions) && isNoEmptyString(contributions) && (
         <AccordionItem value="contribution">
           <AccordionTrigger>¿Qué aporté?</AccordionTrigger>
           <AccordionContent className="space-y-3">
@@ -116,12 +117,13 @@ export function ProjectAccordion({
       )}
 
       {/* Render resources section if GitHub or demo URL is defined */}
-      {(isDefined(githubUrl) || isDefined(demoUrl)) && (
+      {((isDefined(githubUrl) && isNoEmptyString(githubUrl)) ||
+        (isDefined(demoUrl) && isNoEmptyString(demoUrl))) && (
         <AccordionItem value="resources">
           <AccordionTrigger>Recursos</AccordionTrigger>
           <AccordionContent>
             <ul className="space-y-3 pl-5">
-              {isDefined(githubUrl) ? (
+              {isDefined(githubUrl) && isNoEmptyString(githubUrl) ? (
                 <li aria-label="Code Link">
                   <span className="font-bold">Código: </span>
                   <a
@@ -134,7 +136,7 @@ export function ProjectAccordion({
                   </a>
                 </li>
               ) : null}
-              {isDefined(demoUrl) ? (
+              {isDefined(demoUrl) && isNoEmptyString(demoUrl) ? (
                 <li aria-label="Demo Link">
                   <span className="font-bold">Demo: </span>
                   <a
