@@ -495,6 +495,7 @@ export function UpdateProjectForm({
             <li>
               <RelationshipProjectWithCollaborator
                 availableCollaborators={availableCollaborators}
+                disableForm={disableForm}
                 idFrom={defaultValues.id}
               />
             </li>
