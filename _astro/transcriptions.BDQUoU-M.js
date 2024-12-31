@@ -1,0 +1,1 @@
+const T={FINISHED:"Terminado",IN_PROGRESS:"En Desarrollo",STALLED:"Pausado"},A={FULL_STACK:"Full-Stack",BACK_END:"Back-End",FRONT_END:"Front-End"},S={DATABASE:"Base de datos",FRAMEWORK:"Framework",LANGUAGE:"Lenguaje",LIBRARY:"Librería",TOOL:"Herramienta"},a={liked:"Favoritos","A-Z":"A-Z","Z-A":"Z-A"};export{a as P,A as S,T as a,S as b};

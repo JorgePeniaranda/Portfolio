@@ -1,0 +1,1 @@
+function i(n){return null!=n}function o(n){return null==n}export{o as a,i};
