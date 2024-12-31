@@ -89,7 +89,7 @@ export function StackDrawer({
             <article className="space-y-1">
               <h4 className="font-bold underline underline-offset-2">Proyectos relacionados:</h4>
               <ul>
-                {stack.associatedProjects.map((project) => (
+                {stack.associatedProjects?.map((project) => (
                   <li key={project.id}>
                     <a
                       className="flex items-center transition-all ease-linear hover:translate-x-2"

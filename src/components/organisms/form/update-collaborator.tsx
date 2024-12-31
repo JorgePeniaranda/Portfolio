@@ -144,7 +144,7 @@ export function UpdateCollaboratorForm({
         <div className="mx-5 mt-5">
           <h3 className="text-3xl font-medium">Proyectos</h3>
           <ul className="mt-4 flex flex-wrap gap-4">
-            {currentCollaborator.associatedProjects.map((project) => (
+            {currentCollaborator.associatedProjects?.map((project) => (
               <li key={project.id}>
                 <Card className="my-5 flex flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
                   <CardHeader className="relative flex items-center gap-2">
