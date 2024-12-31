@@ -350,7 +350,7 @@ export function ShowProjectForm({
         </Button>
       </form>
       <div className="mt-10">
-        <h2 className="text-3xl font-medium">Editar relaciones</h2>
+        <h2 className="text-3xl font-medium">Relaciones</h2>
         <div className="mx-5 mt-5">
           <h3 className="text-3xl font-medium">Stack</h3>
           <ul className="mt-4 flex flex-wrap gap-4">
