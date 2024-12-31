@@ -1,31 +1,51 @@
 import {zodResolver} from "@hookform/resolvers/zod";
-import {ProjectStatus, StackCategory, type Project} from "@prisma/client";
-import {CalendarIcon, Save} from "lucide-react";
-import {useForm} from "react-hook-form";
+import {
+  ProjectStatus,
+  StackCategory,
+  type Collaborator,
+  type Project,
+  type Stack,
+} from "@prisma/client";
 import {format} from "date-fns";
+import {CalendarIcon, Save, X} from "lucide-react";
+import {useForm} from "react-hook-form";
 
 import {
   PROJECT_STATUS_TRANSCRIPTIONS,
   STACK_CATEGORY_TRANSCRIPTIONS,
 } from "../../../constants/transcriptions";
+import {cn} from "../../../helpers/common/classnames";
 import {useToast} from "../../../hooks/use-toast";
 import {ProjectUpdateSchema} from "../../../schemas/project/update";
+import {putProject} from "../../../services/project/putProject";
+import {Avatar, AvatarFallback, AvatarImage} from "../../ui/avatar";
 import {Button} from "../../ui/button";
+import {Calendar} from "../../ui/calendar";
+import {Card, CardHeader} from "../../ui/card";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
 import {Input} from "../../ui/input";
+import {Popover, PopoverContent, PopoverTrigger} from "../../ui/popover";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
 import {Textarea} from "../../ui/textarea";
-import {Popover, PopoverContent, PopoverTrigger} from "../../ui/popover";
-import {cn} from "../../../helpers/common/classnames";
-import {Calendar} from "../../ui/calendar";
-import {putProject} from "../../../services/project/putProject";
+import {patchDeleteRelationWithCollaborator} from "../../../services/project/patchDeleteRelationWithCollaborator";
+import {patchDeleteRelationWithStack} from "../../../services/project/patchDeleteRelationWithStack";
+
+import {RelationshipProjectWithCollaborator} from "./relationship-project-with-collaborator";
+import {RelationshipProjectWithStack} from "./relationship-project-with-stack";
 
 export function UpdateProjectForm({
   defaultValues,
   disableForm,
+  availableStacks,
+  availableCollaborators,
 }: {
-  defaultValues: Project;
+  defaultValues: Project & {
+    techStacks: Array<Stack>;
+    collaborators: Array<Collaborator>;
+  };
   disableForm?: boolean;
+  availableStacks: Pick<Stack, "id" | "name" | "iconUrl">[];
+  availableCollaborators: Pick<Collaborator, "id" | "nickname" | "githubUsername">[];
 }) {
   const {toast} = useToast();
   const form = useForm<ProjectUpdateSchema>({
@@ -39,7 +59,7 @@ export function UpdateProjectForm({
     if (response.success) {
       form.reset();
       toast({
-        title: "Stack creado",
+        title: "Proyecto creado",
         description: response.message,
         className: "bg-green-500",
       });
@@ -47,7 +67,53 @@ export function UpdateProjectForm({
 
     if (!response.success) {
       toast({
-        title: "Error al crear stack",
+        title: "Error al crear proyecto",
+        description: response.message,
+        className: "bg-red-500",
+      });
+    }
+  };
+
+  const onRemoveCollaborator = async (collaboratorId: number) => {
+    const response = await patchDeleteRelationWithCollaborator({
+      idFrom: defaultValues.id,
+      idTo: collaboratorId,
+    });
+
+    if (response.success) {
+      toast({
+        title: "Colaborador eliminado",
+        description: response.message,
+        className: "bg-green-500",
+      });
+    }
+
+    if (!response.success) {
+      toast({
+        title: "Error al eliminar colaborador",
+        description: response.message,
+        className: "bg-red-500",
+      });
+    }
+  };
+
+  const onRemoveStack = async (stackId: number) => {
+    const response = await patchDeleteRelationWithStack({
+      idFrom: defaultValues.id,
+      idTo: stackId,
+    });
+
+    if (response.success) {
+      toast({
+        title: "Stack eliminado",
+        description: response.message,
+        className: "bg-green-500",
+      });
+    }
+
+    if (!response.success) {
+      toast({
+        title: "Error al eliminar stack",
         description: response.message,
         className: "bg-red-500",
       });
@@ -364,6 +430,77 @@ export function UpdateProjectForm({
           <span className="text-lg">Guardar</span>
         </Button>
       </form>
+      <div className="mt-10">
+        <h2 className="text-3xl font-medium">Editar relaciones</h2>
+        <div className="mx-5 mt-5">
+          <h3 className="text-3xl font-medium">Stack</h3>
+          <ul className="mt-4 flex flex-wrap gap-4">
+            {defaultValues.techStacks.map((stack) => (
+              <li key={stack.id}>
+                <Card className="my-5 flex w-max flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
+                  <CardHeader className="relative">
+                    <Button
+                      aria-label="eliminar relacion"
+                      className="absolute -right-2.5 -top-2.5 m-0 flex aspect-square size-8 items-center justify-center rounded-full bg-red-500 p-0 text-center text-white hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-500"
+                      disabled={disableForm}
+                      onClick={() => onRemoveStack(stack.id)}
+                    >
+                      <X />
+                      <span className="sr-only">eliminar relacion</span>
+                    </Button>
+                    <img
+                      alt={`${stack.name} logo`}
+                      className="size-20 rounded-lg"
+                      src={stack.iconUrl}
+                    />
+                  </CardHeader>
+                </Card>
+              </li>
+            ))}
+            <li>
+              <RelationshipProjectWithStack
+                availableStacks={availableStacks}
+                idFrom={defaultValues.id}
+              />
+            </li>
+          </ul>
+        </div>
+        <div className="mx-5 mt-5">
+          <h3 className="text-3xl font-medium">Colaboradores</h3>
+          <ul className="mt-4 flex flex-wrap gap-4">
+            {defaultValues.collaborators.map((collaborator) => (
+              <li key={collaborator.id}>
+                <Card className="my-5 flex w-max flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
+                  <CardHeader className="relative flex items-center gap-2">
+                    <Button
+                      aria-label="eliminar relacion"
+                      className="absolute -right-2.5 -top-2.5 m-0 flex aspect-square size-8 items-center justify-center rounded-full bg-red-500 p-0 text-center text-white hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-500"
+                      disabled={disableForm}
+                      onClick={() => onRemoveCollaborator(collaborator.id)}
+                    >
+                      <X />
+                      <span className="sr-only">eliminar relacion</span>
+                    </Button>
+                    <Avatar className="size-16 shrink-0">
+                      <AvatarImage
+                        src={`https://avatars.githubusercontent.com/${collaborator.githubUsername}`}
+                      />
+                      <AvatarFallback>{collaborator.githubUsername}</AvatarFallback>
+                    </Avatar>
+                    <span className="text-lg capitalize">{collaborator.githubUsername}</span>
+                  </CardHeader>
+                </Card>
+              </li>
+            ))}
+            <li>
+              <RelationshipProjectWithCollaborator
+                availableCollaborators={availableCollaborators}
+                idFrom={defaultValues.id}
+              />
+            </li>
+          </ul>
+        </div>
+      </div>
     </Form>
   );
 }
