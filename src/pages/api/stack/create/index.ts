@@ -4,9 +4,6 @@ import {databaseClient} from "../../../../helpers/client/prisma";
 import {RequestHandler} from "../../../../helpers/common/request-handler";
 import {StackCreateSchema} from "../../../../schemas/stack/create";
 
-// Disable prerendering for this route
-export const prerender = false;
-
 /**
  * POST handler to create a new stack.
  * - Parses the request body.

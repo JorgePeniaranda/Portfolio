@@ -4,9 +4,6 @@ import {databaseClient} from "../../../../../../helpers/client/prisma";
 import {RequestHandler} from "../../../../../../helpers/common/request-handler";
 import {RelationshipsSchema} from "../../../../../../schemas/common/relationships";
 
-// Disable prerendering for this route
-export const prerender = false;
-
 /**
  * PATCH handler to remove a relation between a stack and a project.
  * - Parses and validates the request body.

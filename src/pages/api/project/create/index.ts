@@ -4,9 +4,6 @@ import {databaseClient} from "../../../../helpers/client/prisma";
 import {RequestHandler} from "../../../../helpers/common/request-handler";
 import {ProjectCreateSchema} from "../../../../schemas/project/create";
 
-// Disable prerendering for this route
-export const prerender = false;
-
 /**
  * POST handler to create a new projects.
  * - Parses the request body.

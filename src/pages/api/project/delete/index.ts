@@ -5,9 +5,6 @@ import {z} from "zod";
 import {databaseClient} from "../../../../helpers/client/prisma";
 import {RequestHandler} from "../../../../helpers/common/request-handler";
 
-// Disable prerendering for this route
-export const prerender = false;
-
 /**
  * POST handler to remove multiple projects.
  * - Parses the request body.

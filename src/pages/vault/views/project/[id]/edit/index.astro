@@ -3,6 +3,7 @@ import Layout from '../../../../../../components/layouts/base.astro'
 import { DashboardLayout } from '../../../../../../components/layouts/dashboard-layout'
 import { UpdateProjectForm } from '../../../../../../components/organisms/form/update-project'
 import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../../../constants/breadcrumb'
+import { ENV } from '../../../../../../constants/env'
 import { getAvailableCollaboratorsToAddRelationshipToProject } from '../../../../../../services/collaborator/getAvailableCollaboratorsToAddRelationshipToProject'
 import { getAllProjectsWithStackAndCollaborators } from '../../../../../../services/project/getAllProjectsWithStackAndCollaborators'
 import { getAvailableStacksToAddRelationshipToProject } from '../../../../../../services/stack/getAvailableStacksToAddRelationshipToProject'
@@ -39,6 +40,7 @@ const availableCollaborators =
         currentProject={project}
         availableStacks={availableStacks}
         availableCollaborators={availableCollaborators}
+        disableForm={ENV.isProduction}
         client:load
       />
     </main>

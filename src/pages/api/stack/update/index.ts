@@ -4,9 +4,6 @@ import {databaseClient} from "../../../../helpers/client/prisma";
 import {RequestHandler} from "../../../../helpers/common/request-handler";
 import {StackUpdateSchema} from "../../../../schemas/stack/update";
 
-// Disable prerendering for this route
-export const prerender = false;
-
 /**
  * PUT handler to update an existing stack.
  * - Parses the request body.
