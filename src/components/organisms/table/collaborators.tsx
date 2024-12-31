@@ -14,6 +14,17 @@ import {Button} from "../../ui/button";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "../../ui/tooltip";
 import {deleteCollaborator} from "../../../services/collaborator/deleteCollaborator";
 import {useToast} from "../../../hooks/use-toast";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../../ui/alert-dialog";
 
 //#region Column Definitions
 const columns: Array<ColumnDef<Collaborator>> = [
@@ -98,10 +109,6 @@ function TableHeaderComponent({table}: {table: Table<Collaborator>}) {
   };
 
   const handleDelete = async () => {
-    if (!confirm("¿Estás seguro de que deseas eliminar los colaboradores seleccionados?")) {
-      return;
-    }
-
     const response = await deleteCollaborator(rows.map((row) => row.original.id));
 
     if (response.success) {
@@ -183,21 +190,42 @@ function TableHeaderComponent({table}: {table: Table<Collaborator>}) {
           </TooltipProvider>
         </li>
         <li>
-          <TooltipProvider>
-            <Tooltip delayDuration={0}>
-              <TooltipTrigger asChild>
-                <Button
-                  className="size-max rounded-full bg-red-500 p-2 text-white hover:bg-red-600 hover:text-white dark:text-white dark:hover:bg-red-400"
-                  disabled={selectedCount <= 0}
-                  variant="outline"
+          <AlertDialog>
+            <AlertDialogTrigger disabled={selectedCount <= 0}>
+              <TooltipProvider>
+                <Tooltip delayDuration={0}>
+                  <TooltipTrigger asChild>
+                    <Button
+                      className="size-max rounded-full bg-red-500 p-2 text-white hover:bg-red-600 hover:text-white dark:text-white dark:hover:bg-red-400"
+                      disabled={selectedCount <= 0}
+                      variant="outline"
+                    >
+                      <Trash className="size-5" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Eliminar</TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>¿Está completamente seguro?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Esta acción no se puede deshacer. Esto borrará permanentemente el/los
+                  colaboradores seleccionados.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                <AlertDialogAction
+                  className="bg-red-500 text-white hover:bg-red-600 hover:text-white dark:text-white dark:hover:bg-red-400"
                   onClick={handleDelete}
                 >
-                  <Trash className="size-5" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>Eliminar</TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+                  Borrar
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </li>
       </ul>
     </div>
