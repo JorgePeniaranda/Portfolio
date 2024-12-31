@@ -20,7 +20,7 @@ export const POST: APIRoute = ({request}) => {
       const body = await request.json();
       const validationResult = z.array(z.number()).parse(body);
 
-      const response = await databaseClient.colaborator.deleteMany({
+      const response = await databaseClient.collaborator.deleteMany({
         where: {id: {in: validationResult}},
       });
 

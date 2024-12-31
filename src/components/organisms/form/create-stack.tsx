@@ -14,6 +14,7 @@ import {
   STACK_TYPE_TRANSCRIPTIONS,
 } from "../../../constants/transcriptions";
 import {Textarea} from "../../ui/textarea";
+import {postStack} from "../../../services/stack/postStack";
 
 export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) {
   const {toast} = useToast();
@@ -23,10 +24,7 @@ export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) 
   });
 
   const onSubmit = async (values: StackCreateSchema) => {
-    const response = {
-      success: false,
-      message: "",
-    };
+    const response = await postStack(values);
 
     if (response.success) {
       form.reset();

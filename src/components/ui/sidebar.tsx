@@ -293,6 +293,7 @@ const SidebarRail = React.forwardRef<HTMLButtonElement, React.ComponentProps<"bu
         data-sidebar="rail"
         tabIndex={-1}
         title="Toggle Sidebar"
+        type="button"
         onClick={toggleSidebar}
         {...props}
       />

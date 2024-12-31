@@ -13,6 +13,7 @@ import {DataTable} from "../data-table";
 import {selectionColumnDef} from "../data-table/column-def/selection";
 import {DataTableColumnHeader} from "../data-table/column/dropdown";
 import {useToast} from "../../../hooks/use-toast";
+import {deleteProject} from "../../../services/project/deleteProject";
 
 //#region Column Definitions
 const columns: Array<ColumnDef<Project>> = [
@@ -77,6 +78,17 @@ const columns: Array<ColumnDef<Project>> = [
     accessorKey: "primaryColor",
     header({column}) {
       return <DataTableColumnHeader column={column} title="Color primario" />;
+    },
+    cell({row}) {
+      return (
+        <div className="flex items-center gap-1">
+          <div
+            className="size-5 rounded-full"
+            style={{backgroundColor: row.original.primaryColor}}
+          />
+          <span>({row.original.primaryColor})</span>
+        </div>
+      );
     },
   },
   {
@@ -167,9 +179,7 @@ function TableHeaderComponent({table}: {table: Table<Project>}) {
       return;
     }
 
-    const response = {
-      success: true,
-    };
+    const response = await deleteProject(rows.map((row) => row.original.id));
 
     if (response.success) {
       toast({

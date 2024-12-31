@@ -51,7 +51,7 @@ export const RequestHandler = async (
       response = {
         success: false,
         message: "Invalid request", // Message indicating that the request data was invalid
-        errors: error.errors.map((error) => error.message), // Map Zod validation errors to messages
+        errors: error.errors.map((error) => `${error.path}: ${error.message}`), // Map Zod validation errors to messages
       };
 
       // Return a 400 error response with validation errors

@@ -21,7 +21,7 @@ export const DASHBOARD_BREADCRUMB_TEMPLATE: Record<
       url: "/vault",
     },
   ],
-  "/vault/views/projects": [
+  "/vault/views/project": [
     {
       title: "Panel de control",
       url: "/vault",
@@ -33,7 +33,7 @@ export const DASHBOARD_BREADCRUMB_TEMPLATE: Record<
       title: "Proyectos",
     },
   ],
-  "/vault/views/projects/create": [
+  "/vault/views/project/create": [
     {
       title: "Panel de control",
       url: "/vault",
@@ -43,13 +43,13 @@ export const DASHBOARD_BREADCRUMB_TEMPLATE: Record<
     },
     {
       title: "Proyectos",
-      url: "/vault/views/projects",
+      url: "/vault/views/project",
     },
     {
       title: "Crear",
     },
   ],
-  "/vault/views/projects/edit": [
+  "/vault/views/project/edit": [
     {
       title: "Panel de control",
       url: "/vault",
@@ -59,13 +59,13 @@ export const DASHBOARD_BREADCRUMB_TEMPLATE: Record<
     },
     {
       title: "Proyectos",
-      url: "/vault/views/projects",
+      url: "/vault/views/project",
     },
     {
       title: "Editar",
     },
   ],
-  "/vault/views/projects/details": [
+  "/vault/views/project/details": [
     {
       title: "Panel de control",
       url: "/vault",
@@ -75,7 +75,7 @@ export const DASHBOARD_BREADCRUMB_TEMPLATE: Record<
     },
     {
       title: "Proyectos",
-      url: "/vault/views/projects",
+      url: "/vault/views/project",
     },
     {
       title: "Detalles",

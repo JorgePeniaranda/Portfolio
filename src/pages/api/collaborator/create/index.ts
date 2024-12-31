@@ -18,7 +18,7 @@ export const POST: APIRoute = ({request}) => {
     async () => {
       const body = await request.json();
       const validationResult = CollaboratorCreateSchema.parse(body);
-      const response = await databaseClient.colaborator.create({
+      const response = await databaseClient.collaborator.create({
         data: validationResult,
       });
 

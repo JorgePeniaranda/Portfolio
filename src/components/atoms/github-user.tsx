@@ -1,6 +1,7 @@
 import React from "react";
 
 import {Avatar, AvatarFallback, AvatarImage} from "../ui/avatar";
+import {cn} from "../../helpers/common/classnames";
 
 /**
  * Props for the GithubUser component.
@@ -21,7 +22,7 @@ export default function GithubUser({username, ...props}: Props) {
   return (
     <a
       aria-label={username}
-      className="flex size-max items-center gap-2"
+      className={cn("flex size-max items-center gap-2", props.className)}
       href={`https://github.com/${username}`}
       rel="noopener noreferrer"
       target="__blank"

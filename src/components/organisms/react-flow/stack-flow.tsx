@@ -20,7 +20,6 @@ import {StackWithDrawerNode} from "./nodes/stack-with-drawer";
  */
 export async function StackFlow({
   stacks,
-  categories,
 }: {
   stacks: Array<
     Stack & {

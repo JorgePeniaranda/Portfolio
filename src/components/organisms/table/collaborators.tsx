@@ -1,4 +1,4 @@
-import type {Colaborator} from "@prisma/client";
+import type {Collaborator} from "@prisma/client";
 import type {ColumnDef, Table} from "@tanstack/react-table";
 
 import moment from "moment";
@@ -12,12 +12,12 @@ import {selectionColumnDef} from "../data-table/column-def/selection";
 import {DataTableColumnHeader} from "../data-table/column/dropdown";
 import {Button} from "../../ui/button";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "../../ui/tooltip";
-import {deleteCollaborator} from "../../../services/colaborator/deleteCollaborator";
+import {deleteCollaborator} from "../../../services/collaborator/deleteCollaborator";
 import {useToast} from "../../../hooks/use-toast";
 
 //#region Column Definitions
-const columns: Array<ColumnDef<Colaborator>> = [
-  selectionColumnDef<Colaborator>(),
+const columns: Array<ColumnDef<Collaborator>> = [
+  selectionColumnDef<Collaborator>(),
   {
     id: "id",
     accessorKey: "id",
@@ -70,12 +70,12 @@ const columns: Array<ColumnDef<Colaborator>> = [
 //#endregion
 
 // MARK: - Collaborator Table
-export function CollaboratorTable({data}: {data: Colaborator[]}) {
+export function CollaboratorTable({data}: {data: Collaborator[]}) {
   return <DataTable HeaderComponent={TableHeaderComponent} columns={columns} data={data} />;
 }
 
 // MARK: - Table Header Component
-function TableHeaderComponent({table}: {table: Table<Colaborator>}) {
+function TableHeaderComponent({table}: {table: Table<Collaborator>}) {
   const {toast} = useToast();
   const selectedRowModel = table.getSelectedRowModel();
   const {rows, selectedCount} = useMemo(() => {

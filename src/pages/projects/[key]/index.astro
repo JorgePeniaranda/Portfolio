@@ -1,4 +1,5 @@
 ---
+import { MessageDisplay } from '../../../components/atoms/message-display'
 import Layout from '../../../components/layouts/base.astro'
 import { ProjectAccordion } from '../../../components/organisms/accordion/project-accordion'
 import {
@@ -7,25 +8,15 @@ import {
 } from '../../../components/organisms/breadcrumb'
 import { ProjectDetailsStyles } from '../../../constants/styles'
 import {
-  STACK_CATEGORY_TRANSCRIPTIONS,
-  PROJECT_STATUS_TRANSCRIPTIONS
+  PROJECT_STATUS_TRANSCRIPTIONS,
+  STACK_CATEGORY_TRANSCRIPTIONS
 } from '../../../constants/transcriptions'
-import { fromArrayStringToArrayObjectWithIdAndValue } from '../../../mappers/common/fromArrayStringToArrayObjectWithIdAndValue'
 import { getAllProjectsWithStackAndCollaborators } from '../../../services/project/getAllProjectsWithStackAndCollaborators'
 
 export async function getStaticPaths() {
   const projects = await getAllProjectsWithStackAndCollaborators()
 
-  // Map the projects to add the goals and contributions as an array of objects
-  const mappedProjects = projects.map(project => ({
-    ...project,
-    goals: fromArrayStringToArrayObjectWithIdAndValue(project.goals),
-    contributions: fromArrayStringToArrayObjectWithIdAndValue(
-      project.contributions
-    )
-  }))
-
-  const paths = mappedProjects.map(project => ({
+  const paths = projects.map(project => ({
     params: { key: project.key },
     props: project
   }))
@@ -85,7 +76,7 @@ const BreadCrumbItems: IBreadCrumb[] = [
             </h3>
           </div>
           <p class="text-pretty">
-            {project.description}
+            <MessageDisplay message={project.description} />
           </p>
         </article>
         <article class="mt-5 flex-1">

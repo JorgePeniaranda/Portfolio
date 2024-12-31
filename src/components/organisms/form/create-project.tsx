@@ -11,6 +11,7 @@ import {
 import {cn} from "../../../helpers/common/classnames";
 import {useToast} from "../../../hooks/use-toast";
 import {ProjectCreateDefaultValues, ProjectCreateSchema} from "../../../schemas/project/create";
+import {postProject} from "../../../services/project/postProject";
 import {Button} from "../../ui/button";
 import {Calendar} from "../../ui/calendar";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
@@ -27,15 +28,12 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
   });
 
   const onSubmit = async (values: ProjectCreateSchema) => {
-    const response = {
-      success: false,
-      message: "",
-    };
+    const response = await postProject(values);
 
     if (response.success) {
       form.reset();
       toast({
-        title: "Stack creado",
+        title: "Proyecto creado",
         description: response.message,
         className: "bg-green-500",
       });
@@ -43,7 +41,7 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
 
     if (!response.success) {
       toast({
-        title: "Error al crear stack",
+        title: "Error al crear proyecto",
         description: response.message,
         className: "bg-red-500",
       });
@@ -279,7 +277,7 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
           />
           <FormField
             control={form.control}
-            name="logoURl"
+            name="logoUrl"
             render={({field}) => (
               <FormItem>
                 <FormLabel>URL de logo</FormLabel>
@@ -287,6 +285,25 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
                   <Input
                     disabled={disableForm}
                     placeholder="URL de logo"
+                    {...field}
+                    value={field.value === null ? undefined : field.value}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="primaryColor"
+            render={({field}) => (
+              <FormItem>
+                <FormLabel>Color Primario</FormLabel>
+                <FormControl>
+                  <Input
+                    disabled={disableForm}
+                    placeholder="Color Primario"
+                    type="color"
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />

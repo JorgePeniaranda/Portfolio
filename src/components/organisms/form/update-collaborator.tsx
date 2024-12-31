@@ -1,4 +1,4 @@
-import type {Colaborator} from "@prisma/client";
+import type {Collaborator} from "@prisma/client";
 
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Save} from "lucide-react";
@@ -6,7 +6,7 @@ import {useForm} from "react-hook-form";
 
 import {useToast} from "../../../hooks/use-toast";
 import {CollaboratorUpdateSchema} from "../../../schemas/collaborator/update";
-import {putCollaborator} from "../../../services/colaborator/putCollaborator";
+import {putCollaborator} from "../../../services/collaborator/putCollaborator";
 import {Button} from "../../ui/button";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
 import {Input} from "../../ui/input";
@@ -15,7 +15,7 @@ export function UpdateCollaboratorForm({
   defaultValues,
   disableForm,
 }: {
-  defaultValues: Colaborator;
+  defaultValues: Collaborator;
   disableForm?: boolean;
 }) {
   const {toast} = useToast();

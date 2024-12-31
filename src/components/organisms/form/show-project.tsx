@@ -249,7 +249,7 @@ export function ShowProjectForm({defaultValues}: {defaultValues: Project}) {
           />
           <FormField
             control={form.control}
-            name="logoURl"
+            name="logoUrl"
             render={({field}) => (
               <FormItem>
                 <FormLabel>URL de logo</FormLabel>
@@ -257,6 +257,25 @@ export function ShowProjectForm({defaultValues}: {defaultValues: Project}) {
                   <Input
                     disabled
                     placeholder="URL de logo"
+                    {...field}
+                    value={field.value === null ? undefined : field.value}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="primaryColor"
+            render={({field}) => (
+              <FormItem>
+                <FormLabel>Color Primario</FormLabel>
+                <FormControl>
+                  <Input
+                    disabled
+                    placeholder="Color Primario"
+                    type="color"
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />

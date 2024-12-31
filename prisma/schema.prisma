@@ -28,24 +28,24 @@ enum StackType {
 }
 
 model Project {
-  id            Int           @id @default(autoincrement())
-  key           String        @unique
+  id            Int            @id @default(autoincrement())
+  key           String         @unique
   name          String
   status        ProjectStatus
   stack         StackCategory
-  startDate     DateTime      @map("start_date")
-  endDate       DateTime?     @map("end_date")
+  startDate     DateTime       @map("start_date")
+  endDate       DateTime?      @map("end_date")
   description   String
-  goals         String[]
-  contributions String[]
-  logoUrl       String        @map("logo_url")
-  primaryColor  String        @map("primary_color")
-  demoUrl       String?       @map("demo_url")
-  githubUrl     String?       @map("github_url")
-  techStacks    Stack[]       @relation("ProjectStacks")
-  collaborators Colaborator[] @relation("ProjectColaborators")
-  createdAt     DateTime      @default(now()) @map("created_at")
-  updatedAt     DateTime      @default(now()) @updatedAt @map("updated_at")
+  goals         String
+  contributions String
+  logoUrl       String         @map("logo_url")
+  primaryColor  String         @map("primary_color")
+  demoUrl       String?        @map("demo_url")
+  githubUrl     String?        @map("github_url")
+  techStacks    Stack[]        @relation("ProjectStacks")
+  collaborators Collaborator[] @relation("ProjectColaborators")
+  createdAt     DateTime       @default(now()) @map("created_at")
+  updatedAt     DateTime       @default(now()) @updatedAt @map("updated_at")
 }
 
 model Stack {
@@ -79,7 +79,7 @@ model RelatedStack {
   toStackStack Stack @relation("RelatedStacksTo", fields: [toStack], references: [id])
 }
 
-model Colaborator {
+model Collaborator {
   id               Int       @id @default(autoincrement())
   nickname         String    @unique
   githubUsername   String?   @map("github_username")
