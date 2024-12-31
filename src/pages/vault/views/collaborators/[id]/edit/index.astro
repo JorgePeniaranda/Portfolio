@@ -53,7 +53,7 @@ const availableProjects =
       <UpdateCollaboratorForm
         currentCollaborator={collaborator}
         availableProjects={availableProjects}
-        disableForm={ENV.isProduction}
+        disableForm={ENV.isServerSideEnable === false}
         client:load
       />
     </main>

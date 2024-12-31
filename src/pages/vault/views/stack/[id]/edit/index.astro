@@ -47,7 +47,7 @@ const availableProjects = await getAvailableProjectsToAddRelationshipToStack({
       <h1 class="text-4xl font-medium">Editar Stack</h1>
       <UpdateStackForm
         currentStack={stack}
-        disableForm={ENV.isProduction}
+        disableForm={ENV.isServerSideEnable === false}
         availableProjects={availableProjects}
         client:load
       />

@@ -13,7 +13,7 @@ import { ENV } from '../../../../../constants/env'
   >
     <main class="w-full h-full flex flex-col pt-7 pl-7 container mx-auto gap-5">
       <h1 class="text-4xl font-medium">Crear Stack</h1>
-      <CreateStackForm disableForm={ENV.isProduction} client:load />
+      <CreateStackForm disableForm={ENV.isServerSideEnable === false} client:load />
     </main>
   </DashboardLayout>
 </Layout>
