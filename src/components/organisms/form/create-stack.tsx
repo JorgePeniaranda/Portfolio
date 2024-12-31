@@ -15,6 +15,7 @@ import {
 } from "../../../constants/transcriptions";
 import {Textarea} from "../../ui/textarea";
 import {postStack} from "../../../services/stack/postStack";
+import {isDefined} from "../../../helpers/guards/is-defined";
 
 export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) {
   const {toast} = useToast();
@@ -33,6 +34,10 @@ export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) 
         description: response.message,
         className: "bg-green-500",
       });
+
+      if (isDefined(response?.data?.id)) {
+        window.location.href = `/vault/views/stack/${response.data.id}`;
+      }
     }
 
     if (!response.success) {
@@ -42,6 +47,8 @@ export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) 
         className: "bg-red-500",
       });
     }
+
+    return;
   };
 
   return (

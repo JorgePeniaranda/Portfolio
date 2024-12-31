@@ -72,6 +72,10 @@ export function UpdateProjectForm({
         className: "bg-red-500",
       });
     }
+
+    window.location.reload();
+
+    return;
   };
 
   const onRemoveCollaborator = async (collaboratorId: number) => {
@@ -95,6 +99,10 @@ export function UpdateProjectForm({
         className: "bg-red-500",
       });
     }
+
+    window.location.reload();
+
+    return;
   };
 
   const onRemoveStack = async (stackId: number) => {
@@ -118,6 +126,10 @@ export function UpdateProjectForm({
         className: "bg-red-500",
       });
     }
+
+    window.location.reload();
+
+    return;
   };
 
   return (

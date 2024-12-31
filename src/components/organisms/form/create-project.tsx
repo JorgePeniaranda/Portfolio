@@ -19,6 +19,7 @@ import {Input} from "../../ui/input";
 import {Popover, PopoverContent, PopoverTrigger} from "../../ui/popover";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
 import {Textarea} from "../../ui/textarea";
+import {isDefined} from "../../../helpers/guards/is-defined";
 
 export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}) {
   const {toast} = useToast();
@@ -37,6 +38,10 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
         description: response.message,
         className: "bg-green-500",
       });
+
+      if (isDefined(response?.data?.id)) {
+        window.location.href = `/vault/views/project/${response.data.id}`;
+      }
     }
 
     if (!response.success) {

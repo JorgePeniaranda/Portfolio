@@ -56,6 +56,10 @@ export function UpdateStackForm({
         className: "bg-red-500",
       });
     }
+
+    window.location.reload();
+
+    return;
   };
 
   const onRemoveProject = async (idProject: number) => {
@@ -79,6 +83,10 @@ export function UpdateStackForm({
         className: "bg-red-500",
       });
     }
+
+    window.location.reload();
+
+    return;
   };
 
   return (

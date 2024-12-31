@@ -57,6 +57,10 @@ export function RelationshipProjectWithCollaborator({
         className: "bg-red-500",
       });
     }
+
+    window.location.reload();
+
+    return;
   };
 
   return (

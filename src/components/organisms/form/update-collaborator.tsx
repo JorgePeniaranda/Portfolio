@@ -51,6 +51,10 @@ export function UpdateCollaboratorForm({
         className: "bg-red-500",
       });
     }
+
+    window.location.reload();
+
+    return;
   };
 
   const onRemoveProject = async (idProject: number) => {
@@ -74,6 +78,10 @@ export function UpdateCollaboratorForm({
         className: "bg-red-500",
       });
     }
+
+    window.location.reload();
+
+    return;
   };
 
   return (

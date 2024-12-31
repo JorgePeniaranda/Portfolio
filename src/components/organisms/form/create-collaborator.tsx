@@ -11,6 +11,7 @@ import {postCollaborator} from "../../../services/collaborator/postCollaborator"
 import {Button} from "../../ui/button";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
 import {Input} from "../../ui/input";
+import {isDefined} from "../../../helpers/guards/is-defined";
 
 export function CreateCollaboratorForm({disableForm = false}: {disableForm?: boolean}) {
   const {toast} = useToast();
@@ -29,6 +30,10 @@ export function CreateCollaboratorForm({disableForm = false}: {disableForm?: boo
         description: response.message,
         className: "bg-green-500",
       });
+
+      if (isDefined(response?.data?.id)) {
+        window.location.href = `/vault/views/collaborators/${response.data.id}`;
+      }
     }
 
     if (!response.success) {
