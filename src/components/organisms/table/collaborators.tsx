@@ -25,6 +25,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../../ui/alert-dialog";
+import {ENV} from "../../../constants/env";
 
 //#region Column Definitions
 const columns: Array<ColumnDef<Collaborator>> = [
@@ -219,6 +220,7 @@ function TableHeaderComponent({table}: {table: Table<Collaborator>}) {
                 <AlertDialogCancel>Cancelar</AlertDialogCancel>
                 <AlertDialogAction
                   className="bg-red-500 text-white hover:bg-red-600 hover:text-white dark:text-white dark:hover:bg-red-400"
+                  disabled={ENV.isServerSideEnable === false}
                   onClick={handleDelete}
                 >
                   Borrar
