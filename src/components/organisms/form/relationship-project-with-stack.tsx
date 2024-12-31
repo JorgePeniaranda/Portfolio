@@ -101,7 +101,7 @@ export function RelationshipProjectWithStack({
                         {...field}
                         value={String(field.value)}
                       >
-                        <SelectTrigger className="w-[180px]" disabled={disableForm}>
+                        <SelectTrigger className="w-[180px]">
                           <SelectValue placeholder="Seleccionar stack" />
                         </SelectTrigger>
                         <SelectContent>

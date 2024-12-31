@@ -101,7 +101,7 @@ export function RelationshipProjectWithCollaborator({
                         {...field}
                         value={String(field.value)}
                       >
-                        <SelectTrigger className="w-[180px]" disabled={disableForm}>
+                        <SelectTrigger className="w-[180px]">
                           <SelectValue placeholder="Seleccionar colaborador" />
                         </SelectTrigger>
                         <SelectContent>
