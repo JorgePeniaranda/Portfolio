@@ -27,8 +27,8 @@ import {Input} from "../../ui/input";
 import {Popover, PopoverContent, PopoverTrigger} from "../../ui/popover";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
 import {Textarea} from "../../ui/textarea";
-import {patchDeleteRelationWithCollaborator} from "../../../services/project/patchDeleteRelationWithCollaborator";
-import {patchDeleteRelationWithStack} from "../../../services/project/patchDeleteRelationWithStack";
+import {patchDeleteRelationWithCollaboratorFromProject} from "../../../services/project/patchDeleteRelationWithCollaboratorFromProject";
+import {patchDeleteRelationWithStackFromProject} from "../../../services/project/patchDeleteRelationWithStackFromProject";
 
 import {RelationshipProjectWithCollaborator} from "./relationship-project-with-collaborator";
 import {RelationshipProjectWithStack} from "./relationship-project-with-stack";
@@ -75,7 +75,7 @@ export function UpdateProjectForm({
   };
 
   const onRemoveCollaborator = async (collaboratorId: number) => {
-    const response = await patchDeleteRelationWithCollaborator({
+    const response = await patchDeleteRelationWithCollaboratorFromProject({
       idFrom: defaultValues.id,
       idTo: collaboratorId,
     });
@@ -98,7 +98,7 @@ export function UpdateProjectForm({
   };
 
   const onRemoveStack = async (stackId: number) => {
-    const response = await patchDeleteRelationWithStack({
+    const response = await patchDeleteRelationWithStackFromProject({
       idFrom: defaultValues.id,
       idTo: stackId,
     });

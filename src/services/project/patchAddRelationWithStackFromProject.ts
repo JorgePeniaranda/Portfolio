@@ -4,11 +4,11 @@ import type {ApiResponse} from "../../types/responses";
 import {type Project} from "@prisma/client";
 import axios from "axios";
 
-export async function patchDeleteRelationWithStack(
+export async function patchAddRelationWithStackFromProject(
   data: RelationshipsSchema,
 ): Promise<ApiResponse<Project>> {
   const {data: response} = await axios.patch<ApiResponse<Project>>(
-    "/api/project/relations/stack/delete",
+    "/api/project/relations/stack/add",
     data,
   );
 

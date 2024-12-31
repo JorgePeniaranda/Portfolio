@@ -5,7 +5,7 @@ import {Plus} from "lucide-react";
 import {useForm} from "react-hook-form";
 
 import {useToast} from "../../../hooks/use-toast";
-import {patchAddRelationWithCollaborator} from "../../../services/project/patchAddRelationWithCollaborator";
+import {patchAddRelationWithCollaboratorFromProject} from "../../../services/project/patchAddRelationWithCollaboratorFromProject";
 import {Button} from "../../ui/button";
 import {
   Dialog,
@@ -36,7 +36,7 @@ export function RelationshipProjectWithCollaborator({
   });
 
   const onSubmit = async (values: RelationshipsSchema) => {
-    const response = await patchAddRelationWithCollaborator({
+    const response = await patchAddRelationWithCollaboratorFromProject({
       idFrom: Number(values.idFrom),
       idTo: Number(values.idTo),
     });
