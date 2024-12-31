@@ -100,7 +100,7 @@ export function CreateCollaboratorForm({disableForm = false}: {disableForm?: boo
           type="submit"
         >
           <Save className="size-7" />
-          <span className="text-lg">Guardar</span>
+          <span className="text-lg">Crear</span>
         </Button>
       </form>
     </Form>

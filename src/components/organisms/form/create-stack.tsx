@@ -182,7 +182,7 @@ export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) 
           type="submit"
         >
           <Save className="size-7" />
-          <span className="text-lg">Guardar</span>
+          <span className="text-lg">Crear</span>
         </Button>
       </form>
     </Form>
