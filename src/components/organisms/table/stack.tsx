@@ -144,10 +144,6 @@ function TableHeaderComponent({table}: {table: Table<Stack>}) {
   };
 
   const handleDelete = async () => {
-    if (!confirm("¿Estás seguro de que deseas eliminar los colaboradores seleccionados?")) {
-      return;
-    }
-
     const response = await deleteStack(rows.map((row) => row.original.id));
 
     if (response.success) {
