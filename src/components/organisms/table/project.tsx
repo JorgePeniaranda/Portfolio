@@ -26,6 +26,7 @@ import {
   AlertDialogTrigger,
 } from "../../ui/alert-dialog";
 import {ENV} from "../../../constants/env";
+import {isNotDefined} from "../../../helpers/guards/is-defined";
 
 //#region Column Definitions
 const columns: Array<ColumnDef<Project>> = [
@@ -82,6 +83,10 @@ const columns: Array<ColumnDef<Project>> = [
       return <DataTableColumnHeader column={column} title="Fecha de fin" />;
     },
     cell({row}) {
+      if (isNotDefined(row.original.endDate)) {
+        return "Sin fecha de fin";
+      }
+
       return moment(row.original.endDate).format(MIN_DATA_FORMAT);
     },
   },

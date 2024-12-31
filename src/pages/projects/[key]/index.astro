@@ -1,4 +1,5 @@
 ---
+import moment from 'moment'
 import { MessageDisplay } from '../../../components/atoms/message-display'
 import Layout from '../../../components/layouts/base.astro'
 import { ProjectAccordion } from '../../../components/organisms/accordion/project-accordion'
@@ -12,6 +13,7 @@ import {
   PROJECT_STATUS_TRANSCRIPTIONS,
   STACK_CATEGORY_TRANSCRIPTIONS
 } from '../../../constants/transcriptions'
+import { isDefined, isNotDefined } from '../../../helpers/guards/is-defined'
 import { getAllProjectsWithStackAndCollaborators } from '../../../services/project/getAllProjectsWithStackAndCollaborators'
 import { getProjectWithStackAndCollaboratorsByKey } from '../../../services/project/getProjectWithStackAndCollaboratorsByKey'
 
@@ -81,9 +83,15 @@ const BreadCrumbItems: IBreadCrumb[] = [
             >
               {PROJECT_STATUS_TRANSCRIPTIONS[project.status]}
             </h2>
-            <small class="leading-none p-1 rounded-md text-base"
-              >2021 - Actualidad</small
-            >
+            <small class="leading-none p-1 rounded-md text-base capitalize">
+              {moment(project.startDate).locale('es').format('MMM YYYY')}
+              {' - '}
+              {
+                isDefined(project.endDate)
+                  ? moment(project.endDate).locale('es').format('MMM YYYY')
+                  : 'Actualidad'
+              }
+            </small>
             <h3
               class="leading-none font-medium rounded-md p-1 text-base"
               class:list={[StackStyle[project.stackCategory]]}
