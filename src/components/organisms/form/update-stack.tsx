@@ -16,7 +16,8 @@ import {Input} from "../../ui/input";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
 import {Textarea} from "../../ui/textarea";
 import {Card, CardHeader} from "../../ui/card";
-import {patchDeleteRelationWithStack} from "../../../services/project/patchDeleteRelationWithStack";
+import {patchDeleteRelationWithStackFromProject} from "../../../services/project/patchDeleteRelationWithStackFromProject";
+import {patchDeleteRelationWithProjectFromStack} from "../../../services/stack/patchDeleteRelationWithProjectFromStack";
 
 import {RelationshipStackWithProject} from "./relationship-stack-with-project";
 
@@ -59,9 +60,9 @@ export function UpdateStackForm({
   };
 
   const onRemoveProject = async (idProject: number) => {
-    const response = await patchDeleteRelationWithStack({
-      idFrom: idProject,
-      idTo: defaultValues.id,
+    const response = await patchDeleteRelationWithProjectFromStack({
+      idFrom: defaultValues.id,
+      idTo: idProject,
     });
 
     if (response.success) {

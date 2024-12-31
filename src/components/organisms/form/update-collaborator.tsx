@@ -11,7 +11,8 @@ import {Button} from "../../ui/button";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
 import {Input} from "../../ui/input";
 import {Card, CardHeader} from "../../ui/card";
-import {patchDeleteRelationWithCollaborator} from "../../../services/project/patchDeleteRelationWithCollaborator";
+import {patchDeleteRelationWithCollaboratorFromProject} from "../../../services/project/patchDeleteRelationWithCollaboratorFromProject";
+import {patchDeleteRelationWithProjectFromCollaborator} from "../../../services/collaborator/patchDeleteRelationWithProjectFromStack";
 
 import {RelationshipCollaboratorWithProject} from "./relationship-collaborator-with-project";
 
@@ -54,9 +55,9 @@ export function UpdateCollaboratorForm({
   };
 
   const onRemoveProject = async (idProject: number) => {
-    const response = await patchDeleteRelationWithCollaborator({
-      idFrom: idProject,
-      idTo: defaultValues.id,
+    const response = await patchDeleteRelationWithProjectFromCollaborator({
+      idFrom: defaultValues.id,
+      idTo: idProject,
     });
 
     if (response.success) {
