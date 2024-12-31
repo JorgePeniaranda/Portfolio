@@ -1,6 +1,8 @@
 import z from "zod";
 
 export const RelationshipsSchema = z.object({
-  from: z.number(),
-  to: z.number(),
+  idFrom: z.number(),
+  idTo: z.number(),
 });
+
+export type RelationshipsSchema = z.infer<typeof RelationshipsSchema>;
