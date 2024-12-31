@@ -4,15 +4,15 @@ import { DashboardLayout } from '../../../../../components/layouts/dashboard-lay
 import { ShowCollaboratorForm } from '../../../../../components/organisms/form/show-collaborator'
 import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../../constants/breadcrumb'
 import { ENV } from '../../../../../constants/env'
-import { getAllCollaborator } from '../../../../../services/collaborator/getAllCollaborator'
-import { getCollaboratorById } from '../../../../../services/collaborator/getCollaboratorById'
+import { getAllCollaboratorWithProjectsMin } from '../../../../../services/collaborator/getAllCollaboratorWithProjectsMin'
+import { getCollaboratorWithProjectsMinById } from '../../../../../services/collaborator/getCollaboratorWithProjectsMinById'
 
 export async function getStaticPaths() {
-  const collaborators = await getAllCollaborator()
+  const collaborators = await getAllCollaboratorWithProjectsMin()
 
-  const paths = collaborators.map(stack => ({
-    params: { id: stack.id },
-    props: stack
+  const paths = collaborators.map(collaborator => ({
+    params: { id: collaborator.id },
+    props: collaborator
   }))
 
   return paths
@@ -20,7 +20,9 @@ export async function getStaticPaths() {
 
 let collaborator
 if (ENV.isServerSideEnable) {
-  collaborator = await getCollaboratorById({ id: Number(Astro.params.id) })
+  collaborator = await getCollaboratorWithProjectsMinById({
+    id: Number(Astro.params.id)
+  })
 } else {
   collaborator = Astro.props
 }

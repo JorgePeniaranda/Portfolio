@@ -11,9 +11,9 @@ import { getCollaboratorWithProjectsMinById } from '../../../../../../services/c
 export async function getStaticPaths() {
   const collaborators = await getAllCollaboratorWithProjectsMin()
 
-  const paths = collaborators.map(stack => ({
-    params: { id: stack.id },
-    props: stack
+  const paths = collaborators.map(collaborator => ({
+    params: { id: collaborator.id },
+    props: collaborator
   }))
 
   return paths

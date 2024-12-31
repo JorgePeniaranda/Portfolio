@@ -4,11 +4,11 @@ import { DashboardLayout } from '../../../../../components/layouts/dashboard-lay
 import { ShowStackForm } from '../../../../../components/organisms/form/show-stack'
 import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../../constants/breadcrumb'
 import { ENV } from '../../../../../constants/env'
-import { getAllStack } from '../../../../../services/stack/getAllStack'
-import { getStackById } from '../../../../../services/stack/getStackById'
+import { getAllStackWithProjectsMin } from '../../../../../services/stack/getAllStackWithProjectsMin'
+import { getStackWithProjectsMinById } from '../../../../../services/stack/getStackWithProjectsMinById'
 
 export async function getStaticPaths() {
-  const stacks = await getAllStack()
+  const stacks = await getAllStackWithProjectsMin()
 
   const paths = stacks.map(stack => ({
     params: { id: stack.id },
@@ -20,7 +20,7 @@ export async function getStaticPaths() {
 
 let stack
 if (ENV.isServerSideEnable) {
-  stack = await getStackById({ id: Number(Astro.params.id) })
+  stack = await getStackWithProjectsMinById({ id: Number(Astro.params.id) })
 } else {
   stack = Astro.props
 }

@@ -1,21 +1,28 @@
 import {zodResolver} from "@hookform/resolvers/zod";
-import {StackCategory, StackType, type Stack} from "@prisma/client";
-import {useForm} from "react-hook-form";
+import {StackCategory, StackType, type Project, type Stack} from "@prisma/client";
 import {Pen} from "lucide-react";
+import {useForm} from "react-hook-form";
 
 import {
   STACK_CATEGORY_TRANSCRIPTIONS,
   STACK_TYPE_TRANSCRIPTIONS,
 } from "../../../constants/transcriptions";
+import {isNotDefined} from "../../../helpers/guards/is-defined";
 import {StackCreateSchema} from "../../../schemas/stack/create";
+import {Button} from "../../ui/button";
+import {Card, CardHeader} from "../../ui/card";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
 import {Input} from "../../ui/input";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
 import {Textarea} from "../../ui/textarea";
-import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "../../ui/tooltip";
-import {Button} from "../../ui/button";
 
-export function ShowStackForm({currentStack}: {currentStack: Stack}) {
+export function ShowStackForm({
+  currentStack,
+}: {
+  currentStack: Stack & {
+    associatedProjects: Pick<Project, "id" | "name" | "logoUrl">[];
+  };
+}) {
   const form = useForm<StackCreateSchema>({
     resolver: zodResolver(StackCreateSchema),
     defaultValues: currentStack,
@@ -166,6 +173,32 @@ export function ShowStackForm({currentStack}: {currentStack: Stack}) {
           <span className="text-lg">Editar</span>
         </Button>
       </form>
+      <div className="mt-10">
+        <h2 className="text-3xl font-medium">Editar relaciones</h2>
+        <div className="mx-5 mt-5">
+          <h3 className="text-3xl font-medium">Proyectos</h3>
+          <ul className="mt-4 flex flex-wrap gap-4">
+            {currentStack.associatedProjects?.map((project) => (
+              <li key={project.id}>
+                <Card className="my-5 flex flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
+                  <CardHeader className="relative flex items-center gap-2">
+                    <img
+                      alt={`${project.name} logo`}
+                      className="size-16 shrink-0"
+                      src={project.logoUrl}
+                    />
+                    <span className="text-lg capitalize">{project.name}</span>
+                  </CardHeader>
+                </Card>
+              </li>
+            ))}
+            {(isNotDefined(currentStack.associatedProjects) ||
+              currentStack.associatedProjects?.length === 0) && (
+              <p className="indent-2 text-lg text-gray-500">No hay proyectos asociados</p>
+            )}
+          </ul>
+        </div>
+      </div>
     </Form>
   );
 }

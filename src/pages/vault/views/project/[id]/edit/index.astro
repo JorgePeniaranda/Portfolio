@@ -12,9 +12,9 @@ import { getAvailableStacksToAddRelationshipToProject } from '../../../../../../
 export async function getStaticPaths() {
   const projects = await getAllProjectsWithStackAndCollaborators()
 
-  const paths = projects.map(stack => ({
-    params: { id: stack.id },
-    props: stack
+  const paths = projects.map(project => ({
+    params: { id: project.id },
+    props: project
   }))
 
   return paths

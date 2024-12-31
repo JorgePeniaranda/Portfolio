@@ -5,14 +5,16 @@ import { ShowProjectForm } from '../../../../../components/organisms/form/show-p
 import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../../constants/breadcrumb'
 import { ENV } from '../../../../../constants/env'
 import { getAllProjects } from '../../../../../services/project/getAllProjects'
+import { getAllProjectsWithStackAndCollaborators } from '../../../../../services/project/getAllProjectsWithStackAndCollaborators'
 import { getProjectById } from '../../../../../services/project/getProjectById'
+import { getProjectWithStackAndCollaboratorsById } from '../../../../../services/project/getProjectWithStackAndCollaboratorsById'
 
 export async function getStaticPaths() {
-  const projects = await getAllProjects()
+  const projects = await getAllProjectsWithStackAndCollaborators()
 
-  const paths = projects.map(stack => ({
-    params: { id: stack.id },
-    props: stack
+  const paths = projects.map(project => ({
+    params: { id: project.id },
+    props: project
   }))
 
   return paths
@@ -20,7 +22,9 @@ export async function getStaticPaths() {
 
 let project
 if (ENV.isServerSideEnable) {
-  project = await getProjectById({ id: Number(Astro.params.id) })
+  project = await getProjectWithStackAndCollaboratorsById({
+    id: Number(Astro.params.id)
+  })
 } else {
   project = Astro.props
 }
