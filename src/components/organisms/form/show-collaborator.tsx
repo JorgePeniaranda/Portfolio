@@ -2,16 +2,22 @@ import type {Collaborator} from "@prisma/client";
 
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
+import {Pen} from "lucide-react";
 
 import {CollaboratorUpdateSchema} from "../../../schemas/collaborator/update";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
 import {Input} from "../../ui/input";
+import {Button} from "../../ui/button";
 
 export function ShowCollaboratorForm({currentCollaborator}: {currentCollaborator: Collaborator}) {
   const form = useForm<CollaboratorUpdateSchema>({
     resolver: zodResolver(CollaboratorUpdateSchema),
     defaultValues: currentCollaborator,
   });
+
+  const handleEdit = () => {
+    window.location.href = `/vault/views/collaborators/${currentCollaborator.id}/edit`;
+  };
 
   return (
     <Form {...form}>
@@ -67,6 +73,14 @@ export function ShowCollaboratorForm({currentCollaborator}: {currentCollaborator
             )}
           />
         </div>
+        <Button
+          className="size-max gap-2 bg-gray-500 p-2 text-white hover:bg-gray-600 hover:text-white dark:text-white dark:hover:bg-gray-400"
+          variant="outline"
+          onClick={handleEdit}
+        >
+          <Pen className="size-5" />
+          <span className="text-lg">Editar</span>
+        </Button>
       </form>
     </Form>
   );

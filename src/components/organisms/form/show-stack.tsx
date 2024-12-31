@@ -1,6 +1,7 @@
 import {zodResolver} from "@hookform/resolvers/zod";
 import {StackCategory, StackType, type Stack} from "@prisma/client";
 import {useForm} from "react-hook-form";
+import {Pen} from "lucide-react";
 
 import {
   STACK_CATEGORY_TRANSCRIPTIONS,
@@ -11,12 +12,18 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "..
 import {Input} from "../../ui/input";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
 import {Textarea} from "../../ui/textarea";
+import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "../../ui/tooltip";
+import {Button} from "../../ui/button";
 
 export function ShowStackForm({currentStack}: {currentStack: Stack}) {
   const form = useForm<StackCreateSchema>({
     resolver: zodResolver(StackCreateSchema),
     defaultValues: currentStack,
   });
+
+  const handleEdit = () => {
+    window.location.href = `/vault/views/stack/${currentStack.id}/edit`;
+  };
 
   return (
     <Form {...form}>
@@ -150,6 +157,14 @@ export function ShowStackForm({currentStack}: {currentStack: Stack}) {
             )}
           />
         </div>
+        <Button
+          className="size-max gap-2 bg-gray-500 p-2 text-white hover:bg-gray-600 hover:text-white dark:text-white dark:hover:bg-gray-400"
+          variant="outline"
+          onClick={handleEdit}
+        >
+          <Pen className="size-5" />
+          <span className="text-lg">Editar</span>
+        </Button>
       </form>
     </Form>
   );

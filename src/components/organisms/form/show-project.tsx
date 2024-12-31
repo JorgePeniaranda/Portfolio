@@ -1,6 +1,6 @@
 import {zodResolver} from "@hookform/resolvers/zod";
 import {ProjectStatus, StackCategory, type Project} from "@prisma/client";
-import {CalendarIcon, Save} from "lucide-react";
+import {CalendarIcon, Pen, Save} from "lucide-react";
 import {useForm} from "react-hook-form";
 import {format} from "date-fns";
 
@@ -23,6 +23,10 @@ export function ShowProjectForm({currentProject}: {currentProject: Project}) {
     resolver: zodResolver(ProjectUpdateSchema),
     defaultValues: currentProject,
   });
+
+  const handleEdit = () => {
+    window.location.href = `/vault/views/project/${currentProject.id}/edit`;
+  };
 
   return (
     <Form {...form}>
@@ -322,12 +326,12 @@ export function ShowProjectForm({currentProject}: {currentProject: Project}) {
           />
         </div>
         <Button
-          disabled
-          className="flex size-max items-center gap-2 rounded-lg bg-lime-600 p-2 text-white hover:bg-lime-700 dark:bg-lime-600 dark:hover:bg-lime-700"
-          type="submit"
+          className="size-max gap-2 bg-gray-500 p-2 text-white hover:bg-gray-600 hover:text-white dark:text-white dark:hover:bg-gray-400"
+          variant="outline"
+          onClick={handleEdit}
         >
-          <Save className="size-7" />
-          <span className="text-lg">Guardar</span>
+          <Pen className="size-5" />
+          <span className="text-lg">Editar</span>
         </Button>
       </form>
     </Form>
