@@ -9,15 +9,15 @@ import {
   X,
 } from "lucide-react";
 
-import {cn} from "../../../../helpers/common/classnames";
-import {Button} from "../../..//ui/button";
+import {Button} from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../../../ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
+import {cn} from "@/helpers/common/classnames";
 
 interface DataTableColumnHeaderProps<TData, TValue> extends React.HTMLAttributes<HTMLDivElement> {
   column: Column<TData, TValue>;

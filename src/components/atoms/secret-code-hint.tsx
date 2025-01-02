@@ -1,9 +1,9 @@
 import {ScanFace} from "lucide-react";
 import {useState} from "react";
 
-import {useToast} from "../../hooks/use-toast";
-import {useSecretCodeStore} from "../../services/storage/secret-code";
-import {Button} from "../ui/button";
+import {Button} from "@/components/ui/button";
+import {useToast} from "@/hooks/use-toast";
+import {useSecretCodeStore} from "@/services/storage/secret-code";
 
 /**
  * Component that displays an interactive button to reveal a digit of a secret code.
@@ -38,6 +38,8 @@ export function SecretCodeHint({position}: {position: number}) {
         className: "bg-orange-500",
       });
 
+      setIsCodeVisible(true);
+
       return;
     }
 
@@ -56,11 +58,7 @@ export function SecretCodeHint({position}: {position: number}) {
 
   // If the code is visible, display the corresponding digit.
   if (isCodeVisible) {
-    return (
-      <div className="flex w-fit items-center justify-center rounded-md border-2 border-primary p-2 text-center animate-in">
-        <p className="size-6">{secretCode[position]}</p>
-      </div>
-    );
+    return;
   }
 
   // If not visible, display the scan button.

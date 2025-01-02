@@ -1,11 +1,8 @@
 import type {APIRoute} from "astro";
 
-import {databaseClient} from "../../../../helpers/client/prisma";
-import {RequestHandler} from "../../../../helpers/common/request-handler";
-import {StackUpdateSchema} from "../../../../schemas/stack/update";
-
-// Disable prerendering for this route
-export const prerender = false;
+import {StackUpdateSchema} from "@/schemas/stack/update";
+import {databaseClient} from "@/helpers/client/prisma";
+import {RequestHandler} from "@/helpers/common/request-handler";
 
 /**
  * PUT handler to update an existing stack.

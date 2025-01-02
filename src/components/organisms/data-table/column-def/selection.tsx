@@ -1,6 +1,6 @@
 import type {ColumnDef} from "@tanstack/react-table";
 
-import {Checkbox} from "../../../ui/checkbox";
+import {Checkbox} from "@/components/ui/checkbox";
 
 export function selectionColumnDef<TData>() {
   const columnDef: ColumnDef<TData> = {

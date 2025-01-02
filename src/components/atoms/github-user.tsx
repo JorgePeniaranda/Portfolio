@@ -1,7 +1,7 @@
 import React from "react";
 
-import {Avatar, AvatarFallback, AvatarImage} from "../ui/avatar";
-import {cn} from "../../helpers/common/classnames";
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
+import {cn} from "@/helpers/common/classnames";
 
 /**
  * Props for the GithubUser component.

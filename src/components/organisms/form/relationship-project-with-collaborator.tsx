@@ -1,12 +1,10 @@
+import type {RelationshipsSchema} from "@/schemas/common/relationships";
 import type {Collaborator, Project} from "@prisma/client";
-import type {RelationshipsSchema} from "../../../schemas/common/relationships";
 
 import {Plus} from "lucide-react";
 import {useForm} from "react-hook-form";
 
-import {useToast} from "../../../hooks/use-toast";
-import {patchAddRelationWithCollaborator} from "../../../services/project/patchAddRelationWithCollaborator";
-import {Button} from "../../ui/button";
+import {Button} from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -15,9 +13,17 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../../ui/dialog";
-import {Form, FormControl, FormField, FormItem} from "../../ui/form";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
+} from "@/components/ui/dialog";
+import {Form, FormControl, FormField, FormItem} from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {useToast} from "@/hooks/use-toast";
+import {patchAddRelationWithCollaboratorFromProject} from "@/services/project/patchAddRelationWithCollaboratorFromProject";
 
 export function RelationshipProjectWithCollaborator({
   idFrom,
@@ -36,7 +42,7 @@ export function RelationshipProjectWithCollaborator({
   });
 
   const onSubmit = async (values: RelationshipsSchema) => {
-    const response = await patchAddRelationWithCollaborator({
+    const response = await patchAddRelationWithCollaboratorFromProject({
       idFrom: Number(values.idFrom),
       idTo: Number(values.idTo),
     });
@@ -57,6 +63,10 @@ export function RelationshipProjectWithCollaborator({
         className: "bg-red-500",
       });
     }
+
+    window.location.reload();
+
+    return;
   };
 
   return (
@@ -97,7 +107,7 @@ export function RelationshipProjectWithCollaborator({
                         {...field}
                         value={String(field.value)}
                       >
-                        <SelectTrigger className="w-[180px]" disabled={disableForm}>
+                        <SelectTrigger className="w-[180px]">
                           <SelectValue placeholder="Seleccionar colaborador" />
                         </SelectTrigger>
                         <SelectContent>

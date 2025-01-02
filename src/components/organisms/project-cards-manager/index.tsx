@@ -1,16 +1,22 @@
 import {ProjectStatus, StackCategory, type Project} from "@prisma/client";
 import {useMemo, useState} from "react";
 
+import {ProjectCard} from "@/components/molecules/cards/project-card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   PROJECT_SORT_TRANSCRIPTIONS,
-  STACK_CATEGORY_TRANSCRIPTIONS,
   PROJECT_STATUS_TRANSCRIPTIONS,
-} from "../../../constants/transcriptions";
-import {isDefined} from "../../../helpers/guards/is-defined";
-import {useProjectLikedStore} from "../../../services/storage/liked-projects";
-import {ProjectSortType} from "../../../types/project.d";
-import {ProjectCard} from "../../molecules/cards/project-card";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
+  STACK_CATEGORY_TRANSCRIPTIONS,
+} from "@/constants/transcriptions";
+import {isDefined} from "@/helpers/guards/is-defined";
+import {useProjectLikedStore} from "@/services/storage/liked-projects";
+import {ProjectSortType} from "@/types/project.d";
 
 /**
  * Component that renders a list of project cards, sorted by favorites.
@@ -23,7 +29,7 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../
 export function ProjectCardsManager({
   projects,
 }: {
-  projects: Pick<Project, "id" | "key" | "name" | "logoUrl" | "stack" | "status">[];
+  projects: Pick<Project, "id" | "key" | "name" | "logoUrl" | "stackCategory" | "status">[];
 }) {
   // Retrieves the list of liked projects from the store
   const {likedKeyProjects} = useProjectLikedStore();
@@ -39,7 +45,7 @@ export function ProjectCardsManager({
 
     // Filter by stack
     if (isDefined(stackFilter)) {
-      newProjects = newProjects.filter((project) => project.stack === stackFilter);
+      newProjects = newProjects.filter((project) => project.stackCategory === stackFilter);
     }
 
     // Filter by status

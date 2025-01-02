@@ -1,7 +1,7 @@
 import type {Collaborator, Stack} from "@prisma/client";
 
-import {databaseClient} from "../../helpers/client/prisma";
-import {isNotDefined} from "../../helpers/guards/is-defined";
+import {databaseClient} from "@/helpers/client/prisma";
+import {isNotDefined} from "@/helpers/guards/is-defined";
 
 export async function getCollaboratorsByProjectId({
   id,
@@ -13,7 +13,7 @@ export async function getCollaboratorsByProjectId({
       id,
     },
     select: {
-      collaborators: true,
+      associatedCollaborators: true,
     },
   });
 
@@ -21,5 +21,5 @@ export async function getCollaboratorsByProjectId({
     return null;
   }
 
-  return data.collaborators;
+  return data.associatedCollaborators;
 }

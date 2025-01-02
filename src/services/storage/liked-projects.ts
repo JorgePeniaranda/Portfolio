@@ -3,7 +3,7 @@ import type {Project} from "@prisma/client";
 import {create} from "zustand";
 import {persist} from "zustand/middleware";
 
-import {PROJECT_LIKED_STORE_KEY} from "../../constants/common";
+import {PROJECT_LIKED_STORE_KEY} from "@/constants/common";
 
 // Define the shape of the store's state.
 export interface ILikedStoreState {

@@ -2,15 +2,16 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Save} from "lucide-react";
 import {useForm} from "react-hook-form";
 
-import {useToast} from "../../../hooks/use-toast";
+import {Button} from "@/components/ui/button";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {Input} from "@/components/ui/input";
+import {isDefined} from "@/helpers/guards/is-defined";
+import {useToast} from "@/hooks/use-toast";
 import {
   CollaboratorCreateDefaultValues,
   CollaboratorCreateSchema,
-} from "../../../schemas/collaborator/create";
-import {postCollaborator} from "../../../services/collaborator/postCollaborator";
-import {Button} from "../../ui/button";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
-import {Input} from "../../ui/input";
+} from "@/schemas/collaborator/create";
+import {postCollaborator} from "@/services/collaborator/postCollaborator";
 
 export function CreateCollaboratorForm({disableForm = false}: {disableForm?: boolean}) {
   const {toast} = useToast();
@@ -29,6 +30,10 @@ export function CreateCollaboratorForm({disableForm = false}: {disableForm?: boo
         description: response.message,
         className: "bg-green-500",
       });
+
+      if (isDefined(response?.data?.id)) {
+        window.location.href = `/vault/views/collaborators/${response.data.id}`;
+      }
     }
 
     if (!response.success) {
@@ -100,7 +105,7 @@ export function CreateCollaboratorForm({disableForm = false}: {disableForm?: boo
           type="submit"
         >
           <Save className="size-7" />
-          <span className="text-lg">Guardar</span>
+          <span className="text-lg">Crear</span>
         </Button>
       </form>
     </Form>

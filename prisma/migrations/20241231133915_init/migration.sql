@@ -13,7 +13,7 @@ CREATE TABLE "Project" (
     "key" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "status" "ProjectStatus" NOT NULL,
-    "stack" "StackCategory" NOT NULL,
+    "stackCategory" "StackCategory" NOT NULL,
     "start_date" TIMESTAMP(3) NOT NULL,
     "end_date" TIMESTAMP(3),
     "description" TEXT NOT NULL,
@@ -66,19 +66,19 @@ CREATE TABLE "Collaborator" (
 );
 
 -- CreateTable
-CREATE TABLE "_ProjectStacks" (
+CREATE TABLE "_StackAssociatedToProjects" (
     "A" INTEGER NOT NULL,
     "B" INTEGER NOT NULL,
 
-    CONSTRAINT "_ProjectStacks_AB_pkey" PRIMARY KEY ("A","B")
+    CONSTRAINT "_StackAssociatedToProjects_AB_pkey" PRIMARY KEY ("A","B")
 );
 
 -- CreateTable
-CREATE TABLE "_ProjectColaborators" (
+CREATE TABLE "_CollaboratorsAssociatedToProjects" (
     "A" INTEGER NOT NULL,
     "B" INTEGER NOT NULL,
 
-    CONSTRAINT "_ProjectColaborators_AB_pkey" PRIMARY KEY ("A","B")
+    CONSTRAINT "_CollaboratorsAssociatedToProjects_AB_pkey" PRIMARY KEY ("A","B")
 );
 
 -- CreateIndex
@@ -91,10 +91,10 @@ CREATE UNIQUE INDEX "Stack_key_key" ON "Stack"("key");
 CREATE UNIQUE INDEX "Collaborator_nickname_key" ON "Collaborator"("nickname");
 
 -- CreateIndex
-CREATE INDEX "_ProjectStacks_B_index" ON "_ProjectStacks"("B");
+CREATE INDEX "_StackAssociatedToProjects_B_index" ON "_StackAssociatedToProjects"("B");
 
 -- CreateIndex
-CREATE INDEX "_ProjectColaborators_B_index" ON "_ProjectColaborators"("B");
+CREATE INDEX "_CollaboratorsAssociatedToProjects_B_index" ON "_CollaboratorsAssociatedToProjects"("B");
 
 -- AddForeignKey
 ALTER TABLE "RelatedStack" ADD CONSTRAINT "RelatedStack_from_stack_fkey" FOREIGN KEY ("from_stack") REFERENCES "Stack"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -103,13 +103,13 @@ ALTER TABLE "RelatedStack" ADD CONSTRAINT "RelatedStack_from_stack_fkey" FOREIGN
 ALTER TABLE "RelatedStack" ADD CONSTRAINT "RelatedStack_to_stack_fkey" FOREIGN KEY ("to_stack") REFERENCES "Stack"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_ProjectStacks" ADD CONSTRAINT "_ProjectStacks_A_fkey" FOREIGN KEY ("A") REFERENCES "Project"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_StackAssociatedToProjects" ADD CONSTRAINT "_StackAssociatedToProjects_A_fkey" FOREIGN KEY ("A") REFERENCES "Project"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_ProjectStacks" ADD CONSTRAINT "_ProjectStacks_B_fkey" FOREIGN KEY ("B") REFERENCES "Stack"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_StackAssociatedToProjects" ADD CONSTRAINT "_StackAssociatedToProjects_B_fkey" FOREIGN KEY ("B") REFERENCES "Stack"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_ProjectColaborators" ADD CONSTRAINT "_ProjectColaborators_A_fkey" FOREIGN KEY ("A") REFERENCES "Collaborator"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_CollaboratorsAssociatedToProjects" ADD CONSTRAINT "_CollaboratorsAssociatedToProjects_A_fkey" FOREIGN KEY ("A") REFERENCES "Collaborator"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_ProjectColaborators" ADD CONSTRAINT "_ProjectColaborators_B_fkey" FOREIGN KEY ("B") REFERENCES "Project"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_CollaboratorsAssociatedToProjects" ADD CONSTRAINT "_CollaboratorsAssociatedToProjects_B_fkey" FOREIGN KEY ("B") REFERENCES "Project"("id") ON DELETE CASCADE ON UPDATE CASCADE;

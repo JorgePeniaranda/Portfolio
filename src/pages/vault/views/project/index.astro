@@ -1,9 +1,9 @@
 ---
-import Layout from '../../../../components/layouts/base.astro'
-import { DashboardLayout } from '../../../../components/layouts/dashboard-layout'
-import { ProjectTable } from '../../../../components/organisms/table/project'
-import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../constants/breadcrumb'
-import { getAllProjects } from '../../../../services/project/getAllProjects'
+import Layout from '@/components/layouts/base.astro'
+import { DashboardLayout } from '@/components/layouts/dashboard-layout'
+import { ProjectTable } from '@/components/organisms/table/project'
+import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
+import { getAllProjects } from '@/services/project/getAllProjects'
 
 const projects = await getAllProjects()
 ---

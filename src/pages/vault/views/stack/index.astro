@@ -1,9 +1,9 @@
 ---
-import Layout from '../../../../components/layouts/base.astro'
-import { DashboardLayout } from '../../../../components/layouts/dashboard-layout'
-import { StackTable } from '../../../../components/organisms/table/stack'
-import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../constants/breadcrumb'
-import { getAllStack } from '../../../../services/stack/getAllStack'
+import Layout from '@/components/layouts/base.astro'
+import { DashboardLayout } from '@/components/layouts/dashboard-layout'
+import { StackTable } from '@/components/organisms/table/stack'
+import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
+import { getAllStack } from '@/services/stack/getAllStack'
 
 const stacks = await getAllStack()
 ---

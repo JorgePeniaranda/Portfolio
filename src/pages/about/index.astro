@@ -1,7 +1,8 @@
 ---
+import Logo from '@/assets/svg/logos/Logo.astro'
+import { SecretCodeHint } from '@/components/atoms/secret-code-hint'
+import Layout from '@/components/layouts/base.astro'
 import { ArrowRight } from 'lucide-react'
-import Logo from '../../assets/svg/logos/Logo.astro'
-import Layout from '../../components/layouts/base.astro'
 ---
 
 <Layout
@@ -28,5 +29,8 @@ import Layout from '../../components/layouts/base.astro'
         </span>
       </a>
     </nav>
+    <div class="fixed left-0 bottom-0">
+      <SecretCodeHint position={3} client:visible />
+    </div>
   </main>
 </Layout>

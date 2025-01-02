@@ -4,10 +4,10 @@ import {MotionValue, motion, useMotionValue, useSpring, useTransform} from "fram
 import {Loader, Moon, Sun, Volume2, VolumeX, icons} from "lucide-react";
 import React, {Fragment, useRef} from "react";
 
-import {NavbarAnimationConfig} from "../../../constants/styles";
-import {useSoundStore} from "../../../services/storage/sound";
-import {useThemeStore} from "../../../services/storage/theme";
-import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "../../ui/tooltip";
+import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip";
+import {NavbarAnimationConfig} from "@/constants/styles";
+import {useSoundStore} from "@/services/storage/sound";
+import {useThemeStore} from "@/services/storage/theme";
 
 //#region NAVBAR
 

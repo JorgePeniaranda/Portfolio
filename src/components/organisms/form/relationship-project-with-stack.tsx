@@ -1,11 +1,10 @@
 import type {Project, Stack} from "@prisma/client";
-import type {RelationshipsSchema} from "../../../schemas/common/relationships";
+import type {RelationshipsSchema} from "@/schemas/common/relationships";
 
 import {Plus} from "lucide-react";
 import {useForm} from "react-hook-form";
 
-import {useToast} from "../../../hooks/use-toast";
-import {Button} from "../../ui/button";
+import {Button} from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -14,10 +13,17 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../../ui/dialog";
-import {Form, FormControl, FormField, FormItem} from "../../ui/form";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
-import {patchAddRelationWithStack} from "../../../services/project/patchAddRelationWithStack";
+} from "@/components/ui/dialog";
+import {Form, FormControl, FormField, FormItem} from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {useToast} from "@/hooks/use-toast";
+import {patchAddRelationWithStackFromProject} from "@/services/project/patchAddRelationWithStackFromProject";
 
 export function RelationshipProjectWithStack({
   idFrom,
@@ -36,7 +42,7 @@ export function RelationshipProjectWithStack({
   });
 
   const onSubmit = async (values: RelationshipsSchema) => {
-    const response = await patchAddRelationWithStack({
+    const response = await patchAddRelationWithStackFromProject({
       idFrom: Number(values.idFrom),
       idTo: Number(values.idTo),
     });
@@ -57,6 +63,10 @@ export function RelationshipProjectWithStack({
         className: "bg-red-500",
       });
     }
+
+    window.location.reload();
+
+    return;
   };
 
   return (
@@ -81,7 +91,7 @@ export function RelationshipProjectWithStack({
         <Form {...form}>
           <form
             className="space-y-8"
-            id="relation-with-collaborator"
+            id="relation-with-stack"
             onSubmit={form.handleSubmit(onSubmit)}
           >
             <div className="flex flex-wrap gap-2">
@@ -97,7 +107,7 @@ export function RelationshipProjectWithStack({
                         {...field}
                         value={String(field.value)}
                       >
-                        <SelectTrigger className="w-[180px]" disabled={disableForm}>
+                        <SelectTrigger className="w-[180px]">
                           <SelectValue placeholder="Seleccionar stack" />
                         </SelectTrigger>
                         <SelectContent>
@@ -126,7 +136,7 @@ export function RelationshipProjectWithStack({
           <Button
             className="bg-zinc-800 text-white hover:bg-zinc-700"
             disabled={disableForm}
-            form="relation-with-collaborator"
+            form="relation-with-stack"
             type="submit"
             typeof="submit"
           >

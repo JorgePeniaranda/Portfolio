@@ -1,22 +1,38 @@
 ---
-import Layout from '../../../../../components/layouts/base.astro'
-import { DashboardLayout } from '../../../../../components/layouts/dashboard-layout'
-import { ShowProjectForm } from '../../../../../components/organisms/form/show-project'
-import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../../constants/breadcrumb'
-import { getAllProjects } from '../../../../../services/project/getAllProjects'
+import Layout from '@/components/layouts/base.astro'
+import { DashboardLayout } from '@/components/layouts/dashboard-layout'
+import { ShowProjectForm } from '@/components/organisms/form/show-project'
+import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
+import { ENV } from '@/constants/env'
+import { getAllProjectsWithStackAndCollaborators } from '@/services/project/getAllProjectsWithStackAndCollaborators'
+import { getProjectWithStackAndCollaboratorsById } from '@/services/project/getProjectWithStackAndCollaboratorsById'
 
 export async function getStaticPaths() {
-  const projects = await getAllProjects()
+  const projects = await getAllProjectsWithStackAndCollaborators()
 
-  const paths = projects.map(stack => ({
-    params: { id: stack.id },
-    props: stack
+  const paths = projects.map(project => ({
+    params: { id: project.id },
+    props: project
   }))
 
   return paths
 }
 
-const project = Astro.props
+let project
+if (ENV.isServerSideEnable) {
+  project = await getProjectWithStackAndCollaboratorsById({
+    id: Number(Astro.params.id)
+  })
+} else {
+  project = Astro.props
+}
+
+if (!project) {
+  return {
+    status: 404,
+    error: new Error('Project not found')
+  }
+}
 ---
 
 <Layout title="Detalle de proyecto">
@@ -26,7 +42,7 @@ const project = Astro.props
   >
     <main class="w-full h-full flex flex-col pt-7 pl-7 container mx-auto gap-5">
       <h1 class="text-4xl font-medium">Detalles de Proyecto</h1>
-      <ShowProjectForm defaultValues={project} client:load />
+      <ShowProjectForm currentProject={project} client:load />
     </main>
   </DashboardLayout>
 </Layout>

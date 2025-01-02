@@ -2,15 +2,15 @@ import type {INavbarSection} from "./navbar";
 
 import {Loader, Moon, Settings, Sun, Volume2, VolumeX, icons} from "lucide-react";
 
-import {useSoundStore} from "../../../services/storage/sound";
-import {useThemeStore} from "../../../services/storage/theme";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "../../ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
+import {useSoundStore} from "@/services/storage/sound";
+import {useThemeStore} from "@/services/storage/theme";
 
 /**
  * MobileNavbar component renders a responsive navigation bar for mobile devices.

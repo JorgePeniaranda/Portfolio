@@ -1,11 +1,8 @@
 import type {APIRoute} from "astro";
 
-import {databaseClient} from "../../../../helpers/client/prisma";
-import {RequestHandler} from "../../../../helpers/common/request-handler";
-import {CollaboratorUpdateSchema} from "../../../../schemas/collaborator/update";
-
-// Disable prerendering for this route
-export const prerender = false;
+import {CollaboratorUpdateSchema} from "@/schemas/collaborator/update";
+import {databaseClient} from "@/helpers/client/prisma";
+import {RequestHandler} from "@/helpers/common/request-handler";
 
 /**
  * PUT handler to update an existing collaborator.

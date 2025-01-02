@@ -1,18 +1,19 @@
-import {type Project, type Stack} from "@prisma/client";
+import type {Project, Stack} from "@prisma/client";
+
 import {Controls, MiniMap, ReactFlow, type Edge, type Node} from "@xyflow/react";
-import "@xyflow/react/dist/style.css";
 import {useMemo} from "react";
 
-import {devConsoleLog} from "../../../helpers/common/dev-console-log";
+import {StackWithDrawerNode} from "@/components/organisms/react-flow/nodes/stack-with-drawer";
+import {devConsoleLog} from "@/helpers/common/dev-console-log";
 
-import {StackWithDrawerNode} from "./nodes/stack-with-drawer";
+import "@xyflow/react/dist/style.css";
 
 /**
  * Component to render a flow diagram of stacks categorized by type and category.
  *
  * @param {Object} props - Component properties.
  * @param {Array<Stack & {
- *   projects: Pick<Project, "id" | "key" | "name" | "logoUrl">[];
+ *   associatedProjects: Pick<Project, "id" | "key" | "name" | "logoUrl">[];
  *   relatedFrom: { toStackStack: Stack }[];
  *   relatedTo: { fromStackStack: Stack }[];
  * }>} props.stacks - List of stacks including their relationships and related projects.
@@ -23,7 +24,7 @@ export async function StackFlow({
 }: {
   stacks: Array<
     Stack & {
-      projects: Pick<Project, "id" | "key" | "name" | "logoUrl">[];
+      associatedProjects: Pick<Project, "id" | "key" | "name" | "logoUrl">[]; // TO-DO: Not used
       relatedFrom: {
         toStackStack: Stack;
       }[];
@@ -153,9 +154,9 @@ export async function StackFlow({
         StackWithIconNode: StackWithDrawerNode,
       }}
       nodes={initialNodes}
-      onNodeClick={(event, node) =>
+      onNodeClick={() =>
         devConsoleLog({
-          message: `Node "${node.data.label}" clicked`,
+          message: `Node clicked`,
           type: "log",
         })
       }

@@ -9,7 +9,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
   Breadcrumb as UIBreadcrumb,
-} from "../../ui/breadcrumb";
+} from "@/components/ui/breadcrumb";
 
 //#region TYPES
 /**

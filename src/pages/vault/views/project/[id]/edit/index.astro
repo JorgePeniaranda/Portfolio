@@ -1,24 +1,41 @@
 ---
-import Layout from '../../../../../../components/layouts/base.astro'
-import { DashboardLayout } from '../../../../../../components/layouts/dashboard-layout'
-import { UpdateProjectForm } from '../../../../../../components/organisms/form/update-project'
-import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../../../constants/breadcrumb'
-import { getAvailableCollaboratorsToAddRelationshipToProject } from '../../../../../../services/collaborator/getAvailableCollaboratorsToAddRelationshipToProject'
-import { getAllProjectsWithStackAndCollaborators } from '../../../../../../services/project/getAllProjectsWithStackAndCollaborators'
-import { getAvailableStacksToAddRelationshipToProject } from '../../../../../../services/stack/getAvailableStacksToAddRelationshipToProject'
+import Layout from '@/components/layouts/base.astro'
+import { DashboardLayout } from '@/components/layouts/dashboard-layout'
+import { UpdateProjectForm } from '@/components/organisms/form/update-project'
+import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
+import { ENV } from '@/constants/env'
+import { getAvailableCollaboratorsToAddRelationshipToProject } from '@/services/collaborator/getAvailableCollaboratorsToAddRelationshipToProject'
+import { getAllProjectsWithStackAndCollaborators } from '@/services/project/getAllProjectsWithStackAndCollaborators'
+import { getProjectWithStackAndCollaboratorsById } from '@/services/project/getProjectWithStackAndCollaboratorsById'
+import { getAvailableStacksToAddRelationshipToProject } from '@/services/stack/getAvailableStacksToAddRelationshipToProject'
 
 export async function getStaticPaths() {
   const projects = await getAllProjectsWithStackAndCollaborators()
 
-  const paths = projects.map(stack => ({
-    params: { id: stack.id },
-    props: stack
+  const paths = projects.map(project => ({
+    params: { id: project.id },
+    props: project
   }))
 
   return paths
 }
 
-const project = Astro.props
+let project
+if (ENV.isServerSideEnable) {
+  project = await getProjectWithStackAndCollaboratorsById({
+    id: Number(Astro.params.id)
+  })
+} else {
+  project = Astro.props
+}
+
+if (!project) {
+  return {
+    status: 404,
+    error: new Error('Project not found')
+  }
+}
+
 const availableStacks = await getAvailableStacksToAddRelationshipToProject({
   idProject: project.id
 })
@@ -36,9 +53,10 @@ const availableCollaborators =
     <main class="w-full h-full flex flex-col pt-7 pl-7 container mx-auto gap-5">
       <h1 class="text-4xl font-medium">Editar de Proyecto</h1>
       <UpdateProjectForm
-        defaultValues={project}
+        currentProject={project}
         availableStacks={availableStacks}
         availableCollaborators={availableCollaborators}
+        disableForm={ENV.isServerSideEnable === false}
         client:load
       />
     </main>

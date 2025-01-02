@@ -1,19 +1,31 @@
 import type {Collaborator} from "@prisma/client";
 import type {ColumnDef, Table} from "@tanstack/react-table";
 
-import moment from "moment";
 import {Eye, Pen, Plus, Trash} from "lucide-react";
+import moment from "moment";
 import {useMemo} from "react";
 
-import {MIN_DATA_FORMAT} from "../../../constants/common";
-import {Input} from "../../ui/input";
-import {DataTable} from "../data-table";
-import {selectionColumnDef} from "../data-table/column-def/selection";
-import {DataTableColumnHeader} from "../data-table/column/dropdown";
-import {Button} from "../../ui/button";
-import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "../../ui/tooltip";
-import {deleteCollaborator} from "../../../services/collaborator/deleteCollaborator";
-import {useToast} from "../../../hooks/use-toast";
+import {DataTable} from "@/components/organisms/data-table";
+import {selectionColumnDef} from "@/components/organisms/data-table/column-def/selection";
+import {DataTableColumnHeader} from "@/components/organisms/data-table/column/dropdown";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import {Button} from "@/components/ui/button";
+import {Input} from "@/components/ui/input";
+import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip";
+import {MIN_DATA_FORMAT} from "@/constants/common";
+import {ENV} from "@/constants/env";
+import {useToast} from "@/hooks/use-toast";
+import {deleteCollaborator} from "@/services/collaborator/deleteCollaborator";
 
 //#region Column Definitions
 const columns: Array<ColumnDef<Collaborator>> = [
@@ -22,7 +34,7 @@ const columns: Array<ColumnDef<Collaborator>> = [
     id: "id",
     accessorKey: "id",
     header({column}) {
-      return <DataTableColumnHeader column={column} title="id" />;
+      return <DataTableColumnHeader column={column} title="ID" />;
     },
   },
   {
@@ -38,12 +50,36 @@ const columns: Array<ColumnDef<Collaborator>> = [
     header({column}) {
       return <DataTableColumnHeader column={column} title="Nickname de GitHub" />;
     },
+    cell({row}) {
+      return (
+        <a
+          className="text-blue-500"
+          href={`https://github.com/${row.original.githubUsername}`}
+          rel="noreferrer"
+          target="_blank"
+        >
+          {row.original.githubUsername}
+        </a>
+      );
+    },
   },
   {
     id: "linkedinUsername",
     accessorKey: "linkedinUsername",
     header({column}) {
       return <DataTableColumnHeader column={column} title="Nickname de Linkedin" />;
+    },
+    cell({row}) {
+      return (
+        <a
+          className="text-blue-500"
+          href={`https://www.linkedin.com/in/${row.original.linkedinUsername}`}
+          rel="noreferrer"
+          target="_blank"
+        >
+          {row.original.linkedinUsername}
+        </a>
+      );
     },
   },
   {
@@ -98,10 +134,6 @@ function TableHeaderComponent({table}: {table: Table<Collaborator>}) {
   };
 
   const handleDelete = async () => {
-    if (!confirm("¿Estás seguro de que deseas eliminar los colaboradores seleccionados?")) {
-      return;
-    }
-
     const response = await deleteCollaborator(rows.map((row) => row.original.id));
 
     if (response.success) {
@@ -183,21 +215,43 @@ function TableHeaderComponent({table}: {table: Table<Collaborator>}) {
           </TooltipProvider>
         </li>
         <li>
-          <TooltipProvider>
-            <Tooltip delayDuration={0}>
-              <TooltipTrigger asChild>
-                <Button
-                  className="size-max rounded-full bg-red-500 p-2 text-white hover:bg-red-600 hover:text-white dark:text-white dark:hover:bg-red-400"
-                  disabled={selectedCount <= 0}
-                  variant="outline"
+          <AlertDialog>
+            <AlertDialogTrigger disabled={selectedCount <= 0}>
+              <TooltipProvider>
+                <Tooltip delayDuration={0}>
+                  <TooltipTrigger asChild>
+                    <Button
+                      className="size-max rounded-full bg-red-500 p-2 text-white hover:bg-red-600 hover:text-white dark:text-white dark:hover:bg-red-400"
+                      disabled={selectedCount <= 0}
+                      variant="outline"
+                    >
+                      <Trash className="size-5" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Eliminar</TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>¿Está completamente seguro?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Esta acción no se puede deshacer. Esto borrará permanentemente el/los
+                  colaboradores seleccionados.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                <AlertDialogAction
+                  className="bg-red-500 text-white hover:bg-red-600 hover:text-white dark:text-white dark:hover:bg-red-400"
+                  disabled={ENV.isServerSideEnable === false}
                   onClick={handleDelete}
                 >
-                  <Trash className="size-5" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>Eliminar</TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+                  Borrar
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </li>
       </ul>
     </div>

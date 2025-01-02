@@ -1,6 +1,6 @@
 import type {Project, Stack} from "@prisma/client";
 
-import {databaseClient} from "../../helpers/client/prisma";
+import {databaseClient} from "@/helpers/client/prisma";
 
 export async function getAvailableStacksToAddRelationshipToProject({
   idProject,
@@ -9,7 +9,7 @@ export async function getAvailableStacksToAddRelationshipToProject({
 }): Promise<Pick<Stack, "id" | "name" | "iconUrl">[]> {
   return await databaseClient.stack.findMany({
     where: {
-      projects: {
+      associatedProjects: {
         none: {
           id: idProject,
         },

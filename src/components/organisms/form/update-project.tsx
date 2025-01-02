@@ -10,38 +10,43 @@ import {format} from "date-fns";
 import {CalendarIcon, Save, X} from "lucide-react";
 import {useForm} from "react-hook-form";
 
+import {RelationshipProjectWithCollaborator} from "@/components/organisms/form/relationship-project-with-collaborator";
+import {RelationshipProjectWithStack} from "@/components/organisms/form/relationship-project-with-stack";
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
+import {Button} from "@/components/ui/button";
+import {Calendar} from "@/components/ui/calendar";
+import {Card, CardHeader} from "@/components/ui/card";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {Input} from "@/components/ui/input";
+import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {Textarea} from "@/components/ui/textarea";
 import {
   PROJECT_STATUS_TRANSCRIPTIONS,
   STACK_CATEGORY_TRANSCRIPTIONS,
-} from "../../../constants/transcriptions";
-import {cn} from "../../../helpers/common/classnames";
-import {useToast} from "../../../hooks/use-toast";
-import {ProjectUpdateSchema} from "../../../schemas/project/update";
-import {putProject} from "../../../services/project/putProject";
-import {Avatar, AvatarFallback, AvatarImage} from "../../ui/avatar";
-import {Button} from "../../ui/button";
-import {Calendar} from "../../ui/calendar";
-import {Card, CardHeader} from "../../ui/card";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
-import {Input} from "../../ui/input";
-import {Popover, PopoverContent, PopoverTrigger} from "../../ui/popover";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
-import {Textarea} from "../../ui/textarea";
-import {patchDeleteRelationWithCollaborator} from "../../../services/project/patchDeleteRelationWithCollaborator";
-import {patchDeleteRelationWithStack} from "../../../services/project/patchDeleteRelationWithStack";
-
-import {RelationshipProjectWithCollaborator} from "./relationship-project-with-collaborator";
-import {RelationshipProjectWithStack} from "./relationship-project-with-stack";
+} from "@/constants/transcriptions";
+import {cn} from "@/helpers/common/classnames";
+import {useToast} from "@/hooks/use-toast";
+import {ProjectUpdateSchema} from "@/schemas/project/update";
+import {patchDeleteRelationWithCollaboratorFromProject} from "@/services/project/patchDeleteRelationWithCollaboratorFromProject";
+import {patchDeleteRelationWithStackFromProject} from "@/services/project/patchDeleteRelationWithStackFromProject";
+import {putProject} from "@/services/project/putProject";
 
 export function UpdateProjectForm({
-  defaultValues,
+  currentProject,
   disableForm,
   availableStacks,
   availableCollaborators,
 }: {
-  defaultValues: Project & {
-    techStacks: Array<Stack>;
-    collaborators: Array<Collaborator>;
+  currentProject: Project & {
+    associatedStacks: Array<Stack>;
+    associatedCollaborators: Array<Collaborator>;
   };
   disableForm?: boolean;
   availableStacks: Pick<Stack, "id" | "name" | "iconUrl">[];
@@ -50,7 +55,7 @@ export function UpdateProjectForm({
   const {toast} = useToast();
   const form = useForm<ProjectUpdateSchema>({
     resolver: zodResolver(ProjectUpdateSchema),
-    defaultValues: defaultValues,
+    defaultValues: currentProject,
   });
 
   const onSubmit = async (values: ProjectUpdateSchema) => {
@@ -72,11 +77,15 @@ export function UpdateProjectForm({
         className: "bg-red-500",
       });
     }
+
+    window.location.reload();
+
+    return;
   };
 
   const onRemoveCollaborator = async (collaboratorId: number) => {
-    const response = await patchDeleteRelationWithCollaborator({
-      idFrom: defaultValues.id,
+    const response = await patchDeleteRelationWithCollaboratorFromProject({
+      idFrom: currentProject.id,
       idTo: collaboratorId,
     });
 
@@ -95,11 +104,15 @@ export function UpdateProjectForm({
         className: "bg-red-500",
       });
     }
+
+    window.location.reload();
+
+    return;
   };
 
   const onRemoveStack = async (stackId: number) => {
-    const response = await patchDeleteRelationWithStack({
-      idFrom: defaultValues.id,
+    const response = await patchDeleteRelationWithStackFromProject({
+      idFrom: currentProject.id,
       idTo: stackId,
     });
 
@@ -118,6 +131,10 @@ export function UpdateProjectForm({
         className: "bg-red-500",
       });
     }
+
+    window.location.reload();
+
+    return;
   };
 
   return (
@@ -187,7 +204,7 @@ export function UpdateProjectForm({
           />
           <FormField
             control={form.control}
-            name="stack"
+            name="stackCategory"
             render={({field}) => (
               <FormItem>
                 <FormLabel>Stack</FormLabel>
@@ -435,7 +452,7 @@ export function UpdateProjectForm({
         <div className="mx-5 mt-5">
           <h3 className="text-3xl font-medium">Stack</h3>
           <ul className="mt-4 flex flex-wrap gap-4">
-            {defaultValues.techStacks.map((stack) => (
+            {currentProject.associatedStacks?.map((stack) => (
               <li key={stack.id}>
                 <Card className="my-5 flex w-max flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
                   <CardHeader className="relative">
@@ -460,7 +477,7 @@ export function UpdateProjectForm({
             <li>
               <RelationshipProjectWithStack
                 availableStacks={availableStacks}
-                idFrom={defaultValues.id}
+                idFrom={currentProject.id}
               />
             </li>
           </ul>
@@ -468,7 +485,7 @@ export function UpdateProjectForm({
         <div className="mx-5 mt-5">
           <h3 className="text-3xl font-medium">Colaboradores</h3>
           <ul className="mt-4 flex flex-wrap gap-4">
-            {defaultValues.collaborators.map((collaborator) => (
+            {currentProject.associatedCollaborators?.map((collaborator) => (
               <li key={collaborator.id}>
                 <Card className="my-5 flex w-max flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
                   <CardHeader className="relative flex items-center gap-2">
@@ -495,7 +512,8 @@ export function UpdateProjectForm({
             <li>
               <RelationshipProjectWithCollaborator
                 availableCollaborators={availableCollaborators}
-                idFrom={defaultValues.id}
+                disableForm={disableForm}
+                idFrom={currentProject.id}
               />
             </li>
           </ul>

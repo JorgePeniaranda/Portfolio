@@ -1,21 +1,22 @@
 import type {Collaborator, Project, Stack} from "@prisma/client";
 
-import {isDefined} from "../../../helpers/guards/is-defined";
-import GithubUser from "../../atoms/github-user";
+import GithubUser from "@/components/atoms/github-user";
+import {MessageDisplay} from "@/components/atoms/message-display";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
   Accordion as UIAccordion,
-} from "../../ui/accordion";
-import {MessageDisplay} from "../../atoms/message-display";
+} from "@/components/ui/accordion";
+import {isDefined} from "@/helpers/guards/is-defined";
+import {isNoEmptyString} from "@/helpers/guards/is-no-empty-string";
 
 //#region TYPES
 /**
  * The props for the ProjectAccordion component.
  * @param contributions - A description of the contributions made to the project.
  * @param goals - A description of the goals for the project.
- * @param techStack - A list of technologies used in the project.
+ * @param stackCategory - A list of technologies used in the project.
  * @param collaborators - A list of collaborators in the project.
  * @param githubUrl - The GitHub repository URL of the project.
  * @param demoUrl - The demo URL of the project.
@@ -23,7 +24,7 @@ import {MessageDisplay} from "../../atoms/message-display";
 interface Props {
   contributions: string;
   goals: string;
-  techStack: Stack[];
+  stackCategory: Stack[];
   collaborators: Collaborator[];
   githubUrl: Project["githubUrl"];
   demoUrl: Project["demoUrl"];
@@ -36,7 +37,7 @@ interface Props {
  * It includes sections for goals, technologies, contributions, collaborators, and resources.
  * @param contributions - A description of the contributions made to the project.
  * @param goals - A description of the goals for the project.
- * @param techStack - A list of technologies used in the project.
+ * @param stackCategory - A list of technologies used in the project.
  * @param collaborators - A list of collaborators in the project.
  * @param githubUrl - The GitHub repository URL of the project.
  * @param demoUrl - The demo URL of the project.
@@ -46,13 +47,13 @@ export function ProjectAccordion({
   demoUrl,
   githubUrl,
   goals,
-  techStack,
+  stackCategory,
   contributions,
 }: Props) {
   return (
     <UIAccordion className="w-full" type="multiple">
       {/* Render goals section if there are goals */}
-      {isDefined(goals) ? (
+      {isDefined(goals) && isNoEmptyString(goals) ? (
         <AccordionItem value="goals">
           <AccordionTrigger>Objetivos</AccordionTrigger>
           <div />
@@ -65,12 +66,12 @@ export function ProjectAccordion({
       ) : null}
 
       {/* Render tech stack section if there are technologies */}
-      {techStack.length > 0 && (
+      {stackCategory.length > 0 && (
         <AccordionItem value="technologies">
           <AccordionTrigger>Tecnologías</AccordionTrigger>
           <AccordionContent>
             <ul className="list-disc pl-4">
-              {techStack.map((stack) => (
+              {stackCategory.map((stack) => (
                 <li key={`technology_${stack.id}`}>
                   <a
                     className="text-blue-500 hover:text-blue-600 dark:hover:text-blue-400"
@@ -88,7 +89,7 @@ export function ProjectAccordion({
       )}
 
       {/* Render contributions section if there are contributions */}
-      {isDefined(contributions) && (
+      {isDefined(contributions) && isNoEmptyString(contributions) && (
         <AccordionItem value="contribution">
           <AccordionTrigger>¿Qué aporté?</AccordionTrigger>
           <AccordionContent className="space-y-3">
@@ -116,12 +117,13 @@ export function ProjectAccordion({
       )}
 
       {/* Render resources section if GitHub or demo URL is defined */}
-      {(isDefined(githubUrl) || isDefined(demoUrl)) && (
+      {((isDefined(githubUrl) && isNoEmptyString(githubUrl)) ||
+        (isDefined(demoUrl) && isNoEmptyString(demoUrl))) && (
         <AccordionItem value="resources">
           <AccordionTrigger>Recursos</AccordionTrigger>
           <AccordionContent>
             <ul className="space-y-3 pl-5">
-              {isDefined(githubUrl) ? (
+              {isDefined(githubUrl) && isNoEmptyString(githubUrl) ? (
                 <li aria-label="Code Link">
                   <span className="font-bold">Código: </span>
                   <a
@@ -134,7 +136,7 @@ export function ProjectAccordion({
                   </a>
                 </li>
               ) : null}
-              {isDefined(demoUrl) ? (
+              {isDefined(demoUrl) && isNoEmptyString(demoUrl) ? (
                 <li aria-label="Demo Link">
                   <span className="font-bold">Demo: </span>
                   <a

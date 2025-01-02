@@ -5,15 +5,32 @@ import {Eye, Pen, Plus, Trash} from "lucide-react";
 import moment from "moment";
 import {useMemo} from "react";
 
-import {MIN_DATA_FORMAT} from "../../../constants/common";
-import {Button} from "../../ui/button";
-import {Input} from "../../ui/input";
-import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "../../ui/tooltip";
-import {DataTable} from "../data-table";
-import {selectionColumnDef} from "../data-table/column-def/selection";
-import {DataTableColumnHeader} from "../data-table/column/dropdown";
-import {useToast} from "../../../hooks/use-toast";
-import {deleteProject} from "../../../services/project/deleteProject";
+import {DataTable} from "@/components/organisms/data-table";
+import {selectionColumnDef} from "@/components/organisms/data-table/column-def/selection";
+import {DataTableColumnHeader} from "@/components/organisms/data-table/column/dropdown";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import {Button} from "@/components/ui/button";
+import {Input} from "@/components/ui/input";
+import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip";
+import {MIN_DATA_FORMAT} from "@/constants/common";
+import {ENV} from "@/constants/env";
+import {
+  PROJECT_STATUS_TRANSCRIPTIONS,
+  STACK_CATEGORY_TRANSCRIPTIONS,
+} from "@/constants/transcriptions";
+import {isNotDefined} from "@/helpers/guards/is-defined";
+import {useToast} from "@/hooks/use-toast";
+import {deleteProject} from "@/services/project/deleteProject";
 
 //#region Column Definitions
 const columns: Array<ColumnDef<Project>> = [
@@ -22,7 +39,7 @@ const columns: Array<ColumnDef<Project>> = [
     id: "id",
     accessorKey: "id",
     header({column}) {
-      return <DataTableColumnHeader column={column} title="id" />;
+      return <DataTableColumnHeader column={column} title="ID" />;
     },
   },
   {
@@ -45,12 +62,18 @@ const columns: Array<ColumnDef<Project>> = [
     header({column}) {
       return <DataTableColumnHeader column={column} title="Estado" />;
     },
+    cell({row}) {
+      return PROJECT_STATUS_TRANSCRIPTIONS[row.original.status];
+    },
   },
   {
-    id: "stack",
-    accessorKey: "stack",
+    id: "stackCategory",
+    accessorKey: "stackCategory",
     header({column}) {
       return <DataTableColumnHeader column={column} title="Stack" />;
+    },
+    cell({row}) {
+      return STACK_CATEGORY_TRANSCRIPTIONS[row.original.stackCategory];
     },
   },
   {
@@ -70,6 +93,10 @@ const columns: Array<ColumnDef<Project>> = [
       return <DataTableColumnHeader column={column} title="Fecha de fin" />;
     },
     cell({row}) {
+      if (isNotDefined(row.original.endDate)) {
+        return "Sin fecha de fin";
+      }
+
       return moment(row.original.endDate).format(MIN_DATA_FORMAT);
     },
   },
@@ -101,7 +128,7 @@ const columns: Array<ColumnDef<Project>> = [
       const value = row.original.demoUrl ?? "#";
 
       return (
-        <a href={value} rel="noreferrer" target="_blank">
+        <a className="text-blue-500" href={value} rel="noreferrer" target="_blank">
           {value}
         </a>
       );
@@ -117,7 +144,7 @@ const columns: Array<ColumnDef<Project>> = [
       const value = row.original.demoUrl ?? "#";
 
       return (
-        <a href={value} rel="noreferrer" target="_blank">
+        <a className="text-blue-500" href={value} rel="noreferrer" target="_blank">
           {value}
         </a>
       );
@@ -175,10 +202,6 @@ function TableHeaderComponent({table}: {table: Table<Project>}) {
   };
 
   const handleDelete = async () => {
-    if (!confirm("¿Estás seguro de que deseas eliminar los colaboradores seleccionados?")) {
-      return;
-    }
-
     const response = await deleteProject(rows.map((row) => row.original.id));
 
     if (response.success) {
@@ -260,21 +283,43 @@ function TableHeaderComponent({table}: {table: Table<Project>}) {
           </TooltipProvider>
         </li>
         <li>
-          <TooltipProvider>
-            <Tooltip delayDuration={0}>
-              <TooltipTrigger asChild>
-                <Button
-                  className="size-max rounded-full bg-red-500 p-2 text-white hover:bg-red-600 hover:text-white dark:text-white dark:hover:bg-red-400"
-                  disabled={selectedCount <= 0}
-                  variant="outline"
+          <AlertDialog>
+            <AlertDialogTrigger disabled={selectedCount <= 0}>
+              <TooltipProvider>
+                <Tooltip delayDuration={0}>
+                  <TooltipTrigger asChild>
+                    <Button
+                      className="size-max rounded-full bg-red-500 p-2 text-white hover:bg-red-600 hover:text-white dark:text-white dark:hover:bg-red-400"
+                      disabled={selectedCount <= 0}
+                      variant="outline"
+                    >
+                      <Trash className="size-5" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Eliminar</TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>¿Está completamente seguro?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Esta acción no se puede deshacer. Esto borrará permanentemente el/los proyectos
+                  seleccionados.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                <AlertDialogAction
+                  className="bg-red-500 text-white hover:bg-red-600 hover:text-white dark:text-white dark:hover:bg-red-400"
+                  disabled={ENV.isServerSideEnable === false}
                   onClick={handleDelete}
                 >
-                  <Trash className="size-5" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>Eliminar</TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+                  Borrar
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </li>
       </ul>
     </div>

@@ -2,9 +2,7 @@ import {REGEXP_ONLY_DIGITS} from "input-otp";
 import {ScanFace} from "lucide-react";
 import {useState} from "react";
 
-import {useToast} from "../../../hooks/use-toast";
-import {useSecretCodeStore} from "../../../services/storage/secret-code";
-import {Button} from "../../ui/button";
+import {Button} from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -12,8 +10,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../../ui/dialog";
-import {InputOTP, InputOTPSlot} from "../../ui/input-otp";
+} from "@/components/ui/dialog";
+import {InputOTP, InputOTPSlot} from "@/components/ui/input-otp";
+import {useToast} from "@/hooks/use-toast";
+import {useSecretCodeStore} from "@/services/storage/secret-code";
 
 /**
  * Component that displays an interactive button to open a modal for entering a secret code.
@@ -61,7 +61,7 @@ export function SecretButton() {
   return (
     <Dialog>
       {/* Button to open the modal */}
-      <DialogTrigger className="hover: flex items-center gap-2 rounded-lg bg-[#580001] px-3 py-2 text-white shadow-sm">
+      <DialogTrigger className="hover: flex items-center gap-2 rounded-lg bg-[#580001] px-3 py-2 text-white shadow-sm dark:bg-[#780001]">
         Acá se esconde algo
         <ScanFace />
       </DialogTrigger>

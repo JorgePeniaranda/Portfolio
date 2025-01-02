@@ -1,4 +1,4 @@
-import type {ApiResponse} from "../../types/responses";
+import type {ApiResponse} from "@/types/responses";
 
 import z from "zod";
 
@@ -28,7 +28,7 @@ import z from "zod";
  * @throws {Error} If an unexpected error occurs, a `500` response with a generic error message is returned.
  */
 export const RequestHandler = async (
-  handler: () => Promise<ApiResponse>, // The handler that processes the request and returns an ApiResponse
+  handler: () => Promise<Omit<ApiResponse, "success">>, // The handler that processes the request and returns an ApiResponse
   {
     successStatusCode = 200, // Default value is 200 if no status code is provided
   }: {
@@ -39,7 +39,10 @@ export const RequestHandler = async (
 
   try {
     // Call the handler function with the provided context to process the request
-    response = await handler();
+    response = {
+      ...(await handler()),
+      success: true, // Set the success flag to true
+    };
 
     // Return the response with the provided success status code (or default 200)
     return Response.json(response, {

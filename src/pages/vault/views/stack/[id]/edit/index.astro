@@ -1,13 +1,15 @@
 ---
-import Layout from '../../../../../../components/layouts/base.astro'
-import { DashboardLayout } from '../../../../../../components/layouts/dashboard-layout'
-import { UpdateStackForm } from '../../../../../../components/organisms/form/update-stack'
-import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../../../constants/breadcrumb'
-import { ENV } from '../../../../../../constants/env'
-import { getAllStack } from '../../../../../../services/stack/getAllStack'
+import Layout from '@/components/layouts/base.astro'
+import { DashboardLayout } from '@/components/layouts/dashboard-layout'
+import { UpdateStackForm } from '@/components/organisms/form/update-stack'
+import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
+import { ENV } from '@/constants/env'
+import { getAvailableProjectsToAddRelationshipToStack } from '@/services/project/getAvailableProjectsToAddRelationshipToStack'
+import { getAllStackWithProjectsMin } from '@/services/stack/getAllStackWithProjectsMin'
+import { getStackWithProjectsMinById } from '@/services/stack/getStackWithProjectsMinById'
 
 export async function getStaticPaths() {
-  const stacks = await getAllStack()
+  const stacks = await getAllStackWithProjectsMin()
 
   const paths = stacks.map(stack => ({
     params: { id: stack.id },
@@ -17,7 +19,23 @@ export async function getStaticPaths() {
   return paths
 }
 
-const stack = Astro.props
+let stack
+if (ENV.isServerSideEnable) {
+  stack = await getStackWithProjectsMinById({ id: Number(Astro.params.id) })
+} else {
+  stack = Astro.props
+}
+
+if (!stack) {
+  return {
+    status: 404,
+    error: new Error('Stack not found')
+  }
+}
+
+const availableProjects = await getAvailableProjectsToAddRelationshipToStack({
+  idStack: stack.id
+})
 ---
 
 <Layout title="Editar de stack">
@@ -28,8 +46,9 @@ const stack = Astro.props
     <main class="w-full h-full flex flex-col pt-7 pl-7 container mx-auto gap-5">
       <h1 class="text-4xl font-medium">Editar Stack</h1>
       <UpdateStackForm
-        defaultValues={stack}
-        disableForm={ENV.isProduction}
+        currentStack={stack}
+        disableForm={ENV.isServerSideEnable === false}
+        availableProjects={availableProjects}
         client:load
       />
     </main>

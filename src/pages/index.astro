@@ -1,15 +1,15 @@
 ---
-import Bird1 from '../assets/svg/draws/Bird-1.astro'
-import Bird2 from '../assets/svg/draws/Bird-2.astro'
-import Bird3 from '../assets/svg/draws/Bird-3.astro'
-import MountainLeft from '../assets/svg/draws/MountainLeft.astro'
-import MountainRight from '../assets/svg/draws/MountainRight.astro'
-import Sun from '../assets/svg/draws/Sun.astro'
-import Wave from '../assets/svg/draws/wave-1.astro'
-import Logo from '../assets/svg/logos/Logo.astro'
-import { TextWritter } from '../components/atoms/text-writter'
-import Layout from '../components/layouts/base.astro'
-import { SecretButton } from '../components/molecules/secret-button'
+import Bird1 from '@/assets/svg/draws/Bird-1.astro'
+import Bird2 from '@/assets/svg/draws/Bird-2.astro'
+import Bird3 from '@/assets/svg/draws/Bird-3.astro'
+import MountainLeft from '@/assets/svg/draws/MountainLeft.astro'
+import MountainRight from '@/assets/svg/draws/MountainRight.astro'
+import Sun from '@/assets/svg/draws/Sun.astro'
+import Wave from '@/assets/svg/draws/wave-1.astro'
+import Logo from '@/assets/svg/logos/Logo.astro'
+import { TextWritter } from '@/components/atoms/text-writter'
+import Layout from '@/components/layouts/base.astro'
+import { SecretButton } from '@/components/molecules/secret-button'
 
 const TITLE_WORD_LIST = [
   'Resultados',
@@ -26,7 +26,8 @@ const TITLE_WORD_LIST = [
 
 <Layout
   body={{
-    class: 'bg-gradient-to-r from-rose-200 to-teal-200'
+    class:
+      'bg-gradient-to-r from-rose-200 to-teal-200 dark:from-[rgba(136,19,55,0.8)] dark:dark:to-[rgba(4,120,87,0.8)] dark:to-gray-800 transition-colors ease-linear'
   }}
 >
   <nav class="h-max px-20 pt-2 flex justify-between items-center">

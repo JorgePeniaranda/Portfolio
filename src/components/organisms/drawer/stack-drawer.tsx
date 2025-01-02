@@ -4,8 +4,9 @@ import {X} from "lucide-react";
 import * as React from "react";
 import {Drawer as DrawerPrimitive} from "vaul";
 
-import {Drawer, DrawerClose, DrawerContent, DrawerTrigger} from "../../../components/ui/drawer";
-import {isDefined, isNotDefined} from "../../../helpers/guards/is-defined";
+import {MessageDisplay} from "@/components/atoms/message-display";
+import {Drawer, DrawerClose, DrawerContent, DrawerTrigger} from "@/components/ui/drawer";
+import {isDefined, isNotDefined} from "@/helpers/guards/is-defined";
 
 /**
  * Component that renders an interactive drawer to display detailed information about a Stack.
@@ -18,7 +19,7 @@ import {isDefined, isNotDefined} from "../../../helpers/guards/is-defined";
  * @param {Object} [props.returnToSiteOnClose] - Optional configuration for URL navigation when the drawer is closed.
  * @param {string} props.returnToSiteOnClose.site - The URL to navigate to when the drawer is closed.
  * @param {boolean} props.returnToSiteOnClose.keepState - Flag to indicate if the application state should be preserved when navigating to `site`.
- * @param {Stack & {projects: Pick<Project, "id" | "key" | "name" | "logoUrl">[]}} props.stack - Stack data to be displayed in the drawer, including associated projects.
+ * @param {Stack & {associatedProjects: Pick<Project, "id" | "key" | "name" | "logoUrl">[]}} props.stack - Stack data to be displayed in the drawer, including associated projects.
  */
 export function StackDrawer({
   triggerChild,
@@ -33,7 +34,7 @@ export function StackDrawer({
     keepState: boolean;
   };
   stack: Stack & {
-    projects: Pick<Project, "id" | "key" | "name" | "logoUrl">[];
+    associatedProjects: Pick<Project, "id" | "key" | "name" | "logoUrl">[];
   };
 }) {
   const handleDrawerClose = () => {
@@ -79,27 +80,31 @@ export function StackDrawer({
           {/* Stack description (if defined) */}
           {isDefined(stack.description) && (
             <article>
-              <h4 className="font-bold underline underline-offset-2">Descripción:</h4>
-              <p className="text-pretty indent-4">{stack.description}</p>
+              <h4 className="text-lg font-bold underline underline-offset-2">Descripción:</h4>
+              <p className="text-pretty indent-4">
+                <MessageDisplay message={stack.description} />
+              </p>
             </article>
           )}
 
           {/* Related projects (if any) */}
-          {stack.projects.length > 0 && (
+          {stack.associatedProjects.length > 0 && (
             <article className="space-y-1">
-              <h4 className="font-bold underline underline-offset-2">Proyectos relacionados:</h4>
-              <ul>
-                {stack.projects.map((project) => (
+              <h4 className="text-lg font-bold underline underline-offset-2">
+                Proyectos relacionados:
+              </h4>
+              <ul className="flex flex-col gap-2">
+                {stack.associatedProjects?.map((project) => (
                   <li key={project.id}>
                     <a
-                      className="flex items-center transition-all ease-linear hover:translate-x-2"
+                      className="flex items-center gap-2 rounded-md transition-all ease-linear hover:translate-x-2"
                       href={`/projects/${project.key}`}
                       rel="noreferrer"
                       target="_blank"
                     >
                       <img
                         alt={`${project.name} logo`}
-                        className="aspect-square size-14 rounded-sm"
+                        className="size-14 rounded-full"
                         src={project.logoUrl}
                       />
                       <h5 className="whitespace-nowrap text-xl">{project.name}</h5>

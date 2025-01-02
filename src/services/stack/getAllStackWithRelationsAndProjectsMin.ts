@@ -1,11 +1,11 @@
 import type {Project, Stack} from "@prisma/client";
 
-import {databaseClient} from "../../helpers/client/prisma";
+import {databaseClient} from "@/helpers/client/prisma";
 
 export async function getAllStackWithRelationsAndProjectsMin(): Promise<
   Array<
     Stack & {
-      projects: Pick<Project, "id" | "key" | "name" | "logoUrl">[];
+      associatedProjects: Pick<Project, "id" | "key" | "name" | "logoUrl">[];
       relatedFrom: {
         toStackStack: Stack;
       }[];
@@ -17,7 +17,7 @@ export async function getAllStackWithRelationsAndProjectsMin(): Promise<
 > {
   return await databaseClient.stack.findMany({
     include: {
-      projects: {
+      associatedProjects: {
         select: {
           id: true,
           key: true,

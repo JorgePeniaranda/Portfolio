@@ -1,10 +1,10 @@
 ---
+import { cn } from '@/helpers/common/classnames'
 import { SEO } from 'astro-seo'
-import { ViewTransitions } from 'astro:transitions'
+import { ClientRouter } from 'astro:transitions'
 import { DEFAULT_LANG } from '../../constants/common'
 import { NAVBAR_ITEMS } from '../../constants/navbar'
 import { SEO_INFO } from '../../constants/seo'
-import { cn } from '../../helpers/common/classnames'
 import '../../styles/globals.css'
 import ThemePreference from '../atoms/theme-preference.astro'
 import { DesktopNavbar } from '../organisms/navbar/desktop'
@@ -31,7 +31,7 @@ const { title, description, lang = DEFAULT_LANG, body, html } = Astro.props
       title={title}
       description={description ?? SEO_INFO.description}
     />
-    <ViewTransitions />
+    <ClientRouter />
     <ThemePreference />
   </head>
   <body

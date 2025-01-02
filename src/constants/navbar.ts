@@ -1,4 +1,4 @@
-import type {INavbarSection} from "../components/organisms/navbar/navbar";
+import type {INavbarSection} from "@/components/organisms/navbar/navbar";
 
 import {PERSONAL_ACCOUNTS} from "./external";
 

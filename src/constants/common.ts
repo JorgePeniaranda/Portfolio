@@ -1,4 +1,4 @@
-import type {ISoundState, theme} from "../types/common.d";
+import type {ISoundState, theme} from "@/types/common.d";
 
 export const DEFAULT_LANG = "es";
 

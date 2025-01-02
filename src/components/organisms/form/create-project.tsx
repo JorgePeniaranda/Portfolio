@@ -4,21 +4,28 @@ import {format} from "date-fns";
 import {CalendarIcon, Save} from "lucide-react";
 import {useForm} from "react-hook-form";
 
+import {Button} from "@/components/ui/button";
+import {Calendar} from "@/components/ui/calendar";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {Input} from "@/components/ui/input";
+import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {Textarea} from "@/components/ui/textarea";
 import {
   PROJECT_STATUS_TRANSCRIPTIONS,
   STACK_CATEGORY_TRANSCRIPTIONS,
-} from "../../../constants/transcriptions";
-import {cn} from "../../../helpers/common/classnames";
-import {useToast} from "../../../hooks/use-toast";
-import {ProjectCreateDefaultValues, ProjectCreateSchema} from "../../../schemas/project/create";
-import {postProject} from "../../../services/project/postProject";
-import {Button} from "../../ui/button";
-import {Calendar} from "../../ui/calendar";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
-import {Input} from "../../ui/input";
-import {Popover, PopoverContent, PopoverTrigger} from "../../ui/popover";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
-import {Textarea} from "../../ui/textarea";
+} from "@/constants/transcriptions";
+import {cn} from "@/helpers/common/classnames";
+import {isDefined} from "@/helpers/guards/is-defined";
+import {useToast} from "@/hooks/use-toast";
+import {ProjectCreateDefaultValues, ProjectCreateSchema} from "@/schemas/project/create";
+import {postProject} from "@/services/project/postProject";
 
 export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}) {
   const {toast} = useToast();
@@ -37,6 +44,10 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
         description: response.message,
         className: "bg-green-500",
       });
+
+      if (isDefined(response?.data?.id)) {
+        window.location.href = `/vault/views/project/${response.data.id}`;
+      }
     }
 
     if (!response.success) {
@@ -115,7 +126,7 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
           />
           <FormField
             control={form.control}
-            name="stack"
+            name="stackCategory"
             render={({field}) => (
               <FormItem>
                 <FormLabel>Stack</FormLabel>
@@ -355,7 +366,7 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
           type="submit"
         >
           <Save className="size-7" />
-          <span className="text-lg">Guardar</span>
+          <span className="text-lg">Crear</span>
         </Button>
       </form>
     </Form>

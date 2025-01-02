@@ -1,8 +1,8 @@
 import {create} from "zustand";
 import {persist} from "zustand/middleware";
 
-import {DEFAULT_THEME, THEME_CLASSNAME, THEME_STORE_KEY} from "../../constants/common";
-import {themes, themesArray, type theme} from "../../types/common.d";
+import {DEFAULT_THEME, THEME_CLASSNAME, THEME_STORE_KEY} from "@/constants/common";
+import {themes, themesArray, type theme} from "@/types/common.d";
 
 // Define the shape of the store's state.
 export interface IThemeStoreState {

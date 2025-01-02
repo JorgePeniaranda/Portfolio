@@ -1,6 +1,6 @@
 import type {Collaborator, Project} from "@prisma/client";
 
-import {databaseClient} from "../../helpers/client/prisma";
+import {databaseClient} from "@/helpers/client/prisma";
 
 export async function getAvailableCollaboratorsToAddRelationshipToProject({
   idProject,
@@ -9,7 +9,7 @@ export async function getAvailableCollaboratorsToAddRelationshipToProject({
 }): Promise<Pick<Collaborator, "id" | "nickname" | "githubUsername">[]> {
   return await databaseClient.collaborator.findMany({
     where: {
-      project: {
+      associatedProjects: {
         none: {
           id: idProject,
         },

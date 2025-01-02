@@ -1,9 +1,9 @@
 ---
+import Logo from '@/assets/svg/logos/Logo.astro'
+import { SecretCodeHint } from '@/components/atoms/secret-code-hint'
+import Layout from '@/components/layouts/base.astro'
+import { ProjectCardsManager } from '@/components/organisms/project-cards-manager'
 import { ArrowRight } from 'lucide-react'
-import Logo from '../../assets/svg/logos/Logo.astro'
-import { SecretCodeHint } from '../../components/atoms/secret-code-hint'
-import Layout from '../../components/layouts/base.astro'
-import { ProjectCardsManager } from '../../components/organisms/project-cards-manager'
 import { getAllProjectMin } from '../../services/project/getAllStackMin'
 
 const Projects = await getAllProjectMin()
@@ -36,7 +36,9 @@ const Projects = await getAllProjectMin()
     <section class="flex flex-col items-center gap-6">
       <article class="w-full flex flex-col text-center items-center gap-2.5">
         <h1 class="text-4xl font-semibold">Mis Proyectos</h1>
-        <p class="text-lg text-gray-600 max-w-2xl max-sm:text-sm">
+        <p
+          class="text-lg text-gray-600 max-w-2xl max-sm:text-sm dark:text-gray-400"
+        >
           Una colección de proyectos en los que he trabajado, tanto por mi
           cuenta como en colaboración con otros colegas. Cada uno tiene su
           propia historia y enfoque.

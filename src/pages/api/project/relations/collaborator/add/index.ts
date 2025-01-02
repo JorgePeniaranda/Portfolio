@@ -1,11 +1,8 @@
 import type {APIRoute} from "astro";
 
-import {databaseClient} from "../../../../../../helpers/client/prisma";
-import {RequestHandler} from "../../../../../../helpers/common/request-handler";
-import {RelationshipsSchema} from "../../../../../../schemas/common/relationships";
-
-// Disable prerendering for this route
-export const prerender = false;
+import {RelationshipsSchema} from "@/schemas/common/relationships";
+import {databaseClient} from "@/helpers/client/prisma";
+import {RequestHandler} from "@/helpers/common/request-handler";
 
 /**
  * PATCH handler to add a collaborator to a project.
@@ -20,7 +17,7 @@ export const PATCH: APIRoute = ({request}) => {
 
       const response = await databaseClient.project.update({
         data: {
-          collaborators: {
+          associatedCollaborators: {
             connect: {
               id: validationResult.idTo,
             },

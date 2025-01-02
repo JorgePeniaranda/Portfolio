@@ -1,28 +1,53 @@
 import {zodResolver} from "@hookform/resolvers/zod";
-import {ProjectStatus, StackCategory, type Project} from "@prisma/client";
-import {CalendarIcon, Save} from "lucide-react";
-import {useForm} from "react-hook-form";
+import {
+  ProjectStatus,
+  StackCategory,
+  type Collaborator,
+  type Project,
+  type Stack,
+} from "@prisma/client";
 import {format} from "date-fns";
+import {CalendarIcon, Pen} from "lucide-react";
+import {useForm} from "react-hook-form";
 
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
+import {Button} from "@/components/ui/button";
+import {Calendar} from "@/components/ui/calendar";
+import {Card, CardHeader} from "@/components/ui/card";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {Input} from "@/components/ui/input";
+import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {Textarea} from "@/components/ui/textarea";
 import {
   PROJECT_STATUS_TRANSCRIPTIONS,
   STACK_CATEGORY_TRANSCRIPTIONS,
-} from "../../../constants/transcriptions";
-import {ProjectUpdateSchema} from "../../../schemas/project/update";
-import {Button} from "../../ui/button";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
-import {Input} from "../../ui/input";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
-import {Textarea} from "../../ui/textarea";
-import {Popover, PopoverContent, PopoverTrigger} from "../../ui/popover";
-import {cn} from "../../../helpers/common/classnames";
-import {Calendar} from "../../ui/calendar";
+} from "@/constants/transcriptions";
+import {cn} from "@/helpers/common/classnames";
+import {ProjectUpdateSchema} from "@/schemas/project/update";
 
-export function ShowProjectForm({defaultValues}: {defaultValues: Project}) {
+export function ShowProjectForm({
+  currentProject,
+}: {
+  currentProject: Project & {
+    associatedStacks: Array<Stack>;
+    associatedCollaborators: Array<Collaborator>;
+  };
+}) {
   const form = useForm<ProjectUpdateSchema>({
     resolver: zodResolver(ProjectUpdateSchema),
-    defaultValues: defaultValues,
+    defaultValues: currentProject,
   });
+
+  const handleEdit = () => {
+    window.location.href = `/vault/views/project/${currentProject.id}/edit`;
+  };
 
   return (
     <Form {...form}>
@@ -91,7 +116,7 @@ export function ShowProjectForm({defaultValues}: {defaultValues: Project}) {
           />
           <FormField
             control={form.control}
-            name="stack"
+            name="stackCategory"
             render={({field}) => (
               <FormItem>
                 <FormLabel>Stack</FormLabel>
@@ -322,14 +347,55 @@ export function ShowProjectForm({defaultValues}: {defaultValues: Project}) {
           />
         </div>
         <Button
-          disabled
-          className="flex size-max items-center gap-2 rounded-lg bg-lime-600 p-2 text-white hover:bg-lime-700 dark:bg-lime-600 dark:hover:bg-lime-700"
-          type="submit"
+          className="size-max gap-2 bg-gray-500 p-2 text-white hover:bg-gray-600 hover:text-white dark:text-white dark:hover:bg-gray-400"
+          variant="outline"
+          onClick={handleEdit}
         >
-          <Save className="size-7" />
-          <span className="text-lg">Guardar</span>
+          <Pen className="size-5" />
+          <span className="text-lg">Editar</span>
         </Button>
       </form>
+      <div className="mt-10">
+        <h2 className="text-3xl font-medium">Relaciones</h2>
+        <div className="mx-5 mt-5">
+          <h3 className="text-3xl font-medium">Stack</h3>
+          <ul className="mt-4 flex flex-wrap gap-4">
+            {currentProject.associatedStacks?.map((stack) => (
+              <li key={stack.id}>
+                <Card className="my-5 flex w-max flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
+                  <CardHeader className="relative">
+                    <img
+                      alt={`${stack.name} logo`}
+                      className="size-20 rounded-lg"
+                      src={stack.iconUrl}
+                    />
+                  </CardHeader>
+                </Card>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="mx-5 mt-5">
+          <h3 className="text-3xl font-medium">Colaboradores</h3>
+          <ul className="mt-4 flex flex-wrap gap-4">
+            {currentProject.associatedCollaborators?.map((collaborator) => (
+              <li key={collaborator.id}>
+                <Card className="my-5 flex w-max flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
+                  <CardHeader className="relative flex items-center gap-2">
+                    <Avatar className="size-16 shrink-0">
+                      <AvatarImage
+                        src={`https://avatars.githubusercontent.com/${collaborator.githubUsername}`}
+                      />
+                      <AvatarFallback>{collaborator.githubUsername}</AvatarFallback>
+                    </Avatar>
+                    <span className="text-lg capitalize">{collaborator.githubUsername}</span>
+                  </CardHeader>
+                </Card>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </Form>
   );
 }

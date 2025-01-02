@@ -1,7 +1,7 @@
 import type {Project, Stack} from "@prisma/client";
 
-import {isNotDefined} from "../../helpers/guards/is-defined";
-import {databaseClient} from "../../helpers/client/prisma";
+import {databaseClient} from "@/helpers/client/prisma";
+import {isNotDefined} from "@/helpers/guards/is-defined";
 
 export async function getProjectsMinByStackId({
   idStack,
@@ -13,7 +13,7 @@ export async function getProjectsMinByStackId({
       id: idStack,
     },
     select: {
-      projects: {
+      associatedProjects: {
         select: {
           id: true,
           name: true,
@@ -27,5 +27,5 @@ export async function getProjectsMinByStackId({
     return [];
   }
 
-  return data.projects;
+  return data.associatedProjects;
 }

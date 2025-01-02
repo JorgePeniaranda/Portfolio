@@ -1,23 +1,44 @@
 ---
-import Layout from '../../../../../../components/layouts/base.astro'
-import { DashboardLayout } from '../../../../../../components/layouts/dashboard-layout'
-import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../../../constants/breadcrumb'
-import { getAllCollaborator } from '../../../../../../services/collaborator/getAllCollaborator'
-import { UpdateCollaboratorForm } from '../../../../../../components/organisms/form/update-collaborator'
-import { ENV } from '../../../../../../constants/env'
+import Layout from '@/components/layouts/base.astro'
+import { DashboardLayout } from '@/components/layouts/dashboard-layout'
+import { UpdateCollaboratorForm } from '@/components/organisms/form/update-collaborator'
+import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
+import { ENV } from '@/constants/env'
+import { getAllCollaboratorWithProjectsMin } from '@/services/collaborator/getAllCollaboratorWithProjectsMin'
+import { getCollaboratorWithProjectsMinById } from '@/services/collaborator/getCollaboratorWithProjectsMinById'
+import { getAvailableProjectsToAddRelationshipToCollaborators } from '@/services/project/getAvailableProjectsToAddRelationshipToCollaborators'
 
 export async function getStaticPaths() {
-  const collaborators = await getAllCollaborator()
+  const collaborators = await getAllCollaboratorWithProjectsMin()
 
-  const paths = collaborators.map(stack => ({
-    params: { id: stack.id },
-    props: stack
+  const paths = collaborators.map(collaborator => ({
+    params: { id: collaborator.id },
+    props: collaborator
   }))
 
   return paths
 }
 
-const collaborator = Astro.props
+let collaborator
+if (ENV.isServerSideEnable) {
+  collaborator = await getCollaboratorWithProjectsMinById({
+    id: Number(Astro.params.id)
+  })
+} else {
+  collaborator = Astro.props
+}
+
+if (!collaborator) {
+  return {
+    status: 404,
+    error: new Error('Collaborator not found')
+  }
+}
+
+const availableProjects =
+  await getAvailableProjectsToAddRelationshipToCollaborators({
+    idStack: collaborator.id
+  })
 ---
 
 <Layout title="Editar de Colaborador">
@@ -30,8 +51,9 @@ const collaborator = Astro.props
     <main class="w-full h-full flex flex-col pt-7 pl-7 container mx-auto gap-5">
       <h1 class="text-4xl font-medium">Editar Colaborador</h1>
       <UpdateCollaboratorForm
-        defaultValues={collaborator}
-        disableForm={ENV.isProduction}
+        currentCollaborator={collaborator}
+        availableProjects={availableProjects}
+        disableForm={ENV.isServerSideEnable === false}
         client:load
       />
     </main>
