@@ -6,12 +6,12 @@ import moment from "moment";
 import {useMemo} from "react";
 
 import {MIN_DATA_FORMAT} from "../../../constants/common";
-import {Button} from "../../ui/button";
-import {Input} from "../../ui/input";
-import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "../../ui/tooltip";
-import {DataTable} from "../data-table";
-import {selectionColumnDef} from "../data-table/column-def/selection";
-import {DataTableColumnHeader} from "../data-table/column/dropdown";
+import {ENV} from "../../../constants/env";
+import {
+  PROJECT_STATUS_TRANSCRIPTIONS,
+  STACK_CATEGORY_TRANSCRIPTIONS,
+} from "../../../constants/transcriptions";
+import {isNotDefined} from "../../../helpers/guards/is-defined";
 import {useToast} from "../../../hooks/use-toast";
 import {deleteProject} from "../../../services/project/deleteProject";
 import {
@@ -25,8 +25,12 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../../ui/alert-dialog";
-import {ENV} from "../../../constants/env";
-import {isNotDefined} from "../../../helpers/guards/is-defined";
+import {Button} from "../../ui/button";
+import {Input} from "../../ui/input";
+import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "../../ui/tooltip";
+import {DataTable} from "../data-table";
+import {selectionColumnDef} from "../data-table/column-def/selection";
+import {DataTableColumnHeader} from "../data-table/column/dropdown";
 
 //#region Column Definitions
 const columns: Array<ColumnDef<Project>> = [
@@ -58,12 +62,18 @@ const columns: Array<ColumnDef<Project>> = [
     header({column}) {
       return <DataTableColumnHeader column={column} title="Estado" />;
     },
+    cell({row}) {
+      return PROJECT_STATUS_TRANSCRIPTIONS[row.original.status];
+    },
   },
   {
     id: "stackCategory",
     accessorKey: "stackCategory",
     header({column}) {
       return <DataTableColumnHeader column={column} title="Stack" />;
+    },
+    cell({row}) {
+      return STACK_CATEGORY_TRANSCRIPTIONS[row.original.stackCategory];
     },
   },
   {
