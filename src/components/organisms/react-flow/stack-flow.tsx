@@ -19,7 +19,7 @@ import "@xyflow/react/dist/style.css";
  * }>} props.stacks - List of stacks including their relationships and related projects.
  * @param {Array<string | null>} props.categories - List of categories for grouping stacks.
  */
-export async function StackFlow({
+export function StackFlow({
   stacks,
 }: {
   stacks: Array<

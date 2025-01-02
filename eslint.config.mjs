@@ -1,4 +1,4 @@
-// import globals from 'globals'
+import globals from 'globals'
 import tseslint from 'typescript-eslint'
 import eslintPluginReact from 'eslint-plugin-react'
 import eslintPluginReactHooks from 'eslint-plugin-react-hooks'
@@ -33,6 +33,7 @@ export default [
     plugins: {
       'react': fixupPluginRules(eslintPluginReact),
       'react-hooks': fixupPluginRules(eslintPluginReactHooks),
+      // 'react-compiler': fixupPluginRules(eslintPluginReactCompiler),
       'jsx-a11y': fixupPluginRules(eslintPluginJsxA11y)
     },
     languageOptions: {
@@ -41,10 +42,10 @@ export default [
           jsx: true
         }
       },
-      // globals: {
-      //   ...globals.browser,
-      //   ...globals.serviceworker
-      // }
+      globals: {
+        ...globals.browser,
+        ...globals.serviceworker
+      }
     },
     settings: {
       react: {
@@ -69,6 +70,7 @@ export default [
           reservedFirst: true
         }
       ],
+      // 'react-compiler/react-compiler': "error",
       'jsx-a11y/no-static-element-interactions': 'off',
       'jsx-a11y/click-events-have-key-events': 'off'
     }
@@ -155,12 +157,12 @@ export default [
     plugins: {
       ...eslintPluginAstro.configs.recommended
     },
-    // languageOptions: {
-    //   globals: {
-    //     ...globals.node,
-    //     ...globals.browser
-    //   }
-    // }
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        ...globals.browser
+      }
+    }
   },
   // Tailwind CSS configuration
   ...[
