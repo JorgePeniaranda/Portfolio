@@ -34,7 +34,7 @@ const columns: Array<ColumnDef<Collaborator>> = [
     id: "id",
     accessorKey: "id",
     header({column}) {
-      return <DataTableColumnHeader column={column} title="id" />;
+      return <DataTableColumnHeader column={column} title="ID" />;
     },
   },
   {

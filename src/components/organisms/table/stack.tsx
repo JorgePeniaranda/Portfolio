@@ -36,7 +36,7 @@ const columns: Array<ColumnDef<Stack>> = [
     id: "id",
     accessorKey: "id",
     header({column}) {
-      return <DataTableColumnHeader column={column} title="id" />;
+      return <DataTableColumnHeader column={column} title="ID" />;
     },
   },
   {
