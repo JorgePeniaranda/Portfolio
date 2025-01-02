@@ -1,5 +1,4 @@
 import type {Collaborator} from "@prisma/client";
-import type {ApiResponse, SuccessResponse} from "@/types/responses";
 
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Save} from "lucide-react";
