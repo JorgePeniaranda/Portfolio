@@ -16,17 +16,16 @@ import {
 import { isDefined, isNotDefined } from '../../../helpers/guards/is-defined'
 import { getAllProjectsWithStackAndCollaborators } from '../../../services/project/getAllProjectsWithStackAndCollaborators'
 import { getProjectWithStackAndCollaboratorsByKey } from '../../../services/project/getProjectWithStackAndCollaboratorsByKey'
+import type { GetStaticPaths } from 'astro'
 
-export async function getStaticPaths() {
+export const getStaticPaths = (async () => {
   const projects = await getAllProjectsWithStackAndCollaborators()
 
-  const paths = projects.map(project => ({
+  return projects.map(project => ({
     params: { key: project.key },
     props: project
   }))
-
-  return paths
-}
+}) satisfies GetStaticPaths;
 
 let project
 if (ENV.isServerSideEnable) {
