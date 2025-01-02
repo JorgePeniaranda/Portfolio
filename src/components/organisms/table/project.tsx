@@ -60,8 +60,8 @@ const columns: Array<ColumnDef<Project>> = [
     },
   },
   {
-    id: "stack",
-    accessorKey: "stack",
+    id: "stackCategory",
+    accessorKey: "stackCategory",
     header({column}) {
       return <DataTableColumnHeader column={column} title="Stack" />;
     },
