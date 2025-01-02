@@ -61,7 +61,7 @@ export function SecretButton() {
   return (
     <Dialog>
       {/* Button to open the modal */}
-      <DialogTrigger className="hover: flex items-center gap-2 rounded-lg bg-[#580001] px-3 py-2 text-white shadow-sm">
+      <DialogTrigger className="hover: flex items-center gap-2 rounded-lg bg-[#580001] px-3 py-2 text-white shadow-sm dark:bg-[#780001]">
         Acá se esconde algo
         <ScanFace />
       </DialogTrigger>
