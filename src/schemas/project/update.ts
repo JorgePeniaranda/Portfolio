@@ -17,7 +17,7 @@ export const ProjectUpdateSchema = z.object({
   key: z.string().min(1),
   name: z.string().min(1),
   status: z.enum(projectStatusValues),
-  stack: z.enum(stackCategoryValues),
+  stackCategory: z.enum(stackCategoryValues),
   startDate: z.coerce.date(),
   endDate: z.coerce.date().optional().nullable(),
   description: z.string().min(1),

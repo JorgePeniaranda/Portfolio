@@ -199,7 +199,7 @@ export function UpdateProjectForm({
           />
           <FormField
             control={form.control}
-            name="stack"
+            name="stackCategory"
             render={({field}) => (
               <FormItem>
                 <FormLabel>Stack</FormLabel>
