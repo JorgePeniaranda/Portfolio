@@ -2,8 +2,8 @@ import type {APIRoute} from "astro";
 
 import {z} from "zod";
 
-import {databaseClient} from "../../../../helpers/client/prisma";
-import {RequestHandler} from "../../../../helpers/common/request-handler";
+import {databaseClient} from "@/helpers/client/prisma";
+import {RequestHandler} from "@/helpers/common/request-handler";
 
 /**
  * POST handler to remove multiple projects.

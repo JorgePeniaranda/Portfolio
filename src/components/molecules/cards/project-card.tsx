@@ -1,7 +1,6 @@
 import {Heart, HeartOff} from "lucide-react";
 
-// Importing custom hook for managing the liked projects state
-import {useProjectLikedStore} from "../../../services/storage/liked-projects";
+import {useProjectLikedStore} from "@/services/storage/liked-projects";
 
 /**
  * Props for the ProjectCard component.

@@ -1,6 +1,6 @@
 import type {Project} from "@prisma/client";
 
-import {databaseClient} from "../../helpers/client/prisma";
+import {databaseClient} from "@/helpers/client/prisma";
 
 export async function getAllProjectMin(): Promise<
   Pick<Project, "id" | "key" | "name" | "logoUrl" | "stackCategory" | "status">[]

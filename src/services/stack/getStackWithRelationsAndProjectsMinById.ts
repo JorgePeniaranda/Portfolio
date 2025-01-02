@@ -1,6 +1,6 @@
 import type {Project, Stack} from "@prisma/client";
 
-import {databaseClient} from "../../helpers/client/prisma";
+import {databaseClient} from "@/helpers/client/prisma";
 
 export async function getStackWithRelationsAndProjectsMinByKey({key}: {key: Stack["key"]}): Promise<
   | (Stack & {

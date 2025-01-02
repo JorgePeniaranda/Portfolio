@@ -4,16 +4,15 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Save, X} from "lucide-react";
 import {useForm} from "react-hook-form";
 
-import {useToast} from "../../../hooks/use-toast";
-import {CollaboratorUpdateSchema} from "../../../schemas/collaborator/update";
-import {patchDeleteRelationWithProjectFromCollaborator} from "../../../services/collaborator/patchDeleteRelationWithProjectFromStack";
-import {putCollaborator} from "../../../services/collaborator/putCollaborator";
-import {Button} from "../../ui/button";
-import {Card, CardHeader} from "../../ui/card";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
-import {Input} from "../../ui/input";
-
-import {RelationshipCollaboratorWithProject} from "./relationship-collaborator-with-project";
+import {RelationshipCollaboratorWithProject} from "@/components/organisms/form/relationship-collaborator-with-project";
+import {Button} from "@/components/ui/button";
+import {Card, CardHeader} from "@/components/ui/card";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {Input} from "@/components/ui/input";
+import {useToast} from "@/hooks/use-toast";
+import {CollaboratorUpdateSchema} from "@/schemas/collaborator/update";
+import {patchDeleteRelationWithProjectFromCollaborator} from "@/services/collaborator/patchDeleteRelationWithProjectFromStack";
+import {putCollaborator} from "@/services/collaborator/putCollaborator";
 
 export function UpdateCollaboratorForm({
   currentCollaborator,

@@ -1,9 +1,9 @@
 import {ScanFace} from "lucide-react";
 import {useState} from "react";
 
-import {useToast} from "../../hooks/use-toast";
-import {useSecretCodeStore} from "../../services/storage/secret-code";
-import {Button} from "../ui/button";
+import {Button} from "@/components/ui/button";
+import {useToast} from "@/hooks/use-toast";
+import {useSecretCodeStore} from "@/services/storage/secret-code";
 
 /**
  * Component that displays an interactive button to reveal a digit of a secret code.

@@ -2,16 +2,16 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Save} from "lucide-react";
 import {useForm} from "react-hook-form";
 
-import {useToast} from "../../../hooks/use-toast";
+import {Button} from "@/components/ui/button";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {Input} from "@/components/ui/input";
+import {isDefined} from "@/helpers/guards/is-defined";
+import {useToast} from "@/hooks/use-toast";
 import {
   CollaboratorCreateDefaultValues,
   CollaboratorCreateSchema,
-} from "../../../schemas/collaborator/create";
-import {postCollaborator} from "../../../services/collaborator/postCollaborator";
-import {Button} from "../../ui/button";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
-import {Input} from "../../ui/input";
-import {isDefined} from "../../../helpers/guards/is-defined";
+} from "@/schemas/collaborator/create";
+import {postCollaborator} from "@/services/collaborator/postCollaborator";
 
 export function CreateCollaboratorForm({disableForm = false}: {disableForm?: boolean}) {
   const {toast} = useToast();

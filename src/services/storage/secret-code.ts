@@ -1,8 +1,8 @@
 import {create} from "zustand";
 import {createJSONStorage, persist} from "zustand/middleware";
 
-import {SECRET_CODE_STORE_KEY} from "../../constants/common";
-import {ENV} from "../../constants/env";
+import {SECRET_CODE_STORE_KEY} from "@/constants/common";
+import {ENV} from "@/constants/env";
 
 export interface ISecretCodeStoreState {
   secretCode: string;

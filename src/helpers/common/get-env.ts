@@ -1,4 +1,4 @@
-import {devConsoleLog} from "./dev-console-log";
+import {devConsoleLog} from "@/helpers/common/dev-console-log";
 
 /**
  * Retrieves the value of an environment variable or returns a default value if not found.

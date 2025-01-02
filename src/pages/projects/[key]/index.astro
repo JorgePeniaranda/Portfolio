@@ -1,22 +1,19 @@
 ---
-import moment from 'moment'
-import { MessageDisplay } from '../../../components/atoms/message-display'
-import Layout from '../../../components/layouts/base.astro'
-import { ProjectAccordion } from '../../../components/organisms/accordion/project-accordion'
-import {
-  Breadcrumb,
-  type IBreadCrumb
-} from '../../../components/organisms/breadcrumb'
-import { ENV } from '../../../constants/env'
-import { ProjectDetailsStyles } from '../../../constants/styles'
+import { MessageDisplay } from '@/components/atoms/message-display'
+import Layout from '@/components/layouts/base.astro'
+import { ProjectAccordion } from '@/components/organisms/accordion/project-accordion'
+import { Breadcrumb, type IBreadCrumb } from '@/components/organisms/breadcrumb'
+import { ENV } from '@/constants/env'
+import { ProjectDetailsStyles } from '@/constants/styles'
 import {
   PROJECT_STATUS_TRANSCRIPTIONS,
   STACK_CATEGORY_TRANSCRIPTIONS
-} from '../../../constants/transcriptions'
-import { isDefined, isNotDefined } from '../../../helpers/guards/is-defined'
-import { getAllProjectsWithStackAndCollaborators } from '../../../services/project/getAllProjectsWithStackAndCollaborators'
-import { getProjectWithStackAndCollaboratorsByKey } from '../../../services/project/getProjectWithStackAndCollaboratorsByKey'
+} from '@/constants/transcriptions'
+import { isDefined } from '@/helpers/guards/is-defined'
+import { getAllProjectsWithStackAndCollaborators } from '@/services/project/getAllProjectsWithStackAndCollaborators'
+import { getProjectWithStackAndCollaboratorsByKey } from '@/services/project/getProjectWithStackAndCollaboratorsByKey'
 import type { GetStaticPaths } from 'astro'
+import moment from 'moment'
 
 export const getStaticPaths = (async () => {
   const projects = await getAllProjectsWithStackAndCollaborators()
@@ -25,7 +22,7 @@ export const getStaticPaths = (async () => {
     params: { key: project.key },
     props: project
   }))
-}) satisfies GetStaticPaths;
+}) satisfies GetStaticPaths
 
 let project
 if (ENV.isServerSideEnable) {

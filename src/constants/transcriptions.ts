@@ -1,5 +1,5 @@
-import type {StackCategory, ProjectStatus, StackType} from "@prisma/client";
-import type {ProjectSortType} from "../types/project.d";
+import type {ProjectSortType} from "@/types/project.d";
+import type {ProjectStatus, StackCategory, StackType} from "@prisma/client";
 
 /**
  * A record that maps each `ProjectStatus` to a human-readable string translation.

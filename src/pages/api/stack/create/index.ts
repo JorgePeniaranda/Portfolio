@@ -1,8 +1,8 @@
 import type {APIRoute} from "astro";
 
-import {databaseClient} from "../../../../helpers/client/prisma";
-import {RequestHandler} from "../../../../helpers/common/request-handler";
-import {StackCreateSchema} from "../../../../schemas/stack/create";
+import {databaseClient} from "@/helpers/client/prisma";
+import {RequestHandler} from "@/helpers/common/request-handler";
+import {StackCreateSchema} from "@/schemas/stack/create";
 
 /**
  * POST handler to create a new stack.

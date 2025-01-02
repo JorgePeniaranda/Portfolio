@@ -1,13 +1,13 @@
 ---
-import Layout from '../../../../../../components/layouts/base.astro'
-import { DashboardLayout } from '../../../../../../components/layouts/dashboard-layout'
-import { UpdateProjectForm } from '../../../../../../components/organisms/form/update-project'
-import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../../../constants/breadcrumb'
-import { ENV } from '../../../../../../constants/env'
-import { getAvailableCollaboratorsToAddRelationshipToProject } from '../../../../../../services/collaborator/getAvailableCollaboratorsToAddRelationshipToProject'
-import { getAllProjectsWithStackAndCollaborators } from '../../../../../../services/project/getAllProjectsWithStackAndCollaborators'
-import { getProjectWithStackAndCollaboratorsById } from '../../../../../../services/project/getProjectWithStackAndCollaboratorsById'
-import { getAvailableStacksToAddRelationshipToProject } from '../../../../../../services/stack/getAvailableStacksToAddRelationshipToProject'
+import Layout from '@/components/layouts/base.astro'
+import { DashboardLayout } from '@/components/layouts/dashboard-layout'
+import { UpdateProjectForm } from '@/components/organisms/form/update-project'
+import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
+import { ENV } from '@/constants/env'
+import { getAvailableCollaboratorsToAddRelationshipToProject } from '@/services/collaborator/getAvailableCollaboratorsToAddRelationshipToProject'
+import { getAllProjectsWithStackAndCollaborators } from '@/services/project/getAllProjectsWithStackAndCollaborators'
+import { getProjectWithStackAndCollaboratorsById } from '@/services/project/getProjectWithStackAndCollaboratorsById'
+import { getAvailableStacksToAddRelationshipToProject } from '@/services/stack/getAvailableStacksToAddRelationshipToProject'
 
 export async function getStaticPaths() {
   const projects = await getAllProjectsWithStackAndCollaborators()

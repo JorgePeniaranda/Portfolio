@@ -10,21 +10,27 @@ import {format} from "date-fns";
 import {CalendarIcon, Pen} from "lucide-react";
 import {useForm} from "react-hook-form";
 
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
+import {Button} from "@/components/ui/button";
+import {Calendar} from "@/components/ui/calendar";
+import {Card, CardHeader} from "@/components/ui/card";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {Input} from "@/components/ui/input";
+import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {Textarea} from "@/components/ui/textarea";
 import {
   PROJECT_STATUS_TRANSCRIPTIONS,
   STACK_CATEGORY_TRANSCRIPTIONS,
-} from "../../../constants/transcriptions";
-import {cn} from "../../../helpers/common/classnames";
-import {ProjectUpdateSchema} from "../../../schemas/project/update";
-import {Avatar, AvatarFallback, AvatarImage} from "../../ui/avatar";
-import {Button} from "../../ui/button";
-import {Calendar} from "../../ui/calendar";
-import {Card, CardHeader} from "../../ui/card";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
-import {Input} from "../../ui/input";
-import {Popover, PopoverContent, PopoverTrigger} from "../../ui/popover";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
-import {Textarea} from "../../ui/textarea";
+} from "@/constants/transcriptions";
+import {cn} from "@/helpers/common/classnames";
+import {ProjectUpdateSchema} from "@/schemas/project/update";
 
 export function ShowProjectForm({
   currentProject,
@@ -110,7 +116,7 @@ export function ShowProjectForm({
           />
           <FormField
             control={form.control}
-            name="stack"
+            name="stackCategory"
             render={({field}) => (
               <FormItem>
                 <FormLabel>Stack</FormLabel>

@@ -1,11 +1,11 @@
 ---
-import Layout from '../../../../../components/layouts/base.astro'
-import { DashboardLayout } from '../../../../../components/layouts/dashboard-layout'
-import { ShowStackForm } from '../../../../../components/organisms/form/show-stack'
-import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../../constants/breadcrumb'
-import { ENV } from '../../../../../constants/env'
-import { getAllStackWithProjectsMin } from '../../../../../services/stack/getAllStackWithProjectsMin'
-import { getStackWithProjectsMinById } from '../../../../../services/stack/getStackWithProjectsMinById'
+import Layout from '@/components/layouts/base.astro'
+import { DashboardLayout } from '@/components/layouts/dashboard-layout'
+import { ShowStackForm } from '@/components/organisms/form/show-stack'
+import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
+import { ENV } from '@/constants/env'
+import { getAllStackWithProjectsMin } from '@/services/stack/getAllStackWithProjectsMin'
+import { getStackWithProjectsMinById } from '@/services/stack/getStackWithProjectsMinById'
 
 export async function getStaticPaths() {
   const stacks = await getAllStackWithProjectsMin()

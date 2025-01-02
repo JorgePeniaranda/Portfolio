@@ -1,8 +1,8 @@
 import type {APIRoute} from "astro";
 
-import {databaseClient} from "../../../../helpers/client/prisma";
-import {RequestHandler} from "../../../../helpers/common/request-handler";
-import {ProjectUpdateSchema} from "../../../../schemas/project/update";
+import {ProjectUpdateSchema} from "@/schemas/project/update";
+import {databaseClient} from "@/helpers/client/prisma";
+import {RequestHandler} from "@/helpers/common/request-handler";
 
 /**
  * PUT handler to update an existing project.

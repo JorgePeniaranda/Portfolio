@@ -4,9 +4,9 @@ import {X} from "lucide-react";
 import * as React from "react";
 import {Drawer as DrawerPrimitive} from "vaul";
 
-import {Drawer, DrawerClose, DrawerContent, DrawerTrigger} from "../../../components/ui/drawer";
-import {isDefined, isNotDefined} from "../../../helpers/guards/is-defined";
-import {MessageDisplay} from "../../atoms/message-display";
+import {MessageDisplay} from "@/components/atoms/message-display";
+import {Drawer, DrawerClose, DrawerContent, DrawerTrigger} from "@/components/ui/drawer";
+import {isDefined, isNotDefined} from "@/helpers/guards/is-defined";
 
 /**
  * Component that renders an interactive drawer to display detailed information about a Stack.

@@ -10,28 +10,33 @@ import {format} from "date-fns";
 import {CalendarIcon, Save, X} from "lucide-react";
 import {useForm} from "react-hook-form";
 
+import {RelationshipProjectWithCollaborator} from "@/components/organisms/form/relationship-project-with-collaborator";
+import {RelationshipProjectWithStack} from "@/components/organisms/form/relationship-project-with-stack";
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
+import {Button} from "@/components/ui/button";
+import {Calendar} from "@/components/ui/calendar";
+import {Card, CardHeader} from "@/components/ui/card";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {Input} from "@/components/ui/input";
+import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {Textarea} from "@/components/ui/textarea";
 import {
   PROJECT_STATUS_TRANSCRIPTIONS,
   STACK_CATEGORY_TRANSCRIPTIONS,
-} from "../../../constants/transcriptions";
-import {cn} from "../../../helpers/common/classnames";
-import {useToast} from "../../../hooks/use-toast";
-import {ProjectUpdateSchema} from "../../../schemas/project/update";
-import {putProject} from "../../../services/project/putProject";
-import {Avatar, AvatarFallback, AvatarImage} from "../../ui/avatar";
-import {Button} from "../../ui/button";
-import {Calendar} from "../../ui/calendar";
-import {Card, CardHeader} from "../../ui/card";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
-import {Input} from "../../ui/input";
-import {Popover, PopoverContent, PopoverTrigger} from "../../ui/popover";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
-import {Textarea} from "../../ui/textarea";
-import {patchDeleteRelationWithCollaboratorFromProject} from "../../../services/project/patchDeleteRelationWithCollaboratorFromProject";
-import {patchDeleteRelationWithStackFromProject} from "../../../services/project/patchDeleteRelationWithStackFromProject";
-
-import {RelationshipProjectWithCollaborator} from "./relationship-project-with-collaborator";
-import {RelationshipProjectWithStack} from "./relationship-project-with-stack";
+} from "@/constants/transcriptions";
+import {cn} from "@/helpers/common/classnames";
+import {useToast} from "@/hooks/use-toast";
+import {ProjectUpdateSchema} from "@/schemas/project/update";
+import {patchDeleteRelationWithCollaboratorFromProject} from "@/services/project/patchDeleteRelationWithCollaboratorFromProject";
+import {patchDeleteRelationWithStackFromProject} from "@/services/project/patchDeleteRelationWithStackFromProject";
+import {putProject} from "@/services/project/putProject";
 
 export function UpdateProjectForm({
   currentProject,

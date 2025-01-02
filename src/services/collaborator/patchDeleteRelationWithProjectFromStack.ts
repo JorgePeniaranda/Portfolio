@@ -1,7 +1,7 @@
+import type {ApiResponse} from "@/types/responses";
 import type {RelationshipsSchema} from "../../schemas/common/relationships";
-import type {ApiResponse} from "../../types/responses";
+import type {Collaborator} from "@prisma/client";
 
-import {type Collaborator} from "@prisma/client";
 import axios from "axios";
 
 export async function patchDeleteRelationWithProjectFromCollaborator(

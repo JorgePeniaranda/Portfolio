@@ -1,15 +1,15 @@
 import type {Collaborator, Project, Stack} from "@prisma/client";
 
-import {isDefined} from "../../../helpers/guards/is-defined";
-import GithubUser from "../../atoms/github-user";
+import GithubUser from "@/components/atoms/github-user";
+import {MessageDisplay} from "@/components/atoms/message-display";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
   Accordion as UIAccordion,
-} from "../../ui/accordion";
-import {MessageDisplay} from "../../atoms/message-display";
-import {isNoEmptyString} from "../../../helpers/guards/is-no-empty-string";
+} from "@/components/ui/accordion";
+import {isDefined} from "@/helpers/guards/is-defined";
+import {isNoEmptyString} from "@/helpers/guards/is-no-empty-string";
 
 //#region TYPES
 /**

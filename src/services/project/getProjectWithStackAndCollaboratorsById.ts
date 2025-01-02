@@ -1,6 +1,6 @@
 import type {Collaborator, Project, Stack} from "@prisma/client";
 
-import {databaseClient} from "../../helpers/client/prisma";
+import {databaseClient} from "@/helpers/client/prisma";
 
 export async function getProjectWithStackAndCollaboratorsById({id}: {id: Project["id"]}): Promise<
   | (Project & {

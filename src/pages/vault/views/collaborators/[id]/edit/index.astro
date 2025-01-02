@@ -1,12 +1,12 @@
 ---
-import Layout from '../../../../../../components/layouts/base.astro'
-import { DashboardLayout } from '../../../../../../components/layouts/dashboard-layout'
-import { UpdateCollaboratorForm } from '../../../../../../components/organisms/form/update-collaborator'
-import { DASHBOARD_BREADCRUMB_TEMPLATE } from '../../../../../../constants/breadcrumb'
-import { ENV } from '../../../../../../constants/env'
-import { getAllCollaboratorWithProjectsMin } from '../../../../../../services/collaborator/getAllCollaboratorWithProjectsMin'
-import { getAvailableProjectsToAddRelationshipToCollaborators } from '../../../../../../services/project/getAvailableProjectsToAddRelationshipToCollaborators'
-import { getCollaboratorWithProjectsMinById } from '../../../../../../services/collaborator/getCollaboratorWithProjectsMinById'
+import Layout from '@/components/layouts/base.astro'
+import { DashboardLayout } from '@/components/layouts/dashboard-layout'
+import { UpdateCollaboratorForm } from '@/components/organisms/form/update-collaborator'
+import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
+import { ENV } from '@/constants/env'
+import { getAllCollaboratorWithProjectsMin } from '@/services/collaborator/getAllCollaboratorWithProjectsMin'
+import { getCollaboratorWithProjectsMinById } from '@/services/collaborator/getCollaboratorWithProjectsMinById'
+import { getAvailableProjectsToAddRelationshipToCollaborators } from '@/services/project/getAvailableProjectsToAddRelationshipToCollaborators'
 
 export async function getStaticPaths() {
   const collaborators = await getAllCollaboratorWithProjectsMin()

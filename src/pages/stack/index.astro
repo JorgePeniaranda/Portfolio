@@ -1,11 +1,11 @@
 ---
+import Logo from '@/assets/svg/logos/Logo.astro'
+import { SecretCodeHint } from '@/components/atoms/secret-code-hint'
+import Layout from '@/components/layouts/base.astro'
+import { StackFlow } from '@/components/organisms/react-flow/stack-flow'
 import { ArrowRight } from 'lucide-react'
-import Logo from '../../assets/svg/logos/Logo.astro'
-import Layout from '../../components/layouts/base.astro'
-import { StackFlow } from '../../components/organisms/react-flow/stack-flow'
 import { getAllStackWithRelationsAndProjectsMin } from '../../services/stack/getAllStackWithRelationsAndProjectsMin'
 import { getDistinctCategories } from '../../services/stack/getDistinctCategories'
-import { SecretCodeHint } from '../../components/atoms/secret-code-hint'
 
 const stacksWithProjectsMin = await getAllStackWithRelationsAndProjectsMin()
 const stackCategories = await getDistinctCategories()

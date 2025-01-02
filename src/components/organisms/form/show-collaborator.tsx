@@ -4,12 +4,12 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Pen} from "lucide-react";
 import {useForm} from "react-hook-form";
 
-import {isNotDefined} from "../../../helpers/guards/is-defined";
-import {CollaboratorUpdateSchema} from "../../../schemas/collaborator/update";
-import {Button} from "../../ui/button";
-import {Card, CardHeader} from "../../ui/card";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
-import {Input} from "../../ui/input";
+import {Button} from "@/components/ui/button";
+import {Card, CardHeader} from "@/components/ui/card";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {Input} from "@/components/ui/input";
+import {isNotDefined} from "@/helpers/guards/is-defined";
+import {CollaboratorUpdateSchema} from "@/schemas/collaborator/update";
 
 export function ShowCollaboratorForm({
   currentCollaborator,

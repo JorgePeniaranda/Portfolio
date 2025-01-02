@@ -1,27 +1,42 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "esModuleInterop": true,
+    "target": "ESNext",
     "jsx": "react-jsx",
-    "jsxImportSource": "react"
+    "jsxImportSource": "react",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "incremental": true,
+    "allowSyntheticDefaultImports": true,
+    "types": ["node"]
   },
-  
-  "target": "ESNext",
   "lib": ["DOM", "dom.iterable","ESNext"],
   "allowJs": true,
   "skipLibCheck": true,
   "strict": true,
   "noEmit": true,
-  "esModuleInterop": true,
   "module": "ESNext",
   "moduleResolution": "bundler",
   "resolveJsonModule": true,
   "isolatedModules": true,
-  "jsx": "react-jsx",
   "incremental": true,
-
   "allowSyntheticDefaultImports": true,
-  "allowUnreachableCode": true,
   "declaration": true,
   "forceConsistentCasingInFileNames": true,
   "newLine": "lf",
@@ -39,7 +54,6 @@
   "strictFunctionTypes": true,
   "strictNullChecks": true,
   "strictPropertyInitialization": true,
-
   "exclude": ["node_modules", "**/*.test.ts", "**/*.spec.ts"],
   "paths": {
     "@/*": ["./src/*"]

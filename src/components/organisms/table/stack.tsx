@@ -1,24 +1,13 @@
 import type {Stack} from "@prisma/client";
 import type {ColumnDef, Table} from "@tanstack/react-table";
 
-import moment from "moment";
 import {Eye, Pen, Plus, Trash} from "lucide-react";
+import moment from "moment";
 import {useMemo} from "react";
 
-import {MIN_DATA_FORMAT} from "../../../constants/common";
-import {
-  STACK_CATEGORY_TRANSCRIPTIONS,
-  STACK_TYPE_TRANSCRIPTIONS,
-} from "../../../constants/transcriptions";
-import {isNotDefined} from "../../../helpers/guards/is-defined";
-import {Input} from "../../ui/input";
-import {DataTable} from "../data-table";
-import {selectionColumnDef} from "../data-table/column-def/selection";
-import {DataTableColumnHeader} from "../data-table/column/dropdown";
-import {Button} from "../../ui/button";
-import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "../../ui/tooltip";
-import {useToast} from "../../../hooks/use-toast";
-import {deleteStack} from "../../../services/stack/deleteStack";
+import {DataTable} from "@/components/organisms/data-table";
+import {selectionColumnDef} from "@/components/organisms/data-table/column-def/selection";
+import {DataTableColumnHeader} from "@/components/organisms/data-table/column/dropdown";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -29,8 +18,16 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../../ui/alert-dialog";
-import {ENV} from "../../../constants/env";
+} from "@/components/ui/alert-dialog";
+import {Button} from "@/components/ui/button";
+import {Input} from "@/components/ui/input";
+import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip";
+import {MIN_DATA_FORMAT} from "@/constants/common";
+import {ENV} from "@/constants/env";
+import {STACK_CATEGORY_TRANSCRIPTIONS, STACK_TYPE_TRANSCRIPTIONS} from "@/constants/transcriptions";
+import {isNotDefined} from "@/helpers/guards/is-defined";
+import {useToast} from "@/hooks/use-toast";
+import {deleteStack} from "@/services/stack/deleteStack";
 
 //#region Column Definitions
 const columns: Array<ColumnDef<Stack>> = [

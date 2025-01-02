@@ -1,5 +1,5 @@
-import packageJson from "../../package.json";
-import {getEnvValue} from "../helpers/common/get-env";
+import {getEnvValue} from "@/helpers/common/get-env";
+import packageJson from "@/../package.json";
 
 // Check if the environment is production based on the `import.meta.env.PROD` value
 const isProduction = import.meta.env.PROD;

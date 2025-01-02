@@ -1,4 +1,4 @@
-import type {ApiResponse} from "../../types/responses";
+import type {ApiResponse} from "@/types/responses";
 
 import z from "zod";
 

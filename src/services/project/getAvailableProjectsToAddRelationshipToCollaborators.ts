@@ -1,6 +1,6 @@
 import type {Collaborator, Project} from "@prisma/client";
 
-import {databaseClient} from "../../helpers/client/prisma";
+import {databaseClient} from "@/helpers/client/prisma";
 
 export async function getAvailableProjectsToAddRelationshipToCollaborators({
   idStack: idCollaborator,

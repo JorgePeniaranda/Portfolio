@@ -1,8 +1,8 @@
 import type {APIRoute} from "astro";
 
-import {databaseClient} from "../../../../../../helpers/client/prisma";
-import {RequestHandler} from "../../../../../../helpers/common/request-handler";
-import {RelationshipsSchema} from "../../../../../../schemas/common/relationships";
+import {databaseClient} from "@/helpers/client/prisma";
+import {RequestHandler} from "@/helpers/common/request-handler";
+import {RelationshipsSchema} from "@/schemas/common/relationships";
 
 /**
  * PATCH handler to add a relation between a stack and a project.

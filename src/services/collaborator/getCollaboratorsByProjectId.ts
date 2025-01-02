@@ -1,7 +1,7 @@
 import type {Collaborator, Stack} from "@prisma/client";
 
-import {databaseClient} from "../../helpers/client/prisma";
-import {isNotDefined} from "../../helpers/guards/is-defined";
+import {databaseClient} from "@/helpers/client/prisma";
+import {isNotDefined} from "@/helpers/guards/is-defined";
 
 export async function getCollaboratorsByProjectId({
   id,

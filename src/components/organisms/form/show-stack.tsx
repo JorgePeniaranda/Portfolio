@@ -3,18 +3,21 @@ import {StackCategory, StackType, type Project, type Stack} from "@prisma/client
 import {Pen} from "lucide-react";
 import {useForm} from "react-hook-form";
 
+import {Button} from "@/components/ui/button";
+import {Card, CardHeader} from "@/components/ui/card";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {Input} from "@/components/ui/input";
 import {
-  STACK_CATEGORY_TRANSCRIPTIONS,
-  STACK_TYPE_TRANSCRIPTIONS,
-} from "../../../constants/transcriptions";
-import {isNotDefined} from "../../../helpers/guards/is-defined";
-import {StackCreateSchema} from "../../../schemas/stack/create";
-import {Button} from "../../ui/button";
-import {Card, CardHeader} from "../../ui/card";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
-import {Input} from "../../ui/input";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
-import {Textarea} from "../../ui/textarea";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {Textarea} from "@/components/ui/textarea";
+import {STACK_CATEGORY_TRANSCRIPTIONS, STACK_TYPE_TRANSCRIPTIONS} from "@/constants/transcriptions";
+import {isNotDefined} from "@/helpers/guards/is-defined";
+import {StackCreateSchema} from "@/schemas/stack/create";
 
 export function ShowStackForm({
   currentStack,

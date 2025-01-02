@@ -1,17 +1,14 @@
 import {ChevronRight, Database} from "lucide-react";
 
-import {ENV} from "../../constants/env";
-import {DASHBOARD_NAVBAR_ITEMS} from "../../constants/navbar";
-import {isDefined} from "../../helpers/guards/is-defined";
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
-} from "../ui/breadcrumb";
-import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "../ui/collapsible";
-import {Separator} from "../ui/separator";
+} from "@/components/ui/breadcrumb";
+import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
+import {Separator} from "@/components/ui/separator";
 import {
   Sidebar,
   SidebarContent,
@@ -27,7 +24,10 @@ import {
   SidebarProvider,
   SidebarRail,
   SidebarTrigger,
-} from "../ui/sidebar";
+} from "@/components/ui/sidebar";
+import {ENV} from "@/constants/env";
+import {DASHBOARD_NAVBAR_ITEMS} from "@/constants/navbar";
+import {isDefined} from "@/helpers/guards/is-defined";
 
 export function DashboardLayout({
   children,

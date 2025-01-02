@@ -1,8 +1,8 @@
 import type {APIRoute} from "astro";
 
-import {databaseClient} from "../../../../helpers/client/prisma";
-import {RequestHandler} from "../../../../helpers/common/request-handler";
-import {ProjectCreateSchema} from "../../../../schemas/project/create";
+import {ProjectCreateSchema} from "@/schemas/project/create";
+import {databaseClient} from "@/helpers/client/prisma";
+import {RequestHandler} from "@/helpers/common/request-handler";
 
 /**
  * POST handler to create a new projects.

@@ -3,22 +3,24 @@ import {StackCategory, StackType, type Project, type Stack} from "@prisma/client
 import {Save, X} from "lucide-react";
 import {useForm} from "react-hook-form";
 
+import {RelationshipStackWithProject} from "@/components/organisms/form/relationship-stack-with-project";
+import {Button} from "@/components/ui/button";
+import {Card, CardHeader} from "@/components/ui/card";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {Input} from "@/components/ui/input";
 import {
-  STACK_CATEGORY_TRANSCRIPTIONS,
-  STACK_TYPE_TRANSCRIPTIONS,
-} from "../../../constants/transcriptions";
-import {useToast} from "../../../hooks/use-toast";
-import {StackUpdateSchema} from "../../../schemas/stack/update";
-import {patchDeleteRelationWithProjectFromStack} from "../../../services/stack/patchDeleteRelationWithProjectFromStack";
-import {putStack} from "../../../services/stack/putStack";
-import {Button} from "../../ui/button";
-import {Card, CardHeader} from "../../ui/card";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "../../ui/form";
-import {Input} from "../../ui/input";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../ui/select";
-import {Textarea} from "../../ui/textarea";
-
-import {RelationshipStackWithProject} from "./relationship-stack-with-project";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {Textarea} from "@/components/ui/textarea";
+import {STACK_CATEGORY_TRANSCRIPTIONS, STACK_TYPE_TRANSCRIPTIONS} from "@/constants/transcriptions";
+import {useToast} from "@/hooks/use-toast";
+import {StackUpdateSchema} from "@/schemas/stack/update";
+import {patchDeleteRelationWithProjectFromStack} from "@/services/stack/patchDeleteRelationWithProjectFromStack";
+import {putStack} from "@/services/stack/putStack";
 
 export function UpdateStackForm({
   currentStack,

@@ -1,4 +1,4 @@
-import {databaseClient} from "../../helpers/client/prisma";
+import {databaseClient} from "@/helpers/client/prisma";
 
 export async function getDistinctCategories(): Promise<Array<string | null>> {
   const data = await databaseClient.stack.findMany({

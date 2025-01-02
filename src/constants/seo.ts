@@ -1,8 +1,8 @@
 import type {Props as SEOProps} from "astro-seo";
 
-import {DEFAULT_LANG} from "./common";
-import {ENV} from "./env";
-import {PERSONAL_ACCOUNTS} from "./external";
+import {DEFAULT_LANG} from "@/constants/common";
+import {ENV} from "@/constants/env";
+import {PERSONAL_ACCOUNTS} from "@/constants/external";
 
 export const ORIGINAL_URL = ENV.base_url;
 
