@@ -128,7 +128,7 @@ const columns: Array<ColumnDef<Project>> = [
       const value = row.original.demoUrl ?? "#";
 
       return (
-        <a href={value} rel="noreferrer" target="_blank">
+        <a className="text-blue-500" href={value} rel="noreferrer" target="_blank">
           {value}
         </a>
       );
@@ -144,7 +144,7 @@ const columns: Array<ColumnDef<Project>> = [
       const value = row.original.demoUrl ?? "#";
 
       return (
-        <a href={value} rel="noreferrer" target="_blank">
+        <a className="text-blue-500" href={value} rel="noreferrer" target="_blank">
           {value}
         </a>
       );
