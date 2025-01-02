@@ -1,4 +1,3 @@
-import {ChevronLeft, ChevronRight} from "lucide-react";
 import * as React from "react";
 import {DayPicker} from "react-day-picker";
 
@@ -43,16 +42,6 @@ function Calendar({className, classNames, showOutsideDays = true, ...props}: Cal
         day_range_middle: "aria-selected:bg-accent aria-selected:text-accent-foreground",
         day_hidden: "invisible",
         ...classNames,
-      }}
-      components={{
-        // eslint-disable-next-line react/no-unstable-nested-components
-        IconLeft: ({className, ...props}) => (
-          <ChevronLeft className={cn("h-4 w-4", className)} {...props} />
-        ),
-        // eslint-disable-next-line react/no-unstable-nested-components
-        IconRight: ({className, ...props}) => (
-          <ChevronRight className={cn("h-4 w-4", className)} {...props} />
-        ),
       }}
       showOutsideDays={showOutsideDays}
       {...props}

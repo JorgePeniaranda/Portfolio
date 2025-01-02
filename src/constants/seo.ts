@@ -1,4 +1,4 @@
-import type {Props as SEOProps} from "astro-seo";
+import type {SEOProps} from "astro-seo";
 
 import {DEFAULT_LANG} from "@/constants/common";
 import {ENV} from "@/constants/env";

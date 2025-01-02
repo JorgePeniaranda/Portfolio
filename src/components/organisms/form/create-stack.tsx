@@ -1,7 +1,8 @@
 import {zodResolver} from "@hookform/resolvers/zod";
-import {StackCategory, StackType} from "@prisma/client";
+import {StackCategory, StackType, type Stack} from "@prisma/client";
 import {Save} from "lucide-react";
 import {useForm} from "react-hook-form";
+import {useEffect, useState} from "react";
 
 import {Button} from "@/components/ui/button";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
@@ -26,6 +27,20 @@ export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) 
     resolver: zodResolver(StackCreateSchema),
     defaultValues: StackCreateDefaultValues,
   });
+  /**
+   * `newProjectId` stores the ID of the new stack, set when a stack is created.
+   * The user is then redirected to the stack view.
+   */
+  const [newStackId, setNewStackId] = useState<Stack["id"]>();
+
+  useEffect(() => {
+    // Redirect happens inside `useEffect` to ensure it occurs after the component has rendered.
+    // This prevents issues that can arise from trying to redirect before React updates the DOM.
+
+    if (isDefined(newStackId)) {
+      window.location.href = `/vault/views/project/${newStackId}`;
+    }
+  }, [newStackId]);
 
   const onSubmit = async (values: StackCreateSchema) => {
     const response = await postStack(values);
@@ -39,7 +54,7 @@ export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) 
       });
 
       if (isDefined(response?.data?.id)) {
-        window.location.href = `/vault/views/stack/${response.data.id}`;
+        setNewStackId(response.data.id);
       }
     }
 

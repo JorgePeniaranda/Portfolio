@@ -1,15 +1,16 @@
-// import globals from 'globals'
-import tseslint from 'typescript-eslint'
-import eslintPluginReact from 'eslint-plugin-react'
-import eslintPluginReactHooks from 'eslint-plugin-react-hooks'
 import { fixupPluginRules } from '@eslint/compat'
-import eslintPluginPrettier from 'eslint-plugin-prettier/recommended'
+import vercelStyleGuideReact from '@vercel/style-guide/eslint/rules/react'
+import vercelStyleGuideTypescript from '@vercel/style-guide/eslint/typescript'
+import eslintPluginAstro from 'eslint-plugin-astro'
 import eslintPluginImport from 'eslint-plugin-import'
 import eslintPluginJsxA11y from 'eslint-plugin-jsx-a11y'
-import vercelStyleGuideTypescript from '@vercel/style-guide/eslint/typescript'
-import vercelStyleGuideReact from '@vercel/style-guide/eslint/rules/react'
-import eslintPluginAstro from 'eslint-plugin-astro'
-import tailwind from "eslint-plugin-tailwindcss";
+import eslintPluginPrettier from 'eslint-plugin-prettier/recommended'
+import eslintPluginReact from 'eslint-plugin-react'
+import eslintPluginReactCompiler from "eslint-plugin-react-compiler"
+import eslintPluginReactHooks from 'eslint-plugin-react-hooks'
+import tailwind from "eslint-plugin-tailwindcss"
+import globals from 'globals'
+import tseslint from 'typescript-eslint'
 
 export default [
   // Ignores configuration
@@ -33,6 +34,7 @@ export default [
     plugins: {
       'react': fixupPluginRules(eslintPluginReact),
       'react-hooks': fixupPluginRules(eslintPluginReactHooks),
+      'react-compiler': fixupPluginRules(eslintPluginReactCompiler),
       'jsx-a11y': fixupPluginRules(eslintPluginJsxA11y)
     },
     languageOptions: {
@@ -41,10 +43,10 @@ export default [
           jsx: true
         }
       },
-      // globals: {
-      //   ...globals.browser,
-      //   ...globals.serviceworker
-      // }
+      globals: {
+        ...globals.browser,
+        ...globals.serviceworker
+      }
     },
     settings: {
       react: {
@@ -69,6 +71,7 @@ export default [
           reservedFirst: true
         }
       ],
+      'react-compiler/react-compiler': "error",
       'jsx-a11y/no-static-element-interactions': 'off',
       'jsx-a11y/click-events-have-key-events': 'off'
     }
@@ -155,12 +158,6 @@ export default [
     plugins: {
       ...eslintPluginAstro.configs.recommended
     },
-    // languageOptions: {
-    //   globals: {
-    //     ...globals.node,
-    //     ...globals.browser
-    //   }
-    // }
   },
   // Tailwind CSS configuration
   ...[
