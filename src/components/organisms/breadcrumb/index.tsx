@@ -39,7 +39,7 @@ interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
 export function Breadcrumb({items, Separator, ...props}: BreadcrumbProps) {
   return (
     <UIBreadcrumb {...props}>
-      <BreadcrumbList>
+      <BreadcrumbList className="text-inherit">
         {items.map((item, index) => {
           return (
             <React.Fragment key={item.label}>
@@ -73,7 +73,9 @@ export function CustomBreadcrumbItem({item, ...props}: CustomBreadcrumbItemProps
     return (
       <BreadcrumbItem {...props}>
         <BreadcrumbLink asChild>
-          <a href={item.href}>{item.label}</a>
+          <a className="text-inherit" href={item.href}>
+            {item.label}
+          </a>
         </BreadcrumbLink>
       </BreadcrumbItem>
     );
@@ -82,7 +84,7 @@ export function CustomBreadcrumbItem({item, ...props}: CustomBreadcrumbItemProps
   // If no href, render the item as a page (non-clickable)
   return (
     <BreadcrumbItem {...props}>
-      <BreadcrumbPage>{item.label}</BreadcrumbPage>
+      <BreadcrumbPage className="text-inherit">{item.label}</BreadcrumbPage>
     </BreadcrumbItem>
   );
 }
