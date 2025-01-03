@@ -85,6 +85,7 @@
     "tailwind-merge": "2.6.0",
     "tailwindcss": "3.4.17",
     "tailwindcss-animate": "1.0.7",
+    "tinycolor2": "1.6.0",
     "vaul": "1.1.2",
     "zod": "3.24.1",
     "zustand": "5.0.2"
@@ -94,6 +95,7 @@
     "@tailwindcss/typography": "0.5.15",
     "@types/react": "19.0.2",
     "@types/react-dom": "19.0.2",
+    "@types/tinycolor2": "1.4.6",
     "@typescript-eslint/parser": "8.19.0",
     "@vercel/style-guide": "6.0.0",
     "astro-eslint-parser": "1.1.0",
