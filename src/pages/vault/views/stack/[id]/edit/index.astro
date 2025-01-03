@@ -38,7 +38,7 @@ const availableProjects = await getAvailableProjectsToAddRelationshipToStack({
 })
 ---
 
-<Layout title="Editar de stack">
+<Layout title={`Editar stack ${stack.name}`}>
   <DashboardLayout
     breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/projects/edit']}
     client:load

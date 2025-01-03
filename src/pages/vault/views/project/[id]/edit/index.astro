@@ -45,7 +45,7 @@ const availableCollaborators =
   })
 ---
 
-<Layout title="Editar de proyecto">
+<Layout title={`Editar proyecto ${project.name}`}>
   <DashboardLayout
     breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/project/edit']}
     client:load

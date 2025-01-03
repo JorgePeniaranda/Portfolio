@@ -35,7 +35,7 @@ if (!project) {
 }
 ---
 
-<Layout title="Detalle de proyecto">
+<Layout title={`Explora el proyecto ${project.name}`}>
   <DashboardLayout
     breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/project/details']}
     client:load
