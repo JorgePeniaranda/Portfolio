@@ -1,0 +1,1 @@
+import{z as n}from"./index.BWv1PMdW.js";const a=n.object({id:n.number(),nickname:n.string().optional(),githubUsername:n.string().optional().nullable(),linkedinUsername:n.string().optional().nullable()});export{a as C};
