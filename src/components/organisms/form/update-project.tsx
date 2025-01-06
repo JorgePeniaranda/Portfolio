@@ -61,7 +61,7 @@ export function UpdateProjectForm({
   const onSubmit = async (values: ProjectUpdateSchema) => {
     const response = await putProject(values);
 
-    if (response.success) {
+    if (response.success === true) {
       form.reset();
       toast({
         title: "Proyecto creado",
@@ -70,7 +70,7 @@ export function UpdateProjectForm({
       });
     }
 
-    if (!response.success) {
+    if (response.success === false) {
       toast({
         title: "Error al crear proyecto",
         description: response.message,
@@ -89,7 +89,7 @@ export function UpdateProjectForm({
       idTo: collaboratorId,
     });
 
-    if (response.success) {
+    if (response.success === true) {
       toast({
         title: "Colaborador eliminado",
         description: response.message,
@@ -97,7 +97,7 @@ export function UpdateProjectForm({
       });
     }
 
-    if (!response.success) {
+    if (response.success === false) {
       toast({
         title: "Error al eliminar colaborador",
         description: response.message,
@@ -116,7 +116,7 @@ export function UpdateProjectForm({
       idTo: stackId,
     });
 
-    if (response.success) {
+    if (response.success === true) {
       toast({
         title: "Stack eliminado",
         description: response.message,
@@ -124,7 +124,7 @@ export function UpdateProjectForm({
       });
     }
 
-    if (!response.success) {
+    if (response.success === false) {
       toast({
         title: "Error al eliminar stack",
         description: response.message,

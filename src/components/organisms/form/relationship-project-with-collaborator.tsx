@@ -47,7 +47,7 @@ export function RelationshipProjectWithCollaborator({
       idTo: Number(values.idTo),
     });
 
-    if (response.success) {
+    if (response.success === true) {
       form.reset();
       toast({
         title: "Colaborador relacionado con el proyecto",
@@ -56,7 +56,7 @@ export function RelationshipProjectWithCollaborator({
       });
     }
 
-    if (!response.success) {
+    if (response.success === false) {
       toast({
         title: "Error al relacionar colaborador con el proyecto",
         description: response.message,

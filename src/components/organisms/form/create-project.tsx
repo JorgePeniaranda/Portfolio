@@ -52,7 +52,7 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
   const onSubmit = async (values: ProjectCreateSchema) => {
     const response = await postProject(values);
 
-    if (response.success) {
+    if (response.success === true) {
       form.reset();
       toast({
         title: "Proyecto creado",
@@ -65,7 +65,7 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
       }
     }
 
-    if (!response.success) {
+    if (response.success === false) {
       toast({
         title: "Error al crear proyecto",
         description: response.message,

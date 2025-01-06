@@ -136,7 +136,7 @@ function TableHeaderComponent({table}: {table: Table<Collaborator>}) {
   const handleDelete = async () => {
     const response = await deleteCollaborator(rows.map((row) => row.original.id));
 
-    if (response.success) {
+    if (response.success === true) {
       toast({
         title: "Colaboradores eliminados",
         description: "Los colaboradores seleccionados se eliminaron correctamente.",

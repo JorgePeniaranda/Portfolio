@@ -34,7 +34,7 @@ export function UpdateCollaboratorForm({
   const onSubmit = async (values: CollaboratorUpdateSchema) => {
     const response = await putCollaborator(values);
 
-    if (response.success) {
+    if (response.success === true) {
       form.reset();
       toast({
         title: "Colaborador actualizado",
@@ -43,7 +43,7 @@ export function UpdateCollaboratorForm({
       });
     }
 
-    if (!response.success) {
+    if (response.success === false) {
       toast({
         title: "Error al actualizar colaborador",
         description: response.message,
@@ -62,7 +62,7 @@ export function UpdateCollaboratorForm({
       idTo: idProject,
     });
 
-    if (response.success) {
+    if (response.success === true) {
       toast({
         title: "Proyecto eliminado",
         description: response.message,
@@ -70,7 +70,7 @@ export function UpdateCollaboratorForm({
       });
     }
 
-    if (!response.success) {
+    if (response.success === false) {
       toast({
         title: "Error al eliminar proyecto",
         description: response.message,

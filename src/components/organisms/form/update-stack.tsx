@@ -42,7 +42,7 @@ export function UpdateStackForm({
   const onSubmit = async (values: StackUpdateSchema) => {
     const response = await putStack(values);
 
-    if (response.success) {
+    if (response.success === true) {
       form.reset();
       toast({
         title: "Stack actualizado",
@@ -51,7 +51,7 @@ export function UpdateStackForm({
       });
     }
 
-    if (!response.success) {
+    if (response.success === false) {
       toast({
         title: "Error al actualizar stack",
         description: response.message,
@@ -70,7 +70,7 @@ export function UpdateStackForm({
       idTo: idProject,
     });
 
-    if (response.success) {
+    if (response.success === true) {
       toast({
         title: "Proyecto eliminado",
         description: response.message,
@@ -78,7 +78,7 @@ export function UpdateStackForm({
       });
     }
 
-    if (!response.success) {
+    if (response.success === false) {
       toast({
         title: "Error al eliminar proyecto",
         description: response.message,

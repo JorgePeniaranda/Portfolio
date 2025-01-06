@@ -47,7 +47,7 @@ export function RelationshipProjectWithStack({
       idTo: Number(values.idTo),
     });
 
-    if (response.success) {
+    if (response.success === true) {
       form.reset();
       toast({
         title: "Stack relacionado con el proyecto",
@@ -56,7 +56,7 @@ export function RelationshipProjectWithStack({
       });
     }
 
-    if (!response.success) {
+    if (response.success === false) {
       toast({
         title: "Error al relacionar stack con el proyecto",
         description: response.message,

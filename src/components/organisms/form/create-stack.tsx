@@ -45,7 +45,7 @@ export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) 
   const onSubmit = async (values: StackCreateSchema) => {
     const response = await postStack(values);
 
-    if (response.success) {
+    if (response.success === true) {
       form.reset();
       toast({
         title: "Stack creado",
@@ -58,7 +58,7 @@ export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) 
       }
     }
 
-    if (!response.success) {
+    if (response.success === false) {
       toast({
         title: "Error al crear stack",
         description: response.message,
