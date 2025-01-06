@@ -1,10 +1,12 @@
 import type {PaginationRequest} from "@/types/responses";
 
+import {isNotDefined} from "@/helpers/guards/is-defined";
+
 export function fromPaginationRequestToPrismaPagination(paginationRequest?: PaginationRequest): {
   skip: number | undefined;
   take: number | undefined;
 } {
-  if (!paginationRequest) {
+  if (isNotDefined(paginationRequest)) {
     return {
       skip: undefined,
       take: undefined,
