@@ -1,7 +1,19 @@
+import type {ApiResponse, PaginationRequest} from "@/types/responses";
 import type {Collaborator} from "@prisma/client";
 
-import {databaseClient} from "@/helpers/client/prisma";
+import {apiClient} from "@/helpers/client/axios";
 
-export async function getAllCollaborator(): Promise<Collaborator[]> {
-  return await databaseClient.collaborator.findMany();
+export async function getAllCollaborator(pagination: PaginationRequest): Promise<Collaborator[]> {
+  const {data: response} = await apiClient.get<ApiResponse<Collaborator[]>>(
+    "/api/collaborator/get/all",
+    {
+      params: pagination,
+    },
+  );
+
+  if (response.success === false) {
+    throw new Error(response.message);
+  }
+
+  return response?.data ?? [];
 }
