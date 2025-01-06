@@ -20,3 +20,7 @@ export interface ErrorResponse extends BaseResponse {
 }
 
 export type ApiResponse<T = undefined> = SuccessResponse<T> | ErrorResponse;
+
+export interface DeleteResponse {
+  count: number; // The number of items deleted
+}
