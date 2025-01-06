@@ -12,7 +12,7 @@ export async function getAllCollaborator(pagination: PaginationRequest): Promise
   );
 
   if (response.success === false) {
-    throw new Error(response.message);
+    throw new Error(`getAllCollaborator -> Error on fetch: ${response.message}`);
   }
 
   return response?.data ?? [];

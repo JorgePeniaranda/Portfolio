@@ -1,15 +1,23 @@
+import type {ApiResponse, PaginationRequest} from "@/types/responses";
 import type {Collaborator} from "@prisma/client";
 
-import {databaseClient} from "@/helpers/client/prisma";
+import {apiClient} from "@/helpers/client/axios";
 
-export async function getAllCollaboratorMin(): Promise<
-  Pick<Collaborator, "id" | "nickname" | "githubUsername">[]
-> {
-  return await databaseClient.collaborator.findMany({
-    select: {
-      id: true,
-      nickname: true,
-      githubUsername: true,
+type CollaboratorMin = Pick<Collaborator, "id" | "nickname" | "githubUsername">;
+
+export async function getAllCollaboratorMin(
+  pagination: PaginationRequest,
+): Promise<CollaboratorMin[]> {
+  const {data: response} = await apiClient.get<ApiResponse<Collaborator[]>>(
+    "/api/collaborator/get/all-min",
+    {
+      params: pagination,
     },
-  });
+  );
+
+  if (response.success === false) {
+    throw new Error(`getAllCollaboratorMin -> Error on fetch: ${response.message}`);
+  }
+
+  return response?.data ?? [];
 }
