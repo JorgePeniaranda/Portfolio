@@ -31,6 +31,7 @@ const { title, description, lang = DEFAULT_LANG, body, html } = Astro.props
       title={title}
       description={description ?? SEO_INFO.description}
     />
+    <meta name="generator" content={Astro.generator} />
     <ClientRouter />
     <ThemePreference />
   </head>
