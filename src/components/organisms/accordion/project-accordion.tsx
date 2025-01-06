@@ -81,7 +81,7 @@ export function ProjectAccordion({
                     rel="noopener noreferrer"
                     target="_blank"
                   >
-                    {demoUrl}
+                    {stack.name}
                     <ExternalLink className="w-4" />
                   </a>
                 </li>
