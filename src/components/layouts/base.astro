@@ -35,7 +35,7 @@ const { title, description, lang = DEFAULT_LANG, body, html } = Astro.props
     <ThemePreference />
   </head>
   <body
-    class={cn('w-screen min-h-screen antialiased font-Baloo', body?.class)}
+    class={cn('w-full min-h-screen antialiased font-Baloo', body?.class)}
     {...body}
   >
     <slot />
