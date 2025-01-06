@@ -7,7 +7,6 @@ export type IGetAllCollaboratorWithProjectsMinResponse = Collaborator & {
   associatedProjects: Pick<Project, "id" | "name" | "logoUrl">[];
 };
 
-// TO-DO: ESTO DEBE SER UN GET ALL PROJECT MIN BY COLLABORATOR ID
 export async function getAllCollaboratorWithProjectsMin(
   pagination?: PaginationRequest,
 ): Promise<IGetAllCollaboratorWithProjectsMinResponse[]> {
