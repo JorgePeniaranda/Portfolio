@@ -16,7 +16,7 @@ export async function getAllCollaboratorMin(
   );
 
   if (response.success === false) {
-    throw new Error(`getAllCollaboratorMin -> Error on fetch: ${response.message}`);
+    throw new Error(response.message);
   }
 
   return response?.data ?? [];

@@ -4,7 +4,7 @@ import {type Collaborator} from "@prisma/client";
 import axios from "axios";
 
 export async function deleteCollaborator(
-  data: Collaborator["id"][],
+  data: Array<Collaborator["id"]>,
 ): Promise<ApiResponse<DeleteResponse>> {
   const {data: response} = await axios.post<ApiResponse<DeleteResponse>>(
     "/api/collaborator/delete",
