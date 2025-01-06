@@ -12,9 +12,5 @@ export async function patchAddRelationWithProjectFromCollaborator(
     data,
   );
 
-  if (response.success === false) {
-    throw new Error(response.message);
-  }
-
   return response;
 }
