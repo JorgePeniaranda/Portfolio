@@ -1,28 +1,21 @@
-import type {Collaborator, Project} from "@prisma/client";
+import type {Collaborator} from "@prisma/client";
 
 import {zodResolver} from "@hookform/resolvers/zod";
-import {Save, X} from "lucide-react";
+import {Save} from "lucide-react";
 import {useForm} from "react-hook-form";
 
-import {RelationshipCollaboratorWithProject} from "@/components/organisms/form/relationship-collaborator-with-project";
 import {Button} from "@/components/ui/button";
-import {Card, CardHeader} from "@/components/ui/card";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
 import {useToast} from "@/hooks/use-toast";
 import {CollaboratorUpdateSchema} from "@/schemas/collaborator/update";
-import {patchDeleteRelationWithProjectFromCollaborator} from "@/services/collaborator/patchDeleteRelationWithProjectFromStack";
 import {putCollaborator} from "@/services/collaborator/putCollaborator";
 
 export function UpdateCollaboratorForm({
   currentCollaborator,
   disableForm,
-  availableProjects,
 }: {
-  currentCollaborator: Collaborator & {
-    associatedProjects: Pick<Project, "id" | "name" | "logoUrl">[];
-  };
-  availableProjects: Pick<Project, "id" | "name" | "logoUrl">[];
+  currentCollaborator: Collaborator;
   disableForm?: boolean;
 }) {
   const {toast} = useToast();
@@ -46,33 +39,6 @@ export function UpdateCollaboratorForm({
     if (response.success === false) {
       toast({
         title: "Error al actualizar colaborador",
-        description: response.message,
-        className: "bg-red-500",
-      });
-    }
-
-    window.location.reload();
-
-    return;
-  };
-
-  const onRemoveProject = async (idProject: number) => {
-    const response = await patchDeleteRelationWithProjectFromCollaborator({
-      idFrom: currentCollaborator.id,
-      idTo: idProject,
-    });
-
-    if (response.success === true) {
-      toast({
-        title: "Proyecto eliminado",
-        description: response.message,
-        className: "bg-green-500",
-      });
-    }
-
-    if (response.success === false) {
-      toast({
-        title: "Error al eliminar proyecto",
         description: response.message,
         className: "bg-red-500",
       });
@@ -146,44 +112,6 @@ export function UpdateCollaboratorForm({
           <span className="text-lg">Guardar</span>
         </Button>
       </form>
-      <div className="mt-10">
-        <h2 className="text-3xl font-medium">Editar relaciones</h2>
-        <div className="mx-5 mt-5">
-          <h3 className="text-3xl font-medium">Proyectos</h3>
-          <ul className="mt-4 flex flex-wrap gap-4">
-            {currentCollaborator.associatedProjects?.map((project) => (
-              <li key={project.id}>
-                <Card className="my-5 flex flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
-                  <CardHeader className="relative flex items-center gap-2">
-                    <Button
-                      aria-label="eliminar relacion"
-                      className="absolute -right-2.5 -top-2.5 m-0 flex aspect-square size-8 items-center justify-center rounded-full bg-red-500 p-0 text-center text-white hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-500"
-                      disabled={disableForm}
-                      onClick={() => onRemoveProject(project.id)}
-                    >
-                      <X />
-                      <span className="sr-only">eliminar relacion</span>
-                    </Button>
-                    <img
-                      alt={`${project.name} logo`}
-                      className="size-16 shrink-0"
-                      src={project.logoUrl}
-                    />
-                    <span className="text-lg capitalize">{project.name}</span>
-                  </CardHeader>
-                </Card>
-              </li>
-            ))}
-            <li>
-              <RelationshipCollaboratorWithProject
-                availableProject={availableProjects}
-                disableForm={disableForm}
-                idFrom={currentCollaborator.id}
-              />
-            </li>
-          </ul>
-        </div>
-      </div>
     </Form>
   );
 }
