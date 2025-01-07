@@ -23,36 +23,40 @@ import {postStack} from "@/services/stack/postStack";
 
 export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) {
   const {toast} = useToast();
+
+  // Create a form to create a stack
   const form = useForm<StackCreateSchema>({
     resolver: zodResolver(StackCreateSchema),
     defaultValues: StackCreateDefaultValues,
   });
 
   const onSubmit = async (values: StackCreateSchema) => {
+    // Send request to create a stack
     const response = await postStack(values);
 
-    if (response.success === true) {
-      form.reset();
-      toast({
-        title: "Stack creado",
-        description: response.message,
-        className: "bg-green-500",
-      });
-
-      if (isDefined(response?.data?.id)) {
-        safeRedirect(`/vault/views/stack/${response.data.id}`);
-      }
-    }
-
+    // If the request was unsuccessful, show an error toast and exit
     if (response.success === false) {
       toast({
         title: "Error al crear stack",
         description: response.message,
         className: "bg-red-500",
       });
+
+      return;
     }
 
-    return;
+    // If the request was successful, show a success toast
+    form.reset();
+    toast({
+      title: "Stack creado",
+      description: response.message,
+      className: "bg-green-500",
+    });
+
+    // Redirect to the stack view
+    if (isDefined(response?.data?.id)) {
+      safeRedirect(`/vault/views/stack/${response.data.id}`);
+    }
   };
 
   return (

@@ -16,33 +16,39 @@ import {postCollaborator} from "@/services/collaborator/postCollaborator";
 
 export function CreateCollaboratorForm({disableForm = false}: {disableForm?: boolean}) {
   const {toast} = useToast();
+
+  // Create a form to create a collaborator
   const form = useForm<CollaboratorCreateSchema>({
     resolver: zodResolver(CollaboratorCreateSchema),
     defaultValues: CollaboratorCreateDefaultValues,
   });
 
   const onSubmit = async (values: CollaboratorCreateSchema) => {
+    // Send request to create a collaborator
     const response = await postCollaborator(values);
 
-    if (response.success === true) {
-      form.reset();
-      toast({
-        title: "Colaborador creado",
-        description: response.message,
-        className: "bg-green-500",
-      });
-
-      if (isDefined(response.data?.id)) {
-        safeRedirect(`/vault/views/collaborators/${response.data.id}`);
-      }
-    }
-
+    // If the request was unsuccessful, show an error toast and exit
     if (response.success === false) {
       toast({
         title: "Error al crear colaborador",
         description: response.message,
         className: "bg-red-500",
       });
+
+      return;
+    }
+
+    // If the request was successful, show a success toast
+    form.reset();
+    toast({
+      title: "Colaborador creado",
+      description: response.message,
+      className: "bg-green-500",
+    });
+
+    // Redirect to the collaborator view
+    if (isDefined(response.data?.id)) {
+      safeRedirect(`/vault/views/collaborators/${response.data.id}`);
     }
   };
 
