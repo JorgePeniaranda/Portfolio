@@ -10,10 +10,8 @@ import {format} from "date-fns";
 import {CalendarIcon, Pen} from "lucide-react";
 import {useForm} from "react-hook-form";
 
-import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {Button} from "@/components/ui/button";
 import {Calendar} from "@/components/ui/calendar";
-import {Card, CardHeader} from "@/components/ui/card";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
@@ -32,14 +30,7 @@ import {
 import {cn} from "@/helpers/common/classnames";
 import {ProjectUpdateSchema} from "@/schemas/project/update";
 
-export function ShowProjectForm({
-  currentProject,
-}: {
-  currentProject: Project & {
-    associatedStacks: Array<Stack>;
-    associatedCollaborators: Array<Collaborator>;
-  };
-}) {
+export function ShowProjectForm({currentProject}: {currentProject: Project}) {
   const form = useForm<ProjectUpdateSchema>({
     resolver: zodResolver(ProjectUpdateSchema),
     defaultValues: currentProject,
@@ -355,47 +346,6 @@ export function ShowProjectForm({
           <span className="text-lg">Editar</span>
         </Button>
       </form>
-      <div className="mt-10">
-        <h2 className="text-3xl font-medium">Relaciones</h2>
-        <div className="mx-5 mt-5">
-          <h3 className="text-3xl font-medium">Stack</h3>
-          <ul className="mt-4 flex flex-wrap gap-4">
-            {currentProject.associatedStacks?.map((stack) => (
-              <li key={stack.id}>
-                <Card className="my-5 flex w-max flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
-                  <CardHeader className="relative">
-                    <img
-                      alt={`${stack.name} logo`}
-                      className="size-20 rounded-lg"
-                      src={stack.iconUrl}
-                    />
-                  </CardHeader>
-                </Card>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="mx-5 mt-5">
-          <h3 className="text-3xl font-medium">Colaboradores</h3>
-          <ul className="mt-4 flex flex-wrap gap-4">
-            {currentProject.associatedCollaborators?.map((collaborator) => (
-              <li key={collaborator.id}>
-                <Card className="my-5 flex w-max flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
-                  <CardHeader className="relative flex items-center gap-2">
-                    <Avatar className="size-16 shrink-0">
-                      <AvatarImage
-                        src={`https://avatars.githubusercontent.com/${collaborator.githubUsername}`}
-                      />
-                      <AvatarFallback>{collaborator.githubUsername}</AvatarFallback>
-                    </Avatar>
-                    <span className="text-lg capitalize">{collaborator.githubUsername}</span>
-                  </CardHeader>
-                </Card>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
     </Form>
   );
 }
