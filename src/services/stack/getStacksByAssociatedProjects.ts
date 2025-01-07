@@ -3,7 +3,7 @@ import type {Stack} from "@prisma/client";
 
 import {apiClient} from "@/helpers/client/axios";
 
-export async function getAllStackMinByProjectId({
+export async function getStacksByAssociatedProjects({
   idProject,
   pagination,
 }: {

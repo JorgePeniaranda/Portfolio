@@ -3,7 +3,7 @@ import type {Project, Stack} from "@prisma/client";
 
 import {apiClient} from "@/helpers/client/axios";
 
-export async function getAvailableStacksToAddRelationshipToProject({
+export async function getStacksByNotAssociatedProjects({
   idProject,
   pagination,
 }: {

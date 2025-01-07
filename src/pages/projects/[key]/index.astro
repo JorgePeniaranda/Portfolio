@@ -17,7 +17,7 @@ import { isDefined } from '@/helpers/guards/is-defined'
 import { getCollaboratorsByAssociatedProjects } from '@/services/collaborator/getCollaboratorsByAssociatedProjects'
 import { getAllProjects } from '@/services/project/getAllProjects'
 import { getProjectByKey } from '@/services/project/getProjectByKey'
-import { getAllStackMinByProjectId } from '@/services/stack/getAllStackByProjectId'
+import { getStacksByAssociatedProjects } from '@/services/stack/getStacksByAssociatedProjects'
 import type { GetStaticPaths } from 'astro'
 import moment from 'moment'
 
@@ -49,7 +49,7 @@ if (!project) {
 }
 
 // MARK: - Fetching associated data
-const associatedStacks = await getAllStackMinByProjectId({
+const associatedStacks = await getStacksByAssociatedProjects({
   idProject: project.id
 })
 const associatedCollaborators = await getCollaboratorsByAssociatedProjects({

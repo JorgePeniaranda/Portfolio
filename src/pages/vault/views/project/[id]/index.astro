@@ -9,7 +9,7 @@ import { ENV } from '@/constants/env'
 import { getCollaboratorsByAssociatedProjects } from '@/services/collaborator/getCollaboratorsByAssociatedProjects'
 import { getAllProjects } from '@/services/project/getAllProjects'
 import { getProjectById } from '@/services/project/getProjectById'
-import { getAllStackMinByProjectId } from '@/services/stack/getAllStackByProjectId'
+import { getStacksByAssociatedProjects } from '@/services/stack/getStacksByAssociatedProjects'
 
 // MARK: - Static paths
 export async function getStaticPaths() {
@@ -41,7 +41,7 @@ if (!project) {
 }
 
 // MARK: - Fetching associated data
-const associatedStacks = await getAllStackMinByProjectId({
+const associatedStacks = await getStacksByAssociatedProjects({
   idProject: project.id
 })
 const associatedCollaborators = await getCollaboratorsByAssociatedProjects({

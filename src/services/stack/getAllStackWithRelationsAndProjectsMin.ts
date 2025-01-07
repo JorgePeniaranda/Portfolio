@@ -2,6 +2,7 @@ import type {Project, Stack} from "@prisma/client";
 
 import {databaseClient} from "@/helpers/client/prisma";
 
+// TO-DO: REPLACE WITH API CALL
 export async function getAllStackWithRelationsAndProjectsMin(): Promise<
   Array<
     Stack & {

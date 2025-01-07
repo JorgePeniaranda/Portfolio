@@ -7,11 +7,11 @@ import { UpdateProjectForm } from '@/components/organisms/form/update-project'
 import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
 import { ENV } from '@/constants/env'
 import { getCollaboratorsByAssociatedProjects } from '@/services/collaborator/getCollaboratorsByAssociatedProjects'
-import { getCollaboratorsNotAssociatedProjects } from '@/services/collaborator/getCollaboratorsByNotAssociatedProjects'
+import { getCollaboratorsByNotAssociatedProjects } from '@/services/collaborator/getCollaboratorsByNotAssociatedProjects'
 import { getAllProjects } from '@/services/project/getAllProjects'
 import { getProjectById } from '@/services/project/getProjectById'
-import { getAllStackMinByProjectId } from '@/services/stack/getAllStackByProjectId'
-import { getAvailableStacksToAddRelationshipToProject } from '@/services/stack/getAvailableStacksToAddRelationshipToProject'
+import { getStacksByAssociatedProjects } from '@/services/stack/getStacksByAssociatedProjects'
+import { getStacksByNotAssociatedProjects } from '@/services/stack/getStacksByNotAssociatedProjects'
 
 export async function getStaticPaths() {
   const projects = await getAllProjects()
@@ -40,16 +40,16 @@ if (!project) {
   }
 }
 
-const relatedStacks = await getAllStackMinByProjectId({
+const relatedStacks = await getStacksByAssociatedProjects({
   idProject: project.id
 })
 const relatedCollaborators = await getCollaboratorsByAssociatedProjects({
   idProject: project.id
 })
-const availableStacks = await getAvailableStacksToAddRelationshipToProject({
+const availableStacks = await getStacksByNotAssociatedProjects({
   idProject: project.id
 })
-const availableCollaborators = await getCollaboratorsNotAssociatedProjects({
+const availableCollaborators = await getCollaboratorsByNotAssociatedProjects({
   idProject: project.id
 })
 ---
