@@ -3,6 +3,7 @@ import type {Project, Stack} from "@prisma/client";
 
 import {Plus, X} from "lucide-react";
 import {useForm} from "react-hook-form";
+import {useState} from "react";
 
 import {Button} from "@/components/ui/button";
 import {Card, CardHeader} from "@/components/ui/card";
@@ -27,11 +28,12 @@ import {useToast} from "@/hooks/use-toast";
 import {patchAddRelationWithStackFromProject} from "@/services/project/patchProjectAddAssociatedStack";
 import {patchProjectRemoveAssociatedStack} from "@/services/project/patchProjectRemoveAssociatedStack";
 import {safeReload} from "@/helpers/common/safe-reload";
+import {isDefined} from "@/helpers/guards/is-defined";
 
 export function UpdateStacksRelatedToProject({
   currentProject,
-  associatedStacks,
-  availableStacks,
+  associatedStacks: initialAssociatedStacks,
+  availableStacks: initialAvailableStacks,
   disableForm,
 }: {
   currentProject: Project;
@@ -39,68 +41,87 @@ export function UpdateStacksRelatedToProject({
   availableStacks: Stack[];
   disableForm?: boolean;
 }) {
+  // Get the toast function from the useToast hook
   const {toast} = useToast();
+
+  // Create a form to relate a stack to the project
   const form = useForm<RelationshipsSchema>({
     defaultValues: {
       idFrom: currentProject.id,
     },
   });
 
+  // Create a function to relate a stack to the project
+  const [associatedStacks, setAssociatedStacks] = useState<Stack[]>(initialAssociatedStacks);
+  const [availableStacks, setAvailableStacks] = useState<Stack[]>(initialAvailableStacks);
+
   const onAddStack = async (values: RelationshipsSchema) => {
+    // Send request to associate the stack to the project
     const response = await patchAddRelationWithStackFromProject({
       idFrom: Number(values.idFrom),
       idTo: Number(values.idTo),
     });
 
-    if (response.success === true) {
-      form.reset();
-      toast({
-        title: "Stack relacionado con el proyecto",
-        description: response.message,
-        className: "bg-green-500",
-      });
-    }
-
+    // If the request was unsuccessful, show an error toast and exit
     if (response.success === false) {
       toast({
         title: "Error al relacionar stack con el proyecto",
         description: response.message,
         className: "bg-red-500",
       });
+
+      return;
     }
 
-    setTimeout(() => {
-      safeReload();
-    }, 1000);
+    // If the request was successful, reset the form and show a success toast
+    form.reset();
+    toast({
+      title: "Stack relacionado con el proyecto",
+      description: response.message,
+      className: "bg-green-500",
+    });
 
-    return;
+    // Update local state for associated and available stacks
+    const findStack = availableStacks.find((stack) => stack.id === Number(values.idTo));
+
+    if (isDefined(findStack)) {
+      setAssociatedStacks((prev) => [...prev, findStack]);
+      setAvailableStacks((prev) => prev.filter((stack) => stack.id !== Number(values.idTo)));
+    }
   };
 
   const onRemoveStack = async (stackId: number) => {
+    // Send request to dissociate the stack from the project
     const response = await patchProjectRemoveAssociatedStack({
       idFrom: currentProject.id,
       idTo: stackId,
     });
 
-    if (response.success === true) {
-      toast({
-        title: "Stack eliminado",
-        description: response.message,
-        className: "bg-green-500",
-      });
-    }
-
+    // If the request was unsuccessful, show an error toast and exit
     if (response.success === false) {
       toast({
         title: "Error al eliminar stack",
         description: response.message,
         className: "bg-red-500",
       });
+
+      return;
     }
 
-    safeReload();
+    // If the request was successful, show a success toast
+    toast({
+      title: "Stack eliminado",
+      description: response.message,
+      className: "bg-green-500",
+    });
 
-    return;
+    // Update local state for associated and available stacks
+    const findStack = associatedStacks.find((stack) => stack.id === stackId);
+
+    if (isDefined(findStack)) {
+      setAvailableStacks((prev) => [...prev, findStack]);
+      setAssociatedStacks((prev) => prev.filter((stack) => stack.id !== stackId));
+    }
   };
 
   return (
