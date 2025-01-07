@@ -7,15 +7,11 @@ import {
   type Stack,
 } from "@prisma/client";
 import {format} from "date-fns";
-import {CalendarIcon, Save, X} from "lucide-react";
+import {CalendarIcon, Save} from "lucide-react";
 import {useForm} from "react-hook-form";
 
-import {RelationshipProjectWithCollaborator} from "@/components/organisms/form/relationship-project-with-collaborator";
-import {RelationshipProjectWithStack} from "@/components/organisms/form/relationship-project-with-stack";
-import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {Button} from "@/components/ui/button";
 import {Calendar} from "@/components/ui/calendar";
-import {Card, CardHeader} from "@/components/ui/card";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
@@ -34,23 +30,14 @@ import {
 import {cn} from "@/helpers/common/classnames";
 import {useToast} from "@/hooks/use-toast";
 import {ProjectUpdateSchema} from "@/schemas/project/update";
-import {patchDeleteRelationWithCollaboratorFromProject} from "@/services/project/patchDeleteRelationWithCollaboratorFromProject";
-import {patchDeleteRelationWithStackFromProject} from "@/services/project/patchDeleteRelationWithStackFromProject";
 import {putProject} from "@/services/project/putProject";
 
 export function UpdateProjectForm({
   currentProject,
   disableForm,
-  availableStacks,
-  availableCollaborators,
 }: {
-  currentProject: Project & {
-    associatedStacks: Array<Stack>;
-    associatedCollaborators: Array<Collaborator>;
-  };
+  currentProject: Project;
   disableForm?: boolean;
-  availableStacks: Pick<Stack, "id" | "name" | "iconUrl">[];
-  availableCollaborators: Pick<Collaborator, "id" | "nickname" | "githubUsername">[];
 }) {
   const {toast} = useToast();
   const form = useForm<ProjectUpdateSchema>({
@@ -73,60 +60,6 @@ export function UpdateProjectForm({
     if (response.success === false) {
       toast({
         title: "Error al crear proyecto",
-        description: response.message,
-        className: "bg-red-500",
-      });
-    }
-
-    window.location.reload();
-
-    return;
-  };
-
-  const onRemoveCollaborator = async (collaboratorId: number) => {
-    const response = await patchDeleteRelationWithCollaboratorFromProject({
-      idFrom: currentProject.id,
-      idTo: collaboratorId,
-    });
-
-    if (response.success === true) {
-      toast({
-        title: "Colaborador eliminado",
-        description: response.message,
-        className: "bg-green-500",
-      });
-    }
-
-    if (response.success === false) {
-      toast({
-        title: "Error al eliminar colaborador",
-        description: response.message,
-        className: "bg-red-500",
-      });
-    }
-
-    window.location.reload();
-
-    return;
-  };
-
-  const onRemoveStack = async (stackId: number) => {
-    const response = await patchDeleteRelationWithStackFromProject({
-      idFrom: currentProject.id,
-      idTo: stackId,
-    });
-
-    if (response.success === true) {
-      toast({
-        title: "Stack eliminado",
-        description: response.message,
-        className: "bg-green-500",
-      });
-    }
-
-    if (response.success === false) {
-      toast({
-        title: "Error al eliminar stack",
         description: response.message,
         className: "bg-red-500",
       });
@@ -447,78 +380,6 @@ export function UpdateProjectForm({
           <span className="text-lg">Guardar</span>
         </Button>
       </form>
-      <div className="mt-10">
-        <h2 className="text-3xl font-medium">Editar relaciones</h2>
-        <div className="mx-5 mt-5">
-          <h3 className="text-3xl font-medium">Stack</h3>
-          <ul className="mt-4 flex flex-wrap gap-4">
-            {currentProject.associatedStacks?.map((stack) => (
-              <li key={stack.id}>
-                <Card className="my-5 flex w-max flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
-                  <CardHeader className="relative">
-                    <Button
-                      aria-label="eliminar relacion"
-                      className="absolute -right-2.5 -top-2.5 m-0 flex aspect-square size-8 items-center justify-center rounded-full bg-red-500 p-0 text-center text-white hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-500"
-                      disabled={disableForm}
-                      onClick={() => onRemoveStack(stack.id)}
-                    >
-                      <X />
-                      <span className="sr-only">eliminar relacion</span>
-                    </Button>
-                    <img
-                      alt={`${stack.name} logo`}
-                      className="size-20 rounded-lg"
-                      src={stack.iconUrl}
-                    />
-                  </CardHeader>
-                </Card>
-              </li>
-            ))}
-            <li>
-              <RelationshipProjectWithStack
-                availableStacks={availableStacks}
-                idFrom={currentProject.id}
-              />
-            </li>
-          </ul>
-        </div>
-        <div className="mx-5 mt-5">
-          <h3 className="text-3xl font-medium">Colaboradores</h3>
-          <ul className="mt-4 flex flex-wrap gap-4">
-            {currentProject.associatedCollaborators?.map((collaborator) => (
-              <li key={collaborator.id}>
-                <Card className="my-5 flex w-max flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
-                  <CardHeader className="relative flex items-center gap-2">
-                    <Button
-                      aria-label="eliminar relacion"
-                      className="absolute -right-2.5 -top-2.5 m-0 flex aspect-square size-8 items-center justify-center rounded-full bg-red-500 p-0 text-center text-white hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-500"
-                      disabled={disableForm}
-                      onClick={() => onRemoveCollaborator(collaborator.id)}
-                    >
-                      <X />
-                      <span className="sr-only">eliminar relacion</span>
-                    </Button>
-                    <Avatar className="size-16 shrink-0">
-                      <AvatarImage
-                        src={`https://avatars.githubusercontent.com/${collaborator.githubUsername}`}
-                      />
-                      <AvatarFallback>{collaborator.githubUsername}</AvatarFallback>
-                    </Avatar>
-                    <span className="text-lg capitalize">{collaborator.githubUsername}</span>
-                  </CardHeader>
-                </Card>
-              </li>
-            ))}
-            <li>
-              <RelationshipProjectWithCollaborator
-                availableCollaborators={availableCollaborators}
-                disableForm={disableForm}
-                idFrom={currentProject.id}
-              />
-            </li>
-          </ul>
-        </div>
-      </div>
     </Form>
   );
 }
