@@ -3,8 +3,8 @@ import Logo from '@/assets/svg/logos/Logo.astro'
 import { SecretCodeHint } from '@/components/atoms/secret-code-hint'
 import Layout from '@/components/layouts/base.astro'
 import { ProjectCardsManager } from '@/components/organisms/project-cards-manager'
+import { getAllProjectMin } from '@/services/project/getAllProjectMin'
 import { ArrowRight } from 'lucide-react'
-import { getAllProjectMin } from '../../services/project/getAllStackMin'
 
 const Projects = await getAllProjectMin()
 ---
