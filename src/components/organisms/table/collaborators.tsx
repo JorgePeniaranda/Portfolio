@@ -125,25 +125,29 @@ function TableHeaderComponent({table}: {table: Table<Collaborator>}) {
   }, [selectedRowModel]);
 
   const handleDelete = async () => {
+    // Send request to delete the collaborator
     const response = await deleteCollaborator(rows.map((row) => row.original.id));
 
-    if (response.success === true) {
-      toast({
-        title: "Colaboradores eliminados",
-        description: "Los colaboradores seleccionados se eliminaron correctamente.",
-        className: "bg-green-500",
-      });
-
-      safeReload();
-    }
-
+    // If the request was unsuccessful, show an error toast and exit
     if (response.success === false) {
       toast({
         title: "Error al eliminar colaboradores",
         description: "No se pudieron eliminar los colaboradores seleccionados.",
         className: "bg-green-500",
       });
+
+      return;
     }
+
+    // If the request was successful, show a success toast
+    toast({
+      title: "Colaboradores eliminados",
+      description: "Los colaboradores seleccionados se eliminaron correctamente.",
+      className: "bg-green-500",
+    });
+
+    // Reload the page to update the table
+    safeReload();
   };
 
   return (
