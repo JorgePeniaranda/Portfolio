@@ -7,6 +7,7 @@ export type IGetAllProjectMinResponse = Array<
   Pick<Project, "id" | "key" | "name" | "logoUrl" | "stackCategory" | "status">
 >;
 
+// NOTE-DEV: If more parameters are added, switch to an object for better clarity.
 export async function getAllProjectMin(
   pagination?: PaginationRequest,
 ): Promise<IGetAllProjectMinResponse> {

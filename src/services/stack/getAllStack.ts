@@ -3,6 +3,7 @@ import type {ApiResponse, PaginationRequest} from "@/types/responses";
 
 import {apiClient} from "@/helpers/client/axios";
 
+// NOTE-DEV: If more parameters are added, switch to an object for better clarity.
 export async function getAllStack(pagination?: PaginationRequest): Promise<Stack[]> {
   const {data: response} = await apiClient.get<ApiResponse<Stack[]>>("/api/stack/get/all", {
     params: pagination,
