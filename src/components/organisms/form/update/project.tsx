@@ -33,7 +33,6 @@ export function UpdateProjectForm({
   currentProject: Project;
   disableForm?: boolean;
 }) {
-  // Get the toast function from the useToast hook
   const {toast} = useToast();
 
   // Create a form to update the project

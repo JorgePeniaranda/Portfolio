@@ -41,7 +41,6 @@ export function UpdateCollaboratorRelatedToProject({
   availableCollaborators: Collaborator[];
   disableForm?: boolean;
 }) {
-  // Get the toast function from the useToast hook
   const {toast} = useToast();
 
   // Initialize local state for associated and available collaborators

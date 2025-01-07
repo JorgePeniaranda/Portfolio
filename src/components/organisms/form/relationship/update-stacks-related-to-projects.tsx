@@ -40,7 +40,6 @@ export function UpdateStacksRelatedToProject({
   availableStacks: Stack[];
   disableForm?: boolean;
 }) {
-  // Get the toast function from the useToast hook
   const {toast} = useToast();
 
   // Create a form to relate a stack to the project
