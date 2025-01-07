@@ -17,7 +17,6 @@ import "@xyflow/react/dist/style.css";
  *   relatedFrom: { toStackStack: Stack }[];
  *   relatedTo: { fromStackStack: Stack }[];
  * }>} props.stacks - List of stacks including their relationships and related projects.
- * @param {Array<string | null>} props.categories - List of categories for grouping stacks.
  */
 export function StackFlow({
   stacks,
@@ -33,7 +32,6 @@ export function StackFlow({
       }[];
     }
   >;
-  categories: Array<string | null>;
 }) {
   // Agrupar los stacks por categoría y tipo usando useMemo
   const groupedStacks = useMemo(() => {

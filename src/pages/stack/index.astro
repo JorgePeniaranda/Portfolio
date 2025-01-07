@@ -5,10 +5,8 @@ import Layout from '@/components/layouts/base.astro'
 import { StackFlow } from '@/components/organisms/react-flow/stack-flow'
 import { ArrowRight } from 'lucide-react'
 import { getAllStackWithRelationsAndProjectsMin } from '../../services/stack/getAllStackWithRelationsAndProjectsMin'
-import { getDistinctCategories } from '../../services/stack/getDistinctCategories'
 
 const stacksWithProjectsMin = await getAllStackWithRelationsAndProjectsMin()
-const stackCategories = await getDistinctCategories()
 ---
 
 <Layout
@@ -52,7 +50,6 @@ const stackCategories = await getDistinctCategories()
     </section>
     <StackFlow
       stacks={stacksWithProjectsMin}
-      categories={stackCategories}
       client:load
     />
   </main>
