@@ -5,7 +5,7 @@ import {apiClient} from "@/helpers/client/axios";
 
 export async function getProjectByKey({key}: {key: Project["key"]}): Promise<Project | null> {
   const {data: response} = await apiClient.get<ApiResponse<Project | null>>(
-    `api/projcets/get/key/${key}`,
+    `api/project/get/key/${key}`,
   );
 
   if (response.success === false) {
