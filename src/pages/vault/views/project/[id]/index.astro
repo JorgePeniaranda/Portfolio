@@ -6,7 +6,7 @@ import { CollaboratorRelationShipCard } from '@/components/molecules/cards/colla
 import { Card, CardHeader } from '@/components/ui/card'
 import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
 import { ENV } from '@/constants/env'
-import { getAllCollaboratorByProjectId } from '@/services/collaborator/getAllCollaboratorByProjectId'
+import { getCollaboratorsByAssociatedProjects } from '@/services/collaborator/getCollaboratorsByAssociatedProjects'
 import { getAllProjects } from '@/services/project/getAllProjects'
 import { getProjectById } from '@/services/project/getProjectById'
 import { getAllStackMinByProjectId } from '@/services/stack/getAllStackByProjectId'
@@ -44,7 +44,7 @@ if (!project) {
 const associatedStacks = await getAllStackMinByProjectId({
   idProject: project.id
 })
-const associatedCollaborators = await getAllCollaboratorByProjectId({
+const associatedCollaborators = await getCollaboratorsByAssociatedProjects({
   idProject: project.id
 })
 ---

@@ -6,8 +6,8 @@ import { UpdateStacksRelatedToProject } from '@/components/organisms/form/relati
 import { UpdateProjectForm } from '@/components/organisms/form/update-project'
 import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
 import { ENV } from '@/constants/env'
-import { getAllCollaboratorByProjectId } from '@/services/collaborator/getAllCollaboratorByProjectId'
-import { getCollaboratorsNotAssociatedWithProject } from '@/services/collaborator/getAvailableCollaboratorsToAddRelationshipToProject'
+import { getCollaboratorsByAssociatedProjects } from '@/services/collaborator/getCollaboratorsByAssociatedProjects'
+import { getCollaboratorsNotAssociatedProjects } from '@/services/collaborator/getCollaboratorsNotAssociatedProjects'
 import { getAllProjects } from '@/services/project/getAllProjects'
 import { getProjectById } from '@/services/project/getProjectById'
 import { getAllStackMinByProjectId } from '@/services/stack/getAllStackByProjectId'
@@ -43,13 +43,13 @@ if (!project) {
 const relatedStacks = await getAllStackMinByProjectId({
   idProject: project.id
 })
-const relatedCollaborators = await getAllCollaboratorByProjectId({
+const relatedCollaborators = await getCollaboratorsByAssociatedProjects({
   idProject: project.id
 })
 const availableStacks = await getAvailableStacksToAddRelationshipToProject({
   idProject: project.id
 })
-const availableCollaborators = await getCollaboratorsNotAssociatedWithProject({
+const availableCollaborators = await getCollaboratorsNotAssociatedProjects({
   idProject: project.id
 })
 ---

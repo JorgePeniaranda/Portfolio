@@ -3,7 +3,7 @@ import type {Collaborator, Stack} from "@prisma/client";
 
 import {apiClient} from "@/helpers/client/axios";
 
-export async function getAllCollaboratorByProjectId({
+export async function getCollaboratorsByAssociatedProjects({
   idProject,
   pagination,
 }: {

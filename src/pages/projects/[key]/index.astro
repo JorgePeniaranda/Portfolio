@@ -14,7 +14,7 @@ import {
   SetHexColorTransparency
 } from '@/helpers/common/color'
 import { isDefined } from '@/helpers/guards/is-defined'
-import { getAllCollaboratorByProjectId } from '@/services/collaborator/getAllCollaboratorByProjectId'
+import { getCollaboratorsByAssociatedProjects } from '@/services/collaborator/getCollaboratorsByAssociatedProjects'
 import { getAllProjects } from '@/services/project/getAllProjects'
 import { getProjectByKey } from '@/services/project/getProjectByKey'
 import { getAllStackMinByProjectId } from '@/services/stack/getAllStackByProjectId'
@@ -52,7 +52,7 @@ if (!project) {
 const associatedStacks = await getAllStackMinByProjectId({
   idProject: project.id
 })
-const associatedCollaborators = await getAllCollaboratorByProjectId({
+const associatedCollaborators = await getCollaboratorsByAssociatedProjects({
   idProject: project.id
 })
 
