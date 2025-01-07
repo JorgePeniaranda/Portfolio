@@ -18,7 +18,6 @@ import {STACK_CATEGORY_TRANSCRIPTIONS, STACK_TYPE_TRANSCRIPTIONS} from "@/consta
 import {useToast} from "@/hooks/use-toast";
 import {StackUpdateSchema} from "@/schemas/stack/update";
 import {putStack} from "@/services/stack/putStack";
-import {safeReload} from "@/helpers/common/safe-reload";
 
 export function UpdateStackForm({
   currentStack,
@@ -27,24 +26,20 @@ export function UpdateStackForm({
   currentStack: Stack;
   disableForm?: boolean;
 }) {
+  // Get the toast function from the useToast hook
   const {toast} = useToast();
+
+  // Create a form to update the stack
   const form = useForm<StackUpdateSchema>({
     resolver: zodResolver(StackUpdateSchema),
     defaultValues: currentStack,
   });
 
   const onSubmit = async (values: StackUpdateSchema) => {
+    // Send request to update the stack
     const response = await putStack(values);
 
-    if (response.success === true) {
-      form.reset();
-      toast({
-        title: "Stack actualizado",
-        description: response.message,
-        className: "bg-green-500",
-      });
-    }
-
+    // If the request was unsuccessful, show an error toast and exit
     if (response.success === false) {
       toast({
         title: "Error al actualizar stack",
@@ -53,9 +48,12 @@ export function UpdateStackForm({
       });
     }
 
-    safeReload();
-
-    return;
+    // If the request was successful, show a success toast
+    toast({
+      title: "Stack actualizado",
+      description: response.message,
+      className: "bg-green-500",
+    });
   };
 
   return (

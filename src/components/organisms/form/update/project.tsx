@@ -25,7 +25,6 @@ import {cn} from "@/helpers/common/classnames";
 import {useToast} from "@/hooks/use-toast";
 import {ProjectUpdateSchema} from "@/schemas/project/update";
 import {putProject} from "@/services/project/putProject";
-import {safeReload} from "@/helpers/common/safe-reload";
 
 export function UpdateProjectForm({
   currentProject,
@@ -34,35 +33,36 @@ export function UpdateProjectForm({
   currentProject: Project;
   disableForm?: boolean;
 }) {
+  // Get the toast function from the useToast hook
   const {toast} = useToast();
+
+  // Create a form to update the project
   const form = useForm<ProjectUpdateSchema>({
     resolver: zodResolver(ProjectUpdateSchema),
     defaultValues: currentProject,
   });
 
   const onSubmit = async (values: ProjectUpdateSchema) => {
+    // Send request to update the project
     const response = await putProject(values);
 
-    if (response.success === true) {
-      form.reset();
-      toast({
-        title: "Proyecto creado",
-        description: response.message,
-        className: "bg-green-500",
-      });
-    }
-
+    // If the request was unsuccessful, show an error toast and exit
     if (response.success === false) {
       toast({
         title: "Error al crear proyecto",
         description: response.message,
         className: "bg-red-500",
       });
+
+      return;
     }
 
-    safeReload();
-
-    return;
+    // If the request was successful, show a success toast
+    toast({
+      title: "Proyecto creado",
+      description: response.message,
+      className: "bg-green-500",
+    });
   };
 
   return (

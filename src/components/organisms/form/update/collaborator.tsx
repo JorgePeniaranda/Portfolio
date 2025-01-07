@@ -10,7 +10,6 @@ import {Input} from "@/components/ui/input";
 import {useToast} from "@/hooks/use-toast";
 import {CollaboratorUpdateSchema} from "@/schemas/collaborator/update";
 import {putCollaborator} from "@/services/collaborator/putCollaborator";
-import {safeReload} from "@/helpers/common/safe-reload";
 
 export function UpdateCollaboratorForm({
   currentCollaborator,
@@ -19,35 +18,36 @@ export function UpdateCollaboratorForm({
   currentCollaborator: Collaborator;
   disableForm?: boolean;
 }) {
+  // Get the toast function from the useToast hook
   const {toast} = useToast();
+
+  // Create a form to update the collaborator
   const form = useForm<CollaboratorUpdateSchema>({
     resolver: zodResolver(CollaboratorUpdateSchema),
     defaultValues: currentCollaborator,
   });
 
   const onSubmit = async (values: CollaboratorUpdateSchema) => {
+    // Send request to update the collaborator
     const response = await putCollaborator(values);
 
-    if (response.success === true) {
-      form.reset();
-      toast({
-        title: "Colaborador actualizado",
-        description: response.message,
-        className: "bg-green-500",
-      });
-    }
-
+    // If the request was unsuccessful, show an error toast and exit
     if (response.success === false) {
       toast({
         title: "Error al actualizar colaborador",
         description: response.message,
         className: "bg-red-500",
       });
+
+      return;
     }
 
-    safeReload();
-
-    return;
+    // If the request was successful, show a success toast
+    toast({
+      title: "Colaborador actualizado",
+      description: response.message,
+      className: "bg-green-500",
+    });
   };
 
   return (
