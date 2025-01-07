@@ -8,20 +8,20 @@ import {RequestHandler} from "@/helpers/common/request-handler";
 import {fromPaginationRequestToPrismaPagination} from "@/mappers/common/fromPaginationRequestToPrismaPagination";
 
 /**
- * GET handler to fetch a paginated list of collaborators.
+ * GET handler to fetch a paginated list of projects.
  * - Pagination is optional. If provided, it must be a positive numeric value greater than 0.
  */
 export const GET: APIRoute = ({request, params}) => {
   return RequestHandler(
     async () => {
-      const idProject = z.coerce.number().parse(params.idProject);
+      const idStack = z.coerce.number().parse(params.idStack);
       const paginationParams = BuildPaginationByURL(request.url);
 
-      const response = await databaseClient.collaborator.findMany({
+      const response = await databaseClient.project.findMany({
         where: {
-          associatedProjects: {
+          associatedStacks: {
             some: {
-              id: idProject,
+              id: idStack,
             },
           },
         },
@@ -30,7 +30,7 @@ export const GET: APIRoute = ({request, params}) => {
 
       return {
         success: true,
-        message: "Collaborators fetched successfully",
+        message: "Projects fetched successfully",
         data: response,
       };
     },
