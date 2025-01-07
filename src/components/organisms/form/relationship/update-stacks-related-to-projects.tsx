@@ -24,8 +24,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {useToast} from "@/hooks/use-toast";
-import {patchAddRelationWithStackFromProject} from "@/services/project/patchAddRelationWithStackFromProject";
-import {patchDeleteRelationWithStackFromProject} from "@/services/project/patchDeleteRelationWithStackFromProject";
+import {patchAddRelationWithStackFromProject} from "@/services/project/patchProjectAddAssociatedStack";
+import {patchProjectRemoveAssociatedStack} from "@/services/project/patchProjectRemoveAssociatedStack";
 
 export function UpdateStacksRelatedToProject({
   currentProject,
@@ -74,7 +74,7 @@ export function UpdateStacksRelatedToProject({
   };
 
   const onRemoveStack = async (stackId: number) => {
-    const response = await patchDeleteRelationWithStackFromProject({
+    const response = await patchProjectRemoveAssociatedStack({
       idFrom: currentProject.id,
       idTo: stackId,
     });

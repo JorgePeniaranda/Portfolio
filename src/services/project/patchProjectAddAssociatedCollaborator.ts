@@ -4,11 +4,11 @@ import type {Project} from "@prisma/client";
 
 import axios from "axios";
 
-export async function patchDeleteRelationWithStackFromProject(
+export async function patchProjectAddAssociatedCollaborator(
   data: RelationshipsSchema,
 ): Promise<ApiResponse<Project>> {
   const {data: response} = await axios.patch<ApiResponse<Project>>(
-    "/api/project/relations/stack/delete",
+    "/api/project/relations/collaborator/add",
     data,
   );
 

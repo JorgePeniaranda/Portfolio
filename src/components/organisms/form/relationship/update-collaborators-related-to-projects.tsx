@@ -25,8 +25,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {useToast} from "@/hooks/use-toast";
-import {patchAddRelationWithCollaboratorFromProject} from "@/services/project/patchAddRelationWithCollaboratorFromProject";
-import {patchDeleteRelationWithCollaboratorFromProject} from "@/services/project/patchDeleteRelationWithCollaboratorFromProject";
+import {patchProjectAddAssociatedCollaborator} from "@/services/project/patchProjectAddAssociatedCollaborator";
+import {patchProjectRemoveAssociatedCollaborator} from "@/services/project/patchProjectRemoveAssociatedCollaborator";
 
 export function UpdateCollaboratorRelatedToProject({
   currentProject,
@@ -47,7 +47,7 @@ export function UpdateCollaboratorRelatedToProject({
   });
 
   const onAddCollaborator = async (values: RelationshipsSchema) => {
-    const response = await patchAddRelationWithCollaboratorFromProject({
+    const response = await patchProjectAddAssociatedCollaborator({
       idFrom: Number(values.idFrom),
       idTo: Number(values.idTo),
     });
@@ -75,7 +75,7 @@ export function UpdateCollaboratorRelatedToProject({
   };
 
   const onRemoveCollaborator = async (collaboratorId: number) => {
-    const response = await patchDeleteRelationWithCollaboratorFromProject({
+    const response = await patchProjectRemoveAssociatedCollaborator({
       idFrom: currentProject.id,
       idTo: collaboratorId,
     });
