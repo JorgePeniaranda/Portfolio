@@ -1,12 +1,13 @@
 ---
 import { StackDrawer } from '@/components/organisms/drawer/stack-drawer'
 import { ENV } from '@/constants/env'
-import { getAllStackWithRelationsAndProjectsMin } from '@/services/stack/getAllStackWithRelationsAndProjectsMin'
-import { getStackWithRelationsAndProjectsMinByKey } from '@/services/stack/getStackWithRelationsAndProjectsMinById'
+import { getAllStack } from '@/services/stack/getAllStack'
+import { getStackByKey } from '@/services/stack/getStackByKey'
 import Base from '../index.astro'
+import { getAllProjectsRelatedWithStack } from '@/services/project/getAllProjectsRelatedWithStack'
 
 export async function getStaticPaths() {
-  const stacks = await getAllStackWithRelationsAndProjectsMin()
+  const stacks = await getAllStack()
 
   const paths = stacks.map(stack => ({
     params: { key: stack.key },
@@ -18,7 +19,7 @@ export async function getStaticPaths() {
 
 let stack
 if (ENV.isServerSideEnable) {
-  stack = await getStackWithRelationsAndProjectsMinByKey({
+  stack = await getStackByKey({
     key: Astro.params.key
   })
 } else {
@@ -31,11 +32,16 @@ if (!stack) {
     error: new Error('Stack not found')
   }
 }
+
+const relatedProjects = await getAllProjectsRelatedWithStack({
+  idStack: stack.id
+})
 ---
 
 <Base />
 <StackDrawer
   stack={stack}
+  associatedProjects={relatedProjects}
   drawerProps={{
     defaultOpen: true
   }}

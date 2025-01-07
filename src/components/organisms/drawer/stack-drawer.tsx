@@ -14,27 +14,28 @@ import {isDefined, isNotDefined} from "@/helpers/guards/is-defined";
  * It also allows navigation to a specific site and preserves state or navigates back based on the provided `returnToSiteOnClose` property.
  *
  * @param {Object} props - Component properties.
+ * @param {Stack} props.stack - Stack data to be displayed in the drawer, including associated projects.
+ * @param {Project[]} props.associatedProjects - Associated projects with current stack.
  * @param {React.ReactNode} [props.triggerChild] - Optional React node acting as a trigger to open the drawer.
  * @param {React.ComponentProps<typeof DrawerPrimitive.Root>} [props.drawerProps] - Optional props for controlling the DrawerPrimitive component, such as open state, close behavior, etc.
  * @param {Object} [props.returnToSiteOnClose] - Optional configuration for URL navigation when the drawer is closed.
  * @param {string} props.returnToSiteOnClose.site - The URL to navigate to when the drawer is closed.
  * @param {boolean} props.returnToSiteOnClose.keepState - Flag to indicate if the application state should be preserved when navigating to `site`.
- * @param {Stack & {associatedProjects: Pick<Project, "id" | "key" | "name" | "logoUrl">[]}} props.stack - Stack data to be displayed in the drawer, including associated projects.
  */
 export function StackDrawer({
-  triggerChild,
   stack,
+  associatedProjects,
+  triggerChild,
   drawerProps,
   returnToSiteOnClose,
 }: {
+  stack: Stack;
+  associatedProjects: Project[];
   triggerChild?: React.ReactNode;
   drawerProps?: React.ComponentProps<typeof DrawerPrimitive.Root>;
   returnToSiteOnClose?: {
     site: string;
     keepState: boolean;
-  };
-  stack: Stack & {
-    associatedProjects: Pick<Project, "id" | "key" | "name" | "logoUrl">[];
   };
 }) {
   const handleDrawerClose = () => {
@@ -88,13 +89,13 @@ export function StackDrawer({
           )}
 
           {/* Related projects (if any) */}
-          {stack.associatedProjects.length > 0 && (
+          {associatedProjects.length > 0 && (
             <article className="space-y-1">
               <h4 className="text-lg font-bold underline underline-offset-2">
                 Proyectos relacionados:
               </h4>
               <ul className="flex flex-col gap-2">
-                {stack.associatedProjects?.map((project) => (
+                {associatedProjects?.map((project) => (
                   <li key={project.id}>
                     <a
                       className="flex items-center gap-2 rounded-md transition-all ease-linear hover:translate-x-2"

@@ -2,14 +2,15 @@
 import Layout from '@/components/layouts/base.astro'
 import { DashboardLayout } from '@/components/layouts/dashboard-layout'
 import { UpdateCollaboratorForm } from '@/components/organisms/form/update-collaborator'
+import { UpdateProjectsRelatedToCollaborator } from '@/components/organisms/form/relationship/update-projects-related-to-collaborator'
 import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
 import { ENV } from '@/constants/env'
-import { getAllCollaboratorWithProjectsMin } from '@/services/collaborator/getAllCollaboratorWithProjectsMin'
-import { getCollaboratorWithProjectsMinById } from '@/services/collaborator/getCollaboratorWithProjectsMinById'
-import { getAvailableProjectsToAddRelationshipToCollaborators } from '@/services/project/getAvailableProjectsToAddRelationshipToCollaborators'
+import { getAllCollaborator } from '@/services/collaborator/getAllCollaborator'
+import { getCollaboratorById } from '@/services/collaborator/getCollaboratorById'
+import { getAllProjectsRelatedWithCollaborator } from '@/services/project/getAllProjectsRelatedWithCollaborator'
 
 export async function getStaticPaths() {
-  const collaborators = await getAllCollaboratorWithProjectsMin()
+  const collaborators = await getAllCollaborator()
 
   const paths = collaborators.map(collaborator => ({
     params: { id: collaborator.id },
@@ -21,7 +22,7 @@ export async function getStaticPaths() {
 
 let collaborator
 if (ENV.isServerSideEnable) {
-  collaborator = await getCollaboratorWithProjectsMinById({
+  collaborator = await getCollaboratorById({
     id: Number(Astro.params.id)
   })
 } else {
@@ -35,9 +36,12 @@ if (!collaborator) {
   }
 }
 
+const associatedProjects = await getAllProjectsRelatedWithCollaborator({
+  idCollaborator: collaborator.id
+})
 const availableProjects =
-  await getAvailableProjectsToAddRelationshipToCollaborators({
-    idStack: collaborator.id
+  await getAllProjectsRelatedWithCollaborator({
+    idCollaborator: collaborator.id
   })
 ---
 
@@ -52,10 +56,21 @@ const availableProjects =
       <h1 class="text-4xl font-medium">Editar Colaborador</h1>
       <UpdateCollaboratorForm
         currentCollaborator={collaborator}
-        availableProjects={availableProjects}
         disableForm={ENV.isServerSideEnable === false}
         client:load
       />
+      <div class="mt-10">
+        <h2 class="text-3xl font-medium">Editar relaciones</h2>
+        <div class="mx-5 mt-5">
+          <h3 class="text-3xl font-medium">Proyectos</h3>
+          <UpdateProjectsRelatedToCollaborator 
+            associatedProjects={associatedProjects} 
+            availableProject={availableProjects} 
+            currentCollaborator={collaborator}
+            client:load
+          />
+        </div>
+      </div>
     </main>
   </DashboardLayout>
 </Layout>

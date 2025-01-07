@@ -3,14 +3,14 @@ import type {Collaborator, Project} from "@prisma/client";
 
 import {apiClient} from "@/helpers/client/axios";
 
-export async function getCollaboratorsMinNotAssociatedWithProject({
+export async function getCollaboratorsNotAssociatedWithProject({
   idProject,
   pagination,
 }: {
   idProject: Project["id"];
   pagination?: PaginationRequest;
-}): Promise<Pick<Collaborator, "id" | "nickname" | "githubUsername">[]> {
-  const {data: response} = await apiClient.get<ApiResponse<Collaborator[]>>(
+}): Promise<Array<Collaborator>> {
+  const {data: response} = await apiClient.get<ApiResponse<Array<Collaborator>>>(
     `api/collaborator/get/not-related/project/${idProject}`,
     {
       params: pagination,

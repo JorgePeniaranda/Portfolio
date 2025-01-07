@@ -6,21 +6,25 @@ import { Breadcrumb, type IBreadCrumb } from '@/components/organisms/breadcrumb'
 import { ENV } from '@/constants/env'
 import { ProjectDetailsStyles } from '@/constants/styles'
 import {
-  PROJECT_STATUS_TRANSCRIPTIONS,
-  STACK_CATEGORY_TRANSCRIPTIONS
+PROJECT_STATUS_TRANSCRIPTIONS,
+STACK_CATEGORY_TRANSCRIPTIONS
 } from '@/constants/transcriptions'
+import {
+GetTextColorForBackground,
+SetHexColorTransparency
+} from '@/helpers/common/color'
 import { isDefined } from '@/helpers/guards/is-defined'
-import { getAllProjectsWithStackAndCollaborators } from '@/services/project/getAllProjectsWithStackAndCollaborators'
-import { getProjectWithStackAndCollaboratorsByKey } from '@/services/project/getProjectWithStackAndCollaboratorsByKey'
+import { getAllCollaboratorByProjectId } from '@/services/collaborator/getAllCollaboratorByProjectId'
+import { getAllProjects } from '@/services/project/getAllProjects'
+import { getProjectByKey } from '@/services/project/getProjectByKey'
+import { getAllStackMinByProjectId } from '@/services/stack/getAllStackByProjectId'
 import type { GetStaticPaths } from 'astro'
 import moment from 'moment'
-import {
-  SetHexColorTransparency,
-  GetTextColorForBackground
-} from '@/helpers/common/color'
 
+
+// MARK: - Static paths
 export const getStaticPaths = (async () => {
-  const projects = await getAllProjectsWithStackAndCollaborators()
+  const projects = await getAllProjects()
 
   return projects.map(project => ({
     params: { key: project.key },
@@ -28,9 +32,10 @@ export const getStaticPaths = (async () => {
   }))
 }) satisfies GetStaticPaths
 
+// MARK: - Fetching project data
 let project
 if (ENV.isServerSideEnable) {
-  project = await getProjectWithStackAndCollaboratorsByKey({
+  project = await getProjectByKey({
     key: Astro.params.key
   })
 } else {
@@ -43,6 +48,14 @@ if (!project) {
     error: new Error('Project not found')
   }
 }
+
+// MARK: - Fetching associated data
+const associatedStacks = await getAllStackMinByProjectId({
+  idProject: project.id
+})
+const associatedCollaborators = await getAllCollaboratorByProjectId({
+  idProject: project.id
+})
 
 const { StackStyle, StatusStyle } = ProjectDetailsStyles
 
@@ -130,12 +143,12 @@ const textColor = GetTextColorForBackground(project.primaryColor)
         </article>
         <article class="mt-5 flex-1">
           <ProjectAccordion
-            collaborators={project.associatedCollaborators}
+            collaborators={associatedCollaborators}
             goals={project.goals}
             contributions={project.contributions}
             demoUrl={project.demoUrl}
             githubUrl={project.githubUrl}
-            stackCategory={project.associatedStacks}
+            stackCategory={associatedStacks}
             client:load
           />
         </article>

@@ -1,13 +1,21 @@
+import type {ApiResponse, PaginationRequest} from "@/types/responses";
 import type {Stack} from "@prisma/client";
 
-import {databaseClient} from "@/helpers/client/prisma";
+import {apiClient} from "@/helpers/client/axios";
 
-export async function getAllStackMin(): Promise<Pick<Stack, "id" | "name" | "iconUrl">[]> {
-  return await databaseClient.stack.findMany({
-    select: {
-      id: true,
-      name: true,
-      iconUrl: true,
+export type IGetAllStackMin = Array<Pick<Stack, "id" | "name" | "iconUrl">>;
+
+export async function getAllStackMin(pagination?: PaginationRequest): Promise<IGetAllStackMin> {
+  const {data: response} = await apiClient.get<ApiResponse<IGetAllStackMin>>(
+    "/api/collaborator/get/min/all",
+    {
+      params: pagination,
     },
-  });
+  );
+
+  if (response.success === false) {
+    throw new Error(response.message);
+  }
+
+  return response?.data ?? [];
 }

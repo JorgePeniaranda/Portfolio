@@ -1,16 +1,20 @@
 ---
 import Layout from '@/components/layouts/base.astro'
 import { DashboardLayout } from '@/components/layouts/dashboard-layout'
+import { UpdateCollaboratorRelatedToProject } from '@/components/organisms/form/relationship/update-collaborators-related-to-projects'
+import { UpdateStacksRelatedToProject } from '@/components/organisms/form/relationship/update-stacks-related-to-projects'
 import { UpdateProjectForm } from '@/components/organisms/form/update-project'
 import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
 import { ENV } from '@/constants/env'
-import { getCollaboratorsMinNotAssociatedWithProject } from '@/services/collaborator/getAvailableCollaboratorsToAddRelationshipToProject'
-import { getAllProjectsWithStackAndCollaborators } from '@/services/project/getAllProjectsWithStackAndCollaborators'
-import { getProjectWithStackAndCollaboratorsById } from '@/services/project/getProjectWithStackAndCollaboratorsById'
+import { getAllCollaboratorByProjectId } from '@/services/collaborator/getAllCollaboratorByProjectId'
+import { getCollaboratorsNotAssociatedWithProject } from '@/services/collaborator/getAvailableCollaboratorsToAddRelationshipToProject'
+import { getAllProjects } from '@/services/project/getAllProjects'
+import { getProjectById } from '@/services/project/getProjectById'
+import { getAllStackMinByProjectId } from '@/services/stack/getAllStackByProjectId'
 import { getAvailableStacksToAddRelationshipToProject } from '@/services/stack/getAvailableStacksToAddRelationshipToProject'
 
 export async function getStaticPaths() {
-  const projects = await getAllProjectsWithStackAndCollaborators()
+  const projects = await getAllProjects()
 
   const paths = projects.map(project => ({
     params: { id: project.id },
@@ -22,7 +26,7 @@ export async function getStaticPaths() {
 
 let project
 if (ENV.isServerSideEnable) {
-  project = await getProjectWithStackAndCollaboratorsById({
+  project = await getProjectById({
     id: Number(Astro.params.id)
   })
 } else {
@@ -36,11 +40,17 @@ if (!project) {
   }
 }
 
+const relatedStacks = await getAllStackMinByProjectId({
+  idProject: project.id
+})
+const relatedCollaborators = await getAllCollaboratorByProjectId({
+  idProject: project.id
+})
 const availableStacks = await getAvailableStacksToAddRelationshipToProject({
   idProject: project.id
 })
 const availableCollaborators =
-  await getCollaboratorsMinNotAssociatedWithProject({
+  await getCollaboratorsNotAssociatedWithProject({
     idProject: project.id
   })
 ---
@@ -54,11 +64,20 @@ const availableCollaborators =
       <h1 class="text-4xl font-medium">Editar de Proyecto</h1>
       <UpdateProjectForm
         currentProject={project}
-        availableStacks={availableStacks}
-        availableCollaborators={availableCollaborators}
         disableForm={ENV.isServerSideEnable === false}
         client:load
       />
+      <div class="mt-10">
+        <h2 class="text-3xl font-medium">Editar relaciones</h2>
+        <div class="mx-5 mt-5">
+          <h3 class="text-3xl font-medium">Stack</h3>
+          <UpdateStacksRelatedToProject associatedStacks={relatedStacks} availableStacks={availableStacks} currentProject={project} client:load/>
+        </div>
+        <div class="mx-5 mt-5">
+          <h3 class="text-3xl font-medium">Colaboradores</h3>
+          <UpdateCollaboratorRelatedToProject associatedCollaborators={relatedCollaborators} availableCollaborators={availableCollaborators} currentProject={project} client:load/>
+        </div>
+      </div>
     </main>
   </DashboardLayout>
 </Layout>

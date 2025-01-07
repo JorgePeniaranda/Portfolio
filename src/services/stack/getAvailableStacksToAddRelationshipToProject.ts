@@ -1,24 +1,25 @@
+import type {ApiResponse, PaginationRequest} from "@/types/responses";
 import type {Project, Stack} from "@prisma/client";
 
-import {databaseClient} from "@/helpers/client/prisma";
+import {apiClient} from "@/helpers/client/axios";
 
 export async function getAvailableStacksToAddRelationshipToProject({
   idProject,
+  pagination,
 }: {
   idProject: Project["id"];
-}): Promise<Pick<Stack, "id" | "name" | "iconUrl">[]> {
-  return await databaseClient.stack.findMany({
-    where: {
-      associatedProjects: {
-        none: {
-          id: idProject,
-        },
-      },
+  pagination?: PaginationRequest;
+}): Promise<Stack[]> {
+  const {data: response} = await apiClient.get<ApiResponse<Array<Stack>>>(
+    `api/stack/get/not-related/project/${idProject}`,
+    {
+      params: pagination,
     },
-    select: {
-      id: true,
-      name: true,
-      iconUrl: true,
-    },
-  });
+  );
+
+  if (response.success === false) {
+    throw new Error(response.message);
+  }
+
+  return response?.data ?? [];
 }

@@ -3,15 +3,14 @@ import type {Collaborator} from "@prisma/client";
 
 import {apiClient} from "@/helpers/client/axios";
 
-export type IGetAllCollaboratorMinResponse = Pick<
-  Collaborator,
-  "id" | "nickname" | "githubUsername"
+export type IGetAllCollaboratorMinResponse = Array<
+  Pick<Collaborator, "id" | "nickname" | "githubUsername">
 >;
 
 export async function getAllCollaboratorMin(
   pagination?: PaginationRequest,
-): Promise<IGetAllCollaboratorMinResponse[]> {
-  const {data: response} = await apiClient.get<ApiResponse<Collaborator[]>>(
+): Promise<IGetAllCollaboratorMinResponse> {
+  const {data: response} = await apiClient.get<ApiResponse<IGetAllCollaboratorMinResponse>>(
     "/api/collaborator/get/min/all",
     {
       params: pagination,

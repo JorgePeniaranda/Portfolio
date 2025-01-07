@@ -2,13 +2,18 @@
 import Layout from '@/components/layouts/base.astro'
 import { DashboardLayout } from '@/components/layouts/dashboard-layout'
 import { ShowProjectForm } from '@/components/organisms/form/show-project'
+import { CollaboratorRelationShipCard } from '@/components/molecules/cards/collaborator-relationship-card'
+import { Card, CardHeader } from '@/components/ui/card'
 import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
 import { ENV } from '@/constants/env'
-import { getAllProjectsWithStackAndCollaborators } from '@/services/project/getAllProjectsWithStackAndCollaborators'
-import { getProjectWithStackAndCollaboratorsById } from '@/services/project/getProjectWithStackAndCollaboratorsById'
+import { getAllCollaboratorByProjectId } from '@/services/collaborator/getAllCollaboratorByProjectId'
+import { getAllProjects } from '@/services/project/getAllProjects'
+import { getProjectById } from '@/services/project/getProjectById'
+import { getAllStackMinByProjectId } from '@/services/stack/getAllStackByProjectId'
 
+// MARK: - Static paths
 export async function getStaticPaths() {
-  const projects = await getAllProjectsWithStackAndCollaborators()
+  const projects = await getAllProjects()
 
   const paths = projects.map(project => ({
     params: { id: project.id },
@@ -18,9 +23,10 @@ export async function getStaticPaths() {
   return paths
 }
 
+// MARK: - Fetching project data
 let project
 if (ENV.isServerSideEnable) {
-  project = await getProjectWithStackAndCollaboratorsById({
+  project = await getProjectById({
     id: Number(Astro.params.id)
   })
 } else {
@@ -33,6 +39,14 @@ if (!project) {
     error: new Error('Project not found')
   }
 }
+
+// MARK: - Fetching associated data
+const associatedStacks = await getAllStackMinByProjectId({
+  idProject: project.id
+})
+const associatedCollaborators = await getAllCollaboratorByProjectId({
+  idProject: project.id
+})
 ---
 
 <Layout title={`Explora el proyecto ${project.name}`}>
@@ -43,6 +57,35 @@ if (!project) {
     <main class="w-full h-full flex flex-col pt-7 pl-7 container mx-auto gap-5">
       <h1 class="text-4xl font-medium">Detalles de Proyecto</h1>
       <ShowProjectForm currentProject={project} client:load />
+      <div class="mt-10">
+        <h2 class="text-3xl font-medium">Relaciones</h2>
+        <div class="mx-5 mt-5">
+          <h3 class="text-3xl font-medium">Stack</h3>
+          <ul class="mt-4 flex flex-wrap gap-4">
+            {associatedStacks?.map((stack) => (
+              <li>
+                <Card className="my-5 flex w-max flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
+                  <CardHeader className="relative">
+                    <img
+                      alt={`${stack.name} logo`}
+                      class="size-20 rounded-lg"
+                      src={stack.iconUrl}
+                    />
+                  </CardHeader>
+                </Card>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="mx-5 mt-5">
+          <h3 class="text-3xl font-medium">Colaboradores</h3>
+          <ul class="mt-4 flex flex-wrap gap-4">
+            {associatedCollaborators?.map((collaborator) => (
+              <CollaboratorRelationShipCard collaborator={collaborator} client:load/>
+            ))}
+          </ul>
+        </div>
+      </div>
     </main>
   </DashboardLayout>
 </Layout>

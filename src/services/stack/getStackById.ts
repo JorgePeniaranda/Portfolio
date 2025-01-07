@@ -1,11 +1,14 @@
+import type {ApiResponse} from "@/types/responses";
 import type {Stack} from "@prisma/client";
 
-import {databaseClient} from "@/helpers/client/prisma";
+import {apiClient} from "@/helpers/client/axios";
 
 export async function getStackById({id}: {id: Stack["id"]}): Promise<Stack | null> {
-  return await databaseClient.stack.findUnique({
-    where: {
-      id,
-    },
-  });
+  const {data: response} = await apiClient.get<ApiResponse<Stack | null>>(`api/projcets/get/${id}`);
+
+  if (response.success === false) {
+    throw new Error(response.message);
+  }
+
+  return response?.data ?? null;
 }

@@ -1,10 +1,10 @@
 import type {ApiResponse} from "@/types/responses";
-import type {Project} from "@prisma/client";
+import type {Stack} from "@prisma/client";
 
 import {apiClient} from "@/helpers/client/axios";
 
-export async function getProjectByKey({key}: {key: Project["key"]}): Promise<Project | null> {
-  const {data: response} = await apiClient.get<ApiResponse<Project | null>>(
+export async function getStackByKey({key}: {key: Stack["key"]}): Promise<Stack | null> {
+  const {data: response} = await apiClient.get<ApiResponse<Stack | null>>(
     `api/projcets/get/key/${key}`,
   );
 
