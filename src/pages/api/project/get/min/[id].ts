@@ -7,7 +7,6 @@ import {RequestHandler} from "@/helpers/common/request-handler";
 
 /**
  * GET handler to fetch a project.
- * - Pagination is optional. If provided, it must be a positive numeric value greater than 0.
  */
 export const GET: APIRoute = ({params}) => {
   return RequestHandler(
