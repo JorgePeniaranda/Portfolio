@@ -26,6 +26,7 @@ import {
 import {useToast} from "@/hooks/use-toast";
 import {patchAddRelationWithProjectFromStack} from "@/services/stack/patchAddRelationWithProjectFromStack";
 import {patchDeleteRelationWithProjectFromStack} from "@/services/stack/patchDeleteRelationWithProjectFromStack";
+import {safeReload} from "@/helpers/common/safe-reload";
 
 export function UpdateProjectsRelatedToStack({
   currentStack,
@@ -68,7 +69,7 @@ export function UpdateProjectsRelatedToStack({
       });
     }
 
-    window.location.reload();
+    safeReload();
 
     return;
   };

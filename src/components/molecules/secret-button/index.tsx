@@ -14,6 +14,7 @@ import {
 import {InputOTP, InputOTPSlot} from "@/components/ui/input-otp";
 import {useToast} from "@/hooks/use-toast";
 import {useSecretCodeStore} from "@/services/storage/secret-code";
+import {safeRedirect} from "@/helpers/common/safe-redirect";
 
 /**
  * Component that displays an interactive button to open a modal for entering a secret code.
@@ -53,7 +54,7 @@ export function SecretButton() {
       className: "bg-green-500",
     });
 
-    window.location.href = "/vault"; // Redirects to the secret dashboard.
+    safeRedirect("/vault"); // Redirects to the secret dashboard.
 
     return; // TO-DO: redirect to the secret dashboard
   };

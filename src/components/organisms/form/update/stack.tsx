@@ -18,6 +18,7 @@ import {STACK_CATEGORY_TRANSCRIPTIONS, STACK_TYPE_TRANSCRIPTIONS} from "@/consta
 import {useToast} from "@/hooks/use-toast";
 import {StackUpdateSchema} from "@/schemas/stack/update";
 import {putStack} from "@/services/stack/putStack";
+import {safeReload} from "@/helpers/common/safe-reload";
 
 export function UpdateStackForm({
   currentStack,
@@ -52,7 +53,7 @@ export function UpdateStackForm({
       });
     }
 
-    window.location.reload();
+    safeReload();
 
     return;
   };

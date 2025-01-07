@@ -5,6 +5,7 @@ import {Eye, Pen, Plus, Trash} from "lucide-react";
 import moment from "moment";
 import {useMemo} from "react";
 
+import {ConditionalAnchor} from "@/components/atoms/conditional-anchor";
 import {DataTable} from "@/components/organisms/data-table";
 import {selectionColumnDef} from "@/components/organisms/data-table/column-def/selection";
 import {DataTableColumnHeader} from "@/components/organisms/data-table/column/dropdown";
@@ -28,6 +29,7 @@ import {
   PROJECT_STATUS_TRANSCRIPTIONS,
   STACK_CATEGORY_TRANSCRIPTIONS,
 } from "@/constants/transcriptions";
+import {safeReload} from "@/helpers/common/safe-reload";
 import {isNotDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {deleteProject} from "@/services/project/deleteProject";
@@ -189,18 +191,6 @@ function TableHeaderComponent({table}: {table: Table<Project>}) {
     };
   }, [selectedRowModel]);
 
-  const handleCreate = () => {
-    window.location.href = "/vault/views/project/create";
-  };
-
-  const handleView = () => {
-    window.location.href = `/vault/views/project/${rows[0].original.id}`;
-  };
-
-  const handleEdit = () => {
-    window.location.href = `/vault/views/project/${rows[0].original.id}/edit`;
-  };
-
   const handleDelete = async () => {
     const response = await deleteProject(rows.map((row) => row.original.id));
 
@@ -211,7 +201,7 @@ function TableHeaderComponent({table}: {table: Table<Project>}) {
         className: "bg-green-500",
       });
 
-      window.location.reload();
+      safeReload();
     } else {
       toast({
         title: "Error al eliminar colaboradores",
@@ -235,14 +225,16 @@ function TableHeaderComponent({table}: {table: Table<Project>}) {
           <TooltipProvider>
             <Tooltip delayDuration={0}>
               <TooltipTrigger asChild>
-                <Button
-                  className="size-max rounded-full bg-lime-600 p-2 text-white hover:bg-lime-700 hover:text-white dark:text-white dark:hover:bg-lime-500"
+                <ConditionalAnchor
+                  className="inline-flex size-max items-center justify-center whitespace-nowrap rounded-full bg-lime-600 p-2 text-sm font-medium text-white ring-offset-background transition-colors hover:bg-lime-700 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 dark:text-white dark:hover:bg-lime-500"
                   disabled={selectedCount !== 0}
-                  variant="outline"
-                  onClick={handleCreate}
+                  disabledButtonProps={{
+                    className: "pointer-events-none opacity-50",
+                  }}
+                  href="/vault/views/project/create"
                 >
                   <Plus className="size-5" />
-                </Button>
+                </ConditionalAnchor>
               </TooltipTrigger>
               <TooltipContent>Crear</TooltipContent>
             </Tooltip>
@@ -252,14 +244,16 @@ function TableHeaderComponent({table}: {table: Table<Project>}) {
           <TooltipProvider>
             <Tooltip delayDuration={0}>
               <TooltipTrigger asChild>
-                <Button
-                  className="size-max rounded-full bg-blue-500 p-2 text-white hover:bg-blue-600 hover:text-white dark:text-white dark:hover:bg-blue-400"
-                  disabled={selectedCount !== 1}
-                  variant="outline"
-                  onClick={handleView}
+                <ConditionalAnchor
+                  className="inline-flex size-max items-center justify-center whitespace-nowrap rounded-full bg-blue-600 p-2 text-sm font-medium text-white ring-offset-background transition-colors hover:bg-blue-700 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 dark:text-white dark:hover:bg-blue-500"
+                  disabled={selectedCount !== 1 || isNotDefined(rows[0]?.original.id)}
+                  disabledButtonProps={{
+                    className: "pointer-events-none opacity-50",
+                  }}
+                  href={`/vault/views/project/${rows[0]?.original.id}`}
                 >
                   <Eye className="size-5" />
-                </Button>
+                </ConditionalAnchor>
               </TooltipTrigger>
               <TooltipContent>Ver detalles</TooltipContent>
             </Tooltip>
@@ -269,14 +263,16 @@ function TableHeaderComponent({table}: {table: Table<Project>}) {
           <TooltipProvider>
             <Tooltip delayDuration={0}>
               <TooltipTrigger asChild>
-                <Button
-                  className="size-max rounded-full bg-gray-500 p-2 text-white hover:bg-gray-600 hover:text-white dark:text-white dark:hover:bg-gray-400"
-                  disabled={selectedCount !== 1}
-                  variant="outline"
-                  onClick={handleEdit}
+                <ConditionalAnchor
+                  className="inline-flex size-max items-center justify-center whitespace-nowrap rounded-full bg-gray-600 p-2 text-sm font-medium text-white ring-offset-background transition-colors hover:bg-gray-700 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 dark:text-white dark:hover:bg-gray-500"
+                  disabled={selectedCount !== 1 || isNotDefined(rows[0]?.original.id)}
+                  disabledButtonProps={{
+                    className: "pointer-events-none opacity-50",
+                  }}
+                  href={`/vault/views/project/${rows[0]?.original.id}/edit`}
                 >
                   <Pen className="size-5" />
-                </Button>
+                </ConditionalAnchor>
               </TooltipTrigger>
               <TooltipContent>Editar</TooltipContent>
             </Tooltip>

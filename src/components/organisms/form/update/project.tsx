@@ -25,6 +25,7 @@ import {cn} from "@/helpers/common/classnames";
 import {useToast} from "@/hooks/use-toast";
 import {ProjectUpdateSchema} from "@/schemas/project/update";
 import {putProject} from "@/services/project/putProject";
+import {safeReload} from "@/helpers/common/safe-reload";
 
 export function UpdateProjectForm({
   currentProject,
@@ -59,7 +60,7 @@ export function UpdateProjectForm({
       });
     }
 
-    window.location.reload();
+    safeReload();
 
     return;
   };

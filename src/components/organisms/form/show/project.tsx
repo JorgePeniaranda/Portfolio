@@ -30,10 +30,6 @@ export function ShowProjectForm({currentProject}: {currentProject: Project}) {
     defaultValues: currentProject,
   });
 
-  const handleEdit = () => {
-    window.location.href = `/vault/views/project/${currentProject.id}/edit`;
-  };
-
   return (
     <Form {...form}>
       <form className="space-y-8">
@@ -331,14 +327,13 @@ export function ShowProjectForm({currentProject}: {currentProject: Project}) {
             )}
           />
         </div>
-        <Button
-          className="size-max gap-2 bg-gray-500 p-2 text-white hover:bg-gray-600 hover:text-white dark:text-white dark:hover:bg-gray-400"
-          variant="outline"
-          onClick={handleEdit}
+        <a
+          className="flex size-max items-center gap-2 rounded-md border border-input bg-gray-500 p-2 px-4 text-white hover:bg-gray-600 hover:text-white dark:text-white dark:hover:bg-gray-400"
+          href={`/vault/views/project/${currentProject.id}/edit`}
         >
           <Pen className="size-5" />
           <span className="text-lg">Editar</span>
-        </Button>
+        </a>
       </form>
     </Form>
   );

@@ -10,6 +10,7 @@ import {Input} from "@/components/ui/input";
 import {useToast} from "@/hooks/use-toast";
 import {CollaboratorUpdateSchema} from "@/schemas/collaborator/update";
 import {putCollaborator} from "@/services/collaborator/putCollaborator";
+import {safeReload} from "@/helpers/common/safe-reload";
 
 export function UpdateCollaboratorForm({
   currentCollaborator,
@@ -44,7 +45,7 @@ export function UpdateCollaboratorForm({
       });
     }
 
-    window.location.reload();
+    safeReload();
 
     return;
   };

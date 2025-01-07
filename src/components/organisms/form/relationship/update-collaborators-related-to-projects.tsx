@@ -27,6 +27,7 @@ import {
 import {useToast} from "@/hooks/use-toast";
 import {patchProjectAddAssociatedCollaborator} from "@/services/project/patchProjectAddAssociatedCollaborator";
 import {patchProjectRemoveAssociatedCollaborator} from "@/services/project/patchProjectRemoveAssociatedCollaborator";
+import {safeReload} from "@/helpers/common/safe-reload";
 
 export function UpdateCollaboratorRelatedToProject({
   currentProject,
@@ -69,7 +70,7 @@ export function UpdateCollaboratorRelatedToProject({
       });
     }
 
-    window.location.reload();
+    safeReload();
 
     return;
   };
@@ -96,7 +97,7 @@ export function UpdateCollaboratorRelatedToProject({
       });
     }
 
-    window.location.reload();
+    safeReload();
 
     return;
   };

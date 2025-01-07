@@ -27,6 +27,7 @@ import {isDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {ProjectCreateDefaultValues, ProjectCreateSchema} from "@/schemas/project/create";
 import {postProject} from "@/services/project/postProject";
+import {safeRedirect} from "@/helpers/common/safe-redirect";
 
 export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}) {
   const {toast} = useToast();
@@ -45,7 +46,7 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
     // This prevents issues that can arise from trying to redirect before React updates the DOM.
 
     if (isDefined(newProjectId)) {
-      window.location.href = `/vault/views/project/${newProjectId}`;
+      safeRedirect(`/vault/views/project/${newProjectId}`);
     }
   }, [newProjectId]);
 

@@ -4,7 +4,6 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Pen} from "lucide-react";
 import {useForm} from "react-hook-form";
 
-import {Button} from "@/components/ui/button";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
 import {CollaboratorUpdateSchema} from "@/schemas/collaborator/update";
@@ -14,10 +13,6 @@ export function ShowCollaboratorForm({currentCollaborator}: {currentCollaborator
     resolver: zodResolver(CollaboratorUpdateSchema),
     defaultValues: currentCollaborator,
   });
-
-  const handleEdit = () => {
-    window.location.href = `/vault/views/collaborators/${currentCollaborator.id}/edit`;
-  };
 
   return (
     <Form {...form}>
@@ -73,14 +68,13 @@ export function ShowCollaboratorForm({currentCollaborator}: {currentCollaborator
             )}
           />
         </div>
-        <Button
-          className="size-max gap-2 bg-gray-500 p-2 text-white hover:bg-gray-600 hover:text-white dark:text-white dark:hover:bg-gray-400"
-          variant="outline"
-          onClick={handleEdit}
+        <a
+          className="flex size-max items-center gap-2 rounded-md border border-input bg-gray-500 p-2 px-4 text-white hover:bg-gray-600 hover:text-white dark:text-white dark:hover:bg-gray-400"
+          href={`/vault/views/collaborators/${currentCollaborator.id}/edit`}
         >
           <Pen className="size-5" />
           <span className="text-lg">Editar</span>
-        </Button>
+        </a>
       </form>
     </Form>
   );

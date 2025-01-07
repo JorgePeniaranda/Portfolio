@@ -20,6 +20,7 @@ import {isDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {StackCreateDefaultValues, StackCreateSchema} from "@/schemas/stack/create";
 import {postStack} from "@/services/stack/postStack";
+import {safeRedirect} from "@/helpers/common/safe-redirect";
 
 export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) {
   const {toast} = useToast();
@@ -38,7 +39,7 @@ export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) 
     // This prevents issues that can arise from trying to redirect before React updates the DOM.
 
     if (isDefined(newStackId)) {
-      window.location.href = `/vault/views/project/${newStackId}`;
+      safeRedirect(`/vault/views/project/${newStackId}`);
     }
   }, [newStackId]);
 

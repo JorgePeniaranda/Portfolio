@@ -1,13 +1,11 @@
-import type {Collaborator} from "@prisma/client";
-
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Save} from "lucide-react";
 import {useForm} from "react-hook-form";
-import {useEffect, useState} from "react";
 
 import {Button} from "@/components/ui/button";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
+import {safeRedirect} from "@/helpers/common/safe-redirect";
 import {isDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {
@@ -22,20 +20,6 @@ export function CreateCollaboratorForm({disableForm = false}: {disableForm?: boo
     resolver: zodResolver(CollaboratorCreateSchema),
     defaultValues: CollaboratorCreateDefaultValues,
   });
-  /**
-   * `newCollaboratorId` stores the ID of the new collaborator, set when a collaborator is created.
-   * The user is then redirected to the collaborator view.
-   */
-  const [newCollaboratorId, setNewCollaboratorId] = useState<Collaborator["id"]>();
-
-  useEffect(() => {
-    // Redirect happens inside `useEffect` to ensure it occurs after the component has rendered.
-    // This prevents issues that can arise from trying to redirect before React updates the DOM.
-
-    if (isDefined(newCollaboratorId)) {
-      window.location.href = `/vault/views/collaborators/${newCollaboratorId}`;
-    }
-  }, [newCollaboratorId]);
 
   const onSubmit = async (values: CollaboratorCreateSchema) => {
     const response = await postCollaborator(values);
@@ -48,7 +32,9 @@ export function CreateCollaboratorForm({disableForm = false}: {disableForm?: boo
         className: "bg-green-500",
       });
 
-      setNewCollaboratorId(response.data?.id);
+      if (isDefined(response.data?.id)) {
+        safeRedirect(`/vault/views/collaborators/${response.data.id}`);
+      }
     }
 
     if (response.success === false) {

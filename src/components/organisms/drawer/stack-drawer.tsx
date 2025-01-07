@@ -7,6 +7,7 @@ import {Drawer as DrawerPrimitive} from "vaul";
 import {MessageDisplay} from "@/components/atoms/message-display";
 import {Drawer, DrawerClose, DrawerContent, DrawerTrigger} from "@/components/ui/drawer";
 import {isDefined, isNotDefined} from "@/helpers/guards/is-defined";
+import {safeRedirect} from "@/helpers/common/safe-redirect";
 
 /**
  * Component that renders an interactive drawer to display detailed information about a Stack.
@@ -46,7 +47,7 @@ export function StackDrawer({
         return;
       }
 
-      window.location.href = returnToSiteOnClose.site;
+      safeRedirect(returnToSiteOnClose.site);
     }
 
     // If drawerProps is not defined, exit the function
