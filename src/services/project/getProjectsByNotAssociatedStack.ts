@@ -3,15 +3,15 @@ import type {Collaborator, Project} from "@prisma/client";
 
 import {apiClient} from "@/helpers/client/axios";
 
-export async function getAllProjectsByCollaboratorId({
-  idCollaborator,
+export async function getProjectsByNotAssociatedStack({
+  idStack,
   pagination,
 }: {
-  idCollaborator: Collaborator["id"];
+  idStack: Collaborator["id"];
   pagination?: PaginationRequest;
-}): Promise<Project[]> {
+}): Promise<Array<Project>> {
   const {data: response} = await apiClient.get<ApiResponse<Project[]>>(
-    `/api/project/get/related/collaborator/${idCollaborator}`,
+    `/api/project/get/related/stack/${idStack}`,
     {
       params: pagination,
     },

@@ -1,17 +1,17 @@
 import type {ApiResponse, PaginationRequest} from "@/types/responses";
-import type {Collaborator, Project} from "@prisma/client";
+import type {Project, Stack} from "@prisma/client";
 
 import {apiClient} from "@/helpers/client/axios";
 
-export async function getAvailableProjectsToAddRelationshipToCollaborators({
-  idStack: idCollaborator,
+export async function getProjectsByAssociatedStack({
+  idStack,
   pagination,
 }: {
-  idStack: Collaborator["id"];
+  idStack: Stack["id"];
   pagination?: PaginationRequest;
-}): Promise<Array<Project>> {
+}): Promise<Project[]> {
   const {data: response} = await apiClient.get<ApiResponse<Project[]>>(
-    `/api/project/get/related/collaborator/${idCollaborator}`,
+    `/api/project/get/related/stack/${idStack}`,
     {
       params: pagination,
     },

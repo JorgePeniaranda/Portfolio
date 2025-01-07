@@ -1,13 +1,14 @@
 ---
 import Layout from '@/components/layouts/base.astro'
 import { DashboardLayout } from '@/components/layouts/dashboard-layout'
-import { UpdateCollaboratorForm } from '@/components/organisms/form/update-collaborator'
 import { UpdateProjectsRelatedToCollaborator } from '@/components/organisms/form/relationship/update-projects-related-to-collaborator'
+import { UpdateCollaboratorForm } from '@/components/organisms/form/update-collaborator'
 import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
 import { ENV } from '@/constants/env'
 import { getAllCollaborator } from '@/services/collaborator/getAllCollaborator'
 import { getCollaboratorById } from '@/services/collaborator/getCollaboratorById'
-import { getAllProjectsRelatedWithCollaborator } from '@/services/project/getAllProjectsRelatedWithCollaborator'
+import { getProjectsByAssociatedCollaborator } from '@/services/project/getProjectsByAssociatedCollaborator'
+import { getProjectsByNotAssociatedCollaborator } from '@/services/project/getProjectsByNotAssociatedCollaborator'
 
 export async function getStaticPaths() {
   const collaborators = await getAllCollaborator()
@@ -36,10 +37,10 @@ if (!collaborator) {
   }
 }
 
-const associatedProjects = await getAllProjectsRelatedWithCollaborator({
+const associatedProjects = await getProjectsByAssociatedCollaborator({
   idCollaborator: collaborator.id
 })
-const availableProjects = await getAllProjectsRelatedWithCollaborator({
+const availableProjects = await getProjectsByNotAssociatedCollaborator({
   idCollaborator: collaborator.id
 })
 ---

@@ -8,7 +8,7 @@ import { ENV } from '@/constants/env'
 import { isNotDefined } from '@/helpers/guards/is-defined'
 import { getAllCollaborator } from '@/services/collaborator/getAllCollaborator'
 import { getCollaboratorById } from '@/services/collaborator/getCollaboratorById'
-import { getAllProjectsRelatedWithCollaborator } from '@/services/project/getAllProjectsRelatedWithCollaborator'
+import { getProjectsByAssociatedCollaborator } from '@/services/project/getProjectsByAssociatedCollaborator'
 
 export async function getStaticPaths() {
   const collaborators = await getAllCollaborator()
@@ -37,7 +37,7 @@ if (!collaborator) {
   }
 }
 
-const associatedProjects = await getAllProjectsRelatedWithCollaborator({
+const associatedProjects = await getProjectsByAssociatedCollaborator({
   idCollaborator: collaborator.id
 })
 ---

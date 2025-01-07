@@ -4,7 +4,7 @@ import { ENV } from '@/constants/env'
 import { getAllStack } from '@/services/stack/getAllStack'
 import { getStackByKey } from '@/services/stack/getStackByKey'
 import Base from '../index.astro'
-import { getAllProjectsRelatedWithStack } from '@/services/project/getAllProjectsRelatedWithStack'
+import { getProjectsByAssociatedStack } from '@/services/project/getProjectsByAssociatedStack'
 
 export async function getStaticPaths() {
   const stacks = await getAllStack()
@@ -33,7 +33,7 @@ if (!stack) {
   }
 }
 
-const relatedProjects = await getAllProjectsRelatedWithStack({
+const relatedProjects = await getProjectsByAssociatedStack({
   idStack: stack.id
 })
 ---

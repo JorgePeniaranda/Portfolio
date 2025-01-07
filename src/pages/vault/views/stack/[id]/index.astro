@@ -6,7 +6,7 @@ import { Card, CardHeader } from '@/components/ui/card'
 import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
 import { ENV } from '@/constants/env'
 import { isNotDefined } from '@/helpers/guards/is-defined'
-import { getAllProjectsRelatedWithStack } from '@/services/project/getAllProjectsRelatedWithStack'
+import { getProjectsByAssociatedStack } from '@/services/project/getProjectsByAssociatedStack'
 import { getAllStack } from '@/services/stack/getAllStack'
 import { getStackById } from '@/services/stack/getStackById'
 
@@ -35,7 +35,7 @@ if (!stack) {
   }
 }
 
-const associatedProjects = await getAllProjectsRelatedWithStack({
+const associatedProjects = await getProjectsByAssociatedStack({
   idStack: stack.id
 })
 ---

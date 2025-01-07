@@ -4,8 +4,8 @@ import { DashboardLayout } from '@/components/layouts/dashboard-layout'
 import { UpdateStackForm } from '@/components/organisms/form/update-stack'
 import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
 import { ENV } from '@/constants/env'
-import { getAllProjectsRelatedWithStack } from '@/services/project/getAllProjectsRelatedWithStack'
-import { getAvailableProjectsToAddRelationshipToStack } from '@/services/project/getAvailableProjectsToAddRelationshipToStack'
+import { getProjectsByAssociatedStack } from '@/services/project/getProjectsByAssociatedStack'
+import { getProjectsByNotAssociatedStack } from '@/services/project/getProjectsByNotAssociatedStack'
 import { getAllStack } from '@/services/stack/getAllStack'
 import { getStackById } from '@/services/stack/getStackById'
 import { UpdateProjectsRelatedToStack } from '@/components/organisms/form/relationship/update-projects-related-to-stack'
@@ -35,10 +35,10 @@ if (!stack) {
   }
 }
 
-const associatedProjects = await getAllProjectsRelatedWithStack({
+const associatedProjects = await getProjectsByAssociatedStack({
   idStack: stack.id
 })
-const availableProjects = await getAvailableProjectsToAddRelationshipToStack({
+const availableProjects = await getProjectsByNotAssociatedStack({
   idStack: stack.id
 })
 ---
