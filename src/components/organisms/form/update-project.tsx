@@ -1,11 +1,5 @@
 import {zodResolver} from "@hookform/resolvers/zod";
-import {
-  ProjectStatus,
-  StackCategory,
-  type Collaborator,
-  type Project,
-  type Stack,
-} from "@prisma/client";
+import {ProjectStatus, StackCategory, type Project} from "@prisma/client";
 import {format} from "date-fns";
 import {CalendarIcon, Save} from "lucide-react";
 import {useForm} from "react-hook-form";

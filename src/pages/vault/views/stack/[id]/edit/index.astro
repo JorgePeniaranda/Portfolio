@@ -8,7 +8,7 @@ import { getAllProjectsRelatedWithStack } from '@/services/project/getAllProject
 import { getAvailableProjectsToAddRelationshipToStack } from '@/services/project/getAvailableProjectsToAddRelationshipToStack'
 import { getAllStack } from '@/services/stack/getAllStack'
 import { getStackById } from '@/services/stack/getStackById'
-import {UpdateProjectsRelatedToStack} from '@/components/organisms/form/relationship/update-projects-related-to-stack'
+import { UpdateProjectsRelatedToStack } from '@/components/organisms/form/relationship/update-projects-related-to-stack'
 
 export async function getStaticPaths() {
   const stacks = await getAllStack()
@@ -59,7 +59,12 @@ const availableProjects = await getAvailableProjectsToAddRelationshipToStack({
         <h2 class="text-3xl font-medium">Relaciones</h2>
         <div class="mx-5 mt-5">
           <h3 class="text-3xl font-medium">Proyectos</h3>
-          <UpdateProjectsRelatedToStack currentStack={stack} availableProject={availableProjects} associatedProjects={associatedProjects} client:load/>
+          <UpdateProjectsRelatedToStack
+            currentStack={stack}
+            availableProject={availableProjects}
+            associatedProjects={associatedProjects}
+            client:load
+          />
         </div>
       </div>
     </main>

@@ -1,8 +1,7 @@
-import type {Collaborator, Project, Stack} from "@prisma/client";
 import type {RelationshipsSchema} from "@/schemas/common/relationships";
+import type {Collaborator, Project} from "@prisma/client";
 
-import {X} from "lucide-react";
-import {Plus} from "lucide-react";
+import {Plus, X} from "lucide-react";
 import {useForm} from "react-hook-form";
 
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
@@ -25,8 +24,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {patchAddRelationWithCollaboratorFromProject} from "@/services/project/patchAddRelationWithCollaboratorFromProject";
 import {useToast} from "@/hooks/use-toast";
+import {patchAddRelationWithCollaboratorFromProject} from "@/services/project/patchAddRelationWithCollaboratorFromProject";
 import {patchDeleteRelationWithCollaboratorFromProject} from "@/services/project/patchDeleteRelationWithCollaboratorFromProject";
 
 export function UpdateCollaboratorRelatedToProject({

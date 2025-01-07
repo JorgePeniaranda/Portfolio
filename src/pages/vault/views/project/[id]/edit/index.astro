@@ -49,10 +49,9 @@ const relatedCollaborators = await getAllCollaboratorByProjectId({
 const availableStacks = await getAvailableStacksToAddRelationshipToProject({
   idProject: project.id
 })
-const availableCollaborators =
-  await getCollaboratorsNotAssociatedWithProject({
-    idProject: project.id
-  })
+const availableCollaborators = await getCollaboratorsNotAssociatedWithProject({
+  idProject: project.id
+})
 ---
 
 <Layout title={`Editar proyecto ${project.name}`}>
@@ -71,11 +70,21 @@ const availableCollaborators =
         <h2 class="text-3xl font-medium">Editar relaciones</h2>
         <div class="mx-5 mt-5">
           <h3 class="text-3xl font-medium">Stack</h3>
-          <UpdateStacksRelatedToProject associatedStacks={relatedStacks} availableStacks={availableStacks} currentProject={project} client:load/>
+          <UpdateStacksRelatedToProject
+            associatedStacks={relatedStacks}
+            availableStacks={availableStacks}
+            currentProject={project}
+            client:load
+          />
         </div>
         <div class="mx-5 mt-5">
           <h3 class="text-3xl font-medium">Colaboradores</h3>
-          <UpdateCollaboratorRelatedToProject associatedCollaborators={relatedCollaborators} availableCollaborators={availableCollaborators} currentProject={project} client:load/>
+          <UpdateCollaboratorRelatedToProject
+            associatedCollaborators={relatedCollaborators}
+            availableCollaborators={availableCollaborators}
+            currentProject={project}
+            client:load
+          />
         </div>
       </div>
     </main>

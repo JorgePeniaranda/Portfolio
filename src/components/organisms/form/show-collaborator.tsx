@@ -1,4 +1,4 @@
-import type {Collaborator, Project} from "@prisma/client";
+import type {Collaborator} from "@prisma/client";
 
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Pen} from "lucide-react";

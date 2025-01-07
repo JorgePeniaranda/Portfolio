@@ -62,27 +62,34 @@ const associatedCollaborators = await getAllCollaboratorByProjectId({
         <div class="mx-5 mt-5">
           <h3 class="text-3xl font-medium">Stack</h3>
           <ul class="mt-4 flex flex-wrap gap-4">
-            {associatedStacks?.map((stack) => (
-              <li>
-                <Card className="my-5 flex w-max flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
-                  <CardHeader className="relative">
-                    <img
-                      alt={`${stack.name} logo`}
-                      class="size-20 rounded-lg"
-                      src={stack.iconUrl}
-                    />
-                  </CardHeader>
-                </Card>
-              </li>
-            ))}
+            {
+              associatedStacks?.map(stack => (
+                <li>
+                  <Card className="my-5 flex w-max flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
+                    <CardHeader className="relative">
+                      <img
+                        alt={`${stack.name} logo`}
+                        class="size-20 rounded-lg"
+                        src={stack.iconUrl}
+                      />
+                    </CardHeader>
+                  </Card>
+                </li>
+              ))
+            }
           </ul>
         </div>
         <div class="mx-5 mt-5">
           <h3 class="text-3xl font-medium">Colaboradores</h3>
           <ul class="mt-4 flex flex-wrap gap-4">
-            {associatedCollaborators?.map((collaborator) => (
-              <CollaboratorRelationShipCard collaborator={collaborator} client:load/>
-            ))}
+            {
+              associatedCollaborators?.map(collaborator => (
+                <CollaboratorRelationShipCard
+                  collaborator={collaborator}
+                  client:load
+                />
+              ))
+            }
           </ul>
         </div>
       </div>

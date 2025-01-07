@@ -39,10 +39,9 @@ if (!collaborator) {
 const associatedProjects = await getAllProjectsRelatedWithCollaborator({
   idCollaborator: collaborator.id
 })
-const availableProjects =
-  await getAllProjectsRelatedWithCollaborator({
-    idCollaborator: collaborator.id
-  })
+const availableProjects = await getAllProjectsRelatedWithCollaborator({
+  idCollaborator: collaborator.id
+})
 ---
 
 <Layout title={`Editar el colaborador ${collaborator.nickname}`}>
@@ -63,9 +62,9 @@ const availableProjects =
         <h2 class="text-3xl font-medium">Editar relaciones</h2>
         <div class="mx-5 mt-5">
           <h3 class="text-3xl font-medium">Proyectos</h3>
-          <UpdateProjectsRelatedToCollaborator 
-            associatedProjects={associatedProjects} 
-            availableProject={availableProjects} 
+          <UpdateProjectsRelatedToCollaborator
+            associatedProjects={associatedProjects}
+            availableProject={availableProjects}
             currentCollaborator={collaborator}
             client:load
           />
