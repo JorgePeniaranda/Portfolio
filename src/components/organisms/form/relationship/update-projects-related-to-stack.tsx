@@ -2,6 +2,7 @@ import type {RelationshipsSchema} from "@/schemas/common/relationships";
 import type {Project, Stack} from "@prisma/client";
 
 import {Plus, X} from "lucide-react";
+import {useState} from "react";
 import {useForm} from "react-hook-form";
 
 import {Button} from "@/components/ui/button";
@@ -23,15 +24,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {isDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {patchAddRelationWithProjectFromStack} from "@/services/stack/patchAddRelationWithProjectFromStack";
 import {patchDeleteRelationWithProjectFromStack} from "@/services/stack/patchDeleteRelationWithProjectFromStack";
-import {safeReload} from "@/helpers/common/safe-reload";
 
 export function UpdateProjectsRelatedToStack({
   currentStack,
-  associatedProjects,
-  availableProject,
+  associatedProjects: initialAssociatedProjects,
+  availableProject: initialAvailableProject,
   disableForm,
 }: {
   currentStack: Stack;
@@ -39,7 +40,15 @@ export function UpdateProjectsRelatedToStack({
   availableProject: Project[];
   disableForm?: boolean;
 }) {
+  // Get the toast function from the useToast hook
   const {toast} = useToast();
+
+  // Initialize local state for associated and available projects
+  const [associatedProjects, setAssociatedProjects] =
+    useState<Project[]>(initialAssociatedProjects);
+  const [availableProject, setAvailableProject] = useState<Project[]>(initialAvailableProject);
+
+  // Create a form to relate a project to the stack
   const form = useForm<RelationshipsSchema>({
     defaultValues: {
       idFrom: currentStack.id,
@@ -47,58 +56,72 @@ export function UpdateProjectsRelatedToStack({
   });
 
   const onAddProject = async (values: RelationshipsSchema) => {
+    // Send request to associate the project to the stack
     const response = await patchAddRelationWithProjectFromStack({
       idFrom: Number(values.idFrom),
       idTo: Number(values.idTo),
     });
 
-    if (response.success === true) {
-      form.reset();
-      toast({
-        title: "Proyecto relacionado con el stack",
-        description: response.message,
-        className: "bg-green-500",
-      });
-    }
-
+    // If the request was unsuccessful, show an error toast and exit
     if (response.success === false) {
       toast({
         title: "Error al relacionar proyecto con el stack",
         description: response.message,
         className: "bg-red-500",
       });
+
+      return;
     }
 
-    safeReload();
+    // If the request was successful, reset the form and show a success toast
+    form.reset();
+    toast({
+      title: "Proyecto relacionado con el stack",
+      description: response.message,
+      className: "bg-green-500",
+    });
 
-    return;
+    // Update local state for associated and available projects
+    const findProject = availableProject.find((project) => project.id === Number(values.idTo));
+
+    if (isDefined(findProject)) {
+      setAssociatedProjects((prev) => [...prev, findProject]);
+      setAvailableProject((prev) => prev.filter((project) => project.id !== Number(values.idTo)));
+    }
   };
 
   const onRemoveProject = async (idProject: number) => {
+    // Send request to dissociate the project with the stack
     const response = await patchDeleteRelationWithProjectFromStack({
       idFrom: currentStack.id,
       idTo: idProject,
     });
 
-    if (response.success === true) {
-      toast({
-        title: "Proyecto eliminado",
-        description: response.message,
-        className: "bg-green-500",
-      });
-    }
-
+    // If the request was unsuccessful, show an error toast and exit
     if (response.success === false) {
       toast({
         title: "Error al eliminar proyecto",
         description: response.message,
         className: "bg-red-500",
       });
+
+      return;
     }
 
-    safeReload();
+    // If the request was successful, show a success toast
+    toast({
+      title: "Proyecto eliminado",
+      description: response.message,
+      className: "bg-green-500",
+    });
 
-    return;
+    // Update local state for associated and available projects
+    const findProject = associatedProjects.find((project) => project.id === idProject);
+
+    if (isDefined(findProject)) {
+      setAvailableProject((prev) => [...prev, findProject]);
+      setAssociatedProjects((prev) => prev.filter((project) => project.id !== idProject));
+    }
   };
 
   return (

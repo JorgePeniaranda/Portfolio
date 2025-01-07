@@ -1,7 +1,8 @@
-import type {Collaborator, Project} from "@prisma/client";
 import type {RelationshipsSchema} from "@/schemas/common/relationships";
+import type {Collaborator, Project} from "@prisma/client";
 
 import {Plus, X} from "lucide-react";
+import {useState} from "react";
 import {useForm} from "react-hook-form";
 
 import {Button} from "@/components/ui/button";
@@ -23,15 +24,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {isDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
+import {patchStackAddAssociatedProjects} from "@/services/collaborator/patchStackAddAssociatedProjects";
 import {patchStackRemoveAssociatedProjects} from "@/services/collaborator/patchStackRemoveAssociatedProjects";
-import {AssociatedProjects} from "@/services/collaborator/patchStackAddAssociatedProjects";
-import {safeReload} from "@/helpers/common/safe-reload";
 
 export function UpdateProjectsRelatedToCollaborator({
   currentCollaborator,
-  associatedProjects,
-  availableProject,
+  associatedProjects: initialAssociatedProjects,
+  availableProject: initialAvailableProject,
   disableForm,
 }: {
   currentCollaborator: Collaborator;
@@ -39,7 +40,15 @@ export function UpdateProjectsRelatedToCollaborator({
   availableProject: Project[];
   disableForm?: boolean;
 }) {
+  // Get the toast function from the useToast hook
   const {toast} = useToast();
+
+  // Initialize local state for associated and available projects
+  const [associatedProjects, setAssociatedProjects] =
+    useState<Project[]>(initialAssociatedProjects);
+  const [availableProject, setAvailableProject] = useState<Project[]>(initialAvailableProject);
+
+  // Create a form to relate a project to the collaborator
   const form = useForm<RelationshipsSchema>({
     defaultValues: {
       idFrom: currentCollaborator.id,
@@ -47,58 +56,72 @@ export function UpdateProjectsRelatedToCollaborator({
   });
 
   const onAddProject = async (values: RelationshipsSchema) => {
-    const response = await AssociatedProjects({
+    // Send request to associate the project to the collaborator
+    const response = await patchStackAddAssociatedProjects({
       idFrom: Number(values.idFrom),
       idTo: Number(values.idTo),
     });
 
-    if (response.success === true) {
-      form.reset();
-      toast({
-        title: "Proyecto relacionado con el colaborador",
-        description: response.message,
-        className: "bg-green-500",
-      });
-    }
-
+    // If the request was unsuccessful, show an error toast and exit
     if (response.success === false) {
       toast({
         title: "Error al relacionar proyecto con el colaborador",
         description: response.message,
         className: "bg-red-500",
       });
+
+      return;
     }
 
-    safeReload();
+    // If the request was successful, reset the form and show a success toast
+    form.reset();
+    toast({
+      title: "Proyecto relacionado con el colaborador",
+      description: response.message,
+      className: "bg-green-500",
+    });
 
-    return;
+    // Update local state for associated and available projects
+    const findProject = availableProject.find((project) => project.id === Number(values.idTo));
+
+    if (isDefined(findProject)) {
+      setAssociatedProjects((prev) => [...prev, findProject]);
+      setAvailableProject((prev) => prev.filter((project) => project.id !== Number(values.idTo)));
+    }
   };
 
   const onRemoveProject = async (idProject: number) => {
+    // Send request to dissociate the project from the collaborator
     const response = await patchStackRemoveAssociatedProjects({
       idFrom: currentCollaborator.id,
       idTo: idProject,
     });
 
-    if (response.success === true) {
-      toast({
-        title: "Proyecto eliminado",
-        description: response.message,
-        className: "bg-green-500",
-      });
-    }
-
+    // If the request was unsuccessful, show an error toast and exit
     if (response.success === false) {
       toast({
         title: "Error al eliminar proyecto",
         description: response.message,
         className: "bg-red-500",
       });
+
+      return;
     }
 
-    safeReload();
+    // If the request was successful, show a success toast
+    toast({
+      title: "Proyecto eliminado",
+      description: response.message,
+      className: "bg-green-500",
+    });
 
-    return;
+    // Update local state for associated and available projects
+    const findProject = associatedProjects.find((project) => project.id === idProject);
+
+    if (isDefined(findProject)) {
+      setAssociatedProjects((prev) => prev.filter((project) => project.id !== idProject));
+      setAvailableProject((prev) => [...prev, findProject]);
+    }
   };
 
   return (

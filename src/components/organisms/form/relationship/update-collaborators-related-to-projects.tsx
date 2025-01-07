@@ -2,6 +2,7 @@ import type {RelationshipsSchema} from "@/schemas/common/relationships";
 import type {Collaborator, Project} from "@prisma/client";
 
 import {Plus, X} from "lucide-react";
+import {useState} from "react";
 import {useForm} from "react-hook-form";
 
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
@@ -24,15 +25,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {isDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {patchProjectAddAssociatedCollaborator} from "@/services/project/patchProjectAddAssociatedCollaborator";
 import {patchProjectRemoveAssociatedCollaborator} from "@/services/project/patchProjectRemoveAssociatedCollaborator";
-import {safeReload} from "@/helpers/common/safe-reload";
 
 export function UpdateCollaboratorRelatedToProject({
   currentProject,
-  associatedCollaborators,
-  availableCollaborators,
+  associatedCollaborators: initialAssociatedCollaborators,
+  availableCollaborators: initialAvailableCollaborators,
   disableForm,
 }: {
   currentProject: Project;
@@ -40,7 +41,18 @@ export function UpdateCollaboratorRelatedToProject({
   availableCollaborators: Collaborator[];
   disableForm?: boolean;
 }) {
+  // Get the toast function from the useToast hook
   const {toast} = useToast();
+
+  // Initialize local state for associated and available collaborators
+  const [associatedCollaborators, setAssociatedCollaborators] = useState<Collaborator[]>(
+    initialAssociatedCollaborators,
+  );
+  const [availableCollaborators, setAvailableCollaborators] = useState<Collaborator[]>(
+    initialAvailableCollaborators,
+  );
+
+  // Create a form to relate a collaborator to the project
   const form = useForm<RelationshipsSchema>({
     defaultValues: {
       idFrom: currentProject.id,
@@ -48,60 +60,80 @@ export function UpdateCollaboratorRelatedToProject({
   });
 
   const onAddCollaborator = async (values: RelationshipsSchema) => {
+    // Send request to associate the project to the collaborator
     const response = await patchProjectAddAssociatedCollaborator({
       idFrom: Number(values.idFrom),
       idTo: Number(values.idTo),
     });
 
-    if (response.success === true) {
-      form.reset();
-      toast({
-        title: "Colaborador relacionado con el proyecto",
-        description: response.message,
-        className: "bg-green-500",
-      });
-    }
-
+    // If the request was unsuccessful, show an error toast and exit
     if (response.success === false) {
       toast({
-        title: "Error al relacionar colaborador con el proyecto",
+        title: "Error linking collaborator to the project",
         description: response.message,
         className: "bg-red-500",
       });
+
+      return;
     }
 
-    setTimeout(() => {
-      safeReload();
-    }, 1000);
+    // If the request was successful, reset the form and show a success toast
+    form.reset();
+    toast({
+      title: "Collaborator linked to the project",
+      description: response.message,
+      className: "bg-green-500",
+    });
 
-    return;
+    // Update local state for associated and available collaborators
+    const findCollaborator = availableCollaborators.find(
+      (collaborator) => collaborator.id === Number(values.idTo),
+    );
+
+    if (isDefined(findCollaborator)) {
+      setAssociatedCollaborators((prev) => [...prev, findCollaborator]);
+      setAvailableCollaborators((prev) =>
+        prev.filter((collaborator) => collaborator.id !== Number(values.idTo)),
+      );
+    }
   };
 
   const onRemoveCollaborator = async (collaboratorId: number) => {
+    // Send request to dissociate the collaborator with the project
     const response = await patchProjectRemoveAssociatedCollaborator({
       idFrom: currentProject.id,
       idTo: collaboratorId,
     });
 
-    if (response.success === true) {
-      toast({
-        title: "Colaborador eliminado",
-        description: response.message,
-        className: "bg-green-500",
-      });
-    }
-
+    // If the request was unsuccessful, show an error toast and exit
     if (response.success === false) {
       toast({
         title: "Error al eliminar colaborador",
         description: response.message,
         className: "bg-red-500",
       });
+
+      return;
     }
 
-    safeReload();
+    // If the request was successful, show a success toast
+    toast({
+      title: "Colaborador eliminado",
+      description: response.message,
+      className: "bg-green-500",
+    });
 
-    return;
+    // Update local state for associated and available collaborators
+    const findCollaborator = associatedCollaborators.find(
+      (collaborator) => collaborator.id === collaboratorId,
+    );
+
+    if (isDefined(findCollaborator)) {
+      setAssociatedCollaborators((prev) =>
+        prev.filter((collaborator) => collaborator.id !== collaboratorId),
+      );
+      setAvailableCollaborators((prev) => [...prev, findCollaborator]);
+    }
   };
 
   return (

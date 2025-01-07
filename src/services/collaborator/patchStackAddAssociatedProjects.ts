@@ -4,7 +4,7 @@ import type {RelationshipsSchema} from "../../schemas/common/relationships";
 import {type Collaborator} from "@prisma/client";
 import axios from "axios";
 
-export async function AssociatedProjects(
+export async function patchStackAddAssociatedProjects(
   data: RelationshipsSchema,
 ): Promise<ApiResponse<Collaborator>> {
   const {data: response} = await axios.patch<ApiResponse<Collaborator>>(
