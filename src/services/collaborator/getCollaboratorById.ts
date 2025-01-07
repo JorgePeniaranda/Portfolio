@@ -9,7 +9,7 @@ export async function getCollaboratorById({
   id: Collaborator["id"];
 }): Promise<Collaborator | null> {
   const {data: response} = await apiClient.get<ApiResponse<Collaborator | null>>(
-    `api/collaborator/get/${id}`,
+    `api/collaborator/get/id/${id}`,
   );
 
   if (response.success === false) {

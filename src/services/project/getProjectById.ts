@@ -5,7 +5,7 @@ import {apiClient} from "@/helpers/client/axios";
 
 export async function getProjectById({id}: {id: Project["id"]}): Promise<Project | null> {
   const {data: response} = await apiClient.get<ApiResponse<Project | null>>(
-    `api/project/get/${id}`,
+    `api/project/get/id/${id}`,
   );
 
   if (response.success === false) {
