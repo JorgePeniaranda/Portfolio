@@ -95,6 +95,10 @@ export function UpdateProjectsRelatedToCollaborator({
         className: "bg-red-500",
       });
     }
+
+    safeReload();
+
+    return;
   };
 
   return (

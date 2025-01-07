@@ -1,8 +1,7 @@
 import {zodResolver} from "@hookform/resolvers/zod";
-import {StackCategory, StackType, type Stack} from "@prisma/client";
+import {StackCategory, StackType} from "@prisma/client";
 import {Save} from "lucide-react";
 import {useForm} from "react-hook-form";
-import {useEffect, useState} from "react";
 
 import {Button} from "@/components/ui/button";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
@@ -16,11 +15,11 @@ import {
 } from "@/components/ui/select";
 import {Textarea} from "@/components/ui/textarea";
 import {STACK_CATEGORY_TRANSCRIPTIONS, STACK_TYPE_TRANSCRIPTIONS} from "@/constants/transcriptions";
+import {safeRedirect} from "@/helpers/common/safe-redirect";
 import {isDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {StackCreateDefaultValues, StackCreateSchema} from "@/schemas/stack/create";
 import {postStack} from "@/services/stack/postStack";
-import {safeRedirect} from "@/helpers/common/safe-redirect";
 
 export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) {
   const {toast} = useToast();
@@ -28,20 +27,6 @@ export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) 
     resolver: zodResolver(StackCreateSchema),
     defaultValues: StackCreateDefaultValues,
   });
-  /**
-   * `newProjectId` stores the ID of the new stack, set when a stack is created.
-   * The user is then redirected to the stack view.
-   */
-  const [newStackId, setNewStackId] = useState<Stack["id"]>();
-
-  useEffect(() => {
-    // Redirect happens inside `useEffect` to ensure it occurs after the component has rendered.
-    // This prevents issues that can arise from trying to redirect before React updates the DOM.
-
-    if (isDefined(newStackId)) {
-      safeRedirect(`/vault/views/project/${newStackId}`);
-    }
-  }, [newStackId]);
 
   const onSubmit = async (values: StackCreateSchema) => {
     const response = await postStack(values);
@@ -55,7 +40,7 @@ export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) 
       });
 
       if (isDefined(response?.data?.id)) {
-        setNewStackId(response.data.id);
+        safeRedirect(`/vault/views/stack/${response.data.id}`);
       }
     }
 

@@ -70,7 +70,9 @@ export function UpdateCollaboratorRelatedToProject({
       });
     }
 
-    safeReload();
+    setTimeout(() => {
+      safeReload();
+    }, 1000);
 
     return;
   };

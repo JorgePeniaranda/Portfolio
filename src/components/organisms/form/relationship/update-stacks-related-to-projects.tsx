@@ -69,7 +69,9 @@ export function UpdateStacksRelatedToProject({
       });
     }
 
-    safeReload();
+    setTimeout(() => {
+      safeReload();
+    }, 1000);
 
     return;
   };
