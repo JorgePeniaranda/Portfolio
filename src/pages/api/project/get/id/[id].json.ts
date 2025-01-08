@@ -4,17 +4,17 @@ import {z} from "zod";
 
 import {databaseClient} from "@/helpers/client/prisma";
 import {RequestHandler} from "@/helpers/common/request-handler";
-import {getAllCollaborator} from "@/services/collaborator/getAllCollaborator";
+import {getAllProjects} from "@/services/project/getAllProjects";
 
 /**
- * GET handler to fetch a collaborator.
+ * GET handler to fetch a project.
  */
 export const GET: APIRoute = ({params}) => {
   return RequestHandler(
     async () => {
       const id = z.coerce.number().parse(params.id);
 
-      const response = await databaseClient.collaborator.findUnique({
+      const response = await databaseClient.project.findUniqueOrThrow({
         where: {
           id,
         },
@@ -22,7 +22,7 @@ export const GET: APIRoute = ({params}) => {
 
       return {
         success: true,
-        message: "Collaborator fetched successfully",
+        message: "Project fetched successfully",
         data: response,
       };
     },
@@ -30,10 +30,10 @@ export const GET: APIRoute = ({params}) => {
   );
 };
 
-export async function getStaticPaths() {
-  const collaborator = await getAllCollaborator();
+export const getStaticPaths = (async () => {
+  const projects = await getAllProjects();
 
-  return collaborator.map((collaborator) => ({
-    params: {id: collaborator.id},
+  return projects.map((project) => ({
+    params: {id: project.id},
   }));
-}
+}) satisfies GetStaticPaths;

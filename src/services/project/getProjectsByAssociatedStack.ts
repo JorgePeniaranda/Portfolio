@@ -11,7 +11,7 @@ export async function getProjectsByAssociatedStack({
   pagination?: PaginationRequest;
 }): Promise<Project[]> {
   const {data: response} = await apiClient.get<ApiResponse<Project[]>>(
-    `/api/project/get/related/stack/${idStack}`,
+    `/api/project/get/related/stack/${idStack}.json`,
     {
       params: pagination,
     },

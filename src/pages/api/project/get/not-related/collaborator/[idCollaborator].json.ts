@@ -6,23 +6,23 @@ import {databaseClient} from "@/helpers/client/prisma";
 import {BuildPaginationByURL} from "@/helpers/common/build-pagination";
 import {RequestHandler} from "@/helpers/common/request-handler";
 import {fromPaginationRequestToPrismaPagination} from "@/mappers/common/fromPaginationRequestToPrismaPagination";
-import {getAllProjects} from "@/services/project/getAllProjects";
+import {getAllCollaborator} from "@/services/collaborator/getAllCollaborator";
 
 /**
- * GET handler to fetch a paginated list of collaborators.
+ * GET handler to fetch a paginated list of projects.
  * - Pagination is optional. If provided, it must be a positive numeric value greater than 0.
  */
 export const GET: APIRoute = ({request, params}) => {
   return RequestHandler(
     async () => {
-      const idProject = z.coerce.number().parse(params.idProject);
+      const idCollaborator = z.coerce.number().parse(params.idCollaborator);
       const paginationParams = BuildPaginationByURL(request.url);
 
-      const response = await databaseClient.collaborator.findMany({
+      const response = await databaseClient.project.findMany({
         where: {
-          associatedProjects: {
-            some: {
-              id: idProject,
+          associatedCollaborators: {
+            none: {
+              id: idCollaborator,
             },
           },
         },
@@ -31,7 +31,7 @@ export const GET: APIRoute = ({request, params}) => {
 
       return {
         success: true,
-        message: "Collaborators fetched successfully",
+        message: "Projects fetched successfully",
         data: response,
       };
     },
@@ -39,10 +39,10 @@ export const GET: APIRoute = ({request, params}) => {
   );
 };
 
-export async function getStaticPaths() {
-  const projects = await getAllProjects();
+export const getStaticPaths = (async () => {
+  const collaborator = await getAllCollaborator();
 
-  return projects.map((project) => ({
-    params: {idProject: project.id},
+  return collaborator.map((collaborator) => ({
+    params: {idCollaborator: collaborator.id},
   }));
-}
+}) satisfies GetStaticPaths;

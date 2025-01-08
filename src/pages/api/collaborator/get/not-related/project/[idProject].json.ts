@@ -6,23 +6,23 @@ import {databaseClient} from "@/helpers/client/prisma";
 import {BuildPaginationByURL} from "@/helpers/common/build-pagination";
 import {RequestHandler} from "@/helpers/common/request-handler";
 import {fromPaginationRequestToPrismaPagination} from "@/mappers/common/fromPaginationRequestToPrismaPagination";
-import {getAllStack} from "@/services/stack/getAllStack";
+import {getAllProjects} from "@/services/project/getAllProjects";
 
 /**
- * GET handler to fetch a paginated list of projects.
+ * GET handler to fetch a paginated list of collaborators.
  * - Pagination is optional. If provided, it must be a positive numeric value greater than 0.
  */
 export const GET: APIRoute = ({request, params}) => {
   return RequestHandler(
     async () => {
-      const idStack = z.coerce.number().parse(params.idStack);
+      const idProject = z.coerce.number().parse(params.idProject);
       const paginationParams = BuildPaginationByURL(request.url);
 
-      const response = await databaseClient.project.findMany({
+      const response = await databaseClient.collaborator.findMany({
         where: {
-          associatedStacks: {
-            some: {
-              id: idStack,
+          associatedProjects: {
+            none: {
+              id: idProject,
             },
           },
         },
@@ -31,7 +31,7 @@ export const GET: APIRoute = ({request, params}) => {
 
       return {
         success: true,
-        message: "Projects fetched successfully",
+        message: "Collaborators fetched successfully",
         data: response,
       };
     },
@@ -39,10 +39,10 @@ export const GET: APIRoute = ({request, params}) => {
   );
 };
 
-export async function getStaticPaths() {
-  const stacks = await getAllStack();
+export const getStaticPaths = (async () => {
+  const projects = await getAllProjects();
 
-  return stacks.map((stack) => ({
-    params: {idStack: stack.id},
+  return projects.map((project) => ({
+    params: {idProject: project.id},
   }));
-}
+}) satisfies GetStaticPaths;

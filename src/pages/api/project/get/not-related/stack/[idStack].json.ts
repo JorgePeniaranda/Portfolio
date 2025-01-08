@@ -6,7 +6,7 @@ import {databaseClient} from "@/helpers/client/prisma";
 import {BuildPaginationByURL} from "@/helpers/common/build-pagination";
 import {RequestHandler} from "@/helpers/common/request-handler";
 import {fromPaginationRequestToPrismaPagination} from "@/mappers/common/fromPaginationRequestToPrismaPagination";
-import {getAllCollaborator} from "@/services/collaborator/getAllCollaborator";
+import {getAllStack} from "@/services/stack/getAllStack";
 
 /**
  * GET handler to fetch a paginated list of projects.
@@ -15,14 +15,14 @@ import {getAllCollaborator} from "@/services/collaborator/getAllCollaborator";
 export const GET: APIRoute = ({request, params}) => {
   return RequestHandler(
     async () => {
-      const idCollaborator = z.coerce.number().parse(params.idCollaborator);
+      const idStack = z.coerce.number().parse(params.idStack);
       const paginationParams = BuildPaginationByURL(request.url);
 
       const response = await databaseClient.project.findMany({
         where: {
-          associatedCollaborators: {
+          associatedStacks: {
             none: {
-              id: idCollaborator,
+              id: idStack,
             },
           },
         },
@@ -39,10 +39,10 @@ export const GET: APIRoute = ({request, params}) => {
   );
 };
 
-export async function getStaticPaths() {
-  const collaborator = await getAllCollaborator();
+export const getStaticPaths = (async () => {
+  const stacks = await getAllStack();
 
-  return collaborator.map((collaborator) => ({
-    params: {idCollaborator: collaborator.id},
+  return stacks.map((stack) => ({
+    params: {idStack: stack.id},
   }));
-}
+}) satisfies GetStaticPaths;

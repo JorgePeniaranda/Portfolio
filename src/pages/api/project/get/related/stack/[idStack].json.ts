@@ -21,7 +21,7 @@ export const GET: APIRoute = ({request, params}) => {
       const response = await databaseClient.project.findMany({
         where: {
           associatedStacks: {
-            none: {
+            some: {
               id: idStack,
             },
           },
@@ -39,10 +39,10 @@ export const GET: APIRoute = ({request, params}) => {
   );
 };
 
-export async function getStaticPaths() {
+export const getStaticPaths = (async () => {
   const stacks = await getAllStack();
 
   return stacks.map((stack) => ({
     params: {idStack: stack.id},
   }));
-}
+}) satisfies GetStaticPaths;

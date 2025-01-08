@@ -9,7 +9,7 @@ import {fromPaginationRequestToPrismaPagination} from "@/mappers/common/fromPagi
 import {getAllProjects} from "@/services/project/getAllProjects";
 
 /**
- * GET handler to fetch a paginated list of stacks.
+ * GET handler to fetch a paginated list of collaborators.
  * - Pagination is optional. If provided, it must be a positive numeric value greater than 0.
  */
 export const GET: APIRoute = ({request, params}) => {
@@ -18,7 +18,7 @@ export const GET: APIRoute = ({request, params}) => {
       const idProject = z.coerce.number().parse(params.idProject);
       const paginationParams = BuildPaginationByURL(request.url);
 
-      const response = await databaseClient.stack.findMany({
+      const response = await databaseClient.collaborator.findMany({
         where: {
           associatedProjects: {
             some: {
@@ -31,7 +31,7 @@ export const GET: APIRoute = ({request, params}) => {
 
       return {
         success: true,
-        message: "Stacks fetched successfully",
+        message: "Collaborators fetched successfully",
         data: response,
       };
     },
@@ -39,10 +39,10 @@ export const GET: APIRoute = ({request, params}) => {
   );
 };
 
-export async function getStaticPaths() {
+export const getStaticPaths = (async () => {
   const projects = await getAllProjects();
 
   return projects.map((project) => ({
     params: {idProject: project.id},
   }));
-}
+}) satisfies GetStaticPaths;

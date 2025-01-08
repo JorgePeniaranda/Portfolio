@@ -39,10 +39,10 @@ export const GET: APIRoute = ({request, params}) => {
   );
 };
 
-export async function getStaticPaths() {
+export const getStaticPaths = (async () => {
   const collaborator = await getAllCollaborator();
 
   return collaborator.map((collaborator) => ({
     params: {idCollaborator: collaborator.id},
   }));
-}
+}) satisfies GetStaticPaths;

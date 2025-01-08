@@ -4,17 +4,17 @@ import {z} from "zod";
 
 import {databaseClient} from "@/helpers/client/prisma";
 import {RequestHandler} from "@/helpers/common/request-handler";
-import {getAllStack} from "@/services/stack/getAllStack";
+import {getAllProjects} from "@/services/project/getAllProjects";
 
 /**
- * GET handler to fetch a stack.
+ * GET handler to fetch a project.
  */
 export const GET: APIRoute = ({params}) => {
   return RequestHandler(
     async () => {
       const key = z.coerce.string().parse(params.key);
 
-      const response = await databaseClient.stack.findUnique({
+      const response = await databaseClient.project.findUnique({
         where: {
           key,
         },
@@ -22,7 +22,7 @@ export const GET: APIRoute = ({params}) => {
 
       return {
         success: true,
-        message: "Stack fetched successfully",
+        message: "Project fetched successfully",
         data: response,
       };
     },
@@ -30,10 +30,10 @@ export const GET: APIRoute = ({params}) => {
   );
 };
 
-export async function getStaticPaths() {
-  const stacks = await getAllStack();
+export const getStaticPaths = (async () => {
+  const projects = await getAllProjects();
 
-  return stacks.map((stack) => ({
-    params: {key: stack.key},
+  return projects.map((project) => ({
+    params: {key: project.key},
   }));
-}
+}) satisfies GetStaticPaths;

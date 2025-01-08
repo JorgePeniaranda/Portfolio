@@ -12,11 +12,11 @@ import {getAllProjects} from "@/services/project/getAllProjects";
 export const GET: APIRoute = ({params}) => {
   return RequestHandler(
     async () => {
-      const key = z.coerce.string().parse(params.key);
+      const id = z.coerce.number().parse(params.id);
 
       const response = await databaseClient.project.findUnique({
         where: {
-          key,
+          id,
         },
       });
 
@@ -30,10 +30,10 @@ export const GET: APIRoute = ({params}) => {
   );
 };
 
-export async function getStaticPaths() {
+export const getStaticPaths = (async () => {
   const projects = await getAllProjects();
 
   return projects.map((project) => ({
-    params: {key: project.key},
+    params: {id: project.id},
   }));
-}
+}) satisfies GetStaticPaths;

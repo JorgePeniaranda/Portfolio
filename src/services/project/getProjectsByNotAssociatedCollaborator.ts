@@ -11,7 +11,7 @@ export async function getProjectsByNotAssociatedCollaborator({
   pagination?: PaginationRequest;
 }): Promise<Project[]> {
   const {data: response} = await apiClient.get<ApiResponse<Project[]>>(
-    `/api/project/get/not-related/collaborator/${idCollaborator}`,
+    `/api/project/get/not-related/collaborator/${idCollaborator}.json`,
     {
       params: pagination,
     },
