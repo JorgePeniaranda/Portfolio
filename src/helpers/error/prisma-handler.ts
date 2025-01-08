@@ -26,7 +26,15 @@ const STATUS_CODE = {
   ],
 };
 
-function getStatusCode(prismaErrorCode: string) {
+/**
+ * Returns the corresponding HTTP status code based on the provided Prisma error code.
+ * It looks for the error code in the `STATUS_CODE` dictionary and returns the associated status code.
+ * If no match is found, it returns a default status code of 500.
+ *
+ * @param {string} prismaErrorCode - The error code from Prisma to map to an HTTP status code.
+ * @returns {number} The HTTP status code corresponding to the Prisma error code, or 500 if not found.
+ */
+function getStatusCode(prismaErrorCode: string): number {
   // Iterate over the STATUS_CODE dictionary entries
   for (const [statusCode, errorCodes] of Object.entries(STATUS_CODE)) {
     // Check if the prismaErrorCode exists in the list of error codes for the current status code
@@ -38,6 +46,14 @@ function getStatusCode(prismaErrorCode: string) {
   return 500; // Default status code if the error code is not found
 }
 
+/**
+ * Handles Prisma errors and returns an object with an appropriate HTTP status code and error message.
+ * It checks if the error is a known Prisma error and if the error code has a corresponding message.
+ * If so, it returns that message and the related status code. Otherwise, it returns a generic internal server error.
+ *
+ * @param {Prisma.PrismaClientKnownRequestError | Prisma.PrismaClientUnknownRequestError | Prisma.PrismaClientRustPanicError} error - The error object thrown by Prisma.
+ * @returns {{statusCode: number, message: string}} An object containing the HTTP status code and error message.
+ */
 export function prismaHandler(
   error:
     | Prisma.PrismaClientKnownRequestError
