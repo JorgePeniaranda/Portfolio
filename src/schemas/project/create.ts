@@ -43,7 +43,7 @@ export const ProjectCreateDefaultValues: ProjectCreateSchema = {
   goals: "",
   contributions: "",
   logoUrl: "",
-  primaryColor: "",
+  primaryColor: "#c05454",
   demoUrl: "",
   githubUrl: "",
 };

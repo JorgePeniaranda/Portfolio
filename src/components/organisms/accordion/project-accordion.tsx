@@ -1,5 +1,7 @@
 import type {Collaborator, Project, Stack} from "@prisma/client";
 
+import {ExternalLink} from "lucide-react";
+
 import GithubUser from "@/components/atoms/github-user";
 import {MessageDisplay} from "@/components/atoms/message-display";
 import {
@@ -74,12 +76,13 @@ export function ProjectAccordion({
               {stackCategory.map((stack) => (
                 <li key={`technology_${stack.id}`}>
                   <a
-                    className="text-blue-500 hover:text-blue-600 dark:hover:text-blue-400"
+                    className="flex items-center gap-1"
                     href={`/stack/${stack.key}`}
                     rel="noopener noreferrer"
-                    target="__blank"
+                    target="_blank"
                   >
                     {stack.name}
+                    <ExternalLink className="w-4" />
                   </a>
                 </li>
               ))}
@@ -124,28 +127,30 @@ export function ProjectAccordion({
           <AccordionContent>
             <ul className="space-y-3 pl-5">
               {isDefined(githubUrl) && isNoEmptyString(githubUrl) ? (
-                <li aria-label="Code Link">
+                <li aria-label="Code Link" className="flex items-center gap-1">
                   <span className="font-bold">Código: </span>
                   <a
-                    className="text-blue-700"
+                    className="flex items-center gap-1"
                     href={githubUrl}
                     rel="noopener noreferrer"
-                    target="__blank"
+                    target="_blank"
                   >
                     {githubUrl}
+                    <ExternalLink className="w-4" />
                   </a>
                 </li>
               ) : null}
               {isDefined(demoUrl) && isNoEmptyString(demoUrl) ? (
-                <li aria-label="Demo Link">
+                <li aria-label="Demo Link" className="flex items-center gap-1">
                   <span className="font-bold">Demo: </span>
                   <a
-                    className="text-blue-700"
+                    className="flex items-center gap-1"
                     href={demoUrl}
                     rel="noopener noreferrer"
-                    target="__blank"
+                    target="_blank"
                   >
                     {demoUrl}
+                    <ExternalLink className="w-4" />
                   </a>
                 </li>
               ) : null}

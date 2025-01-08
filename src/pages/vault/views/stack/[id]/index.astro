@@ -1,14 +1,17 @@
 ---
 import Layout from '@/components/layouts/base.astro'
 import { DashboardLayout } from '@/components/layouts/dashboard-layout'
-import { ShowStackForm } from '@/components/organisms/form/show-stack'
+import { ShowStackForm } from '@/components/organisms/form/show/stack'
+import { Card, CardHeader } from '@/components/ui/card'
 import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
 import { ENV } from '@/constants/env'
-import { getAllStackWithProjectsMin } from '@/services/stack/getAllStackWithProjectsMin'
-import { getStackWithProjectsMinById } from '@/services/stack/getStackWithProjectsMinById'
+import { isNotDefined } from '@/helpers/guards/is-defined'
+import { getProjectsByAssociatedStack } from '@/services/project/getProjectsByAssociatedStack'
+import { getAllStack } from '@/services/stack/getAllStack'
+import { getStackById } from '@/services/stack/getStackById'
 
 export async function getStaticPaths() {
-  const stacks = await getAllStackWithProjectsMin()
+  const stacks = await getAllStack()
 
   const paths = stacks.map(stack => ({
     params: { id: stack.id },
@@ -20,7 +23,7 @@ export async function getStaticPaths() {
 
 let stack
 if (ENV.isServerSideEnable) {
-  stack = await getStackWithProjectsMinById({ id: Number(Astro.params.id) })
+  stack = await getStackById({ id: Number(Astro.params.id) })
 } else {
   stack = Astro.props
 }
@@ -31,16 +34,52 @@ if (!stack) {
     error: new Error('Stack not found')
   }
 }
+
+const associatedProjects = await getProjectsByAssociatedStack({
+  idStack: stack.id
+})
 ---
 
-<Layout title="Detalle de stack">
+<Layout title={`Explora el stack ${stack.name}`}>
   <DashboardLayout
-    breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/projects/details']}
+    breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/project/details']}
     client:load
   >
     <main class="w-full h-full flex flex-col pt-7 pl-7 container mx-auto gap-5">
       <h1 class="text-4xl font-medium">Detalles de Stack</h1>
       <ShowStackForm currentStack={stack} client:load />
+      <div class="mt-10">
+        <h2 class="text-3xl font-medium">Relaciones</h2>
+        <div class="mx-5 mt-5">
+          <h3 class="text-3xl font-medium">Proyectos</h3>
+          <ul class="mt-4 flex flex-wrap gap-4">
+            {
+              associatedProjects?.map(project => (
+                <li>
+                  <Card className="my-5 flex flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
+                    <CardHeader className="relative flex items-center gap-2">
+                      <img
+                        alt={`${project.name} logo`}
+                        class="size-16 shrink-0"
+                        src={project.logoUrl}
+                      />
+                      <span class="text-lg capitalize">{project.name}</span>
+                    </CardHeader>
+                  </Card>
+                </li>
+              ))
+            }
+            {
+              (isNotDefined(associatedProjects) ||
+                associatedProjects?.length === 0) && (
+                <p class="indent-2 text-lg text-gray-500">
+                  No hay proyectos asociados
+                </p>
+              )
+            }
+          </ul>
+        </div>
+      </div>
     </main>
   </DashboardLayout>
 </Layout>

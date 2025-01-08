@@ -9,14 +9,21 @@ import {
   PROJECT_STATUS_TRANSCRIPTIONS,
   STACK_CATEGORY_TRANSCRIPTIONS
 } from '@/constants/transcriptions'
+import {
+  GetTextColorForBackground,
+  SetHexColorTransparency
+} from '@/helpers/common/color'
 import { isDefined } from '@/helpers/guards/is-defined'
-import { getAllProjectsWithStackAndCollaborators } from '@/services/project/getAllProjectsWithStackAndCollaborators'
-import { getProjectWithStackAndCollaboratorsByKey } from '@/services/project/getProjectWithStackAndCollaboratorsByKey'
+import { getCollaboratorsByAssociatedProjects } from '@/services/collaborator/getCollaboratorsByAssociatedProjects'
+import { getAllProjects } from '@/services/project/getAllProjects'
+import { getProjectByKey } from '@/services/project/getProjectByKey'
+import { getStacksByAssociatedProjects } from '@/services/stack/getStacksByAssociatedProjects'
 import type { GetStaticPaths } from 'astro'
 import moment from 'moment'
 
+// MARK: - Static paths
 export const getStaticPaths = (async () => {
-  const projects = await getAllProjectsWithStackAndCollaborators()
+  const projects = await getAllProjects()
 
   return projects.map(project => ({
     params: { key: project.key },
@@ -24,9 +31,10 @@ export const getStaticPaths = (async () => {
   }))
 }) satisfies GetStaticPaths
 
+// MARK: - Fetching project data
 let project
 if (ENV.isServerSideEnable) {
-  project = await getProjectWithStackAndCollaboratorsByKey({
+  project = await getProjectByKey({
     key: Astro.params.key
   })
 } else {
@@ -40,6 +48,14 @@ if (!project) {
   }
 }
 
+// MARK: - Fetching associated data
+const associatedStacks = await getStacksByAssociatedProjects({
+  idProject: project.id
+})
+const associatedCollaborators = await getCollaboratorsByAssociatedProjects({
+  idProject: project.id
+})
+
 const { StackStyle, StatusStyle } = ProjectDetailsStyles
 
 const BreadCrumbItems: IBreadCrumb[] = [
@@ -51,6 +67,8 @@ const BreadCrumbItems: IBreadCrumb[] = [
     label: project.name
   }
 ]
+
+const textColor = GetTextColorForBackground(project.primaryColor)
 ---
 
 <Layout
@@ -59,12 +77,35 @@ const BreadCrumbItems: IBreadCrumb[] = [
   }}
   title={project.name}
 >
-  <div class="py-14 px-16 space-y-4">
-    <header>
-      <Breadcrumb items={BreadCrumbItems} />
+  <div class="py-14 px-16">
+    <header class="mb-2">
+      <Breadcrumb
+        className="text-white relative z-50"
+        items={BreadCrumbItems}
+      />
     </header>
+    <div class="fixed inset-0 z-10">
+      <div
+        class="absolute inset-0"
+        style={`background: linear-gradient(90deg, ${project.primaryColor} 40%, ${SetHexColorTransparency(project.primaryColor, 0.5)} 40%, rgba(255,255,255,0) 100%);`}
+      >
+      </div>
+      <div
+        class="absolute inset-0"
+        style={`background: linear-gradient(120deg, ${project.primaryColor} 15%, ${SetHexColorTransparency(project.primaryColor, 0.5)} 50%, rgba(255,255,255,0) 100%);`}
+      >
+      </div>
+    </div>
     <main class="flex text-black dark:text-white h-full">
-      <section class="flex-1 flex flex-col h-full">
+      <section
+        class:list={[
+          'flex-1 flex flex-col h-full relative z-50',
+          {
+            'text-white': textColor === 'white',
+            'text-dark': textColor === 'black'
+          }
+        ]}
+      >
         <article>
           <h1
             class="scroll-m-20 text-5xl font-extrabold tracking-tight"
@@ -101,19 +142,27 @@ const BreadCrumbItems: IBreadCrumb[] = [
         </article>
         <article class="mt-5 flex-1">
           <ProjectAccordion
-            collaborators={project.associatedCollaborators}
+            collaborators={associatedCollaborators}
             goals={project.goals}
             contributions={project.contributions}
             demoUrl={project.demoUrl}
             githubUrl={project.githubUrl}
-            stackCategory={project.associatedStacks}
+            stackCategory={associatedStacks}
             client:load
           />
         </article>
       </section>
       <section class="flex flex-1 relative justify-center items-center">
-        <article class="sticky top-0 justify-center items-center flex">
-          En Proceso...
+        <article
+          class="fixed aspect-video top-0 justify-center items-center flex z-0 h-full"
+        >
+          <!-- TO-DO: project.previewImageURL -->
+          <img
+            src={``}
+            class="size-full"
+            alt={`${project.name} preview image`}
+            style={`background-color: ${project.primaryColor};`}
+          />
         </article>
       </section>
     </main>

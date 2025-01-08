@@ -1,7 +1,17 @@
 import type {Stack} from "@prisma/client";
+import type {ApiResponse, PaginationRequest} from "@/types/responses";
 
-import {databaseClient} from "@/helpers/client/prisma";
+import {apiClient} from "@/helpers/client/axios";
 
-export async function getAllStack(): Promise<Stack[]> {
-  return await databaseClient.stack.findMany();
+// NOTE-DEV: If more parameters are added, switch to an object for better clarity.
+export async function getAllStack(pagination?: PaginationRequest): Promise<Stack[]> {
+  const {data: response} = await apiClient.get<ApiResponse<Stack[]>>("/api/stack/get/all", {
+    params: pagination,
+  });
+
+  if (response.success === false) {
+    throw new Error(response.message);
+  }
+
+  return response?.data ?? [];
 }

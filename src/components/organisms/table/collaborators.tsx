@@ -3,8 +3,9 @@ import type {ColumnDef, Table} from "@tanstack/react-table";
 
 import {Eye, Pen, Plus, Trash} from "lucide-react";
 import moment from "moment";
-import {useMemo} from "react";
+import {useMemo, useState} from "react";
 
+import {ConditionalAnchor} from "@/components/atoms/conditional-anchor";
 import {DataTable} from "@/components/organisms/data-table";
 import {selectionColumnDef} from "@/components/organisms/data-table/column-def/selection";
 import {DataTableColumnHeader} from "@/components/organisms/data-table/column/dropdown";
@@ -24,6 +25,7 @@ import {Input} from "@/components/ui/input";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip";
 import {MIN_DATA_FORMAT} from "@/constants/common";
 import {ENV} from "@/constants/env";
+import {isDefined, isNotDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {deleteCollaborator} from "@/services/collaborator/deleteCollaborator";
 
@@ -106,8 +108,23 @@ const columns: Array<ColumnDef<Collaborator>> = [
 //#endregion
 
 // MARK: - Collaborator Table
-export function CollaboratorTable({data}: {data: Collaborator[]}) {
-  return <DataTable HeaderComponent={TableHeaderComponent} columns={columns} data={data} />;
+export function CollaboratorTable({data: initialData}: {data: Collaborator[]}) {
+  const [data, setData] = useState<Collaborator[]>(initialData);
+
+  return (
+    <DataTable
+      HeaderComponent={TableHeaderComponent}
+      columns={columns}
+      data={data}
+      meta={{
+        deleteRows(index) {
+          setData((prevData) => {
+            return prevData.filter((_, i) => !index.includes(i));
+          });
+        },
+      }}
+    />
+  );
 }
 
 // MARK: - Table Header Component
@@ -121,35 +138,31 @@ function TableHeaderComponent({table}: {table: Table<Collaborator>}) {
     };
   }, [selectedRowModel]);
 
-  const handleCreate = () => {
-    window.location.href = "/vault/views/collaborators/create";
-  };
-
-  const handleView = () => {
-    window.location.href = `/vault/views/collaborators/${rows[0].original.id}`;
-  };
-
-  const handleEdit = () => {
-    window.location.href = `/vault/views/collaborators/${rows[0].original.id}/edit`;
-  };
-
   const handleDelete = async () => {
+    // Send request to delete the collaborator
     const response = await deleteCollaborator(rows.map((row) => row.original.id));
 
-    if (response.success) {
-      toast({
-        title: "Colaboradores eliminados",
-        description: "Los colaboradores seleccionados se eliminaron correctamente.",
-        className: "bg-green-500",
-      });
-
-      window.location.reload();
-    } else {
+    // If the request was unsuccessful, show an error toast and exit
+    if (response.success === false) {
       toast({
         title: "Error al eliminar colaboradores",
         description: "No se pudieron eliminar los colaboradores seleccionados.",
         className: "bg-green-500",
       });
+
+      return;
+    }
+
+    // If the request was successful, show a success toast
+    toast({
+      title: "Colaboradores eliminados",
+      description: "Los colaboradores seleccionados se eliminaron correctamente.",
+      className: "bg-green-500",
+    });
+
+    // Remove the deleted collaborators from the table
+    if (isDefined(table.options.meta?.deleteRows)) {
+      table.options.meta.deleteRows(rows.map((row) => row.index));
     }
   };
 
@@ -167,14 +180,16 @@ function TableHeaderComponent({table}: {table: Table<Collaborator>}) {
           <TooltipProvider>
             <Tooltip delayDuration={0}>
               <TooltipTrigger asChild>
-                <Button
-                  className="size-max rounded-full bg-lime-600 p-2 text-white hover:bg-lime-700 hover:text-white dark:text-white dark:hover:bg-lime-500"
+                <ConditionalAnchor
+                  className="inline-flex size-max items-center justify-center whitespace-nowrap rounded-full bg-lime-600 p-2 text-sm font-medium text-white ring-offset-background transition-colors hover:bg-lime-700 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 dark:text-white dark:hover:bg-lime-500"
                   disabled={selectedCount !== 0}
-                  variant="outline"
-                  onClick={handleCreate}
+                  disabledButtonProps={{
+                    className: "pointer-events-none opacity-50",
+                  }}
+                  href="/vault/views/collaborators/create"
                 >
                   <Plus className="size-5" />
-                </Button>
+                </ConditionalAnchor>
               </TooltipTrigger>
               <TooltipContent>Crear</TooltipContent>
             </Tooltip>
@@ -184,14 +199,16 @@ function TableHeaderComponent({table}: {table: Table<Collaborator>}) {
           <TooltipProvider>
             <Tooltip delayDuration={0}>
               <TooltipTrigger asChild>
-                <Button
-                  className="size-max rounded-full bg-blue-500 p-2 text-white hover:bg-blue-600 hover:text-white dark:text-white dark:hover:bg-blue-400"
-                  disabled={selectedCount !== 1}
-                  variant="outline"
-                  onClick={handleView}
+                <ConditionalAnchor
+                  className="inline-flex size-max items-center justify-center whitespace-nowrap rounded-full bg-blue-600 p-2 text-sm font-medium text-white ring-offset-background transition-colors hover:bg-blue-700 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 dark:text-white dark:hover:bg-blue-500"
+                  disabled={selectedCount !== 1 || isNotDefined(rows[0]?.original.id)}
+                  disabledButtonProps={{
+                    className: "pointer-events-none opacity-50",
+                  }}
+                  href={`/vault/views/collaborators/${rows[0]?.original.id}`}
                 >
                   <Eye className="size-5" />
-                </Button>
+                </ConditionalAnchor>
               </TooltipTrigger>
               <TooltipContent>Ver detalles</TooltipContent>
             </Tooltip>
@@ -201,14 +218,16 @@ function TableHeaderComponent({table}: {table: Table<Collaborator>}) {
           <TooltipProvider>
             <Tooltip delayDuration={0}>
               <TooltipTrigger asChild>
-                <Button
-                  className="size-max rounded-full bg-gray-500 p-2 text-white hover:bg-gray-600 hover:text-white dark:text-white dark:hover:bg-gray-400"
-                  disabled={selectedCount !== 1}
-                  variant="outline"
-                  onClick={handleEdit}
+                <ConditionalAnchor
+                  className="inline-flex size-max items-center justify-center whitespace-nowrap rounded-full bg-gray-600 p-2 text-sm font-medium text-white ring-offset-background transition-colors hover:bg-gray-700 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 dark:text-white dark:hover:bg-gray-500"
+                  disabled={selectedCount !== 1 || isNotDefined(rows[0]?.original.id)}
+                  disabledButtonProps={{
+                    className: "pointer-events-none opacity-50",
+                  }}
+                  href={`/vault/views/collaborators/${rows[0]?.original.id}/edit`}
                 >
                   <Pen className="size-5" />
-                </Button>
+                </ConditionalAnchor>
               </TooltipTrigger>
               <TooltipContent>Editar</TooltipContent>
             </Tooltip>

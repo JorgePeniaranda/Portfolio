@@ -7,6 +7,7 @@ import {
   useReactTable,
   type ColumnDef,
   type Table as ITable,
+  type TableMeta,
 } from "@tanstack/react-table";
 import {ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight} from "lucide-react";
 
@@ -25,12 +26,14 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   HeaderComponent?: ({table}: {table: ITable<TData>}) => React.ReactNode;
+  meta?: TableMeta<TData>;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   HeaderComponent,
+  meta,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -39,6 +42,7 @@ export function DataTable<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    meta,
   });
 
   return (

@@ -1,3 +1,8 @@
+export interface PaginationRequest {
+  page: number; // The current page number
+  size: number; // The number of items per page
+}
+
 export interface BaseResponse {
   success: boolean; // Indicates whether the operation was successful
   message: string; // Descriptive message about the operation result
@@ -15,3 +20,7 @@ export interface ErrorResponse extends BaseResponse {
 }
 
 export type ApiResponse<T = undefined> = SuccessResponse<T> | ErrorResponse;
+
+export interface DeleteResponse {
+  count: number; // The number of items deleted
+}

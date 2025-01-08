@@ -1,11 +1,16 @@
+import type {ApiResponse} from "@/types/responses";
 import type {Project} from "@prisma/client";
 
-import {databaseClient} from "@/helpers/client/prisma";
+import {apiClient} from "@/helpers/client/axios";
 
-export async function getProjectById({key}: {key: Project["key"]}): Promise<Project | null> {
-  return await databaseClient.project.findUnique({
-    where: {
-      key,
-    },
-  });
+export async function getProjectByKey({key}: {key: Project["key"]}): Promise<Project | null> {
+  const {data: response} = await apiClient.get<ApiResponse<Project | null>>(
+    `api/project/get/key/${key}`,
+  );
+
+  if (response.success === false) {
+    throw new Error(response.message);
+  }
+
+  return response?.data ?? null;
 }
