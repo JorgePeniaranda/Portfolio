@@ -1,7 +1,5 @@
 import type {APIRoute} from "astro";
 
-import {Prisma} from "@prisma/client";
-
 import {ProjectCreateSchema} from "@/schemas/project/create";
 import {databaseClient} from "@/helpers/client/prisma";
 import {RequestHandler} from "@/helpers/common/request-handler";
