@@ -1,9 +1,10 @@
-import type {APIRoute} from "astro";
+import type {APIRoute, GetStaticPaths} from "astro";
 
 import {z} from "zod";
 
 import {databaseClient} from "@/helpers/client/prisma";
 import {RequestHandler} from "@/helpers/common/request-handler";
+import {getAllCollaborator} from "@/services/collaborator/getAllCollaborator";
 
 /**
  * GET handler to fetch a collaborator.
@@ -28,3 +29,12 @@ export const GET: APIRoute = ({params}) => {
     {successStatusCode: 200},
   );
 };
+
+export const getStaticPaths = (async () => {
+  const collaborator = await getAllCollaborator();
+
+  return collaborator.map((collaborator) => ({
+    params: {key: collaborator.id},
+    props: collaborator,
+  }));
+}) satisfies GetStaticPaths;

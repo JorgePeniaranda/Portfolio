@@ -1,4 +1,4 @@
-import type {APIRoute} from "astro";
+import type {APIRoute, GetStaticPaths} from "astro";
 
 import {z} from "zod";
 
@@ -6,6 +6,7 @@ import {databaseClient} from "@/helpers/client/prisma";
 import {BuildPaginationByURL} from "@/helpers/common/build-pagination";
 import {RequestHandler} from "@/helpers/common/request-handler";
 import {fromPaginationRequestToPrismaPagination} from "@/mappers/common/fromPaginationRequestToPrismaPagination";
+import {getAllStack} from "@/services/stack/getAllStack";
 
 /**
  * GET handler to fetch a paginated list of projects.
@@ -37,3 +38,12 @@ export const GET: APIRoute = ({request, params}) => {
     {successStatusCode: 200},
   );
 };
+
+export const getStaticPaths = (async () => {
+  const stacks = await getAllStack();
+
+  return stacks.map((stack) => ({
+    params: {key: stack.id},
+    props: stack,
+  }));
+}) satisfies GetStaticPaths;

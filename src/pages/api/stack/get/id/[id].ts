@@ -1,9 +1,10 @@
-import type {APIRoute} from "astro";
+import type {APIRoute, GetStaticPaths} from "astro";
 
 import {z} from "zod";
 
 import {databaseClient} from "@/helpers/client/prisma";
 import {RequestHandler} from "@/helpers/common/request-handler";
+import {getAllStack} from "@/services/stack/getAllStack";
 
 /**
  * GET handler to fetch a stack.
@@ -28,3 +29,12 @@ export const GET: APIRoute = ({params}) => {
     {successStatusCode: 200},
   );
 };
+
+export const getStaticPaths = (async () => {
+  const stacks = await getAllStack();
+
+  return stacks.map((stack) => ({
+    params: {key: stack.id},
+    props: stack,
+  }));
+}) satisfies GetStaticPaths;
