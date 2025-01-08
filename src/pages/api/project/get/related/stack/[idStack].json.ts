@@ -6,7 +6,6 @@ import {databaseClient} from "@/helpers/client/prisma";
 import {BuildPaginationByURL} from "@/helpers/common/build-pagination";
 import {RequestHandler} from "@/helpers/common/request-handler";
 import {fromPaginationRequestToPrismaPagination} from "@/mappers/common/fromPaginationRequestToPrismaPagination";
-import {getAllStack} from "@/services/stack/getAllStack";
 
 /**
  * GET handler to fetch a paginated list of projects.
@@ -40,7 +39,11 @@ export const GET: APIRoute = ({request, params}) => {
 };
 
 export const getStaticPaths = (async () => {
-  const stacks = await getAllStack();
+  const stacks = await databaseClient.stack.findMany({
+    select: {
+      id: true,
+    },
+  });
 
   return stacks.map((stack) => ({
     params: {idStack: stack.id},

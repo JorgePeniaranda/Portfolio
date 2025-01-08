@@ -4,7 +4,6 @@ import {z} from "zod";
 
 import {databaseClient} from "@/helpers/client/prisma";
 import {RequestHandler} from "@/helpers/common/request-handler";
-import {getAllStack} from "@/services/stack/getAllStack";
 
 /**
  * GET handler to fetch a stack.
@@ -31,7 +30,11 @@ export const GET: APIRoute = ({params}) => {
 };
 
 export const getStaticPaths = (async () => {
-  const stacks = await getAllStack();
+  const stacks = await databaseClient.stack.findMany({
+    select: {
+      key: true,
+    },
+  });
 
   return stacks.map((stack) => ({
     params: {key: stack.key},

@@ -4,7 +4,6 @@ import {z} from "zod";
 
 import {databaseClient} from "@/helpers/client/prisma";
 import {RequestHandler} from "@/helpers/common/request-handler";
-import {getAllProjects} from "@/services/project/getAllProjects";
 
 /**
  * GET handler to fetch a project.
@@ -31,7 +30,11 @@ export const GET: APIRoute = ({params}) => {
 };
 
 export const getStaticPaths = (async () => {
-  const projects = await getAllProjects();
+  const projects = await databaseClient.project.findMany({
+    select: {
+      id: true,
+    },
+  });
 
   return projects.map((project) => ({
     params: {id: project.id},

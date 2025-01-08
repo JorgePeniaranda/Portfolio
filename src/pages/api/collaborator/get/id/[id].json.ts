@@ -4,7 +4,6 @@ import {z} from "zod";
 
 import {databaseClient} from "@/helpers/client/prisma";
 import {RequestHandler} from "@/helpers/common/request-handler";
-import {getAllCollaborator} from "@/services/collaborator/getAllCollaborator";
 
 /**
  * GET handler to fetch a collaborator.
@@ -31,9 +30,13 @@ export const GET: APIRoute = ({params}) => {
 };
 
 export const getStaticPaths = (async () => {
-  const collaborator = await getAllCollaborator();
+  const collaborators = await databaseClient.collaborator.findMany({
+    select: {
+      id: true,
+    },
+  });
 
-  return collaborator.map((collaborator) => ({
+  return collaborators.map((collaborator) => ({
     params: {id: collaborator.id},
   }));
 }) satisfies GetStaticPaths;
