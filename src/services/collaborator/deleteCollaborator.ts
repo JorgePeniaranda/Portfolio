@@ -10,7 +10,7 @@ export async function deleteCollaborator(
 ): Promise<ApiResponse<DeleteResponse>> {
   try {
     const {data: response} = await axios.post<ApiResponse<DeleteResponse>>(
-      "/api/collaborator/deleted",
+      "/api/collaborator/delete",
       data,
     );
 
