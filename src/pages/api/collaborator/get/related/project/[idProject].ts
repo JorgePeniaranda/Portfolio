@@ -39,11 +39,10 @@ export const GET: APIRoute = ({request, params}) => {
   );
 };
 
-export const getStaticPaths = (async () => {
+export async function getStaticPaths() {
   const projects = await getAllProjects();
 
   return projects.map((project) => ({
-    params: {key: project.id},
-    props: project,
+    params: {idProject: project.id},
   }));
-}) satisfies GetStaticPaths;
+}

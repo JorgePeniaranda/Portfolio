@@ -39,11 +39,10 @@ export const GET: APIRoute = ({request, params}) => {
   );
 };
 
-export const getStaticPaths = (async () => {
+export async function getStaticPaths() {
   const stacks = await getAllStack();
 
   return stacks.map((stack) => ({
-    params: {key: stack.id},
-    props: stack,
+    params: {idStack: stack.id},
   }));
-}) satisfies GetStaticPaths;
+}
