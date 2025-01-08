@@ -3,7 +3,7 @@ import type {ColumnDef, Table} from "@tanstack/react-table";
 
 import {Eye, Pen, Plus, Trash} from "lucide-react";
 import moment from "moment";
-import {useMemo} from "react";
+import {useMemo, useState} from "react";
 
 import {ConditionalAnchor} from "@/components/atoms/conditional-anchor";
 import {DataTable} from "@/components/organisms/data-table";
@@ -30,7 +30,7 @@ import {
   STACK_CATEGORY_TRANSCRIPTIONS,
 } from "@/constants/transcriptions";
 import {safeReload} from "@/helpers/common/safe-reload";
-import {isNotDefined} from "@/helpers/guards/is-defined";
+import {isDefined, isNotDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {deleteProject} from "@/services/project/deleteProject";
 
@@ -176,8 +176,23 @@ const columns: Array<ColumnDef<Project>> = [
 //#endregion
 
 // MARK: - Collaborator Table
-export function ProjectTable({data}: {data: Project[]}) {
-  return <DataTable HeaderComponent={TableHeaderComponent} columns={columns} data={data} />;
+export function ProjectTable({data: initialData}: {data: Project[]}) {
+  const [data, setData] = useState<Project[]>(initialData);
+
+  return (
+    <DataTable
+      HeaderComponent={TableHeaderComponent}
+      columns={columns}
+      data={data}
+      meta={{
+        deleteRows(index) {
+          setData((prevData) => {
+            return prevData.filter((_, i) => !index.includes(i));
+          });
+        },
+      }}
+    />
+  );
 }
 
 // MARK: - Table Header Component
@@ -213,8 +228,10 @@ function TableHeaderComponent({table}: {table: Table<Project>}) {
       className: "bg-green-500",
     });
 
-    // Reload the page to update the table
-    safeReload();
+    // Remove the deleted projects from the table
+    if (isDefined(table.options.meta?.deleteRows)) {
+      table.options.meta.deleteRows(rows.map((row) => row.index));
+    }
   };
 
   return (

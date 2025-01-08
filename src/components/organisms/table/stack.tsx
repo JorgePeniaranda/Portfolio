@@ -3,8 +3,9 @@ import type {ColumnDef, Table} from "@tanstack/react-table";
 
 import {Eye, Pen, Plus, Trash} from "lucide-react";
 import moment from "moment";
-import {useMemo} from "react";
+import {useMemo, useState} from "react";
 
+import {ConditionalAnchor} from "@/components/atoms/conditional-anchor";
 import {DataTable} from "@/components/organisms/data-table";
 import {selectionColumnDef} from "@/components/organisms/data-table/column-def/selection";
 import {DataTableColumnHeader} from "@/components/organisms/data-table/column/dropdown";
@@ -25,11 +26,9 @@ import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/compon
 import {MIN_DATA_FORMAT} from "@/constants/common";
 import {ENV} from "@/constants/env";
 import {STACK_CATEGORY_TRANSCRIPTIONS, STACK_TYPE_TRANSCRIPTIONS} from "@/constants/transcriptions";
-import {isNotDefined} from "@/helpers/guards/is-defined";
+import {isDefined, isNotDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {deleteStack} from "@/services/stack/deleteStack";
-import {safeReload} from "@/helpers/common/safe-reload";
-import {ConditionalAnchor} from "@/components/atoms/conditional-anchor";
 
 //#region Column Definitions
 const columns: Array<ColumnDef<Stack>> = [
@@ -116,8 +115,23 @@ const columns: Array<ColumnDef<Stack>> = [
 ];
 
 // MARK: - Collaborator Table
-export function StackTable({data}: {data: Stack[]}) {
-  return <DataTable HeaderComponent={TableHeaderComponent} columns={columns} data={data} />;
+export function StackTable({data: initialData}: {data: Stack[]}) {
+  const [data, setData] = useState<Stack[]>(initialData);
+
+  return (
+    <DataTable
+      HeaderComponent={TableHeaderComponent}
+      columns={columns}
+      data={data}
+      meta={{
+        deleteRows(index) {
+          setData((prevData) => {
+            return prevData.filter((_, i) => !index.includes(i));
+          });
+        },
+      }}
+    />
+  );
 }
 
 // MARK: - Table Header Component
@@ -151,8 +165,10 @@ function TableHeaderComponent({table}: {table: Table<Stack>}) {
       className: "bg-green-500",
     });
 
-    // Reload the page to update the table
-    safeReload();
+    // Remove the deleted stacks from the table
+    if (isDefined(table.options.meta?.deleteRows)) {
+      table.options.meta.deleteRows(rows.map((row) => row.index));
+    }
   };
 
   return (

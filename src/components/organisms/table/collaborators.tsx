@@ -3,7 +3,7 @@ import type {ColumnDef, Table} from "@tanstack/react-table";
 
 import {Eye, Pen, Plus, Trash} from "lucide-react";
 import moment from "moment";
-import {useMemo} from "react";
+import {useMemo, useState} from "react";
 
 import {ConditionalAnchor} from "@/components/atoms/conditional-anchor";
 import {DataTable} from "@/components/organisms/data-table";
@@ -26,7 +26,7 @@ import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/compon
 import {MIN_DATA_FORMAT} from "@/constants/common";
 import {ENV} from "@/constants/env";
 import {safeReload} from "@/helpers/common/safe-reload";
-import {isNotDefined} from "@/helpers/guards/is-defined";
+import {isDefined, isNotDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {deleteCollaborator} from "@/services/collaborator/deleteCollaborator";
 
@@ -109,8 +109,23 @@ const columns: Array<ColumnDef<Collaborator>> = [
 //#endregion
 
 // MARK: - Collaborator Table
-export function CollaboratorTable({data}: {data: Collaborator[]}) {
-  return <DataTable HeaderComponent={TableHeaderComponent} columns={columns} data={data} />;
+export function CollaboratorTable({data: initialData}: {data: Collaborator[]}) {
+  const [data, setData] = useState<Collaborator[]>(initialData);
+
+  return (
+    <DataTable
+      HeaderComponent={TableHeaderComponent}
+      columns={columns}
+      data={data}
+      meta={{
+        deleteRows(index) {
+          setData((prevData) => {
+            return prevData.filter((_, i) => !index.includes(i));
+          });
+        },
+      }}
+    />
+  );
 }
 
 // MARK: - Table Header Component
@@ -146,8 +161,10 @@ function TableHeaderComponent({table}: {table: Table<Collaborator>}) {
       className: "bg-green-500",
     });
 
-    // Reload the page to update the table
-    safeReload();
+    // Remove the deleted collaborators from the table
+    if (isDefined(table.options.meta?.deleteRows)) {
+      table.options.meta.deleteRows(rows.map((row) => row.index));
+    }
   };
 
   return (
