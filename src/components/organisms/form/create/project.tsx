@@ -1,9 +1,8 @@
 import {zodResolver} from "@hookform/resolvers/zod";
-import {ProjectStatus, StackCategory, type Project} from "@prisma/client";
+import {ProjectStatus, StackCategory} from "@prisma/client";
 import {format} from "date-fns";
 import {CalendarIcon, Save} from "lucide-react";
 import {useForm} from "react-hook-form";
-import {useEffect, useState} from "react";
 
 import {Button} from "@/components/ui/button";
 import {Calendar} from "@/components/ui/calendar";
@@ -37,20 +36,6 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
     resolver: zodResolver(ProjectCreateSchema),
     defaultValues: ProjectCreateDefaultValues,
   });
-  /**
-   * `newProjectId` stores the ID of the new project, set when a project is created.
-   * The user is then redirected to the project view.
-   */
-  const [newProjectId, setNewProjectId] = useState<Project["id"]>();
-
-  useEffect(() => {
-    // Redirect happens inside `useEffect` to ensure it occurs after the component has rendered.
-    // This prevents issues that can arise from trying to redirect before React updates the DOM.
-
-    if (isDefined(newProjectId)) {
-      window.location.href = `/vault/views/project/${newProjectId}`;
-    }
-  }, [newProjectId]);
 
   const onSubmit = async (values: ProjectCreateSchema) => {
     // Send request to create a project
