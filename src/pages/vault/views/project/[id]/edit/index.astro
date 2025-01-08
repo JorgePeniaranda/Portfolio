@@ -12,8 +12,10 @@ import { getAllProjects } from '@/services/project/getAllProjects'
 import { getProjectById } from '@/services/project/getProjectById'
 import { getStacksByAssociatedProjects } from '@/services/stack/getStacksByAssociatedProjects'
 import { getStacksByNotAssociatedProjects } from '@/services/stack/getStacksByNotAssociatedProjects'
+import type { GetStaticPaths } from 'astro'
 
-export async function getStaticPaths() {
+// MARK: - Static paths
+export const getStaticPaths = (async () => {
   const projects = await getAllProjects()
 
   const paths = projects.map(project => ({
@@ -22,8 +24,9 @@ export async function getStaticPaths() {
   }))
 
   return paths
-}
+}) satisfies GetStaticPaths
 
+// MARK: - Fetching project data
 let project
 if (ENV.isServerSideEnable) {
   project = await getProjectById({
@@ -40,6 +43,7 @@ if (!project) {
   }
 }
 
+// MARK: - Fetching associated data
 const relatedStacks = await getStacksByAssociatedProjects({
   idProject: project.id
 })

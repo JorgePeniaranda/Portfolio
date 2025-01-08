@@ -5,8 +5,10 @@ import { getAllStack } from '@/services/stack/getAllStack'
 import { getStackByKey } from '@/services/stack/getStackByKey'
 import Base from '../index.astro'
 import { getProjectsByAssociatedStack } from '@/services/project/getProjectsByAssociatedStack'
+import type { GetStaticPaths } from 'astro'
 
-export async function getStaticPaths() {
+// MARK: - Static paths
+export const getStaticPaths = (async () => {
   const stacks = await getAllStack()
 
   const paths = stacks.map(stack => ({
@@ -15,8 +17,9 @@ export async function getStaticPaths() {
   }))
 
   return paths
-}
+}) satisfies GetStaticPaths
 
+// MARK: - Fetching stack data
 let stack
 if (ENV.isServerSideEnable) {
   stack = await getStackByKey({
@@ -33,6 +36,7 @@ if (!stack) {
   }
 }
 
+// MARK: - Fetching associated data
 const relatedProjects = await getProjectsByAssociatedStack({
   idStack: stack.id
 })
