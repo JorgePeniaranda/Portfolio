@@ -96,17 +96,19 @@ const columns: Array<ColumnDef<Stack>> = [
 export function StackTable({data: initialData}: {data: Stack[]}) {
   const [data, setData] = useState<Stack[]>(initialData);
 
+  const deleteRows = (indexes: number[]) => {
+    setData((prevData) => {
+      return prevData.filter((_, i) => !indexes.includes(i));
+    });
+  };
+
   return (
     <DataTable
       HeaderComponent={TableHeaderComponent}
       columns={columns}
       data={data}
       meta={{
-        deleteRows(index) {
-          setData((prevData) => {
-            return prevData.filter((_, i) => !index.includes(i));
-          });
-        },
+        deleteRows,
       }}
     />
   );

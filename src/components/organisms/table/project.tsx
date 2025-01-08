@@ -158,17 +158,19 @@ const columns: Array<ColumnDef<Project>> = [
 export function ProjectTable({data: initialData}: {data: Project[]}) {
   const [data, setData] = useState<Project[]>(initialData);
 
+  const deleteRows = (indexes: number[]) => {
+    setData((prevData) => {
+      return prevData.filter((_, i) => !indexes.includes(i));
+    });
+  };
+
   return (
     <DataTable
       HeaderComponent={TableHeaderComponent}
       columns={columns}
       data={data}
       meta={{
-        deleteRows(index) {
-          setData((prevData) => {
-            return prevData.filter((_, i) => !index.includes(i));
-          });
-        },
+        deleteRows,
       }}
     />
   );

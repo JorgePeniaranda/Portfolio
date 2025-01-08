@@ -89,17 +89,19 @@ const columns: Array<ColumnDef<Collaborator>> = [
 export function CollaboratorTable({data: initialData}: {data: Collaborator[]}) {
   const [data, setData] = useState<Collaborator[]>(initialData);
 
+  const deleteRows = (indexes: number[]) => {
+    setData((prevData) => {
+      return prevData.filter((_, i) => !indexes.includes(i));
+    });
+  };
+
   return (
     <DataTable
       HeaderComponent={TableHeaderComponent}
       columns={columns}
       data={data}
       meta={{
-        deleteRows(index) {
-          setData((prevData) => {
-            return prevData.filter((_, i) => !index.includes(i));
-          });
-        },
+        deleteRows,
       }}
     />
   );
