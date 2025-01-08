@@ -25,7 +25,6 @@ import {Input} from "@/components/ui/input";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip";
 import {MIN_DATA_FORMAT} from "@/constants/common";
 import {ENV} from "@/constants/env";
-import {safeReload} from "@/helpers/common/safe-reload";
 import {isDefined, isNotDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {deleteCollaborator} from "@/services/collaborator/deleteCollaborator";

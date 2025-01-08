@@ -29,7 +29,6 @@ import {
   PROJECT_STATUS_TRANSCRIPTIONS,
   STACK_CATEGORY_TRANSCRIPTIONS,
 } from "@/constants/transcriptions";
-import {safeReload} from "@/helpers/common/safe-reload";
 import {isDefined, isNotDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {deleteProject} from "@/services/project/deleteProject";
