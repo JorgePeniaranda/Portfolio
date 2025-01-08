@@ -6,7 +6,6 @@ import {databaseClient} from "@/helpers/client/prisma";
 import {BuildPaginationByURL} from "@/helpers/common/build-pagination";
 import {RequestHandler} from "@/helpers/common/request-handler";
 import {fromPaginationRequestToPrismaPagination} from "@/mappers/common/fromPaginationRequestToPrismaPagination";
-import {getAllCollaborator} from "@/services/collaborator/getAllCollaborator";
 import {getAllProjects} from "@/services/project/getAllProjects";
 
 /**
