@@ -65,7 +65,7 @@ export function UpdateStacksRelatedToProject({
       toast({
         title: "Error al relacionar stack con el proyecto",
         description: response.message,
-        className: "bg-red-500",
+        className: "bg-red-500 text-white",
       });
 
       return;
@@ -100,7 +100,7 @@ export function UpdateStacksRelatedToProject({
       toast({
         title: "Error al eliminar stack",
         description: response.message,
-        className: "bg-red-500",
+        className: "bg-red-500 text-white",
       });
 
       return;

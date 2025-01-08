@@ -70,7 +70,7 @@ export function UpdateCollaboratorRelatedToProject({
       toast({
         title: "Error linking collaborator to the project",
         description: response.message,
-        className: "bg-red-500",
+        className: "bg-red-500 text-white",
       });
 
       return;
@@ -109,7 +109,7 @@ export function UpdateCollaboratorRelatedToProject({
       toast({
         title: "Error al eliminar colaborador",
         description: response.message,
-        className: "bg-red-500",
+        className: "bg-red-500 text-white",
       });
 
       return;

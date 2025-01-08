@@ -46,7 +46,7 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
       toast({
         title: "Error al crear proyecto",
         description: response.message,
-        className: "bg-red-500",
+        className: "bg-red-500 text-white",
       });
 
       return;

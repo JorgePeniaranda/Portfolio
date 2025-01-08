@@ -39,7 +39,7 @@ export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) 
       toast({
         title: "Error al crear stack",
         description: response.message,
-        className: "bg-red-500",
+        className: "bg-red-500 text-white",
       });
 
       return;

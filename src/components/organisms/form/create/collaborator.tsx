@@ -32,7 +32,7 @@ export function CreateCollaboratorForm({disableForm = false}: {disableForm?: boo
       toast({
         title: "Error al crear colaborador",
         description: response.message,
-        className: "bg-red-500",
+        className: "bg-red-500 text-white",
       });
 
       return;

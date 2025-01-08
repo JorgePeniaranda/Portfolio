@@ -127,7 +127,7 @@ function TableHeaderComponent({table}: {table: Table<Collaborator>}) {
       toast({
         title: "Error al eliminar colaboradores",
         description: "No se pudieron eliminar los colaboradores seleccionados.",
-        className: "bg-green-500",
+        className: "bg-red-500 text-white",
       });
 
       return;
