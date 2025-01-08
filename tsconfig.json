@@ -24,7 +24,7 @@
     },
     "incremental": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["node"]
+    "types": ["node", "jest"]
   },
   "lib": ["DOM", "dom.iterable","ESNext"],
   "allowJs": true,
