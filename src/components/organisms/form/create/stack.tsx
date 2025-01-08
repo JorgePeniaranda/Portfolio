@@ -1,8 +1,7 @@
 import {zodResolver} from "@hookform/resolvers/zod";
-import {StackCategory, StackType, type Stack} from "@prisma/client";
+import {StackCategory, StackType} from "@prisma/client";
 import {Save} from "lucide-react";
 import {useForm} from "react-hook-form";
-import {useEffect, useState} from "react";
 
 import {Button} from "@/components/ui/button";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
