@@ -67,6 +67,7 @@ const availableProjects = await getProjectsByNotAssociatedCollaborator({
             associatedProjects={associatedProjects}
             availableProject={availableProjects}
             currentCollaborator={collaborator}
+            disableForm={ENV.isServerSideEnable === false}
             client:load
           />
         </div>

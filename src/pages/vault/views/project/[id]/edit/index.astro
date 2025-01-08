@@ -74,6 +74,7 @@ const availableCollaborators = await getCollaboratorsByNotAssociatedProjects({
             associatedStacks={relatedStacks}
             availableStacks={availableStacks}
             currentProject={project}
+            disableForm={ENV.isServerSideEnable === false}
             client:load
           />
         </div>
@@ -83,6 +84,7 @@ const availableCollaborators = await getCollaboratorsByNotAssociatedProjects({
             associatedCollaborators={relatedCollaborators}
             availableCollaborators={availableCollaborators}
             currentProject={project}
+            disableForm={ENV.isServerSideEnable === false}
             client:load
           />
         </div>

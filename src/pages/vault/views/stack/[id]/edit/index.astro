@@ -63,6 +63,7 @@ const availableProjects = await getProjectsByNotAssociatedStack({
             currentStack={stack}
             availableProject={availableProjects}
             associatedProjects={associatedProjects}
+            disableForm={ENV.isServerSideEnable === false}
             client:load
           />
         </div>
