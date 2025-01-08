@@ -151,26 +151,6 @@ const columns: Array<ColumnDef<Project>> = [
       );
     },
   },
-  {
-    id: "createdAt",
-    accessorKey: "createdAt",
-    header({column}) {
-      return <DataTableColumnHeader column={column} title="Fecha de creación" />;
-    },
-    cell({row}) {
-      return moment(row.original.createdAt).format(MIN_DATA_FORMAT);
-    },
-  },
-  {
-    id: "updatedAt",
-    accessorKey: "updatedAt",
-    header({column}) {
-      return <DataTableColumnHeader column={column} title="Fecha de actualización" />;
-    },
-    cell({row}) {
-      return moment(row.original.updatedAt).format(MIN_DATA_FORMAT);
-    },
-  },
 ];
 //#endregion
 

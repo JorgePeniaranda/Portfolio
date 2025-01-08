@@ -59,4 +59,9 @@ export const THEME_CLASSNAME = "dark";
 
 //#endregion
 
+/**
+ * The format used for printing dates in the application.
+ *
+ * @constant {string}
+ */
 export const MIN_DATA_FORMAT = "DD-MM-YYYY";
