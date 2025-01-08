@@ -13,7 +13,7 @@ export const GET: APIRoute = ({params}) => {
     async () => {
       const id = z.coerce.number().parse(params.id);
 
-      const response = await databaseClient.project.findUnique({
+      const response = await databaseClient.project.findUniqueOrThrow({
         where: {
           id,
         },
