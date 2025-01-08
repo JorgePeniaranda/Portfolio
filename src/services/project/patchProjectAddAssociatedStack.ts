@@ -4,13 +4,22 @@ import type {Project} from "@prisma/client";
 
 import axios from "axios";
 
+import {serviceErrorHandler} from "@/helpers/error/service-handler";
+
 export async function patchAddRelationWithStackFromProject(
   data: RelationshipsSchema,
 ): Promise<ApiResponse<Project>> {
-  const {data: response} = await axios.patch<ApiResponse<Project>>(
-    "/api/project/relations/stack/add",
-    data,
-  );
+  try {
+    const {data: response} = await axios.patch<ApiResponse<Project>>(
+      "/api/project/relations/stack/add",
+      data,
+    );
 
-  return response;
+    return response;
+  } catch (error) {
+    return {
+      success: false,
+      message: serviceErrorHandler(error),
+    };
+  }
 }

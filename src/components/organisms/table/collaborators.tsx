@@ -2,7 +2,6 @@ import type {Collaborator} from "@prisma/client";
 import type {ColumnDef, Table} from "@tanstack/react-table";
 
 import {Eye, Pen, Plus, Trash} from "lucide-react";
-import moment from "moment";
 import {useMemo, useState} from "react";
 
 import {ConditionalAnchor} from "@/components/atoms/conditional-anchor";
@@ -23,7 +22,6 @@ import {
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip";
-import {MIN_DATA_FORMAT} from "@/constants/common";
 import {ENV} from "@/constants/env";
 import {isDefined, isNotDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
@@ -84,26 +82,6 @@ const columns: Array<ColumnDef<Collaborator>> = [
       );
     },
   },
-  {
-    id: "createdAt",
-    accessorKey: "createdAt",
-    header({column}) {
-      return <DataTableColumnHeader column={column} title="Fecha de creación" />;
-    },
-    cell({row}) {
-      return moment(row.original.createdAt).format(MIN_DATA_FORMAT);
-    },
-  },
-  {
-    id: "updatedAt",
-    accessorKey: "updatedAt",
-    header({column}) {
-      return <DataTableColumnHeader column={column} title="Fecha de actualización" />;
-    },
-    cell({row}) {
-      return moment(row.original.updatedAt).format(MIN_DATA_FORMAT);
-    },
-  },
 ];
 //#endregion
 
@@ -111,17 +89,19 @@ const columns: Array<ColumnDef<Collaborator>> = [
 export function CollaboratorTable({data: initialData}: {data: Collaborator[]}) {
   const [data, setData] = useState<Collaborator[]>(initialData);
 
+  const deleteRows = (indexes: number[]) => {
+    setData((prevData) => {
+      return prevData.filter((_, i) => !indexes.includes(i));
+    });
+  };
+
   return (
     <DataTable
       HeaderComponent={TableHeaderComponent}
       columns={columns}
       data={data}
       meta={{
-        deleteRows(index) {
-          setData((prevData) => {
-            return prevData.filter((_, i) => !index.includes(i));
-          });
-        },
+        deleteRows,
       }}
     />
   );
@@ -147,7 +127,7 @@ function TableHeaderComponent({table}: {table: Table<Collaborator>}) {
       toast({
         title: "Error al eliminar colaboradores",
         description: "No se pudieron eliminar los colaboradores seleccionados.",
-        className: "bg-green-500",
+        className: "bg-red-500 text-white",
       });
 
       return;

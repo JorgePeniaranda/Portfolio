@@ -2,6 +2,9 @@ import type {ApiResponse} from "@/types/responses";
 
 import z from "zod";
 
+import {isPrismaError} from "../guards/is-prisma-error";
+import {prismaHandler} from "../error/prisma-handler";
+
 /**
  * A higher-order function that manages the request handling process in an API endpoint.
  * It accepts a handler function for processing the request and a configuration object
@@ -49,6 +52,21 @@ export const RequestHandler = async (
       status: successStatusCode,
     });
   } catch (error) {
+    // If the error is a Prisma error
+    if (isPrismaError(error)) {
+      const {statusCode, message} = prismaHandler(error);
+
+      // Handle Prisma errors
+      response = {
+        success: false,
+        message: "An error occurred", // Generic error message
+        error: message,
+      };
+
+      // Return a 500 error response
+      return Response.json(response, {status: statusCode});
+    }
+
     // If the error is a Zod validation error
     if (error instanceof z.ZodError) {
       response = {
@@ -59,16 +77,16 @@ export const RequestHandler = async (
 
       // Return a 400 error response with validation errors
       return Response.json(response, {status: 400});
-    } else {
-      // If an unknown error occurs, return a generic error message
-      response = {
-        success: false,
-        message: "An error occurred", // Generic error message
-        error: error instanceof Error ? error.message : "Unknown error occurred.", // Error message or fallback for unknown errors
-      };
-
-      // Return a 500 error response
-      return Response.json(response, {status: 500});
     }
+
+    // If an unknown error occurs, return a generic error message
+    response = {
+      success: false,
+      message: "An error occurred", // Generic error message
+      error: error instanceof Error ? error.message : "Unknown error occurred.", // Error message or fallback for unknown errors
+    };
+
+    // Return a 500 error response
+    return Response.json(response, {status: 500});
   }
 };

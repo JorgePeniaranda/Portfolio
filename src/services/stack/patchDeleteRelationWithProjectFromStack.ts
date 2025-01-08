@@ -4,13 +4,22 @@ import type {Stack} from "@prisma/client";
 
 import axios from "axios";
 
+import {serviceErrorHandler} from "@/helpers/error/service-handler";
+
 export async function patchDeleteRelationWithProjectFromStack(
   data: RelationshipsSchema,
 ): Promise<ApiResponse<Stack>> {
-  const {data: response} = await axios.patch<ApiResponse<Stack>>(
-    "/api/stack/relations/project/delete",
-    data,
-  );
+  try {
+    const {data: response} = await axios.patch<ApiResponse<Stack>>(
+      "/api/stack/relations/project/delete",
+      data,
+    );
 
-  return response;
+    return response;
+  } catch (error) {
+    return {
+      success: false,
+      message: serviceErrorHandler(error),
+    };
+  }
 }

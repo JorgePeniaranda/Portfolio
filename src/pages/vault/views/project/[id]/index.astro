@@ -10,9 +10,10 @@ import { getCollaboratorsByAssociatedProjects } from '@/services/collaborator/ge
 import { getAllProjects } from '@/services/project/getAllProjects'
 import { getProjectById } from '@/services/project/getProjectById'
 import { getStacksByAssociatedProjects } from '@/services/stack/getStacksByAssociatedProjects'
+import type { GetStaticPaths } from 'astro'
 
 // MARK: - Static paths
-export async function getStaticPaths() {
+export const getStaticPaths = (async () => {
   const projects = await getAllProjects()
 
   const paths = projects.map(project => ({
@@ -21,7 +22,7 @@ export async function getStaticPaths() {
   }))
 
   return paths
-}
+}) satisfies GetStaticPaths
 
 // MARK: - Fetching project data
 let project

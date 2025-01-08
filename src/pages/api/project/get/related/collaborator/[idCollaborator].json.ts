@@ -1,4 +1,4 @@
-import type {APIRoute} from "astro";
+import type {APIRoute, GetStaticPaths} from "astro";
 
 import {z} from "zod";
 
@@ -37,3 +37,15 @@ export const GET: APIRoute = ({request, params}) => {
     {successStatusCode: 200},
   );
 };
+
+export const getStaticPaths = (async () => {
+  const collaborators = await databaseClient.collaborator.findMany({
+    select: {
+      id: true,
+    },
+  });
+
+  return collaborators.map((collaborator) => ({
+    params: {idCollaborator: collaborator.id},
+  }));
+}) satisfies GetStaticPaths;

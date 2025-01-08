@@ -35,7 +35,7 @@ export function UpdateCollaboratorForm({
       toast({
         title: "Error al actualizar colaborador",
         description: response.message,
-        className: "bg-red-500",
+        className: "bg-red-500 text-white",
       });
 
       return;

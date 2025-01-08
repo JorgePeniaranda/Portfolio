@@ -1,4 +1,4 @@
-import type {APIRoute} from "astro";
+import type {APIRoute, GetStaticPaths} from "astro";
 
 import {z} from "zod";
 
@@ -13,7 +13,7 @@ export const GET: APIRoute = ({params}) => {
     async () => {
       const id = z.coerce.number().parse(params.id);
 
-      const response = await databaseClient.project.findUnique({
+      const response = await databaseClient.project.findUniqueOrThrow({
         where: {
           id,
         },
@@ -28,3 +28,15 @@ export const GET: APIRoute = ({params}) => {
     {successStatusCode: 200},
   );
 };
+
+export const getStaticPaths = (async () => {
+  const projects = await databaseClient.project.findMany({
+    select: {
+      id: true,
+    },
+  });
+
+  return projects.map((project) => ({
+    params: {id: project.id},
+  }));
+}) satisfies GetStaticPaths;

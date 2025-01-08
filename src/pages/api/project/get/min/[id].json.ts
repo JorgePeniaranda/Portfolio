@@ -1,4 +1,4 @@
-import type {APIRoute} from "astro";
+import type {APIRoute, GetStaticPaths} from "astro";
 
 import {z} from "zod";
 
@@ -11,11 +11,11 @@ import {RequestHandler} from "@/helpers/common/request-handler";
 export const GET: APIRoute = ({params}) => {
   return RequestHandler(
     async () => {
-      const key = z.coerce.string().parse(params.key);
+      const id = z.coerce.number().parse(params.id);
 
       const response = await databaseClient.project.findUnique({
         where: {
-          key,
+          id,
         },
       });
 
@@ -28,3 +28,15 @@ export const GET: APIRoute = ({params}) => {
     {successStatusCode: 200},
   );
 };
+
+export const getStaticPaths = (async () => {
+  const projects = await databaseClient.project.findMany({
+    select: {
+      id: true,
+    },
+  });
+
+  return projects.map((project) => ({
+    params: {id: project.id},
+  }));
+}) satisfies GetStaticPaths;

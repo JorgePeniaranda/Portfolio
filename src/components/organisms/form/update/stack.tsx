@@ -43,7 +43,7 @@ export function UpdateStackForm({
       toast({
         title: "Error al actualizar stack",
         description: response.message,
-        className: "bg-red-500",
+        className: "bg-red-500 text-white",
       });
     }
 

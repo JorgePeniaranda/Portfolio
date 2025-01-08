@@ -151,26 +151,6 @@ const columns: Array<ColumnDef<Project>> = [
       );
     },
   },
-  {
-    id: "createdAt",
-    accessorKey: "createdAt",
-    header({column}) {
-      return <DataTableColumnHeader column={column} title="Fecha de creación" />;
-    },
-    cell({row}) {
-      return moment(row.original.createdAt).format(MIN_DATA_FORMAT);
-    },
-  },
-  {
-    id: "updatedAt",
-    accessorKey: "updatedAt",
-    header({column}) {
-      return <DataTableColumnHeader column={column} title="Fecha de actualización" />;
-    },
-    cell({row}) {
-      return moment(row.original.updatedAt).format(MIN_DATA_FORMAT);
-    },
-  },
 ];
 //#endregion
 
@@ -178,17 +158,19 @@ const columns: Array<ColumnDef<Project>> = [
 export function ProjectTable({data: initialData}: {data: Project[]}) {
   const [data, setData] = useState<Project[]>(initialData);
 
+  const deleteRows = (indexes: number[]) => {
+    setData((prevData) => {
+      return prevData.filter((_, i) => !indexes.includes(i));
+    });
+  };
+
   return (
     <DataTable
       HeaderComponent={TableHeaderComponent}
       columns={columns}
       data={data}
       meta={{
-        deleteRows(index) {
-          setData((prevData) => {
-            return prevData.filter((_, i) => !index.includes(i));
-          });
-        },
+        deleteRows,
       }}
     />
   );
@@ -214,7 +196,7 @@ function TableHeaderComponent({table}: {table: Table<Project>}) {
       toast({
         title: "Error al eliminar colaboradores",
         description: "No se pudieron eliminar los colaboradores seleccionados.",
-        className: "bg-green-500",
+        className: "bg-red-500 text-white",
       });
 
       return;

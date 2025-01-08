@@ -1,4 +1,4 @@
-import type {APIRoute} from "astro";
+import type {APIRoute, GetStaticPaths} from "astro";
 
 import {z} from "zod";
 
@@ -14,14 +14,14 @@ import {fromPaginationRequestToPrismaPagination} from "@/mappers/common/fromPagi
 export const GET: APIRoute = ({request, params}) => {
   return RequestHandler(
     async () => {
-      const idStack = z.coerce.number().parse(params.idStack);
+      const idCollaborator = z.coerce.number().parse(params.idCollaborator);
       const paginationParams = BuildPaginationByURL(request.url);
 
       const response = await databaseClient.project.findMany({
         where: {
-          associatedStacks: {
-            some: {
-              id: idStack,
+          associatedCollaborators: {
+            none: {
+              id: idCollaborator,
             },
           },
         },
@@ -37,3 +37,15 @@ export const GET: APIRoute = ({request, params}) => {
     {successStatusCode: 200},
   );
 };
+
+export const getStaticPaths = (async () => {
+  const collaborators = await databaseClient.collaborator.findMany({
+    select: {
+      id: true,
+    },
+  });
+
+  return collaborators.map((collaborator) => ({
+    params: {idCollaborator: collaborator.id},
+  }));
+}) satisfies GetStaticPaths;

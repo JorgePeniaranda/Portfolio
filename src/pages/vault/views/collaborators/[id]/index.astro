@@ -9,8 +9,10 @@ import { isNotDefined } from '@/helpers/guards/is-defined'
 import { getAllCollaborator } from '@/services/collaborator/getAllCollaborator'
 import { getCollaboratorById } from '@/services/collaborator/getCollaboratorById'
 import { getProjectsByAssociatedCollaborator } from '@/services/project/getProjectsByAssociatedCollaborator'
+import type { GetStaticPaths } from 'astro'
 
-export async function getStaticPaths() {
+// MARK: - Static paths
+export const getStaticPaths = (async () => {
   const collaborators = await getAllCollaborator()
 
   const paths = collaborators.map(collaborator => ({
@@ -19,8 +21,9 @@ export async function getStaticPaths() {
   }))
 
   return paths
-}
+}) satisfies GetStaticPaths
 
+// MARK: - Fetching collaborator data
 let collaborator
 if (ENV.isServerSideEnable) {
   collaborator = await getCollaboratorById({
@@ -37,6 +40,7 @@ if (!collaborator) {
   }
 }
 
+// MARK: - Fetching associated data
 const associatedProjects = await getProjectsByAssociatedCollaborator({
   idCollaborator: collaborator.id
 })

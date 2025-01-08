@@ -4,7 +4,9 @@ import type {Stack} from "@prisma/client";
 import {apiClient} from "@/helpers/client/axios";
 
 export async function getStackById({id}: {id: Stack["id"]}): Promise<Stack | null> {
-  const {data: response} = await apiClient.get<ApiResponse<Stack | null>>(`api/stack/get/id/${id}`);
+  const {data: response} = await apiClient.get<ApiResponse<Stack | null>>(
+    `api/stack/get/id/${id}.json`,
+  );
 
   if (response.success === false) {
     throw new Error(response.message);

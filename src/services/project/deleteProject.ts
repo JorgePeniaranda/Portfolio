@@ -3,11 +3,20 @@ import type {Project} from "@prisma/client";
 
 import axios from "axios";
 
-export async function deleteProject(data: Project["id"][]): Promise<ApiResponse<DeleteResponse>> {
-  const {data: response} = await axios.post<ApiResponse<DeleteResponse>>(
-    "/api/project/delete",
-    data,
-  );
+import {serviceErrorHandler} from "@/helpers/error/service-handler";
 
-  return response;
+export async function deleteProject(data: Project["id"][]): Promise<ApiResponse<DeleteResponse>> {
+  try {
+    const {data: response} = await axios.post<ApiResponse<DeleteResponse>>(
+      "/api/project/delete",
+      data,
+    );
+
+    return response;
+  } catch (error) {
+    return {
+      success: false,
+      message: serviceErrorHandler(error),
+    };
+  }
 }
