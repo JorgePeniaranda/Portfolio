@@ -1,1 +1,0 @@
-import{a as t}from"./classnames.B9MHP6Dy.js";const h=t("ChevronRight",[["path",{d:"m9 18 6-6-6-6",key:"mthhwq"}]]);export{h as C};
