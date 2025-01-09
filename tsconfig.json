@@ -24,12 +24,11 @@
     },
     "incremental": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["node", "jest"]
+    "types": ["node"]
   },
   "lib": ["DOM", "dom.iterable","ESNext"],
   "allowJs": true,
   "skipLibCheck": true,
-  "strict": true,
   "noEmit": true,
   "module": "ESNext",
   "moduleResolution": "bundler",
@@ -54,8 +53,5 @@
   "strictFunctionTypes": true,
   "strictNullChecks": true,
   "strictPropertyInitialization": true,
-  "exclude": ["node_modules", "**/*.test.ts", "**/*.spec.ts"],
-  "paths": {
-    "@/*": ["./src/*"]
-  },
+  "exclude": ["node_modules"],
 }
