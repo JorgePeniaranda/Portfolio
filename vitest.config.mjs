@@ -11,6 +11,14 @@ export default getViteConfig({
     },
     coverage: {
       reporter: ["text", "json", "html"], // Enable coverage reports
+      include: ["src/**/*"], // Only include files inside the 'src' directory
+      exclude: [
+        "src/components/atoms/theme-preference.astro",
+        "src/components/ui/**/*",
+        "src/constants/**/*",
+        "src/types/**/*",
+        "src/env.d.ts",
+      ],
     },
   },
 });
