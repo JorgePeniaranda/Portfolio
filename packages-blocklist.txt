@@ -1,0 +1,8 @@
+> vitest (2.1.6): 
+  - on updating to version >= 2.1.7, an Unknown Error: [object Object] is thrown.
+  - ref: https://github.com/withastro/astro/issues/12384#issuecomment-2518269691
+> @eslint/compat (1.1.1):
+  - fails with the error ERESOLVE could not resolve due to a conflict between eslint versions.
+  - The conflict arises because @eslint/compat@1.2.4 requires eslint@^9.10.0 as peerOptional.
+> husky (8.0.3):
+  - when incrementing the version in package.json (>= 8.0.4), an error occurs: MODULE_NOT_FOUND because the module husky/lib/bin.js is not found.
