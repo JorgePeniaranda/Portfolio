@@ -26,6 +26,7 @@ import {ENV} from "@/constants/env";
 import {isDefined, isNotDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {deleteCollaborator} from "@/services/collaborator/deleteCollaborator";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 //#region Column Definitions
 const columns: Array<ColumnDef<Collaborator>> = [
@@ -135,18 +136,10 @@ function TableHeaderComponent({table}: {table: Table<Collaborator>}) {
         table.options.meta.deleteRows(rows.map((row) => row.index));
       }
     } catch (error) {
-      if (error instanceof Error) {
-        toast({
-          title: "Error al eliminar colaboradores",
-          description: error.message,
-          className: "bg-red-500",
-        });
-      }
-
-      toast({
+      handleErrorWithToast({
+        error,
         title: "Error al eliminar colaboradores",
-        description: "Ha ocurrido un error al eliminar los colaboradores.",
-        className: "bg-red-500",
+        defaultErrorMessage: "Ha ocurrido un error al intentar eliminar los colaboradores.",
       });
     }
   };

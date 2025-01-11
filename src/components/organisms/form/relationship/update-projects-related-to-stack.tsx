@@ -28,6 +28,7 @@ import {isDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {patchStackAddAssociatedProjects} from "@/services/stack/patchStackAddAssociatedProjects";
 import {patchStackRemoveAssociatedProjects} from "@/services/stack/patchStackRemoveAssociatedProjects";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 export function UpdateProjectsRelatedToStack({
   currentStack,
@@ -78,18 +79,10 @@ export function UpdateProjectsRelatedToStack({
         setAvailableProject((prev) => prev.filter((project) => project.id !== Number(values.idTo)));
       }
     } catch (error) {
-      if (error instanceof Error) {
-        toast({
-          title: "Error al relacionar proyecto",
-          description: error.message,
-          className: "bg-red-500 text-white",
-        });
-      }
-
-      toast({
-        title: "Error al relacionar proyecto",
-        description: "Ocurrió un error al relacionar el proyecto con el stack.",
-        className: "bg-red-500 text-white",
+      handleErrorWithToast({
+        error,
+        title: "No se pudo relacionar el proyecto",
+        defaultErrorMessage: "Ocurrió un error al intentar relacionar el proyecto con el stack.",
       });
     }
   };
@@ -117,18 +110,10 @@ export function UpdateProjectsRelatedToStack({
         setAssociatedProjects((prev) => prev.filter((project) => project.id !== idProject));
       }
     } catch (error) {
-      if (error instanceof Error) {
-        toast({
-          title: "Error al eliminar proyecto",
-          description: error.message,
-          className: "bg-red-500 text-white",
-        });
-      }
-
-      toast({
-        title: "Error al eliminar proyecto",
-        description: "Ocurrió un error al eliminar el proyecto del stack.",
-        className: "bg-red-500 text-white",
+      handleErrorWithToast({
+        error,
+        title: "No se pudo eliminar el proyecto",
+        defaultErrorMessage: "Ocurrió un error al intentar eliminar el proyecto del stack.",
       });
     }
   };

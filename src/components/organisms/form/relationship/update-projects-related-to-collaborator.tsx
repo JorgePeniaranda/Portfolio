@@ -28,6 +28,7 @@ import {isDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {patchCollaboratorAddAssociatedProjects} from "@/services/collaborator/patchCollaboratorAddAssociatedProjects";
 import {patchCollaboratorRemoveAssociatedProjects} from "@/services/collaborator/patchCollaboratorRemoveAssociatedProjects";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 export function UpdateProjectsRelatedToCollaborator({
   currentCollaborator,
@@ -78,18 +79,11 @@ export function UpdateProjectsRelatedToCollaborator({
         setAvailableProject((prev) => prev.filter((project) => project.id !== Number(values.idTo)));
       }
     } catch (error) {
-      if (error instanceof Error) {
-        toast({
-          title: "Error al relacionar proyecto",
-          description: error.message,
-          className: "bg-red-500 text-white",
-        });
-      }
-
-      toast({
-        title: "Error al relacionar proyecto",
-        description: "Ocurrió un error al relacionar el proyecto con el colaborador.",
-        className: "bg-red-500 text-white",
+      handleErrorWithToast({
+        error,
+        title: "No se pudo relacionar el proyecto con el colaborador",
+        defaultErrorMessage:
+          "Ocurrió un error al intentar relacionar el proyecto con el colaborador.",
       });
     }
   };
@@ -117,18 +111,10 @@ export function UpdateProjectsRelatedToCollaborator({
         setAvailableProject((prev) => [...prev, findProject]);
       }
     } catch (error) {
-      if (error instanceof Error) {
-        toast({
-          title: "Error al eliminar proyecto",
-          description: error.message,
-          className: "bg-red-500 text-white",
-        });
-      }
-
-      toast({
-        title: "Error al eliminar proyecto",
-        description: "Ocurrió un error al eliminar el proyecto del colaborador.",
-        className: "bg-red-500 text-white",
+      handleErrorWithToast({
+        error,
+        title: "No se pudo eliminar el proyecto del colaborador",
+        defaultErrorMessage: "Ocurrió un error al intentar eliminar el proyecto del colaborador.",
       });
     }
   };

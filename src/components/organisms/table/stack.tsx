@@ -27,6 +27,7 @@ import {STACK_CATEGORY_TRANSCRIPTIONS, STACK_TYPE_TRANSCRIPTIONS} from "@/consta
 import {isDefined, isNotDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {deleteStack} from "@/services/stack/deleteStack";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 //#region Column Definitions
 const columns: Array<ColumnDef<Stack>> = [
@@ -141,18 +142,10 @@ function TableHeaderComponent({table}: {table: Table<Stack>}) {
         table.options.meta.deleteRows(rows.map((row) => row.index));
       }
     } catch (error) {
-      if (error instanceof Error) {
-        toast({
-          title: "Error al eliminar stack",
-          description: error.message,
-          className: "bg-red-500",
-        });
-      }
-
-      toast({
-        title: "Error al eliminar stack",
-        description: "Ha ocurrido un error al eliminar los stacks seleccionados.",
-        className: "bg-red-500",
+      handleErrorWithToast({
+        error,
+        title: "Error al eliminar los stack",
+        defaultErrorMessage: "Ha ocurrido un error al intentar eliminar los stacks seleccionados.",
       });
     }
   };

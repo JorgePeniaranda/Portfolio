@@ -27,6 +27,7 @@ import {isDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {ProjectCreateDefaultValues, ProjectCreateSchema} from "@/schemas/project/create";
 import {postProject} from "@/services/project/postProject";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}) {
   const {toast} = useToast();
@@ -55,18 +56,10 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
         safeRedirect(`/vault/views/project/${response.id}`);
       }
     } catch (error) {
-      if (error instanceof Error) {
-        toast({
-          title: "Error al crear el proyecto",
-          description: error.message,
-          className: "bg-red-500",
-        });
-      }
-
-      toast({
-        title: "Error al crear el proyecto",
-        description: "Ha ocurrido un error al crear el proyecto.",
-        className: "bg-red-500",
+      handleErrorWithToast({
+        error,
+        title: "No se pudo crear el proyecto",
+        defaultErrorMessage: "Ha ocurrido un error al intentar crear el proyecto.",
       });
     }
   };

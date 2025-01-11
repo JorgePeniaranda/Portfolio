@@ -10,6 +10,7 @@ import {Input} from "@/components/ui/input";
 import {useToast} from "@/hooks/use-toast";
 import {CollaboratorUpdateSchema} from "@/schemas/collaborator/update";
 import {putCollaborator} from "@/services/collaborator/putCollaborator";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 export function UpdateCollaboratorForm({
   currentCollaborator,
@@ -38,18 +39,10 @@ export function UpdateCollaboratorForm({
         className: "bg-green-500",
       });
     } catch (error) {
-      if (error instanceof Error) {
-        toast({
-          title: "Error al actualizar el colaborador",
-          description: error.message,
-          className: "bg-red-500",
-        });
-      }
-
-      toast({
-        title: "Error al actualizar el colaborador",
-        description: "Ha ocurrido un error al actualizar el Colaborador.",
-        className: "bg-red-500",
+      handleErrorWithToast({
+        error,
+        title: "No se pudo actualizar el Colaborador",
+        defaultErrorMessage: "Ha ocurrido un error al intentar actualizar el Colaborador.",
       });
     }
   };

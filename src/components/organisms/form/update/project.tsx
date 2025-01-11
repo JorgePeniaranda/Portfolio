@@ -25,6 +25,7 @@ import {cn} from "@/helpers/common/classnames";
 import {useToast} from "@/hooks/use-toast";
 import {ProjectUpdateSchema} from "@/schemas/project/update";
 import {putProject} from "@/services/project/putProject";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 export function UpdateProjectForm({
   currentProject,
@@ -53,18 +54,10 @@ export function UpdateProjectForm({
         className: "bg-green-500",
       });
     } catch (error) {
-      if (error instanceof Error) {
-        toast({
-          title: "Error al actualizar el proyecto",
-          description: error.message,
-          className: "bg-red-500",
-        });
-      }
-
-      toast({
-        title: "Error al actualizar el proyecto",
-        description: "Ha ocurrido un error al actualizar el proyecto.",
-        className: "bg-red-500",
+      handleErrorWithToast({
+        error,
+        title: "No se pudo actualizar el proyecto",
+        defaultErrorMessage: "Ha ocurrido un error al intentar actualizar el proyecto.",
       });
     }
   };

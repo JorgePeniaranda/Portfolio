@@ -18,6 +18,7 @@ import {STACK_CATEGORY_TRANSCRIPTIONS, STACK_TYPE_TRANSCRIPTIONS} from "@/consta
 import {useToast} from "@/hooks/use-toast";
 import {StackUpdateSchema} from "@/schemas/stack/update";
 import {putStack} from "@/services/stack/putStack";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 export function UpdateStackForm({
   currentStack,
@@ -46,18 +47,10 @@ export function UpdateStackForm({
         className: "bg-green-500",
       });
     } catch (error) {
-      if (error instanceof Error) {
-        toast({
-          title: "Error al actualizar stack",
-          description: error.message,
-          className: "bg-red-500",
-        });
-      }
-
-      toast({
-        title: "Error al actualizar stack",
-        description: "Ha ocurrido un error al actualizar el stack.",
-        className: "bg-red-500",
+      handleErrorWithToast({
+        error,
+        title: "No se pudo actualizar el stack",
+        defaultErrorMessage: "Ha ocurrido un error al intentar actualizar el stack.",
       });
     }
   };

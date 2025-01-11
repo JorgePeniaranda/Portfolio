@@ -28,6 +28,7 @@ import {isDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {patchProjectAddAssociatedStack} from "@/services/project/patchProjectAddAssociatedStack";
 import {patchProjectRemoveAssociatedStack} from "@/services/project/patchProjectRemoveAssociatedStack";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 export function UpdateStacksRelatedToProject({
   currentProject,
@@ -77,18 +78,10 @@ export function UpdateStacksRelatedToProject({
         setAvailableStacks((prev) => prev.filter((stack) => stack.id !== Number(values.idTo)));
       }
     } catch (error) {
-      if (error instanceof Error) {
-        toast({
-          title: "Error al relacionar stack",
-          description: error.message,
-          className: "bg-red-500 text-white",
-        });
-      }
-
-      toast({
-        title: "Error al relacionar stack",
-        description: "Ocurrió un error al relacionar el stack con el proyecto.",
-        className: "bg-red-500 text-white",
+      handleErrorWithToast({
+        error,
+        title: "No se pudo relacionar el stack",
+        defaultErrorMessage: "Ocurrió un error al intentar relacionar el stack con el proyecto.",
       });
     }
   };
@@ -116,18 +109,10 @@ export function UpdateStacksRelatedToProject({
         setAssociatedStacks((prev) => prev.filter((stack) => stack.id !== stackId));
       }
     } catch (error) {
-      if (error instanceof Error) {
-        toast({
-          title: "Error al eliminar stack",
-          description: error.message,
-          className: "bg-red-500 text-white",
-        });
-      }
-
-      toast({
-        title: "Error al eliminar stack",
-        description: "Ocurrió un error al eliminar el stack del proyecto.",
-        className: "bg-red-500 text-white",
+      handleErrorWithToast({
+        error,
+        title: "No se pudo eliminar el stack",
+        defaultErrorMessage: "Ocurrió un error al intentar eliminar el stack del proyecto.",
       });
     }
   };

@@ -13,6 +13,7 @@ import {
   CollaboratorCreateSchema,
 } from "@/schemas/collaborator/create";
 import {postCollaborator} from "@/services/collaborator/postCollaborator";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 export function CreateCollaboratorForm({disableForm = false}: {disableForm?: boolean}) {
   const {toast} = useToast();
@@ -41,18 +42,10 @@ export function CreateCollaboratorForm({disableForm = false}: {disableForm?: boo
         safeRedirect(`/vault/views/collaborators/${newCollaboratorResult.id}`);
       }
     } catch (error) {
-      if (error instanceof Error) {
-        toast({
-          title: "Error al crear el colaborador",
-          description: error.message,
-          className: "bg-red-500",
-        });
-      }
-
-      toast({
-        title: "Error al crear el colaborador",
-        description: "Ha ocurrido un error al crear el colaborador.",
-        className: "bg-red-500",
+      handleErrorWithToast({
+        error,
+        title: "No se pudo crear el colaborador",
+        defaultErrorMessage: "Ha ocurrido un error al intentar crear el colaborador.",
       });
     }
   };

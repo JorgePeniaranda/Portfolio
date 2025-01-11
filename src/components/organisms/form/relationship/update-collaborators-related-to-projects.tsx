@@ -29,6 +29,7 @@ import {isDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {patchProjectAddAssociatedCollaborator} from "@/services/project/patchProjectAddAssociatedCollaborator";
 import {patchProjectRemoveAssociatedCollaborator} from "@/services/project/patchProjectRemoveAssociatedCollaborator";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 export function UpdateCollaboratorRelatedToProject({
   currentProject,
@@ -86,18 +87,11 @@ export function UpdateCollaboratorRelatedToProject({
         );
       }
     } catch (error) {
-      if (error instanceof Error) {
-        toast({
-          title: "Error al relacionar proyecto",
-          description: error.message,
-          className: "bg-red-500 text-white",
-        });
-      }
-
-      toast({
-        title: "Error al relacionar proyecto",
-        description: "An error occurred while linking the project with the collaborator.",
-        className: "bg-red-500 text-white",
+      handleErrorWithToast({
+        error,
+        title: "No se pudo relacionar el proyecto con el colaborador",
+        defaultErrorMessage:
+          "Ocurrió un error al intentar relacionar el proyecto con el colaborador.",
       });
     }
   };
@@ -129,18 +123,11 @@ export function UpdateCollaboratorRelatedToProject({
         setAvailableCollaborators((prev) => [...prev, findCollaborator]);
       }
     } catch (error) {
-      if (error instanceof Error) {
-        toast({
-          title: "Error al relacionar proyecto",
-          description: error.message,
-          className: "bg-red-500 text-white",
-        });
-      }
-
-      toast({
-        title: "Error al relacionar proyecto",
-        description: "Ocurrió un error al relacionar el proyecto con el colaborador.",
-        className: "bg-red-500 text-white",
+      handleErrorWithToast({
+        error,
+        title: "No se pudo eliminar el proyecto del colaborador",
+        defaultErrorMessage:
+          "Ocurrió un error al intentar eliminar el proyecto con el colaborador.",
       });
     }
   };

@@ -32,6 +32,7 @@ import {
 import {isDefined, isNotDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {deleteProject} from "@/services/project/deleteProject";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 //#region Column Definitions
 const columns: Array<ColumnDef<Project>> = [
@@ -203,18 +204,10 @@ function TableHeaderComponent({table}: {table: Table<Project>}) {
         table.options.meta.deleteRows(rows.map((row) => row.index));
       }
     } catch (error) {
-      if (error instanceof Error) {
-        toast({
-          title: "Error al eliminar proyectos",
-          description: error.message,
-          className: "bg-red-500",
-        });
-      }
-
-      toast({
+      handleErrorWithToast({
+        error,
         title: "Error al eliminar proyectos",
-        description: "Ha ocurrido un error al eliminar los proyectos.",
-        className: "bg-red-500",
+        defaultErrorMessage: "Ha ocurrido un error al eliminar los proyectos.",
       });
     }
   };
