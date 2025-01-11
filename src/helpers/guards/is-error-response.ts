@@ -9,16 +9,16 @@ import {isNotDefined} from "./is-defined";
  * @returns True if the error is an ErrorResponse, false otherwise
  */
 export function isErrorResponse(error: unknown): error is ErrorResponse {
-  let predicate = true;
+  let predicate = false;
 
   if (typeof error !== "object" || isNotDefined(error)) {
     return false;
   }
 
   if ("error" in error && typeof error.error === "string") {
-    predicate &&= true;
+    predicate ||= true;
   } else {
-    predicate &&= false;
+    predicate ||= false;
   }
 
   if (
@@ -26,9 +26,9 @@ export function isErrorResponse(error: unknown): error is ErrorResponse {
     Array.isArray(error.errors) &&
     error.errors.some((error) => typeof error === "string")
   ) {
-    predicate &&= true;
+    predicate ||= true;
   } else {
-    predicate &&= false;
+    predicate ||= false;
   }
 
   return predicate;
