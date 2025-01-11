@@ -1,25 +1,25 @@
-import type {ApiResponse} from "@/types/responses";
 import type {RelationshipsSchema} from "../../schemas/common/relationships";
 
-import {type Collaborator} from "@prisma/client";
-import axios from "axios";
+import {apiClient} from "@/helpers/client/axios";
 
-import {serviceErrorHandler} from "@/helpers/error/service-handler";
-
+/**
+ * This service is responsible for adding a project to a collaborator.
+ *
+ * @param relationSchema - Object with the collaborator and project data.
+ * @returns A promise with the collaborator and project data.
+ * @throws An error if the collaborator and project data could not be added.
+ */
 export async function patchCollaboratorAddAssociatedProjects(
-  data: RelationshipsSchema,
-): Promise<ApiResponse<Collaborator>> {
+  relationSchema: RelationshipsSchema,
+): Promise<void> {
   try {
-    const {data: response} = await axios.patch<ApiResponse<Collaborator>>(
+    const {data: response} = await apiClient.patch<void>(
       "/api/collaborator/relations/project/add",
-      data,
+      relationSchema,
     );
 
     return response;
-  } catch (error) {
-    return {
-      success: false,
-      message: serviceErrorHandler(error),
-    };
+  } catch {
+    throw new Error("No se pudo agregar el proyecto al colaborador.");
   }
 }

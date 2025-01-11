@@ -1,19 +1,19 @@
-import type {ApiResponse} from "@/types/responses";
-
 import {Prisma, type Project} from "@prisma/client";
 import axios from "axios";
 
-import {serviceErrorHandler} from "@/helpers/error/service-handler";
-
-export async function postProject(data: Prisma.ProjectCreateInput): Promise<ApiResponse<Project>> {
+/**
+ * Create a new project.
+ *
+ * @param projectInput - The project data.
+ * @returns The created project.
+ * @throws An error if the operation fails.
+ */
+export async function postProject(projectInput: Prisma.ProjectCreateInput): Promise<Project> {
   try {
-    const {data: response} = await axios.post<ApiResponse<Project>>("/api/project/create", data);
+    const {data: response} = await axios.post<Project>("/api/project/create", projectInput);
 
     return response;
-  } catch (error) {
-    return {
-      success: false,
-      message: serviceErrorHandler(error),
-    };
+  } catch {
+    throw new Error("No se pudo crear el proyecto");
   }
 }

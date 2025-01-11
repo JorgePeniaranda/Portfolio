@@ -1,24 +1,24 @@
-import type {ApiResponse} from "@/types/responses";
-
 import {Prisma, type Collaborator} from "@prisma/client";
 import axios from "axios";
 
-import {serviceErrorHandler} from "@/helpers/error/service-handler";
-
+/**
+ * Update a collaborator.
+ *
+ * @param updatedCollaborator - The collaborator to update.
+ * @returns The updated collaborator.
+ * @throws An error if the operation fails.
+ */
 export async function putCollaborator(
-  data: Prisma.CollaboratorUpdateInput,
-): Promise<ApiResponse<Collaborator>> {
+  updatedCollaborator: Prisma.CollaboratorUpdateInput,
+): Promise<Collaborator> {
   try {
-    const {data: response} = await axios.put<ApiResponse<Collaborator>>(
+    const {data: response} = await axios.put<Collaborator>(
       "/api/collaborator/update",
-      data,
+      updatedCollaborator,
     );
 
     return response;
-  } catch (error) {
-    return {
-      success: false,
-      message: serviceErrorHandler(error),
-    };
+  } catch {
+    throw new Error("No se pudo actualizar el colaborador.");
   }
 }

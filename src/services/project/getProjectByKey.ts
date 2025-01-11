@@ -1,16 +1,20 @@
-import type {ApiResponse} from "@/types/responses";
 import type {Project} from "@prisma/client";
 
 import {apiClient} from "@/helpers/client/axios";
 
+/**
+ * Get a project by its key.
+ *
+ * @param key - The key of the project
+ * @returns The project with the given key, or null if it does not exist
+ * @throws An error if the project could not be retrieved
+ */
 export async function getProjectByKey({key}: {key: Project["key"]}): Promise<Project | null> {
-  const {data: response} = await apiClient.get<ApiResponse<Project | null>>(
-    `api/project/get/key/${key}.json`,
-  );
+  try {
+    const {data: response} = await apiClient.get<Project | null>(`api/project/get/key/${key}.json`);
 
-  if (response.success === false) {
-    throw new Error(response.message);
+    return response ?? null;
+  } catch {
+    throw new Error("No se pudo obtener el proyecto");
   }
-
-  return response?.data ?? null;
 }

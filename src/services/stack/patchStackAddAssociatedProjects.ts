@@ -1,25 +1,26 @@
 import type {RelationshipsSchema} from "@/schemas/common/relationships";
-import type {ApiResponse} from "@/types/responses";
 import type {Stack} from "@prisma/client";
 
 import axios from "axios";
 
-import {serviceErrorHandler} from "@/helpers/error/service-handler";
-
+/**
+ * Add a project to a stack.
+ *
+ * @param relationshipSchema - Relationships schema.
+ * @returns A promise with the stack data.
+ * @throws An error if the project could not be added to the stack.
+ */
 export async function patchStackAddAssociatedProjects(
-  data: RelationshipsSchema,
-): Promise<ApiResponse<Stack>> {
+  relationshipSchema: RelationshipsSchema,
+): Promise<Stack> {
   try {
-    const {data: response} = await axios.patch<ApiResponse<Stack>>(
+    const {data: response} = await axios.patch<Stack>(
       "/api/stack/relations/project/add",
-      data,
+      relationshipSchema,
     );
 
     return response;
-  } catch (error) {
-    return {
-      success: false,
-      message: serviceErrorHandler(error),
-    };
+  } catch {
+    throw new Error("No se pudo agregar el proyecto al stack.");
   }
 }

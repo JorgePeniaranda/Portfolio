@@ -1,8 +1,16 @@
-import type {ApiResponse, PaginationRequest} from "@/types/responses";
+import type {PaginationRequest} from "@/types/responses";
 import type {Collaborator, Stack} from "@prisma/client";
 
 import {apiClient} from "@/helpers/client/axios";
 
+/**
+ * Get collaborators by associated projects.
+ *
+ * @param idProject - The project ID
+ * @param pagination - Pagination options
+ * @returns A list of collaborators
+ * @throws An error if the collaborators could not be retrieved
+ */
 export async function getCollaboratorsByAssociatedProjects({
   idProject,
   pagination,
@@ -10,16 +18,16 @@ export async function getCollaboratorsByAssociatedProjects({
   idProject: Stack["id"];
   pagination?: PaginationRequest;
 }): Promise<Collaborator[]> {
-  const {data: response} = await apiClient.get<ApiResponse<Collaborator[]>>(
-    `api/collaborator/get/related/project/${idProject}.json`,
-    {
-      params: pagination,
-    },
-  );
+  try {
+    const {data: response} = await apiClient.get<Collaborator[]>(
+      `api/collaborator/get/related/project/${idProject}.json`,
+      {
+        params: pagination,
+      },
+    );
 
-  if (response.success === false) {
-    throw new Error(response.message);
+    return response ?? [];
+  } catch {
+    throw new Error("No se pudo obtener la lista de colaboradores");
   }
-
-  return response?.data ?? [];
 }

@@ -1,17 +1,23 @@
 import type {Stack} from "@prisma/client";
-import type {ApiResponse, PaginationRequest} from "@/types/responses";
+import type {PaginationRequest} from "@/types/responses";
 
 import {apiClient} from "@/helpers/client/axios";
 
-// NOTE-DEV: If more parameters are added, switch to an object for better clarity.
+/**
+ * Get all stacks
+ *
+ * @param pagination - Pagination options
+ * @returns A list of stacks
+ * @throws An error if the stacks could not be retrieved
+ */
 export async function getAllStack(pagination?: PaginationRequest): Promise<Stack[]> {
-  const {data: response} = await apiClient.get<ApiResponse<Stack[]>>("/api/stack/get/all.json", {
-    params: pagination,
-  });
+  try {
+    const {data: response} = await apiClient.get<Stack[]>("/api/stack/get/all.json", {
+      params: pagination,
+    });
 
-  if (response.success === false) {
-    throw new Error(response.message);
+    return response ?? [];
+  } catch {
+    throw new Error("No se pudo obtener la lista de stacks");
   }
-
-  return response?.data ?? [];
 }

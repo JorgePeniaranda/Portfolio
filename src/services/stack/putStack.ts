@@ -1,19 +1,19 @@
-import type {ApiResponse} from "@/types/responses";
-
 import {Prisma, type Stack} from "@prisma/client";
 import axios from "axios";
 
-import {serviceErrorHandler} from "@/helpers/error/service-handler";
-
-export async function putStack(data: Prisma.StackUpdateInput): Promise<ApiResponse<Stack>> {
+/**
+ * Update a stack
+ *
+ * @param stackUpdateInput - Stack data
+ * @returns Stack data
+ * @throws An error if the stack could not be updated
+ */
+export async function putStack(stackUpdateInput: Prisma.StackUpdateInput): Promise<Stack> {
   try {
-    const {data: response} = await axios.put<ApiResponse<Stack>>("/api/stack/update", data);
+    const {data: response} = await axios.put<Stack>("/api/stack/update", stackUpdateInput);
 
     return response;
-  } catch (error) {
-    return {
-      success: false,
-      message: serviceErrorHandler(error),
-    };
+  } catch {
+    throw new Error("No se pudo actualizar el stack.");
   }
 }
