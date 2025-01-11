@@ -42,26 +42,31 @@ export function UpdateProjectForm({
   });
 
   const onSubmit = async (values: ProjectUpdateSchema) => {
-    // Send request to update the project
-    const response = await putProject(values);
+    try {
+      // Send request to update the project
+      await putProject(values);
 
-    // If the request was unsuccessful, show an error toast and exit
-    if (response.success === false) {
+      // If the request was successful, show a success toast
       toast({
-        title: "Error al crear proyecto",
-        description: response.message,
-        className: "bg-red-500 text-white",
+        title: "Proyecto creado",
+        description: "El proyecto ha sido creado exitosamente.",
+        className: "bg-green-500",
       });
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({
+          title: "Error al actualizar el proyecto",
+          description: error.message,
+          className: "bg-red-500",
+        });
+      }
 
-      return;
+      toast({
+        title: "Error al actualizar el proyecto",
+        description: "Ha ocurrido un error al actualizar el proyecto.",
+        className: "bg-red-500",
+      });
     }
-
-    // If the request was successful, show a success toast
-    toast({
-      title: "Proyecto creado",
-      description: response.message,
-      className: "bg-green-500",
-    });
   };
 
   return (

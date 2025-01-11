@@ -27,26 +27,31 @@ export function UpdateCollaboratorForm({
   });
 
   const onSubmit = async (values: CollaboratorUpdateSchema) => {
-    // Send request to update the collaborator
-    const response = await putCollaborator(values);
+    try {
+      // Send request to update the collaborator
+      await putCollaborator(values);
 
-    // If the request was unsuccessful, show an error toast and exit
-    if (response.success === false) {
+      // If the request was successful, show a success toast
       toast({
-        title: "Error al actualizar colaborador",
-        description: response.message,
-        className: "bg-red-500 text-white",
+        title: "Colaborador actualizado",
+        description: "El colaborador ha sido actualizado exitosamente.",
+        className: "bg-green-500",
       });
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({
+          title: "Error al actualizar el colaborador",
+          description: error.message,
+          className: "bg-red-500",
+        });
+      }
 
-      return;
+      toast({
+        title: "Error al actualizar el colaborador",
+        description: "Ha ocurrido un error al actualizar el Colaborador.",
+        className: "bg-red-500",
+      });
     }
-
-    // If the request was successful, show a success toast
-    toast({
-      title: "Colaborador actualizado",
-      description: response.message,
-      className: "bg-green-500",
-    });
   };
 
   return (

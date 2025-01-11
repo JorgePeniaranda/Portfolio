@@ -188,30 +188,34 @@ function TableHeaderComponent({table}: {table: Table<Project>}) {
   }, [selectedRowModel]);
 
   const handleDelete = async () => {
-    // Send request to delete the project
-    const response = await deleteProject(rows.map((row) => row.original.id));
+    try {
+      await deleteProject(rows.map((row) => row.original.id));
 
-    // If the request was unsuccessful, show an error toast and exit
-    if (response.success === false) {
+      // If the request was successful, show a success toast
       toast({
-        title: "Error al eliminar colaboradores",
-        description: "No se pudieron eliminar los colaboradores seleccionados.",
-        className: "bg-red-500 text-white",
+        title: "Colaboradores eliminados",
+        description: "Los proyectos seleccionados se han eliminado correctamente.",
+        className: "bg-green-500",
       });
 
-      return;
-    }
+      // Remove the deleted projects from the table
+      if (isDefined(table.options.meta?.deleteRows)) {
+        table.options.meta.deleteRows(rows.map((row) => row.index));
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({
+          title: "Error al eliminar proyectos",
+          description: error.message,
+          className: "bg-red-500",
+        });
+      }
 
-    // If the request was successful, show a success toast
-    toast({
-      title: "Colaboradores eliminados",
-      description: "Los colaboradores seleccionados se eliminaron correctamente.",
-      className: "bg-green-500",
-    });
-
-    // Remove the deleted projects from the table
-    if (isDefined(table.options.meta?.deleteRows)) {
-      table.options.meta.deleteRows(rows.map((row) => row.index));
+      toast({
+        title: "Error al eliminar proyectos",
+        description: "Ha ocurrido un error al eliminar los proyectos.",
+        className: "bg-red-500",
+      });
     }
   };
 

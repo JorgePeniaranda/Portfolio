@@ -24,31 +24,36 @@ export function CreateCollaboratorForm({disableForm = false}: {disableForm?: boo
   });
 
   const onSubmit = async (values: CollaboratorCreateSchema) => {
-    // Send request to create a collaborator
-    const response = await postCollaborator(values);
+    try {
+      // Send request to create a collaborator
+      const newCollaboratorResult = await postCollaborator(values);
 
-    // If the request was unsuccessful, show an error toast and exit
-    if (response.success === false) {
+      // If the request was successful, show a success toast
+      form.reset();
       toast({
-        title: "Error al crear colaborador",
-        description: response.message,
-        className: "bg-red-500 text-white",
+        title: "Colaborador creado",
+        description: "El colaborador ha sido creado exitosamente.",
+        className: "bg-green-500",
       });
 
-      return;
-    }
+      // Redirect to the collaborator view
+      if (isDefined(newCollaboratorResult?.id)) {
+        safeRedirect(`/vault/views/collaborators/${newCollaboratorResult.id}`);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({
+          title: "Error al crear el colaborador",
+          description: error.message,
+          className: "bg-red-500",
+        });
+      }
 
-    // If the request was successful, show a success toast
-    form.reset();
-    toast({
-      title: "Colaborador creado",
-      description: response.message,
-      className: "bg-green-500",
-    });
-
-    // Redirect to the collaborator view
-    if (isDefined(response.data?.id)) {
-      safeRedirect(`/vault/views/collaborators/${response.data.id}`);
+      toast({
+        title: "Error al crear el colaborador",
+        description: "Ha ocurrido un error al crear el colaborador.",
+        className: "bg-red-500",
+      });
     }
   };
 

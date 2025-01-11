@@ -38,31 +38,36 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
   });
 
   const onSubmit = async (values: ProjectCreateSchema) => {
-    // Send request to create a project
-    const response = await postProject(values);
+    try {
+      // Send request to create a project
+      const response = await postProject(values);
 
-    // If the request was unsuccessful, show an error toast and exit
-    if (response.success === false) {
+      // If the request was successful, show a success toast
+      form.reset();
       toast({
-        title: "Error al crear proyecto",
-        description: response.message,
-        className: "bg-red-500 text-white",
+        title: "Proyecto creado",
+        description: "El proyecto ha sido creado exitosamente.",
+        className: "bg-green-500",
       });
 
-      return;
-    }
+      // Redirect to the project view
+      if (isDefined(response?.id)) {
+        safeRedirect(`/vault/views/project/${response.id}`);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({
+          title: "Error al crear el proyecto",
+          description: error.message,
+          className: "bg-red-500",
+        });
+      }
 
-    // If the request was successful, show a success toast
-    form.reset();
-    toast({
-      title: "Proyecto creado",
-      description: response.message,
-      className: "bg-green-500",
-    });
-
-    // Redirect to the project view
-    if (isDefined(response?.data?.id)) {
-      safeRedirect(`/vault/views/project/${response.data.id}`);
+      toast({
+        title: "Error al crear el proyecto",
+        description: "Ha ocurrido un error al crear el proyecto.",
+        className: "bg-red-500",
+      });
     }
   };
 

@@ -55,71 +55,81 @@ export function UpdateProjectsRelatedToCollaborator({
   });
 
   const onAddProject = async (values: RelationshipsSchema) => {
-    // Send request to associate the project to the collaborator
-    const response = await patchCollaboratorAddAssociatedProjects({
-      idFrom: Number(values.idFrom),
-      idTo: Number(values.idTo),
-    });
-
-    // If the request was unsuccessful, show an error toast and exit
-    if (response.success === false) {
-      toast({
-        title: "Error al relacionar proyecto con el colaborador",
-        description: response.message,
-        className: "bg-red-500 text-white",
+    try {
+      // Send request to associate the project to the collaborator
+      await patchCollaboratorAddAssociatedProjects({
+        idFrom: Number(values.idFrom),
+        idTo: Number(values.idTo),
       });
 
-      return;
-    }
+      // If the request was successful, reset the form and show a success toast
+      form.reset();
+      toast({
+        title: "Proyecto relacionado con el colaborador",
+        description: "El proyecto ha sido relacionado con el colaborador exitosamente.",
+        className: "bg-green-500",
+      });
 
-    // If the request was successful, reset the form and show a success toast
-    form.reset();
-    toast({
-      title: "Proyecto relacionado con el colaborador",
-      description: response.message,
-      className: "bg-green-500",
-    });
+      // Update local state for associated and available projects
+      const findProject = availableProject.find((project) => project.id === Number(values.idTo));
 
-    // Update local state for associated and available projects
-    const findProject = availableProject.find((project) => project.id === Number(values.idTo));
+      if (isDefined(findProject)) {
+        setAssociatedProjects((prev) => [...prev, findProject]);
+        setAvailableProject((prev) => prev.filter((project) => project.id !== Number(values.idTo)));
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({
+          title: "Error al relacionar proyecto",
+          description: error.message,
+          className: "bg-red-500 text-white",
+        });
+      }
 
-    if (isDefined(findProject)) {
-      setAssociatedProjects((prev) => [...prev, findProject]);
-      setAvailableProject((prev) => prev.filter((project) => project.id !== Number(values.idTo)));
+      toast({
+        title: "Error al relacionar proyecto",
+        description: "Ocurrió un error al relacionar el proyecto con el colaborador.",
+        className: "bg-red-500 text-white",
+      });
     }
   };
 
   const onRemoveProject = async (idProject: number) => {
-    // Send request to dissociate the project from the collaborator
-    const response = await patchCollaboratorRemoveAssociatedProjects({
-      idFrom: currentCollaborator.id,
-      idTo: idProject,
-    });
-
-    // If the request was unsuccessful, show an error toast and exit
-    if (response.success === false) {
-      toast({
-        title: "Error al eliminar proyecto",
-        description: response.message,
-        className: "bg-red-500 text-white",
+    try {
+      // Send request to dissociate the project from the collaborator
+      await patchCollaboratorRemoveAssociatedProjects({
+        idFrom: currentCollaborator.id,
+        idTo: idProject,
       });
 
-      return;
-    }
+      // If the request was successful, show a success toast
+      toast({
+        title: "Proyecto eliminado",
+        description: "El proyecto ha sido eliminado del colaborador exitosamente.",
+        className: "bg-green-500",
+      });
 
-    // If the request was successful, show a success toast
-    toast({
-      title: "Proyecto eliminado",
-      description: response.message,
-      className: "bg-green-500",
-    });
+      // Update local state for associated and available projects
+      const findProject = associatedProjects.find((project) => project.id === idProject);
 
-    // Update local state for associated and available projects
-    const findProject = associatedProjects.find((project) => project.id === idProject);
+      if (isDefined(findProject)) {
+        setAssociatedProjects((prev) => prev.filter((project) => project.id !== idProject));
+        setAvailableProject((prev) => [...prev, findProject]);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({
+          title: "Error al eliminar proyecto",
+          description: error.message,
+          className: "bg-red-500 text-white",
+        });
+      }
 
-    if (isDefined(findProject)) {
-      setAssociatedProjects((prev) => prev.filter((project) => project.id !== idProject));
-      setAvailableProject((prev) => [...prev, findProject]);
+      toast({
+        title: "Error al eliminar proyecto",
+        description: "Ocurrió un error al eliminar el proyecto del colaborador.",
+        className: "bg-red-500 text-white",
+      });
     }
   };
 

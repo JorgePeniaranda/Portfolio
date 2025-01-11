@@ -126,28 +126,34 @@ function TableHeaderComponent({table}: {table: Table<Stack>}) {
   }, [selectedRowModel]);
 
   const handleDelete = async () => {
-    // Send request to delete the stack
-    const response = await deleteStack(rows.map((row) => row.original.id));
-
-    // If the request was unsuccessful, show an error toast and exit
-    if (response.success === false) {
+    try {
+      // Send request to delete the stack
+      await deleteStack(rows.map((row) => row.original.id));
+      // If the request was successful, show a success toast
       toast({
-        title: "Error al eliminar colaboradores",
-        description: "No se pudieron eliminar los colaboradores seleccionados.",
-        className: "bg-red-500 text-white",
+        title: "Colaboradores eliminados",
+        description: "Los stack seleccionados se han eliminado correctamente.",
+        className: "bg-green-500",
       });
-    }
 
-    // If the request was successful, show a success toast
-    toast({
-      title: "Colaboradores eliminados",
-      description: "Los colaboradores seleccionados se eliminaron correctamente.",
-      className: "bg-green-500",
-    });
+      // Remove the deleted stacks from the table
+      if (isDefined(table.options.meta?.deleteRows)) {
+        table.options.meta.deleteRows(rows.map((row) => row.index));
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({
+          title: "Error al eliminar stack",
+          description: error.message,
+          className: "bg-red-500",
+        });
+      }
 
-    // Remove the deleted stacks from the table
-    if (isDefined(table.options.meta?.deleteRows)) {
-      table.options.meta.deleteRows(rows.map((row) => row.index));
+      toast({
+        title: "Error al eliminar stack",
+        description: "Ha ocurrido un error al eliminar los stacks seleccionados.",
+        className: "bg-red-500",
+      });
     }
   };
 

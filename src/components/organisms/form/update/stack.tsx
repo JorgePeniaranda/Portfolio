@@ -35,24 +35,31 @@ export function UpdateStackForm({
   });
 
   const onSubmit = async (values: StackUpdateSchema) => {
-    // Send request to update the stack
-    const response = await putStack(values);
+    try {
+      // Send request to update the stack
+      await putStack(values);
 
-    // If the request was unsuccessful, show an error toast and exit
-    if (response.success === false) {
+      // If the request was successful, show a success toast
+      toast({
+        title: "Stack actualizado",
+        description: "El stack ha sido actualizado exitosamente.",
+        className: "bg-green-500",
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({
+          title: "Error al actualizar stack",
+          description: error.message,
+          className: "bg-red-500",
+        });
+      }
+
       toast({
         title: "Error al actualizar stack",
-        description: response.message,
-        className: "bg-red-500 text-white",
+        description: "Ha ocurrido un error al actualizar el stack.",
+        className: "bg-red-500",
       });
     }
-
-    // If the request was successful, show a success toast
-    toast({
-      title: "Stack actualizado",
-      description: response.message,
-      className: "bg-green-500",
-    });
   };
 
   return (
