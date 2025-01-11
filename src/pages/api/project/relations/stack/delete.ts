@@ -25,7 +25,7 @@ export const PATCH: APIRoute = async ({request}) => {
       where: {id: validationResult.idFrom},
     });
 
-    return Response.json(null, {status: 204});
+    return new Response(null, {status: 204});
   } catch (error) {
     return handleApiError(error);
   }
