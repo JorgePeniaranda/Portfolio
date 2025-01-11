@@ -6,7 +6,7 @@ import axios from "axios";
 
 import {serviceErrorHandler} from "@/helpers/error/service-handler";
 
-export async function patchAddRelationWithStackFromProject(
+export async function patchProjectAddAssociatedStack(
   data: RelationshipsSchema,
 ): Promise<ApiResponse<Project>> {
   try {

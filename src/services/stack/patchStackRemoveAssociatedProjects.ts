@@ -6,12 +6,12 @@ import axios from "axios";
 
 import {serviceErrorHandler} from "@/helpers/error/service-handler";
 
-export async function patchAddRelationWithProjectFromStack(
+export async function patchStackRemoveAssociatedProjects(
   data: RelationshipsSchema,
 ): Promise<ApiResponse<Stack>> {
   try {
     const {data: response} = await axios.patch<ApiResponse<Stack>>(
-      "/api/stack/relations/project/add",
+      "/api/stack/relations/project/delete",
       data,
     );
 
