@@ -2,6 +2,7 @@ import type {PaginationRequest} from "@/types/responses";
 import type {Collaborator} from "@prisma/client";
 
 import {apiClient} from "@/helpers/client/axios";
+import {handleServiceError} from "@/helpers/error/service-handler";
 
 /**
  * Get all collaborators
@@ -17,7 +18,10 @@ export async function getAllCollaborator(pagination?: PaginationRequest): Promis
     });
 
     return response ?? [];
-  } catch {
-    throw new Error("No se pudo obtener la lista de colaboradores");
+  } catch (error) {
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo obtener la lista de colaboradores.",
+    });
   }
 }

@@ -1,6 +1,7 @@
 import type {Collaborator} from "@prisma/client";
 
 import {apiClient} from "@/helpers/client/axios";
+import {handleServiceError} from "@/helpers/error/service-handler";
 
 /**
  * Get a collaborator by its id.
@@ -20,7 +21,10 @@ export async function getCollaboratorById({
     );
 
     return response ?? null;
-  } catch {
-    throw new Error("No se pudo obtener la lista de colaboradores");
+  } catch (error) {
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo obtener el colaborador.",
+    });
   }
 }

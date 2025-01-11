@@ -1,6 +1,7 @@
 import type {Project, Stack} from "@prisma/client";
 
 import {databaseClient} from "@/helpers/client/prisma";
+import {handleServiceError} from "@/helpers/error/service-handler";
 
 // TO-DO: REPLACE WITH API CALL
 /**
@@ -47,7 +48,10 @@ export async function getAllStackWithRelationsAndProjectsMin(): Promise<
     });
 
     return response;
-  } catch {
-    throw new Error("No se pudo obtener la lista de stacks");
+  } catch (error) {
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo obtener la lista de stacks.",
+    });
   }
 }

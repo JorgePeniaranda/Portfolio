@@ -3,6 +3,8 @@ import type {Project} from "@prisma/client";
 
 import axios from "axios";
 
+import {handleServiceError} from "@/helpers/error/service-handler";
+
 /**
  * Remove a stack from a project.
  *
@@ -20,7 +22,10 @@ export async function patchProjectRemoveAssociatedStack(
     );
 
     return response;
-  } catch {
-    throw new Error("No se pudo eliminar el stack del proyecto.");
+  } catch (error) {
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo eliminar el stack del proyecto.",
+    });
   }
 }

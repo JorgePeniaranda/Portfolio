@@ -2,6 +2,7 @@ import type {PaginationRequest} from "@/types/responses";
 import type {Stack} from "@prisma/client";
 
 import {apiClient} from "@/helpers/client/axios";
+import {handleServiceError} from "@/helpers/error/service-handler";
 
 /**
  * Get stacks by associated projects.
@@ -27,7 +28,10 @@ export async function getStacksByAssociatedProjects({
     );
 
     return response ?? [];
-  } catch {
-    throw new Error("No se pudo obtener la lista de stacks");
+  } catch (error) {
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo obtener la lista de stacks.",
+    });
   }
 }

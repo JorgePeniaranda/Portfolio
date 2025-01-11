@@ -1,6 +1,7 @@
 import type {Stack} from "@prisma/client";
 
 import {apiClient} from "@/helpers/client/axios";
+import {handleServiceError} from "@/helpers/error/service-handler";
 
 /**
  * Get a stack by its key.
@@ -14,7 +15,10 @@ export async function getStackByKey({key}: {key: Stack["key"]}): Promise<Stack |
     const {data: response} = await apiClient.get<Stack | null>(`api/stack/get/key/${key}.json`);
 
     return response ?? null;
-  } catch {
-    throw new Error("No se pudo obtener el stack");
+  } catch (error) {
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo obtener el stack.",
+    });
   }
 }

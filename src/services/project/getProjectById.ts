@@ -1,6 +1,7 @@
 import type {Project} from "@prisma/client";
 
 import {apiClient} from "@/helpers/client/axios";
+import {handleServiceError} from "@/helpers/error/service-handler";
 
 /**
  * Get a project by its id.
@@ -14,7 +15,10 @@ export async function getProjectById({id}: {id: Project["id"]}): Promise<Project
     const {data: response} = await apiClient.get<Project | null>(`api/project/get/id/${id}.json`);
 
     return response ?? null;
-  } catch {
-    throw new Error("No se pudo obtener el proyecto");
+  } catch (error) {
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo obtener el proyecto.",
+    });
   }
 }

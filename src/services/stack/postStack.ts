@@ -1,6 +1,8 @@
 import {Prisma, type Stack} from "@prisma/client";
 import axios from "axios";
 
+import {handleServiceError} from "@/helpers/error/service-handler";
+
 /**
  * Create a new stack.
  *
@@ -13,7 +15,10 @@ export async function postStack(stackUpdateInput: Prisma.StackUpdateInput): Prom
     const {data: response} = await axios.post<Stack>("/api/stack/create", stackUpdateInput);
 
     return response;
-  } catch {
-    throw new Error("No se pudo crear el stack.");
+  } catch (error) {
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo crear el stack.",
+    });
   }
 }

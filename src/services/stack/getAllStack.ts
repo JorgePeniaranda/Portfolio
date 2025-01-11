@@ -2,6 +2,7 @@ import type {Stack} from "@prisma/client";
 import type {PaginationRequest} from "@/types/responses";
 
 import {apiClient} from "@/helpers/client/axios";
+import {handleServiceError} from "@/helpers/error/service-handler";
 
 /**
  * Get all stacks
@@ -17,7 +18,10 @@ export async function getAllStack(pagination?: PaginationRequest): Promise<Stack
     });
 
     return response ?? [];
-  } catch {
-    throw new Error("No se pudo obtener la lista de stacks");
+  } catch (error) {
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo obtener la lista de stacks.",
+    });
   }
 }

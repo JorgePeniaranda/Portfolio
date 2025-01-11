@@ -2,6 +2,8 @@ import type {RelationshipsSchema} from "../../schemas/common/relationships";
 
 import axios from "axios";
 
+import {handleServiceError} from "@/helpers/error/service-handler";
+
 /**
  * This service is responsible for removing a project from a collaborator.
  *
@@ -19,7 +21,10 @@ export async function patchCollaboratorRemoveAssociatedProjects(
     );
 
     return response;
-  } catch {
-    throw new Error("No se pudo eliminar el proyecto del colaborador.");
+  } catch (error) {
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo eliminar el proyecto del colaborador.",
+    });
   }
 }

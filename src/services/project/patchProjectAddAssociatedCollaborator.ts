@@ -3,6 +3,8 @@ import type {Project} from "@prisma/client";
 
 import axios from "axios";
 
+import {handleServiceError} from "@/helpers/error/service-handler";
+
 /**
  * Add a collaborator to a project.
  *
@@ -20,7 +22,10 @@ export async function patchProjectAddAssociatedCollaborator(
     );
 
     return response;
-  } catch {
-    throw new Error("No se pudo agregar el colaborador al proyecto.");
+  } catch (error) {
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo agregar el colaborador al proyecto.",
+    });
   }
 }

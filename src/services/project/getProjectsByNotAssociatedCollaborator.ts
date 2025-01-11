@@ -2,6 +2,7 @@ import type {PaginationRequest} from "@/types/responses";
 import type {Collaborator, Project} from "@prisma/client";
 
 import {apiClient} from "@/helpers/client/axios";
+import {handleServiceError} from "@/helpers/error/service-handler";
 
 /**
  * Get projects by not associated collaborator.
@@ -27,7 +28,10 @@ export async function getProjectsByNotAssociatedCollaborator({
     );
 
     return response ?? [];
-  } catch {
-    throw new Error("No se pudo obtener la lista de proyectos");
+  } catch (error) {
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo obtener la lista de proyectos.",
+    });
   }
 }

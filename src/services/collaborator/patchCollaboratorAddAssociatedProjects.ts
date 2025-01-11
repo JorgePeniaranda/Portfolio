@@ -1,5 +1,6 @@
 import type {RelationshipsSchema} from "../../schemas/common/relationships";
 
+import {handleServiceError} from "@/helpers/error/service-handler";
 import {apiClient} from "@/helpers/client/axios";
 
 /**
@@ -19,7 +20,10 @@ export async function patchCollaboratorAddAssociatedProjects(
     );
 
     return response;
-  } catch {
-    throw new Error("No se pudo agregar el proyecto al colaborador.");
+  } catch (error) {
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo agregar el proyecto al colaborador.",
+    });
   }
 }

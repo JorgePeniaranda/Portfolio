@@ -1,6 +1,8 @@
 import {Prisma, type Collaborator} from "@prisma/client";
 import axios from "axios";
 
+import {handleServiceError} from "@/helpers/error/service-handler";
+
 /**
  * Create a new collaborator.
  *
@@ -18,7 +20,10 @@ export async function postCollaborator(
     );
 
     return response;
-  } catch {
-    throw new Error("No se pudo crear el colaborador.");
+  } catch (error) {
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo crear el colaborador.",
+    });
   }
 }

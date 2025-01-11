@@ -3,6 +3,8 @@ import type {Stack} from "@prisma/client";
 
 import axios from "axios";
 
+import {handleServiceError} from "@/helpers/error/service-handler";
+
 /**
  * Add a project to a stack.
  *
@@ -20,7 +22,10 @@ export async function patchStackAddAssociatedProjects(
     );
 
     return response;
-  } catch {
-    throw new Error("No se pudo agregar el proyecto al stack.");
+  } catch (error) {
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo agregar el proyecto al stack.",
+    });
   }
 }

@@ -3,6 +3,8 @@ import type {DeleteResponse} from "@/types/responses";
 import {type Collaborator} from "@prisma/client";
 import axios from "axios";
 
+import {handleServiceError} from "@/helpers/error/service-handler";
+
 /**
  * Deletes a list of collaborators from the database.
  *
@@ -20,7 +22,10 @@ export async function deleteCollaborator(
     );
 
     return response;
-  } catch {
-    throw new Error("No se pudo eliminar el colaborador.");
+  } catch (error) {
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo eliminar el colaborador.",
+    });
   }
 }

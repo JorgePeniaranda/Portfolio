@@ -3,6 +3,8 @@ import type {Stack} from "@prisma/client";
 
 import axios from "axios";
 
+import {handleServiceError} from "@/helpers/error/service-handler";
+
 /**
  * Delete a stack.
  *
@@ -15,7 +17,10 @@ export async function deleteStack(stackIds: Stack["id"][]): Promise<DeleteRespon
     const {data: response} = await axios.post<DeleteResponse>("/api/stack/delete", stackIds);
 
     return response;
-  } catch {
-    throw new Error("No se pudo eliminar el stack.");
+  } catch (error) {
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo eliminar el stack.",
+    });
   }
 }

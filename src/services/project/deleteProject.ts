@@ -3,6 +3,8 @@ import type {Project} from "@prisma/client";
 
 import axios from "axios";
 
+import {handleServiceError} from "@/helpers/error/service-handler";
+
 /**
  * Deletes a project.
  *
@@ -15,7 +17,10 @@ export async function deleteProject(projectIds: Project["id"][]): Promise<Delete
     const {data: response} = await axios.post<DeleteResponse>("/api/project/delete", projectIds);
 
     return response;
-  } catch {
-    throw new Error("No se pudo eliminar el proyecto.");
+  } catch (error) {
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo eliminar el proyecto.",
+    });
   }
 }

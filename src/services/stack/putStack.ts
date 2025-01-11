@@ -1,6 +1,8 @@
 import {Prisma, type Stack} from "@prisma/client";
 import axios from "axios";
 
+import {handleServiceError} from "@/helpers/error/service-handler";
+
 /**
  * Update a stack
  *
@@ -13,7 +15,10 @@ export async function putStack(stackUpdateInput: Prisma.StackUpdateInput): Promi
     const {data: response} = await axios.put<Stack>("/api/stack/update", stackUpdateInput);
 
     return response;
-  } catch {
-    throw new Error("No se pudo actualizar el stack.");
+  } catch (error) {
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo actualizar el stack.",
+    });
   }
 }
