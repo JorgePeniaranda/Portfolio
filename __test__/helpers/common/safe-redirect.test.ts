@@ -1,10 +1,16 @@
 import {describe, it, expect, vi, beforeEach, afterEach} from "vitest";
 
 import {safeRedirect} from "@/helpers/common/safe-redirect";
+import {devConsoleLog} from "@/helpers/common/dev-console-log";
+
+vi.mock("@/helpers/common/dev-console-log", () => ({
+  devConsoleLog: {
+    warn: vi.fn(),
+  },
+}));
 
 describe("safeRedirect", () => {
   let originalWindow: typeof globalThis.window;
-  const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -61,6 +67,8 @@ describe("safeRedirect", () => {
     global.window = undefined as any;
 
     safeRedirect("/path");
-    expect(warnSpy).toHaveBeenCalledWith("safeRedirect() was called in a non-browser environment.");
+    expect(devConsoleLog.warn).toHaveBeenCalledWith(
+      "safeRedirect() was called in a non-browser environment.",
+    );
   });
 });
