@@ -3,17 +3,7 @@ export interface PaginationRequest {
   size: number; // The number of items per page
 }
 
-export type ServiceResponse =
-  | {
-      success: false;
-      error?: string;
-    }
-  | {
-      success: true;
-    };
-
 export interface ErrorResponse {
-  success: false;
   error?: string; // Error message if the operation failed
   errors?: string[]; // Validation errors if the operation failed
 }

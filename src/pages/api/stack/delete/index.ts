@@ -3,7 +3,7 @@ import type {APIRoute} from "astro";
 import {z} from "zod";
 
 import {databaseClient} from "@/helpers/client/prisma";
-import {RequestHandler} from "@/helpers/common/request-handler";
+import {handleApiError} from "@/helpers/error/api-handler";
 
 /**
  * POST handler to remove multiple stacks.
@@ -11,22 +11,17 @@ import {RequestHandler} from "@/helpers/common/request-handler";
  * - Validates it as an array of numbers (IDs).
  * - Deletes stacks from the database.
  */
-export const POST: APIRoute = ({request}) => {
-  return RequestHandler(
-    async () => {
-      const body = await request.json();
-      const validationResult = z.array(z.number()).parse(body);
+export const POST: APIRoute = async ({request}) => {
+  try {
+    const body = await request.json();
+    const validationResult = z.array(z.number()).parse(body);
 
-      const response = await databaseClient.stack.deleteMany({
-        where: {id: {in: validationResult}},
-      });
+    const deletedItemsCount = await databaseClient.stack.deleteMany({
+      where: {id: {in: validationResult}},
+    });
 
-      return {
-        success: true,
-        message: "Stack deleted successfully",
-        data: response,
-      };
-    },
-    {successStatusCode: 200},
-  );
+    return Response.json(deletedItemsCount, {status: 200});
+  } catch (error) {
+    return handleApiError(error);
+  }
 };

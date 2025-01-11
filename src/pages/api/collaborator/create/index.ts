@@ -1,8 +1,8 @@
 import type {APIRoute} from "astro";
 
-import {CollaboratorCreateSchema} from "@/schemas/collaborator/create";
 import {databaseClient} from "@/helpers/client/prisma";
-import {RequestHandler} from "@/helpers/common/request-handler";
+import {handleApiError} from "@/helpers/error/api-handler";
+import {CollaboratorCreateSchema} from "@/schemas/collaborator/create";
 
 /**
  * POST handler to create a new collaborator.
@@ -10,21 +10,17 @@ import {RequestHandler} from "@/helpers/common/request-handler";
  * - Validates it using the `CollaboratorCreateSchema`.
  * - Creates a new collaborator in the database.
  */
-export const POST: APIRoute = ({request}) => {
-  return RequestHandler(
-    async () => {
-      const body = await request.json();
-      const validationResult = CollaboratorCreateSchema.parse(body);
-      const response = await databaseClient.collaborator.create({
-        data: validationResult,
-      });
+export const POST: APIRoute = async ({request}) => {
+  try {
+    const body = await request.json();
+    const validationResult = CollaboratorCreateSchema.parse(body);
 
-      return {
-        success: true,
-        message: "Collaborator created successfully",
-        data: response,
-      };
-    },
-    {successStatusCode: 201},
-  );
+    const createdCollaborator = await databaseClient.collaborator.create({
+      data: validationResult,
+    });
+
+    return Response.json(createdCollaborator, {status: 201});
+  } catch (error) {
+    return handleApiError(error);
+  }
 };

@@ -3,30 +3,25 @@ import type {APIRoute, GetStaticPaths} from "astro";
 import {z} from "zod";
 
 import {databaseClient} from "@/helpers/client/prisma";
-import {RequestHandler} from "@/helpers/common/request-handler";
+import {handleApiError} from "@/helpers/error/api-handler";
 
 /**
  * GET handler to fetch a project.
  */
-export const GET: APIRoute = ({params}) => {
-  return RequestHandler(
-    async () => {
-      const id = z.coerce.number().parse(params.id);
+export const GET: APIRoute = async ({params}) => {
+  try {
+    const id = z.coerce.number().parse(params.id);
 
-      const response = await databaseClient.project.findUniqueOrThrow({
-        where: {
-          id,
-        },
-      });
+    const fetchedProject = await databaseClient.project.findUniqueOrThrow({
+      where: {
+        id,
+      },
+    });
 
-      return {
-        success: true,
-        message: "Project fetched successfully",
-        data: response,
-      };
-    },
-    {successStatusCode: 200},
-  );
+    return Response.json(fetchedProject, {status: 200});
+  } catch (error) {
+    return handleApiError(error);
+  }
 };
 
 export const getStaticPaths = (async () => {
