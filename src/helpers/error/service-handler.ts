@@ -1,5 +1,8 @@
-import {isDefined} from "../guards/is-defined";
+import axios from "axios";
+
+import {isDefined, isNotDefined} from "../guards/is-defined";
 import {isErrorResponse} from "../guards/is-error-response";
+import {devConsoleLog} from "../common/dev-console-log";
 
 /**
  * Handle an error from a service.
@@ -15,13 +18,25 @@ export function handleServiceError({
   error: unknown;
   defaultErrorMessage?: string;
 }): Error {
-  if (!isErrorResponse(error)) {
+  devConsoleLog.log("Error in service: ", error);
+
+  if (!axios.isAxiosError(error)) {
     return new Error(defaultErrorMessage);
   }
 
-  if (isDefined(error?.errors?.length) && error?.errors?.length > 0) {
-    return new Error(error.errors.join(", "));
+  if (isNotDefined(error.response?.data)) {
+    return new Error(defaultErrorMessage);
   }
 
-  return new Error(error.error);
+  const {data: responseData} = error.response;
+
+  if (!isErrorResponse(responseData)) {
+    return new Error(defaultErrorMessage);
+  }
+
+  if (isDefined(responseData.errors?.length) && responseData.errors?.length > 0) {
+    return new Error(responseData.errors.join("\n"));
+  }
+
+  return new Error(responseData.error);
 }

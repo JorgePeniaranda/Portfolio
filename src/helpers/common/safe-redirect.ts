@@ -21,9 +21,6 @@ export function safeRedirect(url: string, keepHistory: boolean = true): void {
       window.location.replace(url);
     }
   } else {
-    devConsoleLog({
-      message: "safeRedirect() was called in a non-browser environment.",
-      type: "warn",
-    });
+    devConsoleLog.warn("safeRedirect() was called in a non-browser environment.");
   }
 }

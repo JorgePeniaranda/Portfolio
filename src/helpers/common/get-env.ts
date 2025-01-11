@@ -19,18 +19,14 @@ export function getEnvValue(envName: string, defaultValue?: string): string {
 
   // If a default value is provided, log a warning and return the default value
   if (typeof defaultValue === "string") {
-    devConsoleLog({
-      message: `Environment variable not found: ${envName}, using default value: ${defaultValue}`,
-      type: "warn",
-    });
+    devConsoleLog.warn(
+      `Environment variable not found: ${envName}, using default value: ${defaultValue}`,
+    );
 
     return defaultValue;
   }
 
   // If no default value is provided, log an error and throw an exception
-  devConsoleLog({
-    message: `Environment variable not found: ${envName}`,
-    type: "error",
-  });
+  devConsoleLog.error(`Environment variable not found: ${envName}`);
   throw new Error("Environment variable not found: " + envName);
 }
