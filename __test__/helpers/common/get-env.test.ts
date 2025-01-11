@@ -1,15 +1,11 @@
 import {describe, it, expect, vi, beforeEach} from "vitest";
 
 import {getEnvValue} from "@/helpers/common/get-env";
-import {devConsoleLog} from "@/helpers/common/dev-console-log";
-
-// Mock del módulo devConsoleLog
-vi.mock("@/helpers/common/dev-console-log", () => ({
-  devConsoleLog: vi.fn(),
-}));
 
 describe("getEnvValue", () => {
   const originalEnv = {...process.env};
+  const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+  const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -23,18 +19,16 @@ describe("getEnvValue", () => {
     const result = getEnvValue("TEST_VAR");
 
     expect(result).toBe("testValue");
-    expect(devConsoleLog).not.toHaveBeenCalled();
+    expect(warnSpy).not.toHaveBeenCalled();
   });
 
   it("should return the default value if the environment variable does not exist", () => {
     const result = getEnvValue("NON_EXISTENT_VAR", "defaultValue");
 
     expect(result).toBe("defaultValue");
-    expect(devConsoleLog).toHaveBeenCalledWith({
-      message:
-        "Environment variable not found: NON_EXISTENT_VAR, using default value: defaultValue",
-      type: "warn",
-    });
+    expect(warnSpy).toHaveBeenCalledWith(
+      "Environment variable not found: NON_EXISTENT_VAR, using default value: defaultValue",
+    );
   });
 
   it("should throw an error if the environment variable does not exist and no default value is provided", () => {
@@ -42,9 +36,6 @@ describe("getEnvValue", () => {
       "Environment variable not found: NON_EXISTENT_VAR",
     );
 
-    expect(devConsoleLog).toHaveBeenCalledWith({
-      message: "Environment variable not found: NON_EXISTENT_VAR",
-      type: "error",
-    });
+    expect(errorSpy).toHaveBeenCalledWith("Environment variable not found: NON_EXISTENT_VAR");
   });
 });
