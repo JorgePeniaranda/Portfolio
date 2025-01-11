@@ -30,6 +30,8 @@ Hello! I'm a passionate web developer with boundless creativity and an unwaverin
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg" height="40" alt="prisma logo" />
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" height="40" alt="postgresql logo" />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitest/vitest-original.svg" height="40" alt="vitest logo" />
 </div>
 
 ## 🔄 Git Flow
