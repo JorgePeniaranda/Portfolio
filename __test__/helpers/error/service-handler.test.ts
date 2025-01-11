@@ -1,3 +1,5 @@
+import type {ApiResponse} from "@/types/responses";
+
 import {describe, it, expect, vi} from "vitest";
 
 import {serviceErrorHandler} from "@/helpers/error/service-handler";
@@ -21,8 +23,10 @@ describe("serviceErrorHandler", () => {
       response: {
         status: 404,
         data: {
+          success: false,
           message: "Resource not found",
-        },
+          error: "Resource not found",
+        } satisfies ApiResponse,
       },
     };
     const result = serviceErrorHandler(axiosError);

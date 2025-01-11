@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/select";
 import {isDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
-import {patchAddRelationWithStackFromProject} from "@/services/project/patchProjectAddAssociatedStack";
+import {patchProjectAddAssociatedStack} from "@/services/project/patchProjectAddAssociatedStack";
 import {patchProjectRemoveAssociatedStack} from "@/services/project/patchProjectRemoveAssociatedStack";
 
 export function UpdateStacksRelatedToProject({
@@ -55,7 +55,7 @@ export function UpdateStacksRelatedToProject({
 
   const onAddStack = async (values: RelationshipsSchema) => {
     // Send request to associate the stack to the project
-    const response = await patchAddRelationWithStackFromProject({
+    const response = await patchProjectAddAssociatedStack({
       idFrom: Number(values.idFrom),
       idTo: Number(values.idTo),
     });
