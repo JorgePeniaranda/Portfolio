@@ -5,6 +5,7 @@ import {z} from "zod";
 import {isPrismaError} from "../guards/is-prisma-error";
 
 import {prismaHandler} from "./prisma-handler";
+import {handleZodError} from "./zod-handler";
 
 /**
  * A helper function that formats API errors into a readable error response.
@@ -17,7 +18,6 @@ export function handleApiError(error: unknown): Response {
   if (isPrismaError(error)) {
     const {statusCode, message} = prismaHandler(error);
 
-    // Return a 500 error response
     return Response.json(
       {
         error: message,
@@ -28,19 +28,21 @@ export function handleApiError(error: unknown): Response {
 
   // If the error is a Zod validation error
   if (error instanceof z.ZodError) {
+    const {errorTextReduce, errorList} = handleZodError(error);
+
     return Response.json(
       {
-        errors: error.errors.map((error) => `${error.path}: ${error.message}`), // Map Zod validation errors to messages
+        error: errorTextReduce,
+        errors: errorList,
       } satisfies ErrorResponse,
       {status: 400},
     );
   }
 
-  // Return a 500 error response
+  // Else, return a generic 500 error response
   return Response.json(
     {
-      message: "An error occurred", // Generic error message
-      error: error instanceof Error ? error.message : "Unknown error occurred.", // Error message or fallback for unknown errors
+      error: error instanceof Error ? error.message : "Unknown error occurred.",
     } satisfies ErrorResponse,
     {status: 500},
   );
