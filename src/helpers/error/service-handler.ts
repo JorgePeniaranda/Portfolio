@@ -34,9 +34,13 @@ export function handleServiceError({
     return new Error(defaultErrorMessage);
   }
 
+  if (isDefined(responseData.error)) {
+    return new Error(responseData.error);
+  }
+
   if (isDefined(responseData.errors?.length) && responseData.errors?.length > 0) {
     return new Error(responseData.errors.join("\n"));
   }
 
-  return new Error(responseData.error);
+  return new Error(defaultErrorMessage);
 }
