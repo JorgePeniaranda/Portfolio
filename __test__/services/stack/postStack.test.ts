@@ -1,7 +1,9 @@
-import type {ApiResponse} from "@/types/responses";
+import type {Stack} from "@prisma/client";
 
-import {describe, it, expect, vi} from "vitest";
-import axios, {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
+import axios, {AxiosHeaders, type AxiosResponse} from "axios";
+import {describe, expect, it, vi} from "vitest";
+
+import {TEST_STACK_MOCK} from "./stack.mock";
 
 import {postStack} from "@/services/stack/postStack";
 
@@ -12,27 +14,18 @@ vi.mock("axios");
 
 describe("postStack", () => {
   // Input data for the tests
-  const input = {
-    name: "John Doe",
-  } as const;
+  const input = TEST_STACK_MOCK;
 
   it("should return a successful response when the request is correct", async () => {
     // Mock a successful response
-    const mockResponse: AxiosResponse<ApiResponse<unknown>> = {
+    const mockResponse: AxiosResponse<Stack> = {
       config: {
         headers: new AxiosHeaders(),
       },
       headers: {},
       status: 201,
       statusText: "OK",
-      data: {
-        success: true,
-        message: "Stack created successfully",
-        data: {
-          id: "1",
-          name: "John Doe",
-        },
-      },
+      data: TEST_STACK_MOCK,
     };
 
     // Simulate a resolved promise for axios.post

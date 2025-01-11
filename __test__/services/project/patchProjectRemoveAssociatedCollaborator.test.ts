@@ -1,7 +1,5 @@
-import type {ApiResponse} from "@/types/responses";
-
-import {describe, it, expect, vi} from "vitest";
 import axios, {AxiosHeaders, type AxiosResponse} from "axios";
+import {describe, expect, it, vi} from "vitest";
 
 import {patchProjectRemoveAssociatedCollaborator} from "@/services/project/patchProjectRemoveAssociatedCollaborator";
 
@@ -17,21 +15,14 @@ describe("patchProjectRemoveAssociatedCollaborator", () => {
 
   it("should return a successful response when the request is correct", async () => {
     // Mock a successful response
-    const mockResponse: AxiosResponse<ApiResponse<unknown>> = {
+    const mockResponse: AxiosResponse<null> = {
       config: {
         headers: new AxiosHeaders(),
       },
       headers: {},
       status: 200,
       statusText: "OK",
-      data: {
-        success: true,
-        message: "Project updated successfully",
-        data: {
-          id: "1",
-          name: "John Doe",
-        },
-      },
+      data: null,
     };
 
     // Simulate a resolved promise for axios.patch

@@ -1,7 +1,9 @@
-import type {ApiResponse} from "@/types/responses";
+import type {Collaborator} from "@prisma/client";
 
-import {describe, it, expect, vi} from "vitest";
 import axios, {AxiosHeaders, type AxiosResponse} from "axios";
+import {describe, expect, it, vi} from "vitest";
+
+import {TEST_COLLABORATOR_MOCK} from "./collaborator.mock";
 
 import {putCollaborator} from "@/services/collaborator/putCollaborator";
 
@@ -16,21 +18,14 @@ describe("putCollaborator", () => {
 
   it("should return a successful response when the request is correct", async () => {
     // Mock a successful response
-    const mockResponse: AxiosResponse<ApiResponse<unknown>> = {
+    const mockResponse: AxiosResponse<Collaborator> = {
       config: {
         headers: new AxiosHeaders(),
       },
       headers: {},
       status: 200,
       statusText: "OK",
-      data: {
-        success: true,
-        message: "Collaborator updated successfully",
-        data: {
-          id: "1",
-          name: "John Doe",
-        },
-      },
+      data: TEST_COLLABORATOR_MOCK,
     };
 
     // Simulate a resolved promise for axios.put

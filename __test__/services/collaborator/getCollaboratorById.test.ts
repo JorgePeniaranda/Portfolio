@@ -1,7 +1,9 @@
-import type {ApiResponse} from "@/types/responses";
+import type {Collaborator} from "@prisma/client";
 
 import {describe, it, expect, vi} from "vitest";
 import {AxiosHeaders, type AxiosResponse} from "axios";
+
+import {TEST_COLLABORATOR_MOCK} from "./collaborator.mock";
 
 import {apiClient} from "@/helpers/client/axios";
 import {getCollaboratorById} from "@/services/collaborator/getCollaboratorById";
@@ -12,22 +14,14 @@ vi.mock("@/helpers/client/axios");
 describe("getCollaboratorById", () => {
   it("should return collaborator data when the request is successful", async () => {
     // Simulating a successful response from apiClient
-    const mockResponse: AxiosResponse<ApiResponse<unknown>> = {
+    const mockResponse: AxiosResponse<Collaborator> = {
       config: {
         headers: new AxiosHeaders(),
       },
       headers: {},
       status: 200,
       statusText: "OK",
-      data: {
-        success: true,
-        message: "Collaborator found",
-        data: {
-          id: 1,
-          name: "John Doe",
-          email: "john.doe@example.com",
-        },
-      },
+      data: TEST_COLLABORATOR_MOCK,
     };
 
     // Mocking the resolved value of apiClient.get for this test case

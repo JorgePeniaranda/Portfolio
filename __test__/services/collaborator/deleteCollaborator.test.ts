@@ -1,4 +1,4 @@
-import type {ApiResponse} from "@/types/responses";
+import type {DeleteResponse} from "@/types/responses";
 
 import {describe, it, expect, vi} from "vitest";
 import axios, {AxiosHeaders, type AxiosResponse} from "axios";
@@ -13,7 +13,7 @@ describe("deleteCollaborator", () => {
 
   it("should return a successful response when the request is correct", async () => {
     // Mock a successful response
-    const mockResponse: AxiosResponse<ApiResponse<unknown>> = {
+    const mockResponse: AxiosResponse<DeleteResponse> = {
       config: {
         headers: new AxiosHeaders(),
       },
@@ -21,11 +21,7 @@ describe("deleteCollaborator", () => {
       status: 200,
       statusText: "OK",
       data: {
-        success: true,
-        message: "Collaborator deleted successfully",
-        data: {
-          count: input.length,
-        },
+        count: input.length,
       },
     };
 

@@ -1,7 +1,9 @@
-import type {ApiResponse} from "@/types/responses";
+import type {Project} from "@prisma/client";
 
-import {describe, it, expect, vi} from "vitest";
 import axios, {AxiosHeaders, type AxiosResponse} from "axios";
+import {describe, expect, it, vi} from "vitest";
+
+import {TEST_PROJECT_MOCK} from "./project.mock";
 
 import {putProject} from "@/services/project/putProject";
 
@@ -10,36 +12,18 @@ vi.mock("axios");
 
 describe("putProject", () => {
   // Input data for the tests
-  const input = {
-    key: "TP",
-    name: "Test Project",
-    status: "IN_PROGRESS",
-    stackCategory: "FULL_STACK",
-    description: "This is a test project",
-    contributions: "This is a test contribution",
-    goals: "This is a test goal",
-    logoUrl: "https://example.com/logo.png",
-    primaryColor: "#000000",
-    startDate: "2021-01-01",
-  } as const;
+  const input = TEST_PROJECT_MOCK;
 
   it("should return a successful response when the request is correct", async () => {
     // Mock a successful response
-    const mockResponse: AxiosResponse<ApiResponse<unknown>> = {
+    const mockResponse: AxiosResponse<Project> = {
       config: {
         headers: new AxiosHeaders(),
       },
       headers: {},
       status: 200,
       statusText: "OK",
-      data: {
-        success: true,
-        message: "Project updated successfully",
-        data: {
-          id: "1",
-          name: "John Doe",
-        },
-      },
+      data: TEST_PROJECT_MOCK,
     };
 
     // Simulate a resolved promise for axios.put
