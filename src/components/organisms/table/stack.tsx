@@ -33,13 +33,6 @@ import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 const columns: Array<ColumnDef<Stack>> = [
   selectionColumnDef<Stack>(),
   {
-    id: "id",
-    accessorKey: "id",
-    header({column}) {
-      return <DataTableColumnHeader column={column} title="ID" />;
-    },
-  },
-  {
     id: "name",
     accessorKey: "name",
     header({column}) {

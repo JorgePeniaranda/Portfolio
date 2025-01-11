@@ -32,13 +32,6 @@ import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 const columns: Array<ColumnDef<Collaborator>> = [
   selectionColumnDef<Collaborator>(),
   {
-    id: "id",
-    accessorKey: "id",
-    header({column}) {
-      return <DataTableColumnHeader column={column} title="ID" />;
-    },
-  },
-  {
     id: "nickname",
     accessorKey: "nickname",
     header({column}) {

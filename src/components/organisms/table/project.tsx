@@ -38,13 +38,6 @@ import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 const columns: Array<ColumnDef<Project>> = [
   selectionColumnDef<Project>(),
   {
-    id: "id",
-    accessorKey: "id",
-    header({column}) {
-      return <DataTableColumnHeader column={column} title="ID" />;
-    },
-  },
-  {
     id: "name",
     accessorKey: "name",
     header({column}) {
