@@ -11,17 +11,16 @@ export interface IThemeStoreState {
 
 // Define the actions available in the store.
 export interface IThemeStoreActions {
-  resetTheme: () => void; // Resets the theme to the default value.
-  toggleTheme: () => void; // Toggles between the available themes.
+  resetTheme: () => void;
+  toggleTheme: () => void;
 }
 
 // Create the theme store using Zustand and enable persistence.
 export const useThemeStore = create<IThemeStoreState & IThemeStoreActions>()(
   persist(
     (set) => ({
-      theme: DEFAULT_THEME, // Initial theme value.
+      theme: DEFAULT_THEME,
 
-      // Toggles the current theme to the next theme in the list.
       toggleTheme: () => {
         set((state) => {
           const nextTheme = getNextTheme(state.theme);
@@ -33,13 +32,12 @@ export const useThemeStore = create<IThemeStoreState & IThemeStoreActions>()(
         });
       },
 
-      // Resets the theme to the default and updates the HTML element's class.
       resetTheme: () => {
         updateHTMLTheme(DEFAULT_THEME);
         set({theme: DEFAULT_THEME});
       },
     }),
-    {name: THEME_STORE_KEY}, // Persist the store's state under this key.
+    {name: THEME_STORE_KEY},
   ),
 );
 

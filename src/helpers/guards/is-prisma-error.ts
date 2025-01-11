@@ -8,11 +8,6 @@ import {Prisma} from "@prisma/client";
  *
  * @param {unknown} error - The error object to check.
  * @returns {boolean} `true` if the error is an instance of a known Prisma error type, otherwise `false`.
- *
- * @example
- * if (isPrismaError(error)) {
- *   // Handle Prisma error
- * }
  */
 export function isPrismaError(
   error: unknown,

@@ -12,30 +12,28 @@ export interface ISoundStoreState {
 
 // Define the actions available in the store.
 export interface ISoundStoreActions {
-  toggleSound: () => void; // Toggles the sound on or off.
-  resetSound: () => void; // Resets the sound state to its default.
+  toggleSound: () => void;
+  resetSound: () => void;
 }
 
 // Create the sound store using Zustand and enable persistence.
 export const useSoundStore = create(
   persist<ISoundStoreState & ISoundStoreActions>(
     (set) => ({
-      isSoundEnabled: DEFAULT_SOUND_STATE, // Initial sound state.
+      isSoundEnabled: DEFAULT_SOUND_STATE,
 
-      // Toggles the sound state between enabled and disabled.
       toggleSound: () => {
         set((state) => ({
-          isSoundEnabled: !state.isSoundEnabled, // Toggle the sound state.
+          isSoundEnabled: !state.isSoundEnabled,
         }));
       },
 
-      // Resets the sound state to the default value.
       resetSound: () => {
         set({isSoundEnabled: DEFAULT_SOUND_STATE});
       },
     }),
     {
-      name: SOUND_STORE_KEY, // Persist the store's state under this key.
+      name: SOUND_STORE_KEY,
     },
   ),
 );
