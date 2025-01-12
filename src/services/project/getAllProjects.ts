@@ -17,7 +17,7 @@ export async function getAllProjects(pagination?: PaginationRequest): Promise<Pr
       params: pagination,
     });
 
-    return response ?? [];
+    return response;
   } catch (error) {
     throw handleServiceError({
       error,

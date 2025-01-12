@@ -27,7 +27,7 @@ export async function getProjectsByNotAssociatedStack({
       },
     );
 
-    return response ?? [];
+    return response;
   } catch (error) {
     throw handleServiceError({
       error,
