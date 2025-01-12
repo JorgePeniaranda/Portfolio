@@ -33,7 +33,10 @@ describe("getCollaboratorsByNotAssociatedProjects", () => {
     // Mocking the resolved value of apiClient.get for this test case
     vi.mocked(apiClient.get).mockResolvedValueOnce(mockResponse);
 
-    const response = await getCollaboratorsByNotAssociatedProjects({idProject, pagination});
+    const response = await getCollaboratorsByNotAssociatedProjects({
+      idProject,
+      pagination,
+    });
 
     // Asserting that the response matches the mock data
     expect(response).toEqual(mockResponse.data);

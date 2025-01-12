@@ -25,7 +25,9 @@ vi.mock("@/schemas/stack/update", () => ({
 vi.mock("@/helpers/error/api-handler", () => ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handleApiError: (error: any) => {
-    return new Response(JSON.stringify({error: error.message}), {status: 500});
+    return new Response(JSON.stringify({error: error.message}), {
+      status: 500,
+    });
   },
 }));
 

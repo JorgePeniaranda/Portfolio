@@ -25,7 +25,9 @@ vi.mock("@/helpers/common/build-pagination", () => ({
 vi.mock("@/helpers/error/api-handler", () => ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handleApiError: (error: any) => {
-    return new Response(JSON.stringify({error: error.message}), {status: 500});
+    return new Response(JSON.stringify({error: error.message}), {
+      status: 500,
+    });
   },
 }));
 
@@ -36,7 +38,10 @@ describe("GET /stack/related/project/[idProject] endpoint", () => {
 
   it("should return a paginated list of stacks when parameters are valid", async () => {
     // Mock the pagination utility
-    (BuildPaginationByURL as unknown as Mock).mockReturnValue({page: 1, size: 10});
+    (BuildPaginationByURL as unknown as Mock).mockReturnValue({
+      page: 1,
+      size: 10,
+    });
 
     // Mock the database response
     const mockStacks = [
@@ -72,7 +77,10 @@ describe("GET /stack/related/project/[idProject] endpoint", () => {
   });
 
   it("should return an empty list if no stacks are found", async () => {
-    (BuildPaginationByURL as unknown as Mock).mockReturnValue({page: 1, limit: 10});
+    (BuildPaginationByURL as unknown as Mock).mockReturnValue({
+      page: 1,
+      limit: 10,
+    });
     (databaseClient.stack.findMany as unknown as Mock).mockResolvedValue([]);
 
     // Simulate a request

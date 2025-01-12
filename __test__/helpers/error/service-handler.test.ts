@@ -62,7 +62,10 @@ describe("handleServiceError", () => {
   });
 
   it("should return a default error message if response data is not an error response", () => {
-    const mockError = {isAxiosError: true, response: {data: "Invalid response"}};
+    const mockError = {
+      isAxiosError: true,
+      response: {data: "Invalid response"},
+    };
 
     (axios.isAxiosError as unknown as Mock).mockReturnValue(true);
     (isNotDefined as unknown as Mock).mockReturnValue(false);

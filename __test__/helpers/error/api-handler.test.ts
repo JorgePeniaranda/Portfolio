@@ -21,7 +21,10 @@ vi.mock("@/helpers/error/zod-handler", () => ({
 describe("handleApiError", () => {
   it("should handle a Prisma error", async () => {
     const mockError = {code: "P2002"};
-    const mockPrismaResponse = {statusCode: 409, message: "Unique constraint failed"};
+    const mockPrismaResponse = {
+      statusCode: 409,
+      message: "Unique constraint failed",
+    };
 
     (isPrismaError as unknown as Mock).mockReturnValue(true);
     (prismaHandler as unknown as Mock).mockReturnValue(mockPrismaResponse);
