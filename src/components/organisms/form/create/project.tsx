@@ -48,7 +48,7 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
       toast({
         title: "Proyecto creado",
         description: "El proyecto ha sido creado exitosamente.",
-        className: "bg-green-500",
+        className: "bg-green-500 text-black",
       });
 
       // Redirect to the project view

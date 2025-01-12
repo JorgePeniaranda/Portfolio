@@ -51,7 +51,7 @@ export function SecretButton() {
       title: "Código correcto",
       description: "Enhorabuena. Has descubierto el código secreto. Bienvenido al panel secreto.",
       variant: "default",
-      className: "bg-green-500",
+      className: "bg-green-500 text-black",
     });
 
     setIsUnlocked(true);

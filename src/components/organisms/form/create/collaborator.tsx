@@ -34,7 +34,7 @@ export function CreateCollaboratorForm({disableForm = false}: {disableForm?: boo
       toast({
         title: "Colaborador creado",
         description: "El colaborador ha sido creado exitosamente.",
-        className: "bg-green-500",
+        className: "bg-green-500 text-black",
       });
 
       // Redirect to the collaborator view

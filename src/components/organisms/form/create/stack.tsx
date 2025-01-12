@@ -41,7 +41,7 @@ export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) 
       toast({
         title: "Stack creado",
         description: "El stack ha sido creado exitosamente.",
-        className: "bg-green-500",
+        className: "bg-green-500 text-black",
       });
 
       // Redirect to the stack view

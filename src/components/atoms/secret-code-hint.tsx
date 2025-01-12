@@ -48,7 +48,7 @@ export function SecretCodeHint({position}: {position: number}) {
         title: "Enhorabuena!",
         description: `Has descubierto el código secreto: ${secretCode}!`,
         variant: "default",
-        className: "bg-green-500",
+        className: "bg-green-500 text-black",
       });
     }
 

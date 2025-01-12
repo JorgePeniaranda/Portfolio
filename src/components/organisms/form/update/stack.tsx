@@ -44,7 +44,7 @@ export function UpdateStackForm({
       toast({
         title: "Stack actualizado",
         description: "El stack ha sido actualizado exitosamente.",
-        className: "bg-green-500",
+        className: "bg-green-500 text-black",
       });
     } catch (error) {
       handleErrorWithToast({

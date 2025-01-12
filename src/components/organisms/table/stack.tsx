@@ -127,7 +127,7 @@ function TableHeaderComponent({table}: {table: Table<Stack>}) {
       toast({
         title: "Colaboradores eliminados",
         description: "Los stack seleccionados se han eliminado correctamente.",
-        className: "bg-green-500",
+        className: "bg-green-500 text-black",
       });
 
       // Remove the deleted stacks from the table
