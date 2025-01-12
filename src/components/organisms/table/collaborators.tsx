@@ -128,6 +128,9 @@ function TableHeaderComponent({table}: {table: Table<Collaborator>}) {
       if (isDefined(table.options.meta?.deleteRows)) {
         table.options.meta.deleteRows(rows.map((row) => row.index));
       }
+
+      // Clear the selected rows
+      table.setRowSelection({});
     } catch (error) {
       handleErrorWithToast({
         error,
