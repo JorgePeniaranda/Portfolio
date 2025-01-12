@@ -15,6 +15,7 @@ export default getViteConfig({
         "src/components/atoms/theme-preference.astro",
         "src/components/ui/**/*",
         "src/constants/**/*",
+        "src/messages/**/*",
         "src/helpers/client/**/*",
         "src/schemas/**/*",
         "src/hooks/use-mobile.tsx",
