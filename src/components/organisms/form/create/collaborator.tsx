@@ -46,6 +46,7 @@ export function CreateCollaboratorForm({disableForm = false}: {disableForm?: boo
         error,
         title: "No se pudo crear el colaborador",
         defaultErrorMessage: "Ha ocurrido un error al intentar crear el colaborador.",
+        tryAgain: () => onSubmit(values),
       });
     }
   };

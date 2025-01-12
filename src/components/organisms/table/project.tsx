@@ -201,6 +201,7 @@ function TableHeaderComponent({table}: {table: Table<Project>}) {
         error,
         title: "Error al eliminar proyectos",
         defaultErrorMessage: "Ha ocurrido un error al eliminar los proyectos.",
+        tryAgain: () => handleDelete(),
       });
     }
   };

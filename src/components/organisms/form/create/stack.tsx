@@ -53,6 +53,7 @@ export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) 
         error,
         title: "No se pudo crear el stack",
         defaultErrorMessage: "Ha ocurrido un error al intentar crear el stack.",
+        tryAgain: () => onSubmit(values),
       });
     }
   };

@@ -92,6 +92,7 @@ export function UpdateCollaboratorRelatedToProject({
         title: "No se pudo relacionar el proyecto con el colaborador",
         defaultErrorMessage:
           "Ocurrió un error al intentar relacionar el proyecto con el colaborador.",
+        tryAgain: () => onAddCollaborator(values),
       });
     }
   };
@@ -128,6 +129,7 @@ export function UpdateCollaboratorRelatedToProject({
         title: "No se pudo eliminar el proyecto del colaborador",
         defaultErrorMessage:
           "Ocurrió un error al intentar eliminar el proyecto con el colaborador.",
+        tryAgain: () => onRemoveCollaborator(collaboratorId),
       });
     }
   };

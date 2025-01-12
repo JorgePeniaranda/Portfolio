@@ -58,6 +58,7 @@ export function UpdateProjectForm({
         error,
         title: "No se pudo actualizar el proyecto",
         defaultErrorMessage: "Ha ocurrido un error al intentar actualizar el proyecto.",
+        tryAgain: () => onSubmit(values),
       });
     }
   };

@@ -139,6 +139,7 @@ function TableHeaderComponent({table}: {table: Table<Stack>}) {
         error,
         title: "Error al eliminar los stack",
         defaultErrorMessage: "Ha ocurrido un error al intentar eliminar los stacks seleccionados.",
+        tryAgain: () => handleDelete(),
       });
     }
   };

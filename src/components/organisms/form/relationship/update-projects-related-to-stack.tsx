@@ -83,6 +83,7 @@ export function UpdateProjectsRelatedToStack({
         error,
         title: "No se pudo relacionar el proyecto",
         defaultErrorMessage: "Ocurrió un error al intentar relacionar el proyecto con el stack.",
+        tryAgain: () => onAddProject(values),
       });
     }
   };
@@ -114,6 +115,7 @@ export function UpdateProjectsRelatedToStack({
         error,
         title: "No se pudo eliminar el proyecto",
         defaultErrorMessage: "Ocurrió un error al intentar eliminar el proyecto del stack.",
+        tryAgain: () => onRemoveProject(idProject),
       });
     }
   };

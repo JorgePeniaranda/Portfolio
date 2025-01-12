@@ -51,6 +51,7 @@ export function UpdateStackForm({
         error,
         title: "No se pudo actualizar el stack",
         defaultErrorMessage: "Ha ocurrido un error al intentar actualizar el stack.",
+        tryAgain: () => onSubmit(values),
       });
     }
   };

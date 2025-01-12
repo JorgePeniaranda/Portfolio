@@ -133,6 +133,7 @@ function TableHeaderComponent({table}: {table: Table<Collaborator>}) {
         error,
         title: "Error al eliminar colaboradores",
         defaultErrorMessage: "Ha ocurrido un error al intentar eliminar los colaboradores.",
+        tryAgain: () => handleDelete(),
       });
     }
   };

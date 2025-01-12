@@ -1,3 +1,7 @@
+import {ToastAction} from "@radix-ui/react-toast";
+
+import {isDefined} from "../guards/is-defined";
+
 import {MessageDisplay} from "@/components/atoms/message-display";
 import {toast} from "@/hooks/use-toast";
 
@@ -12,16 +16,23 @@ export function handleErrorWithToast({
   error,
   title,
   defaultErrorMessage = "Ha ocurrido un error.",
+  tryAgain,
 }: {
   error: unknown;
   title?: string;
   defaultErrorMessage?: string;
+  tryAgain?: () => void;
 }): void {
   if (error instanceof Error) {
     toast({
       title,
       description: <MessageDisplay message={error.message} />,
       className: "bg-red-500 text-white",
+      action: isDefined(tryAgain) ? (
+        <ToastAction altText="Reintentar" onClick={tryAgain}>
+          Reintentar
+        </ToastAction>
+      ) : undefined,
     });
 
     return;

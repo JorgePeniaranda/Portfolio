@@ -60,6 +60,7 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
         error,
         title: "No se pudo crear el proyecto",
         defaultErrorMessage: "Ha ocurrido un error al intentar crear el proyecto.",
+        tryAgain: () => onSubmit(values),
       });
     }
   };

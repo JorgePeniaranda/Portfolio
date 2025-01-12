@@ -43,6 +43,7 @@ export function UpdateCollaboratorForm({
         error,
         title: "No se pudo actualizar el Colaborador",
         defaultErrorMessage: "Ha ocurrido un error al intentar actualizar el Colaborador.",
+        tryAgain: () => onSubmit(values),
       });
     }
   };
