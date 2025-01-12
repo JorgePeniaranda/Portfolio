@@ -21,7 +21,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '22.13.0' # Change the version according to your project
+          node-version: '22.13.0' # LTS
           cache: 'npm' # Enable caching for node_modules
 
       # Step 3: Install dependencies
