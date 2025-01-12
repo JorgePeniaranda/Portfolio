@@ -171,7 +171,7 @@ export function UpdateStackForm({
           />
           <FormField
             control={form.control}
-            name="description"
+            name="iconUrl"
             render={({field}) => (
               <FormItem>
                 <FormLabel>URL de icono</FormLabel>
