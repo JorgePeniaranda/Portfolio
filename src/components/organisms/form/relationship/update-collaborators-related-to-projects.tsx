@@ -44,6 +44,9 @@ export function UpdateCollaboratorRelatedToProject({
 }) {
   const {toast} = useToast();
 
+  // Initialize local state for dialog visibility
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   // Initialize local state for associated and available collaborators
   const [associatedCollaborators, setAssociatedCollaborators] = useState<Collaborator[]>(
     initialAssociatedCollaborators,
@@ -86,6 +89,9 @@ export function UpdateCollaboratorRelatedToProject({
           prev.filter((collaborator) => collaborator.id !== Number(values.idTo)),
         );
       }
+
+      // Close the dialog
+      setIsDialogOpen(false);
     } catch (error) {
       handleErrorWithToast({
         error,
@@ -123,6 +129,9 @@ export function UpdateCollaboratorRelatedToProject({
         );
         setAvailableCollaborators((prev) => [...prev, findCollaborator]);
       }
+
+      // Close the dialog
+      setIsDialogOpen(false);
     } catch (error) {
       handleErrorWithToast({
         error,
@@ -161,7 +170,7 @@ export function UpdateCollaboratorRelatedToProject({
         </li>
       ))}
       <li>
-        <Dialog>
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <button
               aria-label="Relacionar colaborador"

@@ -43,6 +43,9 @@ export function UpdateProjectsRelatedToCollaborator({
 }) {
   const {toast} = useToast();
 
+  // Initialize local state for dialog visibility
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   // Initialize local state for associated and available projects
   const [associatedProjects, setAssociatedProjects] =
     useState<Project[]>(initialAssociatedProjects);
@@ -78,6 +81,9 @@ export function UpdateProjectsRelatedToCollaborator({
         setAssociatedProjects((prev) => [...prev, findProject]);
         setAvailableProject((prev) => prev.filter((project) => project.id !== Number(values.idTo)));
       }
+
+      // Close the dialog
+      setIsDialogOpen(false);
     } catch (error) {
       handleErrorWithToast({
         error,
@@ -111,6 +117,9 @@ export function UpdateProjectsRelatedToCollaborator({
         setAssociatedProjects((prev) => prev.filter((project) => project.id !== idProject));
         setAvailableProject((prev) => [...prev, findProject]);
       }
+
+      // Close the dialog
+      setIsDialogOpen(false);
     } catch (error) {
       handleErrorWithToast({
         error,
@@ -147,7 +156,7 @@ export function UpdateProjectsRelatedToCollaborator({
         </li>
       ))}
       <li>
-        <Dialog>
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <button
               aria-label="Relacionar stack"

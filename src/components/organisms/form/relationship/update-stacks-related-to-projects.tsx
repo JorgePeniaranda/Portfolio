@@ -43,6 +43,9 @@ export function UpdateStacksRelatedToProject({
 }) {
   const {toast} = useToast();
 
+  // Initialize local state for dialog visibility
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   // Create a form to relate a stack to the project
   const form = useForm<RelationshipsSchema>({
     defaultValues: {
@@ -77,6 +80,9 @@ export function UpdateStacksRelatedToProject({
         setAssociatedStacks((prev) => [...prev, findStack]);
         setAvailableStacks((prev) => prev.filter((stack) => stack.id !== Number(values.idTo)));
       }
+
+      // Close the dialog
+      setIsDialogOpen(false);
     } catch (error) {
       handleErrorWithToast({
         error,
@@ -109,6 +115,9 @@ export function UpdateStacksRelatedToProject({
         setAvailableStacks((prev) => [...prev, findStack]);
         setAssociatedStacks((prev) => prev.filter((stack) => stack.id !== stackId));
       }
+
+      // Close the dialog
+      setIsDialogOpen(false);
     } catch (error) {
       handleErrorWithToast({
         error,
@@ -148,7 +157,7 @@ export function UpdateStacksRelatedToProject({
             </li>
           ))}
           <li>
-            <Dialog>
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <DialogTrigger asChild>
                 <button
                   aria-label="Relacionar stack"
