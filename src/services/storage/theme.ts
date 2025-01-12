@@ -47,7 +47,7 @@ export const useThemeStore = create<IThemeStoreState & IThemeStoreActions>()(
  * Gets the next theme in the list of available themes.
  * If the current theme is not found, it defaults to the first theme in the list.
  */
-function getNextTheme(currentTheme: theme): theme {
+export function getNextTheme(currentTheme: theme): theme {
   const currentIndex = themesArray.indexOf(currentTheme);
   const validIndex = currentIndex !== -1 ? currentIndex : 0;
 
