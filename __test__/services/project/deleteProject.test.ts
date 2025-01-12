@@ -12,6 +12,7 @@ vi.mock("@/helpers/client/axios");
 describe("deleteProject", () => {
   // Input data for the tests
   const input = [0, 1];
+  const APIUrl = "/api/project/delete";
 
   it("should return a successful response when the request is correct", async () => {
     // Mock a successful response
@@ -33,7 +34,7 @@ describe("deleteProject", () => {
 
     // Validate response and apiClient call
     expect(response).toEqual(mockResponse.data);
-    expect(apiClient.post).toHaveBeenCalledWith("/api/project/delete", input);
+    expect(apiClient.post).toHaveBeenCalledWith(APIUrl, input);
   });
 
   it("should handle errors correctly when the request fails", async () => {
@@ -69,6 +70,6 @@ describe("deleteProject", () => {
       }
     }
 
-    expect(apiClient.post).toHaveBeenCalledWith("/api/project/delete", input);
+    expect(apiClient.post).toHaveBeenCalledWith(APIUrl, input);
   });
 });

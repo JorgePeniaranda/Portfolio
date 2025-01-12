@@ -15,6 +15,7 @@ vi.mock("@/helpers/client/axios");
 describe("postStack", () => {
   // Input data for the tests
   const input = TEST_STACK_MOCK;
+  const APIUrl = "/api/stack/create";
 
   it("should return a successful response when the request is correct", async () => {
     // Mock a successful response
@@ -34,7 +35,7 @@ describe("postStack", () => {
 
     // Validate response and apiClient call
     expect(response).toEqual(mockResponse.data);
-    expect(apiClient.post).toHaveBeenCalledWith("/api/stack/create", input);
+    expect(apiClient.post).toHaveBeenCalledWith(APIUrl, input);
   });
 
   it("should handle errors correctly when the request fails", async () => {
@@ -70,6 +71,6 @@ describe("postStack", () => {
       }
     }
 
-    expect(apiClient.post).toHaveBeenCalledWith("/api/stack/create", input);
+    expect(apiClient.post).toHaveBeenCalledWith(APIUrl, input);
   });
 });

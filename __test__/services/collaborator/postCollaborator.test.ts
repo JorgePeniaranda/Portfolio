@@ -15,6 +15,7 @@ vi.mock("@/helpers/client/axios");
 describe("postCollaborator", () => {
   // Input data for the tests
   const input = TEST_COLLABORATOR_MOCK;
+  const APIUrl = "/api/collaborator/create";
 
   it("should return a successful response when the request is correct", async () => {
     // Mock a successful response
@@ -34,7 +35,7 @@ describe("postCollaborator", () => {
 
     // Validate response and apiClient call
     expect(response).toEqual(mockResponse.data);
-    expect(apiClient.post).toHaveBeenCalledWith("/api/collaborator/create", input);
+    expect(apiClient.post).toHaveBeenCalledWith(APIUrl, input);
   });
 
   it("should handle errors correctly when the request fails", async () => {
@@ -70,6 +71,6 @@ describe("postCollaborator", () => {
       }
     }
 
-    expect(apiClient.post).toHaveBeenCalledWith("/api/collaborator/create", input);
+    expect(apiClient.post).toHaveBeenCalledWith(APIUrl, input);
   });
 });

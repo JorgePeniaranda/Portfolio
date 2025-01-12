@@ -15,6 +15,7 @@ describe("patchProjectAddAssociatedCollaborator", () => {
     idFrom: 1,
     idTo: 2,
   } as const;
+  const APIUrl = "/api/project/relations/collaborator/add";
 
   it("should return a successful response when the request is correct", async () => {
     // Mock a successful response
@@ -34,7 +35,7 @@ describe("patchProjectAddAssociatedCollaborator", () => {
 
     // Validate response and apiClient call
     expect(response).toEqual(mockResponse.data);
-    expect(apiClient.patch).toHaveBeenCalledWith("/api/project/relations/collaborator/add", input);
+    expect(apiClient.patch).toHaveBeenCalledWith(APIUrl, input);
   });
 
   it("should handle errors correctly when the request fails", async () => {
@@ -70,6 +71,6 @@ describe("patchProjectAddAssociatedCollaborator", () => {
       }
     }
 
-    expect(apiClient.patch).toHaveBeenCalledWith("/api/project/relations/collaborator/add", input);
+    expect(apiClient.patch).toHaveBeenCalledWith(APIUrl, input);
   });
 });

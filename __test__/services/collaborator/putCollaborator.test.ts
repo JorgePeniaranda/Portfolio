@@ -17,6 +17,7 @@ describe("putCollaborator", () => {
   const input = {
     nickname: "John Doe",
   } as const;
+  const APIUrl = "/api/collaborator/update";
 
   it("should return a successful response when the request is correct", async () => {
     // Mock a successful response
@@ -36,7 +37,7 @@ describe("putCollaborator", () => {
 
     // Validate response and apiClient call
     expect(response).toEqual(mockResponse.data);
-    expect(apiClient.put).toHaveBeenCalledWith("/api/collaborator/update", input);
+    expect(apiClient.put).toHaveBeenCalledWith(APIUrl, input);
   });
 
   it("should handle errors correctly when the request fails", async () => {
@@ -72,6 +73,6 @@ describe("putCollaborator", () => {
       }
     }
 
-    expect(apiClient.put).toHaveBeenCalledWith("/api/collaborator/update", input);
+    expect(apiClient.put).toHaveBeenCalledWith(APIUrl, input);
   });
 });
