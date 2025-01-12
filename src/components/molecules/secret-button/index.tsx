@@ -34,7 +34,6 @@ export function SecretButton() {
    * Handles the validation of the entered code.
    * - If the code is incorrect, displays an error message.
    * - If the code is correct, displays a success message.
-   * - TO-DO: Redirect to the secret dashboard.
    */
   const handleSubmit = () => {
     if (secretCode !== value) {
