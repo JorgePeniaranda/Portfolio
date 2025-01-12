@@ -17,7 +17,7 @@ export async function getAllCollaborator(pagination?: PaginationRequest): Promis
       params: pagination,
     });
 
-    return response ?? [];
+    return response;
   } catch (error) {
     throw handleServiceError({
       error,

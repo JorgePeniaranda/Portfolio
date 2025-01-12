@@ -21,13 +21,13 @@ export async function getCollaboratorsByNotAssociatedProjects({
 }): Promise<Array<Collaborator>> {
   try {
     const {data: response} = await apiClient.get<Collaborator[]>(
-      `api/collaborator/get/not-related/project/${idProject}.json`,
+      `/api/collaborator/get/not-related/project/${idProject}.json`,
       {
         params: pagination,
       },
     );
 
-    return response ?? [];
+    return response;
   } catch (error) {
     throw handleServiceError({
       error,

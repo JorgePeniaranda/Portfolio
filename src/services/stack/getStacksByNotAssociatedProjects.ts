@@ -21,13 +21,13 @@ export async function getStacksByNotAssociatedProjects({
 }): Promise<Stack[]> {
   try {
     const {data: response} = await apiClient.get<Stack[]>(
-      `api/stack/get/not-related/project/${idProject}.json`,
+      `/api/stack/get/not-related/project/${idProject}.json`,
       {
         params: pagination,
       },
     );
 
-    return response ?? [];
+    return response;
   } catch (error) {
     throw handleServiceError({
       error,
