@@ -5,11 +5,17 @@ import {createContext} from "astro/middleware";
 
 import {databaseClient} from "@/helpers/client/prisma";
 import {BuildPaginationByURL} from "@/helpers/common/build-pagination";
-import {GET} from "@/pages/api/project/get/not-related/collaborator/[idCollaborator].json";
+import {
+  GET,
+  getStaticPaths,
+} from "@/pages/api/project/get/not-related/collaborator/[idCollaborator].json";
 
 vi.mock("@/helpers/client/prisma", () => ({
   databaseClient: {
     project: {
+      findMany: vi.fn(),
+    },
+    collaborator: {
       findMany: vi.fn(),
     },
   },
@@ -109,5 +115,20 @@ describe("GET /project/not-related/collaborator/[idCollaborator] endpoint", () =
     const responseBody = await response.json();
 
     expect(responseBody).toEqual({error: "Invalid URL"});
+  });
+});
+
+describe("getStaticPaths", () => {
+  it("should return a list of paths", async () => {
+    const mockCollaborator = [{id: "1"}, {id: "2"}, {id: "3"}];
+
+    (databaseClient.collaborator.findMany as unknown as Mock).mockResolvedValue(mockCollaborator);
+    const paths = await getStaticPaths();
+
+    expect(paths).toEqual(
+      mockCollaborator.map((collaborator) => ({
+        params: {idCollaborator: collaborator.id.toString()},
+      })),
+    );
   });
 });

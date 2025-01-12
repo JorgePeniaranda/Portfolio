@@ -4,12 +4,13 @@ import {describe, it, vi, expect, beforeEach, type Mock} from "vitest";
 import {createContext} from "astro/middleware";
 
 import {databaseClient} from "@/helpers/client/prisma";
-import {GET} from "@/pages/api/collaborator/get/id/[id].json";
+import {GET, getStaticPaths} from "@/pages/api/collaborator/get/id/[id].json";
 
 vi.mock("@/helpers/client/prisma", () => ({
   databaseClient: {
     collaborator: {
       findUnique: vi.fn(),
+      findMany: vi.fn(),
     },
   },
 }));
@@ -91,5 +92,20 @@ describe("GET /collaborator/id/[id] endpoint", () => {
     const responseBody = await response.json();
 
     expect(responseBody).toEqual({error: "This is a test error"});
+  });
+});
+
+describe("getStaticPaths", () => {
+  it("should return a list of paths", async () => {
+    const mockCollaborator = [{id: "1"}, {id: "2"}, {id: "3"}];
+
+    (databaseClient.collaborator.findMany as unknown as Mock).mockResolvedValue(mockCollaborator);
+    const paths = await getStaticPaths();
+
+    expect(paths).toEqual(
+      mockCollaborator.map((collaborator) => ({
+        params: {id: collaborator.id.toString()},
+      })),
+    );
   });
 });
