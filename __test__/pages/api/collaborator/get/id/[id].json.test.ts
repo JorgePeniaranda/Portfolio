@@ -28,9 +28,9 @@ describe("GET /collaborator/id/[id] endpoint", () => {
 
   it("should return a collaborator when parameters are valid", async () => {
     // Mock the database response
-    const mockStack = {id: 1, name: "collaborator 1"};
+    const mockCollaborator = {id: 1, name: "collaborator 1"};
 
-    (databaseClient.collaborator.findUnique as unknown as Mock).mockResolvedValue(mockStack);
+    (databaseClient.collaborator.findUnique as unknown as Mock).mockResolvedValue(mockCollaborator);
 
     // Simulate a request
     const url = "https://example.com/api/collaborator/id/1";
@@ -46,7 +46,7 @@ describe("GET /collaborator/id/[id] endpoint", () => {
     expect(response.status).toBe(200);
     const responseBody = await response.json();
 
-    expect(responseBody).toEqual(mockStack);
+    expect(responseBody).toEqual(mockCollaborator);
 
     expect(databaseClient.collaborator.findUnique).toHaveBeenCalled();
   });

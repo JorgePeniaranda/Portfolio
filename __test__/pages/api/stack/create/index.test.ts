@@ -2,21 +2,22 @@ import type {APIContext} from "astro";
 
 import {describe, it, vi, expect, beforeEach, type Mock} from "vitest";
 import {createContext} from "astro/middleware";
+import {TEST_STACK_MOCK} from "__test__/services/stack/stack.mock";
 
 import {databaseClient} from "@/helpers/client/prisma";
-import {PATCH} from "@/pages/api/project/relations/collaborator/delete";
-import {RelationshipsSchema} from "@/schemas/common/relationships";
+import {POST} from "@/pages/api/stack/create";
+import {StackCreateSchema} from "@/schemas/stack/create";
 
 vi.mock("@/helpers/client/prisma", () => ({
   databaseClient: {
-    project: {
-      update: vi.fn(),
+    stack: {
+      create: vi.fn(),
     },
   },
 }));
 
-vi.mock("@/schemas/common/relationships", () => ({
-  RelationshipsSchema: {
+vi.mock("@/schemas/stack/create", () => ({
+  StackCreateSchema: {
     parse: vi.fn(),
   },
 }));
@@ -28,61 +29,65 @@ vi.mock("@/helpers/error/api-handler", () => ({
   },
 }));
 
-describe("GET /project/relations/collaborator/delete endpoint", () => {
-  const input = {idFrom: 1, idTo: 2};
+describe("GET /stack/create endpoint", () => {
+  const input = {
+    ...TEST_STACK_MOCK,
+    updatedAt: TEST_STACK_MOCK.updatedAt.toISOString(),
+    createdAt: TEST_STACK_MOCK.createdAt.toISOString(),
+  };
 
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it("should return a project when parameters are valid", async () => {
+  it("should return a stack when parameters are valid", async () => {
     // Mock the database response
-    const mockProject = {id: 1, name: "project 1"};
+    const mockStack = TEST_STACK_MOCK;
 
-    (databaseClient.project.update as unknown as Mock).mockResolvedValue(mockProject);
-    (RelationshipsSchema.parse as unknown as Mock).mockResolvedValue(input);
+    (databaseClient.stack.create as unknown as Mock).mockResolvedValue(mockStack);
+    (StackCreateSchema.parse as unknown as Mock).mockResolvedValue(input);
 
     // Simulate a request
-    const url = "https://example.com/api/id/project/relations/collaborator/delete";
+    const url = "https://example.com/api/stack/delete";
     const request: APIContext = createContext({
       request: new Request(url, {
-        method: "PATCH",
+        method: "POST",
         body: JSON.stringify(input),
       }),
       defaultLocale: "en",
       locals: {},
     });
 
-    const response = await PATCH(request);
+    const response = await POST(request);
 
-    expect(response.status).toBe(204);
-    expect(databaseClient.project.update).toHaveBeenCalled();
-    expect(RelationshipsSchema.parse).toHaveBeenCalledWith(input);
+    expect(response.status).toBe(201);
+    expect(databaseClient.stack.create).toHaveBeenCalled();
+    expect(StackCreateSchema.parse).toHaveBeenCalledWith(input);
   });
 
   it("should return a 500 error if an exception occurs", async () => {
-    (databaseClient.project.update as unknown as Mock).mockRejectedValue(
+    (databaseClient.stack.create as unknown as Mock).mockRejectedValue(
       new Error("This is a test error"),
     );
-    (RelationshipsSchema.parse as unknown as Mock).mockResolvedValue(input);
+    (StackCreateSchema.parse as unknown as Mock).mockResolvedValue(input);
 
     // Simulate a request
-    const url = "https://example.com/api/id/project/relations/collaborator/delete";
+    const url = "https://example.com/api/stack/delete";
     const request: APIContext = createContext({
       request: new Request(url, {
-        method: "PATCH",
+        method: "POST",
         body: JSON.stringify(input),
       }),
       defaultLocale: "en",
       locals: {},
     });
 
-    const response = await PATCH(request);
+    const response = await POST(request);
 
     expect(response.status).toBe(500);
     const responseBody = await response.json();
 
     expect(responseBody).toEqual({error: "This is a test error"});
-    expect(RelationshipsSchema.parse).toHaveBeenCalledWith(input);
+    expect(StackCreateSchema.parse).toHaveBeenCalledWith(input);
   });
 });

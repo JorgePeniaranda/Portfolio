@@ -40,10 +40,7 @@ describe("GET /stack/relations/project/delete endpoint", () => {
     const mockStack = {id: 1, name: "stack 1"};
 
     (databaseClient.stack.update as unknown as Mock).mockResolvedValue(mockStack);
-    (RelationshipsSchema.parse as unknown as Mock).mockResolvedValue({
-      idFrom: 1,
-      idTo: 2,
-    });
+    (RelationshipsSchema.parse as unknown as Mock).mockResolvedValue(input);
 
     // Simulate a request
     const url = "https://example.com/api/id/stack/relations/project/delete";
@@ -67,10 +64,7 @@ describe("GET /stack/relations/project/delete endpoint", () => {
     (databaseClient.stack.update as unknown as Mock).mockRejectedValue(
       new Error("This is a test error"),
     );
-    (RelationshipsSchema.parse as unknown as Mock).mockResolvedValue({
-      idFrom: 1,
-      idTo: 2,
-    });
+    (RelationshipsSchema.parse as unknown as Mock).mockResolvedValue(input);
 
     // Simulate a request
     const url = "https://example.com/api/id/stack/relations/project/delete";

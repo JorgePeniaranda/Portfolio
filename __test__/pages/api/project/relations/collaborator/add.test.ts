@@ -37,13 +37,10 @@ describe("GET /project/relations/collaborator/add endpoint", () => {
 
   it("should return a project when parameters are valid", async () => {
     // Mock the database response
-    const mockStack = {id: 1, name: "project 1"};
+    const mockProject = {id: 1, name: "project 1"};
 
-    (databaseClient.project.update as unknown as Mock).mockResolvedValue(mockStack);
-    (RelationshipsSchema.parse as unknown as Mock).mockResolvedValue({
-      idFrom: 1,
-      idTo: 2,
-    });
+    (databaseClient.project.update as unknown as Mock).mockResolvedValue(mockProject);
+    (RelationshipsSchema.parse as unknown as Mock).mockResolvedValue(input);
 
     // Simulate a request
     const url = "https://example.com/api/id/project/relations/collaborator/add";
@@ -67,10 +64,7 @@ describe("GET /project/relations/collaborator/add endpoint", () => {
     (databaseClient.project.update as unknown as Mock).mockRejectedValue(
       new Error("This is a test error"),
     );
-    (RelationshipsSchema.parse as unknown as Mock).mockResolvedValue({
-      idFrom: 1,
-      idTo: 2,
-    });
+    (RelationshipsSchema.parse as unknown as Mock).mockResolvedValue(input);
 
     // Simulate a request
     const url = "https://example.com/api/id/project/relations/collaborator/add";

@@ -2,21 +2,22 @@ import type {APIContext} from "astro";
 
 import {describe, it, vi, expect, beforeEach, type Mock} from "vitest";
 import {createContext} from "astro/middleware";
+import {TEST_COLLABORATOR_MOCK} from "__test__/services/collaborator/collaborator.mock";
 
 import {databaseClient} from "@/helpers/client/prisma";
-import {PATCH} from "@/pages/api/collaborator/relations/project/add";
-import {RelationshipsSchema} from "@/schemas/common/relationships";
+import {POST} from "@/pages/api/collaborator/create";
+import {CollaboratorCreateSchema} from "@/schemas/collaborator/create";
 
 vi.mock("@/helpers/client/prisma", () => ({
   databaseClient: {
     collaborator: {
-      update: vi.fn(),
+      create: vi.fn(),
     },
   },
 }));
 
-vi.mock("@/schemas/common/relationships", () => ({
-  RelationshipsSchema: {
+vi.mock("@/schemas/collaborator/create", () => ({
+  CollaboratorCreateSchema: {
     parse: vi.fn(),
   },
 }));
@@ -28,8 +29,12 @@ vi.mock("@/helpers/error/api-handler", () => ({
   },
 }));
 
-describe("GET /collaborator/relations/project/add endpoint", () => {
-  const input = {idFrom: 1, idTo: 2};
+describe("GET /collaborator/create endpoint", () => {
+  const input = {
+    ...TEST_COLLABORATOR_MOCK,
+    updatedAt: TEST_COLLABORATOR_MOCK.updatedAt.toISOString(),
+    createdAt: TEST_COLLABORATOR_MOCK.createdAt.toISOString(),
+  };
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -37,52 +42,52 @@ describe("GET /collaborator/relations/project/add endpoint", () => {
 
   it("should return a collaborator when parameters are valid", async () => {
     // Mock the database response
-    const mockCollaborator = {id: 1, name: "collaborator 1"};
+    const mockCollaborator = TEST_COLLABORATOR_MOCK;
 
-    (databaseClient.collaborator.update as unknown as Mock).mockResolvedValue(mockCollaborator);
-    (RelationshipsSchema.parse as unknown as Mock).mockResolvedValue(input);
+    (databaseClient.collaborator.create as unknown as Mock).mockResolvedValue(mockCollaborator);
+    (CollaboratorCreateSchema.parse as unknown as Mock).mockResolvedValue(input);
 
     // Simulate a request
-    const url = "https://example.com/api/id/collaborator/relations/project/add";
+    const url = "https://example.com/api/collaborator/delete";
     const request: APIContext = createContext({
       request: new Request(url, {
-        method: "PATCH",
+        method: "POST",
         body: JSON.stringify(input),
       }),
       defaultLocale: "en",
       locals: {},
     });
 
-    const response = await PATCH(request);
+    const response = await POST(request);
 
-    expect(response.status).toBe(204);
-    expect(databaseClient.collaborator.update).toHaveBeenCalled();
-    expect(RelationshipsSchema.parse).toHaveBeenCalledWith(input);
+    expect(response.status).toBe(201);
+    expect(databaseClient.collaborator.create).toHaveBeenCalled();
+    expect(CollaboratorCreateSchema.parse).toHaveBeenCalledWith(input);
   });
 
   it("should return a 500 error if an exception occurs", async () => {
-    (databaseClient.collaborator.update as unknown as Mock).mockRejectedValue(
+    (databaseClient.collaborator.create as unknown as Mock).mockRejectedValue(
       new Error("This is a test error"),
     );
-    (RelationshipsSchema.parse as unknown as Mock).mockResolvedValue(input);
+    (CollaboratorCreateSchema.parse as unknown as Mock).mockResolvedValue(input);
 
     // Simulate a request
-    const url = "https://example.com/api/id/collaborator/relations/project/add";
+    const url = "https://example.com/api/collaborator/delete";
     const request: APIContext = createContext({
       request: new Request(url, {
-        method: "PATCH",
+        method: "POST",
         body: JSON.stringify(input),
       }),
       defaultLocale: "en",
       locals: {},
     });
 
-    const response = await PATCH(request);
+    const response = await POST(request);
 
     expect(response.status).toBe(500);
     const responseBody = await response.json();
 
     expect(responseBody).toEqual({error: "This is a test error"});
-    expect(RelationshipsSchema.parse).toHaveBeenCalledWith(input);
+    expect(CollaboratorCreateSchema.parse).toHaveBeenCalledWith(input);
   });
 });

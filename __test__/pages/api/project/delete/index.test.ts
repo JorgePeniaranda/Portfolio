@@ -4,20 +4,13 @@ import {describe, it, vi, expect, beforeEach, type Mock} from "vitest";
 import {createContext} from "astro/middleware";
 
 import {databaseClient} from "@/helpers/client/prisma";
-import {PATCH} from "@/pages/api/project/relations/collaborator/delete";
-import {RelationshipsSchema} from "@/schemas/common/relationships";
+import {POST} from "@/pages/api/project/delete";
 
 vi.mock("@/helpers/client/prisma", () => ({
   databaseClient: {
     project: {
-      update: vi.fn(),
+      deleteMany: vi.fn(),
     },
-  },
-}));
-
-vi.mock("@/schemas/common/relationships", () => ({
-  RelationshipsSchema: {
-    parse: vi.fn(),
   },
 }));
 
@@ -28,8 +21,8 @@ vi.mock("@/helpers/error/api-handler", () => ({
   },
 }));
 
-describe("GET /project/relations/collaborator/delete endpoint", () => {
-  const input = {idFrom: 1, idTo: 2};
+describe("GET /project/delete endpoint", () => {
+  const input = [1, 2, 3];
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -37,52 +30,50 @@ describe("GET /project/relations/collaborator/delete endpoint", () => {
 
   it("should return a project when parameters are valid", async () => {
     // Mock the database response
-    const mockProject = {id: 1, name: "project 1"};
+    const mockProject = {
+      count: input.length,
+    };
 
-    (databaseClient.project.update as unknown as Mock).mockResolvedValue(mockProject);
-    (RelationshipsSchema.parse as unknown as Mock).mockResolvedValue(input);
+    (databaseClient.project.deleteMany as unknown as Mock).mockResolvedValue(mockProject);
 
     // Simulate a request
-    const url = "https://example.com/api/id/project/relations/collaborator/delete";
+    const url = "https://example.com/api/project/delete";
     const request: APIContext = createContext({
       request: new Request(url, {
-        method: "PATCH",
+        method: "POST",
         body: JSON.stringify(input),
       }),
       defaultLocale: "en",
       locals: {},
     });
 
-    const response = await PATCH(request);
+    const response = await POST(request);
 
-    expect(response.status).toBe(204);
-    expect(databaseClient.project.update).toHaveBeenCalled();
-    expect(RelationshipsSchema.parse).toHaveBeenCalledWith(input);
+    expect(response.status).toBe(200);
+    expect(databaseClient.project.deleteMany).toHaveBeenCalled();
   });
 
   it("should return a 500 error if an exception occurs", async () => {
-    (databaseClient.project.update as unknown as Mock).mockRejectedValue(
+    (databaseClient.project.deleteMany as unknown as Mock).mockRejectedValue(
       new Error("This is a test error"),
     );
-    (RelationshipsSchema.parse as unknown as Mock).mockResolvedValue(input);
 
     // Simulate a request
-    const url = "https://example.com/api/id/project/relations/collaborator/delete";
+    const url = "https://example.com/api/project/delete";
     const request: APIContext = createContext({
       request: new Request(url, {
-        method: "PATCH",
+        method: "POST",
         body: JSON.stringify(input),
       }),
       defaultLocale: "en",
       locals: {},
     });
 
-    const response = await PATCH(request);
+    const response = await POST(request);
 
     expect(response.status).toBe(500);
     const responseBody = await response.json();
 
     expect(responseBody).toEqual({error: "This is a test error"});
-    expect(RelationshipsSchema.parse).toHaveBeenCalledWith(input);
   });
 });
