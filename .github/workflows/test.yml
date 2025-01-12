@@ -22,19 +22,15 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '22.13.0' # Change the version according to your project
+          cache: 'npm' # Enable caching for node_modules
 
       # Step 3: Install dependencies
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      # Step 4: Run ESLint
-      - name: Run ESLint
-        run: npm run lint
-
-      # Step 5: Run TypeScript typecheck
-      - name: Run TypeScript typecheck
-        run: npm run typecheck
-
-      # Step 5: Run tests
-      - name: Run tests
-        run: npm run test
+      # Step 4: Run Lint, Typecheck, and Tests
+      - name: Run Lint, Typecheck, and Tests
+        run: |
+          npm run lint
+          npm run typecheck
+          npm run test
