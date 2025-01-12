@@ -42,5 +42,10 @@ export function handleErrorWithToast({
     title,
     description: defaultErrorMessage,
     className: "bg-red-500 text-white",
+    action: isDefined(tryAgain) ? (
+      <ToastAction altText="Reintentar" onClick={tryAgain}>
+        Reintentar
+      </ToastAction>
+    ) : undefined,
   });
 }
