@@ -1,6 +1,6 @@
 import {Prisma, type Collaborator} from "@prisma/client";
-import axios from "axios";
 
+import {apiClient} from "@/helpers/client/axios";
 import {handleServiceError} from "@/helpers/error/service-handler";
 
 /**
@@ -14,7 +14,7 @@ export async function postCollaborator(
   newCollaborator: Prisma.CollaboratorCreateInput,
 ): Promise<Collaborator> {
   try {
-    const {data: response} = await axios.post<Collaborator>(
+    const {data: response} = await apiClient.post<Collaborator>(
       "/api/collaborator/create",
       newCollaborator,
     );

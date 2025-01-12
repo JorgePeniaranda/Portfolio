@@ -1,8 +1,7 @@
 import type {RelationshipsSchema} from "@/schemas/common/relationships";
 import type {Stack} from "@prisma/client";
 
-import axios from "axios";
-
+import {apiClient} from "@/helpers/client/axios";
 import {handleServiceError} from "@/helpers/error/service-handler";
 
 /**
@@ -16,7 +15,7 @@ export async function patchStackRemoveAssociatedProjects(
   relationshipSchema: RelationshipsSchema,
 ): Promise<Stack> {
   try {
-    const {data: response} = await axios.patch<Stack>(
+    const {data: response} = await apiClient.patch<Stack>(
       "/api/stack/relations/project/delete",
       relationshipSchema,
     );

@@ -1,8 +1,8 @@
 import type {DeleteResponse} from "@/types/responses";
 
 import {type Collaborator} from "@prisma/client";
-import axios from "axios";
 
+import {apiClient} from "@/helpers/client/axios";
 import {handleServiceError} from "@/helpers/error/service-handler";
 
 /**
@@ -16,7 +16,7 @@ export async function deleteCollaborator(
   collaboratorIds: Array<Collaborator["id"]>,
 ): Promise<DeleteResponse> {
   try {
-    const {data: response} = await axios.post<DeleteResponse>(
+    const {data: response} = await apiClient.post<DeleteResponse>(
       "/api/collaborator/delete",
       collaboratorIds,
     );

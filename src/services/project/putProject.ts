@@ -1,6 +1,6 @@
 import {Prisma, type Project} from "@prisma/client";
-import axios from "axios";
 
+import {apiClient} from "@/helpers/client/axios";
 import {handleServiceError} from "@/helpers/error/service-handler";
 
 /**
@@ -12,7 +12,10 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  */
 export async function putProject(projectUpdateInput: Prisma.ProjectUpdateInput): Promise<Project> {
   try {
-    const {data: response} = await axios.put<Project>("/api/project/update", projectUpdateInput);
+    const {data: response} = await apiClient.put<Project>(
+      "/api/project/update",
+      projectUpdateInput,
+    );
 
     return response;
   } catch (error) {
