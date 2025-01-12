@@ -4,7 +4,7 @@ import type {ErrorResponse} from "@/types/responses";
 import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
 import {describe, expect, it, vi} from "vitest";
 
-import {TEST_COLLABORATOR_MOCK} from "./collaborator.mock";
+import {TEST_COLLABORATOR_MOCK} from "../../__mock__/collaborator.mock";
 
 import {apiClient} from "@/helpers/client/axios";
 import {getCollaboratorsByAssociatedProjects} from "@/services/collaborator/getCollaboratorsByAssociatedProjects";

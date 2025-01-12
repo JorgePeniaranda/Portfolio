@@ -4,7 +4,7 @@ import type {Project} from "@prisma/client";
 import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
 import {describe, expect, it, vi} from "vitest";
 
-import {TEST_PROJECT_MOCK} from "./project.mock";
+import {TEST_PROJECT_MOCK} from "../../__mock__/project.mock";
 
 import {apiClient} from "@/helpers/client/axios";
 import {getAllProjects} from "@/services/project/getAllProjects";

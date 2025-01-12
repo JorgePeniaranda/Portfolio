@@ -2,7 +2,7 @@ import type {APIContext} from "astro";
 
 import {describe, it, vi, expect, beforeEach, type Mock} from "vitest";
 import {createContext} from "astro/middleware";
-import {TEST_COLLABORATOR_MOCK} from "__test__/services/collaborator/collaborator.mock";
+import {TEST_COLLABORATOR_MOCK} from "__test__/__mock__/collaborator.mock";
 
 import {databaseClient} from "@/helpers/client/prisma";
 import {PUT} from "@/pages/api/collaborator/update";

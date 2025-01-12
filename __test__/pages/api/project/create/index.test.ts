@@ -2,7 +2,7 @@ import type {APIContext} from "astro";
 
 import {describe, it, vi, expect, beforeEach, type Mock} from "vitest";
 import {createContext} from "astro/middleware";
-import {TEST_PROJECT_MOCK} from "__test__/services/project/project.mock";
+import {TEST_PROJECT_MOCK} from "__test__/__mock__/project.mock";
 
 import {databaseClient} from "@/helpers/client/prisma";
 import {POST} from "@/pages/api/project/create";

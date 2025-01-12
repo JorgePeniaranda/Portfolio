@@ -4,7 +4,7 @@ import type {Stack} from "@prisma/client";
 import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
 import {describe, expect, it, vi} from "vitest";
 
-import {TEST_STACK_MOCK} from "./stack.mock";
+import {TEST_STACK_MOCK} from "../../__mock__/stack.mock";
 
 import {apiClient} from "@/helpers/client/axios";
 import {getStackByKey} from "@/services/stack/getStackByKey";
