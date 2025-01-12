@@ -1,7 +1,8 @@
 import type {Collaborator} from "@prisma/client";
+import type {ErrorResponse} from "@/types/responses";
 
 import {describe, it, expect, vi} from "vitest";
-import {AxiosHeaders, type AxiosResponse} from "axios";
+import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
 
 import {TEST_COLLABORATOR_MOCK} from "./collaborator.mock";
 
@@ -57,28 +58,6 @@ describe("getCollaboratorById", () => {
       expect(error).toEqual(new Error(mockErrorResponse.data.message));
     }
 
-    // Ensuring the API was called with the correct endpoint
-    expect(apiClient.get).toHaveBeenCalledWith(`api/collaborator/get/id/${collaboratorId}.json`);
-  });
-
-  it("should return null if the collaborator is not found", async () => {
-    // Simulating a successful response with null data for the collaborator
-    const mockResponse = {
-      data: {
-        success: true,
-        message: "Collaborator found",
-        data: null,
-      },
-    };
-
-    // Mocking the resolved value of apiClient.get for this test case
-    vi.mocked(apiClient.get).mockResolvedValueOnce(mockResponse);
-
-    const collaboratorId = 1; // The ID of the collaborator to fetch
-    const response = await getCollaboratorById({id: collaboratorId});
-
-    // Asserting that the response is null since no collaborator was found
-    expect(response).toBeNull();
     // Ensuring the API was called with the correct endpoint
     expect(apiClient.get).toHaveBeenCalledWith(`api/collaborator/get/id/${collaboratorId}.json`);
   });

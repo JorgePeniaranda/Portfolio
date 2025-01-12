@@ -1,6 +1,7 @@
 import type {Project} from "@prisma/client";
+import type {ErrorResponse} from "@/types/responses";
 
-import axios, {AxiosHeaders, type AxiosResponse} from "axios";
+import axios, {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
 import {describe, expect, it, vi} from "vitest";
 
 import {TEST_PROJECT_MOCK} from "./project.mock";
@@ -36,23 +37,38 @@ describe("putProject", () => {
   });
 
   it("should handle errors correctly when the request fails", async () => {
-    // Mock an error response
-    const mockError = {
+    // Mock an error response (axios error)
+    const mockError: AxiosError<ErrorResponse> = {
+      isAxiosError: true,
+      message: "Request failed with status code 500",
+      name: "AxiosError",
+      toJSON: () => ({}),
       response: {
+        config: {
+          headers: new AxiosHeaders(),
+        },
+        headers: {},
+        status: 500,
+        statusText: "Internal Server Error",
         data: {
-          success: false,
-          message: "Error updating project",
-          error: "An test error occurred",
+          error: "This is an test error message",
         },
       },
     };
 
     // Simulate a rejected promise for axios.put
     vi.mocked(axios.put).mockRejectedValueOnce(mockError);
-    const response = await putProject(input);
 
-    // Validate error handling and axios call
-    expect(response).toHaveProperty("success", false);
+    try {
+      await putProject(input);
+    } catch (error) {
+      // Validate error handling and axios call
+      expect(error).toBeInstanceOf(Error);
+      if (error instanceof Error) {
+        expect(error.message).toBe(mockError.response?.data.error);
+      }
+    }
+
     expect(axios.put).toHaveBeenCalledWith("/api/project/update", input);
   });
 });

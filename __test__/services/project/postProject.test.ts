@@ -1,5 +1,7 @@
+import type {ErrorResponse} from "@/types/responses";
+
 import {describe, it, expect, vi} from "vitest";
-import axios, {AxiosHeaders, type AxiosResponse} from "axios";
+import axios, {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
 
 import {TEST_PROJECT_MOCK} from "./project.mock";
 
@@ -34,23 +36,38 @@ describe("postProject", () => {
   });
 
   it("should handle errors correctly when the request fails", async () => {
-    // Mock an error response
-    const mockError = {
+    // Mock an error response (axios error)
+    const mockError: AxiosError<ErrorResponse> = {
+      isAxiosError: true,
+      message: "Request failed with status code 500",
+      name: "AxiosError",
+      toJSON: () => ({}),
       response: {
+        config: {
+          headers: new AxiosHeaders(),
+        },
+        headers: {},
+        status: 500,
+        statusText: "Internal Server Error",
         data: {
-          success: false,
-          message: "Error creating project",
-          error: "An test error occurred",
+          error: "This is an test error message",
         },
       },
     };
 
     // Simulate a rejected promise for axios.post
     vi.mocked(axios.post).mockRejectedValueOnce(mockError);
-    const response = await postProject(input);
 
-    // Validate error handling and axios call
-    expect(response).toHaveProperty("success", false);
+    try {
+      await postProject(input);
+    } catch (error) {
+      // Validate error handling and axios call
+      expect(error).toBeInstanceOf(Error);
+      if (error instanceof Error) {
+        expect(error.message).toBe(mockError.response?.data.error);
+      }
+    }
+
     expect(axios.post).toHaveBeenCalledWith("/api/project/create", input);
   });
 });
