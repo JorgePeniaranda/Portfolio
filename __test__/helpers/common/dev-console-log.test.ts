@@ -62,9 +62,18 @@ describe("devConsoleLog", () => {
     process.env.NODE_ENV = "test";
 
     devConsoleLog({input: ["This should not be logged in test"], type: "log"});
-    devConsoleLog({input: ["This should not be logged in test"], type: "info"});
-    devConsoleLog({input: ["This should not be logged in test"], type: "warn"});
-    devConsoleLog({input: ["This should not be logged in test"], type: "error"});
+    devConsoleLog({
+      input: ["This should not be logged in test"],
+      type: "info",
+    });
+    devConsoleLog({
+      input: ["This should not be logged in test"],
+      type: "warn",
+    });
+    devConsoleLog({
+      input: ["This should not be logged in test"],
+      type: "error",
+    });
 
     expect(logSpy).not.toHaveBeenCalled();
     expect(infoSpy).not.toHaveBeenCalled();
