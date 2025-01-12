@@ -1,1 +1,0 @@
-function i(o,i=!0){if("string"!=typeof o||""===o.trim())throw new Error("Invalid URL provided for redirection.");if(typeof window<"u"&&window.location){if(!/^\/|http(s)?:\/\//.test(o))throw new Error("URL must be absolute or relative.");i?window.location.assign(o):window.location.replace(o)}}export{i as s};
