@@ -26,8 +26,9 @@ import {
 } from "@/components/ui/select";
 import {isDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
-import {patchAddRelationWithProjectFromStack} from "@/services/stack/patchAddRelationWithProjectFromStack";
-import {patchDeleteRelationWithProjectFromStack} from "@/services/stack/patchDeleteRelationWithProjectFromStack";
+import {patchStackAddAssociatedProjects} from "@/services/stack/patchStackAddAssociatedProjects";
+import {patchStackRemoveAssociatedProjects} from "@/services/stack/patchStackRemoveAssociatedProjects";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 export function UpdateProjectsRelatedToStack({
   currentStack,
@@ -55,71 +56,65 @@ export function UpdateProjectsRelatedToStack({
   });
 
   const onAddProject = async (values: RelationshipsSchema) => {
-    // Send request to associate the project to the stack
-    const response = await patchAddRelationWithProjectFromStack({
-      idFrom: Number(values.idFrom),
-      idTo: Number(values.idTo),
-    });
-
-    // If the request was unsuccessful, show an error toast and exit
-    if (response.success === false) {
-      toast({
-        title: "Error al relacionar proyecto con el stack",
-        description: response.message,
-        className: "bg-red-500 text-white",
+    try {
+      // Send request to associate the project to the stack
+      await patchStackAddAssociatedProjects({
+        idFrom: Number(values.idFrom),
+        idTo: Number(values.idTo),
       });
 
-      return;
-    }
+      // If the request was successful, reset the form and show a success toast
+      form.reset();
+      toast({
+        title: "Proyecto relacionado con el stack",
+        description: "El proyecto ha sido relacionado con el stack.",
+        className: "bg-green-500",
+      });
 
-    // If the request was successful, reset the form and show a success toast
-    form.reset();
-    toast({
-      title: "Proyecto relacionado con el stack",
-      description: response.message,
-      className: "bg-green-500",
-    });
+      // Update local state for associated and available projects
+      const findProject = availableProject.find((project) => project.id === Number(values.idTo));
 
-    // Update local state for associated and available projects
-    const findProject = availableProject.find((project) => project.id === Number(values.idTo));
-
-    if (isDefined(findProject)) {
-      setAssociatedProjects((prev) => [...prev, findProject]);
-      setAvailableProject((prev) => prev.filter((project) => project.id !== Number(values.idTo)));
+      if (isDefined(findProject)) {
+        setAssociatedProjects((prev) => [...prev, findProject]);
+        setAvailableProject((prev) => prev.filter((project) => project.id !== Number(values.idTo)));
+      }
+    } catch (error) {
+      handleErrorWithToast({
+        error,
+        title: "No se pudo relacionar el proyecto",
+        defaultErrorMessage: "Ocurrió un error al intentar relacionar el proyecto con el stack.",
+      });
     }
   };
 
   const onRemoveProject = async (idProject: number) => {
-    // Send request to dissociate the project with the stack
-    const response = await patchDeleteRelationWithProjectFromStack({
-      idFrom: currentStack.id,
-      idTo: idProject,
-    });
-
-    // If the request was unsuccessful, show an error toast and exit
-    if (response.success === false) {
-      toast({
-        title: "Error al eliminar proyecto",
-        description: response.message,
-        className: "bg-red-500 text-white",
+    try {
+      // Send request to dissociate the project with the stack
+      await patchStackRemoveAssociatedProjects({
+        idFrom: currentStack.id,
+        idTo: idProject,
       });
 
-      return;
-    }
+      // If the request was successful, show a success toast
+      toast({
+        title: "Proyecto eliminado",
+        description: "El proyecto ha sido eliminado del stack.",
+        className: "bg-green-500",
+      });
 
-    // If the request was successful, show a success toast
-    toast({
-      title: "Proyecto eliminado",
-      description: response.message,
-      className: "bg-green-500",
-    });
+      // Update local state for associated and available projects
+      const findProject = associatedProjects.find((project) => project.id === idProject);
 
-    // Update local state for associated and available projects
-    const findProject = associatedProjects.find((project) => project.id === idProject);
-
-    if (isDefined(findProject)) {
-      setAvailableProject((prev) => [...prev, findProject]);
-      setAssociatedProjects((prev) => prev.filter((project) => project.id !== idProject));
+      if (isDefined(findProject)) {
+        setAvailableProject((prev) => [...prev, findProject]);
+        setAssociatedProjects((prev) => prev.filter((project) => project.id !== idProject));
+      }
+    } catch (error) {
+      handleErrorWithToast({
+        error,
+        title: "No se pudo eliminar el proyecto",
+        defaultErrorMessage: "Ocurrió un error al intentar eliminar el proyecto del stack.",
+      });
     }
   };
 

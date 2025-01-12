@@ -1,24 +1,31 @@
-import type {ApiResponse, DeleteResponse} from "@/types/responses";
+import type {DeleteResponse} from "@/types/responses";
 
 import {type Collaborator} from "@prisma/client";
 import axios from "axios";
 
-import {serviceErrorHandler} from "@/helpers/error/service-handler";
+import {handleServiceError} from "@/helpers/error/service-handler";
 
+/**
+ * Deletes a list of collaborators from the database.
+ *
+ * @param {Array<Collaborator["id"]>} collaboratorIds - An array of collaborator IDs to delete.
+ * @returns {Promise<DeleteResponse>} The number of items deleted.
+ * @throws {Error} A generic error message if the operation fails.
+ */
 export async function deleteCollaborator(
-  data: Array<Collaborator["id"]>,
-): Promise<ApiResponse<DeleteResponse>> {
+  collaboratorIds: Array<Collaborator["id"]>,
+): Promise<DeleteResponse> {
   try {
-    const {data: response} = await axios.post<ApiResponse<DeleteResponse>>(
+    const {data: response} = await axios.post<DeleteResponse>(
       "/api/collaborator/delete",
-      data,
+      collaboratorIds,
     );
 
     return response;
   } catch (error) {
-    return {
-      success: false,
-      message: serviceErrorHandler(error),
-    };
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo eliminar el colaborador.",
+    });
   }
 }

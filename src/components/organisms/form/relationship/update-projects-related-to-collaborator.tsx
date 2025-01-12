@@ -26,8 +26,9 @@ import {
 } from "@/components/ui/select";
 import {isDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
-import {patchStackAddAssociatedProjects} from "@/services/collaborator/patchStackAddAssociatedProjects";
-import {patchStackRemoveAssociatedProjects} from "@/services/collaborator/patchStackRemoveAssociatedProjects";
+import {patchCollaboratorAddAssociatedProjects} from "@/services/collaborator/patchCollaboratorAddAssociatedProjects";
+import {patchCollaboratorRemoveAssociatedProjects} from "@/services/collaborator/patchCollaboratorRemoveAssociatedProjects";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 export function UpdateProjectsRelatedToCollaborator({
   currentCollaborator,
@@ -55,71 +56,66 @@ export function UpdateProjectsRelatedToCollaborator({
   });
 
   const onAddProject = async (values: RelationshipsSchema) => {
-    // Send request to associate the project to the collaborator
-    const response = await patchStackAddAssociatedProjects({
-      idFrom: Number(values.idFrom),
-      idTo: Number(values.idTo),
-    });
-
-    // If the request was unsuccessful, show an error toast and exit
-    if (response.success === false) {
-      toast({
-        title: "Error al relacionar proyecto con el colaborador",
-        description: response.message,
-        className: "bg-red-500 text-white",
+    try {
+      // Send request to associate the project to the collaborator
+      await patchCollaboratorAddAssociatedProjects({
+        idFrom: Number(values.idFrom),
+        idTo: Number(values.idTo),
       });
 
-      return;
-    }
+      // If the request was successful, reset the form and show a success toast
+      form.reset();
+      toast({
+        title: "Proyecto relacionado con el colaborador",
+        description: "El proyecto ha sido relacionado con el colaborador exitosamente.",
+        className: "bg-green-500",
+      });
 
-    // If the request was successful, reset the form and show a success toast
-    form.reset();
-    toast({
-      title: "Proyecto relacionado con el colaborador",
-      description: response.message,
-      className: "bg-green-500",
-    });
+      // Update local state for associated and available projects
+      const findProject = availableProject.find((project) => project.id === Number(values.idTo));
 
-    // Update local state for associated and available projects
-    const findProject = availableProject.find((project) => project.id === Number(values.idTo));
-
-    if (isDefined(findProject)) {
-      setAssociatedProjects((prev) => [...prev, findProject]);
-      setAvailableProject((prev) => prev.filter((project) => project.id !== Number(values.idTo)));
+      if (isDefined(findProject)) {
+        setAssociatedProjects((prev) => [...prev, findProject]);
+        setAvailableProject((prev) => prev.filter((project) => project.id !== Number(values.idTo)));
+      }
+    } catch (error) {
+      handleErrorWithToast({
+        error,
+        title: "No se pudo relacionar el proyecto con el colaborador",
+        defaultErrorMessage:
+          "Ocurrió un error al intentar relacionar el proyecto con el colaborador.",
+      });
     }
   };
 
   const onRemoveProject = async (idProject: number) => {
-    // Send request to dissociate the project from the collaborator
-    const response = await patchStackRemoveAssociatedProjects({
-      idFrom: currentCollaborator.id,
-      idTo: idProject,
-    });
-
-    // If the request was unsuccessful, show an error toast and exit
-    if (response.success === false) {
-      toast({
-        title: "Error al eliminar proyecto",
-        description: response.message,
-        className: "bg-red-500 text-white",
+    try {
+      // Send request to dissociate the project from the collaborator
+      await patchCollaboratorRemoveAssociatedProjects({
+        idFrom: currentCollaborator.id,
+        idTo: idProject,
       });
 
-      return;
-    }
+      // If the request was successful, show a success toast
+      toast({
+        title: "Proyecto eliminado",
+        description: "El proyecto ha sido eliminado del colaborador exitosamente.",
+        className: "bg-green-500",
+      });
 
-    // If the request was successful, show a success toast
-    toast({
-      title: "Proyecto eliminado",
-      description: response.message,
-      className: "bg-green-500",
-    });
+      // Update local state for associated and available projects
+      const findProject = associatedProjects.find((project) => project.id === idProject);
 
-    // Update local state for associated and available projects
-    const findProject = associatedProjects.find((project) => project.id === idProject);
-
-    if (isDefined(findProject)) {
-      setAssociatedProjects((prev) => prev.filter((project) => project.id !== idProject));
-      setAvailableProject((prev) => [...prev, findProject]);
+      if (isDefined(findProject)) {
+        setAssociatedProjects((prev) => prev.filter((project) => project.id !== idProject));
+        setAvailableProject((prev) => [...prev, findProject]);
+      }
+    } catch (error) {
+      handleErrorWithToast({
+        error,
+        title: "No se pudo eliminar el proyecto del colaborador",
+        defaultErrorMessage: "Ocurrió un error al intentar eliminar el proyecto del colaborador.",
+      });
     }
   };
 

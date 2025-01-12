@@ -1,26 +1,46 @@
 import axios from "axios";
 
-import {isDefined} from "../guards/is-defined";
+import {isDefined, isNotDefined} from "../guards/is-defined";
+import {isErrorResponse} from "../guards/is-error-response";
+import {devConsoleLog} from "../common/dev-console-log";
 
 /**
- * Handles errors from service calls and returns a corresponding error message.
- * It checks if the error is an Axios error and if it has a response with a status. If so, it returns the error message from the response.
- * If the error is a generic JavaScript `Error` instance, it returns the error's message.
- * Otherwise, it returns a default error message indicating an unexpected error occurred.
+ * Handle an error from a service.
  *
- * @param {unknown} error - The error object to handle, which can be an Axios error, a generic Error, or any other type.
- * @returns {string} A string message describing the error, either from the Axios response, the error object, or a default message.
+ * @param error - The error to handle.
+ * @param defaultErrorMessage - The default error message to use if the error does not contain one.
+ * @returns An error with the message to display.
  */
-export function serviceErrorHandler(error: unknown): string {
-  if (axios.isAxiosError(error)) {
-    if (isDefined(error.response?.status)) {
-      return error.response.data.message;
-    }
+export function handleServiceError({
+  error,
+  defaultErrorMessage = "Ha ocurrido un error.",
+}: {
+  error: unknown;
+  defaultErrorMessage?: string;
+}): Error {
+  devConsoleLog.log("Error in service: ", error);
+
+  if (!axios.isAxiosError(error)) {
+    return new Error(defaultErrorMessage);
   }
 
-  if (error instanceof Error) {
-    return error.message;
+  if (isNotDefined(error.response?.data)) {
+    return new Error(defaultErrorMessage);
   }
 
-  return "Ha ocurrido un error inesperado";
+  const {data: responseData} = error.response;
+
+  if (!isErrorResponse(responseData)) {
+    return new Error(defaultErrorMessage);
+  }
+
+  if (isDefined(responseData.error)) {
+    return new Error(responseData.error);
+  }
+
+  if (isDefined(responseData.errors?.length) && responseData.errors?.length > 0) {
+    return new Error(responseData.errors.join("\n"));
+  }
+
+  return new Error(defaultErrorMessage);
 }

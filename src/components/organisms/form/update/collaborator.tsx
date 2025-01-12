@@ -10,6 +10,7 @@ import {Input} from "@/components/ui/input";
 import {useToast} from "@/hooks/use-toast";
 import {CollaboratorUpdateSchema} from "@/schemas/collaborator/update";
 import {putCollaborator} from "@/services/collaborator/putCollaborator";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 export function UpdateCollaboratorForm({
   currentCollaborator,
@@ -27,26 +28,23 @@ export function UpdateCollaboratorForm({
   });
 
   const onSubmit = async (values: CollaboratorUpdateSchema) => {
-    // Send request to update the collaborator
-    const response = await putCollaborator(values);
+    try {
+      // Send request to update the collaborator
+      await putCollaborator(values);
 
-    // If the request was unsuccessful, show an error toast and exit
-    if (response.success === false) {
+      // If the request was successful, show a success toast
       toast({
-        title: "Error al actualizar colaborador",
-        description: response.message,
-        className: "bg-red-500 text-white",
+        title: "Colaborador actualizado",
+        description: "El colaborador ha sido actualizado exitosamente.",
+        className: "bg-green-500",
       });
-
-      return;
+    } catch (error) {
+      handleErrorWithToast({
+        error,
+        title: "No se pudo actualizar el Colaborador",
+        defaultErrorMessage: "Ha ocurrido un error al intentar actualizar el Colaborador.",
+      });
     }
-
-    // If the request was successful, show a success toast
-    toast({
-      title: "Colaborador actualizado",
-      description: response.message,
-      className: "bg-green-500",
-    });
   };
 
   return (

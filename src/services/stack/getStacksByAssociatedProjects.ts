@@ -1,8 +1,17 @@
-import type {ApiResponse, PaginationRequest} from "@/types/responses";
+import type {PaginationRequest} from "@/types/responses";
 import type {Stack} from "@prisma/client";
 
 import {apiClient} from "@/helpers/client/axios";
+import {handleServiceError} from "@/helpers/error/service-handler";
 
+/**
+ * Get stacks by associated projects.
+ *
+ * @param idProject - The project ID
+ * @param pagination - Pagination options
+ * @returns A list of stacks
+ * @throws An error if the stacks could not be retrieved
+ */
 export async function getStacksByAssociatedProjects({
   idProject,
   pagination,
@@ -10,16 +19,19 @@ export async function getStacksByAssociatedProjects({
   idProject: Stack["id"];
   pagination?: PaginationRequest;
 }): Promise<Stack[]> {
-  const {data: response} = await apiClient.get<ApiResponse<Array<Stack>>>(
-    `api/stack/get/related/project/${idProject}.json`,
-    {
-      params: pagination,
-    },
-  );
+  try {
+    const {data: response} = await apiClient.get<Stack[]>(
+      `api/stack/get/related/project/${idProject}.json`,
+      {
+        params: pagination,
+      },
+    );
 
-  if (response.success === false) {
-    throw new Error(response.message);
+    return response ?? [];
+  } catch (error) {
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo obtener la lista de stacks.",
+    });
   }
-
-  return response?.data ?? [];
 }

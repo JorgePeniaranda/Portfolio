@@ -26,17 +26,11 @@ import {ENV} from "@/constants/env";
 import {isDefined, isNotDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {deleteCollaborator} from "@/services/collaborator/deleteCollaborator";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 //#region Column Definitions
 const columns: Array<ColumnDef<Collaborator>> = [
   selectionColumnDef<Collaborator>(),
-  {
-    id: "id",
-    accessorKey: "id",
-    header({column}) {
-      return <DataTableColumnHeader column={column} title="ID" />;
-    },
-  },
   {
     id: "nickname",
     accessorKey: "nickname",
@@ -119,30 +113,27 @@ function TableHeaderComponent({table}: {table: Table<Collaborator>}) {
   }, [selectedRowModel]);
 
   const handleDelete = async () => {
-    // Send request to delete the collaborator
-    const response = await deleteCollaborator(rows.map((row) => row.original.id));
+    try {
+      // Send request to delete the collaborator
+      await deleteCollaborator(rows.map((row) => row.original.id));
 
-    // If the request was unsuccessful, show an error toast and exit
-    if (response.success === false) {
+      // If the request was successful, show a success toast
       toast({
-        title: "Error al eliminar colaboradores",
-        description: "No se pudieron eliminar los colaboradores seleccionados.",
-        className: "bg-red-500 text-white",
+        title: "Colaboradores eliminados",
+        description: "Los colaboradores seleccionados se han eliminaron correctamente.",
+        className: "bg-green-500",
       });
 
-      return;
-    }
-
-    // If the request was successful, show a success toast
-    toast({
-      title: "Colaboradores eliminados",
-      description: "Los colaboradores seleccionados se eliminaron correctamente.",
-      className: "bg-green-500",
-    });
-
-    // Remove the deleted collaborators from the table
-    if (isDefined(table.options.meta?.deleteRows)) {
-      table.options.meta.deleteRows(rows.map((row) => row.index));
+      // Remove the deleted collaborators from the table
+      if (isDefined(table.options.meta?.deleteRows)) {
+        table.options.meta.deleteRows(rows.map((row) => row.index));
+      }
+    } catch (error) {
+      handleErrorWithToast({
+        error,
+        title: "Error al eliminar colaboradores",
+        defaultErrorMessage: "Ha ocurrido un error al intentar eliminar los colaboradores.",
+      });
     }
   };
 

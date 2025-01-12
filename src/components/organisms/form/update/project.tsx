@@ -25,6 +25,7 @@ import {cn} from "@/helpers/common/classnames";
 import {useToast} from "@/hooks/use-toast";
 import {ProjectUpdateSchema} from "@/schemas/project/update";
 import {putProject} from "@/services/project/putProject";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 export function UpdateProjectForm({
   currentProject,
@@ -42,26 +43,23 @@ export function UpdateProjectForm({
   });
 
   const onSubmit = async (values: ProjectUpdateSchema) => {
-    // Send request to update the project
-    const response = await putProject(values);
+    try {
+      // Send request to update the project
+      await putProject(values);
 
-    // If the request was unsuccessful, show an error toast and exit
-    if (response.success === false) {
+      // If the request was successful, show a success toast
       toast({
-        title: "Error al crear proyecto",
-        description: response.message,
-        className: "bg-red-500 text-white",
+        title: "Proyecto creado",
+        description: "El proyecto ha sido creado exitosamente.",
+        className: "bg-green-500",
       });
-
-      return;
+    } catch (error) {
+      handleErrorWithToast({
+        error,
+        title: "No se pudo actualizar el proyecto",
+        defaultErrorMessage: "Ha ocurrido un error al intentar actualizar el proyecto.",
+      });
     }
-
-    // If the request was successful, show a success toast
-    toast({
-      title: "Proyecto creado",
-      description: response.message,
-      className: "bg-green-500",
-    });
   };
 
   return (

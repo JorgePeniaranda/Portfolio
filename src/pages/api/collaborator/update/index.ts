@@ -1,8 +1,8 @@
 import type {APIRoute} from "astro";
 
-import {CollaboratorUpdateSchema} from "@/schemas/collaborator/update";
 import {databaseClient} from "@/helpers/client/prisma";
-import {RequestHandler} from "@/helpers/common/request-handler";
+import {handleApiError} from "@/helpers/error/api-handler";
+import {CollaboratorUpdateSchema} from "@/schemas/collaborator/update";
 
 /**
  * PUT handler to update an existing collaborator.
@@ -10,23 +10,18 @@ import {RequestHandler} from "@/helpers/common/request-handler";
  * - Validates it using the `CollaboratorUpdateSchema`.
  * - Updates the collaborator in the database.
  */
-export const PUT: APIRoute = ({request}) => {
-  return RequestHandler(
-    async () => {
-      const body = await request.json();
-      const validationResult = CollaboratorUpdateSchema.parse(body);
+export const PUT: APIRoute = async ({request}) => {
+  try {
+    const body = await request.json();
+    const validationResult = CollaboratorUpdateSchema.parse(body);
 
-      const response = await databaseClient.collaborator.update({
-        data: validationResult,
-        where: {id: validationResult.id},
-      });
+    const updatedCollaborator = await databaseClient.collaborator.update({
+      data: validationResult,
+      where: {id: validationResult.id},
+    });
 
-      return {
-        success: true,
-        message: "Collaborator updated successfully",
-        data: response,
-      };
-    },
-    {successStatusCode: 200},
-  );
+    return Response.json(updatedCollaborator, {status: 200});
+  } catch (error) {
+    return handleApiError(error);
+  }
 };

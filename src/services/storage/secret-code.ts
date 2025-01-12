@@ -22,11 +22,8 @@ export interface ISecretCodeStoreActions {
 export const useSecretCodeStore = create<ISecretCodeStoreState & ISecretCodeStoreActions>()(
   persist(
     (set, get) => ({
-      /** Initial value of the secret code taken from environment variables. */
       secretCode: ENV.secret_code,
-      /** Starts with the first index unlocked. */
-      unlockedNumbers: [0],
-      /** Initially set to false until all numbers are unlocked. */
+      unlockedNumbers: [0], // Start with the first number unlocked.
       isComplete: false,
 
       /**
@@ -79,16 +76,13 @@ export const useSecretCodeStore = create<ISecretCodeStoreState & ISecretCodeStor
         return newUnlockedNumbers.length === ENV.secret_code.length;
       },
 
-      /**
-       * Resets the secret code to its initial state.
-       */
       resetSecretCode: () => {
         set({unlockedNumbers: [0], isComplete: false});
       },
     }),
     {
-      name: SECRET_CODE_STORE_KEY, // Persist the store's state under this key.
-      storage: createJSONStorage(() => sessionStorage), // Use sessionStorage for persistence.
+      name: SECRET_CODE_STORE_KEY,
+      storage: createJSONStorage(() => sessionStorage),
     },
   ),
 );

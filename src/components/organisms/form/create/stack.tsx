@@ -20,6 +20,7 @@ import {isDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {StackCreateDefaultValues, StackCreateSchema} from "@/schemas/stack/create";
 import {postStack} from "@/services/stack/postStack";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) {
   const {toast} = useToast();
@@ -31,31 +32,28 @@ export function CreateStackForm({disableForm = false}: {disableForm?: boolean}) 
   });
 
   const onSubmit = async (values: StackCreateSchema) => {
-    // Send request to create a stack
-    const response = await postStack(values);
+    try {
+      // Send request to create a stack
+      const response = await postStack(values);
 
-    // If the request was unsuccessful, show an error toast and exit
-    if (response.success === false) {
+      // If the request was successful, show a success toast
+      form.reset();
       toast({
-        title: "Error al crear stack",
-        description: response.message,
-        className: "bg-red-500 text-white",
+        title: "Stack creado",
+        description: "El stack ha sido creado exitosamente.",
+        className: "bg-green-500",
       });
 
-      return;
-    }
-
-    // If the request was successful, show a success toast
-    form.reset();
-    toast({
-      title: "Stack creado",
-      description: response.message,
-      className: "bg-green-500",
-    });
-
-    // Redirect to the stack view
-    if (isDefined(response?.data?.id)) {
-      safeRedirect(`/vault/views/stack/${response.data.id}`);
+      // Redirect to the stack view
+      if (isDefined(response?.id)) {
+        safeRedirect(`/vault/views/stack/${response.id}`);
+      }
+    } catch (error) {
+      handleErrorWithToast({
+        error,
+        title: "No se pudo crear el stack",
+        defaultErrorMessage: "Ha ocurrido un error al intentar crear el stack.",
+      });
     }
   };
 

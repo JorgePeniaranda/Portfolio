@@ -1,24 +1,29 @@
-import type {ApiResponse} from "@/types/responses";
-
 import {Prisma, type Collaborator} from "@prisma/client";
 import axios from "axios";
 
-import {serviceErrorHandler} from "@/helpers/error/service-handler";
+import {handleServiceError} from "@/helpers/error/service-handler";
 
+/**
+ * Create a new collaborator.
+ *
+ * @param newCollaborator - The collaborator to create.
+ * @returns The created collaborator.
+ * @throws An error if the operation fails.
+ */
 export async function postCollaborator(
-  data: Prisma.CollaboratorCreateInput,
-): Promise<ApiResponse<Collaborator>> {
+  newCollaborator: Prisma.CollaboratorCreateInput,
+): Promise<Collaborator> {
   try {
-    const {data: response} = await axios.post<ApiResponse<Collaborator>>(
+    const {data: response} = await axios.post<Collaborator>(
       "/api/collaborator/create",
-      data,
+      newCollaborator,
     );
 
     return response;
   } catch (error) {
-    return {
-      success: false,
-      message: serviceErrorHandler(error),
-    };
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo crear el colaborador.",
+    });
   }
 }

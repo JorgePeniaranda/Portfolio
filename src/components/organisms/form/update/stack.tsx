@@ -18,6 +18,7 @@ import {STACK_CATEGORY_TRANSCRIPTIONS, STACK_TYPE_TRANSCRIPTIONS} from "@/consta
 import {useToast} from "@/hooks/use-toast";
 import {StackUpdateSchema} from "@/schemas/stack/update";
 import {putStack} from "@/services/stack/putStack";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 export function UpdateStackForm({
   currentStack,
@@ -35,24 +36,23 @@ export function UpdateStackForm({
   });
 
   const onSubmit = async (values: StackUpdateSchema) => {
-    // Send request to update the stack
-    const response = await putStack(values);
+    try {
+      // Send request to update the stack
+      await putStack(values);
 
-    // If the request was unsuccessful, show an error toast and exit
-    if (response.success === false) {
+      // If the request was successful, show a success toast
       toast({
-        title: "Error al actualizar stack",
-        description: response.message,
-        className: "bg-red-500 text-white",
+        title: "Stack actualizado",
+        description: "El stack ha sido actualizado exitosamente.",
+        className: "bg-green-500",
+      });
+    } catch (error) {
+      handleErrorWithToast({
+        error,
+        title: "No se pudo actualizar el stack",
+        defaultErrorMessage: "Ha ocurrido un error al intentar actualizar el stack.",
       });
     }
-
-    // If the request was successful, show a success toast
-    toast({
-      title: "Stack actualizado",
-      description: response.message,
-      className: "bg-green-500",
-    });
   };
 
   return (

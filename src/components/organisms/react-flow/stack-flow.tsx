@@ -152,12 +152,7 @@ export function StackFlow({
         StackWithIconNode: StackWithDrawerNode,
       }}
       nodes={initialNodes}
-      onNodeClick={() =>
-        devConsoleLog({
-          message: `Node clicked`,
-          type: "log",
-        })
-      }
+      onNodeClick={() => devConsoleLog.log("Node clicked")}
     >
       <MiniMap />
       <Controls />

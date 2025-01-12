@@ -20,9 +20,13 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# lock files
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
 
 # typescript build info
 tsconfig.tsbuildinfo
+
+# test coverage
+coverage/

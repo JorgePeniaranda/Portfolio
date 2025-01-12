@@ -1,8 +1,8 @@
 import type {APIRoute} from "astro";
 
-import {StackUpdateSchema} from "@/schemas/stack/update";
 import {databaseClient} from "@/helpers/client/prisma";
-import {RequestHandler} from "@/helpers/common/request-handler";
+import {handleApiError} from "@/helpers/error/api-handler";
+import {StackUpdateSchema} from "@/schemas/stack/update";
 
 /**
  * PUT handler to update an existing stack.
@@ -10,23 +10,18 @@ import {RequestHandler} from "@/helpers/common/request-handler";
  * - Validates it using the `StackUpdateSchema`.
  * - Updates the stack in the database.
  */
-export const PUT: APIRoute = ({request}) => {
-  return RequestHandler(
-    async () => {
-      const body = await request.json();
-      const validationResult = StackUpdateSchema.parse(body);
+export const PUT: APIRoute = async ({request}) => {
+  try {
+    const body = await request.json();
+    const validationResult = StackUpdateSchema.parse(body);
 
-      const response = await databaseClient.stack.update({
-        data: validationResult,
-        where: {id: validationResult.id},
-      });
+    const updatedStack = await databaseClient.stack.update({
+      data: validationResult,
+      where: {id: validationResult.id},
+    });
 
-      return {
-        success: true,
-        message: "Stack updated successfully",
-        data: response,
-      };
-    },
-    {successStatusCode: 200},
-  );
+    return Response.json(updatedStack, {status: 200});
+  } catch (error) {
+    return handleApiError(error);
+  }
 };

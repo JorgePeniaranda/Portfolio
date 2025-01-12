@@ -5,7 +5,6 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "module": "ESNext",
-    "moduleResolution": "Node",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -24,15 +23,12 @@
     },
     "incremental": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["node"]
+    "types": ["astro", "node"]
   },
   "lib": ["DOM", "dom.iterable","ESNext"],
   "allowJs": true,
   "skipLibCheck": true,
-  "strict": true,
   "noEmit": true,
-  "module": "ESNext",
-  "moduleResolution": "bundler",
   "resolveJsonModule": true,
   "isolatedModules": true,
   "incremental": true,
@@ -54,8 +50,6 @@
   "strictFunctionTypes": true,
   "strictNullChecks": true,
   "strictPropertyInitialization": true,
-  "exclude": ["node_modules", "**/*.test.ts", "**/*.spec.ts"],
-  "paths": {
-    "@/*": ["./src/*"]
-  },
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist", "node_modules"]
 }

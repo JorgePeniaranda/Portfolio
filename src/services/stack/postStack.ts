@@ -1,19 +1,24 @@
-import type {ApiResponse} from "@/types/responses";
-
 import {Prisma, type Stack} from "@prisma/client";
 import axios from "axios";
 
-import {serviceErrorHandler} from "@/helpers/error/service-handler";
+import {handleServiceError} from "@/helpers/error/service-handler";
 
-export async function postStack(data: Prisma.StackUpdateInput): Promise<ApiResponse<Stack>> {
+/**
+ * Create a new stack.
+ *
+ * @param stackUpdateInput - The stack data.
+ * @returns The created stack.
+ * @throws An error if the operation fails.
+ */
+export async function postStack(stackUpdateInput: Prisma.StackUpdateInput): Promise<Stack> {
   try {
-    const {data: response} = await axios.post<ApiResponse<Stack>>("/api/stack/create", data);
+    const {data: response} = await axios.post<Stack>("/api/stack/create", stackUpdateInput);
 
     return response;
   } catch (error) {
-    return {
-      success: false,
-      message: serviceErrorHandler(error),
-    };
+    throw handleServiceError({
+      error,
+      defaultErrorMessage: "No se pudo crear el stack.",
+    });
   }
 }

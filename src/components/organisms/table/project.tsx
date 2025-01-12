@@ -32,17 +32,11 @@ import {
 import {isDefined, isNotDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {deleteProject} from "@/services/project/deleteProject";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 //#region Column Definitions
 const columns: Array<ColumnDef<Project>> = [
   selectionColumnDef<Project>(),
-  {
-    id: "id",
-    accessorKey: "id",
-    header({column}) {
-      return <DataTableColumnHeader column={column} title="ID" />;
-    },
-  },
   {
     id: "name",
     accessorKey: "name",
@@ -188,30 +182,26 @@ function TableHeaderComponent({table}: {table: Table<Project>}) {
   }, [selectedRowModel]);
 
   const handleDelete = async () => {
-    // Send request to delete the project
-    const response = await deleteProject(rows.map((row) => row.original.id));
+    try {
+      await deleteProject(rows.map((row) => row.original.id));
 
-    // If the request was unsuccessful, show an error toast and exit
-    if (response.success === false) {
+      // If the request was successful, show a success toast
       toast({
-        title: "Error al eliminar colaboradores",
-        description: "No se pudieron eliminar los colaboradores seleccionados.",
-        className: "bg-red-500 text-white",
+        title: "Colaboradores eliminados",
+        description: "Los proyectos seleccionados se han eliminado correctamente.",
+        className: "bg-green-500",
       });
 
-      return;
-    }
-
-    // If the request was successful, show a success toast
-    toast({
-      title: "Colaboradores eliminados",
-      description: "Los colaboradores seleccionados se eliminaron correctamente.",
-      className: "bg-green-500",
-    });
-
-    // Remove the deleted projects from the table
-    if (isDefined(table.options.meta?.deleteRows)) {
-      table.options.meta.deleteRows(rows.map((row) => row.index));
+      // Remove the deleted projects from the table
+      if (isDefined(table.options.meta?.deleteRows)) {
+        table.options.meta.deleteRows(rows.map((row) => row.index));
+      }
+    } catch (error) {
+      handleErrorWithToast({
+        error,
+        title: "Error al eliminar proyectos",
+        defaultErrorMessage: "Ha ocurrido un error al eliminar los proyectos.",
+      });
     }
   };
 

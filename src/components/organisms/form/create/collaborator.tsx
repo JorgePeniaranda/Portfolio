@@ -13,6 +13,7 @@ import {
   CollaboratorCreateSchema,
 } from "@/schemas/collaborator/create";
 import {postCollaborator} from "@/services/collaborator/postCollaborator";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 export function CreateCollaboratorForm({disableForm = false}: {disableForm?: boolean}) {
   const {toast} = useToast();
@@ -24,31 +25,28 @@ export function CreateCollaboratorForm({disableForm = false}: {disableForm?: boo
   });
 
   const onSubmit = async (values: CollaboratorCreateSchema) => {
-    // Send request to create a collaborator
-    const response = await postCollaborator(values);
+    try {
+      // Send request to create a collaborator
+      const newCollaboratorResult = await postCollaborator(values);
 
-    // If the request was unsuccessful, show an error toast and exit
-    if (response.success === false) {
+      // If the request was successful, show a success toast
+      form.reset();
       toast({
-        title: "Error al crear colaborador",
-        description: response.message,
-        className: "bg-red-500 text-white",
+        title: "Colaborador creado",
+        description: "El colaborador ha sido creado exitosamente.",
+        className: "bg-green-500",
       });
 
-      return;
-    }
-
-    // If the request was successful, show a success toast
-    form.reset();
-    toast({
-      title: "Colaborador creado",
-      description: response.message,
-      className: "bg-green-500",
-    });
-
-    // Redirect to the collaborator view
-    if (isDefined(response.data?.id)) {
-      safeRedirect(`/vault/views/collaborators/${response.data.id}`);
+      // Redirect to the collaborator view
+      if (isDefined(newCollaboratorResult?.id)) {
+        safeRedirect(`/vault/views/collaborators/${newCollaboratorResult.id}`);
+      }
+    } catch (error) {
+      handleErrorWithToast({
+        error,
+        title: "No se pudo crear el colaborador",
+        defaultErrorMessage: "Ha ocurrido un error al intentar crear el colaborador.",
+      });
     }
   };
 

@@ -27,6 +27,7 @@ import {isDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {ProjectCreateDefaultValues, ProjectCreateSchema} from "@/schemas/project/create";
 import {postProject} from "@/services/project/postProject";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}) {
   const {toast} = useToast();
@@ -38,31 +39,28 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
   });
 
   const onSubmit = async (values: ProjectCreateSchema) => {
-    // Send request to create a project
-    const response = await postProject(values);
+    try {
+      // Send request to create a project
+      const response = await postProject(values);
 
-    // If the request was unsuccessful, show an error toast and exit
-    if (response.success === false) {
+      // If the request was successful, show a success toast
+      form.reset();
       toast({
-        title: "Error al crear proyecto",
-        description: response.message,
-        className: "bg-red-500 text-white",
+        title: "Proyecto creado",
+        description: "El proyecto ha sido creado exitosamente.",
+        className: "bg-green-500",
       });
 
-      return;
-    }
-
-    // If the request was successful, show a success toast
-    form.reset();
-    toast({
-      title: "Proyecto creado",
-      description: response.message,
-      className: "bg-green-500",
-    });
-
-    // Redirect to the project view
-    if (isDefined(response?.data?.id)) {
-      safeRedirect(`/vault/views/project/${response.data.id}`);
+      // Redirect to the project view
+      if (isDefined(response?.id)) {
+        safeRedirect(`/vault/views/project/${response.id}`);
+      }
+    } catch (error) {
+      handleErrorWithToast({
+        error,
+        title: "No se pudo crear el proyecto",
+        defaultErrorMessage: "Ha ocurrido un error al intentar crear el proyecto.",
+      });
     }
   };
 
