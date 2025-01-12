@@ -11,7 +11,7 @@ export function selectionColumnDef<TData>() {
         checked={
           table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")
         }
-        className="border-black data-[state=checked]:bg-white"
+        className="border-black data-[state=checked]:bg-white dark:border-white"
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
       />
     ),
@@ -19,7 +19,7 @@ export function selectionColumnDef<TData>() {
       <Checkbox
         aria-label="Select row"
         checked={row.getIsSelected()}
-        className="border-black data-[state=checked]:bg-white"
+        className="border-black data-[state=checked]:bg-white dark:border-white"
         onCheckedChange={(value) => row.toggleSelected(!!value)}
       />
     ),
