@@ -1,7 +1,8 @@
 import type {RelationshipsSchema} from "../../schemas/common/relationships";
 
+import axios from "axios";
+
 import {handleServiceError} from "@/helpers/error/service-handler";
-import {apiClient} from "@/helpers/client/axios";
 
 /**
  * This service is responsible for adding a project to a collaborator.
@@ -14,7 +15,7 @@ export async function patchCollaboratorAddAssociatedProjects(
   relationSchema: RelationshipsSchema,
 ): Promise<void> {
   try {
-    const {data: response} = await apiClient.patch<void>(
+    const {data: response} = await axios.patch<void>(
       "/api/collaborator/relations/project/add",
       relationSchema,
     );
