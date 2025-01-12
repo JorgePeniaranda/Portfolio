@@ -1,4 +1,4 @@
-import axios, {isAxiosError} from "axios";
+import axios from "axios";
 
 import {isDefined, isNotDefined} from "../guards/is-defined";
 import {isErrorResponse} from "../guards/is-error-response";
@@ -20,7 +20,7 @@ export function handleServiceError({
 }): Error {
   devConsoleLog.log("Error in service: ", error);
 
-  if (!isAxiosError(error)) {
+  if (!axios.isAxiosError(error)) {
     return new Error(defaultErrorMessage);
   }
 
