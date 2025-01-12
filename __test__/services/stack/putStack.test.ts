@@ -1,15 +1,16 @@
-import type {Stack} from "@prisma/client";
 import type {ErrorResponse} from "@/types/responses";
+import type {Stack} from "@prisma/client";
 
-import axios, {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
+import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
 import {describe, expect, it, vi} from "vitest";
 
 import {TEST_STACK_MOCK} from "./stack.mock";
 
+import {apiClient} from "@/helpers/client/axios";
 import {putStack} from "@/services/stack/putStack";
 
-// Mock the axios module
-vi.mock("axios");
+// Mock the apiClient module
+vi.mock("@/helpers/client/axios");
 
 describe("putStack", () => {
   // Input data for the tests
@@ -27,13 +28,13 @@ describe("putStack", () => {
       data: TEST_STACK_MOCK,
     };
 
-    // Simulate a resolved promise for axios.put
-    vi.mocked(axios.put).mockResolvedValueOnce(mockResponse);
+    // Simulate a resolved promise for apiClient.put
+    vi.mocked(apiClient.put).mockResolvedValueOnce(mockResponse);
     const response = await putStack(input);
 
-    // Validate response and axios call
+    // Validate response and apiClient call
     expect(response).toEqual(mockResponse.data);
-    expect(axios.put).toHaveBeenCalledWith("/api/stack/update", input);
+    expect(apiClient.put).toHaveBeenCalledWith("/api/stack/update", input);
   });
 
   it("should handle errors correctly when the request fails", async () => {
@@ -56,19 +57,19 @@ describe("putStack", () => {
       },
     };
 
-    // Simulate a rejected promise for axios.put
-    vi.mocked(axios.put).mockRejectedValueOnce(mockError);
+    // Simulate a rejected promise for apiClient.put
+    vi.mocked(apiClient.put).mockRejectedValueOnce(mockError);
 
     try {
       await putStack(input);
     } catch (error) {
-      // Validate error handling and axios call
+      // Validate error handling and apiClient call
       expect(error).toBeInstanceOf(Error);
       if (error instanceof Error) {
         expect(error.message).toBe(mockError.response?.data.error);
       }
     }
 
-    expect(axios.put).toHaveBeenCalledWith("/api/stack/update", input);
+    expect(apiClient.put).toHaveBeenCalledWith("/api/stack/update", input);
   });
 });

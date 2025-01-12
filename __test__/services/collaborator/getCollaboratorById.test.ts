@@ -1,8 +1,7 @@
 import type {Collaborator} from "@prisma/client";
-import type {ErrorResponse} from "@/types/responses";
 
-import {describe, it, expect, vi} from "vitest";
-import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
+import {AxiosHeaders, type AxiosResponse} from "axios";
+import {describe, expect, it, vi} from "vitest";
 
 import {TEST_COLLABORATOR_MOCK} from "./collaborator.mock";
 

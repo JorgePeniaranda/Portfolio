@@ -1,12 +1,13 @@
 import type {ErrorResponse} from "@/types/responses";
 
-import axios, {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
+import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
 import {describe, expect, it, vi} from "vitest";
 
+import {apiClient} from "@/helpers/client/axios";
 import {patchProjectAddAssociatedCollaborator} from "@/services/project/patchProjectAddAssociatedCollaborator";
 
-// Mock the axios module
-vi.mock("axios");
+// Mock the apiClient module
+vi.mock("@/helpers/client/axios");
 
 describe("patchProjectAddAssociatedCollaborator", () => {
   // Input data for the tests
@@ -27,13 +28,13 @@ describe("patchProjectAddAssociatedCollaborator", () => {
       data: null,
     };
 
-    // Simulate a resolved promise for axios.patch
-    vi.mocked(axios.patch).mockResolvedValueOnce(mockResponse);
+    // Simulate a resolved promise for apiClient.patch
+    vi.mocked(apiClient.patch).mockResolvedValueOnce(mockResponse);
     const response = await patchProjectAddAssociatedCollaborator(input);
 
-    // Validate response and axios call
+    // Validate response and apiClient call
     expect(response).toEqual(mockResponse.data);
-    expect(axios.patch).toHaveBeenCalledWith("/api/project/relations/collaborator/add", input);
+    expect(apiClient.patch).toHaveBeenCalledWith("/api/project/relations/collaborator/add", input);
   });
 
   it("should handle errors correctly when the request fails", async () => {
@@ -56,19 +57,19 @@ describe("patchProjectAddAssociatedCollaborator", () => {
       },
     };
 
-    // Simulate a rejected promise for axios.patch
-    vi.mocked(axios.patch).mockRejectedValueOnce(mockError);
+    // Simulate a rejected promise for apiClient.patch
+    vi.mocked(apiClient.patch).mockRejectedValueOnce(mockError);
 
     try {
       await patchProjectAddAssociatedCollaborator(input);
     } catch (error) {
-      // Validate error handling and axios call
+      // Validate error handling and apiClient call
       expect(error).toBeInstanceOf(Error);
       if (error instanceof Error) {
         expect(error.message).toBe(mockError.response?.data.error);
       }
     }
 
-    expect(axios.patch).toHaveBeenCalledWith("/api/project/relations/collaborator/add", input);
+    expect(apiClient.patch).toHaveBeenCalledWith("/api/project/relations/collaborator/add", input);
   });
 });

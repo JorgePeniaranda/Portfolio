@@ -1,12 +1,13 @@
 import type {DeleteResponse, ErrorResponse} from "@/types/responses";
 
-import {describe, it, expect, vi} from "vitest";
-import axios, {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
+import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
+import {describe, expect, it, vi} from "vitest";
 
+import {apiClient} from "@/helpers/client/axios";
 import {deleteProject} from "@/services/project/deleteProject";
 
-// Mock the axios module
-vi.mock("axios");
+// Mock the apiClient module
+vi.mock("@/helpers/client/axios");
 
 describe("deleteProject", () => {
   // Input data for the tests
@@ -26,13 +27,13 @@ describe("deleteProject", () => {
       },
     };
 
-    // Simulate a resolved promise for axios.post
-    vi.mocked(axios.post).mockResolvedValueOnce(mockResponse);
+    // Simulate a resolved promise for apiClient.post
+    vi.mocked(apiClient.post).mockResolvedValueOnce(mockResponse);
     const response = await deleteProject(input);
 
-    // Validate response and axios call
+    // Validate response and apiClient call
     expect(response).toEqual(mockResponse.data);
-    expect(axios.post).toHaveBeenCalledWith("/api/project/delete", input);
+    expect(apiClient.post).toHaveBeenCalledWith("/api/project/delete", input);
   });
 
   it("should handle errors correctly when the request fails", async () => {
@@ -55,19 +56,19 @@ describe("deleteProject", () => {
       },
     };
 
-    // Simulate a rejected promise for axios.post
-    vi.mocked(axios.post).mockRejectedValueOnce(mockError);
+    // Simulate a rejected promise for apiClient.post
+    vi.mocked(apiClient.post).mockRejectedValueOnce(mockError);
 
     try {
       await deleteProject(input);
     } catch (error) {
-      // Validate error handling and axios call
+      // Validate error handling and apiClient call
       expect(error).toBeInstanceOf(Error);
       if (error instanceof Error) {
         expect(error.message).toBe(mockError.response?.data.error);
       }
     }
 
-    expect(axios.post).toHaveBeenCalledWith("/api/project/delete", input);
+    expect(apiClient.post).toHaveBeenCalledWith("/api/project/delete", input);
   });
 });

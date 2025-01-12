@@ -1,12 +1,13 @@
 import type {DeleteResponse, ErrorResponse} from "@/types/responses";
 
 import {describe, it, expect, vi} from "vitest";
-import axios, {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
+import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
 
 import {deleteCollaborator} from "@/services/collaborator/deleteCollaborator";
+import {apiClient} from "@/helpers/client/axios";
 
-// Mock the axios module
-vi.mock("axios");
+// Mock the apiClient module
+vi.mock("@/helpers/client/axios");
 
 describe("deleteCollaborator", () => {
   const input = [0, 1];
@@ -25,13 +26,13 @@ describe("deleteCollaborator", () => {
       },
     };
 
-    // Simulate a resolved promise for axios.post
-    vi.mocked(axios.post).mockResolvedValueOnce(mockResponse);
+    // Simulate a resolved promise for apiClient.post
+    vi.mocked(apiClient.post).mockResolvedValueOnce(mockResponse);
     const response = await deleteCollaborator(input);
 
-    // Validate response and axios call
+    // Validate response and apiClient call
     expect(response).toEqual(mockResponse.data);
-    expect(axios.post).toHaveBeenCalledWith("/api/collaborator/delete", input);
+    expect(apiClient.post).toHaveBeenCalledWith("/api/collaborator/delete", input);
   });
 
   it("should handle errors correctly when the request fails", async () => {
@@ -54,19 +55,19 @@ describe("deleteCollaborator", () => {
       },
     };
 
-    // Simulate a rejected promise for axios.post
-    vi.mocked(axios.post).mockRejectedValueOnce(mockError);
+    // Simulate a rejected promise for apiClient.post
+    vi.mocked(apiClient.post).mockRejectedValueOnce(mockError);
 
     try {
       await deleteCollaborator(input);
     } catch (error) {
-      // Validate error handling and axios call
+      // Validate error handling and apiClient call
       expect(error).toBeInstanceOf(Error);
       if (error instanceof Error) {
         expect(error.message).toBe(mockError.response?.data.error);
       }
     }
 
-    expect(axios.post).toHaveBeenCalledWith("/api/collaborator/delete", input);
+    expect(apiClient.post).toHaveBeenCalledWith("/api/collaborator/delete", input);
   });
 });
