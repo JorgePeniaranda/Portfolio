@@ -1,37 +1,37 @@
-import type {Collaborator} from "@prisma/client";
 import type {ErrorResponse} from "@/types/responses";
+import type {Project} from "@prisma/client";
 
 import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
 import {describe, expect, it, vi} from "vitest";
 
-import {TEST_COLLABORATOR_MOCK} from "./collaborator.mock";
+import {TEST_PROJECT_MOCK} from "./project.mock";
 
 import {apiClient} from "@/helpers/client/axios";
-import {getCollaboratorById} from "@/services/collaborator/getCollaboratorById";
+import {getProjectById} from "@/services/project/getProjectById";
 
 // Mocking apiClient to simulate HTTP requests without actually calling the API
 vi.mock("@/helpers/client/axios");
 
-describe("getCollaboratorById", () => {
-  const idCollaborator = TEST_COLLABORATOR_MOCK.id;
-  const APIUrl = `/api/collaborator/get/id/${idCollaborator}.json`;
+describe("getProjectById", () => {
+  const idProject = TEST_PROJECT_MOCK.id;
+  const APIUrl = `/api/project/get/id/${idProject}.json`;
 
-  it("should return collaborator data when the request is successful", async () => {
+  it("should return stack data when the request is successful", async () => {
     // Simulating a successful response from apiClient
-    const mockResponse: AxiosResponse<Collaborator> = {
+    const mockResponse: AxiosResponse<Project> = {
       config: {
         headers: new AxiosHeaders(),
       },
       headers: {},
       status: 200,
       statusText: "OK",
-      data: TEST_COLLABORATOR_MOCK,
+      data: TEST_PROJECT_MOCK,
     };
 
     // Mocking the resolved value of apiClient.get for this test case
     vi.mocked(apiClient.get).mockResolvedValueOnce(mockResponse);
 
-    const response = await getCollaboratorById({id: idCollaborator});
+    const response = await getProjectById({id: idProject});
 
     // Asserting that the response matches the mock data
     expect(response).toEqual(mockResponse.data);
@@ -63,7 +63,7 @@ describe("getCollaboratorById", () => {
     vi.mocked(apiClient.get).mockRejectedValueOnce(mockError);
 
     try {
-      await getCollaboratorById({id: idCollaborator});
+      await getProjectById({id: idProject});
     } catch (error) {
       // Validate error handling and apiClient call
       expect(error).toBeInstanceOf(Error);

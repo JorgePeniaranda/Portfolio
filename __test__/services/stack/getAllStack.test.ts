@@ -1,42 +1,44 @@
-import type {Collaborator} from "@prisma/client";
 import type {ErrorResponse} from "@/types/responses";
+import type {Stack} from "@prisma/client";
 
 import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
 import {describe, expect, it, vi} from "vitest";
 
-import {TEST_COLLABORATOR_MOCK} from "./collaborator.mock";
+import {TEST_STACK_MOCK} from "./stack.mock";
 
 import {apiClient} from "@/helpers/client/axios";
-import {getCollaboratorById} from "@/services/collaborator/getCollaboratorById";
+import {getAllStack} from "@/services/stack/getAllStack";
 
 // Mocking apiClient to simulate HTTP requests without actually calling the API
 vi.mock("@/helpers/client/axios");
 
-describe("getCollaboratorById", () => {
-  const idCollaborator = TEST_COLLABORATOR_MOCK.id;
-  const APIUrl = `/api/collaborator/get/id/${idCollaborator}.json`;
+describe("getAllStack", () => {
+  const APIUrl = `/api/stack/get/all.json`;
+  const pagination = {page: 1, size: 10};
 
-  it("should return collaborator data when the request is successful", async () => {
+  it("should return stack data when the request is successful", async () => {
     // Simulating a successful response from apiClient
-    const mockResponse: AxiosResponse<Collaborator> = {
+    const mockResponse: AxiosResponse<Stack[]> = {
       config: {
         headers: new AxiosHeaders(),
       },
       headers: {},
       status: 200,
       statusText: "OK",
-      data: TEST_COLLABORATOR_MOCK,
+      data: [TEST_STACK_MOCK, TEST_STACK_MOCK, TEST_STACK_MOCK],
     };
 
     // Mocking the resolved value of apiClient.get for this test case
     vi.mocked(apiClient.get).mockResolvedValueOnce(mockResponse);
 
-    const response = await getCollaboratorById({id: idCollaborator});
+    const response = await getAllStack(pagination);
 
     // Asserting that the response matches the mock data
     expect(response).toEqual(mockResponse.data);
     // Ensuring the API was called with the correct endpoint
-    expect(apiClient.get).toHaveBeenCalledWith(APIUrl);
+    expect(apiClient.get).toHaveBeenCalledWith(APIUrl, {
+      params: pagination,
+    });
   });
 
   it("should handle errors correctly when the request fails", async () => {
@@ -63,7 +65,7 @@ describe("getCollaboratorById", () => {
     vi.mocked(apiClient.get).mockRejectedValueOnce(mockError);
 
     try {
-      await getCollaboratorById({id: idCollaborator});
+      await getAllStack(pagination);
     } catch (error) {
       // Validate error handling and apiClient call
       expect(error).toBeInstanceOf(Error);
@@ -72,6 +74,8 @@ describe("getCollaboratorById", () => {
       }
     }
 
-    expect(apiClient.get).toHaveBeenCalledWith(APIUrl);
+    expect(apiClient.get).toHaveBeenCalledWith(APIUrl, {
+      params: pagination,
+    });
   });
 });
