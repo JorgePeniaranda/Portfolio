@@ -26,7 +26,7 @@ export async function getAllProjectMin(
       },
     );
 
-    return response ?? [];
+    return response;
   } catch (error) {
     throw handleServiceError({
       error,

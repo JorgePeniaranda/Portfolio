@@ -1,6 +1,75 @@
 import {afterEach, describe, expect, it, vi} from "vitest";
 
-import {devConsoleLog} from "@/helpers/common/dev-console-log";
+import {devConsoleLog, logMessage} from "@/helpers/common/dev-console-log";
+
+vi.mock("console", () => ({
+  log: vi.fn(),
+  info: vi.fn(),
+  warn: vi.fn(),
+  error: vi.fn(),
+}));
+
+describe("logMessage", () => {
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("should log messages to the console in development environment for 'log' type", () => {
+    process.env.NODE_ENV = "development"; // Establece el entorno de desarrollo
+    const inputMessage = ["This is a log message"];
+
+    logMessage("log", inputMessage);
+
+    // eslint-disable-next-line no-console
+    expect(console.log).toHaveBeenCalledWith(...inputMessage);
+  });
+
+  it("should log messages to the console in development environment for 'info' type", () => {
+    process.env.NODE_ENV = "development"; // Establece el entorno de desarrollo
+    const inputMessage = ["This is an info message"];
+
+    logMessage("info", inputMessage);
+
+    // eslint-disable-next-line no-console
+    expect(console.info).toHaveBeenCalledWith(...inputMessage);
+  });
+
+  it("should log messages to the console in development environment for 'warn' type", () => {
+    process.env.NODE_ENV = "development"; // Establece el entorno de desarrollo
+    const inputMessage = ["This is a warning message"];
+
+    logMessage("warn", inputMessage);
+
+    // eslint-disable-next-line no-console
+    expect(console.warn).toHaveBeenCalledWith(...inputMessage);
+  });
+
+  it("should log messages to the console in development environment for 'error' type", () => {
+    process.env.NODE_ENV = "development"; // Establece el entorno de desarrollo
+    const inputMessage = ["This is an error message"];
+
+    logMessage("error", inputMessage);
+
+    // eslint-disable-next-line no-console
+    expect(console.error).toHaveBeenCalledWith(...inputMessage);
+  });
+
+  it("should not log messages when environment is not development", () => {
+    process.env.NODE_ENV = "production"; // Establece un entorno de producción
+    const inputMessage = ["This message should not be logged"];
+
+    logMessage("log", inputMessage);
+
+    // eslint-disable-next-line no-console
+    expect(console.log).not.toHaveBeenCalled();
+    // eslint-disable-next-line no-console
+    expect(console.info).not.toHaveBeenCalled();
+    // eslint-disable-next-line no-console
+    expect(console.warn).not.toHaveBeenCalled();
+    // eslint-disable-next-line no-console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+});
 
 describe("devConsoleLog", () => {
   const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});

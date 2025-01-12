@@ -2,7 +2,7 @@
  * Log message to console in development environment
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function logMessage(type: "log" | "info" | "warn" | "error", input: any[]): void {
+export function logMessage(type: "log" | "info" | "warn" | "error", input: any[]): void {
   if (process.env.NODE_ENV === "development") {
     // eslint-disable-next-line no-console
     console[type](...input);
