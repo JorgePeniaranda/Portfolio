@@ -1,7 +1,8 @@
 import type {Collaborator} from "@prisma/client";
+import type {ErrorResponse} from "@/types/responses";
 
-import {describe, it, expect, vi} from "vitest";
-import {AxiosHeaders, type AxiosResponse} from "axios";
+import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
+import {describe, expect, it, vi} from "vitest";
 
 import {TEST_COLLABORATOR_MOCK} from "./collaborator.mock";
 
@@ -12,6 +13,9 @@ import {getCollaboratorById} from "@/services/collaborator/getCollaboratorById";
 vi.mock("@/helpers/client/axios");
 
 describe("getCollaboratorById", () => {
+  const idCollaborator = TEST_COLLABORATOR_MOCK.id;
+  const APIUrl = `/api/collaborator/get/id/${idCollaborator}.json`;
+
   it("should return collaborator data when the request is successful", async () => {
     // Simulating a successful response from apiClient
     const mockResponse: AxiosResponse<Collaborator> = {
@@ -27,59 +31,47 @@ describe("getCollaboratorById", () => {
     // Mocking the resolved value of apiClient.get for this test case
     vi.mocked(apiClient.get).mockResolvedValueOnce(mockResponse);
 
-    const collaboratorId = 1; // The ID of the collaborator to fetch
-    const response = await getCollaboratorById({id: collaboratorId});
+    const response = await getCollaboratorById({id: idCollaborator});
 
     // Asserting that the response matches the mock data
     expect(response).toEqual(mockResponse.data);
     // Ensuring the API was called with the correct endpoint
-    expect(apiClient.get).toHaveBeenCalledWith(`api/collaborator/get/id/${collaboratorId}.json`);
+    expect(apiClient.get).toHaveBeenCalledWith(APIUrl);
   });
 
-  it("should throw an error when the request fails", async () => {
-    // Simulating an error response from apiClient
-    const mockErrorResponse = {
-      data: {
-        success: false,
-        message: "Collaborator not found",
+  it("should handle errors correctly when the request fails", async () => {
+    // Mock an error response (axios error)
+    const mockError: AxiosError<ErrorResponse> = {
+      isAxiosError: true,
+      message: "Request failed with status code 500",
+      name: "AxiosError",
+      toJSON: () => ({}),
+      response: {
+        config: {
+          headers: new AxiosHeaders(),
+        },
+        headers: {},
+        status: 500,
+        statusText: "Internal Server Error",
+        data: {
+          error: "This is an test error message",
+        },
       },
     };
 
-    // Mocking the resolved value of apiClient.get for this test case
-    vi.mocked(apiClient.get).mockResolvedValueOnce(mockErrorResponse);
-
-    const collaboratorId = 999; // Non-existent collaborator ID to trigger the error
+    // Simulate a rejected promise for apiClient.get
+    vi.mocked(apiClient.get).mockRejectedValueOnce(mockError);
 
     try {
-      await getCollaboratorById({id: collaboratorId});
+      await getCollaboratorById({id: idCollaborator});
     } catch (error) {
-      // Asserting that the error matches the expected message
-      expect(error).toEqual(new Error(mockErrorResponse.data.message));
+      // Validate error handling and apiClient call
+      expect(error).toBeInstanceOf(Error);
+      if (error instanceof Error) {
+        expect(error.message).toBe(mockError.response?.data.error);
+      }
     }
 
-    // Ensuring the API was called with the correct endpoint
-    expect(apiClient.get).toHaveBeenCalledWith(`api/collaborator/get/id/${collaboratorId}.json`);
-  });
-
-  it("should return null if the collaborator is not found", async () => {
-    // Simulating a successful response with null data for the collaborator
-    const mockResponse = {
-      data: {
-        success: true,
-        message: "Collaborator found",
-        data: null,
-      },
-    };
-
-    // Mocking the resolved value of apiClient.get for this test case
-    vi.mocked(apiClient.get).mockResolvedValueOnce(mockResponse);
-
-    const collaboratorId = 1; // The ID of the collaborator to fetch
-    const response = await getCollaboratorById({id: collaboratorId});
-
-    // Asserting that the response is null since no collaborator was found
-    expect(response).toBeNull();
-    // Ensuring the API was called with the correct endpoint
-    expect(apiClient.get).toHaveBeenCalledWith(`api/collaborator/get/id/${collaboratorId}.json`);
+    expect(apiClient.get).toHaveBeenCalledWith(APIUrl);
   });
 });

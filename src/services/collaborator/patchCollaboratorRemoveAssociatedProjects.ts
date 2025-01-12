@@ -1,7 +1,6 @@
 import type {RelationshipsSchema} from "../../schemas/common/relationships";
 
-import axios from "axios";
-
+import {apiClient} from "@/helpers/client/axios";
 import {handleServiceError} from "@/helpers/error/service-handler";
 
 /**
@@ -15,7 +14,7 @@ export async function patchCollaboratorRemoveAssociatedProjects(
   relationSchema: RelationshipsSchema,
 ): Promise<void> {
   try {
-    const {data: response} = await axios.patch<void>(
+    const {data: response} = await apiClient.patch<void>(
       "/api/collaborator/relations/project/delete",
       relationSchema,
     );

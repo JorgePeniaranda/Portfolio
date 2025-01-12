@@ -17,7 +17,7 @@ export async function getAllStack(pagination?: PaginationRequest): Promise<Stack
       params: pagination,
     });
 
-    return response ?? [];
+    return response;
   } catch (error) {
     throw handleServiceError({
       error,

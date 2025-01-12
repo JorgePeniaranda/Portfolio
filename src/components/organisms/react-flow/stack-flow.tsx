@@ -1,4 +1,4 @@
-import type {Project, Stack} from "@prisma/client";
+import type {Stack} from "@prisma/client";
 
 import {Controls, MiniMap, ReactFlow, type Edge, type Node} from "@xyflow/react";
 import {useMemo} from "react";
@@ -23,7 +23,6 @@ export function StackFlow({
 }: {
   stacks: Array<
     Stack & {
-      associatedProjects: Pick<Project, "id" | "key" | "name" | "logoUrl">[]; // TO-DO: Not used
       relatedFrom: {
         toStackStack: Stack;
       }[];

@@ -88,7 +88,6 @@ git push origin production
 
 ## 🚀 Deployment
 
-
 You need the following programs before you start:
 
 - npm: https://www.npmjs.com/package/download
@@ -116,7 +115,6 @@ npm install
 
 - Make sure PostgreSQL is installed and running on your machine.
 - Create a new database for the project (e.g., portfolio_db).
-
 
 5. Configure the database connection:
 

@@ -1,7 +1,7 @@
 import type {RelationshipsSchema} from "../../schemas/common/relationships";
 
-import {handleServiceError} from "@/helpers/error/service-handler";
 import {apiClient} from "@/helpers/client/axios";
+import {handleServiceError} from "@/helpers/error/service-handler";
 
 /**
  * This service is responsible for adding a project to a collaborator.

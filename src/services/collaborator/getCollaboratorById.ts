@@ -17,10 +17,10 @@ export async function getCollaboratorById({
 }): Promise<Collaborator | null> {
   try {
     const {data: response} = await apiClient.get<Collaborator | null>(
-      `api/collaborator/get/id/${id}.json`,
+      `/api/collaborator/get/id/${id}.json`,
     );
 
-    return response ?? null;
+    return response;
   } catch (error) {
     throw handleServiceError({
       error,

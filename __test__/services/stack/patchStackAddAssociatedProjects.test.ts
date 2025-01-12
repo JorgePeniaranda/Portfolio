@@ -1,10 +1,13 @@
-import axios, {AxiosHeaders, type AxiosResponse} from "axios";
+import type {ErrorResponse} from "@/types/responses";
+
+import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
 import {describe, expect, it, vi} from "vitest";
 
+import {apiClient} from "@/helpers/client/axios";
 import {patchStackAddAssociatedProjects} from "@/services/stack/patchStackAddAssociatedProjects";
 
-// Mock the axios module
-vi.mock("axios");
+// Mock the apiClient module
+vi.mock("@/helpers/client/axios");
 
 describe("patchStackAddAssociatedProjects", () => {
   // Input data for the tests
@@ -12,6 +15,7 @@ describe("patchStackAddAssociatedProjects", () => {
     idFrom: 1,
     idTo: 2,
   } as const;
+  const APIUrl = "/api/stack/relations/project/add";
 
   it("should return a successful response when the request is correct", async () => {
     // Mock a successful response
@@ -25,33 +29,48 @@ describe("patchStackAddAssociatedProjects", () => {
       data: null,
     };
 
-    // Simulate a resolved promise for axios.patch
-    vi.mocked(axios.patch).mockResolvedValueOnce(mockResponse);
+    // Simulate a resolved promise for apiClient.patch
+    vi.mocked(apiClient.patch).mockResolvedValueOnce(mockResponse);
     const response = await patchStackAddAssociatedProjects(input);
 
-    // Validate response and axios call
+    // Validate response and apiClient call
     expect(response).toEqual(mockResponse.data);
-    expect(axios.patch).toHaveBeenCalledWith("/api/stack/relations/project/add", input);
+    expect(apiClient.patch).toHaveBeenCalledWith(APIUrl, input);
   });
 
   it("should handle errors correctly when the request fails", async () => {
-    // Mock an error response
-    const mockError = {
+    // Mock an error response (axios error)
+    const mockError: AxiosError<ErrorResponse> = {
+      isAxiosError: true,
+      message: "Request failed with status code 500",
+      name: "AxiosError",
+      toJSON: () => ({}),
       response: {
+        config: {
+          headers: new AxiosHeaders(),
+        },
+        headers: {},
+        status: 500,
+        statusText: "Internal Server Error",
         data: {
-          success: false,
-          message: "Error updating stack",
-          error: "An test error occurred",
+          error: "This is an test error message",
         },
       },
     };
 
-    // Simulate a rejected promise for axios.patch
-    vi.mocked(axios.patch).mockRejectedValueOnce(mockError);
-    const response = await patchStackAddAssociatedProjects(input);
+    // Simulate a rejected promise for apiClient.patch
+    vi.mocked(apiClient.patch).mockRejectedValueOnce(mockError);
 
-    // Validate error handling and axios call
-    expect(response).toHaveProperty("success", false);
-    expect(axios.patch).toHaveBeenCalledWith("/api/stack/relations/project/add", input);
+    try {
+      await patchStackAddAssociatedProjects(input);
+    } catch (error) {
+      // Validate error handling and apiClient call
+      expect(error).toBeInstanceOf(Error);
+      if (error instanceof Error) {
+        expect(error.message).toBe(mockError.response?.data.error);
+      }
+    }
+
+    expect(apiClient.patch).toHaveBeenCalledWith(APIUrl, input);
   });
 });

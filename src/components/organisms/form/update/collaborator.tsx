@@ -36,7 +36,7 @@ export function UpdateCollaboratorForm({
       toast({
         title: "Colaborador actualizado",
         description: "El colaborador ha sido actualizado exitosamente.",
-        className: "bg-green-500",
+        className: "bg-green-500 text-black",
       });
     } catch (error) {
       handleErrorWithToast({

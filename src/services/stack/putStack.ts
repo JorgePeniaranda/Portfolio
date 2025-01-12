@@ -1,6 +1,6 @@
 import {Prisma, type Stack} from "@prisma/client";
-import axios from "axios";
 
+import {apiClient} from "@/helpers/client/axios";
 import {handleServiceError} from "@/helpers/error/service-handler";
 
 /**
@@ -12,7 +12,7 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  */
 export async function putStack(stackUpdateInput: Prisma.StackUpdateInput): Promise<Stack> {
   try {
-    const {data: response} = await axios.put<Stack>("/api/stack/update", stackUpdateInput);
+    const {data: response} = await apiClient.put<Stack>("/api/stack/update", stackUpdateInput);
 
     return response;
   } catch (error) {

@@ -12,9 +12,9 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  */
 export async function getStackById({id}: {id: Stack["id"]}): Promise<Stack | null> {
   try {
-    const {data: response} = await apiClient.get<Stack | null>(`api/stack/get/id/${id}.json`);
+    const {data: response} = await apiClient.get<Stack | null>(`/api/stack/get/id/${id}.json`);
 
-    return response ?? null;
+    return response;
   } catch (error) {
     throw handleServiceError({
       error,

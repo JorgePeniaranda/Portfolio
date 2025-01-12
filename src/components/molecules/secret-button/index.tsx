@@ -14,7 +14,6 @@ import {
 import {InputOTP, InputOTPSlot} from "@/components/ui/input-otp";
 import {useToast} from "@/hooks/use-toast";
 import {useSecretCodeStore} from "@/services/storage/secret-code";
-import {safeRedirect} from "@/helpers/common/safe-redirect";
 
 /**
  * Component that displays an interactive button to open a modal for entering a secret code.
@@ -26,6 +25,7 @@ export function SecretButton() {
   // Retrieves the stored secret code and initializes the state for the entered value.
   const {secretCode} = useSecretCodeStore();
   const [value, setValue] = useState(`${secretCode[0]}`);
+  const [isUnlocked, setIsUnlocked] = useState(false);
 
   // Hook to display toast messages.
   const {toast} = useToast();
@@ -34,7 +34,6 @@ export function SecretButton() {
    * Handles the validation of the entered code.
    * - If the code is incorrect, displays an error message.
    * - If the code is correct, displays a success message.
-   * - TO-DO: Redirect to the secret dashboard.
    */
   const handleSubmit = () => {
     if (secretCode !== value) {
@@ -51,12 +50,10 @@ export function SecretButton() {
       title: "Código correcto",
       description: "Enhorabuena. Has descubierto el código secreto. Bienvenido al panel secreto.",
       variant: "default",
-      className: "bg-green-500",
+      className: "bg-green-500 text-black",
     });
 
-    safeRedirect("/vault"); // Redirects to the secret dashboard.
-
-    return; // TO-DO: redirect to the secret dashboard
+    setIsUnlocked(true);
   };
 
   return (
@@ -97,9 +94,18 @@ export function SecretButton() {
             </InputOTP>
           </div>
           {/* Button to submit the form */}
-          <Button className="bg-[#282828] text-white hover:bg-[#323232]" type="submit">
-            Probar Código Secreto
-          </Button>
+          {isUnlocked ? (
+            <a
+              className="inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white ring-offset-background transition-colors hover:bg-green-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+              href="/vault"
+            >
+              Ir al panel secreto
+            </a>
+          ) : (
+            <Button className="bg-[#282828] text-white hover:bg-[#323232]" type="submit">
+              Probar Código Secreto
+            </Button>
+          )}
         </form>
       </DialogContent>
     </Dialog>

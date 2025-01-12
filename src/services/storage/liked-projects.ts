@@ -15,6 +15,7 @@ export interface ILikedStoreActions {
   addLikedProject(key: Project["key"]): void;
   removeLikedProject(key: Project["key"]): void;
   checkLikedProject(key: Project["key"]): boolean;
+  resetLikedProjects(): void;
 }
 
 // Create the liked projects store using Zustand with persistence enabled.
@@ -37,6 +38,10 @@ export const useProjectLikedStore = create(
 
       checkLikedProject(key: Project["key"]) {
         return get().likedKeyProjects.includes(key);
+      },
+
+      resetLikedProjects() {
+        set({likedKeyProjects: []});
       },
     }),
     {

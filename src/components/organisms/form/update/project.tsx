@@ -51,7 +51,7 @@ export function UpdateProjectForm({
       toast({
         title: "Proyecto creado",
         description: "El proyecto ha sido creado exitosamente.",
-        className: "bg-green-500",
+        className: "bg-green-500 text-black",
       });
     } catch (error) {
       handleErrorWithToast({

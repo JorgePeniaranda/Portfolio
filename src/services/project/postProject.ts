@@ -1,6 +1,6 @@
 import {Prisma, type Project} from "@prisma/client";
-import axios from "axios";
 
+import {apiClient} from "@/helpers/client/axios";
 import {handleServiceError} from "@/helpers/error/service-handler";
 
 /**
@@ -12,7 +12,7 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  */
 export async function postProject(projectInput: Prisma.ProjectCreateInput): Promise<Project> {
   try {
-    const {data: response} = await axios.post<Project>("/api/project/create", projectInput);
+    const {data: response} = await apiClient.post<Project>("/api/project/create", projectInput);
 
     return response;
   } catch (error) {

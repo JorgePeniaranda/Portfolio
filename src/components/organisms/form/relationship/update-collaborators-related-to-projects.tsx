@@ -72,7 +72,7 @@ export function UpdateCollaboratorRelatedToProject({
       toast({
         title: "El colaborador ha sido relacionado",
         description: "El colaborador ha sido relacionado con el proyecto exitosamente.",
-        className: "bg-green-500",
+        className: "bg-green-500 text-black",
       });
 
       // Update local state for associated and available collaborators
@@ -108,7 +108,7 @@ export function UpdateCollaboratorRelatedToProject({
       toast({
         title: "Colaborador eliminado",
         description: "El colaborador ha sido eliminado del proyecto.",
-        className: "bg-green-500",
+        className: "bg-green-500 text-black",
       });
 
       // Update local state for associated and available collaborators

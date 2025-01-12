@@ -68,7 +68,7 @@ export function UpdateProjectsRelatedToStack({
       toast({
         title: "Proyecto relacionado con el stack",
         description: "El proyecto ha sido relacionado con el stack.",
-        className: "bg-green-500",
+        className: "bg-green-500 text-black",
       });
 
       // Update local state for associated and available projects
@@ -99,7 +99,7 @@ export function UpdateProjectsRelatedToStack({
       toast({
         title: "Proyecto eliminado",
         description: "El proyecto ha sido eliminado del stack.",
-        className: "bg-green-500",
+        className: "bg-green-500 text-black",
       });
 
       // Update local state for associated and available projects

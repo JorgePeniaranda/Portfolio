@@ -121,7 +121,7 @@ function TableHeaderComponent({table}: {table: Table<Collaborator>}) {
       toast({
         title: "Colaboradores eliminados",
         description: "Los colaboradores seleccionados se han eliminaron correctamente.",
-        className: "bg-green-500",
+        className: "bg-green-500 text-black",
       });
 
       // Remove the deleted collaborators from the table

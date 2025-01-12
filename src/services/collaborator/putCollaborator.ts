@@ -1,6 +1,6 @@
 import {Prisma, type Collaborator} from "@prisma/client";
-import axios from "axios";
 
+import {apiClient} from "@/helpers/client/axios";
 import {handleServiceError} from "@/helpers/error/service-handler";
 
 /**
@@ -14,7 +14,7 @@ export async function putCollaborator(
   updatedCollaborator: Prisma.CollaboratorUpdateInput,
 ): Promise<Collaborator> {
   try {
-    const {data: response} = await axios.put<Collaborator>(
+    const {data: response} = await apiClient.put<Collaborator>(
       "/api/collaborator/update",
       updatedCollaborator,
     );
