@@ -1,6 +1,8 @@
 import {experimental_AstroContainer as AstroContainer} from "astro/container";
 import {expect, test} from "vitest";
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore: Cannot find module or its corresponding type declarations.
 import Logo from "@/assets/svg/logos/Logo.astro";
 
 test("renders component with correct attributes", async () => {
