@@ -22,12 +22,11 @@ import {
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip";
-import {ENV} from "@/constants/env";
 import {STACK_CATEGORY_TRANSCRIPTIONS, STACK_TYPE_TRANSCRIPTIONS} from "@/constants/transcriptions";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 import {isDefined, isNotDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {deleteStack} from "@/services/stack/deleteStack";
-import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 //#region Column Definitions
 const columns: Array<ColumnDef<Stack>> = [
@@ -244,7 +243,6 @@ function TableHeaderComponent({table}: {table: Table<Stack>}) {
                 <AlertDialogCancel>Cancelar</AlertDialogCancel>
                 <AlertDialogAction
                   className="bg-red-500 text-white hover:bg-red-600 hover:text-white dark:text-white dark:hover:bg-red-400"
-                  disabled={ENV.isServerSideEnable === false}
                   onClick={handleDelete}
                 >
                   Borrar

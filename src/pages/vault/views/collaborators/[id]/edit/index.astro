@@ -60,7 +60,6 @@ const availableProjects = await getProjectsByNotAssociatedCollaborator({
       <h1 class="text-4xl font-medium">Editar Colaborador</h1>
       <UpdateCollaboratorForm
         currentCollaborator={collaborator}
-        disableForm={ENV.isServerSideEnable === false}
         client:load
       />
       <div class="mt-10">
@@ -71,7 +70,6 @@ const availableProjects = await getProjectsByNotAssociatedCollaborator({
             associatedProjects={associatedProjects}
             availableProject={availableProjects}
             currentCollaborator={collaborator}
-            disableForm={ENV.isServerSideEnable === false}
             client:load
           />
         </div>

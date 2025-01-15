@@ -22,11 +22,10 @@ import {
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip";
-import {ENV} from "@/constants/env";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 import {isDefined, isNotDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {deleteCollaborator} from "@/services/collaborator/deleteCollaborator";
-import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 //#region Column Definitions
 const columns: Array<ColumnDef<Collaborator>> = [
@@ -238,7 +237,6 @@ function TableHeaderComponent({table}: {table: Table<Collaborator>}) {
                 <AlertDialogCancel>Cancelar</AlertDialogCancel>
                 <AlertDialogAction
                   className="bg-red-500 text-white hover:bg-red-600 hover:text-white dark:text-white dark:hover:bg-red-400"
-                  disabled={ENV.isServerSideEnable === false}
                   onClick={handleDelete}
                 >
                   Borrar

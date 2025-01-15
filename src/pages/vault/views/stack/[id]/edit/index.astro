@@ -56,7 +56,6 @@ const availableProjects = await getProjectsByNotAssociatedStack({
       <h1 class="text-4xl font-medium">Editar Stack</h1>
       <UpdateStackForm
         currentStack={stack}
-        disableForm={ENV.isServerSideEnable === false}
         client:load
       />
       <div class="mt-10">
@@ -67,7 +66,6 @@ const availableProjects = await getProjectsByNotAssociatedStack({
             currentStack={stack}
             availableProject={availableProjects}
             associatedProjects={associatedProjects}
-            disableForm={ENV.isServerSideEnable === false}
             client:load
           />
         </div>

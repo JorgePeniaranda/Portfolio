@@ -67,7 +67,6 @@ const availableCollaborators = await getCollaboratorsByNotAssociatedProjects({
       <h1 class="text-4xl font-medium">Editar de Proyecto</h1>
       <UpdateProjectForm
         currentProject={project}
-        disableForm={ENV.isServerSideEnable === false}
         client:load
       />
       <div class="mt-10">
@@ -78,7 +77,6 @@ const availableCollaborators = await getCollaboratorsByNotAssociatedProjects({
             associatedStacks={relatedStacks}
             availableStacks={availableStacks}
             currentProject={project}
-            disableForm={ENV.isServerSideEnable === false}
             client:load
           />
         </div>
@@ -88,7 +86,6 @@ const availableCollaborators = await getCollaboratorsByNotAssociatedProjects({
             associatedCollaborators={relatedCollaborators}
             availableCollaborators={availableCollaborators}
             currentProject={project}
-            disableForm={ENV.isServerSideEnable === false}
             client:load
           />
         </div>

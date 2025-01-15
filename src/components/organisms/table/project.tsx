@@ -24,15 +24,14 @@ import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip";
 import {MIN_DATA_FORMAT} from "@/constants/common";
-import {ENV} from "@/constants/env";
 import {
   PROJECT_STATUS_TRANSCRIPTIONS,
   STACK_CATEGORY_TRANSCRIPTIONS,
 } from "@/constants/transcriptions";
+import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 import {isDefined, isNotDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
 import {deleteProject} from "@/services/project/deleteProject";
-import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 //#region Column Definitions
 const columns: Array<ColumnDef<Project>> = [
@@ -306,7 +305,6 @@ function TableHeaderComponent({table}: {table: Table<Project>}) {
                 <AlertDialogCancel>Cancelar</AlertDialogCancel>
                 <AlertDialogAction
                   className="bg-red-500 text-white hover:bg-red-600 hover:text-white dark:text-white dark:hover:bg-red-400"
-                  disabled={ENV.isServerSideEnable === false}
                   onClick={handleDelete}
                 >
                   Borrar
