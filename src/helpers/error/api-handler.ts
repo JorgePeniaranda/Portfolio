@@ -45,7 +45,7 @@ export function handleApiError(error: unknown): Response {
         title: "A validation error occurred.",
         status: 400,
         detail: errorTextReduce,
-        errors: errorList.map((error) => ({
+        fieldErrors: errorList.map((error) => ({
           type: "ValidationError",
           title: "A validation error occurred.",
           status: 400,

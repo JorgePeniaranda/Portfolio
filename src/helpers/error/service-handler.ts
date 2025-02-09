@@ -40,8 +40,8 @@ export function handleServiceError({
     return new Error(defaultErrorMessage);
   }
 
-  if (isDefined(responseData.errors?.length) && responseData.errors.length > 0) {
-    return new Error(responseData.errors.map((error) => error.detail).join("\n"));
+  if (isDefined(responseData.fieldErrors?.length) && responseData.fieldErrors.length > 0) {
+    return new Error(responseData.fieldErrors.map((error) => error.detail).join("\n"));
   }
 
   if (isDefined(responseData.title)) {

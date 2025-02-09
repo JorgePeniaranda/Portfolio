@@ -9,7 +9,7 @@ export interface ErrorResponse {
   status: number;
   detail?: string;
   instance?: string;
-  errors?: Omit<ErrorResponse, "errors">[];
+  fieldErrors?: Omit<ErrorResponse, "errors">[];
 }
 
 export interface DeleteResponse {
