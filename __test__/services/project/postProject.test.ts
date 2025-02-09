@@ -52,7 +52,10 @@ describe("postProject", () => {
         status: 500,
         statusText: "Internal Server Error",
         data: {
-          error: "This is an test error message",
+          status: 500,
+          title: "An internal server error occurred.",
+          type: "InternalServerError",
+          detail: "This is an test error message",
         },
       },
     };
@@ -66,7 +69,7 @@ describe("postProject", () => {
       // Validate error handling and apiClient call
       expect(error).toBeInstanceOf(Error);
       if (error instanceof Error) {
-        expect(error.message).toBe(mockError.response?.data.error);
+        expect(error.message).toBe(mockError.response?.data.title);
       }
     }
 
