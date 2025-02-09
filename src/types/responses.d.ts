@@ -4,8 +4,12 @@ export interface PaginationRequest {
 }
 
 export interface ErrorResponse {
-  error?: string; // Error message if the operation failed
-  errors?: string[]; // Validation errors if the operation failed
+  type: string;
+  title: string;
+  status: number;
+  detail?: string;
+  instance?: string;
+  errors?: Omit<ErrorResponse, "errors">[];
 }
 
 export interface DeleteResponse {
