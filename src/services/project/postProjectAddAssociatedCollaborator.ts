@@ -11,7 +11,7 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  * @returns A promise with the project data.
  * @throws An error if the collaborator could not be added to the project.
  */
-export async function patchProjectAddAssociatedCollaborator(
+export async function postProjectAddAssociatedCollaborator(
   relationshipSchema: RelationshipsSchema,
 ): Promise<Project> {
   try {

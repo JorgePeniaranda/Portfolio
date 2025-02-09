@@ -27,7 +27,7 @@ import {
 } from "@/components/ui/select";
 import {isDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
-import {patchProjectAddAssociatedCollaborator} from "@/services/project/postProjectAddAssociatedCollaborator";
+import {postProjectAddAssociatedCollaborator} from "@/services/project/postProjectAddAssociatedCollaborator";
 import {deleteProjectRemoveAssociatedCollaborator} from "@/services/project/deleteProjectRemoveAssociatedCollaborator";
 import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
@@ -65,7 +65,7 @@ export function UpdateCollaboratorRelatedToProject({
   const onAddCollaborator = async (values: RelationshipsSchema) => {
     try {
       // Send request to associate the project to the collaborator
-      await patchProjectAddAssociatedCollaborator({
+      await postProjectAddAssociatedCollaborator({
         idFrom: Number(values.idFrom),
         idTo: Number(values.idTo),
       });

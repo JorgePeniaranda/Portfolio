@@ -11,7 +11,7 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  * @returns A promise with the project data.
  * @throws An error if the stack could not be added to the project.
  */
-export async function patchProjectAddAssociatedStack(
+export async function postProjectAddAssociatedStack(
   relationshipSchema: RelationshipsSchema,
 ): Promise<Project> {
   try {
