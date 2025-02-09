@@ -12,7 +12,7 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  */
 export async function getStackByKey({key}: {key: Stack["key"]}): Promise<Stack | null> {
   try {
-    const {data: response} = await apiClient.get<Stack | null>(`/api/stack/get/key/${key}.json`);
+    const {data: response} = await apiClient.get<Stack | null>(`/api/stack/key/${key}.json`);
 
     return response;
   } catch (error) {

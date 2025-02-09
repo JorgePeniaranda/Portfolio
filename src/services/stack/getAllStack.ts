@@ -13,7 +13,7 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  */
 export async function getAllStack(pagination?: PaginationRequest): Promise<Stack[]> {
   try {
-    const {data: response} = await apiClient.get<Stack[]>("/api/stack/get/all.json", {
+    const {data: response} = await apiClient.get<Stack[]>("/api/stack.json", {
       params: pagination,
     });
 

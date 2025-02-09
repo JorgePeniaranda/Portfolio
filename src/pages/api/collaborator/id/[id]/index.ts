@@ -21,7 +21,7 @@ export const PUT: APIRoute = async ({request, params}) => {
 
     const updatedCollaborator = await databaseClient.collaborator.update({
       data: validationResult,
-      where: {id: id},
+      where: {id},
     });
 
     return Response.json(updatedCollaborator, {status: 200});

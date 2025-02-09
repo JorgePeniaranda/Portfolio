@@ -26,8 +26,8 @@ import {
 } from "@/components/ui/select";
 import {isDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
-import {patchStackAddAssociatedProjects} from "@/services/stack/patchStackAddAssociatedProjects";
-import {patchStackRemoveAssociatedProjects} from "@/services/stack/patchStackRemoveAssociatedProjects";
+import {postStackAddAssociatedProjects} from "@/services/stack/postStackAddAssociatedProjects";
+import {deleteStackRemoveAssociatedProjects} from "@/services/stack/deleteStackRemoveAssociatedProjects";
 import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 export function UpdateProjectsRelatedToStack({
@@ -61,7 +61,7 @@ export function UpdateProjectsRelatedToStack({
   const onAddProject = async (values: RelationshipsSchema) => {
     try {
       // Send request to associate the project to the stack
-      await patchStackAddAssociatedProjects({
+      await postStackAddAssociatedProjects({
         idFrom: Number(values.idFrom),
         idTo: Number(values.idTo),
       });
@@ -97,7 +97,7 @@ export function UpdateProjectsRelatedToStack({
   const onRemoveProject = async (idProject: number) => {
     try {
       // Send request to dissociate the project with the stack
-      await patchStackRemoveAssociatedProjects({
+      await deleteStackRemoveAssociatedProjects({
         idFrom: currentStack.id,
         idTo: idProject,
       });

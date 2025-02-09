@@ -1,5 +1,7 @@
 import type {APIRoute} from "astro";
 
+import {z} from "zod";
+
 import {databaseClient} from "@/helpers/client/prisma";
 import {handleApiError} from "@/helpers/error/api-handler";
 import {StackUpdateSchema} from "@/schemas/stack/update";
@@ -10,14 +12,16 @@ import {StackUpdateSchema} from "@/schemas/stack/update";
  * - Validates it using the `StackUpdateSchema`.
  * - Updates the stack in the database.
  */
-export const PUT: APIRoute = async ({request}) => {
+export const PUT: APIRoute = async ({request, params}) => {
   try {
+    const id = z.coerce.number().parse(params.id);
     const body = await request.json();
+
     const validationResult = StackUpdateSchema.parse(body);
 
     const updatedStack = await databaseClient.stack.update({
       data: validationResult,
-      where: {id: validationResult.id},
+      where: {id},
     });
 
     return Response.json(updatedStack, {status: 200});

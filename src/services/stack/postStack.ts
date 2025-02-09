@@ -12,7 +12,7 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  */
 export async function postStack(stackUpdateInput: Prisma.StackUpdateInput): Promise<Stack> {
   try {
-    const {data: response} = await apiClient.post<Stack>("/api/stack/create", stackUpdateInput);
+    const {data: response} = await apiClient.post<Stack>("/api/stack", stackUpdateInput);
 
     return response;
   } catch (error) {

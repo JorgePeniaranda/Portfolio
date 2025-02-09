@@ -13,7 +13,9 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  */
 export async function deleteStack(stackIds: Stack["id"][]): Promise<DeleteResponse> {
   try {
-    const {data: response} = await apiClient.post<DeleteResponse>("/api/stack/delete", stackIds);
+    const {data: response} = await apiClient.delete<DeleteResponse>("/api/stack", {
+      data: stackIds,
+    });
 
     return response;
   } catch (error) {

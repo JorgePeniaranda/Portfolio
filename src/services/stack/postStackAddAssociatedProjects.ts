@@ -11,14 +11,12 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  * @returns A promise with the stack data.
  * @throws An error if the project could not be added to the stack.
  */
-export async function patchStackAddAssociatedProjects(
+export async function postStackAddAssociatedProjects(
   relationshipSchema: RelationshipsSchema,
 ): Promise<Stack> {
   try {
-    const {data: response} = await apiClient.patch<Stack>(
-      "/api/stack/relations/project/add",
-      relationshipSchema,
-    );
+    const {idFrom, idTo} = relationshipSchema;
+    const {data: response} = await apiClient.post<Stack>(`/api/stack/id/${idFrom}/project/${idTo}`);
 
     return response;
   } catch (error) {

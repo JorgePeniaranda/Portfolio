@@ -38,7 +38,10 @@ export function UpdateStackForm({
   const onSubmit = async (values: StackUpdateSchema) => {
     try {
       // Send request to update the stack
-      await putStack(values);
+      await putStack({
+        idStack: currentStack.id,
+        stackUpdateInput: values,
+      });
 
       // If the request was successful, show a success toast
       toast({

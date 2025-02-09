@@ -11,13 +11,13 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  * @returns A promise with the stack data.
  * @throws An error if the project could not be removed from the stack.
  */
-export async function patchStackRemoveAssociatedProjects(
+export async function deleteStackRemoveAssociatedProjects(
   relationshipSchema: RelationshipsSchema,
 ): Promise<Stack> {
   try {
-    const {data: response} = await apiClient.patch<Stack>(
-      "/api/stack/relations/project/delete",
-      relationshipSchema,
+    const {idFrom, idTo} = relationshipSchema;
+    const {data: response} = await apiClient.delete<Stack>(
+      `/api/stack/id/${idFrom}/project/${idTo}`,
     );
 
     return response;
