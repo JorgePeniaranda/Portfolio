@@ -60,19 +60,24 @@ export const DELETE: APIRoute = async ({params}) => {
 };
 
 export const getStaticPaths = (async () => {
+  const projects = await databaseClient.project.findMany({
+    select: {
+      id: true,
+    },
+  });
+
   const collaborators = await databaseClient.collaborator.findMany({
     select: {
       id: true,
     },
   });
 
-  // const projects = await databaseClient.project.findMany({
-  //   select: {
-  //     id: true,
-  //   },
-  // });
-
-  return collaborators.map((collaborator) => ({
-    params: {idProject: collaborator.id},
-  }));
+  return projects.flatMap((project) =>
+    collaborators.map((collaborator) => ({
+      params: {
+        id: project.id,
+        idCollaborator: collaborator.id,
+      },
+    })),
+  );
 }) satisfies GetStaticPaths;

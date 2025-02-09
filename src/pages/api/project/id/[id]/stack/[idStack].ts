@@ -66,13 +66,18 @@ export const getStaticPaths = (async () => {
     },
   });
 
-  // const projects = await databaseClient.project.findMany({
-  //   select: {
-  //     id: true,
-  //   },
-  // });
+  const projects = await databaseClient.project.findMany({
+    select: {
+      id: true,
+    },
+  });
 
-  return stacks.map((stack) => ({
-    params: {idProject: stack.id},
-  }));
+  return projects.flatMap((project) =>
+    stacks.map((stack) => ({
+      params: {
+        idProject: project.id,
+        idCollaborator: stack.id,
+      },
+    })),
+  );
 }) satisfies GetStaticPaths;
