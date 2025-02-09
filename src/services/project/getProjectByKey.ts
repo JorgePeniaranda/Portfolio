@@ -12,9 +12,7 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  */
 export async function getProjectByKey({key}: {key: Project["key"]}): Promise<Project | null> {
   try {
-    const {data: response} = await apiClient.get<Project | null>(
-      `/api/project/get/key/${key}.json`,
-    );
+    const {data: response} = await apiClient.get<Project | null>(`/api/project/key/${key}.json`);
 
     return response;
   } catch (error) {

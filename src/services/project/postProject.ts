@@ -12,7 +12,7 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  */
 export async function postProject(projectInput: Prisma.ProjectCreateInput): Promise<Project> {
   try {
-    const {data: response} = await apiClient.post<Project>("/api/project/create", projectInput);
+    const {data: response} = await apiClient.post<Project>("/api/project", projectInput);
 
     return response;
   } catch (error) {

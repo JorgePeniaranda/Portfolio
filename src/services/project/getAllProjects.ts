@@ -13,7 +13,7 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  */
 export async function getAllProjects(pagination?: PaginationRequest): Promise<Project[]> {
   try {
-    const {data: response} = await apiClient.get<Project[]>("/api/project/get/all.json", {
+    const {data: response} = await apiClient.get<Project[]>("/api/project.json", {
       params: pagination,
     });
 

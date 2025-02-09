@@ -27,8 +27,8 @@ import {
 } from "@/components/ui/select";
 import {isDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
-import {patchProjectAddAssociatedCollaborator} from "@/services/project/patchProjectAddAssociatedCollaborator";
-import {patchProjectRemoveAssociatedCollaborator} from "@/services/project/patchProjectRemoveAssociatedCollaborator";
+import {patchProjectAddAssociatedCollaborator} from "@/services/project/postProjectAddAssociatedCollaborator";
+import {deleteProjectRemoveAssociatedCollaborator} from "@/services/project/deleteProjectRemoveAssociatedCollaborator";
 import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 export function UpdateCollaboratorRelatedToProject({
@@ -106,7 +106,7 @@ export function UpdateCollaboratorRelatedToProject({
   const onRemoveCollaborator = async (collaboratorId: number) => {
     try {
       // Send request to dissociate the collaborator with the project
-      await patchProjectRemoveAssociatedCollaborator({
+      await deleteProjectRemoveAssociatedCollaborator({
         idFrom: currentProject.id,
         idTo: collaboratorId,
       });

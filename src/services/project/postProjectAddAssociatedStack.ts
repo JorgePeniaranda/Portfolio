@@ -15,9 +15,9 @@ export async function patchProjectAddAssociatedStack(
   relationshipSchema: RelationshipsSchema,
 ): Promise<Project> {
   try {
-    const {data: response} = await apiClient.patch<Project>(
-      "/api/project/relations/stack/add",
-      relationshipSchema,
+    const {idFrom, idTo} = relationshipSchema;
+    const {data: response} = await apiClient.post<Project>(
+      `/api/project/id/${idFrom}/stack/${idTo}`,
     );
 
     return response;

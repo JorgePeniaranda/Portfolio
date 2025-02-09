@@ -45,7 +45,10 @@ export function UpdateProjectForm({
   const onSubmit = async (values: ProjectUpdateSchema) => {
     try {
       // Send request to update the project
-      await putProject(values);
+      await putProject({
+        idProject: currentProject.id,
+        projectUpdateInput: values,
+      });
 
       // If the request was successful, show a success toast
       toast({

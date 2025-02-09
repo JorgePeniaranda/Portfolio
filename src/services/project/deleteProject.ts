@@ -13,10 +13,9 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  */
 export async function deleteProject(projectIds: Project["id"][]): Promise<DeleteResponse> {
   try {
-    const {data: response} = await apiClient.post<DeleteResponse>(
-      "/api/project/delete",
-      projectIds,
-    );
+    const {data: response} = await apiClient.delete<DeleteResponse>("/api/project", {
+      data: projectIds,
+    });
 
     return response;
   } catch (error) {

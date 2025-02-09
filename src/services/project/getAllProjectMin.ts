@@ -20,7 +20,7 @@ export async function getAllProjectMin(
 ): Promise<IGetAllProjectMinResponse> {
   try {
     const {data: response} = await apiClient.get<IGetAllProjectMinResponse>(
-      "/api/project/get/min/all.json",
+      "/api/project/min.json",
       {
         params: pagination,
       },

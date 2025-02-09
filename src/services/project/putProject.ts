@@ -10,10 +10,16 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  * @returns The updated project.
  * @throws An error if the operation fails.
  */
-export async function putProject(projectUpdateInput: Prisma.ProjectUpdateInput): Promise<Project> {
+export async function putProject({
+  idProject,
+  projectUpdateInput,
+}: {
+  idProject: Project["id"];
+  projectUpdateInput: Prisma.ProjectUpdateInput;
+}): Promise<Project> {
   try {
     const {data: response} = await apiClient.put<Project>(
-      "/api/project/update",
+      `/api/project/id/${idProject}`,
       projectUpdateInput,
     );
 
