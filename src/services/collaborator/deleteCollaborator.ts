@@ -16,10 +16,9 @@ export async function deleteCollaborator(
   collaboratorIds: Array<Collaborator["id"]>,
 ): Promise<DeleteResponse> {
   try {
-    const {data: response} = await apiClient.post<DeleteResponse>(
-      "/api/collaborator/delete",
-      collaboratorIds,
-    );
+    const {data: response} = await apiClient.delete<DeleteResponse>("/api/collaborator", {
+      data: collaboratorIds,
+    });
 
     return response;
   } catch (error) {

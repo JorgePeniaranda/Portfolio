@@ -10,12 +10,16 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  * @returns The updated collaborator.
  * @throws An error if the operation fails.
  */
-export async function putCollaborator(
-  updatedCollaborator: Prisma.CollaboratorUpdateInput,
-): Promise<Collaborator> {
+export async function putCollaborator({
+  idCollaborator,
+  updatedCollaborator,
+}: {
+  idCollaborator: Collaborator["id"];
+  updatedCollaborator: Prisma.CollaboratorUpdateInput;
+}): Promise<Collaborator> {
   try {
     const {data: response} = await apiClient.put<Collaborator>(
-      "/api/collaborator/update",
+      `/api/collaborator/id/${idCollaborator}`,
       updatedCollaborator,
     );
 

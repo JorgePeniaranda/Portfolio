@@ -4,7 +4,7 @@ import {describe, it, vi, expect, beforeEach, type Mock} from "vitest";
 import {createContext} from "astro/middleware";
 
 import {databaseClient} from "@/helpers/client/prisma";
-import {PATCH} from "@/pages/api/collaborator/relations/project/delete";
+import {PATCH} from "@/pages/api/collaborator/id/[id]/project/delete";
 import {RelationshipsSchema} from "@/schemas/common/relationships";
 
 vi.mock("@/helpers/client/prisma", () => ({

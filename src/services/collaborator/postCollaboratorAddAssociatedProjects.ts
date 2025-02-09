@@ -10,13 +10,13 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  * @returns A promise with the collaborator and project data.
  * @throws An error if the collaborator and project data could not be added.
  */
-export async function patchCollaboratorAddAssociatedProjects(
+export async function postCollaboratorAddAssociatedProjects(
   relationSchema: RelationshipsSchema,
 ): Promise<void> {
   try {
-    const {data: response} = await apiClient.patch<void>(
-      "/api/collaborator/relations/project/add",
-      relationSchema,
+    const {idFrom, idTo} = relationSchema;
+    const {data: response} = await apiClient.post<void>(
+      `/api/collaborator/id/${idFrom}/project/${idTo}`,
     );
 
     return response;

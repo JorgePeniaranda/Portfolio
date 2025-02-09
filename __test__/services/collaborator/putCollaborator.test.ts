@@ -33,7 +33,10 @@ describe("putCollaborator", () => {
 
     // Simulate a resolved promise for apiClient.put
     vi.mocked(apiClient.put).mockResolvedValueOnce(mockResponse);
-    const response = await putCollaborator(input);
+    const response = await putCollaborator({
+      idCollaborator: 1,
+      updatedCollaborator: input,
+    });
 
     // Validate response and apiClient call
     expect(response).toEqual(mockResponse.data);
@@ -67,7 +70,10 @@ describe("putCollaborator", () => {
     vi.mocked(apiClient.put).mockRejectedValueOnce(mockError);
 
     try {
-      await putCollaborator(input);
+      await putCollaborator({
+        idCollaborator: 1,
+        updatedCollaborator: input,
+      });
     } catch (error) {
       // Validate error handling and apiClient call
       expect(error).toBeInstanceOf(Error);

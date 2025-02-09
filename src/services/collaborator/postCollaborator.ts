@@ -15,7 +15,7 @@ export async function postCollaborator(
 ): Promise<Collaborator> {
   try {
     const {data: response} = await apiClient.post<Collaborator>(
-      "/api/collaborator/create",
+      "/api/collaborator",
       newCollaborator,
     );
 

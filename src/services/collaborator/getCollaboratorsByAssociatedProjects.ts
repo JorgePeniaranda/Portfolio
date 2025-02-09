@@ -21,7 +21,7 @@ export async function getCollaboratorsByAssociatedProjects({
 }): Promise<Collaborator[]> {
   try {
     const {data: response} = await apiClient.get<Collaborator[]>(
-      `/api/collaborator/get/related/project/${idProject}.json`,
+      `/api/collaborator/related/project/${idProject}.json`,
       {
         params: pagination,
       },

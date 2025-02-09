@@ -30,7 +30,10 @@ export function UpdateCollaboratorForm({
   const onSubmit = async (values: CollaboratorUpdateSchema) => {
     try {
       // Send request to update the collaborator
-      await putCollaborator(values);
+      await putCollaborator({
+        idCollaborator: currentCollaborator.id,
+        updatedCollaborator: values,
+      });
 
       // If the request was successful, show a success toast
       toast({

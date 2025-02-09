@@ -13,7 +13,7 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  */
 export async function getAllCollaborator(pagination?: PaginationRequest): Promise<Collaborator[]> {
   try {
-    const {data: response} = await apiClient.get<Collaborator[]>("/api/collaborator/get/all.json", {
+    const {data: response} = await apiClient.get<Collaborator[]>("/api/collaborator.json", {
       params: pagination,
     });
 

@@ -10,13 +10,13 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  * @returns A promise with the collaborator and project data.
  * @throws An error if the collaborator and project data could not be removed.
  */
-export async function patchCollaboratorRemoveAssociatedProjects(
+export async function deleteCollaboratorRemoveAssociatedProjects(
   relationSchema: RelationshipsSchema,
 ): Promise<void> {
   try {
-    const {data: response} = await apiClient.patch<void>(
-      "/api/collaborator/relations/project/delete",
-      relationSchema,
+    const {idFrom, idTo} = relationSchema;
+    const {data: response} = await apiClient.delete<void>(
+      `/api/collaborator/id/${idFrom}/project/${idTo}`,
     );
 
     return response;

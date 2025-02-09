@@ -26,8 +26,8 @@ import {
 } from "@/components/ui/select";
 import {isDefined} from "@/helpers/guards/is-defined";
 import {useToast} from "@/hooks/use-toast";
-import {patchCollaboratorAddAssociatedProjects} from "@/services/collaborator/patchCollaboratorAddAssociatedProjects";
-import {patchCollaboratorRemoveAssociatedProjects} from "@/services/collaborator/patchCollaboratorRemoveAssociatedProjects";
+import {postCollaboratorAddAssociatedProjects} from "@/services/collaborator/postCollaboratorAddAssociatedProjects";
+import {deleteCollaboratorRemoveAssociatedProjects} from "@/services/collaborator/deleteCollaboratorRemoveAssociatedProjects";
 import {handleErrorWithToast} from "@/helpers/error/toast-handler";
 
 export function UpdateProjectsRelatedToCollaborator({
@@ -61,7 +61,7 @@ export function UpdateProjectsRelatedToCollaborator({
   const onAddProject = async (values: RelationshipsSchema) => {
     try {
       // Send request to associate the project to the collaborator
-      await patchCollaboratorAddAssociatedProjects({
+      await postCollaboratorAddAssociatedProjects({
         idFrom: Number(values.idFrom),
         idTo: Number(values.idTo),
       });
@@ -98,7 +98,7 @@ export function UpdateProjectsRelatedToCollaborator({
   const onRemoveProject = async (idProject: number) => {
     try {
       // Send request to dissociate the project from the collaborator
-      await patchCollaboratorRemoveAssociatedProjects({
+      await deleteCollaboratorRemoveAssociatedProjects({
         idFrom: currentCollaborator.id,
         idTo: idProject,
       });

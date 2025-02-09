@@ -4,7 +4,7 @@ import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
 import {describe, expect, it, vi} from "vitest";
 
 import {apiClient} from "@/helpers/client/axios";
-import {patchCollaboratorAddAssociatedProjects} from "@/services/collaborator/patchCollaboratorAddAssociatedProjects";
+import {postCollaboratorAddAssociatedProjects} from "@/services/collaborator/postCollaboratorAddAssociatedProjects";
 
 // Mock the apiClient module
 vi.mock("@/helpers/client/axios");
@@ -31,7 +31,7 @@ describe("patchCollaboratorAddAssociatedProjects", () => {
 
     // Simulate a resolved promise for apiClient.patch
     vi.mocked(apiClient.patch).mockResolvedValueOnce(mockResponse);
-    const response = await patchCollaboratorAddAssociatedProjects(input);
+    const response = await postCollaboratorAddAssociatedProjects(input);
 
     // Validate response and apiClient call
     expect(response).toEqual(mockResponse.data);
@@ -65,7 +65,7 @@ describe("patchCollaboratorAddAssociatedProjects", () => {
     vi.mocked(apiClient.patch).mockRejectedValueOnce(mockError);
 
     try {
-      await patchCollaboratorAddAssociatedProjects(input);
+      await postCollaboratorAddAssociatedProjects(input);
     } catch (error) {
       // Validate error handling and apiClient call
       expect(error).toBeInstanceOf(Error);
