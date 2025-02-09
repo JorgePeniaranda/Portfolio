@@ -13,7 +13,6 @@ const projectStatusValues = Object.values(ProjectStatus) as [
 ];
 
 export const ProjectUpdateSchema = z.object({
-  id: z.number(),
   key: z.string().min(1),
   name: z.string().min(1),
   status: z.enum(projectStatusValues),
