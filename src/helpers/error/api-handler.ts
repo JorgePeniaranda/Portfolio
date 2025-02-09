@@ -20,9 +20,18 @@ export function handleApiError(error: unknown): Response {
 
     return Response.json(
       {
-        error: message,
+        type: "PrismaError",
+        title: "A Prisma error occurred.",
+        status: statusCode,
+        detail: message,
       } satisfies ErrorResponse,
-      {status: statusCode},
+      {
+        status: statusCode,
+        statusText: "Bad Request",
+        headers: {
+          "Content-Type": "application/problem+json",
+        },
+      },
     );
   }
 
@@ -32,18 +41,41 @@ export function handleApiError(error: unknown): Response {
 
     return Response.json(
       {
-        error: errorTextReduce,
-        errors: errorList,
+        type: "ValidationError",
+        title: "A validation error occurred.",
+        status: 400,
+        detail: errorTextReduce,
+        errors: errorList.map((error) => ({
+          type: "ValidationError",
+          title: "A validation error occurred.",
+          status: 400,
+          detail: error,
+        })),
       } satisfies ErrorResponse,
-      {status: 400},
+      {
+        status: 400,
+        statusText: "Bad Request",
+        headers: {
+          "Content-Type": "application/problem+json",
+        },
+      },
     );
   }
 
   // Else, return a generic 500 error response
   return Response.json(
     {
-      error: error instanceof Error ? error.message : "Unknown error occurred.",
+      type: "InternalServerError",
+      title: "An internal server error occurred.",
+      status: 500,
+      detail: error instanceof Error ? error.message : "Unknown error occurred.",
     } satisfies ErrorResponse,
-    {status: 500},
+    {
+      status: 500,
+      statusText: "Internal Server Error",
+      headers: {
+        "Content-Type": "application/problem+json",
+      },
+    },
   );
 }
