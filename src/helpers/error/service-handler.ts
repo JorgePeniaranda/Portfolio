@@ -41,11 +41,11 @@ export function handleServiceError({
   }
 
   if (isDefined(responseData.errors?.length) && responseData.errors.length > 0) {
-    return new Error(responseData.errors.join("\n"));
+    return new Error(responseData.errors.map((error) => error.detail).join("\n"));
   }
 
-  if (isDefined(responseData.error)) {
-    return new Error(responseData.error);
+  if (isDefined(responseData.title)) {
+    return new Error(responseData.title);
   }
 
   return new Error(defaultErrorMessage);
