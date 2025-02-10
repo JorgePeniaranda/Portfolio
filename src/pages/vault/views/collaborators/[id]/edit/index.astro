@@ -58,10 +58,7 @@ const availableProjects = await getProjectsByNotAssociatedCollaborator({
   >
     <main class="w-full h-full flex flex-col pt-7 pl-7 container mx-auto gap-5">
       <h1 class="text-4xl font-medium">Editar Colaborador</h1>
-      <UpdateCollaboratorForm
-        currentCollaborator={collaborator}
-        client:load
-      />
+      <UpdateCollaboratorForm currentCollaborator={collaborator} client:load />
       <div class="mt-10">
         <h2 class="text-3xl font-medium">Editar relaciones</h2>
         <div class="mx-5 mt-5">

@@ -54,10 +54,7 @@ const availableProjects = await getProjectsByNotAssociatedStack({
   >
     <main class="w-full h-full flex flex-col pt-7 pl-7 container mx-auto gap-5">
       <h1 class="text-4xl font-medium">Editar Stack</h1>
-      <UpdateStackForm
-        currentStack={stack}
-        client:load
-      />
+      <UpdateStackForm currentStack={stack} client:load />
       <div class="mt-10">
         <h2 class="text-3xl font-medium">Relaciones</h2>
         <div class="mx-5 mt-5">
