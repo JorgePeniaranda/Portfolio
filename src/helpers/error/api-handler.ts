@@ -29,7 +29,6 @@ export function handleApiError(error: unknown, url?: URL): Response {
       } satisfies ErrorResponse,
       {
         status: statusCode,
-        statusText: "Bad Request",
         headers: {
           "Content-Type": "application/problem+json",
         },
@@ -57,7 +56,6 @@ export function handleApiError(error: unknown, url?: URL): Response {
       } satisfies ErrorResponse,
       {
         status: 400,
-        statusText: "Bad Request",
         headers: {
           "Content-Type": "application/problem+json",
         },
@@ -76,7 +74,6 @@ export function handleApiError(error: unknown, url?: URL): Response {
     } satisfies ErrorResponse,
     {
       status: 500,
-      statusText: "Internal Server Error",
       headers: {
         "Content-Type": "application/problem+json",
       },
