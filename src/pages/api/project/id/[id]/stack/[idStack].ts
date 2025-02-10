@@ -75,8 +75,8 @@ export const getStaticPaths = (async () => {
   return projects.flatMap((project) =>
     stacks.map((stack) => ({
       params: {
-        idProject: project.id,
-        idCollaborator: stack.id,
+        id: project.id,
+        idStack: stack.id,
       },
     })),
   );
