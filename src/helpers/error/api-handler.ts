@@ -13,17 +13,18 @@ import {handleZodError} from "./zod-handler";
  * @param {unknown} error - The error object to handle.
  * @returns {Response} A response object containing the error message and status code.
  */
-export function handleApiError(error: unknown): Response {
+export function handleApiError(error: unknown, url: URL): Response {
   // If the error is a Prisma error
   if (isPrismaError(error)) {
     const {statusCode, message} = prismaHandler(error);
 
     return Response.json(
       {
-        type: "PrismaError",
-        title: "A Prisma error occurred.",
-        status: statusCode,
         detail: message,
+        instance: url.pathname,
+        status: statusCode,
+        title: "An operation failed while processing the request.",
+        type: "OperationFailedError",
       } satisfies ErrorResponse,
       {
         status: statusCode,
@@ -41,9 +42,6 @@ export function handleApiError(error: unknown): Response {
 
     return Response.json(
       {
-        type: "ValidationError",
-        title: "A validation error occurred.",
-        status: 400,
         detail: errorTextReduce,
         fieldErrors: errorList.map((error) => ({
           type: "ValidationError",
@@ -51,6 +49,10 @@ export function handleApiError(error: unknown): Response {
           status: 400,
           detail: error,
         })),
+        instance: url.pathname,
+        status: 400,
+        title: "A validation error occurred.",
+        type: "ValidationError",
       } satisfies ErrorResponse,
       {
         status: 400,
@@ -65,10 +67,11 @@ export function handleApiError(error: unknown): Response {
   // Else, return a generic 500 error response
   return Response.json(
     {
-      type: "InternalServerError",
-      title: "An internal server error occurred.",
-      status: 500,
       detail: error instanceof Error ? error.message : "Unknown error occurred.",
+      instance: url.pathname,
+      status: 500,
+      title: "An internal server error occurred.",
+      type: "InternalServerError",
     } satisfies ErrorResponse,
     {
       status: 500,
