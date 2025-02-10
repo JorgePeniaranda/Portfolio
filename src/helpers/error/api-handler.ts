@@ -11,9 +11,10 @@ import {handleZodError} from "./zod-handler";
  * A helper function that formats API errors into a readable error response.
  *
  * @param {unknown} error - The error object to handle.
+ * @param {URL} [url] - The URL object to include in the error response.
  * @returns {Response} A response object containing the error message and status code.
  */
-export function handleApiError(error: unknown, url: URL): Response {
+export function handleApiError(error: unknown, url?: URL): Response {
   // If the error is a Prisma error
   if (isPrismaError(error)) {
     const {statusCode, message} = prismaHandler(error);
@@ -21,7 +22,7 @@ export function handleApiError(error: unknown, url: URL): Response {
     return Response.json(
       {
         detail: message,
-        instance: url.pathname,
+        instance: url?.pathname,
         status: statusCode,
         title: "An operation failed while processing the request.",
         type: "OperationFailedError",
@@ -49,7 +50,7 @@ export function handleApiError(error: unknown, url: URL): Response {
           status: 400,
           detail: error,
         })),
-        instance: url.pathname,
+        instance: url?.pathname,
         status: 400,
         title: "A validation error occurred.",
         type: "ValidationError",
@@ -68,7 +69,7 @@ export function handleApiError(error: unknown, url: URL): Response {
   return Response.json(
     {
       detail: error instanceof Error ? error.message : "Unknown error occurred.",
-      instance: url.pathname,
+      instance: url?.pathname,
       status: 500,
       title: "An internal server error occurred.",
       type: "InternalServerError",
