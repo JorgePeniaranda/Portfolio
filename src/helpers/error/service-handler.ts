@@ -41,7 +41,9 @@ export function handleServiceError({
   }
 
   if (isDefined(responseData.fieldErrors?.length) && responseData.fieldErrors.length > 0) {
-    return new Error(responseData.fieldErrors.map((error) => error.detail).join("\n"));
+    return new Error(
+      responseData.fieldErrors.map((error) => `${error.field}: ${error.message}`).join("\n"),
+    );
   }
 
   if (isDefined(responseData.title)) {
