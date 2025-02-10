@@ -12,7 +12,7 @@ import {StackCreateSchema} from "@/schemas/stack/create";
  * - Validates it using the `StackCreateSchema`.
  * - Creates a new stack in the database.
  */
-export const POST: APIRoute = async ({request}) => {
+export const POST: APIRoute = async ({request, url}) => {
   try {
     const body = await request.json();
     const validationResult = StackCreateSchema.parse(body);
@@ -23,7 +23,7 @@ export const POST: APIRoute = async ({request}) => {
 
     return Response.json(response, {status: 201});
   } catch (error) {
-    return handleApiError(error);
+    return handleApiError(error, url);
   }
 };
 
@@ -33,7 +33,7 @@ export const POST: APIRoute = async ({request}) => {
  * - Validates it as an array of numbers (IDs).
  * - Deletes stacks from the database.
  */
-export const DELETE: APIRoute = async ({request}) => {
+export const DELETE: APIRoute = async ({request, url}) => {
   try {
     const body = await request.json();
     const validationResult = z.array(z.number()).parse(body);
@@ -44,6 +44,6 @@ export const DELETE: APIRoute = async ({request}) => {
 
     return Response.json(deletedItemsCount, {status: 200});
   } catch (error) {
-    return handleApiError(error);
+    return handleApiError(error, url);
   }
 };

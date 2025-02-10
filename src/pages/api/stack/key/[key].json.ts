@@ -8,7 +8,7 @@ import {handleApiError} from "@/helpers/error/api-handler";
 /**
  * GET handler to fetch a stack.
  */
-export const GET: APIRoute = async ({params}) => {
+export const GET: APIRoute = async ({params, url}) => {
   try {
     const key = z.coerce.string().parse(params.key);
 
@@ -20,7 +20,7 @@ export const GET: APIRoute = async ({params}) => {
 
     return Response.json(fetchedStack, {status: 200});
   } catch (error) {
-    return handleApiError(error);
+    return handleApiError(error, url);
   }
 };
 

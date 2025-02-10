@@ -12,7 +12,7 @@ import {ProjectUpdateSchema} from "@/schemas/project/update";
  * - Validates it using the `ProjectUpdateSchema`.
  * - Updates the project in the database.
  */
-export const PUT: APIRoute = async ({request, params}) => {
+export const PUT: APIRoute = async ({request, params, url}) => {
   try {
     const id = z.coerce.number().parse(params.id);
     const body = await request.json();
@@ -26,7 +26,7 @@ export const PUT: APIRoute = async ({request, params}) => {
 
     return Response.json(updatedProject, {status: 200});
   } catch (error) {
-    return handleApiError(error);
+    return handleApiError(error, url);
   }
 };
 

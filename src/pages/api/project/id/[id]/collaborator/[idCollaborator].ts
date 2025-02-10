@@ -10,7 +10,7 @@ import {handleApiError} from "@/helpers/error/api-handler";
  * - Parses and validates the params.
  * - Connects the specified collaborator to the project in the database.
  */
-export const POST: APIRoute = async ({params}) => {
+export const POST: APIRoute = async ({params, url}) => {
   try {
     const idFrom = z.coerce.number().parse(params.id);
     const idTo = z.coerce.number().parse(params.idCollaborator);
@@ -28,7 +28,7 @@ export const POST: APIRoute = async ({params}) => {
 
     return new Response(null, {status: 204});
   } catch (error) {
-    return handleApiError(error);
+    return handleApiError(error, url);
   }
 };
 
@@ -37,7 +37,7 @@ export const POST: APIRoute = async ({params}) => {
  * - Parses and validates the params.
  * - Disconnects the specified collaborator from the project in the database.
  */
-export const DELETE: APIRoute = async ({params}) => {
+export const DELETE: APIRoute = async ({params, url}) => {
   try {
     const idFrom = z.coerce.number().parse(params.id);
     const idTo = z.coerce.number().parse(params.idCollaborator);
@@ -55,7 +55,7 @@ export const DELETE: APIRoute = async ({params}) => {
 
     return new Response(null, {status: 204});
   } catch (error) {
-    return handleApiError(error);
+    return handleApiError(error, url);
   }
 };
 

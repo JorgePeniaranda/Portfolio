@@ -9,7 +9,7 @@ import {fromPaginationRequestToPrismaPagination} from "@/mappers/common/fromPagi
  * GET handler to fetch a paginated list of projects.
  * - Pagination is optional. If provided, it must be a positive numeric value greater than 0.
  */
-export const GET: APIRoute = async ({request}) => {
+export const GET: APIRoute = async ({request, url}) => {
   try {
     const paginationParams = BuildPaginationByURL(request.url);
 
@@ -27,6 +27,6 @@ export const GET: APIRoute = async ({request}) => {
 
     return Response.json(fetchedProjects, {status: 200});
   } catch (error) {
-    return handleApiError(error);
+    return handleApiError(error, url);
   }
 };

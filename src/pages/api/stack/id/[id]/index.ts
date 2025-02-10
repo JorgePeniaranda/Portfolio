@@ -12,7 +12,7 @@ import {StackUpdateSchema} from "@/schemas/stack/update";
  * - Validates it using the `StackUpdateSchema`.
  * - Updates the stack in the database.
  */
-export const PUT: APIRoute = async ({request, params}) => {
+export const PUT: APIRoute = async ({request, params, url}) => {
   try {
     const id = z.coerce.number().parse(params.id);
     const body = await request.json();
@@ -26,6 +26,6 @@ export const PUT: APIRoute = async ({request, params}) => {
 
     return Response.json(updatedStack, {status: 200});
   } catch (error) {
-    return handleApiError(error);
+    return handleApiError(error, url);
   }
 };

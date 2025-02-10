@@ -12,7 +12,7 @@ import {ProjectCreateSchema} from "@/schemas/project/create";
  * - Validates it using the `ProjectCreateSchema`.
  * - Creates a new projects in the database.
  */
-export const POST: APIRoute = async ({request}) => {
+export const POST: APIRoute = async ({request, url}) => {
   try {
     const body = await request.json();
     const validationResult = ProjectCreateSchema.parse(body);
@@ -23,7 +23,7 @@ export const POST: APIRoute = async ({request}) => {
 
     return Response.json(createdProject, {status: 201});
   } catch (error) {
-    return handleApiError(error);
+    return handleApiError(error, url);
   }
 };
 
@@ -33,7 +33,7 @@ export const POST: APIRoute = async ({request}) => {
  * - Validates it as an array of numbers (IDs).
  * - Deletes projects from the database.
  */
-export const DELETE: APIRoute = async ({request}) => {
+export const DELETE: APIRoute = async ({request, url}) => {
   try {
     const body = await request.json();
     const validationResult = z.array(z.number()).parse(body);
@@ -44,6 +44,6 @@ export const DELETE: APIRoute = async ({request}) => {
 
     return Response.json(deletedItemsCount, {status: 200});
   } catch (error) {
-    return handleApiError(error);
+    return handleApiError(error, url);
   }
 };

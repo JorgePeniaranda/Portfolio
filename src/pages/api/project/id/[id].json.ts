@@ -8,7 +8,7 @@ import {handleApiError} from "@/helpers/error/api-handler";
 /**
  * GET handler to fetch a project.
  */
-export const GET: APIRoute = async ({params}) => {
+export const GET: APIRoute = async ({params, url}) => {
   try {
     const id = z.coerce.number().parse(params.id);
 
@@ -20,7 +20,7 @@ export const GET: APIRoute = async ({params}) => {
 
     return Response.json(fetchedProject, {status: 200});
   } catch (error) {
-    return handleApiError(error);
+    return handleApiError(error, url);
   }
 };
 
