@@ -5,7 +5,9 @@ import {ProjectCard} from "@/components/molecules/cards/project-card";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectSeparator,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -17,6 +19,7 @@ import {
 import {isDefined} from "@/helpers/guards/is-defined";
 import {useProjectLikedStore} from "@/services/storage/liked-projects";
 import {ProjectSortType} from "@/types/project.d";
+import {Button} from "@/components/ui/button";
 
 /**
  * Component that renders a list of project cards, sorted by favorites.
@@ -38,6 +41,10 @@ export function ProjectCardsManager({
   const [sortType, setSortType] = useState<ProjectSortType>("liked");
   const [stackFilter, setStackFilter] = useState<StackCategory>();
   const [statusFilter, setStatusFilter] = useState<ProjectStatus>();
+
+  // key to select
+  const [stackKey, setStackKey] = useState(+new Date());
+  const [statusKey, setStatusKey] = useState(+new Date());
 
   // Memoized sorting of projects based on filters and sort type
   const sortedProjects = useMemo(() => {
@@ -128,24 +135,40 @@ export function ProjectCardsManager({
             Stack:
           </label>
           <Select
+            key={stackKey}
             value={stackFilter}
             onValueChange={(value: StackCategory) => {
               setStackFilter(value); // Update the stack filter
             }}
           >
-            <SelectTrigger className="w-[180px]" id="stack-select">
+            <SelectTrigger className="w-[180px]" id="stack-select" unselectable="on">
               <SelectValue placeholder="Filtrar por stack" />
             </SelectTrigger>
-            <SelectContent>
-              <SelectItem value={StackCategory.FULL_STACK}>
-                {STACK_CATEGORY_TRANSCRIPTIONS.FULL_STACK}
-              </SelectItem>
-              <SelectItem value={StackCategory.FRONT_END}>
-                {STACK_CATEGORY_TRANSCRIPTIONS.FRONT_END}
-              </SelectItem>
-              <SelectItem value={StackCategory.BACK_END}>
-                {STACK_CATEGORY_TRANSCRIPTIONS.BACK_END}
-              </SelectItem>
+            <SelectContent unselectable="on">
+              <SelectGroup>
+                <SelectItem value={StackCategory.FULL_STACK}>
+                  {STACK_CATEGORY_TRANSCRIPTIONS.FULL_STACK}
+                </SelectItem>
+                <SelectItem value={StackCategory.FRONT_END}>
+                  {STACK_CATEGORY_TRANSCRIPTIONS.FRONT_END}
+                </SelectItem>
+                <SelectItem value={StackCategory.BACK_END}>
+                  {STACK_CATEGORY_TRANSCRIPTIONS.BACK_END}
+                </SelectItem>
+                <SelectSeparator />
+              </SelectGroup>
+              <Button
+                className="w-full px-2"
+                size="sm"
+                variant="secondary"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setStackFilter(undefined);
+                  setStackKey(+new Date());
+                }}
+              >
+                Limpiar
+              </Button>
             </SelectContent>
           </Select>
         </li>
@@ -156,6 +179,7 @@ export function ProjectCardsManager({
             Estado:
           </label>
           <Select
+            key={statusKey}
             value={statusFilter}
             onValueChange={(value: ProjectStatus) => {
               setStatusFilter(value); // Update the status filter
@@ -165,15 +189,29 @@ export function ProjectCardsManager({
               <SelectValue placeholder="Filtrar por status" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value={ProjectStatus.FINISHED}>
-                {PROJECT_STATUS_TRANSCRIPTIONS.FINISHED}
-              </SelectItem>
-              <SelectItem value={ProjectStatus.IN_PROGRESS}>
-                {PROJECT_STATUS_TRANSCRIPTIONS.IN_PROGRESS}
-              </SelectItem>
-              <SelectItem value={ProjectStatus.STALLED}>
-                {PROJECT_STATUS_TRANSCRIPTIONS.STALLED}
-              </SelectItem>
+              <SelectGroup>
+                <SelectItem value={ProjectStatus.FINISHED}>
+                  {PROJECT_STATUS_TRANSCRIPTIONS.FINISHED}
+                </SelectItem>
+                <SelectItem value={ProjectStatus.IN_PROGRESS}>
+                  {PROJECT_STATUS_TRANSCRIPTIONS.IN_PROGRESS}
+                </SelectItem>
+                <SelectItem value={ProjectStatus.STALLED}>
+                  {PROJECT_STATUS_TRANSCRIPTIONS.STALLED}
+                </SelectItem>
+              </SelectGroup>
+              <Button
+                className="w-full px-2"
+                size="sm"
+                variant="secondary"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setStatusFilter(undefined);
+                  setStatusKey(+new Date());
+                }}
+              >
+                Limpiar
+              </Button>
             </SelectContent>
           </Select>
         </li>
