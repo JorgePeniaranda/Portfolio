@@ -24,10 +24,6 @@ import {Button} from "@/components/ui/button";
 /**
  * Component that renders a list of project cards, sorted by favorites.
  * The list is sorted such that liked projects appear first.
- *
- * @param {object} props - The component props.
- * @param {Array<Pick<Project, "id" | "key" | "name" | "logoUrl">>} props.projects - The list of projects to display.
- * @returns {JSX.Element} A sorted list of project cards.
  */
 export function ProjectCardsManager({
   projects,

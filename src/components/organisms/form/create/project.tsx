@@ -187,12 +187,7 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
                     </FormControl>
                   </PopoverTrigger>
                   <PopoverContent align="start" className="w-auto p-0">
-                    <Calendar
-                      initialFocus
-                      mode="single"
-                      selected={field.value}
-                      onSelect={field.onChange}
-                    />
+                    <Calendar mode="single" selected={field.value} onSelect={field.onChange} />
                   </PopoverContent>
                 </Popover>
                 <FormMessage />
@@ -227,7 +222,6 @@ export function CreateProjectForm({disableForm = false}: {disableForm?: boolean}
                   </PopoverTrigger>
                   <PopoverContent align="start" className="w-auto p-0">
                     <Calendar
-                      initialFocus
                       mode="single"
                       selected={field.value === null ? undefined : field.value}
                       onSelect={field.onChange}

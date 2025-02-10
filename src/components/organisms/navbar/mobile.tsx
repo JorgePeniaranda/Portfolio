@@ -15,10 +15,6 @@ import {useThemeStore} from "@/services/storage/theme";
 /**
  * MobileNavbar component renders a responsive navigation bar for mobile devices.
  * It displays navigation links, configuration buttons, and allows toggling of theme and sound.
- *
- * @param {object} props - The component props.
- * @param {INavbarSection[]} props.items - The list of navigation sections to display, each containing a list of items with labels, links, and icons.
- * @returns {JSX.Element} The mobile navigation bar with dropdown menus.
  */
 export function MobileNavbar({items}: {items: INavbarSection[]}) {
   const {theme, toggleTheme} = useThemeStore();

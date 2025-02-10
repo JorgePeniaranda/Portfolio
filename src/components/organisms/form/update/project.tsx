@@ -188,12 +188,7 @@ export function UpdateProjectForm({
                     </FormControl>
                   </PopoverTrigger>
                   <PopoverContent align="start" className="w-auto p-0">
-                    <Calendar
-                      initialFocus
-                      mode="single"
-                      selected={field.value}
-                      onSelect={field.onChange}
-                    />
+                    <Calendar mode="single" selected={field.value} onSelect={field.onChange} />
                   </PopoverContent>
                 </Popover>
                 <FormMessage />
@@ -228,7 +223,6 @@ export function UpdateProjectForm({
                   </PopoverTrigger>
                   <PopoverContent align="start" className="w-auto p-0">
                     <Calendar
-                      initialFocus
                       mode="single"
                       selected={field.value === null ? undefined : field.value}
                       onSelect={field.onChange}

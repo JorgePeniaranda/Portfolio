@@ -18,8 +18,6 @@ import {useSecretCodeStore} from "@/services/storage/secret-code";
 /**
  * Component that displays an interactive button to open a modal for entering a secret code.
  * If the entered code is correct, it shows a success message.
- *
- * @returns {JSX.Element} JSX element representing the button and interactive modal.
  */
 export function SecretButton() {
   // Retrieves the stored secret code and initializes the state for the entered value.

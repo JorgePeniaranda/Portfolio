@@ -13,9 +13,6 @@ import {useThemeStore} from "@/services/storage/theme";
 
 /**
  * Desktop navigation bar component.
- * @param {Object} props - The props object.
- * @param {INavbarSection[]} props.items - Array of navigation section objects.
- * @returns {JSX.Element} The navigation bar component.
  */
 export function DesktopNavbar({items}: {items: INavbarSection[]}) {
   const {theme, toggleTheme} = useThemeStore();
@@ -144,10 +141,6 @@ export function DesktopNavbar({items}: {items: INavbarSection[]}) {
 
 /**
  * A motion-enabled navigation item that animates based on mouse movement.
- * @param {Object} props - The props object.
- * @param {MotionValue<number>} props.mouseX - The motion value representing the mouse's X position.
- * @param {React.ReactNode} [props.children] - The content of the navigation item.
- * @returns {JSX.Element} The navigation item component.
  */
 function NavbarItem({mouseX, children}: {mouseX: MotionValue<number>; children?: React.ReactNode}) {
   const ref = useRef<HTMLLIElement>(null);
@@ -186,7 +179,6 @@ function NavbarItem({mouseX, children}: {mouseX: MotionValue<number>; children?:
 
 /**
  * A separator element between sections in the navigation bar.
- * @returns {JSX.Element} The separator element.
  */
 function NavbarSeparator() {
   return <hr className="h-8 w-0.5 bg-neutral-400/20 dark:bg-neutral-600/20" />;

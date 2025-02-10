@@ -4,14 +4,6 @@ import {Heart, HeartOff} from "lucide-react";
 
 import {useProjectLikedStore} from "@/services/storage/liked-projects";
 
-/**
- * Props for the ProjectCard component.
- * @typedef {Object} Props
- * @property {string} projectKey - The unique identifier for the project.
- * @property {string} name - The name of the project.
- * @property {string} logoURL - The URL of the project's logo image.
- * @property {string} primaryColor - The primary color for the card's background.
- */
 export interface Props {
   projectKey: string;
   name: string;
@@ -20,8 +12,6 @@ export interface Props {
 
 /**
  * ProjectCard component displays project details, allows the user to like/unlike it, and navigate to the project page.
- * @param {Props} props - The props for the component.
- * @returns {JSX.Element} The rendered component.
  */
 export function ProjectCard({projectKey, name, logoURL}: Props) {
   // Destructure functions for managing the liked projects state

@@ -8,10 +8,6 @@ import {useSecretCodeStore} from "@/services/storage/secret-code";
 /**
  * Component that displays an interactive button to reveal a digit of a secret code.
  * If the code has already been fully discovered, it shows a reminder message.
- *
- * @param {Object} props - Component properties.
- * @param {number} props.position - The position of the secret code digit to reveal.
- * @returns {JSX.Element} JSX element representing the button or the revealed digit.
  */
 export function SecretCodeHint({position}: {position: number}) {
   // Access the secret code and functions to unlock a digit.
