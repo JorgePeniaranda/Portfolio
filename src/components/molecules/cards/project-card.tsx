@@ -1,3 +1,5 @@
+import type {MouseEvent} from "react";
+
 import {Heart, HeartOff} from "lucide-react";
 
 import {useProjectLikedStore} from "@/services/storage/liked-projects";
@@ -29,7 +31,9 @@ export function ProjectCard({projectKey, name, logoURL}: Props) {
   const isLiked = checkLikedProject(projectKey);
 
   // Function to toggle the liked state when the heart icon is clicked
-  const handleClickHeart = () => {
+  const handleClickHeart = (e: MouseEvent<SVGSVGElement, globalThis.MouseEvent>) => {
+    e.stopPropagation();
+
     if (isLiked) {
       removeLikedProject(projectKey);
     } else {
