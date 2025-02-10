@@ -4,8 +4,6 @@ import {isDefined, isNotDefined} from "../guards/is-defined";
 import {isErrorResponse} from "../guards/is-error-response";
 import {devConsoleLog} from "../common/dev-console-log";
 
-import {ENV} from "@/constants/env";
-
 /**
  * Handle an error from a service.
  *
@@ -21,10 +19,6 @@ export function handleServiceError({
   defaultErrorMessage?: string;
 }): Error {
   devConsoleLog.log("Error in service: ", error);
-
-  if (ENV.isServerSideEnable === false) {
-    throw new Error("No se puede realizar cambios por ser un sitio estático");
-  }
 
   if (!axios.isAxiosError(error)) {
     return new Error(defaultErrorMessage);
