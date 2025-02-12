@@ -1,4 +1,4 @@
-import tinycolor from "tinycolor2";
+import tinycolor from 'tinycolor2';
 
 /**
  * Adjusts the transparency of a hex color.
@@ -17,6 +17,6 @@ export function SetHexColorTransparency(color: string, alpha: number): string {
  * @param backgroundColor - The background color in any valid format.
  * @returns "white" if the background color is dark, "black" if it is light.
  */
-export function GetTextColorForBackground(backgroundColor: string): "black" | "white" {
-  return tinycolor(backgroundColor).isLight() ? "black" : "white";
+export function GetTextColorForBackground(backgroundColor: string): 'black' | 'white' {
+  return tinycolor(backgroundColor).isLight() ? 'black' : 'white';
 }

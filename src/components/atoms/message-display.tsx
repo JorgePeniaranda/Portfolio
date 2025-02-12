@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 /**
  * A React component that displays a message with line breaks.
@@ -7,9 +7,9 @@ import React from "react";
  * and renders each line of text as a separate line in the rendered output. A `<br />` tag
  * is inserted after each line to create a visible line break in the rendered HTML.
  */
-export function MessageDisplay({message}: {message: string}) {
+export function MessageDisplay({ message }: { message: string }) {
   // Split the message by newline characters and map each line to a <br />
-  return message.split("\n").map((line, index) => (
+  return message.split('\n').map((line, index) => (
     // eslint-disable-next-line react/no-array-index-key
     <React.Fragment key={index}>
       {line}

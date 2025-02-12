@@ -1,4 +1,4 @@
-import z from "zod";
+import z from 'zod';
 
 export const RelationshipsSchema = z.object({
   idFrom: z.number(),

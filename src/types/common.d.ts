@@ -1,7 +1,7 @@
 // Type representing the possible values of themes ('light' or 'dark')
 export const themes = {
-  light: "light",
-  dark: "dark",
+  light: 'light',
+  dark: 'dark',
 } as const;
 
 export type theme = (typeof themes)[keyof typeof themes];

@@ -1,14 +1,14 @@
-import type {APIContext} from "astro";
+import type { APIContext } from 'astro';
 
-import {describe, it, vi, expect, beforeEach, type Mock} from "vitest";
-import {createContext} from "astro/middleware";
-import {TEST_PROJECT_MOCK} from "__test__/__mock__/project.mock";
+import { describe, it, vi, expect, beforeEach, type Mock } from 'vitest';
+import { createContext } from 'astro/middleware';
+import { TEST_PROJECT_MOCK } from '__test__/__mock__/project.mock';
 
-import {databaseClient} from "@/helpers/client/prisma";
-import {PUT} from "@/pages/api/project/update";
-import {ProjectUpdateSchema} from "@/schemas/project/update";
+import { databaseClient } from '@/helpers/client/prisma';
+import { PUT } from '@/pages/api/project/update';
+import { ProjectUpdateSchema } from '@/schemas/project/update';
 
-vi.mock("@/helpers/client/prisma", () => ({
+vi.mock('@/helpers/client/prisma', () => ({
   databaseClient: {
     project: {
       update: vi.fn(),
@@ -16,22 +16,22 @@ vi.mock("@/helpers/client/prisma", () => ({
   },
 }));
 
-vi.mock("@/schemas/project/update", () => ({
+vi.mock('@/schemas/project/update', () => ({
   ProjectUpdateSchema: {
     parse: vi.fn(),
   },
 }));
 
-vi.mock("@/helpers/error/api-handler", () => ({
+vi.mock('@/helpers/error/api-handler', () => ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handleApiError: (error: any) => {
-    return new Response(JSON.stringify({error: error.message}), {
+    return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
     });
   },
 }));
 
-describe("GET /project/update endpoint", () => {
+describe('GET /project/update endpoint', () => {
   const input = {
     ...TEST_PROJECT_MOCK,
     startDate: TEST_PROJECT_MOCK.startDate.toISOString(),
@@ -44,7 +44,7 @@ describe("GET /project/update endpoint", () => {
     vi.clearAllMocks();
   });
 
-  it("should return a project when parameters are valid", async () => {
+  it('should return a project when parameters are valid', async () => {
     // Mock the database response
     const mockProject = TEST_PROJECT_MOCK;
 
@@ -52,13 +52,13 @@ describe("GET /project/update endpoint", () => {
     (ProjectUpdateSchema.parse as unknown as Mock).mockResolvedValue(input);
 
     // Simulate a request
-    const url = "https://example.com/api/project/update";
+    const url = 'https://example.com/api/project/update';
     const request: APIContext = createContext({
       request: new Request(url, {
-        method: "PUT",
+        method: 'PUT',
         body: JSON.stringify(input),
       }),
-      defaultLocale: "en",
+      defaultLocale: 'en',
       locals: {},
     });
 
@@ -69,20 +69,20 @@ describe("GET /project/update endpoint", () => {
     expect(ProjectUpdateSchema.parse).toHaveBeenCalledWith(input);
   });
 
-  it("should return a 500 error if an exception occurs", async () => {
+  it('should return a 500 error if an exception occurs', async () => {
     (databaseClient.project.update as unknown as Mock).mockRejectedValue(
-      new Error("This is a test error"),
+      new Error('This is a test error'),
     );
     (ProjectUpdateSchema.parse as unknown as Mock).mockResolvedValue(input);
 
     // Simulate a request
-    const url = "https://example.com/api/project/update";
+    const url = 'https://example.com/api/project/update';
     const request: APIContext = createContext({
       request: new Request(url, {
-        method: "PUT",
+        method: 'PUT',
         body: JSON.stringify(input),
       }),
-      defaultLocale: "en",
+      defaultLocale: 'en',
       locals: {},
     });
 
@@ -91,7 +91,7 @@ describe("GET /project/update endpoint", () => {
     expect(response.status).toBe(500);
     const responseBody = await response.json();
 
-    expect(responseBody).toEqual({error: "This is a test error"});
+    expect(responseBody).toEqual({ error: 'This is a test error' });
     expect(ProjectUpdateSchema.parse).toHaveBeenCalledWith(input);
   });
 });

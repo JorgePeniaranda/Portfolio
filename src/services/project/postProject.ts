@@ -1,7 +1,7 @@
-import {Prisma, type Project} from "@prisma/client";
+import type { Prisma, Project } from '@prisma/client';
 
-import {apiClient} from "@/helpers/client/axios";
-import {handleServiceError} from "@/helpers/error/service-handler";
+import { apiClient } from '@/helpers/client/axios';
+import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Create a new project.
@@ -12,13 +12,13 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  */
 export async function postProject(projectInput: Prisma.ProjectCreateInput): Promise<Project> {
   try {
-    const {data: response} = await apiClient.post<Project>("/api/project", projectInput);
+    const { data: response } = await apiClient.post<Project>('/api/project', projectInput);
 
     return response;
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: "No se pudo crear el proyecto.",
+      defaultErrorMessage: 'No se pudo crear el proyecto.',
     });
   }
 }

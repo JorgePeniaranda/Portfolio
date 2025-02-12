@@ -1,7 +1,7 @@
-import type {Collaborator} from "@prisma/client";
+import type { Collaborator } from '@prisma/client';
 
-import {apiClient} from "@/helpers/client/axios";
-import {handleServiceError} from "@/helpers/error/service-handler";
+import { apiClient } from '@/helpers/client/axios';
+import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Get a collaborator by its id.
@@ -13,10 +13,10 @@ import {handleServiceError} from "@/helpers/error/service-handler";
 export async function getCollaboratorById({
   id,
 }: {
-  id: Collaborator["id"];
+  id: Collaborator['id'];
 }): Promise<Collaborator | null> {
   try {
-    const {data: response} = await apiClient.get<Collaborator | null>(
+    const { data: response } = await apiClient.get<Collaborator | null>(
       `/api/collaborator/id/${id}.json`,
     );
 
@@ -24,7 +24,7 @@ export async function getCollaboratorById({
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: "No se pudo obtener el colaborador.",
+      defaultErrorMessage: 'No se pudo obtener el colaborador.',
     });
   }
 }

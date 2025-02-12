@@ -1,23 +1,23 @@
-import type {ErrorResponse} from "@/types/responses";
-import type {Project} from "@prisma/client";
+import type { ErrorResponse } from '@/types/responses';
+import type { Project } from '@prisma/client';
 
-import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
-import {describe, expect, it, vi} from "vitest";
+import { AxiosError, AxiosHeaders, type AxiosResponse } from 'axios';
+import { describe, expect, it, vi } from 'vitest';
 
-import {TEST_PROJECT_MOCK} from "../../__mock__/project.mock";
+import { TEST_PROJECT_MOCK } from '../../__mock__/project.mock';
 
-import {apiClient} from "@/helpers/client/axios";
-import {getProjectsByAssociatedStack} from "@/services/project/getProjectsByAssociatedStack";
+import { apiClient } from '@/helpers/client/axios';
+import { getProjectsByAssociatedStack } from '@/services/project/getProjectsByAssociatedStack';
 
 // Mocking apiClient to simulate HTTP requests without actually calling the API
-vi.mock("@/helpers/client/axios");
+vi.mock('@/helpers/client/axios');
 
-describe("getProjectsByAssociatedStack", () => {
+describe('getProjectsByAssociatedStack', () => {
   const idStack = 1;
   const APIUrl = `/api/project/get/related/stack/${idStack}.json`;
-  const pagination = {page: 1, size: 10};
+  const pagination = { page: 1, size: 10 };
 
-  it("should return project data when the request is successful", async () => {
+  it('should return project data when the request is successful', async () => {
     // Simulating a successful response from apiClient
     const mockResponse: AxiosResponse<Project[]> = {
       config: {
@@ -25,14 +25,17 @@ describe("getProjectsByAssociatedStack", () => {
       },
       headers: {},
       status: 200,
-      statusText: "OK",
+      statusText: 'OK',
       data: [TEST_PROJECT_MOCK, TEST_PROJECT_MOCK, TEST_PROJECT_MOCK],
     };
 
     // Mocking the resolved value of apiClient.get for this test case
     vi.mocked(apiClient.get).mockResolvedValueOnce(mockResponse);
 
-    const response = await getProjectsByAssociatedStack({idStack, pagination});
+    const response = await getProjectsByAssociatedStack({
+      idStack,
+      pagination,
+    });
 
     // Asserting that the response matches the mock data
     expect(response).toEqual(mockResponse.data);
@@ -42,12 +45,12 @@ describe("getProjectsByAssociatedStack", () => {
     });
   });
 
-  it("should handle errors correctly when the request fails", async () => {
+  it('should handle errors correctly when the request fails', async () => {
     // Mock an error response (axios error)
     const mockError: AxiosError<ErrorResponse> = {
       isAxiosError: true,
-      message: "Request failed with status code 500",
-      name: "AxiosError",
+      message: 'Request failed with status code 500',
+      name: 'AxiosError',
       toJSON: () => ({}),
       response: {
         config: {
@@ -55,12 +58,12 @@ describe("getProjectsByAssociatedStack", () => {
         },
         headers: {},
         status: 500,
-        statusText: "Internal Server Error",
+        statusText: 'Internal Server Error',
         data: {
           status: 500,
-          title: "An internal server error occurred.",
-          type: "InternalServerError",
-          detail: "This is an test error message",
+          title: 'An internal server error occurred.',
+          type: 'InternalServerError',
+          detail: 'This is an test error message',
         },
       },
     };
@@ -69,7 +72,7 @@ describe("getProjectsByAssociatedStack", () => {
     vi.mocked(apiClient.get).mockRejectedValueOnce(mockError);
 
     try {
-      await getProjectsByAssociatedStack({idStack, pagination});
+      await getProjectsByAssociatedStack({ idStack, pagination });
     } catch (error) {
       // Validate error handling and apiClient call
       expect(error).toBeInstanceOf(Error);

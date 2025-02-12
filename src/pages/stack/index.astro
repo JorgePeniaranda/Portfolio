@@ -1,50 +1,49 @@
 ---
-import Logo from '@/assets/svg/logos/Logo.astro'
-import { SecretCodeHint } from '@/components/atoms/secret-code-hint'
-import Layout from '@/components/layouts/base.astro'
-import { StackFlow } from '@/components/organisms/react-flow/stack-flow'
-import { ArrowRight } from 'lucide-react'
-import { getAllStackWithRelationsAndProjectsMin } from '../../services/stack/getAllStackWithRelationsAndProjectsMin'
+import Logo from '@/assets/svg/logos/Logo.astro';
+import { SecretCodeHint } from '@/components/atoms/secret-code-hint';
+import Layout from '@/components/layouts/base.astro';
+import { StackFlow } from '@/components/organisms/react-flow/stack-flow';
+import { ArrowRight } from 'lucide-react';
+import { getAllStackWithRelationsAndProjectsMin } from '../../services/stack/getAllStackWithRelationsAndProjectsMin';
 
-const stacksWithProjectsMin = await getAllStackWithRelationsAndProjectsMin()
+const stacksWithProjectsMin = await getAllStackWithRelationsAndProjectsMin();
 ---
 
 <Layout
   body={{
-    class: 'bg-background dark:bg-background-dark'
+    class: 'bg-background dark:bg-background-dark',
   }}
-  title="Stack"
+  title='Stack'
 >
-  <main class="w-full h-[80vh] space-y-10 container">
-    <nav class="h-max pt-2 flex justify-between items-center">
-      <Logo class="w-28 aspect-square" />
+  <main class='w-full h-[80vh] space-y-10 container'>
+    <nav class='h-max pt-2 flex justify-between items-center'>
+      <Logo class='w-28 aspect-square' />
       <a
-        href="/about"
-        class="flex px-3 py-2 rounded-lg items-center gap-1 shadow-sm text-primary group relative m-1 cursor-pointer overflow-hidden border-2 border-primary font-semibold"
+        href='/about'
+        class='flex px-3 py-2 rounded-lg items-center gap-1 shadow-sm text-primary group relative m-1 cursor-pointer overflow-hidden border-2 border-primary font-semibold'
       >
         <span
-          class="ease absolute top-1/2 h-0 w-80 origin-center -translate-x-20 rotate-45 bg-primary transition-all duration-300 group-hover:h-64 group-hover:-translate-y-32"
+          class='ease absolute top-1/2 h-0 w-80 origin-center -translate-x-20 rotate-45 bg-primary transition-all duration-300 group-hover:h-64 group-hover:-translate-y-32'
         ></span>
         <span
-          class="ease relative text-primary transition duration-300 group-hover:text-white flex gap-2 max-sm:text-xs max-sm:text-center items-center"
+          class='ease relative text-primary transition duration-300 group-hover:text-white flex gap-2 max-sm:text-xs max-sm:text-center items-center'
         >
           ¡Haz clic para conocerme!
           <ArrowRight />
         </span>
       </a>
     </nav>
-    <section class="flex flex-col items-center gap-6">
-      <article class="w-full flex flex-col text-center items-center gap-2.5">
-        <div class="flex gap-2">
-          <h1 class="text-4xl font-semibold">Mi stack</h1>
+    <section class='flex flex-col items-center gap-6'>
+      <article class='w-full flex flex-col text-center items-center gap-2.5'>
+        <div class='flex gap-2'>
+          <h1 class='text-4xl font-semibold'>Mi stack</h1>
           <SecretCodeHint position={2} client:visible />
         </div>
-        <p class="text-lg text-gray-600 max-w-2xl max-sm:text-sm">
-          A lo largo de mi carrera, he desarrollado un conjunto de tecnologías
-          que me permiten crear soluciones innovadoras y eficientes. Mi stack
-          incluye lenguajes de programación, frameworks y herramientas para
-          proyectos web y backend, siempre enfocado en mantenerme actualizado y
-          asegurar la mejor calidad y rendimiento.
+        <p class='text-lg text-gray-600 max-w-2xl max-sm:text-sm'>
+          A lo largo de mi carrera, he desarrollado un conjunto de tecnologías que me permiten crear
+          soluciones innovadoras y eficientes. Mi stack incluye lenguajes de programación,
+          frameworks y herramientas para proyectos web y backend, siempre enfocado en mantenerme
+          actualizado y asegurar la mejor calidad y rendimiento.
         </p>
       </article>
     </section>

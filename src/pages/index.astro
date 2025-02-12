@@ -1,15 +1,15 @@
 ---
-import Bird1 from '@/assets/svg/draws/Bird-1.astro'
-import Bird2 from '@/assets/svg/draws/Bird-2.astro'
-import Bird3 from '@/assets/svg/draws/Bird-3.astro'
-import MountainLeft from '@/assets/svg/draws/MountainLeft.astro'
-import MountainRight from '@/assets/svg/draws/MountainRight.astro'
-import Sun from '@/assets/svg/draws/Sun.astro'
-import Wave from '@/assets/svg/draws/wave-1.astro'
-import Logo from '@/assets/svg/logos/Logo.astro'
-import { TextWritter } from '@/components/atoms/text-writter'
-import Layout from '@/components/layouts/base.astro'
-import { SecretButton } from '@/components/molecules/secret-button'
+import Bird1 from '@/assets/svg/draws/Bird-1.astro';
+import Bird2 from '@/assets/svg/draws/Bird-2.astro';
+import Bird3 from '@/assets/svg/draws/Bird-3.astro';
+import MountainLeft from '@/assets/svg/draws/MountainLeft.astro';
+import MountainRight from '@/assets/svg/draws/MountainRight.astro';
+import Sun from '@/assets/svg/draws/Sun.astro';
+import Wave from '@/assets/svg/draws/wave-1.astro';
+import Logo from '@/assets/svg/logos/Logo.astro';
+import { TextWritter } from '@/components/atoms/text-writter';
+import Layout from '@/components/layouts/base.astro';
+import { SecretButton } from '@/components/molecules/secret-button';
 
 const TITLE_WORD_LIST = [
   'Resultados',
@@ -20,91 +20,77 @@ const TITLE_WORD_LIST = [
   'Logros',
   'Aplicaciones',
   'Mejoras',
-  'El éxito'
-]
+  'El éxito',
+];
 ---
 
 <Layout
   body={{
     class:
-      'bg-gradient-to-r from-rose-200 to-teal-200 dark:from-[rgba(136,19,55,0.8)] dark:dark:to-[rgba(4,120,87,0.8)] dark:to-gray-800 transition-colors ease-linear'
+      'bg-gradient-to-r from-rose-200 to-teal-200 dark:from-[rgba(136,19,55,0.8)] dark:dark:to-[rgba(4,120,87,0.8)] dark:to-gray-800 transition-colors ease-linear',
   }}
 >
-  <nav class="h-max px-20 pt-2 flex justify-between items-center">
-    <Logo class="w-28 aspect-square" />
+  <nav class='h-max px-20 pt-2 flex justify-between items-center'>
+    <Logo class='w-28 aspect-square' />
     <SecretButton client:visible />
   </nav>
-  <header
-    id="header"
-    class="flex flex-col gap-1 items-center text-center h-max my-14 mb-20"
-  >
-    <h1 class="sr-only">
-      Portfolio de Full-Stack Developer especializado en Front-End y Back-End
-    </h1>
-    <h2 class="font-medium text-6xl">
-      De tus ideas a <b class="text-primary">
+  <header id='header' class='flex flex-col gap-1 items-center text-center h-max my-14 mb-20'>
+    <h1 class='sr-only'>Portfolio de Full-Stack Developer especializado en Front-End y Back-End</h1>
+    <h2 class='font-medium text-6xl'>
+      De tus ideas a <b class='text-primary'>
         <TextWritter wordList={TITLE_WORD_LIST} client:load />
       </b>
     </h2>
-    <p class="max-w-2xl text-xl">
-      ¿Buscas soluciones web prácticas y efectivas? Descubre cómo mi experiencia
-      puede darle a tus proyectos el impulso que necesitan para destacar.
+    <p class='max-w-2xl text-xl'>
+      ¿Buscas soluciones web prácticas y efectivas? Descubre cómo mi experiencia puede darle a tus
+      proyectos el impulso que necesitan para destacar.
     </p>
     <a
-      href="/projects"
-      class="bg-primary font-semibold text-2xl text-white px-5 mt-10 py-2.5 rounded-md hover:scale-105 transition-transform"
+      href='/projects'
+      class='bg-primary font-semibold text-2xl text-white px-5 mt-10 py-2.5 rounded-md hover:scale-105 transition-transform'
       >Conoce mis Proyectos</a
     >
   </header>
   <section
-    class="w-9/12 flex justify-center items-center relative mx-auto rounded-2xl cursor-zoom-in hover:scale-105 transition-transform"
-    aria-label="Header Illustration"
+    class='w-9/12 flex justify-center items-center relative mx-auto rounded-2xl cursor-zoom-in hover:scale-105 transition-transform'
+    aria-label='Header Illustration'
   >
     <figure
-      class="w-full h-full flex items-end -z-50 bg-primary rounded-[inherit] absolute bottom-0"
+      class='w-full h-full flex items-end -z-50 bg-primary rounded-[inherit] absolute bottom-0'
     >
-      <Wave
-        class="w-full rounded-bl-[inherit] rounded-br-[inherit]"
-        aria-label="wave"
-      />
-      <figcaption class="sr-only fixed">Background Wave</figcaption>
+      <Wave class='w-full rounded-bl-[inherit] rounded-br-[inherit]' aria-label='wave' />
+      <figcaption class='sr-only fixed'>Background Wave</figcaption>
     </figure>
-    <article
-      class="w-2/3 text-center select-none text-white pointer-events-none z-40 py-20"
-    >
+    <article class='w-2/3 text-center select-none text-white pointer-events-none z-40 py-20'>
       <h5
-        class="text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-20 font-AlfaSlabOne !leading-normal"
+        class='text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-20 font-AlfaSlabOne !leading-normal'
       >
         Páginas unicas con diseños increibles
       </h5>
-      <h4
-        class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-ZillaSlabHighlight"
-      >
+      <h4 class='text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-ZillaSlabHighlight'>
         Jorge Peñaranda | Desarrollador web
       </h4>
     </article>
-    <figure
-      class="w-full h-full absolute bottom-0 z-30 rounded-bl-[inherit] rounded-br-[inherit]"
-    >
+    <figure class='w-full h-full absolute bottom-0 z-30 rounded-bl-[inherit] rounded-br-[inherit]'>
       <MountainLeft
-        aria-label="Left mountain"
-        class="w-2/5 h-fit absolute bottom-0 left-0 rounded-bl-[inherit]"
+        aria-label='Left mountain'
+        class='w-2/5 h-fit absolute bottom-0 left-0 rounded-bl-[inherit]'
       />
       <MountainRight
-        aria-label="Right mountain"
-        class="w-2/5 h-fit absolute bottom-0 right-0 rounded-br-[inherit]"
+        aria-label='Right mountain'
+        class='w-2/5 h-fit absolute bottom-0 right-0 rounded-br-[inherit]'
       />
-      <figcaption class="sr-only">Mountains</figcaption>
+      <figcaption class='sr-only'>Mountains</figcaption>
     </figure>
-    <figure class="hidden md:inline z-20">
-      <Bird1 aria-label="Bird 1" class="absolute top-[23%] left-[21%]" />
-      <Bird2 aria-label="Bird 2" class="absolute bottom-[17%] right-[45%]" />
-      <Bird3 aria-label="Bird 3" class="absolute top-[20%] right-[35%]" />
-      <figcaption class="sr-only">Birds</figcaption>
+    <figure class='hidden md:inline z-20'>
+      <Bird1 aria-label='Bird 1' class='absolute top-[23%] left-[21%]' />
+      <Bird2 aria-label='Bird 2' class='absolute bottom-[17%] right-[45%]' />
+      <Bird3 aria-label='Bird 3' class='absolute top-[20%] right-[35%]' />
+      <figcaption class='sr-only'>Birds</figcaption>
     </figure>
-    <figure class="hidden md:inline z-10">
-      <Sun aria-label="sun" class="absolute top-[5%] right-[10%]" />
-      <figcaption class="sr-only">Sun</figcaption>
+    <figure class='hidden md:inline z-10'>
+      <Sun aria-label='sun' class='absolute top-[5%] right-[10%]' />
+      <figcaption class='sr-only'>Sun</figcaption>
     </figure>
   </section>
   <!-- <section class="mt-20 mb-40 flex flex-col justify-center items-center">

@@ -1,7 +1,7 @@
-import type {RelationshipsSchema} from "../../schemas/common/relationships";
+import type { RelationshipsSchema } from '../../schemas/common/relationships';
 
-import {apiClient} from "@/helpers/client/axios";
-import {handleServiceError} from "@/helpers/error/service-handler";
+import { apiClient } from '@/helpers/client/axios';
+import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * This service is responsible for adding a project to a collaborator.
@@ -14,8 +14,8 @@ export async function postCollaboratorAddAssociatedProjects(
   relationSchema: RelationshipsSchema,
 ): Promise<void> {
   try {
-    const {idFrom, idTo} = relationSchema;
-    const {data: response} = await apiClient.post<void>(
+    const { idFrom, idTo } = relationSchema;
+    const { data: response } = await apiClient.post<void>(
       `/api/collaborator/id/${idFrom}/project/${idTo}`,
     );
 
@@ -23,7 +23,7 @@ export async function postCollaboratorAddAssociatedProjects(
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: "No se pudo agregar el proyecto al colaborador.",
+      defaultErrorMessage: 'No se pudo agregar el proyecto al colaborador.',
     });
   }
 }

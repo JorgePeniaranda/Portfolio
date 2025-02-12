@@ -1,14 +1,14 @@
-import {afterEach, describe, expect, it} from "vitest";
+import { afterEach, describe, expect, it } from 'vitest';
 
-import {DEFAULT_SOUND_STATE} from "@/constants/common";
-import {useSoundStore} from "@/services/storage/sound";
+import { DEFAULT_SOUND_STATE } from '@/constants/common';
+import { useSoundStore } from '@/services/storage/sound';
 
-describe("useSoundStore", () => {
+describe('useSoundStore', () => {
   afterEach(() => {
     useSoundStore.getState().resetSound();
   });
 
-  it("should toggle the sound state", () => {
+  it('should toggle the sound state', () => {
     // Initial state should be the default
     expect(useSoundStore.getState().isSoundEnabled).toBe(DEFAULT_SOUND_STATE);
 
@@ -21,7 +21,7 @@ describe("useSoundStore", () => {
     expect(useSoundStore.getState().isSoundEnabled).toBe(DEFAULT_SOUND_STATE);
   });
 
-  it("should reset the sound state to default", () => {
+  it('should reset the sound state to default', () => {
     // Change the sound state
     useSoundStore.getState().toggleSound();
     expect(useSoundStore.getState().isSoundEnabled).not.toBe(DEFAULT_SOUND_STATE);

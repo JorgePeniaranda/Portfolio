@@ -1,7 +1,7 @@
-import {Prisma, type Stack} from "@prisma/client";
+import type { Prisma, Stack } from '@prisma/client';
 
-import {apiClient} from "@/helpers/client/axios";
-import {handleServiceError} from "@/helpers/error/service-handler";
+import { apiClient } from '@/helpers/client/axios';
+import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Create a new stack.
@@ -12,13 +12,13 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  */
 export async function postStack(stackUpdateInput: Prisma.StackUpdateInput): Promise<Stack> {
   try {
-    const {data: response} = await apiClient.post<Stack>("/api/stack", stackUpdateInput);
+    const { data: response } = await apiClient.post<Stack>('/api/stack', stackUpdateInput);
 
     return response;
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: "No se pudo crear el stack.",
+      defaultErrorMessage: 'No se pudo crear el stack.',
     });
   }
 }

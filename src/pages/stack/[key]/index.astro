@@ -1,45 +1,45 @@
 ---
-import { StackDrawer } from '@/components/organisms/drawer/stack-drawer'
-import { ENV } from '@/constants/env'
-import { getAllStack } from '@/services/stack/getAllStack'
-import { getStackByKey } from '@/services/stack/getStackByKey'
-import Base from '../index.astro'
-import { getProjectsByAssociatedStack } from '@/services/project/getProjectsByAssociatedStack'
-import type { GetStaticPaths } from 'astro'
+import { StackDrawer } from '@/components/organisms/drawer/stack-drawer';
+import { ENV } from '@/constants/env';
+import { getAllStack } from '@/services/stack/getAllStack';
+import { getStackByKey } from '@/services/stack/getStackByKey';
+import Base from '../index.astro';
+import { getProjectsByAssociatedStack } from '@/services/project/getProjectsByAssociatedStack';
+import type { GetStaticPaths } from 'astro';
 
 // MARK: - Static paths
 export const getStaticPaths = (async () => {
-  const stacks = await getAllStack()
+  const stacks = await getAllStack();
 
-  const paths = stacks.map(stack => ({
+  const paths = stacks.map((stack) => ({
     params: { key: stack.key },
-    props: stack
-  }))
+    props: stack,
+  }));
 
-  return paths
-}) satisfies GetStaticPaths
+  return paths;
+}) satisfies GetStaticPaths;
 
 // MARK: - Fetching stack data
-let stack
+let stack;
 if (ENV.isServerSideEnable) {
   stack = await getStackByKey({
-    key: Astro.params.key
-  })
+    key: Astro.params.key,
+  });
 } else {
-  stack = Astro.props
+  stack = Astro.props;
 }
 
 if (!stack) {
   return {
     status: 404,
-    error: new Error('Stack not found')
-  }
+    error: new Error('Stack not found'),
+  };
 }
 
 // MARK: - Fetching associated data
 const relatedProjects = await getProjectsByAssociatedStack({
-  idStack: stack.id
-})
+  idStack: stack.id,
+});
 ---
 
 <Base />
@@ -47,11 +47,11 @@ const relatedProjects = await getProjectsByAssociatedStack({
   stack={stack}
   associatedProjects={relatedProjects}
   drawerProps={{
-    defaultOpen: true
+    defaultOpen: true,
   }}
   returnToSiteOnClose={{
     site: '/stack',
-    keepState: true
+    keepState: true,
   }}
   client:load
 />

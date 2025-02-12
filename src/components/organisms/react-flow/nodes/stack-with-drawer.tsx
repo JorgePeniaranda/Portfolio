@@ -1,4 +1,4 @@
-import type {Project, Stack} from "@prisma/client";
+import type { Project, Stack } from '@prisma/client';
 
 /**
  * Component that wraps the `StackDrawer` and provides a visual trigger for opening it.
@@ -16,19 +16,19 @@ export function StackWithDrawerNode({
     label: string;
     iconUrl: string;
     stackData: Stack & {
-      projects: Pick<Project, "id" | "key" | "name" | "logoUrl">[];
+      projects: Pick<Project, 'id' | 'key' | 'name' | 'logoUrl'>[];
     };
   };
 }) {
   return (
     <a
-      className="flex aspect-square items-center justify-center rounded-full border-2 border-stone-400 bg-white p-2 shadow-md"
+      className='flex aspect-square items-center justify-center rounded-full border-2 border-stone-400 bg-white p-2 shadow-md'
       href={`/stack/${data.stackData.key}`}
     >
       {/* Trigger element displaying the stack icon */}
-      <img alt={data.label} className="h-7" src={data.iconUrl} />
+      <img alt={data.label} className='h-7' src={data.iconUrl} />
       {/* Accessible label for screen readers */}
-      <span className="sr-only">{data.label}</span>
+      <span className='sr-only'>{data.label}</span>
     </a>
   );
 }

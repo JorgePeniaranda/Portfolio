@@ -1,16 +1,16 @@
-import type {APIContext} from "astro";
+import type { APIContext } from 'astro';
 
-import {describe, it, vi, expect, beforeEach, type Mock} from "vitest";
-import {createContext} from "astro/middleware";
+import { describe, it, vi, expect, beforeEach, type Mock } from 'vitest';
+import { createContext } from 'astro/middleware';
 
-import {databaseClient} from "@/helpers/client/prisma";
-import {BuildPaginationByURL} from "@/helpers/common/build-pagination";
+import { databaseClient } from '@/helpers/client/prisma';
+import { BuildPaginationByURL } from '@/helpers/common/build-pagination';
 import {
   GET,
   getStaticPaths,
-} from "@/pages/api/collaborator/get/not-related/project/[idProject].json";
+} from '@/pages/api/collaborator/get/not-related/project/[idProject].json';
 
-vi.mock("@/helpers/client/prisma", () => ({
+vi.mock('@/helpers/client/prisma', () => ({
   databaseClient: {
     collaborator: {
       findMany: vi.fn(),
@@ -21,25 +21,25 @@ vi.mock("@/helpers/client/prisma", () => ({
   },
 }));
 
-vi.mock("@/helpers/common/build-pagination", () => ({
+vi.mock('@/helpers/common/build-pagination', () => ({
   BuildPaginationByURL: vi.fn(),
 }));
 
-vi.mock("@/helpers/error/api-handler", () => ({
+vi.mock('@/helpers/error/api-handler', () => ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handleApiError: (error: any) => {
-    return new Response(JSON.stringify({error: error.message}), {
+    return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
     });
   },
 }));
 
-describe("GET /collaborator/not-related/project/[idProject] endpoint", () => {
+describe('GET /collaborator/not-related/project/[idProject] endpoint', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it("should return a paginated list of stacks when parameters are valid", async () => {
+  it('should return a paginated list of stacks when parameters are valid', async () => {
     // Mock the pagination utility
     (BuildPaginationByURL as unknown as Mock).mockReturnValue({
       page: 1,
@@ -48,18 +48,18 @@ describe("GET /collaborator/not-related/project/[idProject] endpoint", () => {
 
     // Mock the database response
     const mockStacks = [
-      {id: 1, name: "collaborator 1"},
-      {id: 2, name: "collaborator 2"},
+      { id: 1, name: 'collaborator 1' },
+      { id: 2, name: 'collaborator 2' },
     ];
 
     (databaseClient.collaborator.findMany as unknown as Mock).mockResolvedValue(mockStacks);
 
     // Simulate a request
-    const url = "https://example.com/api/collaborator/get/not-related/project/1?page=1&size=10";
+    const url = 'https://example.com/api/collaborator/get/not-related/project/1?page=1&size=10';
     const request: APIContext = createContext({
-      params: {idProject: "1"},
+      params: { idProject: '1' },
       request: new Request(url),
-      defaultLocale: "en",
+      defaultLocale: 'en',
       locals: {},
     });
 
@@ -79,7 +79,7 @@ describe("GET /collaborator/not-related/project/[idProject] endpoint", () => {
     );
   });
 
-  it("should return an empty list if no stacks are found", async () => {
+  it('should return an empty list if no stacks are found', async () => {
     (BuildPaginationByURL as unknown as Mock).mockReturnValue({
       page: 1,
       limit: 10,
@@ -87,11 +87,11 @@ describe("GET /collaborator/not-related/project/[idProject] endpoint", () => {
     (databaseClient.collaborator.findMany as unknown as Mock).mockResolvedValue([]);
 
     // Simulate a request
-    const url = "https://example.com/api/collaborator/get/not-related/project/1?page=1&size=10";
+    const url = 'https://example.com/api/collaborator/get/not-related/project/1?page=1&size=10';
     const request: APIContext = createContext({
-      params: {idProject: "1"},
+      params: { idProject: '1' },
       request: new Request(url),
-      defaultLocale: "en",
+      defaultLocale: 'en',
       locals: {},
     });
 
@@ -103,17 +103,17 @@ describe("GET /collaborator/not-related/project/[idProject] endpoint", () => {
     expect(responseBody).toEqual([]);
   });
 
-  it("should return a 500 error if an exception occurs", async () => {
+  it('should return a 500 error if an exception occurs', async () => {
     (BuildPaginationByURL as unknown as Mock).mockImplementation(() => {
-      throw new Error("Invalid URL");
+      throw new Error('Invalid URL');
     });
 
     // Simulate a request
-    const url = "https://example.com/api/collaborator/get/not-related/project/1?page=1&size=10";
+    const url = 'https://example.com/api/collaborator/get/not-related/project/1?page=1&size=10';
     const request: APIContext = createContext({
-      params: {idProject: "1"},
+      params: { idProject: '1' },
       request: new Request(url),
-      defaultLocale: "en",
+      defaultLocale: 'en',
       locals: {},
     });
 
@@ -122,20 +122,20 @@ describe("GET /collaborator/not-related/project/[idProject] endpoint", () => {
     expect(response.status).toBe(500);
     const responseBody = await response.json();
 
-    expect(responseBody).toEqual({error: "Invalid URL"});
+    expect(responseBody).toEqual({ error: 'Invalid URL' });
   });
 });
 
-describe("getStaticPaths", () => {
-  it("should return a list of paths", async () => {
-    const mockProject = [{id: "1"}, {id: "2"}, {id: "3"}];
+describe('getStaticPaths', () => {
+  it('should return a list of paths', async () => {
+    const mockProject = [{ id: '1' }, { id: '2' }, { id: '3' }];
 
     (databaseClient.project.findMany as unknown as Mock).mockResolvedValue(mockProject);
     const paths = await getStaticPaths();
 
     expect(paths).toEqual(
       mockProject.map((project) => ({
-        params: {idProject: project.id.toString()},
+        params: { idProject: project.id.toString() },
       })),
     );
   });

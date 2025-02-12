@@ -1,10 +1,10 @@
-import type {APIRoute, GetStaticPaths} from "astro";
+import type { APIRoute, GetStaticPaths } from 'astro';
 
-import {z} from "zod";
+import { z } from 'zod';
 
-import {databaseClient} from "@/helpers/client/prisma";
-import {handleApiError} from "@/helpers/error/api-handler";
-import {ProjectUpdateSchema} from "@/schemas/project/update";
+import { databaseClient } from '@/helpers/client/prisma';
+import { handleApiError } from '@/helpers/error/api-handler';
+import { ProjectUpdateSchema } from '@/schemas/project/update';
 
 /**
  * PUT handler to update an existing project.
@@ -12,7 +12,7 @@ import {ProjectUpdateSchema} from "@/schemas/project/update";
  * - Validates it using the `ProjectUpdateSchema`.
  * - Updates the project in the database.
  */
-export const PUT: APIRoute = async ({request, params, url}) => {
+export const PUT: APIRoute = async ({ request, params, url }) => {
   try {
     const id = z.coerce.number().parse(params.id);
     const body = await request.json();
@@ -21,10 +21,10 @@ export const PUT: APIRoute = async ({request, params, url}) => {
 
     const updatedProject = await databaseClient.project.update({
       data: validationResult,
-      where: {id},
+      where: { id },
     });
 
-    return Response.json(updatedProject, {status: 200});
+    return Response.json(updatedProject, { status: 200 });
   } catch (error) {
     return handleApiError(error, url);
   }
@@ -38,6 +38,6 @@ export const getStaticPaths = (async () => {
   });
 
   return projects.map((project) => ({
-    params: {id: project.id},
+    params: { id: project.id },
   }));
 }) satisfies GetStaticPaths;

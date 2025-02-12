@@ -1,8 +1,8 @@
-import {create} from "zustand";
-import {createJSONStorage, persist} from "zustand/middleware";
+import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
-import {SECRET_CODE_STORE_KEY} from "@/constants/common";
-import {ENV} from "@/constants/env";
+import { SECRET_CODE_STORE_KEY } from '@/constants/common';
+import { ENV } from '@/constants/env';
 
 export interface ISecretCodeStoreState {
   secretCode: string;
@@ -34,7 +34,7 @@ export const useSecretCodeStore = create<ISecretCodeStoreState & ISecretCodeStor
        * @param index - The index of the number to unlock.
        */
       unlockOneNumber: (index: number) => {
-        const {unlockedNumbers} = get();
+        const { unlockedNumbers } = get();
 
         // Check if the index is out of bounds for the secret code.
         if (index >= ENV.secret_code.length || index < 0) {
@@ -51,10 +51,10 @@ export const useSecretCodeStore = create<ISecretCodeStoreState & ISecretCodeStor
 
           // Mark the state as complete if all numbers are unlocked.
           if (newUnlockedNumbers.length === ENV.secret_code.length) {
-            return {unlockedNumbers: newUnlockedNumbers, isComplete: true};
+            return { unlockedNumbers: newUnlockedNumbers, isComplete: true };
           }
 
-          return {unlockedNumbers: newUnlockedNumbers};
+          return { unlockedNumbers: newUnlockedNumbers };
         });
       },
 
@@ -65,7 +65,7 @@ export const useSecretCodeStore = create<ISecretCodeStoreState & ISecretCodeStor
        * @returns {boolean} True if the secret code is complete, false otherwise.
        */
       checkIfCodeIsCompleteWithNewIndex: (index: number): boolean => {
-        const {unlockedNumbers} = get();
+        const { unlockedNumbers } = get();
 
         if (unlockedNumbers.includes(index)) {
           return false;
@@ -77,7 +77,7 @@ export const useSecretCodeStore = create<ISecretCodeStoreState & ISecretCodeStor
       },
 
       resetSecretCode: () => {
-        set({unlockedNumbers: [0], isComplete: false});
+        set({ unlockedNumbers: [0], isComplete: false });
       },
     }),
     {

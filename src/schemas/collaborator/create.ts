@@ -1,4 +1,4 @@
-import {z} from "zod";
+import { z } from 'zod';
 
 export const CollaboratorCreateSchema = z.object({
   nickname: z.string().min(1),
@@ -9,7 +9,7 @@ export const CollaboratorCreateSchema = z.object({
 export type CollaboratorCreateSchema = z.infer<typeof CollaboratorCreateSchema>;
 
 export const CollaboratorCreateDefaultValues: CollaboratorCreateSchema = {
-  nickname: "",
+  nickname: '',
   githubUsername: null,
   linkedinUsername: null,
 };

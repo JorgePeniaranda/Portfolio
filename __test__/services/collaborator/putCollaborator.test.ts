@@ -1,25 +1,25 @@
-import type {ErrorResponse} from "@/types/responses";
-import type {Collaborator} from "@prisma/client";
+import type { ErrorResponse } from '@/types/responses';
+import type { Collaborator } from '@prisma/client';
 
-import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
-import {describe, expect, it, vi} from "vitest";
+import { AxiosError, AxiosHeaders, type AxiosResponse } from 'axios';
+import { describe, expect, it, vi } from 'vitest';
 
-import {TEST_COLLABORATOR_MOCK} from "../../__mock__/collaborator.mock";
+import { TEST_COLLABORATOR_MOCK } from '../../__mock__/collaborator.mock';
 
-import {putCollaborator} from "@/services/collaborator/putCollaborator";
-import {apiClient} from "@/helpers/client/axios";
+import { putCollaborator } from '@/services/collaborator/putCollaborator';
+import { apiClient } from '@/helpers/client/axios';
 
 // Mock the apiClient module
-vi.mock("@/helpers/client/axios");
+vi.mock('@/helpers/client/axios');
 
-describe("putCollaborator", () => {
+describe('putCollaborator', () => {
   // Input data for the tests
   const input = {
-    nickname: "John Doe",
+    nickname: 'John Doe',
   } as const;
-  const APIUrl = "/api/collaborator/update";
+  const APIUrl = '/api/collaborator/update';
 
-  it("should return a successful response when the request is correct", async () => {
+  it('should return a successful response when the request is correct', async () => {
     // Mock a successful response
     const mockResponse: AxiosResponse<Collaborator> = {
       config: {
@@ -27,7 +27,7 @@ describe("putCollaborator", () => {
       },
       headers: {},
       status: 200,
-      statusText: "OK",
+      statusText: 'OK',
       data: TEST_COLLABORATOR_MOCK,
     };
 
@@ -43,12 +43,12 @@ describe("putCollaborator", () => {
     expect(apiClient.put).toHaveBeenCalledWith(APIUrl, input);
   });
 
-  it("should handle errors correctly when the request fails", async () => {
+  it('should handle errors correctly when the request fails', async () => {
     // Mock an error response (axios error)
     const mockError: AxiosError<ErrorResponse> = {
       isAxiosError: true,
-      message: "Request failed with status code 500",
-      name: "AxiosError",
+      message: 'Request failed with status code 500',
+      name: 'AxiosError',
       toJSON: () => ({}),
       response: {
         config: {
@@ -56,12 +56,12 @@ describe("putCollaborator", () => {
         },
         headers: {},
         status: 500,
-        statusText: "Internal Server Error",
+        statusText: 'Internal Server Error',
         data: {
           status: 500,
-          title: "An internal server error occurred.",
-          type: "InternalServerError",
-          detail: "This is an test error message",
+          title: 'An internal server error occurred.',
+          type: 'InternalServerError',
+          detail: 'This is an test error message',
         },
       },
     };

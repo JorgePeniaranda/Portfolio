@@ -1,10 +1,10 @@
-import type {APIRoute, GetStaticPaths} from "astro";
+import type { APIRoute, GetStaticPaths } from 'astro';
 
-import {z} from "zod";
+import { z } from 'zod';
 
-import {databaseClient} from "@/helpers/client/prisma";
-import {handleApiError} from "@/helpers/error/api-handler";
-import {StackUpdateSchema} from "@/schemas/stack/update";
+import { databaseClient } from '@/helpers/client/prisma';
+import { handleApiError } from '@/helpers/error/api-handler';
+import { StackUpdateSchema } from '@/schemas/stack/update';
 
 /**
  * PUT handler to update an existing stack.
@@ -12,7 +12,7 @@ import {StackUpdateSchema} from "@/schemas/stack/update";
  * - Validates it using the `StackUpdateSchema`.
  * - Updates the stack in the database.
  */
-export const PUT: APIRoute = async ({request, params, url}) => {
+export const PUT: APIRoute = async ({ request, params, url }) => {
   try {
     const id = z.coerce.number().parse(params.id);
     const body = await request.json();
@@ -21,10 +21,10 @@ export const PUT: APIRoute = async ({request, params, url}) => {
 
     const updatedStack = await databaseClient.stack.update({
       data: validationResult,
-      where: {id},
+      where: { id },
     });
 
-    return Response.json(updatedStack, {status: 200});
+    return Response.json(updatedStack, { status: 200 });
   } catch (error) {
     return handleApiError(error, url);
   }
@@ -38,6 +38,6 @@ export const getStaticPaths = (async () => {
   });
 
   return stacks.map((stack) => ({
-    params: {id: stack.id},
+    params: { id: stack.id },
   }));
 }) satisfies GetStaticPaths;

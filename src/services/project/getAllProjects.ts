@@ -1,8 +1,8 @@
-import type {PaginationRequest} from "@/types/responses";
-import type {Project} from "@prisma/client";
+import type { PaginationRequest } from '@/types/responses';
+import type { Project } from '@prisma/client';
 
-import {apiClient} from "@/helpers/client/axios";
-import {handleServiceError} from "@/helpers/error/service-handler";
+import { apiClient } from '@/helpers/client/axios';
+import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Get all projects
@@ -13,7 +13,7 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  */
 export async function getAllProjects(pagination?: PaginationRequest): Promise<Project[]> {
   try {
-    const {data: response} = await apiClient.get<Project[]>("/api/project.json", {
+    const { data: response } = await apiClient.get<Project[]>('/api/project.json', {
       params: pagination,
     });
 
@@ -21,7 +21,7 @@ export async function getAllProjects(pagination?: PaginationRequest): Promise<Pr
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: "No se pudo obtener la lista de proyectos.",
+      defaultErrorMessage: 'No se pudo obtener la lista de proyectos.',
     });
   }
 }

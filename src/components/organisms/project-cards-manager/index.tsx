@@ -1,7 +1,7 @@
-import {ProjectStatus, StackCategory, type Project} from "@prisma/client";
-import {useMemo, useState} from "react";
+import { ProjectStatus, StackCategory, type Project } from '@prisma/client';
+import { useMemo, useState } from 'react';
 
-import {ProjectCard} from "@/components/molecules/cards/project-card";
+import { ProjectCard } from '@/components/molecules/cards/project-card';
 import {
   Select,
   SelectContent,
@@ -10,16 +10,16 @@ import {
   SelectSeparator,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 import {
   PROJECT_SORT_TRANSCRIPTIONS,
   PROJECT_STATUS_TRANSCRIPTIONS,
   STACK_CATEGORY_TRANSCRIPTIONS,
-} from "@/constants/transcriptions";
-import {isDefined} from "@/helpers/guards/is-defined";
-import {useProjectLikedStore} from "@/services/storage/liked-projects";
-import {ProjectSortType} from "@/types/project.d";
-import {Button} from "@/components/ui/button";
+} from '@/constants/transcriptions';
+import { isDefined } from '@/helpers/guards/is-defined';
+import { useProjectLikedStore } from '@/services/storage/liked-projects';
+import { ProjectSortType } from '@/types/project.d';
+import { Button } from '@/components/ui/button';
 
 /**
  * Component that renders a list of project cards, sorted by favorites.
@@ -28,13 +28,13 @@ import {Button} from "@/components/ui/button";
 export function ProjectCardsManager({
   projects,
 }: {
-  projects: Pick<Project, "id" | "key" | "name" | "logoUrl" | "stackCategory" | "status">[];
+  projects: Pick<Project, 'id' | 'key' | 'name' | 'logoUrl' | 'stackCategory' | 'status'>[];
 }) {
   // Retrieves the list of liked projects from the store
-  const {likedKeyProjects} = useProjectLikedStore();
+  const { likedKeyProjects } = useProjectLikedStore();
 
   // State for sorting type, stack filter, and status filter
-  const [sortType, setSortType] = useState<ProjectSortType>("liked");
+  const [sortType, setSortType] = useState<ProjectSortType>('liked');
   const [stackFilter, setStackFilter] = useState<StackCategory>();
   const [statusFilter, setStatusFilter] = useState<ProjectStatus>();
 
@@ -58,7 +58,7 @@ export function ProjectCardsManager({
 
     // Sort projects based on the selected sort type
     newProjects = newProjects.sort((a, b) => {
-      if (sortType === "liked") {
+      if (sortType === 'liked') {
         const getLikedIndex = (key: string) => likedKeyProjects.indexOf(key);
 
         const aIsLiked = likedKeyProjects.includes(a.key); // Check if project a is liked
@@ -78,11 +78,11 @@ export function ProjectCardsManager({
         return 1;
       }
 
-      if (sortType === "A-Z") {
+      if (sortType === 'A-Z') {
         return a.name.localeCompare(b.name); // Sort alphabetically A-Z
       }
 
-      if (sortType === "Z-A") {
+      if (sortType === 'Z-A') {
         return b.name.localeCompare(a.name); // Sort alphabetically Z-A
       }
 
@@ -93,12 +93,12 @@ export function ProjectCardsManager({
   }, [projects, stackFilter, statusFilter, sortType, likedKeyProjects]);
 
   return (
-    <div className="mt-16 flex flex-col gap-8">
+    <div className='mt-16 flex flex-col gap-8'>
       {/* Filters for sorting and project attributes */}
-      <ul className="flex w-full items-center justify-center gap-10 overflow-x-auto">
+      <ul className='flex w-full items-center justify-center gap-10 overflow-x-auto'>
         {/* Sort filter */}
-        <li className="flex items-center gap-2">
-          <label className="whitespace-nowrap text-sm text-gray-400/80" htmlFor="sort-select">
+        <li className='flex items-center gap-2'>
+          <label className='whitespace-nowrap text-sm text-gray-400/80' htmlFor='sort-select'>
             Ordenar por:
           </label>
           <Select
@@ -108,26 +108,26 @@ export function ProjectCardsManager({
               setSortType(value); // Update the sort type
             }}
           >
-            <SelectTrigger className="w-[180px]" id="sort-select">
-              <SelectValue placeholder="Ordenar" />
+            <SelectTrigger className='w-[180px]' id='sort-select'>
+              <SelectValue placeholder='Ordenar' />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value={ProjectSortType.LIKED}>
                 {PROJECT_SORT_TRANSCRIPTIONS.liked}
               </SelectItem>
               <SelectItem value={ProjectSortType.A_Z}>
-                {PROJECT_SORT_TRANSCRIPTIONS["A-Z"]}
+                {PROJECT_SORT_TRANSCRIPTIONS['A-Z']}
               </SelectItem>
               <SelectItem value={ProjectSortType.Z_A}>
-                {PROJECT_SORT_TRANSCRIPTIONS["Z-A"]}
+                {PROJECT_SORT_TRANSCRIPTIONS['Z-A']}
               </SelectItem>
             </SelectContent>
           </Select>
         </li>
 
         {/* Stack filter */}
-        <li className="flex items-center gap-2">
-          <label className="whitespace-nowrap text-sm text-gray-400/80" htmlFor="stack-select">
+        <li className='flex items-center gap-2'>
+          <label className='whitespace-nowrap text-sm text-gray-400/80' htmlFor='stack-select'>
             Stack:
           </label>
           <Select
@@ -137,10 +137,10 @@ export function ProjectCardsManager({
               setStackFilter(value); // Update the stack filter
             }}
           >
-            <SelectTrigger className="w-[180px]" id="stack-select" unselectable="on">
-              <SelectValue placeholder="Filtrar por stack" />
+            <SelectTrigger className='w-[180px]' id='stack-select' unselectable='on'>
+              <SelectValue placeholder='Filtrar por stack' />
             </SelectTrigger>
-            <SelectContent unselectable="on">
+            <SelectContent unselectable='on'>
               <SelectGroup>
                 <SelectItem value={StackCategory.FULL_STACK}>
                   {STACK_CATEGORY_TRANSCRIPTIONS.FULL_STACK}
@@ -154,9 +154,9 @@ export function ProjectCardsManager({
                 <SelectSeparator />
               </SelectGroup>
               <Button
-                className="w-full px-2"
-                size="sm"
-                variant="secondary"
+                className='w-full px-2'
+                size='sm'
+                variant='secondary'
                 onClick={(e) => {
                   e.stopPropagation();
                   setStackFilter(undefined);
@@ -170,8 +170,8 @@ export function ProjectCardsManager({
         </li>
 
         {/* Status filter */}
-        <li className="flex items-center gap-2">
-          <label className="whitespace-nowrap text-sm text-gray-400/80" htmlFor="status-select">
+        <li className='flex items-center gap-2'>
+          <label className='whitespace-nowrap text-sm text-gray-400/80' htmlFor='status-select'>
             Estado:
           </label>
           <Select
@@ -181,8 +181,8 @@ export function ProjectCardsManager({
               setStatusFilter(value); // Update the status filter
             }}
           >
-            <SelectTrigger className="w-[180px]" id="status-select">
-              <SelectValue placeholder="Filtrar por status" />
+            <SelectTrigger className='w-[180px]' id='status-select'>
+              <SelectValue placeholder='Filtrar por status' />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
@@ -197,9 +197,9 @@ export function ProjectCardsManager({
                 </SelectItem>
               </SelectGroup>
               <Button
-                className="w-full px-2"
-                size="sm"
-                variant="secondary"
+                className='w-full px-2'
+                size='sm'
+                variant='secondary'
                 onClick={(e) => {
                   e.stopPropagation();
                   setStatusFilter(undefined);
@@ -214,7 +214,7 @@ export function ProjectCardsManager({
       </ul>
 
       {/* Render sorted project cards */}
-      <section className="grid max-w-full grid-cols-1 gap-2 md:grid-cols-2 lg:gap-8 xl:grid-cols-3">
+      <section className='grid max-w-full grid-cols-1 gap-2 md:grid-cols-2 lg:gap-8 xl:grid-cols-3'>
         {sortedProjects.map((project) => (
           <ProjectCard
             key={project.key}

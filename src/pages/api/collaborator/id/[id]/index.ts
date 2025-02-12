@@ -1,10 +1,10 @@
-import type {APIRoute, GetStaticPaths} from "astro";
+import type { APIRoute, GetStaticPaths } from 'astro';
 
-import {z} from "zod";
+import { z } from 'zod';
 
-import {databaseClient} from "@/helpers/client/prisma";
-import {handleApiError} from "@/helpers/error/api-handler";
-import {CollaboratorUpdateSchema} from "@/schemas/collaborator/update";
+import { databaseClient } from '@/helpers/client/prisma';
+import { handleApiError } from '@/helpers/error/api-handler';
+import { CollaboratorUpdateSchema } from '@/schemas/collaborator/update';
 
 /**
  * PUT handler to update an existing collaborator.
@@ -12,7 +12,7 @@ import {CollaboratorUpdateSchema} from "@/schemas/collaborator/update";
  * - Validates it using the `CollaboratorUpdateSchema`.
  * - Updates the collaborator in the database.
  */
-export const PUT: APIRoute = async ({request, params, url}) => {
+export const PUT: APIRoute = async ({ request, params, url }) => {
   try {
     const id = z.coerce.number().parse(params.id);
     const body = await request.json();
@@ -21,10 +21,10 @@ export const PUT: APIRoute = async ({request, params, url}) => {
 
     const updatedCollaborator = await databaseClient.collaborator.update({
       data: validationResult,
-      where: {id},
+      where: { id },
     });
 
-    return Response.json(updatedCollaborator, {status: 200});
+    return Response.json(updatedCollaborator, { status: 200 });
   } catch (error) {
     return handleApiError(error, url);
   }
@@ -38,6 +38,6 @@ export const getStaticPaths = (async () => {
   });
 
   return collaborators.map((collaborator) => ({
-    params: {id: collaborator.id},
+    params: { id: collaborator.id },
   }));
 }) satisfies GetStaticPaths;

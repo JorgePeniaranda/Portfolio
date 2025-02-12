@@ -1,23 +1,23 @@
-import type {ErrorResponse} from "@/types/responses";
+import type { ErrorResponse } from '@/types/responses';
 
-import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
-import {describe, expect, it, vi} from "vitest";
+import { AxiosError, AxiosHeaders, type AxiosResponse } from 'axios';
+import { describe, expect, it, vi } from 'vitest';
 
-import {apiClient} from "@/helpers/client/axios";
-import {patchStackAddAssociatedProjects} from "@/services/stack/patchStackAddAssociatedProjects";
+import { apiClient } from '@/helpers/client/axios';
+import { patchStackAddAssociatedProjects } from '@/services/stack/patchStackAddAssociatedProjects';
 
 // Mock the apiClient module
-vi.mock("@/helpers/client/axios");
+vi.mock('@/helpers/client/axios');
 
-describe("patchStackAddAssociatedProjects", () => {
+describe('patchStackAddAssociatedProjects', () => {
   // Input data for the tests
   const input = {
     idFrom: 1,
     idTo: 2,
   } as const;
-  const APIUrl = "/api/stack/relations/project/add";
+  const APIUrl = '/api/stack/relations/project/add';
 
-  it("should return a successful response when the request is correct", async () => {
+  it('should return a successful response when the request is correct', async () => {
     // Mock a successful response
     const mockResponse: AxiosResponse<null> = {
       config: {
@@ -25,7 +25,7 @@ describe("patchStackAddAssociatedProjects", () => {
       },
       headers: {},
       status: 200,
-      statusText: "OK",
+      statusText: 'OK',
       data: null,
     };
 
@@ -38,12 +38,12 @@ describe("patchStackAddAssociatedProjects", () => {
     expect(apiClient.patch).toHaveBeenCalledWith(APIUrl, input);
   });
 
-  it("should handle errors correctly when the request fails", async () => {
+  it('should handle errors correctly when the request fails', async () => {
     // Mock an error response (axios error)
     const mockError: AxiosError<ErrorResponse> = {
       isAxiosError: true,
-      message: "Request failed with status code 500",
-      name: "AxiosError",
+      message: 'Request failed with status code 500',
+      name: 'AxiosError',
       toJSON: () => ({}),
       response: {
         config: {
@@ -51,12 +51,12 @@ describe("patchStackAddAssociatedProjects", () => {
         },
         headers: {},
         status: 500,
-        statusText: "Internal Server Error",
+        statusText: 'Internal Server Error',
         data: {
           status: 500,
-          title: "An internal server error occurred.",
-          type: "InternalServerError",
-          detail: "This is an test error message",
+          title: 'An internal server error occurred.',
+          type: 'InternalServerError',
+          detail: 'This is an test error message',
         },
       },
     };

@@ -1,18 +1,18 @@
-import type {PaginationRequest} from "@/types/responses";
+import type { PaginationRequest } from '@/types/responses';
 
-import {describe, it, expect} from "vitest";
+import { describe, it, expect } from 'vitest';
 
-import {fromPaginationRequestToPrismaPagination} from "@/mappers/common/fromPaginationRequestToPrismaPagination";
+import { fromPaginationRequestToPrismaPagination } from '@/mappers/common/fromPaginationRequestToPrismaPagination';
 
-describe("fromPaginationRequestToPrismaPagination", () => {
-  it("should return undefined skip and take when paginationRequest is not defined", () => {
+describe('fromPaginationRequestToPrismaPagination', () => {
+  it('should return undefined skip and take when paginationRequest is not defined', () => {
     const result = fromPaginationRequestToPrismaPagination();
 
     expect(result.skip).toBeUndefined();
     expect(result.take).toBeUndefined();
   });
 
-  it("should return correct skip and take when paginationRequest is provided", () => {
+  it('should return correct skip and take when paginationRequest is provided', () => {
     const paginationRequest: PaginationRequest = {
       page: 2,
       size: 10,
@@ -24,7 +24,7 @@ describe("fromPaginationRequestToPrismaPagination", () => {
     expect(result.take).toBe(10);
   });
 
-  it("should handle edge case where page is 1", () => {
+  it('should handle edge case where page is 1', () => {
     const paginationRequest: PaginationRequest = {
       page: 1,
       size: 10,
@@ -36,7 +36,7 @@ describe("fromPaginationRequestToPrismaPagination", () => {
     expect(result.take).toBe(10);
   });
 
-  it("should handle cases with different page sizes", () => {
+  it('should handle cases with different page sizes', () => {
     const paginationRequest: PaginationRequest = {
       page: 3,
       size: 5,

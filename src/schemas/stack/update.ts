@@ -1,5 +1,5 @@
-import {StackCategory, StackType} from "@prisma/client";
-import {z} from "zod";
+import { StackCategory, StackType } from '@prisma/client';
+import { z } from 'zod';
 
 const stackCategoryValues = Object.values(StackCategory) as [
   (typeof StackCategory)[keyof typeof StackCategory],

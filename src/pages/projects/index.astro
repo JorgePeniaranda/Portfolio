@@ -1,52 +1,49 @@
 ---
-import Logo from '@/assets/svg/logos/Logo.astro'
-import { SecretCodeHint } from '@/components/atoms/secret-code-hint'
-import Layout from '@/components/layouts/base.astro'
-import { ProjectCardsManager } from '@/components/organisms/project-cards-manager'
-import { getAllProjectMin } from '@/services/project/getAllProjectMin'
-import { ArrowRight } from 'lucide-react'
+import Logo from '@/assets/svg/logos/Logo.astro';
+import { SecretCodeHint } from '@/components/atoms/secret-code-hint';
+import Layout from '@/components/layouts/base.astro';
+import { ProjectCardsManager } from '@/components/organisms/project-cards-manager';
+import { getAllProjectMin } from '@/services/project/getAllProjectMin';
+import { ArrowRight } from 'lucide-react';
 
-const Projects = await getAllProjectMin()
+const Projects = await getAllProjectMin();
 ---
 
 <Layout
   body={{
-    class: 'bg-background dark:bg-background-dark'
+    class: 'bg-background dark:bg-background-dark',
   }}
-  title="Proyectos"
+  title='Proyectos'
 >
-  <main class="w-full h-full space-y-10 container mb-28">
-    <nav class="h-max pt-2 flex justify-between items-center">
-      <Logo class="w-28 aspect-square" />
+  <main class='w-full h-full space-y-10 container mb-28'>
+    <nav class='h-max pt-2 flex justify-between items-center'>
+      <Logo class='w-28 aspect-square' />
       <a
-        href="/stack"
-        class="flex px-3 py-2 rounded-lg items-center gap-1 shadow-sm text-primary group relative m-1 cursor-pointer overflow-hidden border-2 border-primary font-semibold"
+        href='/stack'
+        class='flex px-3 py-2 rounded-lg items-center gap-1 shadow-sm text-primary group relative m-1 cursor-pointer overflow-hidden border-2 border-primary font-semibold'
       >
         <span
-          class="ease absolute top-1/2 h-0 w-80 origin-center -translate-x-20 rotate-45 bg-primary transition-all duration-300 group-hover:h-64 group-hover:-translate-y-32"
+          class='ease absolute top-1/2 h-0 w-80 origin-center -translate-x-20 rotate-45 bg-primary transition-all duration-300 group-hover:h-64 group-hover:-translate-y-32'
         ></span>
         <span
-          class="ease relative text-primary transition duration-300 group-hover:text-white flex gap-2 max-sm:text-xs max-sm:text-center items-center"
+          class='ease relative text-primary transition duration-300 group-hover:text-white flex gap-2 max-sm:text-xs max-sm:text-center items-center'
         >
           ¿Te interesa mi stack?
           <ArrowRight />
         </span>
       </a>
     </nav>
-    <section class="flex flex-col items-center gap-6">
-      <article class="w-full flex flex-col text-center items-center gap-2.5">
-        <h1 class="text-4xl font-semibold">Mis Proyectos</h1>
-        <p
-          class="text-lg text-gray-600 max-w-2xl max-sm:text-sm dark:text-gray-400"
-        >
-          Una colección de proyectos en los que he trabajado, tanto por mi
-          cuenta como en colaboración con otros colegas. Cada uno tiene su
-          propia historia y enfoque.
+    <section class='flex flex-col items-center gap-6'>
+      <article class='w-full flex flex-col text-center items-center gap-2.5'>
+        <h1 class='text-4xl font-semibold'>Mis Proyectos</h1>
+        <p class='text-lg text-gray-600 max-w-2xl max-sm:text-sm dark:text-gray-400'>
+          Una colección de proyectos en los que he trabajado, tanto por mi cuenta como en
+          colaboración con otros colegas. Cada uno tiene su propia historia y enfoque.
         </p>
       </article>
     </section>
     <ProjectCardsManager projects={Projects} client:load />
-    <div class="fixed right-0 bottom-0">
+    <div class='fixed right-0 bottom-0'>
       <SecretCodeHint position={1} client:visible />
     </div>
   </main>

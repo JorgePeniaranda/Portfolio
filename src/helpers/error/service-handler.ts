@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 
-import {isDefined, isNotDefined} from "../guards/is-defined";
-import {isErrorResponse} from "../guards/is-error-response";
-import {devConsoleLog} from "../common/dev-console-log";
+import { isDefined, isNotDefined } from '../guards/is-defined';
+import { isErrorResponse } from '../guards/is-error-response';
+import { devConsoleLog } from '../common/dev-console-log';
 
-import {ENV} from "@/constants/env";
+import { ENV } from '@/constants/env';
 
 /**
  * Handle an error from a service.
@@ -15,15 +15,15 @@ import {ENV} from "@/constants/env";
  */
 export function handleServiceError({
   error,
-  defaultErrorMessage = "Ha ocurrido un error.",
+  defaultErrorMessage = 'Ha ocurrido un error.',
 }: {
   error: unknown;
   defaultErrorMessage?: string;
 }): Error {
-  devConsoleLog.log("Error in service: ", error);
+  devConsoleLog.log('Error in service: ', error);
 
   if (ENV.isServerSideEnable === false) {
-    throw new Error("No se puede realizar cambios por ser un sitio estático");
+    throw new Error('No se puede realizar cambios por ser un sitio estático');
   }
 
   if (!axios.isAxiosError(error)) {
@@ -34,7 +34,7 @@ export function handleServiceError({
     return new Error(defaultErrorMessage);
   }
 
-  const {data: responseData} = error.response;
+  const { data: responseData } = error.response;
 
   if (!isErrorResponse(responseData)) {
     return new Error(defaultErrorMessage);
@@ -42,7 +42,7 @@ export function handleServiceError({
 
   if (isDefined(responseData.fieldErrors?.length) && responseData.fieldErrors.length > 0) {
     return new Error(
-      responseData.fieldErrors.map((error) => `${error.field}: ${error.message}`).join("\n"),
+      responseData.fieldErrors.map((error) => `${error.field}: ${error.message}`).join('\n'),
     );
   }
 

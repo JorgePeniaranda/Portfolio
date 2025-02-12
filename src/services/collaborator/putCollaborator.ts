@@ -1,7 +1,7 @@
-import {Prisma, type Collaborator} from "@prisma/client";
+import type { Prisma, Collaborator } from '@prisma/client';
 
-import {apiClient} from "@/helpers/client/axios";
-import {handleServiceError} from "@/helpers/error/service-handler";
+import { apiClient } from '@/helpers/client/axios';
+import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Update a collaborator.
@@ -14,11 +14,11 @@ export async function putCollaborator({
   idCollaborator,
   updatedCollaborator,
 }: {
-  idCollaborator: Collaborator["id"];
+  idCollaborator: Collaborator['id'];
   updatedCollaborator: Prisma.CollaboratorUpdateInput;
 }): Promise<Collaborator> {
   try {
-    const {data: response} = await apiClient.put<Collaborator>(
+    const { data: response } = await apiClient.put<Collaborator>(
       `/api/collaborator/id/${idCollaborator}`,
       updatedCollaborator,
     );
@@ -27,7 +27,7 @@ export async function putCollaborator({
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: "No se pudo actualizar el colaborador.",
+      defaultErrorMessage: 'No se pudo actualizar el colaborador.',
     });
   }
 }

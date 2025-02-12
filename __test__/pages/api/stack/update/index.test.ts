@@ -1,14 +1,14 @@
-import type {APIContext} from "astro";
+import type { APIContext } from 'astro';
 
-import {describe, it, vi, expect, beforeEach, type Mock} from "vitest";
-import {createContext} from "astro/middleware";
-import {TEST_STACK_MOCK} from "__test__/__mock__/stack.mock";
+import { describe, it, vi, expect, beforeEach, type Mock } from 'vitest';
+import { createContext } from 'astro/middleware';
+import { TEST_STACK_MOCK } from '__test__/__mock__/stack.mock';
 
-import {databaseClient} from "@/helpers/client/prisma";
-import {PUT} from "@/pages/api/stack/update";
-import {StackUpdateSchema} from "@/schemas/stack/update";
+import { databaseClient } from '@/helpers/client/prisma';
+import { PUT } from '@/pages/api/stack/update';
+import { StackUpdateSchema } from '@/schemas/stack/update';
 
-vi.mock("@/helpers/client/prisma", () => ({
+vi.mock('@/helpers/client/prisma', () => ({
   databaseClient: {
     stack: {
       update: vi.fn(),
@@ -16,22 +16,22 @@ vi.mock("@/helpers/client/prisma", () => ({
   },
 }));
 
-vi.mock("@/schemas/stack/update", () => ({
+vi.mock('@/schemas/stack/update', () => ({
   StackUpdateSchema: {
     parse: vi.fn(),
   },
 }));
 
-vi.mock("@/helpers/error/api-handler", () => ({
+vi.mock('@/helpers/error/api-handler', () => ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handleApiError: (error: any) => {
-    return new Response(JSON.stringify({error: error.message}), {
+    return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
     });
   },
 }));
 
-describe("GET /stack/update endpoint", () => {
+describe('GET /stack/update endpoint', () => {
   const input = {
     ...TEST_STACK_MOCK,
     updatedAt: TEST_STACK_MOCK.updatedAt.toISOString(),
@@ -42,7 +42,7 @@ describe("GET /stack/update endpoint", () => {
     vi.clearAllMocks();
   });
 
-  it("should return a stack when parameters are valid", async () => {
+  it('should return a stack when parameters are valid', async () => {
     // Mock the database response
     const mockStack = TEST_STACK_MOCK;
 
@@ -50,13 +50,13 @@ describe("GET /stack/update endpoint", () => {
     (StackUpdateSchema.parse as unknown as Mock).mockResolvedValue(input);
 
     // Simulate a request
-    const url = "https://example.com/api/stack/update";
+    const url = 'https://example.com/api/stack/update';
     const request: APIContext = createContext({
       request: new Request(url, {
-        method: "PUT",
+        method: 'PUT',
         body: JSON.stringify(input),
       }),
-      defaultLocale: "en",
+      defaultLocale: 'en',
       locals: {},
     });
 
@@ -67,20 +67,20 @@ describe("GET /stack/update endpoint", () => {
     expect(StackUpdateSchema.parse).toHaveBeenCalledWith(input);
   });
 
-  it("should return a 500 error if an exception occurs", async () => {
+  it('should return a 500 error if an exception occurs', async () => {
     (databaseClient.stack.update as unknown as Mock).mockRejectedValue(
-      new Error("This is a test error"),
+      new Error('This is a test error'),
     );
     (StackUpdateSchema.parse as unknown as Mock).mockResolvedValue(input);
 
     // Simulate a request
-    const url = "https://example.com/api/stack/update";
+    const url = 'https://example.com/api/stack/update';
     const request: APIContext = createContext({
       request: new Request(url, {
-        method: "PUT",
+        method: 'PUT',
         body: JSON.stringify(input),
       }),
-      defaultLocale: "en",
+      defaultLocale: 'en',
       locals: {},
     });
 
@@ -89,7 +89,7 @@ describe("GET /stack/update endpoint", () => {
     expect(response.status).toBe(500);
     const responseBody = await response.json();
 
-    expect(responseBody).toEqual({error: "This is a test error"});
+    expect(responseBody).toEqual({ error: 'This is a test error' });
     expect(StackUpdateSchema.parse).toHaveBeenCalledWith(input);
   });
 });

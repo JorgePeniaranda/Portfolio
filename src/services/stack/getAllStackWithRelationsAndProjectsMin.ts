@@ -1,7 +1,7 @@
-import type {Project, Stack} from "@prisma/client";
+import type { Project, Stack } from '@prisma/client';
 
-import {databaseClient} from "@/helpers/client/prisma";
-import {handleServiceError} from "@/helpers/error/service-handler";
+import { databaseClient } from '@/helpers/client/prisma';
+import { handleServiceError } from '@/helpers/error/service-handler';
 
 // TO-DO: REPLACE WITH API CALL
 /**
@@ -13,7 +13,7 @@ import {handleServiceError} from "@/helpers/error/service-handler";
 export async function getAllStackWithRelationsAndProjectsMin(): Promise<
   Array<
     Stack & {
-      associatedProjects: Pick<Project, "id" | "key" | "name" | "logoUrl">[];
+      associatedProjects: Pick<Project, 'id' | 'key' | 'name' | 'logoUrl'>[];
       relatedFrom: {
         toStackStack: Stack;
       }[];
@@ -51,7 +51,7 @@ export async function getAllStackWithRelationsAndProjectsMin(): Promise<
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: "No se pudo obtener la lista de stacks.",
+      defaultErrorMessage: 'No se pudo obtener la lista de stacks.',
     });
   }
 }

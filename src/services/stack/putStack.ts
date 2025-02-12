@@ -1,7 +1,7 @@
-import {Prisma, type Stack} from "@prisma/client";
+import type { Prisma, Stack } from '@prisma/client';
 
-import {apiClient} from "@/helpers/client/axios";
-import {handleServiceError} from "@/helpers/error/service-handler";
+import { apiClient } from '@/helpers/client/axios';
+import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Update a stack
@@ -14,11 +14,11 @@ export async function putStack({
   idStack,
   stackUpdateInput,
 }: {
-  idStack: Stack["id"];
+  idStack: Stack['id'];
   stackUpdateInput: Prisma.StackUpdateInput;
 }): Promise<Stack> {
   try {
-    const {data: response} = await apiClient.put<Stack>(
+    const { data: response } = await apiClient.put<Stack>(
       `/api/stack/id/${idStack}`,
       stackUpdateInput,
     );
@@ -27,7 +27,7 @@ export async function putStack({
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: "No se pudo actualizar el stack.",
+      defaultErrorMessage: 'No se pudo actualizar el stack.',
     });
   }
 }

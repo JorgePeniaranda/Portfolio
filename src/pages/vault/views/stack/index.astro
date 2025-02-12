@@ -1,20 +1,17 @@
 ---
-import Layout from '@/components/layouts/base.astro'
-import { DashboardLayout } from '@/components/layouts/dashboard-layout'
-import { StackTable } from '@/components/organisms/table/stack'
-import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
-import { getAllStack } from '@/services/stack/getAllStack'
+import Layout from '@/components/layouts/base.astro';
+import { DashboardLayout } from '@/components/layouts/dashboard-layout';
+import { StackTable } from '@/components/organisms/table/stack';
+import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb';
+import { getAllStack } from '@/services/stack/getAllStack';
 
-const stacks = await getAllStack()
+const stacks = await getAllStack();
 ---
 
-<Layout title="Stack">
-  <DashboardLayout
-    breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/stack']}
-    client:load
-  >
-    <main class="w-full h-full flex flex-col pt-7 pl-7 container mx-auto">
-      <h1 class="text-4xl font-medium">Stack</h1>
+<Layout title='Stack'>
+  <DashboardLayout breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/stack']} client:load>
+    <main class='w-full h-full flex flex-col pt-7 pl-7 container mx-auto'>
+      <h1 class='text-4xl font-medium'>Stack</h1>
       <StackTable data={stacks} client:load />
     </main>
   </DashboardLayout>

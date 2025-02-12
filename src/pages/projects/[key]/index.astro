@@ -1,126 +1,117 @@
 ---
-import { MessageDisplay } from '@/components/atoms/message-display'
-import Layout from '@/components/layouts/base.astro'
-import { ProjectAccordion } from '@/components/organisms/accordion/project-accordion'
-import { Breadcrumb, type IBreadCrumb } from '@/components/organisms/breadcrumb'
-import { ENV } from '@/constants/env'
-import { ProjectDetailsStyles } from '@/constants/styles'
+import { MessageDisplay } from '@/components/atoms/message-display';
+import Layout from '@/components/layouts/base.astro';
+import { ProjectAccordion } from '@/components/organisms/accordion/project-accordion';
+import { Breadcrumb, type IBreadCrumb } from '@/components/organisms/breadcrumb';
+import { ENV } from '@/constants/env';
+import { ProjectDetailsStyles } from '@/constants/styles';
 import {
   PROJECT_STATUS_TRANSCRIPTIONS,
-  STACK_CATEGORY_TRANSCRIPTIONS
-} from '@/constants/transcriptions'
-import {
-  GetTextColorForBackground,
-  SetHexColorTransparency
-} from '@/helpers/common/color'
-import { isDefined } from '@/helpers/guards/is-defined'
-import { getCollaboratorsByAssociatedProjects } from '@/services/collaborator/getCollaboratorsByAssociatedProjects'
-import { getAllProjects } from '@/services/project/getAllProjects'
-import { getProjectByKey } from '@/services/project/getProjectByKey'
-import { getStacksByAssociatedProjects } from '@/services/stack/getStacksByAssociatedProjects'
-import type { GetStaticPaths } from 'astro'
-import moment from 'moment'
+  STACK_CATEGORY_TRANSCRIPTIONS,
+} from '@/constants/transcriptions';
+import { GetTextColorForBackground, SetHexColorTransparency } from '@/helpers/common/color';
+import { isDefined } from '@/helpers/guards/is-defined';
+import { getCollaboratorsByAssociatedProjects } from '@/services/collaborator/getCollaboratorsByAssociatedProjects';
+import { getAllProjects } from '@/services/project/getAllProjects';
+import { getProjectByKey } from '@/services/project/getProjectByKey';
+import { getStacksByAssociatedProjects } from '@/services/stack/getStacksByAssociatedProjects';
+import type { GetStaticPaths } from 'astro';
+import moment from 'moment';
 
 // MARK: - Static paths
 export const getStaticPaths = (async () => {
-  const projects = await getAllProjects()
+  const projects = await getAllProjects();
 
-  return projects.map(project => ({
+  return projects.map((project) => ({
     params: { key: project.key },
-    props: project
-  }))
-}) satisfies GetStaticPaths
+    props: project,
+  }));
+}) satisfies GetStaticPaths;
 
 // MARK: - Fetching project data
-let project
+let project;
 if (ENV.isServerSideEnable) {
   project = await getProjectByKey({
-    key: Astro.params.key
-  })
+    key: Astro.params.key,
+  });
 } else {
-  project = Astro.props
+  project = Astro.props;
 }
 
 if (!project) {
   return {
     status: 404,
-    error: new Error('Project not found')
-  }
+    error: new Error('Project not found'),
+  };
 }
 
 // MARK: - Fetching associated data
 const associatedStacks = await getStacksByAssociatedProjects({
-  idProject: project.id
-})
+  idProject: project.id,
+});
 const associatedCollaborators = await getCollaboratorsByAssociatedProjects({
-  idProject: project.id
-})
+  idProject: project.id,
+});
 
-const { StackStyle, StatusStyle } = ProjectDetailsStyles
+const { StackStyle, StatusStyle } = ProjectDetailsStyles;
 
 const BreadCrumbItems: IBreadCrumb[] = [
   {
     label: 'Proyectos',
-    href: '/projects'
+    href: '/projects',
   },
   {
-    label: project.name
-  }
-]
+    label: project.name,
+  },
+];
 
-const textColor = GetTextColorForBackground(project.primaryColor)
+const textColor = GetTextColorForBackground(project.primaryColor);
 ---
 
 <Layout
   body={{
-    class: 'bg-background dark:bg-background-dark'
+    class: 'bg-background dark:bg-background-dark',
   }}
   title={project.name}
 >
-  <div class="py-14 px-16">
-    <header class="mb-2">
-      <Breadcrumb
-        className="text-white relative z-50"
-        items={BreadCrumbItems}
-      />
+  <div class='py-14 px-16'>
+    <header class='mb-2'>
+      <Breadcrumb className='text-white relative z-50' items={BreadCrumbItems} />
     </header>
-    <div class="fixed inset-0 z-10">
+    <div class='fixed inset-0 z-10'>
       <div
-        class="absolute inset-0"
+        class='absolute inset-0'
         style={`background: linear-gradient(90deg, ${project.primaryColor} 40%, ${SetHexColorTransparency(project.primaryColor, 0.5)} 40%, rgba(255,255,255,0) 100%);`}
       >
       </div>
       <div
-        class="absolute inset-0"
+        class='absolute inset-0'
         style={`background: linear-gradient(120deg, ${project.primaryColor} 15%, ${SetHexColorTransparency(project.primaryColor, 0.5)} 50%, rgba(255,255,255,0) 100%);`}
       >
       </div>
     </div>
-    <main class="flex text-black dark:text-white h-full">
+    <main class='flex text-black dark:text-white h-full'>
       <section
         class:list={[
           'flex-1 flex flex-col h-full relative z-50',
           {
             '!text-white': textColor === 'white',
-            '!text-black': textColor === 'black'
-          }
+            '!text-black': textColor === 'black',
+          },
         ]}
       >
         <article>
           <h1
-            class="scroll-m-20 text-5xl font-extrabold tracking-tight"
+            class='scroll-m-20 text-5xl font-extrabold tracking-tight'
             transition:name={`${project.key} Title`}
           >
             {project.name}
           </h1>
-          <div class="flex gap-2 items-center font-light text-lg my-2">
-            <h2
-              class="leading-none font-medium"
-              class:list={StatusStyle[project.status]}
-            >
+          <div class='flex gap-2 items-center font-light text-lg my-2'>
+            <h2 class='leading-none font-medium' class:list={StatusStyle[project.status]}>
               {PROJECT_STATUS_TRANSCRIPTIONS[project.status]}
             </h2>
-            <small class="leading-none p-1 rounded-md text-base capitalize">
+            <small class='leading-none p-1 rounded-md text-base capitalize'>
               {moment(project.startDate).locale('es').format('MMM YYYY')}
               {' - '}
               {
@@ -130,17 +121,17 @@ const textColor = GetTextColorForBackground(project.primaryColor)
               }
             </small>
             <h3
-              class="leading-none font-medium rounded-md p-1 text-base"
+              class='leading-none font-medium rounded-md p-1 text-base'
               class:list={[StackStyle[project.stackCategory]]}
             >
               {STACK_CATEGORY_TRANSCRIPTIONS[project.stackCategory]}
             </h3>
           </div>
-          <p class="text-pretty">
+          <p class='text-pretty'>
             <MessageDisplay message={project.description} />
           </p>
         </article>
-        <article class="mt-5 flex-1">
+        <article class='mt-5 flex-1'>
           <ProjectAccordion
             collaborators={associatedCollaborators}
             goals={project.goals}
@@ -152,14 +143,12 @@ const textColor = GetTextColorForBackground(project.primaryColor)
           />
         </article>
       </section>
-      <section class="flex flex-1 relative justify-center items-center">
-        <article
-          class="fixed aspect-video top-0 justify-center items-center flex z-0 h-full"
-        >
+      <section class='flex flex-1 relative justify-center items-center'>
+        <article class='fixed aspect-video top-0 justify-center items-center flex z-0 h-full'>
           <!-- TO-DO: project.previewImageURL -->
           <img
             src={``}
-            class="size-full"
+            class='size-full'
             alt={`${project.name} preview image`}
             style={`background-color: ${project.primaryColor};`}
           />

@@ -1,89 +1,84 @@
 ---
-import Layout from '@/components/layouts/base.astro'
-import { DashboardLayout } from '@/components/layouts/dashboard-layout'
-import { ShowCollaboratorForm } from '@/components/organisms/form/show/collaborator'
-import { Card, CardHeader } from '@/components/ui/card'
-import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
-import { ENV } from '@/constants/env'
-import { isNotDefined } from '@/helpers/guards/is-defined'
-import { getAllCollaborator } from '@/services/collaborator/getAllCollaborator'
-import { getCollaboratorById } from '@/services/collaborator/getCollaboratorById'
-import { getProjectsByAssociatedCollaborator } from '@/services/project/getProjectsByAssociatedCollaborator'
-import type { GetStaticPaths } from 'astro'
+import Layout from '@/components/layouts/base.astro';
+import { DashboardLayout } from '@/components/layouts/dashboard-layout';
+import { ShowCollaboratorForm } from '@/components/organisms/form/show/collaborator';
+import { Card, CardHeader } from '@/components/ui/card';
+import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb';
+import { ENV } from '@/constants/env';
+import { isNotDefined } from '@/helpers/guards/is-defined';
+import { getAllCollaborator } from '@/services/collaborator/getAllCollaborator';
+import { getCollaboratorById } from '@/services/collaborator/getCollaboratorById';
+import { getProjectsByAssociatedCollaborator } from '@/services/project/getProjectsByAssociatedCollaborator';
+import type { GetStaticPaths } from 'astro';
 
 // MARK: - Static paths
 export const getStaticPaths = (async () => {
-  const collaborators = await getAllCollaborator()
+  const collaborators = await getAllCollaborator();
 
-  const paths = collaborators.map(collaborator => ({
+  const paths = collaborators.map((collaborator) => ({
     params: { id: collaborator.id },
-    props: collaborator
-  }))
+    props: collaborator,
+  }));
 
-  return paths
-}) satisfies GetStaticPaths
+  return paths;
+}) satisfies GetStaticPaths;
 
 // MARK: - Fetching collaborator data
-let collaborator
+let collaborator;
 if (ENV.isServerSideEnable) {
   collaborator = await getCollaboratorById({
-    id: Number(Astro.params.id)
-  })
+    id: Number(Astro.params.id),
+  });
 } else {
-  collaborator = Astro.props
+  collaborator = Astro.props;
 }
 
 if (!collaborator) {
   return {
     status: 404,
-    error: new Error('Collaborator not found')
-  }
+    error: new Error('Collaborator not found'),
+  };
 }
 
 // MARK: - Fetching associated data
 const associatedProjects = await getProjectsByAssociatedCollaborator({
-  idCollaborator: collaborator.id
-})
+  idCollaborator: collaborator.id,
+});
 ---
 
 <Layout title={`Explora el colaborador ${collaborator.nickname}`}>
   <DashboardLayout
-    breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE[
-      '/vault/views/collaborators/details'
-    ]}
+    breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/collaborators/details']}
     client:load
   >
-    <main class="w-full h-full flex flex-col pt-7 pl-7 container mx-auto gap-5">
-      <h1 class="text-4xl font-medium">Detalles de Colaborador</h1>
+    <main class='w-full h-full flex flex-col pt-7 pl-7 container mx-auto gap-5'>
+      <h1 class='text-4xl font-medium'>Detalles de Colaborador</h1>
       <ShowCollaboratorForm currentCollaborator={collaborator} client:load />
 
-      <div class="mt-10">
-        <h2 class="text-3xl font-medium">Relaciones</h2>
-        <div class="mx-5 mt-5">
-          <h3 class="text-3xl font-medium">Proyectos</h3>
-          <ul class="mt-4 flex flex-wrap gap-4">
+      <div class='mt-10'>
+        <h2 class='text-3xl font-medium'>Relaciones</h2>
+        <div class='mx-5 mt-5'>
+          <h3 class='text-3xl font-medium'>Proyectos</h3>
+          <ul class='mt-4 flex flex-wrap gap-4'>
             {
-              associatedProjects?.map(project => (
+              associatedProjects?.map((project) => (
                 <li>
-                  <Card className="my-5 flex flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
-                    <CardHeader className="relative flex items-center gap-2">
+                  <Card className='my-5 flex flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800'>
+                    <CardHeader className='relative flex items-center gap-2'>
                       <img
                         alt={`${project.name} logo`}
-                        class="size-16 shrink-0"
+                        class='size-16 shrink-0'
                         src={project.logoUrl}
                       />
-                      <span class="text-lg capitalize">{project.name}</span>
+                      <span class='text-lg capitalize'>{project.name}</span>
                     </CardHeader>
                   </Card>
                 </li>
               ))
             }
             {
-              (isNotDefined(associatedProjects) ||
-                associatedProjects?.length === 0) && (
-                <p class="indent-2 text-lg text-gray-500">
-                  No hay proyectos asociados
-                </p>
+              (isNotDefined(associatedProjects) || associatedProjects?.length === 0) && (
+                <p class='indent-2 text-lg text-gray-500'>No hay proyectos asociados</p>
               )
             }
           </ul>

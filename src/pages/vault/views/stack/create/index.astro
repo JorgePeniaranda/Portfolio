@@ -1,17 +1,17 @@
 ---
-import Layout from '@/components/layouts/base.astro'
-import { DashboardLayout } from '@/components/layouts/dashboard-layout'
-import { CreateStackForm } from '@/components/organisms/form/create/stack'
-import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
+import Layout from '@/components/layouts/base.astro';
+import { DashboardLayout } from '@/components/layouts/dashboard-layout';
+import { CreateStackForm } from '@/components/organisms/form/create/stack';
+import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb';
 ---
 
-<Layout title="Crear stack">
+<Layout title='Crear stack'>
   <DashboardLayout
     breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/stack/create']}
     client:load
   >
-    <main class="w-full h-full flex flex-col pt-7 pl-7 container mx-auto gap-5">
-      <h1 class="text-4xl font-medium">Crear Stack</h1>
+    <main class='w-full h-full flex flex-col pt-7 pl-7 container mx-auto gap-5'>
+      <h1 class='text-4xl font-medium'>Crear Stack</h1>
       <CreateStackForm client:load />
     </main>
   </DashboardLayout>

@@ -1,29 +1,29 @@
-import {describe, it, expect, vi, type Mock} from "vitest";
-import {z} from "zod";
+import { describe, it, expect, vi, type Mock } from 'vitest';
+import { z } from 'zod';
 
-import {handleApiError} from "@/helpers/error/api-handler";
-import {prismaHandler} from "@/helpers/error/prisma-handler";
-import {handleZodError} from "@/helpers/error/zod-handler";
-import {isPrismaError} from "@/helpers/guards/is-prisma-error";
+import { handleApiError } from '@/helpers/error/api-handler';
+import { prismaHandler } from '@/helpers/error/prisma-handler';
+import { handleZodError } from '@/helpers/error/zod-handler';
+import { isPrismaError } from '@/helpers/guards/is-prisma-error';
 
-vi.mock("@/helpers/guards/is-prisma-error", () => ({
+vi.mock('@/helpers/guards/is-prisma-error', () => ({
   isPrismaError: vi.fn(),
 }));
 
-vi.mock("@/helpers/error/prisma-handler", () => ({
+vi.mock('@/helpers/error/prisma-handler', () => ({
   prismaHandler: vi.fn(),
 }));
 
-vi.mock("@/helpers/error/zod-handler", () => ({
+vi.mock('@/helpers/error/zod-handler', () => ({
   handleZodError: vi.fn(),
 }));
 
-describe("handleApiError", () => {
-  it("should handle a Prisma error", async () => {
-    const mockError = {code: "P2002"};
+describe('handleApiError', () => {
+  it('should handle a Prisma error', async () => {
+    const mockError = { code: 'P2002' };
     const mockPrismaResponse = {
       statusCode: 409,
-      message: "Unique constraint failed",
+      message: 'Unique constraint failed',
     };
 
     (isPrismaError as unknown as Mock).mockReturnValue(true);
@@ -43,13 +43,13 @@ describe("handleApiError", () => {
     });
   });
 
-  it("should handle a Zod validation error", async () => {
+  it('should handle a Zod validation error', async () => {
     const mockZodError = new z.ZodError([
-      {path: ["field1"], message: "Invalid field1", code: "custom"},
+      { path: ['field1'], message: 'Invalid field1', code: 'custom' },
     ]);
     const mockZodResponse = {
-      errorTextReduce: "Invalid field1",
-      errorList: [{path: ["field1"], message: "Invalid field1"}],
+      errorTextReduce: 'Invalid field1',
+      errorList: [{ path: ['field1'], message: 'Invalid field1' }],
     };
 
     (isPrismaError as unknown as Mock).mockReturnValue(false);
@@ -70,8 +70,8 @@ describe("handleApiError", () => {
     });
   });
 
-  it("should handle a generic error", async () => {
-    const mockGenericError = new Error("Something went wrong");
+  it('should handle a generic error', async () => {
+    const mockGenericError = new Error('Something went wrong');
 
     (isPrismaError as unknown as Mock).mockReturnValue(false);
 
@@ -88,8 +88,8 @@ describe("handleApiError", () => {
     });
   });
 
-  it("should handle an unknown error", async () => {
-    const mockUnknownError = {someKey: "someValue"};
+  it('should handle an unknown error', async () => {
+    const mockUnknownError = { someKey: 'someValue' };
 
     (isPrismaError as unknown as Mock).mockReturnValue(false);
 
@@ -102,7 +102,7 @@ describe("handleApiError", () => {
     const body = await response.json();
 
     expect(body).toEqual({
-      error: "Unknown error occurred.",
+      error: 'Unknown error occurred.',
     });
   });
 });

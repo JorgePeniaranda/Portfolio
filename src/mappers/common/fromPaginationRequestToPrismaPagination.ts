@@ -1,6 +1,6 @@
-import type {PaginationRequest} from "@/types/responses";
+import type { PaginationRequest } from '@/types/responses';
 
-import {isNotDefined} from "@/helpers/guards/is-defined";
+import { isNotDefined } from '@/helpers/guards/is-defined';
 
 /**
  * Converts a pagination request object to a Prisma-compatible pagination format.

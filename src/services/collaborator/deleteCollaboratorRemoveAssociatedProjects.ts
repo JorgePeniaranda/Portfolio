@@ -1,7 +1,7 @@
-import type {RelationshipsSchema} from "../../schemas/common/relationships";
+import type { RelationshipsSchema } from '../../schemas/common/relationships';
 
-import {apiClient} from "@/helpers/client/axios";
-import {handleServiceError} from "@/helpers/error/service-handler";
+import { apiClient } from '@/helpers/client/axios';
+import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * This service is responsible for removing a project from a collaborator.
@@ -14,8 +14,8 @@ export async function deleteCollaboratorRemoveAssociatedProjects(
   relationSchema: RelationshipsSchema,
 ): Promise<void> {
   try {
-    const {idFrom, idTo} = relationSchema;
-    const {data: response} = await apiClient.delete<void>(
+    const { idFrom, idTo } = relationSchema;
+    const { data: response } = await apiClient.delete<void>(
       `/api/collaborator/id/${idFrom}/project/${idTo}`,
     );
 
@@ -23,7 +23,7 @@ export async function deleteCollaboratorRemoveAssociatedProjects(
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: "No se pudo eliminar el proyecto del colaborador.",
+      defaultErrorMessage: 'No se pudo eliminar el proyecto del colaborador.',
     });
   }
 }

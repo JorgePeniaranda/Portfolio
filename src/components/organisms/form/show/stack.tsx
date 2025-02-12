@@ -1,22 +1,32 @@
-import {zodResolver} from "@hookform/resolvers/zod";
-import {StackCategory, StackType, type Stack} from "@prisma/client";
-import {Pen} from "lucide-react";
-import {useForm} from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { StackCategory, StackType, type Stack } from '@prisma/client';
+import { Pen } from 'lucide-react';
+import { useForm } from 'react-hook-form';
 
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
-import {Input} from "@/components/ui/input";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import {Textarea} from "@/components/ui/textarea";
-import {STACK_CATEGORY_TRANSCRIPTIONS, STACK_TYPE_TRANSCRIPTIONS} from "@/constants/transcriptions";
-import {StackCreateSchema} from "@/schemas/stack/create";
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  STACK_CATEGORY_TRANSCRIPTIONS,
+  STACK_TYPE_TRANSCRIPTIONS,
+} from '@/constants/transcriptions';
+import { StackCreateSchema } from '@/schemas/stack/create';
 
-export function ShowStackForm({currentStack}: {currentStack: Stack}) {
+export function ShowStackForm({ currentStack }: { currentStack: Stack }) {
   const form = useForm<StackCreateSchema>({
     resolver: zodResolver(StackCreateSchema),
     defaultValues: currentStack,
@@ -24,16 +34,16 @@ export function ShowStackForm({currentStack}: {currentStack: Stack}) {
 
   return (
     <Form {...form}>
-      <form className="space-y-8">
-        <div className="flex flex-wrap gap-2">
+      <form className='space-y-8'>
+        <div className='flex flex-wrap gap-2'>
           <FormField
             control={form.control}
-            name="key"
-            render={({field}) => (
+            name='key'
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>Key</FormLabel>
                 <FormControl>
-                  <Input disabled placeholder="Key" {...field} />
+                  <Input disabled placeholder='Key' {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -41,14 +51,14 @@ export function ShowStackForm({currentStack}: {currentStack: Stack}) {
           />
           <FormField
             control={form.control}
-            name="name"
-            render={({field}) => (
+            name='name'
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>Nombre</FormLabel>
                 <FormControl>
                   <Input
                     disabled
-                    placeholder="Nombre"
+                    placeholder='Nombre'
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />
@@ -59,14 +69,14 @@ export function ShowStackForm({currentStack}: {currentStack: Stack}) {
           />
           <FormField
             control={form.control}
-            name="description"
-            render={({field}) => (
+            name='description'
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>Descripción</FormLabel>
                 <FormControl>
                   <Textarea
                     disabled
-                    placeholder="Descripción"
+                    placeholder='Descripción'
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />
@@ -77,8 +87,8 @@ export function ShowStackForm({currentStack}: {currentStack: Stack}) {
           />
           <FormField
             control={form.control}
-            name="category"
-            render={({field}) => (
+            name='category'
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>Categoria</FormLabel>
                 <Select
@@ -89,8 +99,8 @@ export function ShowStackForm({currentStack}: {currentStack: Stack}) {
                   value={field.value === null ? undefined : field.value}
                 >
                   <FormControl>
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Descripción" />
+                    <SelectTrigger className='w-[180px]'>
+                      <SelectValue placeholder='Descripción' />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -107,8 +117,8 @@ export function ShowStackForm({currentStack}: {currentStack: Stack}) {
           />
           <FormField
             control={form.control}
-            name="type"
-            render={({field}) => (
+            name='type'
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>Tipo</FormLabel>
                 <Select
@@ -119,8 +129,8 @@ export function ShowStackForm({currentStack}: {currentStack: Stack}) {
                   value={field.value === null ? undefined : field.value}
                 >
                   <FormControl>
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Tipo" />
+                    <SelectTrigger className='w-[180px]'>
+                      <SelectValue placeholder='Tipo' />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -137,14 +147,14 @@ export function ShowStackForm({currentStack}: {currentStack: Stack}) {
           />
           <FormField
             control={form.control}
-            name="iconUrl"
-            render={({field}) => (
+            name='iconUrl'
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>URL de icono</FormLabel>
                 <FormControl>
                   <Input
                     disabled
-                    placeholder="iconURL"
+                    placeholder='iconURL'
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />
@@ -155,11 +165,11 @@ export function ShowStackForm({currentStack}: {currentStack: Stack}) {
           />
         </div>
         <a
-          className="flex size-max items-center gap-2 rounded-md border border-input bg-gray-500 p-2 px-4 text-white hover:bg-gray-600 hover:text-white dark:text-white dark:hover:bg-gray-400"
+          className='flex size-max items-center gap-2 rounded-md border border-input bg-gray-500 p-2 px-4 text-white hover:bg-gray-600 hover:text-white dark:text-white dark:hover:bg-gray-400'
           href={`/vault/views/stack/${currentStack.id}/edit`}
         >
-          <Pen className="size-5" />
-          <span className="text-lg">Editar</span>
+          <Pen className='size-5' />
+          <span className='text-lg'>Editar</span>
         </a>
       </form>
     </Form>

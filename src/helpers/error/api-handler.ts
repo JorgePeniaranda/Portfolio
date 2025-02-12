@@ -1,10 +1,10 @@
-import type {ErrorResponse} from "@/types/responses";
+import type { ErrorResponse } from '@/types/responses';
 
-import {z} from "zod";
+import { z } from 'zod';
 
-import {isPrismaError} from "../guards/is-prisma-error";
+import { isPrismaError } from '../guards/is-prisma-error';
 
-import {prismaHandler} from "./prisma-handler";
+import { prismaHandler } from './prisma-handler';
 
 /**
  * A helper function that formats API errors into a readable error response.
@@ -16,20 +16,20 @@ import {prismaHandler} from "./prisma-handler";
 export function handleApiError(error: unknown, url?: URL): Response {
   // If the error is a Prisma error
   if (isPrismaError(error)) {
-    const {statusCode, message} = prismaHandler(error);
+    const { statusCode, message } = prismaHandler(error);
 
     return Response.json(
       {
         detail: message,
         instance: url?.pathname,
         status: statusCode,
-        title: "An operation failed while processing the request.",
-        type: "OperationFailedError",
+        title: 'An operation failed while processing the request.',
+        type: 'OperationFailedError',
       } satisfies ErrorResponse,
       {
         status: statusCode,
         headers: {
-          "Content-Type": "application/problem+json",
+          'Content-Type': 'application/problem+json',
         },
       },
     );
@@ -39,20 +39,20 @@ export function handleApiError(error: unknown, url?: URL): Response {
   if (error instanceof z.ZodError) {
     return Response.json(
       {
-        detail: error.errors.map((error) => `${error.path}: ${error.message}`).join(", "),
+        detail: error.errors.map((error) => `${error.path}: ${error.message}`).join(', '),
         fieldErrors: error.errors.map((error) => ({
-          field: error.path.join("."),
+          field: error.path.join('.'),
           message: error.message,
         })),
         instance: url?.pathname,
         status: 400,
-        title: "A validation error occurred.",
-        type: "ValidationError",
+        title: 'A validation error occurred.',
+        type: 'ValidationError',
       } satisfies ErrorResponse,
       {
         status: 400,
         headers: {
-          "Content-Type": "application/problem+json",
+          'Content-Type': 'application/problem+json',
         },
       },
     );
@@ -61,16 +61,16 @@ export function handleApiError(error: unknown, url?: URL): Response {
   // Else, return a generic 500 error response
   return Response.json(
     {
-      detail: error instanceof Error ? error.message : "Unknown error occurred.",
+      detail: error instanceof Error ? error.message : 'Unknown error occurred.',
       instance: url?.pathname,
       status: 500,
-      title: "An internal server error occurred.",
-      type: "InternalServerError",
+      title: 'An internal server error occurred.',
+      type: 'InternalServerError',
     } satisfies ErrorResponse,
     {
       status: 500,
       headers: {
-        "Content-Type": "application/problem+json",
+        'Content-Type': 'application/problem+json',
       },
     },
   );

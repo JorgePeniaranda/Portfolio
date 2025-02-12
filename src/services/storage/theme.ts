@@ -1,8 +1,8 @@
-import {create} from "zustand";
-import {persist} from "zustand/middleware";
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-import {DEFAULT_THEME, THEME_CLASSNAME, THEME_STORE_KEY} from "@/constants/common";
-import {themes, themesArray, type theme} from "@/types/common.d";
+import { DEFAULT_THEME, THEME_CLASSNAME, THEME_STORE_KEY } from '@/constants/common';
+import { themes, themesArray, type theme } from '@/types/common.d';
 
 // Define the shape of the store's state.
 export interface IThemeStoreState {
@@ -28,16 +28,16 @@ export const useThemeStore = create<IThemeStoreState & IThemeStoreActions>()(
           // Update the HTML element's class to reflect the new theme.
           updateHTMLTheme(nextTheme);
 
-          return {theme: nextTheme};
+          return { theme: nextTheme };
         });
       },
 
       resetTheme: () => {
         updateHTMLTheme(DEFAULT_THEME);
-        set({theme: DEFAULT_THEME});
+        set({ theme: DEFAULT_THEME });
       },
     }),
-    {name: THEME_STORE_KEY},
+    { name: THEME_STORE_KEY },
   ),
 );
 

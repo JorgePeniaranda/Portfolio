@@ -1,20 +1,20 @@
-import type {DeleteResponse, ErrorResponse} from "@/types/responses";
+import type { DeleteResponse, ErrorResponse } from '@/types/responses';
 
-import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
-import {describe, expect, it, vi} from "vitest";
+import { AxiosError, AxiosHeaders, type AxiosResponse } from 'axios';
+import { describe, expect, it, vi } from 'vitest';
 
-import {apiClient} from "@/helpers/client/axios";
-import {deleteStack} from "@/services/stack/deleteStack";
+import { apiClient } from '@/helpers/client/axios';
+import { deleteStack } from '@/services/stack/deleteStack';
 
 // Mock the apiClient module
-vi.mock("@/helpers/client/axios");
+vi.mock('@/helpers/client/axios');
 
-describe("deleteStack", () => {
+describe('deleteStack', () => {
   // Input data for the tests
   const input = [0, 1];
-  const APIUrl = "/api/stack/delete";
+  const APIUrl = '/api/stack/delete';
 
-  it("should return a successful response when the request is correct", async () => {
+  it('should return a successful response when the request is correct', async () => {
     // Mock a successful response
     const mockResponse: AxiosResponse<DeleteResponse> = {
       config: {
@@ -22,7 +22,7 @@ describe("deleteStack", () => {
       },
       headers: {},
       status: 200,
-      statusText: "OK",
+      statusText: 'OK',
       data: {
         count: input.length,
       },
@@ -37,12 +37,12 @@ describe("deleteStack", () => {
     expect(apiClient.post).toHaveBeenCalledWith(APIUrl, input);
   });
 
-  it("should handle errors correctly when the request fails", async () => {
+  it('should handle errors correctly when the request fails', async () => {
     // Mock an error response (axios error)
     const mockError: AxiosError<ErrorResponse> = {
       isAxiosError: true,
-      message: "Request failed with status code 500",
-      name: "AxiosError",
+      message: 'Request failed with status code 500',
+      name: 'AxiosError',
       toJSON: () => ({}),
       response: {
         config: {
@@ -50,12 +50,12 @@ describe("deleteStack", () => {
         },
         headers: {},
         status: 500,
-        statusText: "Internal Server Error",
+        statusText: 'Internal Server Error',
         data: {
           status: 500,
-          title: "An internal server error occurred.",
-          type: "InternalServerError",
-          detail: "This is an test error message",
+          title: 'An internal server error occurred.',
+          type: 'InternalServerError',
+          detail: 'This is an test error message',
         },
       },
     };

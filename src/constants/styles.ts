@@ -1,4 +1,4 @@
-import type {ProjectStatus, StackCategory} from "@prisma/client";
+import type { ProjectStatus, StackCategory } from '@prisma/client';
 
 //#region Navbar
 
@@ -32,9 +32,9 @@ export const NavbarAnimationConfig = {
  * @constant {Record<ProjectStatus, string>}
  */
 const StatusStyle: Record<ProjectStatus, string> = {
-  FINISHED: "text-green-500", // Style for finished projects (green)
-  IN_PROGRESS: "text-yellow-500", // Style for in-progress projects (yellow)
-  STALLED: "text-red-500", // Style for stalled projects (red)
+  FINISHED: 'text-green-500', // Style for finished projects (green)
+  IN_PROGRESS: 'text-yellow-500', // Style for in-progress projects (yellow)
+  STALLED: 'text-red-500', // Style for stalled projects (red)
 } as const;
 
 /**
@@ -44,9 +44,9 @@ const StatusStyle: Record<ProjectStatus, string> = {
  * @constant {Record<StackCategory, string>}
  */
 const StackStyle: Record<StackCategory, string> = {
-  FULL_STACK: "bg-red-500/70 text-white dark:bg-red-500", // Full-stack style (red background)
-  BACK_END: "bg-blue-500/70 text-white dark:bg-blue-500", // Back-end style (blue background)
-  FRONT_END: "bg-green-500/70 text-white dark:bg-green-500", // Front-end style (green background)
+  FULL_STACK: 'bg-red-500/70 text-white dark:bg-red-500', // Full-stack style (red background)
+  BACK_END: 'bg-blue-500/70 text-white dark:bg-blue-500', // Back-end style (blue background)
+  FRONT_END: 'bg-green-500/70 text-white dark:bg-green-500', // Front-end style (green background)
 } as const;
 
 /**

@@ -1,23 +1,23 @@
-import type {ErrorResponse} from "@/types/responses";
-import type {Stack} from "@prisma/client";
+import type { ErrorResponse } from '@/types/responses';
+import type { Stack } from '@prisma/client';
 
-import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
-import {describe, expect, it, vi} from "vitest";
+import { AxiosError, AxiosHeaders, type AxiosResponse } from 'axios';
+import { describe, expect, it, vi } from 'vitest';
 
-import {TEST_STACK_MOCK} from "../../__mock__/stack.mock";
+import { TEST_STACK_MOCK } from '../../__mock__/stack.mock';
 
-import {apiClient} from "@/helpers/client/axios";
-import {postStack} from "@/services/stack/postStack";
+import { apiClient } from '@/helpers/client/axios';
+import { postStack } from '@/services/stack/postStack';
 
 // Mock the apiClient module
-vi.mock("@/helpers/client/axios");
+vi.mock('@/helpers/client/axios');
 
-describe("postStack", () => {
+describe('postStack', () => {
   // Input data for the tests
   const input = TEST_STACK_MOCK;
-  const APIUrl = "/api/stack/create";
+  const APIUrl = '/api/stack/create';
 
-  it("should return a successful response when the request is correct", async () => {
+  it('should return a successful response when the request is correct', async () => {
     // Mock a successful response
     const mockResponse: AxiosResponse<Stack> = {
       config: {
@@ -25,7 +25,7 @@ describe("postStack", () => {
       },
       headers: {},
       status: 201,
-      statusText: "OK",
+      statusText: 'OK',
       data: TEST_STACK_MOCK,
     };
 
@@ -38,12 +38,12 @@ describe("postStack", () => {
     expect(apiClient.post).toHaveBeenCalledWith(APIUrl, input);
   });
 
-  it("should handle errors correctly when the request fails", async () => {
+  it('should handle errors correctly when the request fails', async () => {
     // Mock an error response (axios error)
     const mockError: AxiosError<ErrorResponse> = {
       isAxiosError: true,
-      message: "Request failed with status code 500",
-      name: "AxiosError",
+      message: 'Request failed with status code 500',
+      name: 'AxiosError',
       toJSON: () => ({}),
       response: {
         config: {
@@ -51,12 +51,12 @@ describe("postStack", () => {
         },
         headers: {},
         status: 500,
-        statusText: "Internal Server Error",
+        statusText: 'Internal Server Error',
         data: {
           status: 500,
-          title: "An internal server error occurred.",
-          type: "InternalServerError",
-          detail: "This is an test error message",
+          title: 'An internal server error occurred.',
+          type: 'InternalServerError',
+          detail: 'This is an test error message',
         },
       },
     };

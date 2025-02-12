@@ -1,14 +1,14 @@
-import type {APIRoute, GetStaticPaths} from "astro";
+import type { APIRoute, GetStaticPaths } from 'astro';
 
-import {z} from "zod";
+import { z } from 'zod';
 
-import {databaseClient} from "@/helpers/client/prisma";
-import {handleApiError} from "@/helpers/error/api-handler";
+import { databaseClient } from '@/helpers/client/prisma';
+import { handleApiError } from '@/helpers/error/api-handler';
 
 /**
  * GET handler to fetch a stack.
  */
-export const GET: APIRoute = async ({params, url}) => {
+export const GET: APIRoute = async ({ params, url }) => {
   try {
     const id = z.coerce.number().parse(params.id);
 
@@ -18,7 +18,7 @@ export const GET: APIRoute = async ({params, url}) => {
       },
     });
 
-    return Response.json(fetchedStack, {status: 200});
+    return Response.json(fetchedStack, { status: 200 });
   } catch (error) {
     return handleApiError(error, url);
   }
@@ -32,6 +32,6 @@ export const getStaticPaths = (async () => {
   });
 
   return stacks.map((stack) => ({
-    params: {id: stack.id},
+    params: { id: stack.id },
   }));
 }) satisfies GetStaticPaths;
