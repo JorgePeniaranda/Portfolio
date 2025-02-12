@@ -17,6 +17,7 @@ import eslintPluginReactHooks from 'eslint-plugin-react-hooks';
 import tailwind from 'eslint-plugin-tailwindcss';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
+import astroParser from "astro-eslint-parser";
 
 export default [
   /**
@@ -57,6 +58,7 @@ export default [
    * 🔹 React-specific ESLint rules
    */
   {
+    files: ['**/*.{ts,tsx,js,jsx}'],
     plugins: {
       react: fixupPluginRules(eslintPluginReact),
       'react-hooks': fixupPluginRules(eslintPluginReactHooks),
@@ -144,7 +146,7 @@ export default [
             proseWrap: 'always',
             htmlWhitespaceSensitivity: 'css',
             embeddedLanguageFormatting: 'auto',
-            plugins: ['prettier-plugin-tailwindcss']
+            // plugins: ['prettier-plugin-tailwindcss']
           }
         ]
       }
@@ -175,7 +177,18 @@ export default [
    * 🔹 Astro-specific ESLint rules
    */
   {
-    plugins: { ...eslintPluginAstro.configs.recommended }
+    files: ['**/*.astro'],
+    languageOptions: {
+      parser: astroParser,
+      parserOptions: {
+        parser: '@typescript-eslint/parser',
+        extraFileExtensions: ['.astro'],
+      },
+    },
+    rules: {
+      "@typescript-eslint/no-empty-object-type": "off",
+    },
+    plugins: { ...eslintPluginAstro.configs.recommended },
   },
 
   /**
