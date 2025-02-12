@@ -1,5 +1,8 @@
 /**
- * @file ESLint configuration for Astro + React project.
+ * @file ESLint configuration for an Astro + React project.
+ * @description Defines linting rules and best practices for maintaining code quality,
+ *              ensuring consistency, and enforcing accessibility and performance optimizations
+ *              in a TypeScript-based Astro and React project.
  */
 
 import { fixupPluginRules } from '@eslint/compat';
@@ -16,7 +19,9 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 export default [
-  // Ignores configuration
+  /**
+   * 🔹 Ignore paths that should not be linted
+   */
   {
     ignores: [
       'node_modules',
@@ -30,7 +35,10 @@ export default [
       '__test__' // TO-DO: Remove test folder
     ]
   },
-  // General configuration
+
+  /**
+   * 🔹 General ESLint rules
+   */
   {
     rules: {
       'padding-line-between-statements': [
@@ -41,10 +49,13 @@ export default [
       ],
       'no-console': 'warn',
       'prefer-const': 'error',
-      'no-var': 'error',
+      'no-var': 'error'
     }
   },
-  // React configuration
+
+  /**
+   * 🔹 React-specific ESLint rules
+   */
   {
     plugins: {
       react: fixupPluginRules(eslintPluginReact),
@@ -64,11 +75,13 @@ export default [
       react: { version: 'detect' }
     },
     rules: {
-      // Recommended rules from react, jsx-a11y and react-hooks
+      // ✅ Recommended rules
       ...eslintPluginReact.configs.recommended.rules,
       ...eslintPluginJsxA11y.configs.recommended.rules,
       ...eslintPluginReactHooks.configs.recommended.rules,
       ...vercelStyleGuideReact.rules,
+
+      // 🚀 Best practices
       'react/prop-types': 'off',
       'react/jsx-uses-react': 'off',
       'react/react-in-jsx-scope': 'off',
@@ -78,13 +91,15 @@ export default [
         { callbacksLast: true, shorthandFirst: true, noSortAlphabetically: false, reservedFirst: true }
       ],
       'react-hooks/exhaustive-deps': 'warn',
-      // Additional React best practices.
       'react/no-array-index-key': 'warn',
       'react/no-unstable-nested-components': 'warn',
       'react/jsx-no-useless-fragment': 'warn'
     }
   },
-  // TypeScript configuration
+
+  /**
+   * 🔹 TypeScript-specific ESLint rules
+   */
   ...[
     ...tseslint.configs.recommended,
     {
@@ -100,12 +115,14 @@ export default [
           'warn',
           { args: 'after-used', ignoreRestSiblings: false, argsIgnorePattern: '^_.*?$' }
         ],
-        // Enforce using type-only imports when possible.
-        '@typescript-eslint/consistent-type-imports': 'warn'
+        '@typescript-eslint/consistent-type-imports': 'warn' // Enforce type-only imports when possible
       }
     }
   ],
-  // Prettier configuration
+
+  /**
+   * 🔹 Prettier configuration
+   */
   ...[
     eslintPluginPrettier,
     {
@@ -117,17 +134,26 @@ export default [
             trailingComma: 'all',
             tabWidth: 2,
             semi: true,
-            singleQuote: false,
-            bracketSpacing: false,
+            singleQuote: true,
+            jsxSingleQuote: true,
+            bracketSpacing: true,
+            bracketSameLine: false,
             arrowParens: 'always',
-            endOfLine: 'auto',
+            endOfLine: 'lf',
+            quoteProps: 'consistent',
+            proseWrap: 'always',
+            htmlWhitespaceSensitivity: 'css',
+            embeddedLanguageFormatting: 'auto',
             plugins: ['prettier-plugin-tailwindcss']
           }
         ]
       }
     }
   ],
-  // Import configuration
+
+  /**
+   * 🔹 Import management rules
+   */
   {
     plugins: {
       import: fixupPluginRules(eslintPluginImport)
@@ -137,27 +163,24 @@ export default [
       'import/order': [
         'warn',
         {
-          groups: [
-            'type',
-            'builtin',
-            'object',
-            'external',
-            'internal',
-            'parent',
-            'sibling',
-            'index'
-          ],
+          groups: ['type', 'builtin', 'object', 'external', 'internal', 'parent', 'sibling', 'index'],
           pathGroups: [{ pattern: '~/**', group: 'external', position: 'after' }],
           'newlines-between': 'always'
-        },
+        }
       ]
     }
   },
-  // Astro configuration
+
+  /**
+   * 🔹 Astro-specific ESLint rules
+   */
   {
     plugins: { ...eslintPluginAstro.configs.recommended }
   },
-  // Tailwind CSS configuration
+
+  /**
+   * 🔹 Tailwind CSS configuration
+   */
   ...[
     ...tailwind.configs['flat/recommended']
   ]
