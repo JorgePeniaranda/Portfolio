@@ -17,7 +17,7 @@ import eslintPluginReactHooks from 'eslint-plugin-react-hooks';
 import tailwind from 'eslint-plugin-tailwindcss';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
-import astroParser from "astro-eslint-parser";
+import astroParser from 'astro-eslint-parser';
 
 export default [
   /**
@@ -31,10 +31,9 @@ export default [
       'public',
       'dist',
       'coverage',
-      '.idea',
       'src/env.d.ts',
-      '__test__' // TO-DO: Remove test folder
-    ]
+      '__test__', // TO-DO: Remove test folder
+    ],
   },
 
   /**
@@ -46,12 +45,12 @@ export default [
         'warn',
         { blankLine: 'always', prev: '*', next: ['return', 'export'] },
         { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
-        { blankLine: 'any', prev: ['const', 'let', 'var'], next: ['const', 'let', 'var'] }
+        { blankLine: 'any', prev: ['const', 'let', 'var'], next: ['const', 'let', 'var'] },
       ],
       'no-console': 'warn',
       'prefer-const': 'error',
-      'no-var': 'error'
-    }
+      'no-var': 'error',
+    },
   },
 
   /**
@@ -60,21 +59,21 @@ export default [
   {
     files: ['**/*.{ts,tsx,js,jsx}'],
     plugins: {
-      react: fixupPluginRules(eslintPluginReact),
+      'react': fixupPluginRules(eslintPluginReact),
       'react-hooks': fixupPluginRules(eslintPluginReactHooks),
-      'jsx-a11y': fixupPluginRules(eslintPluginJsxA11y)
+      'jsx-a11y': fixupPluginRules(eslintPluginJsxA11y),
     },
     languageOptions: {
       parserOptions: {
-        ecmaFeatures: { jsx: true }
+        ecmaFeatures: { jsx: true },
       },
       globals: {
         ...globals.browser,
-        ...globals.serviceworker
-      }
+        ...globals.serviceworker,
+      },
     },
     settings: {
-      react: { version: 'detect' }
+      react: { version: 'detect' },
     },
     rules: {
       // ✅ Recommended rules
@@ -90,13 +89,18 @@ export default [
       'react/self-closing-comp': 'warn',
       'react/jsx-sort-props': [
         'warn',
-        { callbacksLast: true, shorthandFirst: true, noSortAlphabetically: false, reservedFirst: true }
+        {
+          callbacksLast: true,
+          shorthandFirst: true,
+          noSortAlphabetically: false,
+          reservedFirst: true,
+        },
       ],
       'react-hooks/exhaustive-deps': 'warn',
       'react/no-array-index-key': 'warn',
       'react/no-unstable-nested-components': 'warn',
-      'react/jsx-no-useless-fragment': 'warn'
-    }
+      'react/jsx-no-useless-fragment': 'warn',
+    },
   },
 
   /**
@@ -115,11 +119,11 @@ export default [
         '@typescript-eslint/no-confusing-void-expression': 'off',
         '@typescript-eslint/no-unused-vars': [
           'warn',
-          { args: 'after-used', ignoreRestSiblings: false, argsIgnorePattern: '^_.*?$' }
+          { args: 'after-used', ignoreRestSiblings: false, argsIgnorePattern: '^_.*?$' },
         ],
-        '@typescript-eslint/consistent-type-imports': 'warn' // Enforce type-only imports when possible
-      }
-    }
+        '@typescript-eslint/consistent-type-imports': 'warn', // Enforce type-only imports when possible
+      },
+    },
   ],
 
   /**
@@ -147,10 +151,10 @@ export default [
             htmlWhitespaceSensitivity: 'css',
             embeddedLanguageFormatting: 'auto',
             // plugins: ['prettier-plugin-tailwindcss']
-          }
-        ]
-      }
-    }
+          },
+        ],
+      },
+    },
   ],
 
   /**
@@ -158,19 +162,28 @@ export default [
    */
   {
     plugins: {
-      import: fixupPluginRules(eslintPluginImport)
+      import: fixupPluginRules(eslintPluginImport),
     },
     rules: {
       'import/no-default-export': 'off',
       'import/order': [
         'warn',
         {
-          groups: ['type', 'builtin', 'object', 'external', 'internal', 'parent', 'sibling', 'index'],
-          pathGroups: [{ pattern: '~/**', group: 'external', position: 'after' }],
-          'newlines-between': 'always'
-        }
-      ]
-    }
+          'groups': [
+            'type',
+            'builtin',
+            'object',
+            'external',
+            'internal',
+            'parent',
+            'sibling',
+            'index',
+          ],
+          'pathGroups': [{ pattern: '~/**', group: 'external', position: 'after' }],
+          'newlines-between': 'always',
+        },
+      ],
+    },
   },
 
   /**
@@ -186,7 +199,7 @@ export default [
       },
     },
     rules: {
-      "@typescript-eslint/no-empty-object-type": "off",
+      '@typescript-eslint/no-empty-object-type': 'off',
     },
     plugins: { ...eslintPluginAstro.configs.recommended },
   },
@@ -194,7 +207,5 @@ export default [
   /**
    * 🔹 Tailwind CSS configuration
    */
-  ...[
-    ...tailwind.configs['flat/recommended']
-  ]
+  ...[...tailwind.configs['flat/recommended']],
 ];
