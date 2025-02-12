@@ -30,15 +30,15 @@ const TITLE_WORD_LIST = [
       'bg-gradient-to-r from-rose-200 to-teal-200 dark:from-[rgba(136,19,55,0.8)] dark:dark:to-[rgba(4,120,87,0.8)] dark:to-gray-800 transition-colors ease-linear',
   }}
 >
-  <nav class='h-max px-20 pt-2 flex justify-between items-center'>
-    <Logo class='w-28 aspect-square' />
+  <nav class='flex h-max items-center justify-between px-20 pt-2'>
+    <Logo class='aspect-square w-28' />
     <SecretButton client:visible />
   </nav>
-  <header id='header' class='flex flex-col gap-1 items-center text-center h-max my-14 mb-20'>
+  <header class='my-14 mb-20 flex h-max flex-col items-center gap-1 text-center' id='header'>
     <h1 class='sr-only'>Portfolio de Full-Stack Developer especializado en Front-End y Back-End</h1>
-    <h2 class='font-medium text-6xl'>
+    <h2 class='text-6xl font-medium'>
       De tus ideas a <b class='text-primary'>
-        <TextWritter wordList={TITLE_WORD_LIST} client:load />
+        <TextWritter client:load wordList={TITLE_WORD_LIST} />
       </b>
     </h2>
     <p class='max-w-2xl text-xl'>
@@ -46,50 +46,47 @@ const TITLE_WORD_LIST = [
       proyectos el impulso que necesitan para destacar.
     </p>
     <a
-      href='/projects'
-      class='bg-primary font-semibold text-2xl text-white px-5 mt-10 py-2.5 rounded-md hover:scale-105 transition-transform'
-      >Conoce mis Proyectos</a
+      class='mt-10 rounded-md bg-primary px-5 py-2.5 text-2xl font-semibold text-white transition-transform hover:scale-105'
+      href='/projects'>Conoce mis Proyectos</a
     >
   </header>
   <section
-    class='w-9/12 flex justify-center items-center relative mx-auto rounded-2xl cursor-zoom-in hover:scale-105 transition-transform'
     aria-label='Header Illustration'
+    class='relative mx-auto flex w-9/12 cursor-zoom-in items-center justify-center rounded-2xl transition-transform hover:scale-105'
   >
-    <figure
-      class='w-full h-full flex items-end -z-50 bg-primary rounded-[inherit] absolute bottom-0'
-    >
-      <Wave class='w-full rounded-bl-[inherit] rounded-br-[inherit]' aria-label='wave' />
+    <figure class='absolute bottom-0 -z-50 flex size-full items-end rounded-[inherit] bg-primary'>
+      <Wave aria-label='wave' class='w-full rounded-b-[inherit]' />
       <figcaption class='sr-only fixed'>Background Wave</figcaption>
     </figure>
-    <article class='w-2/3 text-center select-none text-white pointer-events-none z-40 py-20'>
+    <article class='pointer-events-none z-40 w-2/3 select-none py-20 text-center text-white'>
       <h5
-        class='text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-20 font-AlfaSlabOne !leading-normal'
+        class='mb-20 font-AlfaSlabOne text-5xl !leading-normal md:text-6xl lg:text-7xl xl:text-8xl'
       >
         Páginas unicas con diseños increibles
       </h5>
-      <h4 class='text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-ZillaSlabHighlight'>
+      <h4 class='font-ZillaSlabHighlight text-2xl md:text-3xl lg:text-4xl xl:text-5xl'>
         Jorge Peñaranda | Desarrollador web
       </h4>
     </article>
-    <figure class='w-full h-full absolute bottom-0 z-30 rounded-bl-[inherit] rounded-br-[inherit]'>
+    <figure class='absolute bottom-0 z-30 size-full rounded-b-[inherit]'>
       <MountainLeft
         aria-label='Left mountain'
-        class='w-2/5 h-fit absolute bottom-0 left-0 rounded-bl-[inherit]'
+        class='absolute bottom-0 left-0 h-fit w-2/5 rounded-bl-[inherit]'
       />
       <MountainRight
         aria-label='Right mountain'
-        class='w-2/5 h-fit absolute bottom-0 right-0 rounded-br-[inherit]'
+        class='absolute bottom-0 right-0 h-fit w-2/5 rounded-br-[inherit]'
       />
       <figcaption class='sr-only'>Mountains</figcaption>
     </figure>
-    <figure class='hidden md:inline z-20'>
-      <Bird1 aria-label='Bird 1' class='absolute top-[23%] left-[21%]' />
+    <figure class='z-20 hidden md:inline'>
+      <Bird1 aria-label='Bird 1' class='absolute left-[21%] top-[23%]' />
       <Bird2 aria-label='Bird 2' class='absolute bottom-[17%] right-[45%]' />
-      <Bird3 aria-label='Bird 3' class='absolute top-[20%] right-[35%]' />
+      <Bird3 aria-label='Bird 3' class='absolute right-[35%] top-[20%]' />
       <figcaption class='sr-only'>Birds</figcaption>
     </figure>
-    <figure class='hidden md:inline z-10'>
-      <Sun aria-label='sun' class='absolute top-[5%] right-[10%]' />
+    <figure class='z-10 hidden md:inline'>
+      <Sun aria-label='sun' class='absolute right-[10%] top-[5%]' />
       <figcaption class='sr-only'>Sun</figcaption>
     </figure>
   </section>

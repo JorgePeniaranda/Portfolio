@@ -1,8 +1,9 @@
 ---
+import { ArrowRight } from 'lucide-react';
+
 import Logo from '@/assets/svg/logos/Logo.astro';
 import { SecretCodeHint } from '@/components/atoms/secret-code-hint';
 import Layout from '@/components/layouts/base.astro';
-import { ArrowRight } from 'lucide-react';
 ---
 
 <Layout
@@ -11,26 +12,26 @@ import { ArrowRight } from 'lucide-react';
   }}
   title='Sobre mi'
 >
-  <main class='w-full h-full space-y-10 container'>
-    <nav class='h-max pt-2 flex justify-between items-center'>
-      <Logo class='w-28 aspect-square' />
+  <main class='container size-full space-y-10'>
+    <nav class='flex h-max items-center justify-between pt-2'>
+      <Logo class='aspect-square w-28' />
       <a
+        class='group relative m-1 flex cursor-pointer items-center gap-1 overflow-hidden rounded-lg border-2 border-primary px-3 py-2 font-semibold text-primary shadow-sm'
         href='/blog'
-        class='flex px-3 py-2 rounded-lg items-center gap-1 shadow-sm text-primary group relative m-1 cursor-pointer overflow-hidden border-2 border-primary font-semibold'
       >
         <span
           class='ease absolute top-1/2 h-0 w-80 origin-center -translate-x-20 rotate-45 bg-primary transition-all duration-300 group-hover:h-64 group-hover:-translate-y-32'
         ></span>
         <span
-          class='ease relative text-primary transition duration-300 group-hover:text-white flex gap-2 max-sm:text-xs max-sm:text-center items-center'
+          class='ease relative flex items-center gap-2 text-primary transition duration-300 group-hover:text-white max-sm:text-center max-sm:text-xs'
         >
           ¿Conoces mi blog?
           <ArrowRight />
         </span>
       </a>
     </nav>
-    <div class='fixed left-0 bottom-0'>
-      <SecretCodeHint position={3} client:visible />
+    <div class='fixed bottom-0 left-0'>
+      <SecretCodeHint client:visible position={3} />
     </div>
   </main>
 </Layout>

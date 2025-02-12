@@ -1,10 +1,12 @@
 ---
+import { ArrowRight } from 'lucide-react';
+
+import { getAllStackWithRelationsAndProjectsMin } from '../../services/stack/getAllStackWithRelationsAndProjectsMin';
+
 import Logo from '@/assets/svg/logos/Logo.astro';
 import { SecretCodeHint } from '@/components/atoms/secret-code-hint';
 import Layout from '@/components/layouts/base.astro';
 import { StackFlow } from '@/components/organisms/react-flow/stack-flow';
-import { ArrowRight } from 'lucide-react';
-import { getAllStackWithRelationsAndProjectsMin } from '../../services/stack/getAllStackWithRelationsAndProjectsMin';
 
 const stacksWithProjectsMin = await getAllStackWithRelationsAndProjectsMin();
 ---
@@ -15,18 +17,18 @@ const stacksWithProjectsMin = await getAllStackWithRelationsAndProjectsMin();
   }}
   title='Stack'
 >
-  <main class='w-full h-[80vh] space-y-10 container'>
-    <nav class='h-max pt-2 flex justify-between items-center'>
-      <Logo class='w-28 aspect-square' />
+  <main class='container h-[80vh] w-full space-y-10'>
+    <nav class='flex h-max items-center justify-between pt-2'>
+      <Logo class='aspect-square w-28' />
       <a
+        class='group relative m-1 flex cursor-pointer items-center gap-1 overflow-hidden rounded-lg border-2 border-primary px-3 py-2 font-semibold text-primary shadow-sm'
         href='/about'
-        class='flex px-3 py-2 rounded-lg items-center gap-1 shadow-sm text-primary group relative m-1 cursor-pointer overflow-hidden border-2 border-primary font-semibold'
       >
         <span
           class='ease absolute top-1/2 h-0 w-80 origin-center -translate-x-20 rotate-45 bg-primary transition-all duration-300 group-hover:h-64 group-hover:-translate-y-32'
         ></span>
         <span
-          class='ease relative text-primary transition duration-300 group-hover:text-white flex gap-2 max-sm:text-xs max-sm:text-center items-center'
+          class='ease relative flex items-center gap-2 text-primary transition duration-300 group-hover:text-white max-sm:text-center max-sm:text-xs'
         >
           ¡Haz clic para conocerme!
           <ArrowRight />
@@ -34,12 +36,12 @@ const stacksWithProjectsMin = await getAllStackWithRelationsAndProjectsMin();
       </a>
     </nav>
     <section class='flex flex-col items-center gap-6'>
-      <article class='w-full flex flex-col text-center items-center gap-2.5'>
+      <article class='flex w-full flex-col items-center gap-2.5 text-center'>
         <div class='flex gap-2'>
           <h1 class='text-4xl font-semibold'>Mi stack</h1>
-          <SecretCodeHint position={2} client:visible />
+          <SecretCodeHint client:visible position={2} />
         </div>
-        <p class='text-lg text-gray-600 max-w-2xl max-sm:text-sm'>
+        <p class='max-w-2xl text-lg text-gray-600 max-sm:text-sm'>
           A lo largo de mi carrera, he desarrollado un conjunto de tecnologías que me permiten crear
           soluciones innovadoras y eficientes. Mi stack incluye lenguajes de programación,
           frameworks y herramientas para proyectos web y backend, siempre enfocado en mantenerme
@@ -47,6 +49,6 @@ const stacksWithProjectsMin = await getAllStackWithRelationsAndProjectsMin();
         </p>
       </article>
     </section>
-    <StackFlow stacks={stacksWithProjectsMin} client:load />
+    <StackFlow client:load stacks={stacksWithProjectsMin} />
   </main>
 </Layout>

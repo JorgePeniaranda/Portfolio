@@ -1,36 +1,37 @@
 ---
+import { ArrowRight } from 'lucide-react';
+
 import Layout from '@/components/layouts/base.astro';
 import { DashboardLayout } from '@/components/layouts/dashboard-layout';
 import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb';
-import { ArrowRight } from 'lucide-react';
 ---
 
 <Layout title='Panel de Control'>
-  <DashboardLayout breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault']} client:load>
-    <main class='w-full h-full flex flex-col items-center pt-20'>
+  <DashboardLayout client:load breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault']}>
+    <main class='flex size-full flex-col items-center pt-20'>
       <h1 class='text-center text-4xl font-medium'>¡Bienvenido al Panel de Control!</h1>
-      <p class='text-center max-w-3xl'>
+      <p class='max-w-3xl text-center'>
         El panel de control es una herramienta interna y oculta que permite gestionar el contenido
         del portafolio. Desde aquí se pueden agregar y editar proyectos, así como actualizar el
         stack tecnológico presentado, asegurando que el portafolio refleje siempre información
         precisa y actualizada.
       </p>
       <b class='mt-10 text-2xl'>¡Aviso!</b>
-      <p class='text-center max-w-2xl'>
+      <p class='max-w-2xl text-center'>
         Esta aplicación utiliza archivos estáticos para generar el contenido visible en el
         portafolio. Por este motivo, los cambios realizados a través del panel de control no se
         reflejarán de manera inmediata en la versión pública. Estos ajustes solo tendrán efecto en
         el entorno local.
       </p>
       <a
+        class='group relative m-1 mt-40 flex cursor-pointer items-center gap-1 overflow-hidden rounded-lg border-2 border-primary px-3 py-2 font-semibold text-primary shadow-sm'
         href='/'
-        class='mt-40 flex px-3 py-2 rounded-lg items-center gap-1 shadow-sm text-primary group relative m-1 cursor-pointer overflow-hidden border-2 border-primary font-semibold'
       >
         <span
           class='ease absolute top-1/2 h-0 w-80 origin-center -translate-x-20 rotate-45 bg-primary transition-all duration-300 group-hover:h-64 group-hover:-translate-y-32'
         ></span>
         <span
-          class='ease relative text-primary transition duration-300 group-hover:text-white flex gap-2 max-sm:text-xs max-sm:text-center items-center'
+          class='ease relative flex items-center gap-2 text-primary transition duration-300 group-hover:text-white max-sm:text-center max-sm:text-xs'
         >
           Volver al portafolio
           <ArrowRight />

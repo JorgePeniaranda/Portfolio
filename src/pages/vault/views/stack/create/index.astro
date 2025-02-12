@@ -7,10 +7,10 @@ import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb';
 
 <Layout title='Crear stack'>
   <DashboardLayout
-    breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/stack/create']}
     client:load
+    breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/stack/create']}
   >
-    <main class='w-full h-full flex flex-col pt-7 pl-7 container mx-auto gap-5'>
+    <main class='container mx-auto flex size-full flex-col gap-5 pl-7 pt-7'>
       <h1 class='text-4xl font-medium'>Crear Stack</h1>
       <CreateStackForm client:load />
     </main>

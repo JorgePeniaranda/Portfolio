@@ -9,10 +9,10 @@ const stacks = await getAllStack();
 ---
 
 <Layout title='Stack'>
-  <DashboardLayout breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/stack']} client:load>
-    <main class='w-full h-full flex flex-col pt-7 pl-7 container mx-auto'>
+  <DashboardLayout client:load breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/stack']}>
+    <main class='container mx-auto flex size-full flex-col pl-7 pt-7'>
       <h1 class='text-4xl font-medium'>Stack</h1>
-      <StackTable data={stacks} client:load />
+      <StackTable client:load data={stacks} />
     </main>
   </DashboardLayout>
 </Layout>

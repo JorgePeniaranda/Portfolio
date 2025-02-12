@@ -10,12 +10,12 @@ const collaborators = await getAllCollaborator();
 
 <Layout title='Colaboradores'>
   <DashboardLayout
-    breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/collaborators']}
     client:load
+    breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/collaborators']}
   >
-    <main class='w-full h-full flex flex-col pt-7 pl-7 container mx-auto'>
+    <main class='container mx-auto flex size-full flex-col pl-7 pt-7'>
       <h1 class='text-4xl font-medium'>Colaboradores</h1>
-      <CollaboratorTable data={collaborators} client:load />
+      <CollaboratorTable client:load data={collaborators} />
     </main>
   </DashboardLayout>
 </Layout>

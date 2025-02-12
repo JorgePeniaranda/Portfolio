@@ -1,4 +1,8 @@
 ---
+import type { GetStaticPaths } from 'astro';
+
+import moment from 'moment';
+
 import { MessageDisplay } from '@/components/atoms/message-display';
 import Layout from '@/components/layouts/base.astro';
 import { ProjectAccordion } from '@/components/organisms/accordion/project-accordion';
@@ -15,8 +19,6 @@ import { getCollaboratorsByAssociatedProjects } from '@/services/collaborator/ge
 import { getAllProjects } from '@/services/project/getAllProjects';
 import { getProjectByKey } from '@/services/project/getProjectByKey';
 import { getStacksByAssociatedProjects } from '@/services/stack/getStacksByAssociatedProjects';
-import type { GetStaticPaths } from 'astro';
-import moment from 'moment';
 
 // MARK: - Static paths
 export const getStaticPaths = (async () => {
@@ -30,6 +32,7 @@ export const getStaticPaths = (async () => {
 
 // MARK: - Fetching project data
 let project;
+
 if (ENV.isServerSideEnable) {
   project = await getProjectByKey({
     key: Astro.params.key,
@@ -74,9 +77,9 @@ const textColor = GetTextColorForBackground(project.primaryColor);
   }}
   title={project.name}
 >
-  <div class='py-14 px-16'>
+  <div class='px-16 py-14'>
     <header class='mb-2'>
-      <Breadcrumb className='text-white relative z-50' items={BreadCrumbItems} />
+      <Breadcrumb className='relative z-50 text-white' items={BreadCrumbItems} />
     </header>
     <div class='fixed inset-0 z-10'>
       <div
@@ -90,7 +93,7 @@ const textColor = GetTextColorForBackground(project.primaryColor);
       >
       </div>
     </div>
-    <main class='flex text-black dark:text-white h-full'>
+    <main class='flex h-full text-black dark:text-white'>
       <section
         class:list={[
           'flex-1 flex flex-col h-full relative z-50',
@@ -107,11 +110,11 @@ const textColor = GetTextColorForBackground(project.primaryColor);
           >
             {project.name}
           </h1>
-          <div class='flex gap-2 items-center font-light text-lg my-2'>
-            <h2 class='leading-none font-medium' class:list={StatusStyle[project.status]}>
+          <div class='my-2 flex items-center gap-2 text-lg font-light'>
+            <h2 class:list={StatusStyle[project.status]} class='font-medium leading-none'>
               {PROJECT_STATUS_TRANSCRIPTIONS[project.status]}
             </h2>
-            <small class='leading-none p-1 rounded-md text-base capitalize'>
+            <small class='rounded-md p-1 text-base capitalize leading-none'>
               {moment(project.startDate).locale('es').format('MMM YYYY')}
               {' - '}
               {
@@ -121,8 +124,8 @@ const textColor = GetTextColorForBackground(project.primaryColor);
               }
             </small>
             <h3
-              class='leading-none font-medium rounded-md p-1 text-base'
               class:list={[StackStyle[project.stackCategory]]}
+              class='rounded-md p-1 text-base font-medium leading-none'
             >
               {STACK_CATEGORY_TRANSCRIPTIONS[project.stackCategory]}
             </h3>
@@ -133,23 +136,23 @@ const textColor = GetTextColorForBackground(project.primaryColor);
         </article>
         <article class='mt-5 flex-1'>
           <ProjectAccordion
+            client:load
             collaborators={associatedCollaborators}
-            goals={project.goals}
             contributions={project.contributions}
             demoUrl={project.demoUrl}
             githubUrl={project.githubUrl}
+            goals={project.goals}
             stackCategory={associatedStacks}
-            client:load
           />
         </article>
       </section>
-      <section class='flex flex-1 relative justify-center items-center'>
-        <article class='fixed aspect-video top-0 justify-center items-center flex z-0 h-full'>
+      <section class='relative flex flex-1 items-center justify-center'>
+        <article class='fixed top-0 z-0 flex aspect-video h-full items-center justify-center'>
           <!-- TO-DO: project.previewImageURL -->
           <img
-            src={``}
-            class='size-full'
             alt={`${project.name} preview image`}
+            class='size-full'
+            src=''
             style={`background-color: ${project.primaryColor};`}
           />
         </article>

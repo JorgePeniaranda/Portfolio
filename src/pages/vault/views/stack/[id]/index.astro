@@ -1,4 +1,6 @@
 ---
+import type { GetStaticPaths } from 'astro';
+
 import Layout from '@/components/layouts/base.astro';
 import { DashboardLayout } from '@/components/layouts/dashboard-layout';
 import { ShowStackForm } from '@/components/organisms/form/show/stack';
@@ -9,7 +11,6 @@ import { isNotDefined } from '@/helpers/guards/is-defined';
 import { getProjectsByAssociatedStack } from '@/services/project/getProjectsByAssociatedStack';
 import { getAllStack } from '@/services/stack/getAllStack';
 import { getStackById } from '@/services/stack/getStackById';
-import type { GetStaticPaths } from 'astro';
 
 // MARK: - Static paths
 export const getStaticPaths = (async () => {
@@ -25,6 +26,7 @@ export const getStaticPaths = (async () => {
 
 // MARK: - Fetching stack data
 let stack;
+
 if (ENV.isServerSideEnable) {
   stack = await getStackById({ id: Number(Astro.params.id) });
 } else {
@@ -46,12 +48,12 @@ const associatedProjects = await getProjectsByAssociatedStack({
 
 <Layout title={`Explora el stack ${stack.name}`}>
   <DashboardLayout
-    breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/project/details']}
     client:load
+    breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/project/details']}
   >
-    <main class='w-full h-full flex flex-col pt-7 pl-7 container mx-auto gap-5'>
+    <main class='container mx-auto flex size-full flex-col gap-5 pl-7 pt-7'>
       <h1 class='text-4xl font-medium'>Detalles de Stack</h1>
-      <ShowStackForm currentStack={stack} client:load />
+      <ShowStackForm client:load currentStack={stack} />
       <div class='mt-10'>
         <h2 class='text-3xl font-medium'>Relaciones</h2>
         <div class='mx-5 mt-5'>
