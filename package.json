@@ -28,15 +28,13 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro:check": "astro check",
     "prisma:generate": "npx prisma generate",
     "prisma:migrate": "npx prisma migrate dev",
     "prisma:studio": "npx prisma studio",
     "prisma:deploy": "npx prisma migrate deploy",
     "prisma:push": "npx prisma db push",
     "prisma:format": "npx prisma format",
-    "format": "prettier . --write",
-    "format:check": "prettier . --check",
+    "astro:check": "astro check",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
@@ -127,8 +125,7 @@
     "vitest": "3.0.5"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "prettier . --write",
+    "*.{js,jsx,ts,tsx,astro}": [
       "eslint . --fix"
     ]
   }
