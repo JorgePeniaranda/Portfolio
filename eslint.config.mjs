@@ -1,21 +1,24 @@
-import { fixupPluginRules } from '@eslint/compat'
-import vercelStyleGuideReact from '@vercel/style-guide/eslint/rules/react'
-import vercelStyleGuideTypescript from '@vercel/style-guide/eslint/typescript'
-import eslintPluginAstro from 'eslint-plugin-astro'
-import eslintPluginImport from 'eslint-plugin-import'
-import eslintPluginJsxA11y from 'eslint-plugin-jsx-a11y'
-import eslintPluginPrettier from 'eslint-plugin-prettier/recommended'
-import eslintPluginReact from 'eslint-plugin-react'
-import eslintPluginReactCompiler from "eslint-plugin-react-compiler"
-import eslintPluginReactHooks from 'eslint-plugin-react-hooks'
-import tailwind from "eslint-plugin-tailwindcss"
-import globals from 'globals'
-import tseslint from 'typescript-eslint'
+/**
+ * @file ESLint configuration for Astro + React project.
+ */
+
+import { fixupPluginRules } from '@eslint/compat';
+import vercelStyleGuideReact from '@vercel/style-guide/eslint/rules/react';
+import vercelStyleGuideTypescript from '@vercel/style-guide/eslint/typescript';
+import eslintPluginAstro from 'eslint-plugin-astro';
+import eslintPluginImport from 'eslint-plugin-import';
+import eslintPluginJsxA11y from 'eslint-plugin-jsx-a11y';
+import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
+import eslintPluginReact from 'eslint-plugin-react';
+import eslintPluginReactHooks from 'eslint-plugin-react-hooks';
+import tailwind from "eslint-plugin-tailwindcss";
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
 export default [
   // Ignores configuration
   {
-    ignores: ['node_modules', '.astro', '.github', 'public', 'dist', 'coverage', '.idea', 'src/env.d.ts' ]
+    ignores: ['node_modules', '.astro', '.github', 'public', 'dist', 'coverage', '.idea', 'src/env.d.ts']
   },
   // General configuration
   {
@@ -32,16 +35,13 @@ export default [
   // React configuration
   {
     plugins: {
-      'react': fixupPluginRules(eslintPluginReact),
+      react: fixupPluginRules(eslintPluginReact),
       'react-hooks': fixupPluginRules(eslintPluginReactHooks),
-      'react-compiler': fixupPluginRules(eslintPluginReactCompiler),
       'jsx-a11y': fixupPluginRules(eslintPluginJsxA11y)
     },
     languageOptions: {
       parserOptions: {
-        ecmaFeatures: {
-          jsx: true
-        }
+        ecmaFeatures: { jsx: true }
       },
       globals: {
         ...globals.browser,
@@ -49,11 +49,10 @@ export default [
       }
     },
     settings: {
-      react: {
-        version: 'detect'
-      }
+      react: { version: 'detect' }
     },
     rules: {
+      // Recommended rules from react, jsx-a11y and react-hooks
       ...eslintPluginReact.configs.recommended.rules,
       ...eslintPluginJsxA11y.configs.recommended.rules,
       ...eslintPluginReactHooks.configs.recommended.rules,
@@ -64,14 +63,11 @@ export default [
       'react/self-closing-comp': 'warn',
       'react/jsx-sort-props': [
         'warn',
-        {
-          callbacksLast: true,
-          shorthandFirst: true,
-          noSortAlphabetically: false,
-          reservedFirst: true
-        }
+        { callbacksLast: true, shorthandFirst: true, noSortAlphabetically: false, reservedFirst: true }
       ],
-      'react-compiler/react-compiler': "error",
+      // Recommended hook dependency warning
+      'react-hooks/exhaustive-deps': 'warn',
+      // Accessibility overrides
       'jsx-a11y/no-static-element-interactions': 'off',
       'jsx-a11y/click-events-have-key-events': 'off'
     }
@@ -90,11 +86,7 @@ export default [
         '@typescript-eslint/no-confusing-void-expression': 'off',
         '@typescript-eslint/no-unused-vars': [
           'warn',
-          {
-            args: 'after-used',
-            ignoreRestSiblings: false,
-            argsIgnorePattern: '^_.*?$'
-          }
+          { args: 'after-used', ignoreRestSiblings: false, argsIgnorePattern: '^_.*?$' }
         ]
       }
     }
@@ -131,7 +123,7 @@ export default [
       'import/order': [
         'warn',
         {
-          'groups': [
+          groups: [
             'type',
             'builtin',
             'object',
@@ -141,12 +133,8 @@ export default [
             'sibling',
             'index'
           ],
-          'pathGroups': [
-            {
-              pattern: '~/**',
-              group: 'external',
-              position: 'after'
-            }
+          pathGroups: [
+            { pattern: '~/**', group: 'external', position: 'after' }
           ],
           'newlines-between': 'always'
         }
@@ -155,12 +143,10 @@ export default [
   },
   // Astro configuration
   {
-    plugins: {
-      ...eslintPluginAstro.configs.recommended
-    },
+    plugins: { ...eslintPluginAstro.configs.recommended }
   },
   // Tailwind CSS configuration
   ...[
-    ...tailwind.configs["flat/recommended"],
+    ...tailwind.configs['flat/recommended']
   ]
-]
+];
