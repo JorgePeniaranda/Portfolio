@@ -11,14 +11,24 @@ import eslintPluginJsxA11y from 'eslint-plugin-jsx-a11y';
 import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
 import eslintPluginReact from 'eslint-plugin-react';
 import eslintPluginReactHooks from 'eslint-plugin-react-hooks';
-import tailwind from "eslint-plugin-tailwindcss";
+import tailwind from 'eslint-plugin-tailwindcss';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 export default [
   // Ignores configuration
   {
-    ignores: ['node_modules', '.astro', '.github', 'public', 'dist', 'coverage', '.idea', 'src/env.d.ts']
+    ignores: [
+      'node_modules',
+      '.astro',
+      '.github',
+      'public',
+      'dist',
+      'coverage',
+      '.idea',
+      'src/env.d.ts',
+      '__test__' // TO-DO: Remove test folder
+    ]
   },
   // General configuration
   {
@@ -29,7 +39,9 @@ export default [
         { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
         { blankLine: 'any', prev: ['const', 'let', 'var'], next: ['const', 'let', 'var'] }
       ],
-      'no-console': 'warn'
+      'no-console': 'warn',
+      'prefer-const': 'error',
+      'no-var': 'error',
     }
   },
   // React configuration
@@ -65,11 +77,11 @@ export default [
         'warn',
         { callbacksLast: true, shorthandFirst: true, noSortAlphabetically: false, reservedFirst: true }
       ],
-      // Recommended hook dependency warning
       'react-hooks/exhaustive-deps': 'warn',
-      // Accessibility overrides
-      'jsx-a11y/no-static-element-interactions': 'off',
-      'jsx-a11y/click-events-have-key-events': 'off'
+      // Additional React best practices.
+      'react/no-array-index-key': 'warn',
+      'react/no-unstable-nested-components': 'warn',
+      'react/jsx-no-useless-fragment': 'warn'
     }
   },
   // TypeScript configuration
@@ -87,7 +99,9 @@ export default [
         '@typescript-eslint/no-unused-vars': [
           'warn',
           { args: 'after-used', ignoreRestSiblings: false, argsIgnorePattern: '^_.*?$' }
-        ]
+        ],
+        // Enforce using type-only imports when possible.
+        '@typescript-eslint/consistent-type-imports': 'warn'
       }
     }
   ],
@@ -133,11 +147,9 @@ export default [
             'sibling',
             'index'
           ],
-          pathGroups: [
-            { pattern: '~/**', group: 'external', position: 'after' }
-          ],
+          pathGroups: [{ pattern: '~/**', group: 'external', position: 'after' }],
           'newlines-between': 'always'
-        }
+        },
       ]
     }
   },
