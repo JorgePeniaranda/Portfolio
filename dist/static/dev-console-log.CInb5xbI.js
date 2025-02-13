@@ -1,0 +1,1 @@
+const o=Object.assign((({input:o,type:n})=>{}),{log:(...o)=>{},info:(...o)=>{},warn:(...o)=>{},error:(...o)=>{}});export{o as d};
