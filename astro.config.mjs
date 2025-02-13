@@ -9,6 +9,7 @@ import { defineConfig } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://jorgepeniaranda.github.io/Portfolio/',
+  base: '/Portfolio/',
   integrations: [react(), sitemap(), tailwind(), playformCompress(), icon(), robotsTxt()],
   compressHTML: true,
   output: process.env.NODE_ENV === 'development' ? 'server' : 'static',
