@@ -10,6 +10,7 @@ export const ENV = {
   isProduction: import.meta.env.PROD,
   isDevelopment: import.meta.env.DEV,
   isServerSideEnable: import.meta.env.SSR,
-  base_url: import.meta.env.PROD ? import.meta.env.SITE : 'http://localhost:4321',
+  base_url: import.meta.env.SITE,
+  api_url: 'http://localhost:4321',
   secret_code: getEnvValue('PUBLIC_SECRET_CODE', '7421'),
 } as const;
