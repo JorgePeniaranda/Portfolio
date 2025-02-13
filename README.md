@@ -9,8 +9,6 @@ experiences.
 
 ![App Screenshot](./public/assets/images/banner.png)
 
----
-
 ## 🧰 Tech Stack
 
 <div align="center">
@@ -38,8 +36,6 @@ experiences.
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitest/vitest-original.svg" height="40" alt="vitest logo" />
 </div>
-
----
 
 ## 🔄 Git Flow
 
