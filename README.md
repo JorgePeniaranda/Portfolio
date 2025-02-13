@@ -51,49 +51,85 @@ This project follows the **Git Flow** workflow for efficient development and dep
 
 ### Workflow:
 
-1. **Work in `develop`**: Create feature branches from `develop` to work on new functionality.
+### Propuesta de Workflow:
 
-```sh
-git checkout develop
-git checkout -b feature/my-new-feature
-```
+Certainly! Here's the workflow translated into English:
 
-2. Release preparation: When develop is ready for testing, create a main (RC) branch for final
-   testing.
+### Workflow:
 
-```sh
-git checkout develop
-git checkout -b release/v1.0.0
-```
+1. **Work in `develop`**: Develop new features in feature branches derived from `develop`.
 
-3. Production deployment: After merging into main, generate static files and push them to
-   production.
+   ```bash
+   git checkout develop
+   git checkout -b feature/new-feature
+   ```
 
-```sh
-npm run build  # Generates static files
-git checkout production
-git add dist/  # Ensure static files are in dist/
-git commit -m "Deploy to production"
-git push origin production
-```
+2. **Preparation for testing**: Once a feature is ready, merge the feature branch into `develop` and create a release branch for final testing.
 
-4. Branch integration: Keep branches updated with periodic merges from develop to main and from main
-   to production.
+   ```bash
+   git checkout develop
+   git merge feature/new-feature
+   git checkout -b release/v1.0.0
+   ```
 
-```sh
-git checkout develop
-git pull origin develop
-git checkout main
-git merge develop
-git push origin main
+3. **Testing in `main`**: After testing in the release branch, merge the changes into `main` for additional testing if necessary.
 
-# When ready to deploy:
-git checkout production
-git pull origin production
-git merge main
-git push origin production
-```
+   ```bash
+   git checkout main
+   git merge release/v1.0.0
+   ```
 
+4. **Production deployment**: Once the changes in `main` have been validated, merge `main` into `production`.
+
+   ```bash
+   git checkout production
+   git merge main
+   ```
+Here's the updated workflow, including the manual build and deployment process:
+
+---
+
+### **Workflow: Astro Development and Deployment**
+
+1. **Work in `develop`**: Develop new features in feature branches derived from `develop`.  
+
+   ```bash
+   git checkout develop
+   git checkout -b feature/new-feature
+   ```
+
+2. **Preparation for testing**: Once a feature is ready, merge the feature branch into `develop` and create a release branch for final testing.  
+
+   ```bash
+   git checkout develop
+   git merge feature/new-feature
+   git checkout -b release/v1.0.0
+   ```
+
+3. **Testing in `main`**: After testing in the release branch, merge the changes into `main` for additional testing if necessary.  
+
+   ```bash
+   git checkout main
+   git merge release/v1.0.0
+   ```
+
+4. **Production deployment**: Once the changes in `main` have been validated, merge `main` into `production`.  
+
+   ```bash
+   git checkout production
+   git merge main
+   ```
+
+5. **Build and deploy manually**: After merging into `production`, you need to generate the build and upload the `dist/` folder.
+
+   ```bash
+   npm run dev & npm run build  # Start dev server and build production files
+   git add -f dist/                 # Add the built files
+   git commit -m "Deploy to production"
+   git push origin production    # Push to production branch
+   ```
+
+Now, your `dist/` folder will be included in the `production` branch, making it ready for deployment to **GitHub Pages**. 🚀
 ## 🚀 Deployment
 
 You need the following programs before you start:
