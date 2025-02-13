@@ -1,5 +1,11 @@
 import { devConsoleLog } from './dev-console-log';
 
+/**
+ * Safely redirects the user to a new URL.
+ *
+ * @param url The URL to redirect to.
+ * @param keepHistory Whether to keep the redirect in the browser history.
+ */
 export function safeRedirect(url: string, keepHistory: boolean = true): void {
   // Validate the URL to ensure it's a non-empty string and properly formatted
   if (typeof url !== 'string' || url.trim() === '') {
