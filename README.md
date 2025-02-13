@@ -9,6 +9,8 @@ experiences.
 
 ![App Screenshot](./public/assets/images/banner.png)
 
+---
+
 ## 🧰 Tech Stack
 
 <div align="center">
@@ -36,6 +38,8 @@ experiences.
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitest/vitest-original.svg" height="40" alt="vitest logo" />
 </div>
+
+---
 
 ## 🔄 Git Flow
 
@@ -79,7 +83,6 @@ This project follows the **Git Flow** workflow for efficient development and dep
    git checkout production
    git merge main
    ```
-Here's the updated workflow, including the manual build and deployment process:
 
 ---
 
@@ -124,6 +127,8 @@ Before deploying to GitHub Pages, ensure that the `.nojekyll` file exists in the
    ```
 
 Now, your `docs/` folder will be included in the `production` branch, making it ready for deployment to **GitHub Pages**. 🚀
+
+---
 
 ## 🖥️ Running Locally
 
