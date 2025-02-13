@@ -97,8 +97,7 @@ This project follows the **Git Flow** workflow for efficient development and dep
    npm run dev & npm run build  # Start dev server and build production files
    ```
 
-3. **Ensure `.nojekyll` exists**:  
-Before deploying to GitHub Pages, ensure that the `.nojekyll` file exists in the `docs/` folder to prevent Jekyll processing.
+3. **Ensure `.nojekyll` exists**: Before deploying to GitHub Pages, ensure that the `.nojekyll` file exists in the `docs/` folder to prevent Jekyll processing.
 
    #### **For Linux/macOS**:
    ```bash
