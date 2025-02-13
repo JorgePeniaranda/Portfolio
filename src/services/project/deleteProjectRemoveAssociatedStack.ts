@@ -1,4 +1,4 @@
-import type { RelationshipsSchema } from '@/schemas/common/relationships';
+import type { EntityRelationSchema } from '@/schemas/common/entity-relation-schema';
 import type { Project } from '@prisma/client';
 
 import { apiClient } from '@/helpers/client/axios';
@@ -7,17 +7,17 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 /**
  * Remove a stack from a project.
  *
- * @param relationshipSchema - Relationships schema.
+ * @param relationSchema - Relationships schema.
  * @returns A promise with the project data.
  * @throws An error if the stack could not be removed from the project.
  */
 export async function deleteProjectRemoveAssociatedStack(
-  relationshipSchema: RelationshipsSchema,
+  relationSchema: EntityRelationSchema,
 ): Promise<Project> {
   try {
-    const { idFrom, idTo } = relationshipSchema;
+    const { idSource, idTarget } = relationSchema;
     const { data: response } = await apiClient.delete<Project>(
-      `/api/project/id/${idFrom}/stack/${idTo}`,
+      `/api/project/id/${idTarget}/stack/${idSource}`,
     );
 
     return response;

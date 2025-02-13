@@ -1,4 +1,4 @@
-import type { RelationshipsSchema } from '@/schemas/common/relationships';
+import type { EntityRelationSchema } from '@/schemas/common/entity-relation-schema';
 import type { Project, Stack } from '@prisma/client';
 
 import { Plus, X } from 'lucide-react';
@@ -52,18 +52,18 @@ export function UpdateProjectsRelatedToStack({
   const [availableProject, setAvailableProject] = useState<Project[]>(initialAvailableProject);
 
   // Create a form to relate a project to the stack
-  const form = useForm<RelationshipsSchema>({
+  const form = useForm<EntityRelationSchema>({
     defaultValues: {
-      idFrom: currentStack.id,
+      idTarget: currentStack.id,
     },
   });
 
-  const onAddProject = async (values: RelationshipsSchema) => {
+  const onAddProject = async (values: EntityRelationSchema) => {
     try {
       // Send request to associate the project to the stack
       await postStackAddAssociatedProjects({
-        idFrom: Number(values.idFrom),
-        idTo: Number(values.idTo),
+        idSource: Number(values.idSource),
+        idTarget: Number(values.idTarget),
       });
 
       // If the request was successful, reset the form and show a success toast
@@ -75,11 +75,15 @@ export function UpdateProjectsRelatedToStack({
       });
 
       // Update local state for associated and available projects
-      const findProject = availableProject.find((project) => project.id === Number(values.idTo));
+      const findProject = availableProject.find(
+        (project) => project.id === Number(values.idSource),
+      );
 
       if (isDefined(findProject)) {
         setAssociatedProjects((prev) => [...prev, findProject]);
-        setAvailableProject((prev) => prev.filter((project) => project.id !== Number(values.idTo)));
+        setAvailableProject((prev) =>
+          prev.filter((project) => project.id !== Number(values.idSource)),
+        );
       }
 
       // Close the dialog
@@ -98,8 +102,8 @@ export function UpdateProjectsRelatedToStack({
     try {
       // Send request to dissociate the project with the stack
       await deleteStackRemoveAssociatedProjects({
-        idFrom: currentStack.id,
-        idTo: idProject,
+        idTarget: currentStack.id,
+        idSource: idProject,
       });
 
       // If the request was successful, show a success toast
@@ -181,7 +185,7 @@ export function UpdateProjectsRelatedToStack({
                 <div className='flex flex-wrap gap-2'>
                   <FormField
                     control={form.control}
-                    name='idTo'
+                    name='idSource'
                     render={({ field }) => (
                       <FormItem className='mx-auto'>
                         <FormControl>

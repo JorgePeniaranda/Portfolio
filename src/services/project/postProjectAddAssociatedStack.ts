@@ -1,4 +1,4 @@
-import type { RelationshipsSchema } from '@/schemas/common/relationships';
+import type { EntityRelationSchema } from '@/schemas/common/entity-relation-schema';
 import type { Project } from '@prisma/client';
 
 import { apiClient } from '@/helpers/client/axios';
@@ -7,17 +7,17 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 /**
  * Add a stack to a project.
  *
- * @param relationshipSchema - Relationships schema.
+ * @param relationSchema - Relationships schema.
  * @returns A promise with the project data.
  * @throws An error if the stack could not be added to the project.
  */
 export async function postProjectAddAssociatedStack(
-  relationshipSchema: RelationshipsSchema,
+  relationSchema: EntityRelationSchema,
 ): Promise<Project> {
   try {
-    const { idFrom, idTo } = relationshipSchema;
+    const { idSource, idTarget } = relationSchema;
     const { data: response } = await apiClient.post<Project>(
-      `/api/project/id/${idFrom}/stack/${idTo}`,
+      `/api/project/id/${idTarget}/stack/${idSource}`,
     );
 
     return response;

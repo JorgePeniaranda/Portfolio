@@ -1,4 +1,4 @@
-import type { RelationshipsSchema } from '@/schemas/common/relationships';
+import type { EntityRelationSchema } from '@/schemas/common/entity-relation-schema';
 import type { Project, Stack } from '@prisma/client';
 
 import { Plus, X } from 'lucide-react';
@@ -47,9 +47,9 @@ export function UpdateStacksRelatedToProject({
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   // Create a form to relate a stack to the project
-  const form = useForm<RelationshipsSchema>({
+  const form = useForm<EntityRelationSchema>({
     defaultValues: {
-      idFrom: currentProject.id,
+      idTarget: currentProject.id,
     },
   });
 
@@ -57,12 +57,12 @@ export function UpdateStacksRelatedToProject({
   const [associatedStacks, setAssociatedStacks] = useState<Stack[]>(initialAssociatedStacks);
   const [availableStacks, setAvailableStacks] = useState<Stack[]>(initialAvailableStacks);
 
-  const onAddStack = async (values: RelationshipsSchema) => {
+  const onAddStack = async (values: EntityRelationSchema) => {
     try {
       // Send request to associate the stack to the project
       await postProjectAddAssociatedStack({
-        idFrom: Number(values.idFrom),
-        idTo: Number(values.idTo),
+        idSource: Number(values.idSource),
+        idTarget: Number(values.idTarget),
       });
 
       // If the request was successful, reset the form and show a success toast
@@ -74,11 +74,11 @@ export function UpdateStacksRelatedToProject({
       });
 
       // Update local state for associated and available stacks
-      const findStack = availableStacks.find((stack) => stack.id === Number(values.idTo));
+      const findStack = availableStacks.find((stack) => stack.id === Number(values.idSource));
 
       if (isDefined(findStack)) {
         setAssociatedStacks((prev) => [...prev, findStack]);
-        setAvailableStacks((prev) => prev.filter((stack) => stack.id !== Number(values.idTo)));
+        setAvailableStacks((prev) => prev.filter((stack) => stack.id !== Number(values.idSource)));
       }
 
       // Close the dialog
@@ -97,8 +97,8 @@ export function UpdateStacksRelatedToProject({
     try {
       // Send request to dissociate the stack from the project
       await deleteProjectRemoveAssociatedStack({
-        idFrom: currentProject.id,
-        idTo: stackId,
+        idTarget: currentProject.id,
+        idSource: stackId,
       });
 
       // If the request was successful, show a success toast
@@ -175,7 +175,7 @@ export function UpdateStacksRelatedToProject({
                 <div className='flex flex-wrap gap-2'>
                   <FormField
                     control={form.control}
-                    name='idTo'
+                    name='idSource'
                     render={({ field }) => (
                       <FormItem className='mx-auto'>
                         <FormControl>

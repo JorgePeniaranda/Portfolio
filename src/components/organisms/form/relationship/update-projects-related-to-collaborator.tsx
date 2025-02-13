@@ -1,4 +1,4 @@
-import type { RelationshipsSchema } from '@/schemas/common/relationships';
+import type { EntityRelationSchema } from '@/schemas/common/entity-relation-schema';
 import type { Collaborator, Project } from '@prisma/client';
 
 import { Plus, X } from 'lucide-react';
@@ -52,18 +52,18 @@ export function UpdateProjectsRelatedToCollaborator({
   const [availableProject, setAvailableProject] = useState<Project[]>(initialAvailableProject);
 
   // Create a form to relate a project to the collaborator
-  const form = useForm<RelationshipsSchema>({
+  const form = useForm<EntityRelationSchema>({
     defaultValues: {
-      idFrom: currentCollaborator.id,
+      idTarget: currentCollaborator.id,
     },
   });
 
-  const onAddProject = async (values: RelationshipsSchema) => {
+  const onAddProject = async (values: EntityRelationSchema) => {
     try {
       // Send request to associate the project to the collaborator
       await postCollaboratorAddAssociatedProjects({
-        idFrom: Number(values.idFrom),
-        idTo: Number(values.idTo),
+        idSource: Number(values.idSource),
+        idTarget: Number(values.idTarget),
       });
 
       // If the request was successful, reset the form and show a success toast
@@ -75,11 +75,15 @@ export function UpdateProjectsRelatedToCollaborator({
       });
 
       // Update local state for associated and available projects
-      const findProject = availableProject.find((project) => project.id === Number(values.idTo));
+      const findProject = availableProject.find(
+        (project) => project.id === Number(values.idSource),
+      );
 
       if (isDefined(findProject)) {
         setAssociatedProjects((prev) => [...prev, findProject]);
-        setAvailableProject((prev) => prev.filter((project) => project.id !== Number(values.idTo)));
+        setAvailableProject((prev) =>
+          prev.filter((project) => project.id !== Number(values.idSource)),
+        );
       }
 
       // Close the dialog
@@ -99,8 +103,8 @@ export function UpdateProjectsRelatedToCollaborator({
     try {
       // Send request to dissociate the project from the collaborator
       await deleteCollaboratorRemoveAssociatedProjects({
-        idFrom: currentCollaborator.id,
-        idTo: idProject,
+        idTarget: currentCollaborator.id,
+        idSource: idProject,
       });
 
       // If the request was successful, show a success toast
@@ -182,7 +186,7 @@ export function UpdateProjectsRelatedToCollaborator({
                 <div className='flex flex-wrap gap-2'>
                   <FormField
                     control={form.control}
-                    name='idTo'
+                    name='idSource'
                     render={({ field }) => (
                       <FormItem className='mx-auto'>
                         <FormControl>
