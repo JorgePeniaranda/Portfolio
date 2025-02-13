@@ -8,7 +8,7 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'http://jorgepeniaranda.dev.ar',
+  site: 'https://jorgepeniaranda.dev.ar',
   // base: '/Portfolio/',
   integrations: [react(), sitemap(), tailwind(), playformCompress(), icon(), robotsTxt()],
   compressHTML: true,
