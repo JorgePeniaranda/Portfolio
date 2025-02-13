@@ -8,7 +8,7 @@ import { handleApiError } from '@/helpers/error/api-handler';
  */
 export const GET: APIRoute = async ({ url }) => {
   try {
-    const fetchedProjects = await databaseClient.project.findMany({});
+    const fetchedProjects = await databaseClient.project.findMany();
 
     return Response.json(fetchedProjects, { status: 200 });
   } catch (error) {

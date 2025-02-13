@@ -9,7 +9,7 @@ import { handleApiError } from '@/helpers/error/api-handler';
  */
 export const GET: APIRoute = async ({ url }) => {
   try {
-    const fetchedCollaborators = await databaseClient.collaborator.findMany({});
+    const fetchedCollaborators = await databaseClient.collaborator.findMany();
 
     return Response.json(fetchedCollaborators, { status: 200 });
   } catch (error) {

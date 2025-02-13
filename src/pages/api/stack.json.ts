@@ -9,7 +9,7 @@ import { handleApiError } from '@/helpers/error/api-handler';
  */
 export const GET: APIRoute = async ({ url }) => {
   try {
-    const fetchedStacks = await databaseClient.stack.findMany({});
+    const fetchedStacks = await databaseClient.stack.findMany();
 
     return Response.json(fetchedStacks, { status: 200 });
   } catch (error) {
