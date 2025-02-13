@@ -1,25 +1,25 @@
-import type {ColumnDef} from "@tanstack/react-table";
+import type { ColumnDef } from '@tanstack/react-table';
 
-import {Checkbox} from "@/components/ui/checkbox";
+import { Checkbox } from '@/components/ui/checkbox';
 
 export function selectionColumnDef<TData>() {
   const columnDef: ColumnDef<TData> = {
-    id: "select",
-    header: ({table}) => (
+    id: 'select',
+    header: ({ table }) => (
       <Checkbox
-        aria-label="Select all"
+        aria-label='Select all'
         checked={
-          table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")
+          table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')
         }
-        className="border-black data-[state=checked]:bg-white dark:border-white"
+        className='border-black data-[state=checked]:bg-white dark:border-white'
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
       />
     ),
-    cell: ({row}) => (
+    cell: ({ row }) => (
       <Checkbox
-        aria-label="Select row"
+        aria-label='Select row'
         checked={row.getIsSelected()}
-        className="border-black data-[state=checked]:bg-white dark:border-white"
+        className='border-black data-[state=checked]:bg-white dark:border-white'
         onCheckedChange={(value) => row.toggleSelected(!!value)}
       />
     ),

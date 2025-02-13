@@ -1,6 +1,6 @@
-import type {PaginationRequest} from "@/types/responses";
+import type { PaginationRequest } from '@/types/responses';
 
-import {PaginationParamsSchema} from "@/schemas/common/pagination-params";
+import { PaginationParamsSchema } from '@/schemas/common/pagination-params';
 
 /**
  * Extracts pagination parameters (`page` and `size`) from a URL.
@@ -14,7 +14,7 @@ export function BuildPaginationByURL(url: string): PaginationRequest | undefined
   const urlObject = new URL(url);
   const params = new URLSearchParams(urlObject.search);
 
-  if (params.has("page") && params.has("size")) {
+  if (params.has('page') && params.has('size')) {
     const parsedParams = PaginationParamsSchema.parse(Object.fromEntries(params));
 
     return parsedParams;

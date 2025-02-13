@@ -1,8 +1,8 @@
-import type {DeleteResponse} from "@/types/responses";
-import type {Project} from "@prisma/client";
+import type { DeleteResponse } from '@/types/responses';
+import type { Project } from '@prisma/client';
 
-import {apiClient} from "@/helpers/client/axios";
-import {handleServiceError} from "@/helpers/error/service-handler";
+import { apiClient } from '@/helpers/client/axios';
+import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Deletes a project.
@@ -11,18 +11,17 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  * @returns The number of items deleted.
  * @throws An error if the operation fails.
  */
-export async function deleteProject(projectIds: Project["id"][]): Promise<DeleteResponse> {
+export async function deleteProject(projectIds: Project['id'][]): Promise<DeleteResponse> {
   try {
-    const {data: response} = await apiClient.post<DeleteResponse>(
-      "/api/project/delete",
-      projectIds,
-    );
+    const { data: response } = await apiClient.delete<DeleteResponse>('/api/project', {
+      data: projectIds,
+    });
 
     return response;
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: "No se pudo eliminar el proyecto.",
+      defaultErrorMessage: 'No se pudo eliminar el proyecto.',
     });
   }
 }

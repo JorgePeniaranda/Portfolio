@@ -1,31 +1,29 @@
 <!-- apply theme preferences to avoid flickering -->
 <script is:inline>
-  ;(function () {
+  (function () {
     const THEME = {
       LIGHT: 'light',
       DARK: 'dark',
       CLASSNAME: 'dark',
-      STORAGE_KEY: 'theme'
-    }
+      STORAGE_KEY: 'theme',
+    };
 
-    const htmlClassList = document.documentElement.classList
+    const htmlClassList = document.documentElement.classList;
 
     try {
       // Access the theme stored in localStorage
-      const storedData = JSON.parse(
-        localStorage.getItem(THEME.STORAGE_KEY) || '{}'
-      )
-      const savedTheme = storedData?.state?.theme || THEME.LIGHT
+      const storedData = JSON.parse(localStorage.getItem(THEME.STORAGE_KEY) || '{}');
+      const savedTheme = storedData?.state?.theme || THEME.LIGHT;
 
       // Apply the theme class directly
       if (savedTheme === THEME.DARK) {
-        htmlClassList.add(THEME.CLASSNAME)
+        htmlClassList.add(THEME.CLASSNAME);
       } else {
-        htmlClassList.remove(THEME.CLASSNAME)
+        htmlClassList.remove(THEME.CLASSNAME);
       }
     } catch {
       // Default to LIGHT theme in case of errors
-      htmlClassList.remove(THEME.CLASSNAME)
+      htmlClassList.remove(THEME.CLASSNAME);
     }
-  })()
+  })();
 </script>

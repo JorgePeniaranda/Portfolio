@@ -1,7 +1,7 @@
-import {Prisma} from "@prisma/client";
+import { Prisma } from '@prisma/client';
 
-import {PRISMA_ERROR_MESSAGES} from "@/messages/errors/prisma-errors";
-import {PRISMA_STATUS_CODE_STATUS_CATEGORY} from "@/constants/common";
+import { PRISMA_ERROR_MESSAGES } from '@/messages/errors/prisma-errors';
+import { PRISMA_STATUS_CODE_STATUS_CATEGORY } from '@/constants/common';
 
 /**
  * Returns the corresponding HTTP status code based on the provided Prisma error code.
@@ -36,7 +36,7 @@ export function prismaHandler(
     | Prisma.PrismaClientKnownRequestError
     | Prisma.PrismaClientUnknownRequestError
     | Prisma.PrismaClientRustPanicError,
-): {statusCode: number; message: string} {
+): { statusCode: number; message: string } {
   if (
     error instanceof Prisma.PrismaClientKnownRequestError &&
     error.code in PRISMA_ERROR_MESSAGES
@@ -49,6 +49,6 @@ export function prismaHandler(
 
   return {
     statusCode: 500,
-    message: "Internal server error.",
+    message: 'Internal server error.',
   };
 }

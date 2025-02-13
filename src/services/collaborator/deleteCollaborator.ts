@@ -1,9 +1,9 @@
-import type {DeleteResponse} from "@/types/responses";
+import type { DeleteResponse } from '@/types/responses';
 
-import {type Collaborator} from "@prisma/client";
+import { type Collaborator } from '@prisma/client';
 
-import {apiClient} from "@/helpers/client/axios";
-import {handleServiceError} from "@/helpers/error/service-handler";
+import { apiClient } from '@/helpers/client/axios';
+import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Deletes a list of collaborators from the database.
@@ -13,19 +13,18 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  * @throws {Error} A generic error message if the operation fails.
  */
 export async function deleteCollaborator(
-  collaboratorIds: Array<Collaborator["id"]>,
+  collaboratorIds: Array<Collaborator['id']>,
 ): Promise<DeleteResponse> {
   try {
-    const {data: response} = await apiClient.post<DeleteResponse>(
-      "/api/collaborator/delete",
-      collaboratorIds,
-    );
+    const { data: response } = await apiClient.delete<DeleteResponse>('/api/collaborator', {
+      data: collaboratorIds,
+    });
 
     return response;
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: "No se pudo eliminar el colaborador.",
+      defaultErrorMessage: 'No se pudo eliminar el colaborador.',
     });
   }
 }

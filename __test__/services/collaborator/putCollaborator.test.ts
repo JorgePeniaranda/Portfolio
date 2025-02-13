@@ -1,25 +1,25 @@
-import type {ErrorResponse} from "@/types/responses";
-import type {Collaborator} from "@prisma/client";
+import type { ErrorResponse } from '@/types/responses';
+import type { Collaborator } from '@prisma/client';
 
-import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
-import {describe, expect, it, vi} from "vitest";
+import { AxiosError, AxiosHeaders, type AxiosResponse } from 'axios';
+import { describe, expect, it, vi } from 'vitest';
 
-import {TEST_COLLABORATOR_MOCK} from "../../__mock__/collaborator.mock";
+import { TEST_COLLABORATOR_MOCK } from '../../__mock__/collaborator.mock';
 
-import {putCollaborator} from "@/services/collaborator/putCollaborator";
-import {apiClient} from "@/helpers/client/axios";
+import { putCollaborator } from '@/services/collaborator/putCollaborator';
+import { apiClient } from '@/helpers/client/axios';
 
 // Mock the apiClient module
-vi.mock("@/helpers/client/axios");
+vi.mock('@/helpers/client/axios');
 
-describe("putCollaborator", () => {
+describe('putCollaborator', () => {
   // Input data for the tests
   const input = {
-    nickname: "John Doe",
+    nickname: 'John Doe',
   } as const;
-  const APIUrl = "/api/collaborator/update";
+  const APIUrl = '/api/collaborator/update';
 
-  it("should return a successful response when the request is correct", async () => {
+  it('should return a successful response when the request is correct', async () => {
     // Mock a successful response
     const mockResponse: AxiosResponse<Collaborator> = {
       config: {
@@ -27,25 +27,28 @@ describe("putCollaborator", () => {
       },
       headers: {},
       status: 200,
-      statusText: "OK",
+      statusText: 'OK',
       data: TEST_COLLABORATOR_MOCK,
     };
 
     // Simulate a resolved promise for apiClient.put
     vi.mocked(apiClient.put).mockResolvedValueOnce(mockResponse);
-    const response = await putCollaborator(input);
+    const response = await putCollaborator({
+      idCollaborator: 1,
+      updatedCollaborator: input,
+    });
 
     // Validate response and apiClient call
     expect(response).toEqual(mockResponse.data);
     expect(apiClient.put).toHaveBeenCalledWith(APIUrl, input);
   });
 
-  it("should handle errors correctly when the request fails", async () => {
+  it('should handle errors correctly when the request fails', async () => {
     // Mock an error response (axios error)
     const mockError: AxiosError<ErrorResponse> = {
       isAxiosError: true,
-      message: "Request failed with status code 500",
-      name: "AxiosError",
+      message: 'Request failed with status code 500',
+      name: 'AxiosError',
       toJSON: () => ({}),
       response: {
         config: {
@@ -53,9 +56,12 @@ describe("putCollaborator", () => {
         },
         headers: {},
         status: 500,
-        statusText: "Internal Server Error",
+        statusText: 'Internal Server Error',
         data: {
-          error: "This is an test error message",
+          status: 500,
+          title: 'An internal server error occurred.',
+          type: 'InternalServerError',
+          detail: 'This is an test error message',
         },
       },
     };
@@ -64,12 +70,15 @@ describe("putCollaborator", () => {
     vi.mocked(apiClient.put).mockRejectedValueOnce(mockError);
 
     try {
-      await putCollaborator(input);
+      await putCollaborator({
+        idCollaborator: 1,
+        updatedCollaborator: input,
+      });
     } catch (error) {
       // Validate error handling and apiClient call
       expect(error).toBeInstanceOf(Error);
       if (error instanceof Error) {
-        expect(error.message).toBe(mockError.response?.data.error);
+        expect(error.message).toBe(mockError.response?.data.title);
       }
     }
 

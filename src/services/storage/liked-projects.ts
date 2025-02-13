@@ -1,20 +1,20 @@
-import type {Project} from "@prisma/client";
+import type { Project } from '@prisma/client';
 
-import {create} from "zustand";
-import {persist} from "zustand/middleware";
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-import {PROJECT_LIKED_STORE_KEY} from "@/constants/common";
+import { PROJECT_LIKED_STORE_KEY } from '@/constants/common';
 
 // Define the shape of the store's state.
 export interface ILikedStoreState {
-  likedKeyProjects: Project["key"][];
+  likedKeyProjects: Project['key'][];
 }
 
 // Define the actions available in the store.
 export interface ILikedStoreActions {
-  addLikedProject(key: Project["key"]): void;
-  removeLikedProject(key: Project["key"]): void;
-  checkLikedProject(key: Project["key"]): boolean;
+  addLikedProject(key: Project['key']): void;
+  removeLikedProject(key: Project['key']): void;
+  checkLikedProject(key: Project['key']): boolean;
   resetLikedProjects(): void;
 }
 
@@ -24,24 +24,24 @@ export const useProjectLikedStore = create(
     (set, get) => ({
       likedKeyProjects: [],
 
-      addLikedProject(key: Project["key"]) {
+      addLikedProject(key: Project['key']) {
         set((state) => ({
           likedKeyProjects: [...state.likedKeyProjects, key],
         }));
       },
 
-      removeLikedProject(key: Project["key"]) {
+      removeLikedProject(key: Project['key']) {
         set((state) => ({
           likedKeyProjects: state.likedKeyProjects.filter((projectKey) => projectKey !== key), // Filter out the key.
         }));
       },
 
-      checkLikedProject(key: Project["key"]) {
+      checkLikedProject(key: Project['key']) {
         return get().likedKeyProjects.includes(key);
       },
 
       resetLikedProjects() {
-        set({likedKeyProjects: []});
+        set({ likedKeyProjects: [] });
       },
     }),
     {

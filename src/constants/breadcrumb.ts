@@ -15,202 +15,202 @@ export const DASHBOARD_BREADCRUMB_TEMPLATE: Record<
     url?: string;
   }>
 > = {
-  "/vault": [
+  '/vault': [
     {
-      title: "Panel de control",
-      url: "/vault",
+      title: 'Panel de control',
+      url: '/vault',
     },
   ],
-  "/vault/views/project": [
+  '/vault/views/project': [
     {
-      title: "Panel de control",
-      url: "/vault",
+      title: 'Panel de control',
+      url: '/vault',
     },
     {
-      title: "Vistas",
+      title: 'Vistas',
     },
     {
-      title: "Proyectos",
-    },
-  ],
-  "/vault/views/project/create": [
-    {
-      title: "Panel de control",
-      url: "/vault",
-    },
-    {
-      title: "Vistas",
-    },
-    {
-      title: "Proyectos",
-      url: "/vault/views/project",
-    },
-    {
-      title: "Crear",
+      title: 'Proyectos',
     },
   ],
-  "/vault/views/project/edit": [
+  '/vault/views/project/create': [
     {
-      title: "Panel de control",
-      url: "/vault",
+      title: 'Panel de control',
+      url: '/vault',
     },
     {
-      title: "Vistas",
+      title: 'Vistas',
     },
     {
-      title: "Proyectos",
-      url: "/vault/views/project",
+      title: 'Proyectos',
+      url: '/vault/views/project',
     },
     {
-      title: "Editar",
-    },
-  ],
-  "/vault/views/project/details": [
-    {
-      title: "Panel de control",
-      url: "/vault",
-    },
-    {
-      title: "Vistas",
-    },
-    {
-      title: "Proyectos",
-      url: "/vault/views/project",
-    },
-    {
-      title: "Detalles",
+      title: 'Crear',
     },
   ],
-  "/vault/views/stack": [
+  '/vault/views/project/edit': [
     {
-      title: "Panel de control",
-      url: "/vault",
+      title: 'Panel de control',
+      url: '/vault',
     },
     {
-      title: "Vistas",
+      title: 'Vistas',
     },
     {
-      title: "Stack",
-    },
-  ],
-  "/vault/views/stack/create": [
-    {
-      title: "Panel de control",
-      url: "/vault",
+      title: 'Proyectos',
+      url: '/vault/views/project',
     },
     {
-      title: "Vistas",
-    },
-    {
-      title: "Stack",
-      url: "/vault/stack/collaborators",
-    },
-    {
-      title: "Crear",
+      title: 'Editar',
     },
   ],
-  "/vault/views/stack/edit": [
+  '/vault/views/project/details': [
     {
-      title: "Panel de control",
-      url: "/vault",
+      title: 'Panel de control',
+      url: '/vault',
     },
     {
-      title: "Vistas",
+      title: 'Vistas',
     },
     {
-      title: "Stack",
-      url: "/vault/stack/collaborators",
+      title: 'Proyectos',
+      url: '/vault/views/project',
     },
     {
-      title: "Editar",
-    },
-  ],
-  "/vault/views/stack/details": [
-    {
-      title: "Panel de control",
-      url: "/vault",
-    },
-    {
-      title: "Vistas",
-    },
-    {
-      title: "Stack",
-      url: "/vault/stack/collaborators",
-    },
-    {
-      title: "Detalles",
+      title: 'Detalles',
     },
   ],
-  "/vault/views/collaborators": [
+  '/vault/views/stack': [
     {
-      title: "Panel de control",
-      url: "/vault",
+      title: 'Panel de control',
+      url: '/vault',
     },
     {
-      title: "Vistas",
+      title: 'Vistas',
     },
     {
-      title: "Colaboradores",
-    },
-  ],
-  "/vault/views/collaborators/create": [
-    {
-      title: "Panel de control",
-      url: "/vault",
-    },
-    {
-      title: "Vistas",
-    },
-    {
-      title: "Colaboradores",
-      url: "/vault/views/collaborators",
-    },
-    {
-      title: "Crear",
+      title: 'Stack',
     },
   ],
-  "/vault/views/collaborators/edit": [
+  '/vault/views/stack/create': [
     {
-      title: "Panel de control",
-      url: "/vault",
+      title: 'Panel de control',
+      url: '/vault',
     },
     {
-      title: "Vistas",
+      title: 'Vistas',
     },
     {
-      title: "Colaboradores",
-      url: "/vault/views/collaborators",
+      title: 'Stack',
+      url: '/vault/stack/collaborators',
     },
     {
-      title: "Editar",
-    },
-  ],
-  "/vault/views/collaborators/details": [
-    {
-      title: "Panel de control",
-      url: "/vault",
-    },
-    {
-      title: "Vistas",
-    },
-    {
-      title: "Colaboradores",
-      url: "/vault/views/collaborators",
-    },
-    {
-      title: "Detalles",
+      title: 'Crear',
     },
   ],
-  "/vault/design/stack-flow": [
+  '/vault/views/stack/edit': [
     {
-      title: "Panel de control",
-      url: "/vault",
+      title: 'Panel de control',
+      url: '/vault',
     },
     {
-      title: "Diseño",
+      title: 'Vistas',
     },
     {
-      title: "Stack Flow",
+      title: 'Stack',
+      url: '/vault/stack/collaborators',
+    },
+    {
+      title: 'Editar',
+    },
+  ],
+  '/vault/views/stack/details': [
+    {
+      title: 'Panel de control',
+      url: '/vault',
+    },
+    {
+      title: 'Vistas',
+    },
+    {
+      title: 'Stack',
+      url: '/vault/stack/collaborators',
+    },
+    {
+      title: 'Detalles',
+    },
+  ],
+  '/vault/views/collaborators': [
+    {
+      title: 'Panel de control',
+      url: '/vault',
+    },
+    {
+      title: 'Vistas',
+    },
+    {
+      title: 'Colaboradores',
+    },
+  ],
+  '/vault/views/collaborators/create': [
+    {
+      title: 'Panel de control',
+      url: '/vault',
+    },
+    {
+      title: 'Vistas',
+    },
+    {
+      title: 'Colaboradores',
+      url: '/vault/views/collaborators',
+    },
+    {
+      title: 'Crear',
+    },
+  ],
+  '/vault/views/collaborators/edit': [
+    {
+      title: 'Panel de control',
+      url: '/vault',
+    },
+    {
+      title: 'Vistas',
+    },
+    {
+      title: 'Colaboradores',
+      url: '/vault/views/collaborators',
+    },
+    {
+      title: 'Editar',
+    },
+  ],
+  '/vault/views/collaborators/details': [
+    {
+      title: 'Panel de control',
+      url: '/vault',
+    },
+    {
+      title: 'Vistas',
+    },
+    {
+      title: 'Colaboradores',
+      url: '/vault/views/collaborators',
+    },
+    {
+      title: 'Detalles',
+    },
+  ],
+  '/vault/design/stack-flow': [
+    {
+      title: 'Panel de control',
+      url: '/vault',
+    },
+    {
+      title: 'Diseño',
+    },
+    {
+      title: 'Stack Flow',
     },
   ],
 } as const;

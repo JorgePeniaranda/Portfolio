@@ -1,6 +1,6 @@
-import type {ErrorResponse} from "@/types/responses";
+import type { ErrorResponse } from '@/types/responses';
 
-import {isNotDefined} from "./is-defined";
+import { isNotDefined } from './is-defined';
 
 /**
  * Type guard for the ErrorResponse type.
@@ -11,21 +11,23 @@ import {isNotDefined} from "./is-defined";
 export function isErrorResponse(error: unknown): error is ErrorResponse {
   let predicate = false;
 
-  if (typeof error !== "object" || isNotDefined(error)) {
+  if (typeof error !== 'object' || isNotDefined(error)) {
     return false;
   }
 
-  if ("error" in error && typeof error.error === "string") {
+  if ('type' in error && typeof error.type === 'string') {
     predicate ||= true;
   } else {
     predicate ||= false;
   }
 
-  if (
-    "errors" in error &&
-    Array.isArray(error.errors) &&
-    error.errors.some((error) => typeof error === "string")
-  ) {
+  if ('title' in error && typeof error.title === 'string') {
+    predicate ||= true;
+  } else {
+    predicate ||= false;
+  }
+
+  if ('status' in error && typeof error.status === 'string') {
     predicate ||= true;
   } else {
     predicate ||= false;

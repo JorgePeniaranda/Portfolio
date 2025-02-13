@@ -1,19 +1,17 @@
-import {Loader, RotateCcw} from "lucide-react";
-import {useState, type HTMLAttributes} from "react";
+import { Loader, RotateCcw } from 'lucide-react';
+import { useState, type HTMLAttributes } from 'react';
 
-import {cn} from "@/helpers/common/classnames";
+import { cn } from '@/helpers/common/classnames';
 
 // List of URLs for the cat images (gif and static)
-const CAT_URLs = ["https://cataas.com/cat/gif", "https://cataas.com/cat"];
+const CAT_URLs = ['https://cataas.com/cat/gif', 'https://cataas.com/cat'];
 
 /**
  * CatAsAService component displays a random cat image, and allows the user to request a new one by clicking a button.
- * @param {HTMLAttributes<HTMLDivElement>} props - Additional HTML attributes for the container div.
- * @returns {JSX.Element} The rendered component.
  */
 export function CatAsAService(props: HTMLAttributes<HTMLDivElement>) {
   const [loading, setLoading] = useState(true);
-  const [currentURL, setCurrentURL] = useState("https://cataas.com/cat/gif");
+  const [currentURL, setCurrentURL] = useState('https://cataas.com/cat/gif');
 
   /**
    * Handler function triggered when the image is fully loaded.
@@ -37,32 +35,32 @@ export function CatAsAService(props: HTMLAttributes<HTMLDivElement>) {
 
   return (
     <div
-      className={cn("flex flex-col items-center justify-center gap-5", props.className)}
+      className={cn('flex flex-col items-center justify-center gap-5', props.className)}
       {...props}
     >
-      <picture className="flex size-72 items-center justify-center rounded">
+      <picture className='flex size-72 items-center justify-center rounded'>
         {loading ? (
-          <Loader aria-label="loader" className="size-10 animate-spin text-black dark:text-white" />
+          <Loader aria-label='loader' className='size-10 animate-spin text-black dark:text-white' />
         ) : null}
         <img
-          alt="cat"
-          aria-label="Cat ❤️"
-          className="size-72 rounded-lg bg-cover bg-no-repeat object-cover"
+          alt='cat'
+          aria-label='Cat ❤️'
+          className='size-72 rounded-lg bg-cover bg-no-repeat object-cover'
           src={currentURL}
-          style={{display: loading ? "none" : "block"}} // Hide image while loading
+          style={{ display: loading ? 'none' : 'block' }} // Hide image while loading
           onLoad={onLoad} // Trigger onLoad handler when the image finishes loading
         />
       </picture>
       {!loading && (
         <button
-          aria-label="Find new cat"
-          className="rounded-lg bg-neutral-200/80 p-2 text-neutral-500 shadow-2xl dark:bg-neutral-800 dark:text-neutral-400"
-          type="button"
+          aria-label='Find new cat'
+          className='rounded-lg bg-neutral-200/80 p-2 text-neutral-500 shadow-2xl dark:bg-neutral-800 dark:text-neutral-400'
+          type='button'
           onClick={handleClick} // Change to a new cat when clicked
         >
           <RotateCcw
-            aria-label="Reload icon"
-            className="size-8 transition-transform hover:-rotate-45"
+            aria-label='Reload icon'
+            className='size-8 transition-transform hover:-rotate-45'
           />
         </button>
       )}

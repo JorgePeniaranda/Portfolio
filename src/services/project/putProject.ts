@@ -1,7 +1,7 @@
-import {Prisma, type Project} from "@prisma/client";
+import type { Prisma, Project } from '@prisma/client';
 
-import {apiClient} from "@/helpers/client/axios";
-import {handleServiceError} from "@/helpers/error/service-handler";
+import { apiClient } from '@/helpers/client/axios';
+import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Updates a project.
@@ -10,10 +10,16 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  * @returns The updated project.
  * @throws An error if the operation fails.
  */
-export async function putProject(projectUpdateInput: Prisma.ProjectUpdateInput): Promise<Project> {
+export async function putProject({
+  idProject,
+  projectUpdateInput,
+}: {
+  idProject: Project['id'];
+  projectUpdateInput: Prisma.ProjectUpdateInput;
+}): Promise<Project> {
   try {
-    const {data: response} = await apiClient.put<Project>(
-      "/api/project/update",
+    const { data: response } = await apiClient.put<Project>(
+      `/api/project/id/${idProject}`,
       projectUpdateInput,
     );
 
@@ -21,7 +27,7 @@ export async function putProject(projectUpdateInput: Prisma.ProjectUpdateInput):
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: "No se pudo actualizar el proyecto.",
+      defaultErrorMessage: 'No se pudo actualizar el proyecto.',
     });
   }
 }

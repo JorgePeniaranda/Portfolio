@@ -1,12 +1,12 @@
-import type {Stack} from "@prisma/client";
+import type { Stack } from '@prisma/client';
 
-import {Controls, MiniMap, ReactFlow, type Edge, type Node} from "@xyflow/react";
-import {useMemo} from "react";
+import { Controls, MiniMap, ReactFlow, type Edge, type Node } from '@xyflow/react';
+import { useMemo } from 'react';
 
-import {StackWithDrawerNode} from "@/components/organisms/react-flow/nodes/stack-with-drawer";
-import {devConsoleLog} from "@/helpers/common/dev-console-log";
+import { StackWithDrawerNode } from '@/components/organisms/react-flow/nodes/stack-with-drawer';
+import { devConsoleLog } from '@/helpers/common/dev-console-log';
 
-import "@xyflow/react/dist/style.css";
+import '@xyflow/react/dist/style.css';
 
 /**
  * Component to render a flow diagram of stacks categorized by type and category.
@@ -34,14 +34,14 @@ export function StackFlow({
 }) {
   // Agrupar los stacks por categoría y tipo usando useMemo
   const groupedStacks = useMemo(() => {
-    const categoryMap: Record<string, {stacks: Stack[]; types: Record<string, Stack[]>}> = {};
+    const categoryMap: Record<string, { stacks: Stack[]; types: Record<string, Stack[]> }> = {};
 
     stacks.forEach((stack) => {
-      const category = stack.category || "Uncategorized"; // Categoría por defecto
-      const type = stack.type || "Unknown"; // Tipo por defecto
+      const category = stack.category || 'Uncategorized'; // Categoría por defecto
+      const type = stack.type || 'Unknown'; // Tipo por defecto
 
       if (!categoryMap[category]) {
-        categoryMap[category] = {stacks: [], types: {}};
+        categoryMap[category] = { stacks: [], types: {} };
       }
 
       // Agrupar por tipo dentro de cada categoría
@@ -65,11 +65,11 @@ export function StackFlow({
       // Nodo para la categoría
       nodes.push({
         id: `category-${category}`, // Usamos la categoría como ID del grupo
-        type: "default",
+        type: 'default',
         data: {
           label: category, // Nombre de la categoría
         },
-        position: {x: 200 * categoryIndex, y: 100}, // Posición inicial de cada categoría
+        position: { x: 200 * categoryIndex, y: 100 }, // Posición inicial de cada categoría
       });
 
       // Añadir nodos para cada tipo dentro de la categoría
@@ -77,7 +77,7 @@ export function StackFlow({
         // Nodo para el tipo
         nodes.push({
           id: `type-${category}-${type}`, // ID único para el tipo
-          type: "default",
+          type: 'default',
           data: {
             label: type, // Nombre del tipo (Framework, Language, etc.)
           },
@@ -91,9 +91,9 @@ export function StackFlow({
         groupedStacks[category].types[type].forEach((stack, stackIndex) => {
           nodes.push({
             id: `stack-${stack.id}`, // ID único para el stack
-            type: "StackWithIconNode",
+            type: 'StackWithIconNode',
             data: {
-              label: "", // Solo mostramos el icono
+              label: '', // Solo mostramos el icono
               iconUrl: stack.iconUrl, // Mostramos el icono del stack
               stackData: stack, // Pasamos los datos del stack
             },
@@ -151,7 +151,7 @@ export function StackFlow({
         StackWithIconNode: StackWithDrawerNode,
       }}
       nodes={initialNodes}
-      onNodeClick={() => devConsoleLog.log("Node clicked")}
+      onNodeClick={() => devConsoleLog.log('Node clicked')}
     >
       <MiniMap />
       <Controls />

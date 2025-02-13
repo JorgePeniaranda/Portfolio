@@ -1,6 +1,6 @@
-import type {LucideIcon} from "lucide-react";
+import type { LucideIcon } from 'lucide-react';
 
-import React from "react";
+import React from 'react';
 
 import {
   BreadcrumbItem,
@@ -9,7 +9,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
   Breadcrumb as UIBreadcrumb,
-} from "@/components/ui/breadcrumb";
+} from '@/components/ui/breadcrumb';
 
 //#region TYPES
 /**
@@ -36,10 +36,10 @@ interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
   Separator?: LucideIcon;
 }
 
-export function Breadcrumb({items, Separator, ...props}: BreadcrumbProps) {
+export function Breadcrumb({ items, Separator, ...props }: BreadcrumbProps) {
   return (
     <UIBreadcrumb {...props}>
-      <BreadcrumbList className="text-inherit">
+      <BreadcrumbList className='text-inherit'>
         {items.map((item, index) => {
           return (
             <React.Fragment key={item.label}>
@@ -67,13 +67,13 @@ interface CustomBreadcrumbItemProps extends React.HTMLAttributes<HTMLElement> {
   item: IBreadCrumb;
 }
 
-export function CustomBreadcrumbItem({item, ...props}: CustomBreadcrumbItemProps) {
+export function CustomBreadcrumbItem({ item, ...props }: CustomBreadcrumbItemProps) {
   if (item.href !== undefined) {
     // If href is defined, render a link
     return (
       <BreadcrumbItem {...props}>
         <BreadcrumbLink asChild>
-          <a className="text-inherit" href={item.href}>
+          <a className='text-inherit' href={item.href}>
             {item.label}
           </a>
         </BreadcrumbLink>
@@ -84,7 +84,7 @@ export function CustomBreadcrumbItem({item, ...props}: CustomBreadcrumbItemProps
   // If no href, render the item as a page (non-clickable)
   return (
     <BreadcrumbItem {...props}>
-      <BreadcrumbPage className="text-inherit">{item.label}</BreadcrumbPage>
+      <BreadcrumbPage className='text-inherit'>{item.label}</BreadcrumbPage>
     </BreadcrumbItem>
   );
 }

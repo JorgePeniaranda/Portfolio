@@ -1,12 +1,12 @@
-import type {RelationshipsSchema} from "@/schemas/common/relationships";
-import type {Collaborator, Project} from "@prisma/client";
+import type { RelationshipsSchema } from '@/schemas/common/relationships';
+import type { Collaborator, Project } from '@prisma/client';
 
-import {Plus, X} from "lucide-react";
-import {useState} from "react";
-import {useForm} from "react-hook-form";
+import { Plus, X } from 'lucide-react';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
-import {Button} from "@/components/ui/button";
-import {Card, CardHeader} from "@/components/ui/card";
+import { Button } from '@/components/ui/button';
+import { Card, CardHeader } from '@/components/ui/card';
 import {
   Dialog,
   DialogContent,
@@ -15,20 +15,20 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import {Form, FormControl, FormField, FormItem} from "@/components/ui/form";
+} from '@/components/ui/dialog';
+import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import {isDefined} from "@/helpers/guards/is-defined";
-import {useToast} from "@/hooks/use-toast";
-import {patchCollaboratorAddAssociatedProjects} from "@/services/collaborator/patchCollaboratorAddAssociatedProjects";
-import {patchCollaboratorRemoveAssociatedProjects} from "@/services/collaborator/patchCollaboratorRemoveAssociatedProjects";
-import {handleErrorWithToast} from "@/helpers/error/toast-handler";
+} from '@/components/ui/select';
+import { isDefined } from '@/helpers/guards/is-defined';
+import { useToast } from '@/hooks/use-toast';
+import { postCollaboratorAddAssociatedProjects } from '@/services/collaborator/postCollaboratorAddAssociatedProjects';
+import { deleteCollaboratorRemoveAssociatedProjects } from '@/services/collaborator/deleteCollaboratorRemoveAssociatedProjects';
+import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 
 export function UpdateProjectsRelatedToCollaborator({
   currentCollaborator,
@@ -41,7 +41,7 @@ export function UpdateProjectsRelatedToCollaborator({
   availableProject: Project[];
   disableForm?: boolean;
 }) {
-  const {toast} = useToast();
+  const { toast } = useToast();
 
   // Initialize local state for dialog visibility
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -61,7 +61,7 @@ export function UpdateProjectsRelatedToCollaborator({
   const onAddProject = async (values: RelationshipsSchema) => {
     try {
       // Send request to associate the project to the collaborator
-      await patchCollaboratorAddAssociatedProjects({
+      await postCollaboratorAddAssociatedProjects({
         idFrom: Number(values.idFrom),
         idTo: Number(values.idTo),
       });
@@ -69,9 +69,9 @@ export function UpdateProjectsRelatedToCollaborator({
       // If the request was successful, reset the form and show a success toast
       form.reset();
       toast({
-        title: "Proyecto relacionado con el colaborador",
-        description: "El proyecto ha sido relacionado con el colaborador exitosamente.",
-        className: "bg-green-500 text-black",
+        title: 'Proyecto relacionado con el colaborador',
+        description: 'El proyecto ha sido relacionado con el colaborador exitosamente.',
+        className: 'bg-green-500 text-black',
       });
 
       // Update local state for associated and available projects
@@ -87,9 +87,9 @@ export function UpdateProjectsRelatedToCollaborator({
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: "No se pudo relacionar el proyecto con el colaborador",
+        title: 'No se pudo relacionar el proyecto con el colaborador',
         defaultErrorMessage:
-          "Ocurrió un error al intentar relacionar el proyecto con el colaborador.",
+          'Ocurrió un error al intentar relacionar el proyecto con el colaborador.',
         tryAgain: () => onAddProject(values),
       });
     }
@@ -98,16 +98,16 @@ export function UpdateProjectsRelatedToCollaborator({
   const onRemoveProject = async (idProject: number) => {
     try {
       // Send request to dissociate the project from the collaborator
-      await patchCollaboratorRemoveAssociatedProjects({
+      await deleteCollaboratorRemoveAssociatedProjects({
         idFrom: currentCollaborator.id,
         idTo: idProject,
       });
 
       // If the request was successful, show a success toast
       toast({
-        title: "Proyecto eliminado",
-        description: "El proyecto ha sido eliminado del colaborador exitosamente.",
-        className: "bg-green-500 text-black",
+        title: 'Proyecto eliminado',
+        description: 'El proyecto ha sido eliminado del colaborador exitosamente.',
+        className: 'bg-green-500 text-black',
       });
 
       // Update local state for associated and available projects
@@ -123,34 +123,34 @@ export function UpdateProjectsRelatedToCollaborator({
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: "No se pudo eliminar el proyecto del colaborador",
-        defaultErrorMessage: "Ocurrió un error al intentar eliminar el proyecto del colaborador.",
+        title: 'No se pudo eliminar el proyecto del colaborador',
+        defaultErrorMessage: 'Ocurrió un error al intentar eliminar el proyecto del colaborador.',
         tryAgain: () => onRemoveProject(idProject),
       });
     }
   };
 
   return (
-    <ul className="mt-4 flex flex-wrap gap-4">
+    <ul className='mt-4 flex flex-wrap gap-4'>
       {associatedProjects?.map((project) => (
         <li key={project.id}>
-          <Card className="my-5 flex flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800">
-            <CardHeader className="relative flex items-center gap-2">
+          <Card className='my-5 flex flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800'>
+            <CardHeader className='relative flex items-center gap-2'>
               <Button
-                aria-label="eliminar relacion"
-                className="absolute -right-2.5 -top-2.5 m-0 flex aspect-square size-8 items-center justify-center rounded-full bg-red-500 p-0 text-center text-white hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-500"
+                aria-label='eliminar relacion'
+                className='absolute -right-2.5 -top-2.5 m-0 flex aspect-square size-8 items-center justify-center rounded-full bg-red-500 p-0 text-center text-white hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-500'
                 disabled={disableForm}
                 onClick={() => onRemoveProject(project.id)}
               >
                 <X />
-                <span className="sr-only">eliminar relacion</span>
+                <span className='sr-only'>eliminar relacion</span>
               </Button>
               <img
                 alt={`${project.name} logo`}
-                className="size-16 shrink-0"
+                className='size-16 shrink-0'
                 src={project.logoUrl}
               />
-              <span className="text-lg capitalize">{project.name}</span>
+              <span className='text-lg capitalize'>{project.name}</span>
             </CardHeader>
           </Card>
         </li>
@@ -159,32 +159,32 @@ export function UpdateProjectsRelatedToCollaborator({
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <button
-              aria-label="Relacionar stack"
-              className="my-5 flex aspect-square w-max flex-col items-center justify-center rounded-lg bg-zinc-300 p-6 shadow dark:bg-zinc-800"
-              type="button"
+              aria-label='Relacionar stack'
+              className='my-5 flex aspect-square w-max flex-col items-center justify-center rounded-lg bg-zinc-300 p-6 shadow dark:bg-zinc-800'
+              type='button'
             >
-              <Plus className="size-20" />
+              <Plus className='size-20' />
             </button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
+          <DialogContent className='sm:max-w-[425px]'>
             <DialogHeader>
-              <DialogTitle className="text-center">Relacionar proyecto</DialogTitle>
+              <DialogTitle className='text-center'>Relacionar proyecto</DialogTitle>
               <DialogDescription>
                 Selecciona un proyecto para relacionar con el colaborador.
               </DialogDescription>
             </DialogHeader>
             <Form {...form}>
               <form
-                className="space-y-8"
-                id="relation-with-project-from-collaborator"
+                className='space-y-8'
+                id='relation-with-project-from-collaborator'
                 onSubmit={form.handleSubmit(onAddProject)}
               >
-                <div className="flex flex-wrap gap-2">
+                <div className='flex flex-wrap gap-2'>
                   <FormField
                     control={form.control}
-                    name="idTo"
-                    render={({field}) => (
-                      <FormItem className="mx-auto">
+                    name='idTo'
+                    render={({ field }) => (
+                      <FormItem className='mx-auto'>
                         <FormControl>
                           <Select
                             defaultValue={String(field.value)}
@@ -192,16 +192,16 @@ export function UpdateProjectsRelatedToCollaborator({
                             {...field}
                             value={String(field.value)}
                           >
-                            <SelectTrigger className="w-[180px]">
-                              <SelectValue placeholder="Seleccionar proyecto" />
+                            <SelectTrigger className='w-[180px]'>
+                              <SelectValue placeholder='Seleccionar proyecto' />
                             </SelectTrigger>
                             <SelectContent>
                               {availableProject.map((project) => (
                                 <SelectItem key={project.id} value={String(project.id)}>
-                                  <div className="flex items-center gap-2">
+                                  <div className='flex items-center gap-2'>
                                     <img
                                       alt={`${project.name} logo`}
-                                      className="size-6"
+                                      className='size-6'
                                       src={project.logoUrl}
                                     />
                                     <span>{project.name}</span>
@@ -219,11 +219,11 @@ export function UpdateProjectsRelatedToCollaborator({
             </Form>
             <DialogFooter>
               <Button
-                className="bg-zinc-800 text-white hover:bg-zinc-700"
+                className='bg-zinc-800 text-white hover:bg-zinc-700'
                 disabled={disableForm}
-                form="relation-with-project-from-collaborator"
-                type="submit"
-                typeof="submit"
+                form='relation-with-project-from-collaborator'
+                type='submit'
+                typeof='submit'
               >
                 Relacionar
               </Button>

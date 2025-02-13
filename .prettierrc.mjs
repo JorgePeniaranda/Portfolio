@@ -1,26 +1,27 @@
 // .prettierrc.mjs
 /** @type {import("prettier").Config} */
 export default {
-  plugins: ["prettier-plugin-astro"],
+  plugins: ['prettier-plugin-astro', 'prettier-plugin-tailwindcss'],
   overrides: [
     {
-      files: "*.astro",
+      files: '*.astro',
       options: {
-        parser: "astro",
+        parser: 'astro',
       },
     },
   ],
-  experimentalTernaries: false,
-  printWidth: 80,
+  printWidth: 100,
+  trailingComma: 'all',
   tabWidth: 2,
-  useTabs: false,
-  semi: false,
+  semi: true,
   singleQuote: true,
-  quoteProps: "consistent",
-  jsxSingleQuote: false,
-  trailingComma: "none",
+  jsxSingleQuote: true,
   bracketSpacing: true,
   bracketSameLine: false,
-  arrowParens: "avoid",
-  endOfLine: "lf",
+  arrowParens: 'always',
+  endOfLine: 'lf',
+  quoteProps: 'consistent',
+  proseWrap: 'always',
+  htmlWhitespaceSensitivity: 'css',
+  embeddedLanguageFormatting: 'auto',
 };

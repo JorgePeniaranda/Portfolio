@@ -1,78 +1,73 @@
 ---
-import Layout from '@/components/layouts/base.astro'
-import { DashboardLayout } from '@/components/layouts/dashboard-layout'
-import { UpdateProjectsRelatedToCollaborator } from '@/components/organisms/form/relationship/update-projects-related-to-collaborator'
-import { UpdateCollaboratorForm } from '@/components/organisms/form/update/collaborator'
-import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb'
-import { ENV } from '@/constants/env'
-import { getAllCollaborator } from '@/services/collaborator/getAllCollaborator'
-import { getCollaboratorById } from '@/services/collaborator/getCollaboratorById'
-import { getProjectsByAssociatedCollaborator } from '@/services/project/getProjectsByAssociatedCollaborator'
-import { getProjectsByNotAssociatedCollaborator } from '@/services/project/getProjectsByNotAssociatedCollaborator'
-import type { GetStaticPaths } from 'astro'
+import type { GetStaticPaths } from 'astro';
+
+import Layout from '@/components/layouts/base.astro';
+import { DashboardLayout } from '@/components/layouts/dashboard-layout';
+import { UpdateProjectsRelatedToCollaborator } from '@/components/organisms/form/relationship/update-projects-related-to-collaborator';
+import { UpdateCollaboratorForm } from '@/components/organisms/form/update/collaborator';
+import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb';
+import { ENV } from '@/constants/env';
+import { getAllCollaborator } from '@/services/collaborator/getAllCollaborator';
+import { getCollaboratorById } from '@/services/collaborator/getCollaboratorById';
+import { getProjectsByAssociatedCollaborator } from '@/services/project/getProjectsByAssociatedCollaborator';
+import { getProjectsByNotAssociatedCollaborator } from '@/services/project/getProjectsByNotAssociatedCollaborator';
 
 // MARK: - Static paths
 export const getStaticPaths = (async () => {
-  const collaborators = await getAllCollaborator()
+  const collaborators = await getAllCollaborator();
 
-  const paths = collaborators.map(collaborator => ({
+  const paths = collaborators.map((collaborator) => ({
     params: { id: collaborator.id },
-    props: collaborator
-  }))
+    props: collaborator,
+  }));
 
-  return paths
-}) satisfies GetStaticPaths
+  return paths;
+}) satisfies GetStaticPaths;
 
 // MARK: - Fetching collaborator data
-let collaborator
+let collaborator;
+
 if (ENV.isServerSideEnable) {
   collaborator = await getCollaboratorById({
-    id: Number(Astro.params.id)
-  })
+    id: Number(Astro.params.id),
+  });
 } else {
-  collaborator = Astro.props
+  collaborator = Astro.props;
 }
 
 if (!collaborator) {
   return {
     status: 404,
-    error: new Error('Collaborator not found')
-  }
+    error: new Error('Collaborator not found'),
+  };
 }
 
 // MARK: - Fetching associated data
 const associatedProjects = await getProjectsByAssociatedCollaborator({
-  idCollaborator: collaborator.id
-})
+  idCollaborator: collaborator.id,
+});
 const availableProjects = await getProjectsByNotAssociatedCollaborator({
-  idCollaborator: collaborator.id
-})
+  idCollaborator: collaborator.id,
+});
 ---
 
 <Layout title={`Editar el colaborador ${collaborator.nickname}`}>
   <DashboardLayout
-    breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE[
-      '/vault/views/collaborators/edit'
-    ]}
     client:load
+    breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/collaborators/edit']}
   >
-    <main class="w-full h-full flex flex-col pt-7 pl-7 container mx-auto gap-5">
-      <h1 class="text-4xl font-medium">Editar Colaborador</h1>
-      <UpdateCollaboratorForm
-        currentCollaborator={collaborator}
-        disableForm={ENV.isServerSideEnable === false}
-        client:load
-      />
-      <div class="mt-10">
-        <h2 class="text-3xl font-medium">Editar relaciones</h2>
-        <div class="mx-5 mt-5">
-          <h3 class="text-3xl font-medium">Proyectos</h3>
+    <main class='container mx-auto flex size-full flex-col gap-5 pl-7 pt-7'>
+      <h1 class='text-4xl font-medium'>Editar Colaborador</h1>
+      <UpdateCollaboratorForm client:load currentCollaborator={collaborator} />
+      <div class='mt-10'>
+        <h2 class='text-3xl font-medium'>Editar relaciones</h2>
+        <div class='mx-5 mt-5'>
+          <h3 class='text-3xl font-medium'>Proyectos</h3>
           <UpdateProjectsRelatedToCollaborator
+            client:load
             associatedProjects={associatedProjects}
             availableProject={availableProjects}
             currentCollaborator={collaborator}
-            disableForm={ENV.isServerSideEnable === false}
-            client:load
           />
         </div>
       </div>

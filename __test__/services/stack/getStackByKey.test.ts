@@ -1,22 +1,22 @@
-import type {ErrorResponse} from "@/types/responses";
-import type {Stack} from "@prisma/client";
+import type { ErrorResponse } from '@/types/responses';
+import type { Stack } from '@prisma/client';
 
-import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
-import {describe, expect, it, vi} from "vitest";
+import { AxiosError, AxiosHeaders, type AxiosResponse } from 'axios';
+import { describe, expect, it, vi } from 'vitest';
 
-import {TEST_STACK_MOCK} from "../../__mock__/stack.mock";
+import { TEST_STACK_MOCK } from '../../__mock__/stack.mock';
 
-import {apiClient} from "@/helpers/client/axios";
-import {getStackByKey} from "@/services/stack/getStackByKey";
+import { apiClient } from '@/helpers/client/axios';
+import { getStackByKey } from '@/services/stack/getStackByKey';
 
 // Mocking apiClient to simulate HTTP requests without actually calling the API
-vi.mock("@/helpers/client/axios");
+vi.mock('@/helpers/client/axios');
 
-describe("getStackByKey", () => {
+describe('getStackByKey', () => {
   const keyStack = TEST_STACK_MOCK.key;
   const APIUrl = `/api/stack/get/key/${keyStack}.json`;
 
-  it("should return stack data when the request is successful", async () => {
+  it('should return stack data when the request is successful', async () => {
     // Simulating a successful response from apiClient
     const mockResponse: AxiosResponse<Stack> = {
       config: {
@@ -24,14 +24,14 @@ describe("getStackByKey", () => {
       },
       headers: {},
       status: 200,
-      statusText: "OK",
+      statusText: 'OK',
       data: TEST_STACK_MOCK,
     };
 
     // Mocking the resolved value of apiClient.get for this test case
     vi.mocked(apiClient.get).mockResolvedValueOnce(mockResponse);
 
-    const response = await getStackByKey({key: keyStack});
+    const response = await getStackByKey({ key: keyStack });
 
     // Asserting that the response matches the mock data
     expect(response).toEqual(mockResponse.data);
@@ -39,12 +39,12 @@ describe("getStackByKey", () => {
     expect(apiClient.get).toHaveBeenCalledWith(APIUrl);
   });
 
-  it("should handle errors correctly when the request fails", async () => {
+  it('should handle errors correctly when the request fails', async () => {
     // Mock an error response (axios error)
     const mockError: AxiosError<ErrorResponse> = {
       isAxiosError: true,
-      message: "Request failed with status code 500",
-      name: "AxiosError",
+      message: 'Request failed with status code 500',
+      name: 'AxiosError',
       toJSON: () => ({}),
       response: {
         config: {
@@ -52,9 +52,12 @@ describe("getStackByKey", () => {
         },
         headers: {},
         status: 500,
-        statusText: "Internal Server Error",
+        statusText: 'Internal Server Error',
         data: {
-          error: "This is an test error message",
+          status: 500,
+          title: 'An internal server error occurred.',
+          type: 'InternalServerError',
+          detail: 'This is an test error message',
         },
       },
     };
@@ -63,12 +66,12 @@ describe("getStackByKey", () => {
     vi.mocked(apiClient.get).mockRejectedValueOnce(mockError);
 
     try {
-      await getStackByKey({key: keyStack});
+      await getStackByKey({ key: keyStack });
     } catch (error) {
       // Validate error handling and apiClient call
       expect(error).toBeInstanceOf(Error);
       if (error instanceof Error) {
-        expect(error.message).toBe(mockError.response?.data.error);
+        expect(error.message).toBe(mockError.response?.data.title);
       }
     }
 

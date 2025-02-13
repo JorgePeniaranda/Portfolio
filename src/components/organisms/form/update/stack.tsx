@@ -1,24 +1,34 @@
-import {zodResolver} from "@hookform/resolvers/zod";
-import {StackCategory, StackType, type Stack} from "@prisma/client";
-import {Save} from "lucide-react";
-import {useForm} from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { StackCategory, StackType, type Stack } from '@prisma/client';
+import { Save } from 'lucide-react';
+import { useForm } from 'react-hook-form';
 
-import {Button} from "@/components/ui/button";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
-import {Input} from "@/components/ui/input";
+import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import {Textarea} from "@/components/ui/textarea";
-import {STACK_CATEGORY_TRANSCRIPTIONS, STACK_TYPE_TRANSCRIPTIONS} from "@/constants/transcriptions";
-import {useToast} from "@/hooks/use-toast";
-import {StackUpdateSchema} from "@/schemas/stack/update";
-import {putStack} from "@/services/stack/putStack";
-import {handleErrorWithToast} from "@/helpers/error/toast-handler";
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  STACK_CATEGORY_TRANSCRIPTIONS,
+  STACK_TYPE_TRANSCRIPTIONS,
+} from '@/constants/transcriptions';
+import { useToast } from '@/hooks/use-toast';
+import { StackUpdateSchema } from '@/schemas/stack/update';
+import { putStack } from '@/services/stack/putStack';
+import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 
 export function UpdateStackForm({
   currentStack,
@@ -27,7 +37,7 @@ export function UpdateStackForm({
   currentStack: Stack;
   disableForm?: boolean;
 }) {
-  const {toast} = useToast();
+  const { toast } = useToast();
 
   // Create a form to update the stack
   const form = useForm<StackUpdateSchema>({
@@ -38,19 +48,22 @@ export function UpdateStackForm({
   const onSubmit = async (values: StackUpdateSchema) => {
     try {
       // Send request to update the stack
-      await putStack(values);
+      await putStack({
+        idStack: currentStack.id,
+        stackUpdateInput: values,
+      });
 
       // If the request was successful, show a success toast
       toast({
-        title: "Stack actualizado",
-        description: "El stack ha sido actualizado exitosamente.",
-        className: "bg-green-500 text-black",
+        title: 'Stack actualizado',
+        description: 'El stack ha sido actualizado exitosamente.',
+        className: 'bg-green-500 text-black',
       });
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: "No se pudo actualizar el stack",
-        defaultErrorMessage: "Ha ocurrido un error al intentar actualizar el stack.",
+        title: 'No se pudo actualizar el stack',
+        defaultErrorMessage: 'Ha ocurrido un error al intentar actualizar el stack.',
         tryAgain: () => onSubmit(values),
       });
     }
@@ -58,16 +71,16 @@ export function UpdateStackForm({
 
   return (
     <Form {...form}>
-      <form className="space-y-8" onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex flex-wrap gap-2">
+      <form className='space-y-8' onSubmit={form.handleSubmit(onSubmit)}>
+        <div className='flex flex-wrap gap-2'>
           <FormField
             control={form.control}
-            name="key"
-            render={({field}) => (
+            name='key'
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>Key</FormLabel>
                 <FormControl>
-                  <Input disabled={disableForm} placeholder="Key" {...field} />
+                  <Input disabled={disableForm} placeholder='Key' {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -75,14 +88,14 @@ export function UpdateStackForm({
           />
           <FormField
             control={form.control}
-            name="name"
-            render={({field}) => (
+            name='name'
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>Nombre</FormLabel>
                 <FormControl>
                   <Input
                     disabled={disableForm}
-                    placeholder="Nombre"
+                    placeholder='Nombre'
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />
@@ -93,14 +106,14 @@ export function UpdateStackForm({
           />
           <FormField
             control={form.control}
-            name="description"
-            render={({field}) => (
+            name='description'
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>Descripción</FormLabel>
                 <FormControl>
                   <Textarea
                     disabled={disableForm}
-                    placeholder="Descripción"
+                    placeholder='Descripción'
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />
@@ -111,8 +124,8 @@ export function UpdateStackForm({
           />
           <FormField
             control={form.control}
-            name="category"
-            render={({field}) => (
+            name='category'
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>Categoria</FormLabel>
                 <Select
@@ -123,8 +136,8 @@ export function UpdateStackForm({
                   value={field.value === null ? undefined : field.value}
                 >
                   <FormControl>
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Descripción" />
+                    <SelectTrigger className='w-[180px]'>
+                      <SelectValue placeholder='Descripción' />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -141,8 +154,8 @@ export function UpdateStackForm({
           />
           <FormField
             control={form.control}
-            name="type"
-            render={({field}) => (
+            name='type'
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>Tipo</FormLabel>
                 <Select
@@ -153,8 +166,8 @@ export function UpdateStackForm({
                   value={field.value === null ? undefined : field.value}
                 >
                   <FormControl>
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Tipo" />
+                    <SelectTrigger className='w-[180px]'>
+                      <SelectValue placeholder='Tipo' />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -171,14 +184,14 @@ export function UpdateStackForm({
           />
           <FormField
             control={form.control}
-            name="iconUrl"
-            render={({field}) => (
+            name='iconUrl'
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>URL de icono</FormLabel>
                 <FormControl>
                   <Input
                     disabled={disableForm}
-                    placeholder="iconURL"
+                    placeholder='iconURL'
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />
@@ -189,12 +202,12 @@ export function UpdateStackForm({
           />
         </div>
         <Button
-          className="flex size-max items-center gap-2 rounded-lg bg-lime-600 p-2 text-white hover:bg-lime-700 dark:bg-lime-600 dark:hover:bg-lime-700"
+          className='flex size-max items-center gap-2 rounded-lg bg-lime-600 p-2 text-white hover:bg-lime-700 dark:bg-lime-600 dark:hover:bg-lime-700'
           disabled={disableForm}
-          type="submit"
+          type='submit'
         >
-          <Save className="size-7" />
-          <span className="text-lg">Guardar</span>
+          <Save className='size-7' />
+          <span className='text-lg'>Guardar</span>
         </Button>
       </form>
     </Form>

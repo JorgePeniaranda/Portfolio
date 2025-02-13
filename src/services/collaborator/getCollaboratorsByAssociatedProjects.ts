@@ -1,8 +1,8 @@
-import type {PaginationRequest} from "@/types/responses";
-import type {Collaborator, Stack} from "@prisma/client";
+import type { PaginationRequest } from '@/types/responses';
+import type { Collaborator, Stack } from '@prisma/client';
 
-import {apiClient} from "@/helpers/client/axios";
-import {handleServiceError} from "@/helpers/error/service-handler";
+import { apiClient } from '@/helpers/client/axios';
+import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Get collaborators by associated projects.
@@ -16,12 +16,12 @@ export async function getCollaboratorsByAssociatedProjects({
   idProject,
   pagination,
 }: {
-  idProject: Stack["id"];
+  idProject: Stack['id'];
   pagination?: PaginationRequest;
 }): Promise<Collaborator[]> {
   try {
-    const {data: response} = await apiClient.get<Collaborator[]>(
-      `/api/collaborator/get/related/project/${idProject}.json`,
+    const { data: response } = await apiClient.get<Collaborator[]>(
+      `/api/collaborator/related/project/${idProject}.json`,
       {
         params: pagination,
       },
@@ -31,7 +31,7 @@ export async function getCollaboratorsByAssociatedProjects({
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: "No se pudo obtener la lista de colaboradores.",
+      defaultErrorMessage: 'No se pudo obtener la lista de colaboradores.',
     });
   }
 }

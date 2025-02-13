@@ -1,7 +1,7 @@
-import {ProjectStatus, StackCategory} from "@prisma/client";
-import {z} from "zod";
+import { ProjectStatus, StackCategory } from '@prisma/client';
+import { z } from 'zod';
 
-import {isHexadecimal} from "@/helpers/guards/is-hexadecimal";
+import { isHexadecimal } from '@/helpers/guards/is-hexadecimal';
 
 const stackCategoryValues = Object.values(StackCategory) as [
   (typeof StackCategory)[keyof typeof StackCategory],
@@ -24,7 +24,7 @@ export const ProjectCreateSchema = z.object({
   contributions: z.string().min(1),
   logoUrl: z.string().min(1),
   primaryColor: z.string().refine(isHexadecimal, {
-    message: "Invalid hex color format. Expected format: #RRGGBB or #RGB",
+    message: 'Invalid hex color format. Expected format: #RRGGBB or #RGB',
   }),
   demoUrl: z.string().optional().nullable(),
   githubUrl: z.string().optional().nullable(),
@@ -33,17 +33,17 @@ export const ProjectCreateSchema = z.object({
 export type ProjectCreateSchema = z.infer<typeof ProjectCreateSchema>;
 
 export const ProjectCreateDefaultValues: ProjectCreateSchema = {
-  key: "",
-  name: "",
+  key: '',
+  name: '',
   status: ProjectStatus.IN_PROGRESS,
   stackCategory: StackCategory.FRONT_END,
   startDate: new Date(),
   endDate: null,
-  description: "",
-  goals: "",
-  contributions: "",
-  logoUrl: "",
-  primaryColor: "#c05454",
-  demoUrl: "",
-  githubUrl: "",
+  description: '',
+  goals: '',
+  contributions: '',
+  logoUrl: '',
+  primaryColor: '#c05454',
+  demoUrl: '',
+  githubUrl: '',
 };

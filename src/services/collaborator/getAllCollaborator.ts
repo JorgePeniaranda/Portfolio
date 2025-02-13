@@ -1,8 +1,8 @@
-import type {PaginationRequest} from "@/types/responses";
-import type {Collaborator} from "@prisma/client";
+import type { PaginationRequest } from '@/types/responses';
+import type { Collaborator } from '@prisma/client';
 
-import {apiClient} from "@/helpers/client/axios";
-import {handleServiceError} from "@/helpers/error/service-handler";
+import { apiClient } from '@/helpers/client/axios';
+import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Get all collaborators
@@ -13,7 +13,7 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  */
 export async function getAllCollaborator(pagination?: PaginationRequest): Promise<Collaborator[]> {
   try {
-    const {data: response} = await apiClient.get<Collaborator[]>("/api/collaborator/get/all.json", {
+    const { data: response } = await apiClient.get<Collaborator[]>('/api/collaborator.json', {
       params: pagination,
     });
 
@@ -21,7 +21,7 @@ export async function getAllCollaborator(pagination?: PaginationRequest): Promis
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: "No se pudo obtener la lista de colaboradores.",
+      defaultErrorMessage: 'No se pudo obtener la lista de colaboradores.',
     });
   }
 }

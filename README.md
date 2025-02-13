@@ -2,7 +2,10 @@
    👋 Jorge Peñaranda's Portfolio
 </h1>
 
-Hello! I'm a passionate web developer with boundless creativity and an unwavering commitment to excellence in code. I design and develop websites that are not only visually appealing but also highly functional and user-friendly. My focus is on creating stunning and effective online experiences.
+Hello! I'm a passionate web developer with boundless creativity and an unwavering commitment to
+excellence in code. I design and develop websites that are not only visually appealing but also
+highly functional and user-friendly. My focus is on creating stunning and effective online
+experiences.
 
 ![App Screenshot](./public/assets/images/banner.png)
 
@@ -40,9 +43,11 @@ This project follows the **Git Flow** workflow for efficient development and dep
 
 ### Main branches:
 
-- **`main`**: The **Release Candidate (RC)** branch, containing code ready for final testing and static build generation for production.
+- **`main`**: The **Release Candidate (RC)** branch, containing code ready for final testing and
+  static build generation for production.
 - **`develop`**: The development branch where new features and improvements are implemented.
-- **`production`**: Contains the generated static files ready for production. It is updated when the code in `main` is ready for deployment.
+- **`production`**: Contains the generated static files ready for production. It is updated when the
+  code in `main` is ready for deployment.
 
 ### Workflow:
 
@@ -53,14 +58,16 @@ git checkout develop
 git checkout -b feature/my-new-feature
 ```
 
-2. Release preparation: When develop is ready for testing, create a main (RC) branch for final testing.
+2. Release preparation: When develop is ready for testing, create a main (RC) branch for final
+   testing.
 
 ```sh
 git checkout develop
 git checkout -b release/v1.0.0
 ```
 
-3. Production deployment: After merging into main, generate static files and push them to production.
+3. Production deployment: After merging into main, generate static files and push them to
+   production.
 
 ```sh
 npm run build  # Generates static files
@@ -70,7 +77,8 @@ git commit -m "Deploy to production"
 git push origin production
 ```
 
-4. Branch integration: Keep branches updated with periodic merges from develop to main and from main to production.
+4. Branch integration: Keep branches updated with periodic merges from develop to main and from main
+   to production.
 
 ```sh
 git checkout develop
@@ -118,7 +126,8 @@ npm install
 
 5. Configure the database connection:
 
-- In the .env file (or create one), set the DATABASE_URL environment variable to match your PostgreSQL connection string:
+- In the .env file (or create one), set the DATABASE_URL environment variable to match your
+  PostgreSQL connection string:
 
 ```env
 DATABASE_URL="postgresql://user:password@localhost:5432/portfolio_db?schema=public"
@@ -146,4 +155,5 @@ npm run prisma:migrate
 npm run dev
 ```
 
-This will start the development server. You can now access your application at http://localhost:4321.
+This will start the development server. You can now access your application at
+http://localhost:4321.

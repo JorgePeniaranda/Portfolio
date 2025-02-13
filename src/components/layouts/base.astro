@@ -1,56 +1,43 @@
 ---
-import { cn } from '@/helpers/common/classnames'
-import { SEO } from 'astro-seo'
-import { ClientRouter } from 'astro:transitions'
-import { DEFAULT_LANG } from '../../constants/common'
-import { NAVBAR_ITEMS } from '../../constants/navbar'
-import { SEO_INFO } from '../../constants/seo'
-import '../../styles/globals.css'
-import ThemePreference from '../atoms/theme-preference.astro'
-import { DesktopNavbar } from '../organisms/navbar/desktop'
-import { MobileNavbar } from '../organisms/navbar/mobile'
-import { Toaster } from '../ui/toaster'
+import { SEO } from 'astro-seo';
+import { ClientRouter } from 'astro:transitions';
+
+import { DEFAULT_LANG } from '../../constants/common';
+import { NAVBAR_ITEMS } from '../../constants/navbar';
+import { SEO_INFO } from '../../constants/seo';
+import '../../styles/globals.css';
+import ThemePreference from '../atoms/theme-preference.astro';
+import { DesktopNavbar } from '../organisms/navbar/desktop';
+import { MobileNavbar } from '../organisms/navbar/mobile';
+import { Toaster } from '../ui/toaster';
+
+import { cn } from '@/helpers/common/classnames';
 
 interface Props {
-  title?: string
-  description?: string
-  lang?: string
-  body?: astroHTML.JSX.HTMLAttributes
-  html?: astroHTML.JSX.HtmlHTMLAttributes
+  title?: string;
+  description?: string;
+  lang?: string;
+  body?: astroHTML.JSX.HTMLAttributes;
+  html?: astroHTML.JSX.HtmlHTMLAttributes;
 }
 
 // Extract props passed to the Astro component
-const { title, description, lang = DEFAULT_LANG, body, html } = Astro.props
+const { title, description, lang = DEFAULT_LANG, body, html } = Astro.props;
 ---
 
 <!doctype html>
 <html lang={lang} {...html}>
   <head>
-    <SEO
-      {...SEO_INFO}
-      title={title}
-      description={description ?? SEO_INFO.description}
-    />
-    <meta name="generator" content={Astro.generator} />
+    <SEO {...SEO_INFO} description={description ?? SEO_INFO.description} title={title} />
+    <meta content={Astro.generator} name='generator' />
     <ClientRouter />
     <ThemePreference />
   </head>
-  <body
-    class={cn('w-full min-h-screen antialiased font-Baloo', body?.class)}
-    {...body}
-  >
+  <body class={cn('w-full min-h-screen antialiased font-Baloo', body?.class)} {...body}>
     <slot />
-    <DesktopNavbar
-      items={NAVBAR_ITEMS}
-      client:idle
-      transition:name="main-desktop-navbar"
-    />
-    <div class="h-16 flex md:hidden">
-      <MobileNavbar
-        items={NAVBAR_ITEMS}
-        client:idle
-        transition:name="main-mobile-navbar"
-      />
+    <DesktopNavbar client:idle items={NAVBAR_ITEMS} transition:name='main-desktop-navbar' />
+    <div class='flex h-16 md:hidden'>
+      <MobileNavbar client:idle items={NAVBAR_ITEMS} transition:name='main-mobile-navbar' />
     </div>
     <Toaster client:idle />
   </body>

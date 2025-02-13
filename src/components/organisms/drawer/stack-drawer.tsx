@@ -1,13 +1,13 @@
-import type {Project, Stack} from "@prisma/client";
+import type { Project, Stack } from '@prisma/client';
+import type { Drawer as DrawerPrimitive } from 'vaul';
 
-import {X} from "lucide-react";
-import * as React from "react";
-import {Drawer as DrawerPrimitive} from "vaul";
+import { X } from 'lucide-react';
+import * as React from 'react';
 
-import {MessageDisplay} from "@/components/atoms/message-display";
-import {Drawer, DrawerClose, DrawerContent, DrawerTrigger} from "@/components/ui/drawer";
-import {isDefined, isNotDefined} from "@/helpers/guards/is-defined";
-import {safeRedirect} from "@/helpers/common/safe-redirect";
+import { MessageDisplay } from '@/components/atoms/message-display';
+import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
+import { isDefined, isNotDefined } from '@/helpers/guards/is-defined';
+import { safeRedirect } from '@/helpers/common/safe-redirect';
 
 /**
  * Component that renders an interactive drawer to display detailed information about a Stack.
@@ -42,7 +42,7 @@ export function StackDrawer({
   const handleDrawerClose = () => {
     if (isDefined(returnToSiteOnClose)) {
       if (returnToSiteOnClose.keepState) {
-        history.pushState(null, "", returnToSiteOnClose.site);
+        history.pushState(null, '', returnToSiteOnClose.site);
 
         return;
       }
@@ -64,17 +64,17 @@ export function StackDrawer({
   return (
     <Drawer {...drawerProps} onClose={handleDrawerClose}>
       <DrawerTrigger asChild>{triggerChild}</DrawerTrigger>
-      <DrawerContent className="overflow-y-auto overflow-x-hidden px-6 py-2">
-        <section className="space-y-4">
+      <DrawerContent className='overflow-y-auto overflow-x-hidden px-6 py-2'>
+        <section className='space-y-4'>
           {/* Header with the stack logo and name */}
-          <div className="relative flex items-center space-x-2">
+          <div className='relative flex items-center space-x-2'>
             <img
               alt={`${stack.name} stack logo`}
-              className="aspect-square size-10 rounded-sm"
+              className='aspect-square size-10 rounded-sm'
               src={stack.iconUrl}
             />
-            <h3 className="text-4xl font-bold">{stack.name}</h3>
-            <DrawerClose className="absolute right-0 top-0 p-2">
+            <h3 className='text-4xl font-bold'>{stack.name}</h3>
+            <DrawerClose className='absolute right-0 top-0 p-2'>
               <X />
             </DrawerClose>
           </div>
@@ -82,8 +82,8 @@ export function StackDrawer({
           {/* Stack description (if defined) */}
           {isDefined(stack.description) && (
             <article>
-              <h4 className="text-lg font-bold underline underline-offset-2">Descripción:</h4>
-              <p className="text-pretty indent-4">
+              <h4 className='text-lg font-bold underline underline-offset-2'>Descripción:</h4>
+              <p className='text-pretty indent-4'>
                 <MessageDisplay message={stack.description} />
               </p>
             </article>
@@ -91,25 +91,25 @@ export function StackDrawer({
 
           {/* Related projects (if any) */}
           {associatedProjects.length > 0 && (
-            <article className="space-y-1">
-              <h4 className="text-lg font-bold underline underline-offset-2">
+            <article className='space-y-1'>
+              <h4 className='text-lg font-bold underline underline-offset-2'>
                 Proyectos relacionados:
               </h4>
-              <ul className="flex flex-col gap-2">
+              <ul className='flex flex-col gap-2'>
                 {associatedProjects?.map((project) => (
                   <li key={project.id}>
                     <a
-                      className="flex items-center gap-2 rounded-md transition-all ease-linear hover:translate-x-2"
+                      className='flex items-center gap-2 rounded-md transition-all ease-linear hover:translate-x-2'
                       href={`/projects/${project.key}`}
-                      rel="noreferrer"
-                      target="_blank"
+                      rel='noreferrer'
+                      target='_blank'
                     >
                       <img
                         alt={`${project.name} logo`}
-                        className="size-14 rounded-full"
+                        className='size-14 rounded-full'
                         src={project.logoUrl}
                       />
-                      <h5 className="whitespace-nowrap text-xl">{project.name}</h5>
+                      <h5 className='whitespace-nowrap text-xl'>{project.name}</h5>
                     </a>
                   </li>
                 ))}

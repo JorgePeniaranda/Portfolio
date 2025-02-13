@@ -1,8 +1,8 @@
-import type {Stack} from "@prisma/client";
-import type {PaginationRequest} from "@/types/responses";
+import type { Stack } from '@prisma/client';
+import type { PaginationRequest } from '@/types/responses';
 
-import {apiClient} from "@/helpers/client/axios";
-import {handleServiceError} from "@/helpers/error/service-handler";
+import { apiClient } from '@/helpers/client/axios';
+import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Get all stacks
@@ -13,7 +13,7 @@ import {handleServiceError} from "@/helpers/error/service-handler";
  */
 export async function getAllStack(pagination?: PaginationRequest): Promise<Stack[]> {
   try {
-    const {data: response} = await apiClient.get<Stack[]>("/api/stack/get/all.json", {
+    const { data: response } = await apiClient.get<Stack[]>('/api/stack.json', {
       params: pagination,
     });
 
@@ -21,7 +21,7 @@ export async function getAllStack(pagination?: PaginationRequest): Promise<Stack
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: "No se pudo obtener la lista de stacks.",
+      defaultErrorMessage: 'No se pudo obtener la lista de stacks.',
     });
   }
 }

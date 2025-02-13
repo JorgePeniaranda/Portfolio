@@ -1,4 +1,4 @@
-import {devConsoleLog} from "@/helpers/common/dev-console-log";
+import { devConsoleLog } from '@/helpers/common/dev-console-log';
 
 /**
  * Retrieves the value of an environment variable or returns a default value if not found.
@@ -13,12 +13,12 @@ export function getEnvValue(envName: string, defaultValue?: string): string {
   const envValue = import.meta.env[envName];
 
   // If the environment variable exists and has a non-empty value, return it
-  if (typeof envValue === "string" && envValue.length > 0) {
+  if (typeof envValue === 'string' && envValue.length > 0) {
     return envValue;
   }
 
   // If a default value is provided, log a warning and return the default value
-  if (typeof defaultValue === "string") {
+  if (typeof defaultValue === 'string') {
     devConsoleLog.warn(
       `Environment variable not found: ${envName}, using default value: ${defaultValue}`,
     );
@@ -28,5 +28,5 @@ export function getEnvValue(envName: string, defaultValue?: string): string {
 
   // If no default value is provided, log an error and throw an exception
   devConsoleLog.error(`Environment variable not found: ${envName}`);
-  throw new Error("Environment variable not found: " + envName);
+  throw new Error('Environment variable not found: ' + envName);
 }

@@ -1,22 +1,22 @@
-import type {Collaborator} from "@prisma/client";
-import type {ErrorResponse} from "@/types/responses";
+import type { Collaborator } from '@prisma/client';
+import type { ErrorResponse } from '@/types/responses';
 
-import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
-import {describe, expect, it, vi} from "vitest";
+import { AxiosError, AxiosHeaders, type AxiosResponse } from 'axios';
+import { describe, expect, it, vi } from 'vitest';
 
-import {TEST_COLLABORATOR_MOCK} from "../../__mock__/collaborator.mock";
+import { TEST_COLLABORATOR_MOCK } from '../../__mock__/collaborator.mock';
 
-import {apiClient} from "@/helpers/client/axios";
-import {getAllCollaborator} from "@/services/collaborator/getAllCollaborator";
+import { apiClient } from '@/helpers/client/axios';
+import { getAllCollaborator } from '@/services/collaborator/getAllCollaborator';
 
 // Mocking apiClient to simulate HTTP requests without actually calling the API
-vi.mock("@/helpers/client/axios");
+vi.mock('@/helpers/client/axios');
 
-describe("getAllCollaborator", () => {
+describe('getAllCollaborator', () => {
   const APIUrl = `/api/collaborator/get/all.json`;
-  const pagination = {page: 1, size: 10};
+  const pagination = { page: 1, size: 10 };
 
-  it("should return collaborator data when the request is successful", async () => {
+  it('should return collaborator data when the request is successful', async () => {
     // Simulating a successful response from apiClient
     const mockResponse: AxiosResponse<Collaborator[]> = {
       config: {
@@ -24,7 +24,7 @@ describe("getAllCollaborator", () => {
       },
       headers: {},
       status: 200,
-      statusText: "OK",
+      statusText: 'OK',
       data: [TEST_COLLABORATOR_MOCK, TEST_COLLABORATOR_MOCK, TEST_COLLABORATOR_MOCK],
     };
 
@@ -41,12 +41,12 @@ describe("getAllCollaborator", () => {
     });
   });
 
-  it("should handle errors correctly when the request fails", async () => {
+  it('should handle errors correctly when the request fails', async () => {
     // Mock an error response (axios error)
     const mockError: AxiosError<ErrorResponse> = {
       isAxiosError: true,
-      message: "Request failed with status code 500",
-      name: "AxiosError",
+      message: 'Request failed with status code 500',
+      name: 'AxiosError',
       toJSON: () => ({}),
       response: {
         config: {
@@ -54,9 +54,12 @@ describe("getAllCollaborator", () => {
         },
         headers: {},
         status: 500,
-        statusText: "Internal Server Error",
+        statusText: 'Internal Server Error',
         data: {
-          error: "This is an test error message",
+          status: 500,
+          title: 'An internal server error occurred.',
+          type: 'InternalServerError',
+          detail: 'This is an test error message',
         },
       },
     };
@@ -70,7 +73,7 @@ describe("getAllCollaborator", () => {
       // Validate error handling and apiClient call
       expect(error).toBeInstanceOf(Error);
       if (error instanceof Error) {
-        expect(error.message).toBe(mockError.response?.data.error);
+        expect(error.message).toBe(mockError.response?.data.title);
       }
     }
 

@@ -1,23 +1,23 @@
-import type {ErrorResponse} from "@/types/responses";
+import type { ErrorResponse } from '@/types/responses';
 
-import {AxiosError, AxiosHeaders, type AxiosResponse} from "axios";
-import {describe, expect, it, vi} from "vitest";
+import { AxiosError, AxiosHeaders, type AxiosResponse } from 'axios';
+import { describe, expect, it, vi } from 'vitest';
 
-import {apiClient} from "@/helpers/client/axios";
-import {patchProjectAddAssociatedCollaborator} from "@/services/project/patchProjectAddAssociatedCollaborator";
+import { apiClient } from '@/helpers/client/axios';
+import { patchProjectAddAssociatedCollaborator } from '@/services/project/patchProjectAddAssociatedCollaborator';
 
 // Mock the apiClient module
-vi.mock("@/helpers/client/axios");
+vi.mock('@/helpers/client/axios');
 
-describe("patchProjectAddAssociatedCollaborator", () => {
+describe('patchProjectAddAssociatedCollaborator', () => {
   // Input data for the tests
   const input = {
     idFrom: 1,
     idTo: 2,
   } as const;
-  const APIUrl = "/api/project/relations/collaborator/add";
+  const APIUrl = '/api/project/relations/collaborator/add';
 
-  it("should return a successful response when the request is correct", async () => {
+  it('should return a successful response when the request is correct', async () => {
     // Mock a successful response
     const mockResponse: AxiosResponse<null> = {
       config: {
@@ -25,7 +25,7 @@ describe("patchProjectAddAssociatedCollaborator", () => {
       },
       headers: {},
       status: 200,
-      statusText: "OK",
+      statusText: 'OK',
       data: null,
     };
 
@@ -38,12 +38,12 @@ describe("patchProjectAddAssociatedCollaborator", () => {
     expect(apiClient.patch).toHaveBeenCalledWith(APIUrl, input);
   });
 
-  it("should handle errors correctly when the request fails", async () => {
+  it('should handle errors correctly when the request fails', async () => {
     // Mock an error response (axios error)
     const mockError: AxiosError<ErrorResponse> = {
       isAxiosError: true,
-      message: "Request failed with status code 500",
-      name: "AxiosError",
+      message: 'Request failed with status code 500',
+      name: 'AxiosError',
       toJSON: () => ({}),
       response: {
         config: {
@@ -51,9 +51,12 @@ describe("patchProjectAddAssociatedCollaborator", () => {
         },
         headers: {},
         status: 500,
-        statusText: "Internal Server Error",
+        statusText: 'Internal Server Error',
         data: {
-          error: "This is an test error message",
+          status: 500,
+          title: 'An internal server error occurred.',
+          type: 'InternalServerError',
+          detail: 'This is an test error message',
         },
       },
     };
@@ -67,7 +70,7 @@ describe("patchProjectAddAssociatedCollaborator", () => {
       // Validate error handling and apiClient call
       expect(error).toBeInstanceOf(Error);
       if (error instanceof Error) {
-        expect(error.message).toBe(mockError.response?.data.error);
+        expect(error.message).toBe(mockError.response?.data.title);
       }
     }
 

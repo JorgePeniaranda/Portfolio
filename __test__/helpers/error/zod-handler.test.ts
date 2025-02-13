@@ -1,18 +1,18 @@
-import {describe, it, expect} from "vitest";
-import {z} from "zod";
+import { describe, it, expect } from 'vitest';
+import { z } from 'zod';
 
-import {handleZodError} from "@/helpers/error/zod-handler";
+import { handleZodError } from '@/helpers/error/zod-handler';
 
-describe("handleZodError", () => {
-  it("should format Zod validation errors correctly", () => {
+describe('handleZodError', () => {
+  it('should format Zod validation errors correctly', () => {
     // Define a Zod schema
     const schema = z.object({
-      name: z.string().min(3, "Name must have at least 3 characters"),
-      age: z.number().min(18, "Age must be at least 18"),
+      name: z.string().min(3, 'Name must have at least 3 characters'),
+      age: z.number().min(18, 'Age must be at least 18'),
     });
 
     // Validate invalid data to generate a ZodError
-    const invalidData = {name: "Jo", age: 16};
+    const invalidData = { name: 'Jo', age: 16 };
     let error: z.ZodError | null = null;
 
     try {
@@ -31,15 +31,15 @@ describe("handleZodError", () => {
 
     // Check the expected results
     expect(result.errorTextReduce).toBe(
-      "name: Name must have at least 3 characters, age: Age must be at least 18",
+      'name: Name must have at least 3 characters, age: Age must be at least 18',
     );
     expect(result.errorList).toEqual([
-      "name: Name must have at least 3 characters",
-      "age: Age must be at least 18",
+      'name: Name must have at least 3 characters',
+      'age: Age must be at least 18',
     ]);
   });
 
-  it("should return empty strings if there are no errors", () => {
+  it('should return empty strings if there are no errors', () => {
     // Create an empty ZodError
     const emptyError = new z.ZodError([]);
 
@@ -47,7 +47,7 @@ describe("handleZodError", () => {
     const result = handleZodError(emptyError);
 
     // Check the expected results
-    expect(result.errorTextReduce).toBe("");
+    expect(result.errorTextReduce).toBe('');
     expect(result.errorList).toEqual([]);
   });
 });

@@ -1,4 +1,4 @@
-import {Prisma} from "@prisma/client";
+import { Prisma } from '@prisma/client';
 
 /**
  * Type guard function that checks if the provided error is a known Prisma error.

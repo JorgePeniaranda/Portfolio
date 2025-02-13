@@ -1,5 +1,5 @@
-import {StackCategory, StackType} from "@prisma/client";
-import {z} from "zod";
+import { StackCategory, StackType } from '@prisma/client';
+import { z } from 'zod';
 
 const stackCategoryValues = Object.values(StackCategory) as [
   (typeof StackCategory)[keyof typeof StackCategory],
@@ -11,7 +11,6 @@ const stackTypeValues = Object.values(StackType) as [
 ];
 
 export const StackUpdateSchema = z.object({
-  id: z.number(),
   key: z.string().min(1),
   name: z.string().min(1),
   description: z.string().min(1),

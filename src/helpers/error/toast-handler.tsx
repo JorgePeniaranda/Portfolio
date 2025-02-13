@@ -1,9 +1,9 @@
-import {ToastAction} from "@radix-ui/react-toast";
+import { ToastAction } from '@radix-ui/react-toast';
 
-import {isDefined} from "../guards/is-defined";
+import { isDefined } from '../guards/is-defined';
 
-import {MessageDisplay} from "@/components/atoms/message-display";
-import {toast} from "@/hooks/use-toast";
+import { MessageDisplay } from '@/components/atoms/message-display';
+import { toast } from '@/hooks/use-toast';
 
 /**
  * Handle an error and display a toast message.
@@ -15,7 +15,7 @@ import {toast} from "@/hooks/use-toast";
 export function handleErrorWithToast({
   error,
   title,
-  defaultErrorMessage = "Ha ocurrido un error.",
+  defaultErrorMessage = 'Ha ocurrido un error.',
   tryAgain,
 }: {
   error: unknown;
@@ -27,9 +27,9 @@ export function handleErrorWithToast({
     toast({
       title,
       description: <MessageDisplay message={error.message} />,
-      className: "bg-red-500 text-white",
+      className: 'bg-red-500 text-white',
       action: isDefined(tryAgain) ? (
-        <ToastAction altText="Reintentar" onClick={tryAgain}>
+        <ToastAction altText='Reintentar' onClick={tryAgain}>
           Reintentar
         </ToastAction>
       ) : undefined,
@@ -41,6 +41,11 @@ export function handleErrorWithToast({
   toast({
     title,
     description: defaultErrorMessage,
-    className: "bg-red-500 text-white",
+    className: 'bg-red-500 text-white',
+    action: isDefined(tryAgain) ? (
+      <ToastAction altText='Reintentar' onClick={tryAgain}>
+        Reintentar
+      </ToastAction>
+    ) : undefined,
   });
 }

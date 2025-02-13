@@ -1,9 +1,9 @@
-import type {ISoundState} from "@/types/common.d";
+import type { ISoundState } from '@/types/common.d';
 
-import {create} from "zustand";
-import {persist} from "zustand/middleware";
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-import {DEFAULT_SOUND_STATE, SOUND_STORE_KEY} from "@/constants/common";
+import { DEFAULT_SOUND_STATE, SOUND_STORE_KEY } from '@/constants/common';
 
 // Define the shape of the store's state.
 export interface ISoundStoreState {
@@ -29,7 +29,7 @@ export const useSoundStore = create(
       },
 
       resetSound: () => {
-        set({isSoundEnabled: DEFAULT_SOUND_STATE});
+        set({ isSoundEnabled: DEFAULT_SOUND_STATE });
       },
     }),
     {

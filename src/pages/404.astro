@@ -1,33 +1,28 @@
 ---
-import { CatAsAService } from '@/components/atoms/cat'
-import Layout from '@/components/layouts/base.astro'
-import { ChevronLeft } from 'lucide-react'
+import { ChevronLeft } from 'lucide-react';
+
+import { CatAsAService } from '@/components/atoms/cat';
+import Layout from '@/components/layouts/base.astro';
 ---
 
-<Layout title="Not found" description="Página no encontrada">
-  <main
-    class="flex flex-col px-52 py-24 gap-10 w-full h-full items-center justify-between lg:flex-row"
-  >
-    <section
-      class="flex-1 flex justify-center flex-col text-black dark:text-white gap-2"
-    >
-      <h1 class="font-bold text-6xl">Página no encontrada</h1>
-      <p class="text-3xl">La página que buscas no existe.</p>
+<Layout description='Página no encontrada' title='Not found'>
+  <main class='flex size-full flex-col items-center justify-between gap-10 px-52 py-24 lg:flex-row'>
+    <section class='flex flex-1 flex-col justify-center gap-2 text-black dark:text-white'>
+      <h1 class='text-6xl font-bold'>Página no encontrada</h1>
+      <p class='text-3xl'>La página que buscas no existe.</p>
       <a
-        href="/"
-        class="flex w-max items-center mt-64 hover:-ml-2 transition-all"
-        aria-label="Go back to home"
+        aria-label='Go back to home'
+        class='mt-64 flex w-max items-center transition-all hover:-ml-2'
+        href='/'
       >
-        <ChevronLeft className="w-9 h-9" />
-        <p class="text-2xl font-semibold">Volver</p>
+        <ChevronLeft className='size-9' />
+        <p class='text-2xl font-semibold'>Volver</p>
       </a>
     </section>
-    <section class="flex-1">
-      <h2 class="text-center mb-2">
-        Pero aquí tienes un gato para que te sientas mejor
-      </h2>
-      <div class="w-auto h-96">
-        <CatAsAService client:only="react" />
+    <section class='flex-1'>
+      <h2 class='mb-2 text-center'>Pero aquí tienes un gato para que te sientas mejor</h2>
+      <div class='h-96 w-auto'>
+        <CatAsAService client:only='react' />
       </div>
     </section>
   </main>
