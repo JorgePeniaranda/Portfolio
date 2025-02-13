@@ -1,1 +1,0 @@
-import{c as o}from"./createLucideIcon.D2R2PR3o.js";const e=[["path",{d:"M20 6 9 17l-5-5",key:"1gmf2c"}]],s=o("Check",e),c=[["path",{d:"m18 15-6-6-6 6",key:"153udz"}]],h=o("ChevronUp",c),n=[["path",{d:"m7 15 5 5 5-5",key:"1hf1tw"}],["path",{d:"m7 9 5-5 5 5",key:"sgt6xg"}]],a=o("ChevronsUpDown",n);export{s as C,a,h as b};

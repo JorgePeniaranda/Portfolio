@@ -1,1 +1,0 @@
-import{z as n}from"./index.CydnYaqo.js";const a=n.object({nickname:n.string().optional(),githubUsername:n.string().optional().nullable(),linkedinUsername:n.string().optional().nullable()});export{a as C};
