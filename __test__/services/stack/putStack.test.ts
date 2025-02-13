@@ -16,7 +16,7 @@ vi.mock('@/helpers/client/axios');
 describe('putStack', () => {
   // Input data for the tests
   const input = TEST_STACK_MOCK;
-  const APIUrl = '/api/stack/update';
+  const APIUrl = `/api/stack/id/${input.id}`;
 
   it('should return a successful response when the request is correct', async () => {
     // Mock a successful response
@@ -32,7 +32,10 @@ describe('putStack', () => {
 
     // Simulate a resolved promise for apiClient.put
     vi.mocked(apiClient.put).mockResolvedValueOnce(mockResponse);
-    const response = await putStack(input);
+    const response = await putStack({
+      idStack: input.id,
+      stackUpdateInput: input,
+    });
 
     // Validate response and apiClient call
     expect(response).toEqual(mockResponse.data);
@@ -66,7 +69,10 @@ describe('putStack', () => {
     vi.mocked(apiClient.put).mockRejectedValueOnce(mockError);
 
     try {
-      await putStack(input);
+      await putStack({
+        idStack: input.id,
+        stackUpdateInput: input,
+      });
     } catch (error) {
       // Validate error handling and apiClient call
       expect(error).toBeInstanceOf(Error);

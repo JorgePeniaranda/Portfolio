@@ -1,7 +1,8 @@
 import type { ErrorResponse } from '@/types/responses';
 import type { Collaborator } from '@prisma/client';
+import type { AxiosError } from 'axios';
 
-import { AxiosError, AxiosHeaders, type AxiosResponse } from 'axios';
+import { AxiosHeaders, type AxiosResponse } from 'axios';
 import { describe, expect, it, vi } from 'vitest';
 
 import { TEST_COLLABORATOR_MOCK } from '../../__mock__/collaborator.mock';
@@ -13,9 +14,8 @@ import { postCollaborator } from '@/services/collaborator/postCollaborator';
 vi.mock('@/helpers/client/axios');
 
 describe('postCollaborator', () => {
-  // Input data for the tests
   const input = TEST_COLLABORATOR_MOCK;
-  const APIUrl = '/api/collaborator/create';
+  const APIUrl = '/api/collaborator';
 
   it('should return a successful response when the request is correct', async () => {
     // Mock a successful response

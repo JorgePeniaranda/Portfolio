@@ -1,7 +1,8 @@
 import type { ErrorResponse } from '@/types/responses';
 import type { Project } from '@prisma/client';
+import type { AxiosError } from 'axios';
 
-import { AxiosError, AxiosHeaders, type AxiosResponse } from 'axios';
+import { AxiosHeaders, type AxiosResponse } from 'axios';
 import { describe, expect, it, vi } from 'vitest';
 
 import { TEST_PROJECT_MOCK } from '../../__mock__/project.mock';
@@ -14,8 +15,7 @@ vi.mock('@/helpers/client/axios');
 
 describe('getProjectsByAssociatedStack', () => {
   const idStack = 1;
-  const APIUrl = `/api/project/get/related/stack/${idStack}.json`;
-  const pagination = { page: 1, size: 10 };
+  const APIUrl = `/api/project/related/stack/${idStack}.json`;
 
   it('should return project data when the request is successful', async () => {
     // Simulating a successful response from apiClient
@@ -34,15 +34,12 @@ describe('getProjectsByAssociatedStack', () => {
 
     const response = await getProjectsByAssociatedStack({
       idStack,
-      pagination,
     });
 
     // Asserting that the response matches the mock data
     expect(response).toEqual(mockResponse.data);
     // Ensuring the API was called with the correct endpoint
-    expect(apiClient.get).toHaveBeenCalledWith(APIUrl, {
-      params: pagination,
-    });
+    expect(apiClient.get).toHaveBeenCalledWith(APIUrl);
   });
 
   it('should handle errors correctly when the request fails', async () => {
@@ -72,7 +69,7 @@ describe('getProjectsByAssociatedStack', () => {
     vi.mocked(apiClient.get).mockRejectedValueOnce(mockError);
 
     try {
-      await getProjectsByAssociatedStack({ idStack, pagination });
+      await getProjectsByAssociatedStack({ idStack });
     } catch (error) {
       // Validate error handling and apiClient call
       expect(error).toBeInstanceOf(Error);
@@ -81,8 +78,6 @@ describe('getProjectsByAssociatedStack', () => {
       }
     }
 
-    expect(apiClient.get).toHaveBeenCalledWith(APIUrl, {
-      params: pagination,
-    });
+    expect(apiClient.get).toHaveBeenCalledWith(APIUrl);
   });
 });

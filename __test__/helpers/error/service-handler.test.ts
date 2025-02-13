@@ -80,10 +80,10 @@ describe('handleServiceError', () => {
     expect(result).toEqual(new Error('An error occurred.'));
   });
 
-  it('should return the `error` property if defined in the response', () => {
+  it('should return the `title` property if defined in the response', () => {
     const mockError = {
       isAxiosError: true,
-      response: { data: { error: 'Specific error message' } },
+      response: { data: { title: 'Specific error message' } },
     };
 
     (axios.isAxiosError as unknown as Mock).mockReturnValue(true);
@@ -100,10 +100,17 @@ describe('handleServiceError', () => {
     expect(result).toEqual(new Error('Specific error message'));
   });
 
-  it('should return concatenated `errors` if defined in the response', () => {
+  it('should return concatenated `fieldErrors` if defined in the response', () => {
     const mockError = {
       isAxiosError: true,
-      response: { data: { errors: ['Error 1', 'Error 2'] } },
+      response: {
+        data: {
+          fieldErrors: [
+            { field: 'email', message: 'Invalid email' },
+            { field: 'password', message: 'Password too short' },
+          ],
+        },
+      },
     };
 
     (axios.isAxiosError as unknown as Mock).mockReturnValue(true);
@@ -117,10 +124,10 @@ describe('handleServiceError', () => {
     });
 
     expect(devConsoleLog.log).toHaveBeenCalledWith('Error in service: ', mockError);
-    expect(result).toEqual(new Error('Error 1\nError 2'));
+    expect(result).toEqual(new Error('email: Invalid email\npassword: Password too short'));
   });
 
-  it('should return a default error message if no `error` or `errors` are defined', () => {
+  it('should return a default error message if no `title` or `fieldErrors` are defined', () => {
     const mockError = { isAxiosError: true, response: { data: {} } };
 
     (axios.isAxiosError as unknown as Mock).mockReturnValue(true);

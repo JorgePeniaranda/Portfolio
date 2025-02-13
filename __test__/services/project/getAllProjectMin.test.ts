@@ -1,7 +1,8 @@
 import type { ErrorResponse } from '@/types/responses';
 import type { Project } from '@prisma/client';
+import type { AxiosError } from 'axios';
 
-import { AxiosError, AxiosHeaders, type AxiosResponse } from 'axios';
+import { AxiosHeaders, type AxiosResponse } from 'axios';
 import { describe, expect, it, vi } from 'vitest';
 
 import { TEST_PROJECT_MOCK } from '../../__mock__/project.mock';
@@ -13,8 +14,7 @@ import { getAllProjectMin } from '@/services/project/getAllProjectMin';
 vi.mock('@/helpers/client/axios');
 
 describe('getAllProjectMin', () => {
-  const APIUrl = `/api/project/get/min/all.json`;
-  const pagination = { page: 1, size: 10 };
+  const APIUrl = `/api/project/min.json`;
 
   it('should return project data when the request is successful', async () => {
     // Simulating a successful response from apiClient
@@ -31,14 +31,12 @@ describe('getAllProjectMin', () => {
     // Mocking the resolved value of apiClient.get for this test case
     vi.mocked(apiClient.get).mockResolvedValueOnce(mockResponse);
 
-    const response = await getAllProjectMin(pagination);
+    const response = await getAllProjectMin();
 
     // Asserting that the response matches the mock data
     expect(response).toEqual(mockResponse.data);
     // Ensuring the API was called with the correct endpoint
-    expect(apiClient.get).toHaveBeenCalledWith(APIUrl, {
-      params: pagination,
-    });
+    expect(apiClient.get).toHaveBeenCalledWith(APIUrl);
   });
 
   it('should handle errors correctly when the request fails', async () => {
@@ -68,7 +66,7 @@ describe('getAllProjectMin', () => {
     vi.mocked(apiClient.get).mockRejectedValueOnce(mockError);
 
     try {
-      await getAllProjectMin(pagination);
+      await getAllProjectMin();
     } catch (error) {
       // Validate error handling and apiClient call
       expect(error).toBeInstanceOf(Error);
@@ -77,8 +75,6 @@ describe('getAllProjectMin', () => {
       }
     }
 
-    expect(apiClient.get).toHaveBeenCalledWith(APIUrl, {
-      params: pagination,
-    });
+    expect(apiClient.get).toHaveBeenCalledWith(APIUrl);
   });
 });

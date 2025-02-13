@@ -1,8 +1,10 @@
 import type { Collaborator } from '@prisma/client';
 import type { ErrorResponse } from '@/types/responses';
+import type { AxiosError } from 'axios';
 
-import { AxiosError, AxiosHeaders, type AxiosResponse } from 'axios';
+import { AxiosHeaders, type AxiosResponse } from 'axios';
 import { describe, expect, it, vi } from 'vitest';
+import { TEST_PROJECT_MOCK } from '__test__/__mock__/project.mock';
 
 import { TEST_COLLABORATOR_MOCK } from '../../__mock__/collaborator.mock';
 
@@ -14,9 +16,8 @@ vi.mock('@/helpers/client/axios');
 
 describe('getCollaboratorsByNotAssociatedProjects', () => {
   const idCollaborator = TEST_COLLABORATOR_MOCK.id;
-  const APIUrl = `/api/collaborator/get/not-related/project/${idCollaborator}.json`;
-  const idProject = 1;
-  const pagination = { page: 1, size: 10 };
+  const idProject = TEST_PROJECT_MOCK.id;
+  const APIUrl = `/api/collaborator/not-related/project/${idCollaborator}.json`;
 
   it('should return collaborator data when the request is successful', async () => {
     // Simulating a successful response from apiClient
@@ -35,15 +36,12 @@ describe('getCollaboratorsByNotAssociatedProjects', () => {
 
     const response = await getCollaboratorsByNotAssociatedProjects({
       idProject,
-      pagination,
     });
 
     // Asserting that the response matches the mock data
     expect(response).toEqual(mockResponse.data);
     // Ensuring the API was called with the correct endpoint
-    expect(apiClient.get).toHaveBeenCalledWith(APIUrl, {
-      params: pagination,
-    });
+    expect(apiClient.get).toHaveBeenCalledWith(APIUrl);
   });
 
   it('should handle errors correctly when the request fails', async () => {
@@ -73,7 +71,7 @@ describe('getCollaboratorsByNotAssociatedProjects', () => {
     vi.mocked(apiClient.get).mockRejectedValueOnce(mockError);
 
     try {
-      await getCollaboratorsByNotAssociatedProjects({ idProject, pagination });
+      await getCollaboratorsByNotAssociatedProjects({ idProject });
     } catch (error) {
       // Validate error handling and apiClient call
       expect(error).toBeInstanceOf(Error);
@@ -82,8 +80,6 @@ describe('getCollaboratorsByNotAssociatedProjects', () => {
       }
     }
 
-    expect(apiClient.get).toHaveBeenCalledWith(APIUrl, {
-      params: pagination,
-    });
+    expect(apiClient.get).toHaveBeenCalledWith(APIUrl);
   });
 });

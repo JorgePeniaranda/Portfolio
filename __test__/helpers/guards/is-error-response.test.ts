@@ -30,8 +30,8 @@ describe('isErrorResponse', () => {
     expect(result).toBe(false);
   });
 
-  it("should return true if error has a string 'error' property", () => {
-    const mockError = { error: 'Some error occurred' };
+  it("should return true if error has a valid 'type' property", () => {
+    const mockError = { type: 'validation_error' };
 
     (isNotDefined as unknown as Mock).mockReturnValue(false);
 
@@ -40,8 +40,8 @@ describe('isErrorResponse', () => {
     expect(result).toBe(true);
   });
 
-  it("should return true if error has an 'errors' array of strings", () => {
-    const mockError = { errors: ['Error 1', 'Error 2'] };
+  it("should return true if error has a valid 'title' property", () => {
+    const mockError = { title: 'Invalid request' };
 
     (isNotDefined as unknown as Mock).mockReturnValue(false);
 
@@ -50,8 +50,18 @@ describe('isErrorResponse', () => {
     expect(result).toBe(true);
   });
 
-  it("should return false if error has 'errors' but they are not strings", () => {
-    const mockError = { errors: [1, 2, 3] };
+  it("should return true if error has a valid 'status' property", () => {
+    const mockError = { status: '400' };
+
+    (isNotDefined as unknown as Mock).mockReturnValue(false);
+
+    const result = isErrorResponse(mockError);
+
+    expect(result).toBe(true);
+  });
+
+  it("should return false if 'type', 'title', and 'status' are missing", () => {
+    const mockError = { message: 'Some error message' };
 
     (isNotDefined as unknown as Mock).mockReturnValue(false);
 
@@ -60,8 +70,8 @@ describe('isErrorResponse', () => {
     expect(result).toBe(false);
   });
 
-  it("should return false if error does not have 'error' or 'errors' properties", () => {
-    const mockError = { message: 'Some other error' };
+  it("should return false if 'type' is not a string", () => {
+    const mockError = { type: 123 };
 
     (isNotDefined as unknown as Mock).mockReturnValue(false);
 
@@ -70,8 +80,8 @@ describe('isErrorResponse', () => {
     expect(result).toBe(false);
   });
 
-  it("should return false if 'error' is not a string", () => {
-    const mockError = { error: 123 };
+  it("should return false if 'title' is not a string", () => {
+    const mockError = { title: 404 };
 
     (isNotDefined as unknown as Mock).mockReturnValue(false);
 
@@ -80,8 +90,32 @@ describe('isErrorResponse', () => {
     expect(result).toBe(false);
   });
 
-  it("should return true if both 'error' and 'errors' are valid properties", () => {
-    const mockError = { error: 'Some error occurred', errors: ['Error 1'] };
+  it("should return false if 'status' is not a string", () => {
+    const mockError = { status: 500 };
+
+    (isNotDefined as unknown as Mock).mockReturnValue(false);
+
+    const result = isErrorResponse(mockError);
+
+    expect(result).toBe(false);
+  });
+
+  it("should return true if at least one of 'type', 'title', or 'status' is valid", () => {
+    const mockError = { type: 'server_error', status: 500 };
+
+    (isNotDefined as unknown as Mock).mockReturnValue(false);
+
+    const result = isErrorResponse(mockError);
+
+    expect(result).toBe(true);
+  });
+
+  it("should return true if all 'type', 'title', and 'status' properties are valid", () => {
+    const mockError = {
+      type: 'server_error',
+      title: 'Internal Server Error',
+      status: '500',
+    };
 
     (isNotDefined as unknown as Mock).mockReturnValue(false);
 

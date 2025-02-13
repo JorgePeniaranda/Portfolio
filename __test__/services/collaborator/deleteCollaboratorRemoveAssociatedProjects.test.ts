@@ -1,21 +1,23 @@
 import type { ErrorResponse } from '@/types/responses';
+import type { AxiosError } from 'axios';
+import type { EntityRelationSchema } from '@/schemas/common/entity-relation-schema';
 
-import { AxiosError, AxiosHeaders, type AxiosResponse } from 'axios';
+import { AxiosHeaders, type AxiosResponse } from 'axios';
 import { describe, expect, it, vi } from 'vitest';
 
 import { apiClient } from '@/helpers/client/axios';
-import { patchStackAddAssociatedProjects } from '@/services/stack/patchStackAddAssociatedProjects';
+import { deleteCollaboratorRemoveAssociatedProjects } from '@/services/collaborator/deleteCollaboratorRemoveAssociatedProjects';
 
 // Mock the apiClient module
 vi.mock('@/helpers/client/axios');
 
-describe('patchStackAddAssociatedProjects', () => {
+describe('deleteCollaboratorRemoveAssociatedProjects', () => {
   // Input data for the tests
-  const input = {
-    idFrom: 1,
-    idTo: 2,
+  const input: EntityRelationSchema = {
+    idSource: 1,
+    idTarget: 2,
   } as const;
-  const APIUrl = '/api/stack/relations/project/add';
+  const APIUrl = `/api/collaborator/id/${input.idTarget}/project/${input.idSource}`;
 
   it('should return a successful response when the request is correct', async () => {
     // Mock a successful response
@@ -29,13 +31,13 @@ describe('patchStackAddAssociatedProjects', () => {
       data: null,
     };
 
-    // Simulate a resolved promise for apiClient.patch
-    vi.mocked(apiClient.patch).mockResolvedValueOnce(mockResponse);
-    const response = await patchStackAddAssociatedProjects(input);
+    // Simulate a resolved promise for apiClient.delete
+    vi.mocked(apiClient.delete).mockResolvedValueOnce(mockResponse);
+    const response = await deleteCollaboratorRemoveAssociatedProjects(input);
 
     // Validate response and apiClient call
     expect(response).toEqual(mockResponse.data);
-    expect(apiClient.patch).toHaveBeenCalledWith(APIUrl, input);
+    expect(apiClient.delete).toHaveBeenCalledWith(APIUrl);
   });
 
   it('should handle errors correctly when the request fails', async () => {
@@ -61,11 +63,11 @@ describe('patchStackAddAssociatedProjects', () => {
       },
     };
 
-    // Simulate a rejected promise for apiClient.patch
-    vi.mocked(apiClient.patch).mockRejectedValueOnce(mockError);
+    // Simulate a rejected promise for apiClient.delete
+    vi.mocked(apiClient.delete).mockRejectedValueOnce(mockError);
 
     try {
-      await patchStackAddAssociatedProjects(input);
+      await deleteCollaboratorRemoveAssociatedProjects(input);
     } catch (error) {
       // Validate error handling and apiClient call
       expect(error).toBeInstanceOf(Error);
@@ -74,6 +76,6 @@ describe('patchStackAddAssociatedProjects', () => {
       }
     }
 
-    expect(apiClient.patch).toHaveBeenCalledWith(APIUrl, input);
+    expect(apiClient.delete).toHaveBeenCalledWith(APIUrl);
   });
 });

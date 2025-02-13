@@ -1,9 +1,10 @@
+import type { FieldError } from '@/types/responses';
+
 import { describe, it, expect, vi, type Mock } from 'vitest';
 import { z } from 'zod';
 
 import { handleApiError } from '@/helpers/error/api-handler';
 import { prismaHandler } from '@/helpers/error/prisma-handler';
-import { handleZodError } from '@/helpers/error/zod-handler';
 import { isPrismaError } from '@/helpers/guards/is-prisma-error';
 
 vi.mock('@/helpers/guards/is-prisma-error', () => ({
@@ -38,9 +39,12 @@ describe('handleApiError', () => {
 
     const body = await response.json();
 
-    expect(body).toEqual({
-      error: mockPrismaResponse.message,
-    });
+    expect(body).toEqual(
+      expect.objectContaining({
+        detail: mockPrismaResponse.message,
+        status: mockPrismaResponse.statusCode,
+      }),
+    );
   });
 
   it('should handle a Zod validation error', async () => {
@@ -48,26 +52,26 @@ describe('handleApiError', () => {
       { path: ['field1'], message: 'Invalid field1', code: 'custom' },
     ]);
     const mockZodResponse = {
-      errorTextReduce: 'Invalid field1',
-      errorList: [{ path: ['field1'], message: 'Invalid field1' }],
+      errorTextReduce: 'field1: Invalid field1',
+      errorList: [{ field: 'field1', message: 'Invalid field1' }] satisfies FieldError[],
     };
 
     (isPrismaError as unknown as Mock).mockReturnValue(false);
-    (handleZodError as unknown as Mock).mockReturnValue(mockZodResponse);
 
     const response = handleApiError(mockZodError);
 
     expect(isPrismaError).toHaveBeenCalledWith(mockZodError);
-    expect(handleZodError).toHaveBeenCalledWith(mockZodError);
 
     expect(response.status).toBe(400);
 
     const body = await response.json();
 
-    expect(body).toEqual({
-      error: mockZodResponse.errorTextReduce,
-      errors: mockZodResponse.errorList,
-    });
+    expect(body).toEqual(
+      expect.objectContaining({
+        detail: mockZodResponse.errorTextReduce,
+        fieldErrors: mockZodResponse.errorList,
+      }),
+    );
   });
 
   it('should handle a generic error', async () => {
@@ -83,9 +87,12 @@ describe('handleApiError', () => {
 
     const body = await response.json();
 
-    expect(body).toEqual({
-      error: mockGenericError.message,
-    });
+    expect(body).toEqual(
+      expect.objectContaining({
+        detail: 'Something went wrong',
+        status: 500,
+      }),
+    );
   });
 
   it('should handle an unknown error', async () => {
@@ -101,8 +108,11 @@ describe('handleApiError', () => {
 
     const body = await response.json();
 
-    expect(body).toEqual({
-      error: 'Unknown error occurred.',
-    });
+    expect(body).toEqual(
+      expect.objectContaining({
+        detail: 'Unknown error occurred.',
+        status: 500,
+      }),
+    );
   });
 });

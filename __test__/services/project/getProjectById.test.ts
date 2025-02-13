@@ -1,7 +1,8 @@
 import type { ErrorResponse } from '@/types/responses';
 import type { Project } from '@prisma/client';
+import type { AxiosError } from 'axios';
 
-import { AxiosError, AxiosHeaders, type AxiosResponse } from 'axios';
+import { AxiosHeaders, type AxiosResponse } from 'axios';
 import { describe, expect, it, vi } from 'vitest';
 
 import { TEST_PROJECT_MOCK } from '../../__mock__/project.mock';
@@ -14,7 +15,7 @@ vi.mock('@/helpers/client/axios');
 
 describe('getProjectById', () => {
   const idProject = TEST_PROJECT_MOCK.id;
-  const APIUrl = `/api/project/get/id/${idProject}.json`;
+  const APIUrl = `/api/project/id/${idProject}.json`;
 
   it('should return stack data when the request is successful', async () => {
     // Simulating a successful response from apiClient
