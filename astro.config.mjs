@@ -12,6 +12,7 @@ export default defineConfig({
   integrations: [react(), sitemap(), tailwind(), playformCompress(), icon(), robotsTxt()],
   compressHTML: true,
   output: process.env.NODE_ENV === 'development' ? 'server' : 'static',
+  outDir: 'docs',
   build: {
     assets: 'static',
   },

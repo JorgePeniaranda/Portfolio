@@ -114,16 +114,16 @@ Here's the updated workflow, including the manual build and deployment process:
    git merge main
    ```
 
-5. **Build and deploy manually**: After merging into `production`, you need to generate the build and upload the `dist/` folder.
+5. **Build and deploy manually**: After merging into `production`, you need to generate the build and upload the `docs/` folder.
 
    ```bash
    npm run dev & npm run build  # Start dev server and build production files
-   git add -f dist/                 # Add the built files
+   git add -f docs/                 # Add the built files
    git commit -m "Deploy to production"
    git push origin production    # Push to production branch
    ```
 
-Now, your `dist/` folder will be included in the `production` branch, making it ready for deployment to **GitHub Pages**. 🚀
+Now, your `docs/` folder will be included in the `production` branch, making it ready for deployment to **GitHub Pages**. 🚀
 ## 🚀 Deployment
 
 You need the following programs before you start:
