@@ -122,6 +122,18 @@ Here's the updated workflow, including the manual build and deployment process:
    git commit -m "Deploy to production"
    git push origin production    # Push to production branch
    ```
+6. **Ensure `.nojekyll` exists**:  
+Before deploying to GitHub Pages, ensure that the `.nojekyll` file exists in the `docs/` folder to prevent Jekyll processing.
+
+   #### **For Linux/macOS**:
+   ```bash
+   touch docs/.nojekyll  # Creates .nojekyll in the docs folder
+   ```
+
+   #### **For Windows (CMD or PowerShell)**:
+   ```bash
+   echo "" > docs\.nojekyll  # Creates .nojekyll in the docs folder
+   ```
 
 Now, your `docs/` folder will be included in the `production` branch, making it ready for deployment to **GitHub Pages**. 🚀
 ## 🚀 Deployment

@@ -4,7 +4,7 @@ import { DEFAULT_LANG } from '@/constants/common';
 import { ENV } from '@/constants/env';
 import { PERSONAL_ACCOUNTS } from '@/constants/external';
 
-export const ORIGINAL_URL = ENV.base_url;
+export const ORIGINAL_URL = ENV.site_url;
 
 export const SITE_INFO = {
   name: 'Jorge Peñaranda',
