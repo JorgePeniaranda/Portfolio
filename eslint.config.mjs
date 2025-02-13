@@ -46,7 +46,11 @@ export default [
         'warn',
         { blankLine: 'always', prev: '*', next: ['return', 'export'] },
         { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
-        { blankLine: 'any', prev: ['const', 'let', 'var'], next: ['const', 'let', 'var'] },
+        {
+          blankLine: 'any',
+          prev: ['const', 'let', 'var'],
+          next: ['const', 'let', 'var'],
+        },
       ],
       'no-console': 'warn',
       'prefer-const': 'error',
@@ -120,7 +124,11 @@ export default [
         '@typescript-eslint/no-confusing-void-expression': 'off',
         '@typescript-eslint/no-unused-vars': [
           'warn',
-          { args: 'after-used', ignoreRestSiblings: false, argsIgnorePattern: '^_.*?$' },
+          {
+            args: 'after-used',
+            ignoreRestSiblings: false,
+            argsIgnorePattern: '^_.*?$',
+          },
         ],
         '@typescript-eslint/consistent-type-imports': 'warn', // Enforce type-only imports when possible
       },
