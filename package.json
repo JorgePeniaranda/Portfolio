@@ -34,6 +34,8 @@
     "prisma:deploy": "npx prisma migrate deploy",
     "prisma:push": "npx prisma db push",
     "prisma:format": "npx prisma format",
+    "format": "prettier --write .",
+    "format:check" : "prettier --check .",
     "astro:check": "astro check",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
