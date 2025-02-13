@@ -96,7 +96,7 @@ const textColor = GetTextColorForBackground(project.primaryColor);
     <main class='flex h-full text-black dark:text-white'>
       <section
         class:list={[
-          'flex-1 flex flex-col h-full relative z-50',
+          'relative z-50 flex h-full flex-1 flex-col',
           {
             '!text-white': textColor === 'white',
             '!text-black': textColor === 'black',
