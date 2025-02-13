@@ -1,0 +1,23 @@
+# Ignore dependencies folder  
+node_modules/
+
+# Ignore test coverage reports  
+coverage/
+
+# Ignore VS Code settings  
+.vscode/
+
+# Ignore GitHub Actions configs  
+.github/
+
+# Ignore Astro cache files  
+.astro/
+
+# Ignore static assets  
+public/
+
+# Ignore build output  
+dist/
+
+# Ignore TypeScript config  
+tsconfig.json

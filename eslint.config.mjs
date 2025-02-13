@@ -31,6 +31,7 @@ export default [
       'public',
       'dist',
       'coverage',
+      '.idea',
       'src/env.d.ts',
       '__test__', // TO-DO: Remove test folder
     ],
@@ -135,7 +136,17 @@ export default [
       rules: {
         'prettier/prettier': [
           'warn',
+          // Same configuration as .prettierrc.mjs
           {
+            plugins: ['prettier-plugin-astro', 'prettier-plugin-tailwindcss'],
+            overrides: [
+              {
+                files: '*.astro',
+                options: {
+                  parser: 'astro',
+                },
+              },
+            ],
             printWidth: 100,
             trailingComma: 'all',
             tabWidth: 2,
@@ -150,7 +161,6 @@ export default [
             proseWrap: 'always',
             htmlWhitespaceSensitivity: 'css',
             embeddedLanguageFormatting: 'auto',
-            // plugins: ['prettier-plugin-tailwindcss']
           },
         ],
       },
