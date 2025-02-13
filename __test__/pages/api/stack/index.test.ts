@@ -5,13 +5,14 @@ import { createContext } from 'astro/middleware';
 import { TEST_STACK_MOCK } from '__test__/__mock__/stack.mock';
 
 import { databaseClient } from '@/helpers/client/prisma';
-import { POST } from '@/pages/api/stack/create';
+import { POST, DELETE } from '@/pages/api/stack';
 import { StackCreateSchema } from '@/schemas/stack/create';
 
 vi.mock('@/helpers/client/prisma', () => ({
   databaseClient: {
     stack: {
       create: vi.fn(),
+      deleteMany: vi.fn(),
     },
   },
 }));
@@ -31,7 +32,7 @@ vi.mock('@/helpers/error/api-handler', () => ({
   },
 }));
 
-describe('GET /stack/create endpoint', () => {
+describe('CREATE stack endpoint', () => {
   const input = {
     ...TEST_STACK_MOCK,
     updatedAt: TEST_STACK_MOCK.updatedAt.toISOString(),
@@ -91,5 +92,62 @@ describe('GET /stack/create endpoint', () => {
 
     expect(responseBody).toEqual({ error: 'This is a test error' });
     expect(StackCreateSchema.parse).toHaveBeenCalledWith(input);
+  });
+});
+
+describe('DELETE stack endpoint', () => {
+  const input = [1, 2, 3];
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('should return a stack when parameters are valid', async () => {
+    // Mock the database response
+    const mockStack = {
+      count: input.length,
+    };
+
+    (databaseClient.stack.deleteMany as unknown as Mock).mockResolvedValue(mockStack);
+
+    // Simulate a request
+    const url = 'https://example.com/api/stack/delete';
+    const request: APIContext = createContext({
+      request: new Request(url, {
+        method: 'DELETE',
+        body: JSON.stringify(input),
+      }),
+      defaultLocale: 'en',
+      locals: {},
+    });
+
+    const response = await DELETE(request);
+
+    expect(response.status).toBe(200);
+    expect(databaseClient.stack.deleteMany).toHaveBeenCalled();
+  });
+
+  it('should return a 500 error if an exception occurs', async () => {
+    (databaseClient.stack.deleteMany as unknown as Mock).mockRejectedValue(
+      new Error('This is a test error'),
+    );
+
+    // Simulate a request
+    const url = 'https://example.com/api/stack/delete';
+    const request: APIContext = createContext({
+      request: new Request(url, {
+        method: 'DELETE',
+        body: JSON.stringify(input),
+      }),
+      defaultLocale: 'en',
+      locals: {},
+    });
+
+    const response = await DELETE(request);
+
+    expect(response.status).toBe(500);
+    const responseBody = await response.json();
+
+    expect(responseBody).toEqual({ error: 'This is a test error' });
   });
 });

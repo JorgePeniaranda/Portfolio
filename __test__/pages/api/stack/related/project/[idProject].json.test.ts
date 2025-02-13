@@ -4,12 +4,14 @@ import { describe, it, vi, expect, beforeEach, type Mock } from 'vitest';
 import { createContext } from 'astro/middleware';
 
 import { databaseClient } from '@/helpers/client/prisma';
-import { GET, getStaticPaths } from '@/pages/api/stack/get/id/[id].json';
+import { GET, getStaticPaths } from '@/pages/api/stack/related/project/[idProject].json';
 
 vi.mock('@/helpers/client/prisma', () => ({
   databaseClient: {
     stack: {
-      findUnique: vi.fn(),
+      findMany: vi.fn(),
+    },
+    project: {
       findMany: vi.fn(),
     },
   },
@@ -24,21 +26,24 @@ vi.mock('@/helpers/error/api-handler', () => ({
   },
 }));
 
-describe('GET /stack/id/[id] endpoint', () => {
+describe('GET stack by related project endpoint', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it('should return a stack when parameters are valid', async () => {
+  it('should return a paginated list of stacks when parameters are valid', async () => {
     // Mock the database response
-    const mockStack = { id: 1, name: 'stack 1' };
+    const mockStacks = [
+      { id: 1, name: 'stack 1' },
+      { id: 2, name: 'stack 2' },
+    ];
 
-    (databaseClient.stack.findUnique as unknown as Mock).mockResolvedValue(mockStack);
+    (databaseClient.stack.findMany as unknown as Mock).mockResolvedValue(mockStacks);
 
     // Simulate a request
-    const url = 'https://example.com/api/id/1';
+    const url = 'https://example.com/api/get/stack/related/project/1?page=1&size=10';
     const request: APIContext = createContext({
-      params: { id: '1' },
+      params: { idProject: '1' },
       request: new Request(url),
       defaultLocale: 'en',
       locals: {},
@@ -49,18 +54,23 @@ describe('GET /stack/id/[id] endpoint', () => {
     expect(response.status).toBe(200);
     const responseBody = await response.json();
 
-    expect(responseBody).toEqual(mockStack);
+    expect(responseBody).toEqual(mockStacks);
 
-    expect(databaseClient.stack.findUnique).toHaveBeenCalled();
+    expect(databaseClient.stack.findMany).toHaveBeenCalledWith(
+      expect.objectContaining({
+        skip: 0,
+        take: 10,
+      }),
+    );
   });
 
-  it('should return null if no stack are found', async () => {
-    (databaseClient.stack.findUnique as unknown as Mock).mockResolvedValue([]);
+  it('should return an empty list if no stacks are found', async () => {
+    (databaseClient.stack.findMany as unknown as Mock).mockResolvedValue([]);
 
     // Simulate a request
-    const url = 'https://example.com/api/id/1';
+    const url = 'https://example.com/api/get/stack/related/project/1?page=1&size=10';
     const request: APIContext = createContext({
-      params: { id: '1' },
+      params: { idProject: '1' },
       request: new Request(url),
       defaultLocale: 'en',
       locals: {},
@@ -75,14 +85,10 @@ describe('GET /stack/id/[id] endpoint', () => {
   });
 
   it('should return a 500 error if an exception occurs', async () => {
-    (databaseClient.stack.findUnique as unknown as Mock).mockRejectedValue(
-      new Error('This is a test error'),
-    );
-
     // Simulate a request
-    const url = 'https://example.com/api/id/1';
+    const url = 'https://example.com/api/get/stack/related/project/1?page=1&size=10';
     const request: APIContext = createContext({
-      params: { id: '1' },
+      params: { idProject: '1' },
       request: new Request(url),
       defaultLocale: 'en',
       locals: {},
@@ -93,20 +99,20 @@ describe('GET /stack/id/[id] endpoint', () => {
     expect(response.status).toBe(500);
     const responseBody = await response.json();
 
-    expect(responseBody).toEqual({ error: 'This is a test error' });
+    expect(responseBody).toEqual({ error: 'Invalid URL' });
   });
 });
 
 describe('getStaticPaths', () => {
   it('should return a list of paths', async () => {
-    const mockStacks = [{ id: '1' }, { id: '2' }, { id: '3' }];
+    const mockProject = [{ id: '1' }, { id: '2' }, { id: '3' }];
 
-    (databaseClient.stack.findMany as unknown as Mock).mockResolvedValue(mockStacks);
+    (databaseClient.project.findMany as unknown as Mock).mockResolvedValue(mockProject);
     const paths = await getStaticPaths();
 
     expect(paths).toEqual(
-      mockStacks.map((stack) => ({
-        params: { id: stack.id.toString() },
+      mockProject.map((project) => ({
+        params: { idProject: project.id.toString() },
       })),
     );
   });

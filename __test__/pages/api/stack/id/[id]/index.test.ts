@@ -5,7 +5,7 @@ import { createContext } from 'astro/middleware';
 import { TEST_STACK_MOCK } from '__test__/__mock__/stack.mock';
 
 import { databaseClient } from '@/helpers/client/prisma';
-import { PUT } from '@/pages/api/stack/update';
+import { PUT } from '@/pages/api/stack/id/[id]';
 import { StackUpdateSchema } from '@/schemas/stack/update';
 
 vi.mock('@/helpers/client/prisma', () => ({
@@ -31,12 +31,13 @@ vi.mock('@/helpers/error/api-handler', () => ({
   },
 }));
 
-describe('GET /stack/update endpoint', () => {
+describe('PUT stack endpoint', () => {
   const input = {
     ...TEST_STACK_MOCK,
     updatedAt: TEST_STACK_MOCK.updatedAt.toISOString(),
     createdAt: TEST_STACK_MOCK.createdAt.toISOString(),
   };
+  const url = `https://example.com/api/stack/${input.id}/update`;
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -50,7 +51,6 @@ describe('GET /stack/update endpoint', () => {
     (StackUpdateSchema.parse as unknown as Mock).mockResolvedValue(input);
 
     // Simulate a request
-    const url = 'https://example.com/api/stack/update';
     const request: APIContext = createContext({
       request: new Request(url, {
         method: 'PUT',
@@ -74,7 +74,6 @@ describe('GET /stack/update endpoint', () => {
     (StackUpdateSchema.parse as unknown as Mock).mockResolvedValue(input);
 
     // Simulate a request
-    const url = 'https://example.com/api/stack/update';
     const request: APIContext = createContext({
       request: new Request(url, {
         method: 'PUT',
