@@ -17,7 +17,7 @@ coverage/
 public/
 
 # Ignore build output  
-dist/
+docs/
 
 # Ignore TypeScript config  
 tsconfig.json

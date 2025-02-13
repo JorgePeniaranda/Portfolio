@@ -29,7 +29,7 @@ export default [
       '.astro',
       '.github',
       'public',
-      'dist',
+      'docs',
       'coverage',
       '.idea',
       'src/env.d.ts',
