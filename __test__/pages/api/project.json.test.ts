@@ -53,10 +53,7 @@ describe('GET all project endpoint', () => {
 
     expect(responseBody).toEqual(mockProjects);
 
-    expect(databaseClient.project.findMany).toHaveBeenCalledWith({
-      skip: 0,
-      take: 10,
-    });
+    expect(databaseClient.project.findMany).toHaveBeenCalled();
   });
 
   it('should return an empty list if no project are found', async () => {

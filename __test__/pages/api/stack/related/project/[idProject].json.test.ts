@@ -1,21 +1,12 @@
 import type { APIContext } from 'astro';
 
-import { describe, it, vi, expect, beforeEach, type Mock } from 'vitest';
-import { createContext } from 'astro/middleware';
+import { createMockApiContext } from '__test__/__mock__/create-mock-api-context';
+import { TEST_PROJECT_MOCK } from '__test__/__mock__/project.mock';
+import { TEST_STACK_MOCK } from '__test__/__mock__/stack.mock';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { databaseClient } from '@/helpers/client/prisma';
 import { GET, getStaticPaths } from '@/pages/api/stack/related/project/[idProject].json';
-
-vi.mock('@/helpers/client/prisma', () => ({
-  databaseClient: {
-    stack: {
-      findMany: vi.fn(),
-    },
-    project: {
-      findMany: vi.fn(),
-    },
-  },
-}));
 
 vi.mock('@/helpers/error/api-handler', () => ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -27,92 +18,69 @@ vi.mock('@/helpers/error/api-handler', () => ({
 }));
 
 describe('GET stack by related project endpoint', () => {
+  const PrismaStackMock = [TEST_STACK_MOCK, TEST_STACK_MOCK, TEST_STACK_MOCK];
+  const ResponseStackExpected = PrismaStackMock.map((e) => ({
+    ...e,
+    createdAt: e.createdAt.toISOString(),
+    updatedAt: e.updatedAt.toISOString(),
+  }));
+  let AstroApiContext: APIContext;
+
   beforeEach(() => {
+    AstroApiContext = createMockApiContext({
+      params: { idProject: '1' },
+    });
+
+    vi.restoreAllMocks();
     vi.clearAllMocks();
+    vi.resetAllMocks();
+  });
+
+  afterEach(() => {
+    expect(databaseClient.stack.findMany).toHaveBeenCalled();
   });
 
   it('should return a paginated list of stacks when parameters are valid', async () => {
-    // Mock the database response
-    const mockStacks = [
-      { id: 1, name: 'stack 1' },
-      { id: 2, name: 'stack 2' },
-    ];
+    vi.spyOn(databaseClient.stack, 'findMany').mockResolvedValue(PrismaStackMock);
 
-    (databaseClient.stack.findMany as unknown as Mock).mockResolvedValue(mockStacks);
-
-    // Simulate a request
-    const url = 'https://example.com/api/get/stack/related/project/1?page=1&size=10';
-    const request: APIContext = createContext({
-      params: { idProject: '1' },
-      request: new Request(url),
-      defaultLocale: 'en',
-      locals: {},
-    });
-
-    const response = await GET(request);
-
-    expect(response.status).toBe(200);
+    const response = await GET(AstroApiContext);
     const responseBody = await response.json();
 
-    expect(responseBody).toEqual(mockStacks);
-
-    expect(databaseClient.stack.findMany).toHaveBeenCalledWith(
-      expect.objectContaining({
-        skip: 0,
-        take: 10,
-      }),
-    );
+    expect(responseBody).toEqual(ResponseStackExpected);
+    expect(response.status).toBe(200);
   });
 
   it('should return an empty list if no stacks are found', async () => {
-    (databaseClient.stack.findMany as unknown as Mock).mockResolvedValue([]);
+    vi.spyOn(databaseClient.stack, 'findMany').mockResolvedValue([]);
 
-    // Simulate a request
-    const url = 'https://example.com/api/get/stack/related/project/1?page=1&size=10';
-    const request: APIContext = createContext({
-      params: { idProject: '1' },
-      request: new Request(url),
-      defaultLocale: 'en',
-      locals: {},
-    });
-
-    const response = await GET(request);
-
-    expect(response.status).toBe(200);
+    const response = await GET(AstroApiContext);
     const responseBody = await response.json();
 
     expect(responseBody).toEqual([]);
+    expect(response.status).toBe(200);
   });
 
   it('should return a 500 error if an exception occurs', async () => {
-    // Simulate a request
-    const url = 'https://example.com/api/get/stack/related/project/1?page=1&size=10';
-    const request: APIContext = createContext({
-      params: { idProject: '1' },
-      request: new Request(url),
-      defaultLocale: 'en',
-      locals: {},
-    });
+    vi.spyOn(databaseClient.stack, 'findMany').mockRejectedValue(new Error('This is a test error'));
 
-    const response = await GET(request);
-
-    expect(response.status).toBe(500);
+    const response = await GET(AstroApiContext);
     const responseBody = await response.json();
 
-    expect(responseBody).toEqual({ error: 'Invalid URL' });
+    expect(responseBody).toEqual({ error: 'This is a test error' });
+    expect(response.status).toBe(500);
   });
 });
 
 describe('getStaticPaths', () => {
   it('should return a list of paths', async () => {
-    const mockProject = [{ id: '1' }, { id: '2' }, { id: '3' }];
+    const PrismaProjectMock = [TEST_PROJECT_MOCK, TEST_PROJECT_MOCK, TEST_PROJECT_MOCK];
 
-    (databaseClient.project.findMany as unknown as Mock).mockResolvedValue(mockProject);
+    vi.spyOn(databaseClient.project, 'findMany').mockResolvedValue(PrismaProjectMock);
     const paths = await getStaticPaths();
 
     expect(paths).toEqual(
-      mockProject.map((project) => ({
-        params: { idProject: project.id.toString() },
+      PrismaProjectMock.map((project) => ({
+        params: { idProject: project.id },
       })),
     );
   });

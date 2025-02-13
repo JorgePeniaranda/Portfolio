@@ -1,19 +1,11 @@
 import type { APIContext } from 'astro';
 
-import { describe, it, vi, expect, beforeEach, type Mock } from 'vitest';
-import { createContext } from 'astro/middleware';
+import { createMockApiContext } from '__test__/__mock__/create-mock-api-context';
+import { TEST_STACK_MOCK } from '__test__/__mock__/stack.mock';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { databaseClient } from '@/helpers/client/prisma';
 import { GET, getStaticPaths } from '@/pages/api/stack/id/[id].json';
-
-vi.mock('@/helpers/client/prisma', () => ({
-  databaseClient: {
-    stack: {
-      findUnique: vi.fn(),
-      findMany: vi.fn(),
-    },
-  },
-}));
 
 vi.mock('@/helpers/error/api-handler', () => ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -25,88 +17,71 @@ vi.mock('@/helpers/error/api-handler', () => ({
 }));
 
 describe('GET stack by id endpoint', () => {
+  const PrismaStackMock = TEST_STACK_MOCK;
+  const ResponseStackExpected = {
+    ...PrismaStackMock,
+    createdAt: PrismaStackMock.createdAt.toISOString(),
+    updatedAt: PrismaStackMock.updatedAt.toISOString(),
+  };
+  let AstroApiContext: APIContext;
+
   beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
-  it('should return a stack when parameters are valid', async () => {
-    // Mock the database response
-    const mockStack = { id: 1, name: 'stack 1' };
-
-    (databaseClient.stack.findUnique as unknown as Mock).mockResolvedValue(mockStack);
-
-    // Simulate a request
-    const url = 'https://example.com/api/id/1';
-    const request: APIContext = createContext({
+    AstroApiContext = createMockApiContext({
       params: { id: '1' },
-      request: new Request(url),
-      defaultLocale: 'en',
-      locals: {},
     });
 
-    const response = await GET(request);
+    vi.restoreAllMocks();
+    vi.clearAllMocks();
+    vi.resetAllMocks();
+  });
 
-    expect(response.status).toBe(200);
-    const responseBody = await response.json();
-
-    expect(responseBody).toEqual(mockStack);
-
+  afterEach(() => {
     expect(databaseClient.stack.findUnique).toHaveBeenCalled();
   });
 
-  it('should return null if no stack are found', async () => {
-    (databaseClient.stack.findUnique as unknown as Mock).mockResolvedValue([]);
+  it('should return a stack when parameters are valid', async () => {
+    vi.spyOn(databaseClient.stack, 'findUnique').mockResolvedValue(PrismaStackMock);
 
-    // Simulate a request
-    const url = 'https://example.com/api/id/1';
-    const request: APIContext = createContext({
-      params: { id: '1' },
-      request: new Request(url),
-      defaultLocale: 'en',
-      locals: {},
-    });
-
-    const response = await GET(request);
-
-    expect(response.status).toBe(200);
+    const response = await GET(AstroApiContext);
     const responseBody = await response.json();
 
-    expect(responseBody).toEqual([]);
+    expect(responseBody).toEqual(ResponseStackExpected);
+    expect(response.status).toBe(200);
+  });
+
+  it('should return null if no stack is found', async () => {
+    vi.spyOn(databaseClient.stack, 'findUnique').mockResolvedValue(null);
+
+    const response = await GET(AstroApiContext);
+    const responseBody = await response.json();
+
+    expect(responseBody).toBeNull();
+    expect(response.status).toBe(200);
   });
 
   it('should return a 500 error if an exception occurs', async () => {
-    (databaseClient.stack.findUnique as unknown as Mock).mockRejectedValue(
+    vi.spyOn(databaseClient.stack, 'findUnique').mockRejectedValue(
       new Error('This is a test error'),
     );
 
-    // Simulate a request
-    const url = 'https://example.com/api/id/1';
-    const request: APIContext = createContext({
-      params: { id: '1' },
-      request: new Request(url),
-      defaultLocale: 'en',
-      locals: {},
-    });
-
-    const response = await GET(request);
-
-    expect(response.status).toBe(500);
+    const response = await GET(AstroApiContext);
     const responseBody = await response.json();
 
     expect(responseBody).toEqual({ error: 'This is a test error' });
+    expect(response.status).toBe(500);
   });
 });
 
 describe('getStaticPaths', () => {
   it('should return a list of paths', async () => {
-    const mockStacks = [{ id: '1' }, { id: '2' }, { id: '3' }];
+    const PrismaStackMock = [TEST_STACK_MOCK, TEST_STACK_MOCK, TEST_STACK_MOCK];
 
-    (databaseClient.stack.findMany as unknown as Mock).mockResolvedValue(mockStacks);
+    vi.spyOn(databaseClient.stack, 'findMany').mockResolvedValue(PrismaStackMock);
     const paths = await getStaticPaths();
 
     expect(paths).toEqual(
-      mockStacks.map((stack) => ({
-        params: { id: stack.id.toString() },
+      PrismaStackMock.map((stack) => ({
+        params: { id: stack.id },
       })),
     );
   });

@@ -5,7 +5,6 @@ import { handleApiError } from '@/helpers/error/api-handler';
 
 /**
  * GET handler to fetch a paginated list of stacks.
- * - Pagination is optional. If provided, it must be a positive numeric value greater than 0.
  */
 export const GET: APIRoute = async ({ url }) => {
   try {
@@ -13,6 +12,8 @@ export const GET: APIRoute = async ({ url }) => {
 
     return Response.json(fetchedStacks, { status: 200 });
   } catch (error) {
+    console.log({ error });
+
     return handleApiError(error, url);
   }
 };

@@ -1,11 +1,11 @@
 import type { APIContext } from 'astro';
 
-import { describe, it, vi, expect, beforeEach, type Mock } from 'vitest';
-import { createContext } from 'astro/middleware';
+import { createMockApiContext } from '__test__/__mock__/create-mock-api-context';
 import { TEST_STACK_MOCK } from '__test__/__mock__/stack.mock';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { databaseClient } from '@/helpers/client/prisma';
-import { POST, DELETE } from '@/pages/api/stack';
+import { DELETE, POST } from '@/pages/api/stack';
 import { StackCreateSchema } from '@/schemas/stack/create';
 
 vi.mock('@/helpers/client/prisma', () => ({
@@ -33,121 +33,106 @@ vi.mock('@/helpers/error/api-handler', () => ({
 }));
 
 describe('CREATE stack endpoint', () => {
-  const input = {
-    ...TEST_STACK_MOCK,
-    updatedAt: TEST_STACK_MOCK.updatedAt.toISOString(),
-    createdAt: TEST_STACK_MOCK.createdAt.toISOString(),
+  const PrismaStackMock = TEST_STACK_MOCK;
+  const RequestStackMock: StackCreateSchema = {
+    name: 'Test Stack',
+    description: 'This is a test stack',
+    key: 'test-stack',
+    category: 'BACK_END',
+    type: 'DATABASE',
+    iconUrl: 'https://example.com/icon.png',
   };
+  const ResponseStackExpected = {
+    ...PrismaStackMock,
+    createdAt: PrismaStackMock.createdAt.toISOString(),
+    updatedAt: PrismaStackMock.updatedAt.toISOString(),
+  };
+  let AstroApiContext: APIContext;
 
   beforeEach(() => {
+    AstroApiContext = createMockApiContext({
+      request: {
+        method: 'POST',
+        body: JSON.stringify(RequestStackMock),
+      },
+    });
+
+    vi.restoreAllMocks();
     vi.clearAllMocks();
+    vi.resetAllMocks();
+  });
+
+  afterEach(() => {
+    expect(StackCreateSchema.parse).toHaveBeenCalledWith(RequestStackMock);
+    expect(databaseClient.stack.create).toHaveBeenCalled();
   });
 
   it('should return a stack when parameters are valid', async () => {
-    // Mock the database response
-    const mockStack = TEST_STACK_MOCK;
+    vi.spyOn(databaseClient.stack, 'create').mockResolvedValue(PrismaStackMock);
+    vi.spyOn(StackCreateSchema, 'parse').mockResolvedValue(RequestStackMock);
 
-    (databaseClient.stack.create as unknown as Mock).mockResolvedValue(mockStack);
-    (StackCreateSchema.parse as unknown as Mock).mockResolvedValue(input);
+    const response = await POST(AstroApiContext);
+    const responseBody = await response.json();
 
-    // Simulate a request
-    const url = 'https://example.com/api/stack/delete';
-    const request: APIContext = createContext({
-      request: new Request(url, {
-        method: 'POST',
-        body: JSON.stringify(input),
-      }),
-      defaultLocale: 'en',
-      locals: {},
-    });
-
-    const response = await POST(request);
-
+    expect(responseBody).toEqual(ResponseStackExpected);
     expect(response.status).toBe(201);
-    expect(databaseClient.stack.create).toHaveBeenCalled();
-    expect(StackCreateSchema.parse).toHaveBeenCalledWith(input);
   });
 
   it('should return a 500 error if an exception occurs', async () => {
-    (databaseClient.stack.create as unknown as Mock).mockRejectedValue(
-      new Error('This is a test error'),
-    );
-    (StackCreateSchema.parse as unknown as Mock).mockResolvedValue(input);
+    vi.spyOn(databaseClient.stack, 'create').mockRejectedValue(new Error('This is a test error'));
+    vi.spyOn(StackCreateSchema, 'parse').mockResolvedValue(RequestStackMock);
 
-    // Simulate a request
-    const url = 'https://example.com/api/stack/delete';
-    const request: APIContext = createContext({
-      request: new Request(url, {
-        method: 'POST',
-        body: JSON.stringify(input),
-      }),
-      defaultLocale: 'en',
-      locals: {},
-    });
-
-    const response = await POST(request);
-
-    expect(response.status).toBe(500);
+    const response = await POST(AstroApiContext);
     const responseBody = await response.json();
 
+    expect(response.status).toBe(500);
     expect(responseBody).toEqual({ error: 'This is a test error' });
-    expect(StackCreateSchema.parse).toHaveBeenCalledWith(input);
   });
 });
 
 describe('DELETE stack endpoint', () => {
-  const input = [1, 2, 3];
+  const RequestInputMock = [1, 2, 3];
+  const ResponseDeletedExpected = {
+    count: RequestInputMock.length,
+  };
+  let AstroApiContext: APIContext;
 
   beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
-  it('should return a stack when parameters are valid', async () => {
-    // Mock the database response
-    const mockStack = {
-      count: input.length,
-    };
-
-    (databaseClient.stack.deleteMany as unknown as Mock).mockResolvedValue(mockStack);
-
-    // Simulate a request
-    const url = 'https://example.com/api/stack/delete';
-    const request: APIContext = createContext({
-      request: new Request(url, {
+    AstroApiContext = createMockApiContext({
+      request: {
         method: 'DELETE',
-        body: JSON.stringify(input),
-      }),
-      defaultLocale: 'en',
-      locals: {},
+        body: JSON.stringify(RequestInputMock),
+      },
     });
 
-    const response = await DELETE(request);
+    vi.restoreAllMocks();
+    vi.clearAllMocks();
+    vi.resetAllMocks();
+  });
 
-    expect(response.status).toBe(200);
+  afterEach(() => {
     expect(databaseClient.stack.deleteMany).toHaveBeenCalled();
   });
 
+  it('should return a stack when parameters are valid', async () => {
+    vi.spyOn(databaseClient.stack, 'deleteMany').mockResolvedValue(ResponseDeletedExpected);
+
+    const response = await DELETE(AstroApiContext);
+    const responseBody = await response.json();
+
+    expect(response.status).toBe(200);
+    expect(responseBody).toEqual(ResponseDeletedExpected);
+  });
+
   it('should return a 500 error if an exception occurs', async () => {
-    (databaseClient.stack.deleteMany as unknown as Mock).mockRejectedValue(
+    vi.spyOn(databaseClient.stack, 'deleteMany').mockRejectedValue(
       new Error('This is a test error'),
     );
 
-    // Simulate a request
-    const url = 'https://example.com/api/stack/delete';
-    const request: APIContext = createContext({
-      request: new Request(url, {
-        method: 'DELETE',
-        body: JSON.stringify(input),
-      }),
-      defaultLocale: 'en',
-      locals: {},
-    });
-
-    const response = await DELETE(request);
-
-    expect(response.status).toBe(500);
+    const response = await DELETE(AstroApiContext);
     const responseBody = await response.json();
 
+    expect(response.status).toBe(500);
     expect(responseBody).toEqual({ error: 'This is a test error' });
   });
 });

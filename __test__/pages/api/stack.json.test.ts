@@ -1,18 +1,11 @@
 import type { APIContext } from 'astro';
 
-import { describe, it, vi, expect, beforeEach, type Mock } from 'vitest';
-import { createContext } from 'astro/middleware';
+import { createMockApiContext } from '__test__/__mock__/create-mock-api-context';
+import { TEST_STACK_MOCK } from '__test__/__mock__/stack.mock';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { databaseClient } from '@/helpers/client/prisma';
 import { GET } from '@/pages/api/stack.json';
-
-vi.mock('@/helpers/client/prisma', () => ({
-  databaseClient: {
-    stack: {
-      findMany: vi.fn(),
-    },
-  },
-}));
 
 vi.mock('@/helpers/error/api-handler', () => ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -24,72 +17,53 @@ vi.mock('@/helpers/error/api-handler', () => ({
 }));
 
 describe('GET all stacks endpoint', () => {
-  const url = 'https://example.com/api/stack.json';
+  const PrismaStackMock = [TEST_STACK_MOCK, TEST_STACK_MOCK, TEST_STACK_MOCK];
+  const ResponseStackExpected = PrismaStackMock.map((e) => ({
+    ...e,
+    createdAt: e.createdAt.toISOString(),
+    updatedAt: e.updatedAt.toISOString(),
+  }));
+  let AstroApiContext: APIContext;
 
   beforeEach(() => {
+    AstroApiContext = createMockApiContext();
+
+    vi.restoreAllMocks();
     vi.clearAllMocks();
+    vi.resetAllMocks();
+  });
+
+  afterEach(() => {
+    expect(databaseClient.stack.findMany).toHaveBeenCalled();
   });
 
   it('should return a paginated list of stack when parameters are valid', async () => {
-    // Mock the database response
-    const mockStacks = [
-      { id: 1, name: 'stack 1' },
-      { id: 2, name: 'stack 2' },
-    ];
+    vi.spyOn(databaseClient.stack, 'findMany').mockResolvedValue(PrismaStackMock);
 
-    (databaseClient.stack.findMany as unknown as Mock).mockResolvedValue(mockStacks);
-
-    // Simulate a request
-    const request: APIContext = createContext({
-      request: new Request(url),
-      defaultLocale: 'en',
-      locals: {},
-    });
-
-    const response = await GET(request);
-
-    expect(response.status).toBe(200);
+    const response = await GET(AstroApiContext);
     const responseBody = await response.json();
 
-    expect(responseBody).toEqual(mockStacks);
-
-    expect(databaseClient.stack.findMany).toHaveBeenCalledWith({
-      skip: 0,
-      take: 10,
-    });
+    expect(responseBody).toEqual(ResponseStackExpected);
+    expect(response.status).toBe(200);
   });
 
   it('should return an empty list if no stack are found', async () => {
-    (databaseClient.stack.findMany as unknown as Mock).mockResolvedValue([]);
+    vi.spyOn(databaseClient.stack, 'findMany').mockResolvedValue([]);
 
-    // Simulate a request
-    const request: APIContext = createContext({
-      request: new Request(url),
-      defaultLocale: 'en',
-      locals: {},
-    });
-
-    const response = await GET(request);
-
-    expect(response.status).toBe(200);
+    const response = await GET(AstroApiContext);
     const responseBody = await response.json();
 
+    expect(response.status).toBe(200);
     expect(responseBody).toEqual([]);
   });
 
   it('should return a 500 error if an exception occurs', async () => {
-    // Simulate a request
-    const request: APIContext = createContext({
-      request: new Request(url),
-      defaultLocale: 'en',
-      locals: {},
-    });
+    vi.spyOn(databaseClient.stack, 'findMany').mockRejectedValue(new Error('This is a test error'));
 
-    const response = await GET(request);
-
-    expect(response.status).toBe(500);
+    const response = await GET(AstroApiContext);
     const responseBody = await response.json();
 
-    expect(responseBody).toEqual({ error: 'Invalid URL' });
+    expect(responseBody).toEqual({ error: 'This is a test error' });
+    expect(response.status).toBe(500);
   });
 });

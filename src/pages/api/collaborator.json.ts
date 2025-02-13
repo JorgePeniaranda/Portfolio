@@ -5,7 +5,6 @@ import { handleApiError } from '@/helpers/error/api-handler';
 
 /**
  * GET handler to fetch a paginated list of collaborators.
- * - Pagination is optional. If provided, it must be a positive numeric value greater than 0.
  */
 export const GET: APIRoute = async ({ url }) => {
   try {

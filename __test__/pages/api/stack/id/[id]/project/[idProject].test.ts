@@ -1,25 +1,12 @@
 import type { APIContext } from 'astro';
 
-import { describe, it, vi, expect, beforeEach, type Mock } from 'vitest';
-import { createContext } from 'astro/middleware';
+import { createMockApiContext } from '__test__/__mock__/create-mock-api-context';
+import { TEST_STACK_MOCK } from '__test__/__mock__/stack.mock';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { TEST_PROJECT_MOCK } from '__test__/__mock__/project.mock';
 
 import { databaseClient } from '@/helpers/client/prisma';
-import { DELETE, POST } from '@/pages/api/stack/id/[id]/project/[idProject]';
-import { EntityRelationSchema } from '@/schemas/common/entity-relation-schema';
-
-vi.mock('@/helpers/client/prisma', () => ({
-  databaseClient: {
-    stack: {
-      update: vi.fn(),
-    },
-  },
-}));
-
-vi.mock('@/schemas/common/entity-relation-schema', () => ({
-  EntityRelationSchema: {
-    parse: vi.fn(),
-  },
-}));
+import { DELETE, POST, getStaticPaths } from '@/pages/api/stack/id/[id]/project/[idProject]';
 
 vi.mock('@/helpers/error/api-handler', () => ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -31,119 +18,105 @@ vi.mock('@/helpers/error/api-handler', () => ({
 }));
 
 describe('POST relation with stack endpoint', () => {
-  const input = { idFrom: 1, idTo: 2 };
-  const url = `https://example.com/api/stack/id/${input.idTo}/project/1`;
+  const PrismaStackMock = TEST_STACK_MOCK;
+  let AstroApiContext: APIContext;
 
   beforeEach(() => {
+    AstroApiContext = createMockApiContext({
+      params: {
+        id: '1',
+        idProject: '2',
+      },
+      request: {
+        method: 'POST',
+      },
+    });
+
+    vi.restoreAllMocks();
     vi.clearAllMocks();
+    vi.resetAllMocks();
+  });
+
+  afterEach(() => {
+    expect(databaseClient.stack.update).toHaveBeenCalled();
   });
 
   it('should return a stack when parameters are valid', async () => {
-    // Mock the database response
-    const mockStack = { id: 1, name: 'stack 1' };
+    vi.spyOn(databaseClient.stack, 'update').mockResolvedValue(PrismaStackMock);
 
-    (databaseClient.stack.update as unknown as Mock).mockResolvedValue(mockStack);
-    (EntityRelationSchema.parse as unknown as Mock).mockResolvedValue(input);
-
-    // Simulate a request
-    const url = 'https://example.com/api/id/stack/relations/project/add';
-    const request: APIContext = createContext({
-      request: new Request(url, {
-        method: 'POST',
-        body: JSON.stringify(input),
-      }),
-      defaultLocale: 'en',
-      locals: {},
-    });
-
-    const response = await POST(request);
+    const response = await POST(AstroApiContext);
 
     expect(response.status).toBe(204);
-    expect(databaseClient.stack.update).toHaveBeenCalled();
-    expect(EntityRelationSchema.parse).toHaveBeenCalledWith(input);
   });
 
   it('should return a 500 error if an exception occurs', async () => {
-    (databaseClient.stack.update as unknown as Mock).mockRejectedValue(
-      new Error('This is a test error'),
-    );
-    (EntityRelationSchema.parse as unknown as Mock).mockResolvedValue(input);
+    vi.spyOn(databaseClient.stack, 'update').mockRejectedValue(new Error('This is a test error'));
 
-    // Simulate a request
-    const request: APIContext = createContext({
-      request: new Request(url, {
-        method: 'POST',
-        body: JSON.stringify(input),
-      }),
-      defaultLocale: 'en',
-      locals: {},
-    });
-
-    const response = await POST(request);
-
-    expect(response.status).toBe(500);
+    const response = await POST(AstroApiContext);
     const responseBody = await response.json();
 
     expect(responseBody).toEqual({ error: 'This is a test error' });
-    expect(EntityRelationSchema.parse).toHaveBeenCalledWith(input);
+    expect(response.status).toBe(500);
   });
 });
 
 describe('DELETE relation with stack endpoint', () => {
-  const input = { idFrom: 1, idTo: 2 };
+  const PrismaStackMock = TEST_STACK_MOCK;
+  const AstroApiContext: APIContext = createMockApiContext({
+    params: {
+      id: '1',
+      idProject: '2',
+    },
+    request: {
+      method: 'DELETE',
+    },
+  });
 
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
+  afterEach(() => {
+    expect(databaseClient.stack.update).toHaveBeenCalled();
+  });
+
   it('should return a stack when parameters are valid', async () => {
-    // Mock the database response
-    const mockStack = { id: 1, name: 'stack 1' };
+    vi.spyOn(databaseClient.stack, 'update').mockResolvedValue(PrismaStackMock);
 
-    (databaseClient.stack.update as unknown as Mock).mockResolvedValue(mockStack);
-    (EntityRelationSchema.parse as unknown as Mock).mockResolvedValue(input);
-
-    // Simulate a request
-    const url = 'https://example.com/api/id/stack/relations/project/delete';
-    const request: APIContext = createContext({
-      request: new Request(url, {
-        method: 'DELETE',
-        body: JSON.stringify(input),
-      }),
-      defaultLocale: 'en',
-      locals: {},
-    });
-
-    const response = await DELETE(request);
+    const response = await DELETE(AstroApiContext);
 
     expect(response.status).toBe(204);
-    expect(databaseClient.stack.update).toHaveBeenCalled();
-    expect(EntityRelationSchema.parse).toHaveBeenCalledWith(input);
   });
 
   it('should return a 500 error if an exception occurs', async () => {
-    (databaseClient.stack.update as unknown as Mock).mockRejectedValue(
-      new Error('This is a test error'),
-    );
-    (EntityRelationSchema.parse as unknown as Mock).mockResolvedValue(input);
+    vi.spyOn(databaseClient.stack, 'update').mockRejectedValue(new Error('This is a test error'));
 
-    // Simulate a request
-    const url = 'https://example.com/api/id/stack/relations/project/delete';
-    const request: APIContext = createContext({
-      request: new Request(url, {
-        method: 'DELETE',
-        body: JSON.stringify(input),
-      }),
-      defaultLocale: 'en',
-      locals: {},
-    });
-
-    const response = await DELETE(request);
-
-    expect(response.status).toBe(500);
+    const response = await DELETE(AstroApiContext);
     const responseBody = await response.json();
 
     expect(responseBody).toEqual({ error: 'This is a test error' });
-    expect(EntityRelationSchema.parse).toHaveBeenCalledWith(input);
+    expect(response.status).toBe(500);
+  });
+});
+
+describe('getStaticPaths', () => {
+  it('should return a list of paths', async () => {
+    const PrismaStackMock = [TEST_STACK_MOCK, TEST_STACK_MOCK, TEST_STACK_MOCK];
+    const PrismaProjectMock = [TEST_PROJECT_MOCK, TEST_PROJECT_MOCK, TEST_PROJECT_MOCK];
+
+    vi.spyOn(databaseClient.stack, 'findMany').mockResolvedValue(PrismaStackMock);
+    vi.spyOn(databaseClient.project, 'findMany').mockResolvedValue(PrismaProjectMock);
+    const paths = await getStaticPaths();
+
+    expect(paths).toEqual(
+      PrismaStackMock.flatMap((stack) =>
+        PrismaProjectMock.map((project) => ({
+          params: {
+            id: stack.id,
+            idProject: project.id,
+          },
+        })),
+      ),
+    );
   });
 });
