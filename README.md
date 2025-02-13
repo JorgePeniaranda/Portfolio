@@ -51,12 +51,6 @@ This project follows the **Git Flow** workflow for efficient development and dep
 
 ### Workflow:
 
-### Propuesta de Workflow:
-
-Certainly! Here's the workflow translated into English:
-
-### Workflow:
-
 1. **Work in `develop`**: Develop new features in feature branches derived from `develop`.
 
    ```bash
