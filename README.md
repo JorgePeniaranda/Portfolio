@@ -37,70 +37,6 @@ experiences.
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitest/vitest-original.svg" height="40" alt="vitest logo" />
 </div>
 
-## 🖥️ Running Locally
-
-You need the following programs before you start:
-
-- npm: https://www.npmjs.com/package/download
-- PostgreSQL: https://www.postgresql.org/download/
-
-1. Clone the repo
-
-```sh
-git clone https://github.com/JorgePeniaranda/Portfolio
-```
-
-2. Navigate to the project
-
-```sh
-cd ./Portfolio
-```
-
-3. Install NPM packages
-
-```sh
-npm install
-```
-
-4. Set up PostgreSQL:
-
-- Make sure PostgreSQL is installed and running on your machine.
-- Create a new database for the project (e.g., portfolio_db).
-
-5. Configure the database connection:
-
-- In the .env file (or create one), set the DATABASE_URL environment variable to match your
-  PostgreSQL connection string:
-
-```env
-DATABASE_URL="postgresql://user:password@localhost:5432/portfolio_db?schema=public"
-```
-
-6. Generate Prisma Client:
-
-- After configuring your .env file, run the following command to generate the Prisma Client:
-
-```sh
-npm run prisma:generate
-```
-
-7. Migrate the database:
-
-- Run Prisma migrations to set up the database schema:
-
-```sh
-npm run prisma:migrate
-```
-
-8. Execute the project
-
-```sh
-npm run dev
-```
-
-This will start the development server. You can now access your application at
-http://localhost:4321.
-
 ## 🔄 Git Flow
 
 This project follows the **Git Flow** workflow for efficient development and deployment.
@@ -188,3 +124,60 @@ Before deploying to GitHub Pages, ensure that the `.nojekyll` file exists in the
    ```
 
 Now, your `docs/` folder will be included in the `production` branch, making it ready for deployment to **GitHub Pages**. 🚀
+
+## 🖥️ Running Locally
+
+You need the following programs before you start:
+
+- npm: https://www.npmjs.com/package/download
+- PostgreSQL: https://www.postgresql.org/download/
+
+1. **Clone the repo**:
+
+   ```sh
+   git clone https://github.com/JorgePeniaranda/Portfolio
+   ```
+
+2. **Navigate to the project**:
+
+   ```sh
+   cd ./Portfolio
+   ```
+
+3. **Install NPM packages**:
+
+   ```sh
+   npm install
+   ```
+
+4. **Set up PostgreSQL**:
+
+   - Make sure PostgreSQL is installed and running on your machine.
+   - Create a new database for the project (e.g., portfolio_db).
+
+5. **Configure the database connection**: In the .env file (or create one), set the DATABASE_URL environment variable to match your PostgreSQL connection string.
+
+   ```env
+   DATABASE_URL="postgresql://user:password@localhost:5432/portfolio_db?schema=public"
+   ```
+
+6. **Generate Prisma Client**: After configuring your .env file, run the following command to generate the Prisma Client:
+  
+   ```sh
+   npm run prisma:generate
+   ```
+
+7. **Migrate the database**: Run Prisma migrations to set up the database schema.
+
+   ```sh
+   npm run prisma:migrate
+   ```
+
+8. **Execute the project**
+
+   ```sh
+   npm run dev
+   ```
+
+This will start the development server. You can now access your application at
+http://localhost:4321.
