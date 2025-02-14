@@ -16,7 +16,9 @@ describe('safeRedirect', () => {
   let originalWindow: typeof globalThis.window;
 
   beforeEach(() => {
+    vi.restoreAllMocks();
     vi.clearAllMocks();
+    vi.resetAllMocks();
 
     originalWindow = global.window;
     global.window = {

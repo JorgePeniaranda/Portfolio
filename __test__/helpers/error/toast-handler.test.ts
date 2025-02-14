@@ -1,7 +1,7 @@
-import { describe, it, expect, vi, afterEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { toast } from '@/hooks/use-toast';
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
+import { toast } from '@/hooks/use-toast';
 
 vi.mock('@/hooks/use-toast', () => ({
   toast: vi.fn(),
@@ -12,8 +12,10 @@ vi.mock('@/components/atoms/message-display', () => ({
 }));
 
 describe('handleErrorWithToast', () => {
-  afterEach(() => {
+  beforeEach(() => {
+    vi.restoreAllMocks();
     vi.clearAllMocks();
+    vi.resetAllMocks();
   });
 
   it('should display a toast with the message of an Error', () => {

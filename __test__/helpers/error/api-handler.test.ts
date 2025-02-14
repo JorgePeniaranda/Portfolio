@@ -1,6 +1,6 @@
 import type { FieldError } from '@/types/responses';
 
-import { describe, it, expect, vi, type Mock } from 'vitest';
+import { describe, it, expect, vi, type Mock, beforeEach } from 'vitest';
 import { z } from 'zod';
 
 import { handleApiError } from '@/helpers/error/api-handler';
@@ -20,6 +20,12 @@ vi.mock('@/helpers/error/zod-handler', () => ({
 }));
 
 describe('handleApiError', () => {
+  beforeEach(() => {
+    vi.restoreAllMocks();
+    vi.clearAllMocks();
+    vi.resetAllMocks();
+  });
+
   it('should handle a Prisma error', async () => {
     const mockError = { code: 'P2002' };
     const mockPrismaResponse = {
@@ -27,18 +33,15 @@ describe('handleApiError', () => {
       message: 'Unique constraint failed',
     };
 
-    (isPrismaError as unknown as Mock).mockReturnValue(true);
-    (prismaHandler as unknown as Mock).mockReturnValue(mockPrismaResponse);
+    vi.mocked(isPrismaError).mockReturnValue(true);
+    vi.mocked(prismaHandler).mockReturnValue(mockPrismaResponse);
 
     const response = handleApiError(mockError);
+    const body = await response.json();
 
     expect(isPrismaError).toHaveBeenCalledWith(mockError);
     expect(prismaHandler).toHaveBeenCalledWith(mockError);
-
     expect(response.status).toBe(409);
-
-    const body = await response.json();
-
     expect(body).toEqual(
       expect.objectContaining({
         detail: mockPrismaResponse.message,
@@ -56,16 +59,13 @@ describe('handleApiError', () => {
       errorList: [{ field: 'field1', message: 'Invalid field1' }] satisfies FieldError[],
     };
 
-    (isPrismaError as unknown as Mock).mockReturnValue(false);
+    vi.mocked(isPrismaError).mockReturnValue(false);
 
     const response = handleApiError(mockZodError);
-
-    expect(isPrismaError).toHaveBeenCalledWith(mockZodError);
-
-    expect(response.status).toBe(400);
-
     const body = await response.json();
 
+    expect(isPrismaError).toHaveBeenCalledWith(mockZodError);
+    expect(response.status).toBe(400);
     expect(body).toEqual(
       expect.objectContaining({
         detail: mockZodResponse.errorTextReduce,
@@ -77,16 +77,13 @@ describe('handleApiError', () => {
   it('should handle a generic error', async () => {
     const mockGenericError = new Error('Something went wrong');
 
-    (isPrismaError as unknown as Mock).mockReturnValue(false);
+    vi.mocked(isPrismaError).mockReturnValue(false);
 
     const response = handleApiError(mockGenericError);
-
-    expect(isPrismaError).toHaveBeenCalledWith(mockGenericError);
-
-    expect(response.status).toBe(500);
-
     const body = await response.json();
 
+    expect(isPrismaError).toHaveBeenCalledWith(mockGenericError);
+    expect(response.status).toBe(500);
     expect(body).toEqual(
       expect.objectContaining({
         detail: 'Something went wrong',
@@ -98,16 +95,13 @@ describe('handleApiError', () => {
   it('should handle an unknown error', async () => {
     const mockUnknownError = { someKey: 'someValue' };
 
-    (isPrismaError as unknown as Mock).mockReturnValue(false);
+    vi.mocked(isPrismaError).mockReturnValue(false);
 
     const response = handleApiError(mockUnknownError);
-
-    expect(isPrismaError).toHaveBeenCalledWith(mockUnknownError);
-
-    expect(response.status).toBe(500);
-
     const body = await response.json();
 
+    expect(isPrismaError).toHaveBeenCalledWith(mockUnknownError);
+    expect(response.status).toBe(500);
     expect(body).toEqual(
       expect.objectContaining({
         detail: 'Unknown error occurred.',

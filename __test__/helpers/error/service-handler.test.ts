@@ -1,16 +1,10 @@
-import { describe, it, expect, vi, afterEach, type Mock } from 'vitest';
 import axios from 'axios';
+import { beforeEach, describe, expect, it, vi, type Mock } from 'vitest';
 
-import { handleServiceError } from '@/helpers/error/service-handler';
 import { devConsoleLog } from '@/helpers/common/dev-console-log';
+import { handleServiceError } from '@/helpers/error/service-handler';
 import { isDefined, isNotDefined } from '@/helpers/guards/is-defined';
 import { isErrorResponse } from '@/helpers/guards/is-error-response';
-
-vi.mock('axios', () => ({
-  default: {
-    isAxiosError: vi.fn(),
-  },
-}));
 
 vi.mock('@/helpers/common/dev-console-log', () => ({
   devConsoleLog: {
@@ -31,14 +25,16 @@ vi.mock('@/helpers/guards/is-error-response', () => ({
 }));
 
 describe('handleServiceError', () => {
-  afterEach(() => {
+  beforeEach(() => {
+    vi.restoreAllMocks();
     vi.clearAllMocks();
+    vi.resetAllMocks();
   });
 
   it('should return a default error message for non-Axios errors', () => {
     const mockError = { message: 'Not an Axios error' };
 
-    (axios.isAxiosError as unknown as Mock).mockReturnValue(false);
+    vi.spyOn(axios, 'isAxiosError').mockReturnValue(false);
 
     const result = handleServiceError({
       error: mockError,
@@ -52,8 +48,8 @@ describe('handleServiceError', () => {
   it('should return a default error message if Axios error has no response', () => {
     const mockError = { isAxiosError: true, response: undefined };
 
-    (axios.isAxiosError as unknown as Mock).mockReturnValue(true);
-    (isNotDefined as unknown as Mock).mockReturnValue(true);
+    vi.spyOn(axios, 'isAxiosError').mockReturnValue(true);
+    vi.mocked(isNotDefined).mockReturnValue(true);
 
     const result = handleServiceError({
       error: mockError,
@@ -70,9 +66,9 @@ describe('handleServiceError', () => {
       response: { data: 'Invalid response' },
     };
 
-    (axios.isAxiosError as unknown as Mock).mockReturnValue(true);
-    (isNotDefined as unknown as Mock).mockReturnValue(false);
-    (isErrorResponse as unknown as Mock).mockReturnValue(false);
+    vi.spyOn(axios, 'isAxiosError').mockReturnValue(true);
+    vi.mocked(isNotDefined).mockReturnValue(false);
+    vi.mocked(isErrorResponse).mockReturnValue(false);
 
     const result = handleServiceError({
       error: mockError,
@@ -89,9 +85,9 @@ describe('handleServiceError', () => {
       response: { data: { title: 'Specific error message' } },
     };
 
-    (axios.isAxiosError as unknown as Mock).mockReturnValue(true);
-    (isNotDefined as unknown as Mock).mockReturnValue(false);
-    (isErrorResponse as unknown as Mock).mockReturnValue(true);
+    vi.spyOn(axios, 'isAxiosError').mockReturnValue(true);
+    vi.mocked(isNotDefined).mockReturnValue(false);
+    vi.mocked(isErrorResponse).mockReturnValue(true);
     (isDefined as unknown as Mock).mockImplementation((value) => value !== undefined);
 
     const result = handleServiceError({
@@ -116,9 +112,9 @@ describe('handleServiceError', () => {
       },
     };
 
-    (axios.isAxiosError as unknown as Mock).mockReturnValue(true);
-    (isNotDefined as unknown as Mock).mockReturnValue(false);
-    (isErrorResponse as unknown as Mock).mockReturnValue(true);
+    vi.spyOn(axios, 'isAxiosError').mockReturnValue(true);
+    vi.mocked(isNotDefined).mockReturnValue(false);
+    vi.mocked(isErrorResponse).mockReturnValue(true);
     (isDefined as unknown as Mock).mockImplementation((value) => value !== undefined);
 
     const result = handleServiceError({
@@ -133,9 +129,9 @@ describe('handleServiceError', () => {
   it('should return a default error message if no `title` or `fieldErrors` are defined', () => {
     const mockError = { isAxiosError: true, response: { data: {} } };
 
-    (axios.isAxiosError as unknown as Mock).mockReturnValue(true);
-    (isNotDefined as unknown as Mock).mockReturnValue(false);
-    (isErrorResponse as unknown as Mock).mockReturnValue(true);
+    vi.spyOn(axios, 'isAxiosError').mockReturnValue(true);
+    vi.mocked(isNotDefined).mockReturnValue(false);
+    vi.mocked(isErrorResponse).mockReturnValue(true);
     (isDefined as unknown as Mock).mockReturnValue(false);
 
     const result = handleServiceError({

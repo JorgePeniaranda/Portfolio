@@ -9,9 +9,6 @@ import { generateTestStackMock } from '../../__mock__/stack.mock';
 import { apiClient } from '@/helpers/client/axios';
 import { putStack } from '@/services/stack/putStack';
 
-// Mock the apiClient module
-vi.mock('@/helpers/client/axios');
-
 describe('putStack', () => {
   /**
    * Mocked request body for the service.
@@ -52,7 +49,7 @@ describe('putStack', () => {
   });
 
   it('should return a successful response when the request is correct', async () => {
-    vi.mocked(apiClient.put).mockResolvedValueOnce(MockAxiosResponse);
+    vi.spyOn(apiClient, 'put').mockResolvedValueOnce(MockAxiosResponse);
 
     const response = await putStack({
       idStack: MockStackRequest.id,
@@ -63,7 +60,7 @@ describe('putStack', () => {
   });
 
   it('should handle errors correctly when the request fails', async () => {
-    vi.mocked(apiClient.put).mockRejectedValueOnce(MockAxiosError);
+    vi.spyOn(apiClient, 'put').mockRejectedValueOnce(MockAxiosError);
 
     try {
       await putStack({
