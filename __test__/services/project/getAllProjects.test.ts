@@ -34,7 +34,7 @@ describe('getAllProjects', () => {
   /**
    * API endpoint for the service.
    */
-  const EndpointUrl = `/api/project/min.json`;
+  const EndpointUrl = `/api/project.json`;
 
   beforeEach(() => {
     vi.restoreAllMocks();
