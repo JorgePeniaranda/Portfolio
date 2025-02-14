@@ -18,8 +18,17 @@ vi.mock('@/helpers/error/api-handler', () => ({
 }));
 
 describe('POST relation with stack endpoint', () => {
-  const PrismaStackMock = TEST_STACK_MOCK;
+  /**
+   * Mocked API context for Astro API requests.
+   * This context is initialized before each test to ensure isolation.
+   */
   let AstroApiContext: APIContext;
+
+  /**
+   * Mocked database response representing a stored stack entry.
+   * This simulates the expected result when querying the database.
+   */
+  const MockStackRecord = TEST_STACK_MOCK;
 
   beforeEach(() => {
     AstroApiContext = createMockApiContext({
@@ -42,7 +51,7 @@ describe('POST relation with stack endpoint', () => {
   });
 
   it('should return a stack when parameters are valid', async () => {
-    vi.spyOn(databaseClient.stack, 'update').mockResolvedValue(PrismaStackMock);
+    vi.spyOn(databaseClient.stack, 'update').mockResolvedValue(MockStackRecord);
 
     const response = await POST(AstroApiContext);
 
@@ -61,19 +70,32 @@ describe('POST relation with stack endpoint', () => {
 });
 
 describe('DELETE relation with stack endpoint', () => {
-  const PrismaStackMock = TEST_STACK_MOCK;
-  const AstroApiContext: APIContext = createMockApiContext({
-    params: {
-      id: '1',
-      idProject: '2',
-    },
-    request: {
-      method: 'DELETE',
-    },
-  });
+  /**
+   * Mocked API context for Astro API requests.
+   * This context is initialized before each test to ensure isolation.
+   */
+  let AstroApiContext: APIContext;
+
+  /**
+   * Mocked database response representing a stored stack entry.
+   * This simulates the expected result when querying the database.
+   */
+  const MockStackRecord = TEST_STACK_MOCK;
 
   beforeEach(() => {
+    AstroApiContext = createMockApiContext({
+      params: {
+        id: '1',
+        idProject: '2',
+      },
+      request: {
+        method: 'POST',
+      },
+    });
+
+    vi.restoreAllMocks();
     vi.clearAllMocks();
+    vi.resetAllMocks();
   });
 
   afterEach(() => {
@@ -81,7 +103,7 @@ describe('DELETE relation with stack endpoint', () => {
   });
 
   it('should return a stack when parameters are valid', async () => {
-    vi.spyOn(databaseClient.stack, 'update').mockResolvedValue(PrismaStackMock);
+    vi.spyOn(databaseClient.stack, 'update').mockResolvedValue(MockStackRecord);
 
     const response = await DELETE(AstroApiContext);
 

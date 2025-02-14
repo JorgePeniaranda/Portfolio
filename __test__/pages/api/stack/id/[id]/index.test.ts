@@ -18,8 +18,17 @@ vi.mock('@/helpers/error/api-handler', () => ({
 }));
 
 describe('PUT stack endpoint', () => {
-  const PrismaStackMock = TEST_STACK_MOCK;
-  const RequestStackMock: StackUpdateSchema = {
+  /**
+   * Mocked API context for Astro API requests.
+   * This context is initialized before each test to ensure isolation.
+   */
+  let AstroApiContext: APIContext;
+
+  /**
+   * Mocked request body representing a stack update payload.
+   * Used as input data when testing the API request handling.
+   */
+  const MockStackRequest: StackUpdateSchema = {
     name: 'Test Stack',
     description: 'This is a test stack',
     key: 'test-stack',
@@ -27,12 +36,31 @@ describe('PUT stack endpoint', () => {
     type: 'DATABASE',
     iconUrl: 'https://example.com/icon.png',
   };
-  const ResponseStackExpected = {
-    ...PrismaStackMock,
-    createdAt: PrismaStackMock.createdAt.toISOString(),
-    updatedAt: PrismaStackMock.updatedAt.toISOString(),
-  };
-  let AstroApiContext: APIContext;
+
+  /**
+   * Parsed version of the request body.
+   * Simulates the actual result of calling `request.json()` in an API handler.
+   *
+   * @example
+   * const parsed = request.json(); // Equivalent to ParsedStackRequest
+   */
+  const ParsedStackRequest: typeof MockStackRequest = JSON.parse(JSON.stringify(MockStackRequest));
+
+  /**
+   * Mocked database response representing a stored stack entry.
+   * This simulates the expected result when querying the database.
+   */
+  const MockStackRecord = TEST_STACK_MOCK;
+
+  /**
+   * Simulated parsed response body.
+   * Represents the expected API response after processing the request.
+   *
+   * @example
+   * const response = await apiCall();
+   * const parsedResponse = await response.json(); // Equivalent to ParsedStackResponse
+   */
+  const ParsedStackResponse: typeof MockStackRecord = JSON.parse(JSON.stringify(MockStackRecord));
 
   beforeEach(() => {
     AstroApiContext = createMockApiContext({
@@ -41,7 +69,7 @@ describe('PUT stack endpoint', () => {
       },
       request: {
         method: 'PUT',
-        body: JSON.stringify(RequestStackMock),
+        body: JSON.stringify(ParsedStackRequest),
       },
     });
 
@@ -53,19 +81,19 @@ describe('PUT stack endpoint', () => {
   afterEach(() => {});
 
   it('should return a 200 status and update the stack when parameters are valid', async () => {
-    vi.spyOn(databaseClient.stack, 'update').mockResolvedValue(PrismaStackMock);
-    vi.spyOn(StackUpdateSchema, 'parse').mockResolvedValue(RequestStackMock);
+    vi.spyOn(databaseClient.stack, 'update').mockResolvedValue(MockStackRecord);
+    vi.spyOn(StackUpdateSchema, 'parse').mockResolvedValue(ParsedStackRequest);
 
     const response = await PUT(AstroApiContext);
     const responseBody = await response.json();
 
-    expect(responseBody).toEqual(ResponseStackExpected);
+    expect(responseBody).toEqual(ParsedStackResponse);
     expect(response.status).toBe(200);
   });
 
   it('should return a 500 error if an exception occurs', async () => {
     vi.spyOn(databaseClient.stack, 'update').mockRejectedValue(new Error('This is a test error'));
-    vi.spyOn(StackUpdateSchema, 'parse').mockResolvedValue(RequestStackMock);
+    vi.spyOn(StackUpdateSchema, 'parse').mockResolvedValue(ParsedStackRequest);
 
     const response = await PUT(AstroApiContext);
     const responseBody = await response.json();

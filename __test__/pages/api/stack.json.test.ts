@@ -17,13 +17,27 @@ vi.mock('@/helpers/error/api-handler', () => ({
 }));
 
 describe('GET all stacks endpoint', () => {
-  const PrismaStackMock = [TEST_STACK_MOCK, TEST_STACK_MOCK, TEST_STACK_MOCK];
-  const ResponseStackExpected = PrismaStackMock.map((e) => ({
-    ...e,
-    createdAt: e.createdAt.toISOString(),
-    updatedAt: e.updatedAt.toISOString(),
-  }));
+  /**
+   * Mocked API context for Astro API requests.
+   * This context is initialized before each test to ensure isolation.
+   */
   let AstroApiContext: APIContext;
+
+  /**
+   * Mocked database response representing a stored stack entry.
+   * This simulates the expected result when querying the database.
+   */
+  const MockStackRecord = [TEST_STACK_MOCK, TEST_STACK_MOCK, TEST_STACK_MOCK];
+
+  /**
+   * Simulated parsed response body.
+   * Represents the expected API response after processing the request.
+   *
+   * @example
+   * const response = await apiCall();
+   * const parsedResponse = await response.json(); // Equivalent to ParsedStackResponse
+   */
+  const ParsedStackResponse: typeof MockStackRecord = JSON.parse(JSON.stringify(MockStackRecord));
 
   beforeEach(() => {
     AstroApiContext = createMockApiContext();
@@ -38,12 +52,12 @@ describe('GET all stacks endpoint', () => {
   });
 
   it('should return a paginated list of stack when parameters are valid', async () => {
-    vi.spyOn(databaseClient.stack, 'findMany').mockResolvedValue(PrismaStackMock);
+    vi.spyOn(databaseClient.stack, 'findMany').mockResolvedValue(MockStackRecord);
 
     const response = await GET(AstroApiContext);
     const responseBody = await response.json();
 
-    expect(responseBody).toEqual(ResponseStackExpected);
+    expect(responseBody).toEqual(ParsedStackResponse);
     expect(response.status).toBe(200);
   });
 

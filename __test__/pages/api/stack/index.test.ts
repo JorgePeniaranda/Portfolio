@@ -42,17 +42,13 @@ describe('CREATE stack endpoint', () => {
     type: 'DATABASE',
     iconUrl: 'https://example.com/icon.png',
   };
-  const ResponseStackExpected = {
-    ...PrismaStackMock,
-    createdAt: PrismaStackMock.createdAt.toISOString(),
-    updatedAt: PrismaStackMock.updatedAt.toISOString(),
-  };
+  const ParsedStackRequest: typeof RequestStackMock = JSON.parse(JSON.stringify(RequestStackMock));
   let AstroApiContext: APIContext;
 
   beforeEach(() => {
     AstroApiContext = createMockApiContext({
       request: {
-        method: 'POST',
+        method: '',
         body: JSON.stringify(RequestStackMock),
       },
     });
@@ -63,24 +59,24 @@ describe('CREATE stack endpoint', () => {
   });
 
   afterEach(() => {
-    expect(StackCreateSchema.parse).toHaveBeenCalledWith(RequestStackMock);
+    expect(StackCreateSchema.parse).toHaveBeenCalledWith(ParsedStackRequest);
     expect(databaseClient.stack.create).toHaveBeenCalled();
   });
 
   it('should return a stack when parameters are valid', async () => {
     vi.spyOn(databaseClient.stack, 'create').mockResolvedValue(PrismaStackMock);
-    vi.spyOn(StackCreateSchema, 'parse').mockResolvedValue(RequestStackMock);
+    vi.spyOn(StackCreateSchema, 'parse').mockResolvedValue(ParsedStackRequest);
 
     const response = await POST(AstroApiContext);
     const responseBody = await response.json();
 
-    expect(responseBody).toEqual(ResponseStackExpected);
+    expect(responseBody).toEqual(ParsedStackRequest);
     expect(response.status).toBe(201);
   });
 
   it('should return a 500 error if an exception occurs', async () => {
     vi.spyOn(databaseClient.stack, 'create').mockRejectedValue(new Error('This is a test error'));
-    vi.spyOn(StackCreateSchema, 'parse').mockResolvedValue(RequestStackMock);
+    vi.spyOn(StackCreateSchema, 'parse').mockResolvedValue(ParsedStackRequest);
 
     const response = await POST(AstroApiContext);
     const responseBody = await response.json();
