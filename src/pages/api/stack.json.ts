@@ -12,8 +12,6 @@ export const GET: APIRoute = async ({ url }) => {
 
     return Response.json(fetchedStacks, { status: 200 });
   } catch (error) {
-    console.log({ error });
-
     return handleApiError(error, url);
   }
 };
