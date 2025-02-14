@@ -1,8 +1,8 @@
-import type { DeleteResponse, ErrorResponse } from '@/types/responses';
-import type { AxiosError } from 'axios';
+import type { DeleteResponse } from '@/types/responses';
 
-import { AxiosHeaders, type AxiosResponse } from 'axios';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { createMockAxiosError } from '__test__/__mock__/create-mock-axios-error';
+import { createMockAxiosResponse } from '__test__/__mock__/create-mock-axios-response';
 
 import { apiClient } from '@/helpers/client/axios';
 import { deleteProject } from '@/services/project/deleteProject';
@@ -11,72 +11,66 @@ import { deleteProject } from '@/services/project/deleteProject';
 vi.mock('@/helpers/client/axios');
 
 describe('deleteProject', () => {
-  const input = [0, 1];
-  const APIUrl = '/api/project';
+  /**
+   * Mocked request body for the service.
+   */
+  const MockProjectRequest = [0, 1];
 
-  it('should return a successful response when the request is correct', async () => {
-    // Mock a successful response
-    const mockResponse: AxiosResponse<DeleteResponse> = {
-      config: {
-        headers: new AxiosHeaders(),
-      },
-      headers: {},
-      status: 200,
-      statusText: 'OK',
+  /**
+   * Mocked response body for axios when the request is successful.
+   */
+  const MockAxiosResponse = createMockAxiosResponse<DeleteResponse>({
+    data: {
+      count: MockProjectRequest.length,
+    },
+  });
+
+  /**
+   * Mocked error response for axios when the request fails.
+   */
+  const MockAxiosError = createMockAxiosError({
+    response: {
       data: {
-        count: input.length,
+        title: 'An test error occurred',
       },
-    };
+    },
+  });
 
-    // Simulate a resolved promise for apiClient.delete
-    vi.mocked(apiClient.delete).mockResolvedValueOnce(mockResponse);
-    const response = await deleteProject(input);
+  /**
+   * API endpoint for the service.
+   */
+  const EndpointUrl = '/api/project';
 
-    // Validate response and apiClient call
-    expect(response).toEqual(mockResponse.data);
-    expect(apiClient.delete).toHaveBeenCalledWith(APIUrl, {
-      data: input,
+  beforeEach(() => {
+    vi.restoreAllMocks();
+    vi.clearAllMocks();
+    vi.resetAllMocks();
+  });
+
+  afterEach(() => {
+    expect(apiClient.delete).toHaveBeenCalledWith(EndpointUrl, {
+      data: MockProjectRequest,
     });
   });
 
-  it('should handle errors correctly when the request fails', async () => {
-    // Mock an error response (axios error)
-    const mockError: AxiosError<ErrorResponse> = {
-      isAxiosError: true,
-      message: 'Request failed with status code 500',
-      name: 'AxiosError',
-      toJSON: () => ({}),
-      response: {
-        config: {
-          headers: new AxiosHeaders(),
-        },
-        headers: {},
-        status: 500,
-        statusText: 'Internal Server Error',
-        data: {
-          status: 500,
-          title: 'An internal server error occurred.',
-          type: 'InternalServerError',
-          detail: 'This is an test error message',
-        },
-      },
-    };
+  it('should return a successful response when the request is correct', async () => {
+    vi.mocked(apiClient.delete).mockResolvedValueOnce(MockAxiosResponse);
 
-    // Simulate a rejected promise for apiClient.delete
-    vi.mocked(apiClient.delete).mockRejectedValueOnce(mockError);
+    const response = await deleteProject(MockProjectRequest);
+
+    expect(response).toEqual(MockAxiosResponse.data);
+  });
+
+  it('should handle errors correctly when the request fails', async () => {
+    vi.mocked(apiClient.delete).mockRejectedValueOnce(MockAxiosError);
 
     try {
-      await deleteProject(input);
+      await deleteProject(MockProjectRequest);
     } catch (error) {
-      // Validate error handling and apiClient call
       expect(error).toBeInstanceOf(Error);
       if (error instanceof Error) {
-        expect(error.message).toBe(mockError.response?.data.title);
+        expect(error.message).toBe(MockAxiosError.response?.data.title);
       }
     }
-
-    expect(apiClient.delete).toHaveBeenCalledWith(APIUrl, {
-      data: input,
-    });
   });
 });

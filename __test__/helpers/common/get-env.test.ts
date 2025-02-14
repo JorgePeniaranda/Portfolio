@@ -17,7 +17,9 @@ describe('getEnvValue', () => {
   const originalEnv = { ...process.env };
 
   beforeEach(() => {
+    vi.restoreAllMocks();
     vi.clearAllMocks();
+    vi.resetAllMocks();
 
     process.env = { ...originalEnv };
   });

@@ -1,7 +1,7 @@
 import type { APIContext } from 'astro';
 
 import { createMockApiContext } from '__test__/__mock__/create-mock-api-context';
-import { TEST_STACK_MOCK } from '__test__/__mock__/stack.mock';
+import { generateManyTestStackMocks, generateTestStackMock } from '__test__/__mock__/stack.mock';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { databaseClient } from '@/helpers/client/prisma';
@@ -27,7 +27,7 @@ describe('GET stack by id endpoint', () => {
    * Mocked database response representing a stored stack entry.
    * This simulates the expected result when querying the database.
    */
-  const MockStackRecord = TEST_STACK_MOCK;
+  const MockStackRecord = generateTestStackMock();
 
   /**
    * Simulated parsed response body.
@@ -88,7 +88,7 @@ describe('GET stack by id endpoint', () => {
 
 describe('getStaticPaths', () => {
   it('should return a list of paths for all stacks', async () => {
-    const PrismaStackMock = [TEST_STACK_MOCK, TEST_STACK_MOCK, TEST_STACK_MOCK];
+    const PrismaStackMock = generateManyTestStackMocks(3);
 
     vi.spyOn(databaseClient.stack, 'findMany').mockResolvedValue(PrismaStackMock);
     const paths = await getStaticPaths();

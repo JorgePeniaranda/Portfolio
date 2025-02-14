@@ -1,10 +1,21 @@
 import type { Collaborator } from '@prisma/client';
 
-export const TEST_COLLABORATOR_MOCK: Collaborator = {
-  id: 1,
-  nickname: 'John Doe',
-  githubUsername: 'johndoe',
-  linkedinUsername: 'johndoe',
-  createdAt: new Date('2021-01-01T00:00:00.000Z'),
-  updatedAt: new Date('2023-01-01T00:00:00.000Z'),
-};
+import { faker } from '@faker-js/faker';
+
+export function generateTestCollaboratorMock(overrides: Partial<Collaborator> = {}): Collaborator {
+  const username = faker.internet.userName().toLowerCase(); // Para usar el mismo en GitHub y LinkedIn
+
+  return {
+    id: faker.number.int({ min: 1, max: 1000 }),
+    nickname: faker.person.fullName(),
+    githubUsername: username,
+    linkedinUsername: username,
+    createdAt: faker.date.past(),
+    updatedAt: faker.date.recent(),
+    ...overrides, // Permite personalizar valores específicos
+  };
+}
+
+export function generateManyTestCollaboratorMocks(count: number): Collaborator[] {
+  return Array.from({ length: count }, () => generateTestCollaboratorMock());
+}

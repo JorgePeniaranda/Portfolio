@@ -1,3 +1,5 @@
+import type { Prisma } from '@prisma/client';
+
 import { StackCategory, StackType } from '@prisma/client';
 import { z } from 'zod';
 
@@ -17,7 +19,7 @@ export const StackCreateSchema = z.object({
   category: z.enum(stackCategoryValues).optional().nullable(),
   type: z.enum(stackTypeValues).optional().nullable(),
   iconUrl: z.string().min(1),
-});
+}) satisfies z.ZodType<Prisma.StackCreateInput>;
 
 export type StackCreateSchema = z.infer<typeof StackCreateSchema>;
 

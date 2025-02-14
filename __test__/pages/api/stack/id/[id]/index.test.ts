@@ -1,11 +1,11 @@
 import type { APIContext } from 'astro';
 
 import { createMockApiContext } from '__test__/__mock__/create-mock-api-context';
-import { TEST_STACK_MOCK } from '__test__/__mock__/stack.mock';
+import { generateManyTestStackMocks, generateTestStackMock } from '__test__/__mock__/stack.mock';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { databaseClient } from '@/helpers/client/prisma';
-import { PUT } from '@/pages/api/stack/id/[id]';
+import { PUT, getStaticPaths } from '@/pages/api/stack/id/[id]';
 import { StackUpdateSchema } from '@/schemas/stack/update';
 
 vi.mock('@/helpers/error/api-handler', () => ({
@@ -50,7 +50,7 @@ describe('PUT stack endpoint', () => {
    * Mocked database response representing a stored stack entry.
    * This simulates the expected result when querying the database.
    */
-  const MockStackRecord = TEST_STACK_MOCK;
+  const MockStackRecord = generateTestStackMock();
 
   /**
    * Simulated parsed response body.
@@ -100,5 +100,20 @@ describe('PUT stack endpoint', () => {
 
     expect(responseBody).toEqual({ error: 'This is a test error' });
     expect(response.status).toBe(500);
+  });
+});
+
+describe('getStaticPaths', () => {
+  it('should return a list of paths for all stacks', async () => {
+    const PrismaStackMock = generateManyTestStackMocks(3);
+
+    vi.spyOn(databaseClient.stack, 'findMany').mockResolvedValue(PrismaStackMock);
+    const paths = await getStaticPaths();
+
+    expect(paths).toEqual(
+      PrismaStackMock.map((stack) => ({
+        params: { id: stack.id },
+      })),
+    );
   });
 });

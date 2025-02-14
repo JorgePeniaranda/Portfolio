@@ -1,7 +1,10 @@
 import type { APIContext } from 'astro';
 
 import { createMockApiContext } from '__test__/__mock__/create-mock-api-context';
-import { TEST_PROJECT_MOCK } from '__test__/__mock__/project.mock';
+import {
+  generateManyTestProjectMocks,
+  generateTestProjectMock,
+} from '__test__/__mock__/project.mock';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { databaseClient } from '@/helpers/client/prisma';
@@ -27,7 +30,7 @@ describe('GET project by id endpoint', () => {
    * Mocked database response representing a stored project entry.
    * This simulates the expected result when querying the database.
    */
-  const MockProjectRecord = TEST_PROJECT_MOCK;
+  const MockProjectRecord = generateTestProjectMock();
 
   /**
    * Simulated parsed response body.
@@ -90,7 +93,7 @@ describe('GET project by id endpoint', () => {
 
 describe('getStaticPaths', () => {
   it('should return a list of paths for all projects', async () => {
-    const PrismaProjectMock = [TEST_PROJECT_MOCK, TEST_PROJECT_MOCK, TEST_PROJECT_MOCK];
+    const PrismaProjectMock = generateManyTestProjectMocks(3);
 
     vi.spyOn(databaseClient.project, 'findMany').mockResolvedValue(PrismaProjectMock);
     const paths = await getStaticPaths();

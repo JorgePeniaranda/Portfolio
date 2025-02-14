@@ -1,11 +1,14 @@
 import type { APIContext } from 'astro';
 
 import { createMockApiContext } from '__test__/__mock__/create-mock-api-context';
-import { TEST_PROJECT_MOCK } from '__test__/__mock__/project.mock';
+import {
+  generateManyTestProjectMocks,
+  generateTestProjectMock,
+} from '__test__/__mock__/project.mock';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { databaseClient } from '@/helpers/client/prisma';
-import { PUT } from '@/pages/api/project/id/[id]';
+import { PUT, getStaticPaths } from '@/pages/api/project/id/[id]';
 import { ProjectUpdateSchema } from '@/schemas/project/update';
 
 vi.mock('@/helpers/error/api-handler', () => ({
@@ -59,7 +62,7 @@ describe('PUT project endpoint', () => {
    * Mocked database response representing a stored project entry.
    * This simulates the expected result when querying the database.
    */
-  const MockProjectRecord = TEST_PROJECT_MOCK;
+  const MockProjectRecord = generateTestProjectMock();
 
   /**
    * Simulated parsed response body.
@@ -111,5 +114,20 @@ describe('PUT project endpoint', () => {
 
     expect(responseBody).toEqual({ error: 'This is a test error' });
     expect(response.status).toBe(500);
+  });
+});
+
+describe('getStaticPaths', () => {
+  it('should return a list of paths for all projects', async () => {
+    const PrismaProjectMock = generateManyTestProjectMocks(3);
+
+    vi.spyOn(databaseClient.project, 'findMany').mockResolvedValue(PrismaProjectMock);
+    const paths = await getStaticPaths();
+
+    expect(paths).toEqual(
+      PrismaProjectMock.map((project) => ({
+        params: { id: project.id },
+      })),
+    );
   });
 });

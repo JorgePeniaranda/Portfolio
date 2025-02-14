@@ -1,4 +1,5 @@
-import type { Prisma, Project } from '@prisma/client';
+import type { Project } from '@prisma/client';
+import type { ProjectUpdateSchema } from '@/schemas/project/update';
 
 import { apiClient } from '@/helpers/client/axios';
 import { handleServiceError } from '@/helpers/error/service-handler';
@@ -15,7 +16,7 @@ export async function putProject({
   projectUpdateInput,
 }: {
   idProject: Project['id'];
-  projectUpdateInput: Prisma.ProjectUpdateInput;
+  projectUpdateInput: ProjectUpdateSchema;
 }): Promise<Project> {
   try {
     const { data: response } = await apiClient.put<Project>(

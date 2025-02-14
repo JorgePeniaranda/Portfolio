@@ -3,22 +3,22 @@ import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { themes, themesArray } from '@/types/common.d'; // Assuming themes are imported like this
 import { getNextTheme, useThemeStore } from '@/services/storage/theme';
 
-// Mock the document object
-beforeAll(() => {
-  global.document = {
-    ...global?.document,
-    documentElement: {
-      ...global?.document?.documentElement,
-      classList: {
-        ...global?.document?.documentElement?.classList,
-        add: vi.fn(),
-        remove: vi.fn(),
-      },
-    },
-  };
-});
-
 describe('useThemeStore', () => {
+  // Mock the document object
+  beforeAll(() => {
+    global.document = {
+      ...global?.document,
+      documentElement: {
+        ...global?.document?.documentElement,
+        classList: {
+          ...global?.document?.documentElement?.classList,
+          add: vi.fn(),
+          remove: vi.fn(),
+        },
+      },
+    };
+  });
+
   afterEach(() => {
     useThemeStore.getState().resetTheme(); // Reset theme after each test
   });

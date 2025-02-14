@@ -1,7 +1,10 @@
 import type { APIContext } from 'astro';
 
+import {
+  generateManyTestCollaboratorMocks,
+  generateTestCollaboratorMock,
+} from '__test__/__mock__/collaborator.mock';
 import { createMockApiContext } from '__test__/__mock__/create-mock-api-context';
-import { TEST_COLLABORATOR_MOCK } from '__test__/__mock__/collaborator.mock';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { databaseClient } from '@/helpers/client/prisma';
@@ -27,7 +30,7 @@ describe('GET collaborator by id endpoint', () => {
    * Mocked database response representing a stored collaborator entry.
    * This simulates the expected result when querying the database.
    */
-  const MockCollaboratorRecord = TEST_COLLABORATOR_MOCK;
+  const MockCollaboratorRecord = generateTestCollaboratorMock();
 
   /**
    * Simulated parsed response body.
@@ -90,11 +93,7 @@ describe('GET collaborator by id endpoint', () => {
 
 describe('getStaticPaths', () => {
   it('should return a list of paths for all collaborators', async () => {
-    const PrismaCollaboratorMock = [
-      TEST_COLLABORATOR_MOCK,
-      TEST_COLLABORATOR_MOCK,
-      TEST_COLLABORATOR_MOCK,
-    ];
+    const PrismaCollaboratorMock = generateManyTestCollaboratorMocks(3);
 
     vi.spyOn(databaseClient.collaborator, 'findMany').mockResolvedValue(PrismaCollaboratorMock);
     const paths = await getStaticPaths();

@@ -1,12 +1,12 @@
 import type { APIContext } from 'astro';
 
 import { createMockApiContext } from '__test__/__mock__/create-mock-api-context';
-import { TEST_STACK_MOCK } from '__test__/__mock__/stack.mock';
+import { generateManyTestProjectMocks } from '__test__/__mock__/project.mock';
+import { generateManyTestStackMocks, generateTestStackMock } from '__test__/__mock__/stack.mock';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { TEST_PROJECT_MOCK } from '__test__/__mock__/project.mock';
 
 import { databaseClient } from '@/helpers/client/prisma';
-import { DELETE, POST, getStaticPaths } from '@/pages/api/stack/id/[id]/project/[idProject]';
+import { DELETE, getStaticPaths, POST } from '@/pages/api/stack/id/[id]/project/[idProject]';
 
 vi.mock('@/helpers/error/api-handler', () => ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -28,7 +28,7 @@ describe('POST relation with stack endpoint', () => {
    * Mocked database response representing a stored stack entry.
    * This simulates the expected result when querying the database.
    */
-  const MockStackRecord = TEST_STACK_MOCK;
+  const MockStackRecord = generateTestStackMock();
 
   beforeEach(() => {
     AstroApiContext = createMockApiContext({
@@ -80,7 +80,7 @@ describe('DELETE relation with stack endpoint', () => {
    * Mocked database response representing a stored stack entry.
    * This simulates the expected result when querying the database.
    */
-  const MockStackRecord = TEST_STACK_MOCK;
+  const MockStackRecord = generateTestStackMock();
 
   beforeEach(() => {
     AstroApiContext = createMockApiContext({
@@ -123,8 +123,8 @@ describe('DELETE relation with stack endpoint', () => {
 
 describe('getStaticPaths', () => {
   it('should return a list of paths for all stack and project combinations', async () => {
-    const PrismaStackMock = [TEST_STACK_MOCK, TEST_STACK_MOCK, TEST_STACK_MOCK];
-    const PrismaProjectMock = [TEST_PROJECT_MOCK, TEST_PROJECT_MOCK, TEST_PROJECT_MOCK];
+    const PrismaStackMock = generateManyTestStackMocks(3);
+    const PrismaProjectMock = generateManyTestProjectMocks(3);
 
     vi.spyOn(databaseClient.stack, 'findMany').mockResolvedValue(PrismaStackMock);
     vi.spyOn(databaseClient.project, 'findMany').mockResolvedValue(PrismaProjectMock);

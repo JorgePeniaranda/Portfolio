@@ -1,13 +1,21 @@
-import type { Stack } from '@prisma/client';
+import { StackCategory, StackType, type Stack } from '@prisma/client';
+import { faker } from '@faker-js/faker';
 
-export const TEST_STACK_MOCK: Stack = {
-  id: 1,
-  name: 'Test Stack',
-  key: 'test-stack',
-  category: 'FULL_STACK',
-  type: 'DATABASE',
-  description: 'A test stack',
-  iconUrl: 'https://example.com/icon.png',
-  createdAt: new Date('2021-01-01T00:00:00.000Z'),
-  updatedAt: new Date('2023-01-01T00:00:00.000Z'),
-};
+export function generateTestStackMock(overrides: Partial<Stack> = {}): Stack {
+  return {
+    id: faker.number.int({ min: 1, max: 1000 }),
+    name: faker.company.name(),
+    key: faker.helpers.slugify(faker.lorem.words(2)).toLowerCase(),
+    category: faker.helpers.enumValue(StackCategory) as StackCategory,
+    type: faker.helpers.enumValue(StackType) as StackType,
+    description: faker.lorem.sentence(),
+    iconUrl: faker.image.url(),
+    createdAt: faker.date.past(),
+    updatedAt: faker.date.recent(),
+    ...overrides,
+  };
+}
+
+export function generateManyTestStackMocks(count: number): Stack[] {
+  return Array.from({ length: count }, () => generateTestStackMock());
+}

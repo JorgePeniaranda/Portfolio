@@ -1,21 +1,17 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { devConsoleLog, logMessage } from '@/helpers/common/dev-console-log';
 
-vi.mock('console', () => ({
-  log: vi.fn(),
-  info: vi.fn(),
-  warn: vi.fn(),
-  error: vi.fn(),
-}));
-
 describe('logMessage', () => {
-  afterEach(() => {
+  beforeEach(() => {
+    vi.restoreAllMocks();
     vi.clearAllMocks();
+    vi.resetAllMocks();
   });
 
   it("should log messages to the console in development environment for 'log' type", () => {
-    process.env.NODE_ENV = 'development'; // Establece el entorno de desarrollo
+    vi.spyOn(console, 'log').mockImplementation(() => {});
+    process.env.NODE_ENV = 'development';
     const inputMessage = ['This is a log message'];
 
     logMessage('log', inputMessage);
@@ -25,7 +21,8 @@ describe('logMessage', () => {
   });
 
   it("should log messages to the console in development environment for 'info' type", () => {
-    process.env.NODE_ENV = 'development'; // Establece el entorno de desarrollo
+    vi.spyOn(console, 'info').mockImplementation(() => {});
+    process.env.NODE_ENV = 'development';
     const inputMessage = ['This is an info message'];
 
     logMessage('info', inputMessage);
@@ -35,7 +32,8 @@ describe('logMessage', () => {
   });
 
   it("should log messages to the console in development environment for 'warn' type", () => {
-    process.env.NODE_ENV = 'development'; // Establece el entorno de desarrollo
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
+    process.env.NODE_ENV = 'development';
     const inputMessage = ['This is a warning message'];
 
     logMessage('warn', inputMessage);
@@ -45,7 +43,8 @@ describe('logMessage', () => {
   });
 
   it("should log messages to the console in development environment for 'error' type", () => {
-    process.env.NODE_ENV = 'development'; // Establece el entorno de desarrollo
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+    process.env.NODE_ENV = 'development';
     const inputMessage = ['This is an error message'];
 
     logMessage('error', inputMessage);
@@ -55,7 +54,11 @@ describe('logMessage', () => {
   });
 
   it('should not log messages when environment is not development', () => {
-    process.env.NODE_ENV = 'production'; // Establece un entorno de producción
+    vi.spyOn(console, 'log').mockImplementation(() => {});
+    vi.spyOn(console, 'info').mockImplementation(() => {});
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+    process.env.NODE_ENV = 'production';
     const inputMessage = ['This message should not be logged'];
 
     logMessage('log', inputMessage);
@@ -72,48 +75,57 @@ describe('logMessage', () => {
 });
 
 describe('devConsoleLog', () => {
-  const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
-  const infoSpy = vi.spyOn(console, 'info').mockImplementation(() => {});
-  const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-  const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-
-  afterEach(() => {
+  beforeEach(() => {
+    vi.restoreAllMocks();
     vi.clearAllMocks();
+    vi.resetAllMocks();
   });
 
   it('should log the message using console.log in development environment', () => {
+    vi.spyOn(console, 'log').mockImplementation(() => {});
     process.env.NODE_ENV = 'development';
 
     devConsoleLog({ input: ['This is a log message'], type: 'log' });
 
-    expect(logSpy).toHaveBeenCalledWith('This is a log message');
+    // eslint-disable-next-line no-console
+    expect(console.log).toHaveBeenCalledWith('This is a log message');
   });
 
   it('should log the message using console.info in development environment', () => {
+    vi.spyOn(console, 'info').mockImplementation(() => {});
     process.env.NODE_ENV = 'development';
 
     devConsoleLog({ input: ['This is an info message'], type: 'info' });
 
-    expect(infoSpy).toHaveBeenCalledWith('This is an info message');
+    // eslint-disable-next-line no-console
+    expect(console.info).toHaveBeenCalledWith('This is an info message');
   });
 
   it('should log the message using console.warn in development environment', () => {
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
     process.env.NODE_ENV = 'development';
 
     devConsoleLog({ input: ['This is a warning message'], type: 'warn' });
 
-    expect(warnSpy).toHaveBeenCalledWith('This is a warning message');
+    // eslint-disable-next-line no-console
+    expect(console.warn).toHaveBeenCalledWith('This is a warning message');
   });
 
   it('should log the message using console.error in development environment', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
     process.env.NODE_ENV = 'development';
 
     devConsoleLog({ input: ['This is an error message'], type: 'error' });
 
-    expect(errorSpy).toHaveBeenCalledWith('This is an error message');
+    // eslint-disable-next-line no-console
+    expect(console.error).toHaveBeenCalledWith('This is an error message');
   });
 
   it('should not log anything in production environment', () => {
+    vi.spyOn(console, 'log').mockImplementation(() => {});
+    vi.spyOn(console, 'info').mockImplementation(() => {});
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
+    vi.spyOn(console, 'error').mockImplementation(() => {});
     process.env.NODE_ENV = 'production';
 
     devConsoleLog({ input: ['This should not be logged'], type: 'log' });
@@ -121,13 +133,21 @@ describe('devConsoleLog', () => {
     devConsoleLog({ input: ['This should not be logged'], type: 'warn' });
     devConsoleLog({ input: ['This should not be logged'], type: 'error' });
 
-    expect(logSpy).not.toHaveBeenCalled();
-    expect(infoSpy).not.toHaveBeenCalled();
-    expect(warnSpy).not.toHaveBeenCalled();
-    expect(errorSpy).not.toHaveBeenCalled();
+    // eslint-disable-next-line no-console
+    expect(console.log).not.toHaveBeenCalled();
+    // eslint-disable-next-line no-console
+    expect(console.info).not.toHaveBeenCalled();
+    // eslint-disable-next-line no-console
+    expect(console.warn).not.toHaveBeenCalled();
+    // eslint-disable-next-line no-console
+    expect(console.error).not.toHaveBeenCalled();
   });
 
   it('should not log anything in test environment', () => {
+    vi.spyOn(console, 'log').mockImplementation(() => {});
+    vi.spyOn(console, 'info').mockImplementation(() => {});
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
+    vi.spyOn(console, 'error').mockImplementation(() => {});
     process.env.NODE_ENV = 'test';
 
     devConsoleLog({
@@ -147,9 +167,13 @@ describe('devConsoleLog', () => {
       type: 'error',
     });
 
-    expect(logSpy).not.toHaveBeenCalled();
-    expect(infoSpy).not.toHaveBeenCalled();
-    expect(warnSpy).not.toHaveBeenCalled();
-    expect(errorSpy).not.toHaveBeenCalled();
+    // eslint-disable-next-line no-console
+    expect(console.log).not.toHaveBeenCalled();
+    // eslint-disable-next-line no-console
+    expect(console.info).not.toHaveBeenCalled();
+    // eslint-disable-next-line no-console
+    expect(console.warn).not.toHaveBeenCalled();
+    // eslint-disable-next-line no-console
+    expect(console.error).not.toHaveBeenCalled();
   });
 });

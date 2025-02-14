@@ -1,15 +1,18 @@
 import type { APIContext } from 'astro';
 
+import { generateManyTestCollaboratorMocks } from '__test__/__mock__/collaborator.mock';
 import { createMockApiContext } from '__test__/__mock__/create-mock-api-context';
-import { TEST_PROJECT_MOCK } from '__test__/__mock__/project.mock';
+import {
+  generateManyTestProjectMocks,
+  generateTestProjectMock,
+} from '__test__/__mock__/project.mock';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { TEST_COLLABORATOR_MOCK } from '__test__/__mock__/collaborator.mock';
 
 import { databaseClient } from '@/helpers/client/prisma';
 import {
   DELETE,
-  POST,
   getStaticPaths,
+  POST,
 } from '@/pages/api/project/id/[id]/collaborator/[idCollaborator]';
 
 vi.mock('@/helpers/error/api-handler', () => ({
@@ -32,7 +35,7 @@ describe('POST relation with project endpoint', () => {
    * Mocked database response representing a stored project entry.
    * This simulates the expected result when querying the database.
    */
-  const MockProjectRecord = TEST_PROJECT_MOCK;
+  const MockProjectRecord = generateTestProjectMock();
 
   beforeEach(() => {
     AstroApiContext = createMockApiContext({
@@ -84,7 +87,7 @@ describe('DELETE relation with project endpoint', () => {
    * Mocked database response representing a stored project entry.
    * This simulates the expected result when querying the database.
    */
-  const MockProjectRecord = TEST_PROJECT_MOCK;
+  const MockProjectRecord = generateTestProjectMock();
 
   beforeEach(() => {
     AstroApiContext = createMockApiContext({
@@ -127,12 +130,8 @@ describe('DELETE relation with project endpoint', () => {
 
 describe('getStaticPaths', () => {
   it('should return a list of paths for all project and collaborator combinations', async () => {
-    const PrismaProjectMock = [TEST_PROJECT_MOCK, TEST_PROJECT_MOCK, TEST_PROJECT_MOCK];
-    const PrismaCollaboratorMock = [
-      TEST_COLLABORATOR_MOCK,
-      TEST_COLLABORATOR_MOCK,
-      TEST_COLLABORATOR_MOCK,
-    ];
+    const PrismaProjectMock = generateManyTestProjectMocks(3);
+    const PrismaCollaboratorMock = generateManyTestCollaboratorMocks(3);
 
     vi.spyOn(databaseClient.project, 'findMany').mockResolvedValue(PrismaProjectMock);
     vi.spyOn(databaseClient.collaborator, 'findMany').mockResolvedValue(PrismaCollaboratorMock);

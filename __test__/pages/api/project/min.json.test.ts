@@ -1,12 +1,11 @@
 import type { APIContext } from 'astro';
 
-import { generateManyTestCollaboratorMocks } from '__test__/__mock__/collaborator.mock';
 import { createMockApiContext } from '__test__/__mock__/create-mock-api-context';
 import { generateManyTestProjectMocks } from '__test__/__mock__/project.mock';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { databaseClient } from '@/helpers/client/prisma';
-import { GET, getStaticPaths } from '@/pages/api/collaborator/not-related/project/[idProject].json';
+import { GET } from '@/pages/api/project/min.json';
 
 vi.mock('@/helpers/error/api-handler', () => ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -17,7 +16,7 @@ vi.mock('@/helpers/error/api-handler', () => ({
   },
 }));
 
-describe('GET collaborator by not related project endpoint', () => {
+describe('GET all projects min endpoint', () => {
   /**
    * Mocked API context for Astro API requests.
    * This context is initialized before each test to ensure isolation.
@@ -25,10 +24,10 @@ describe('GET collaborator by not related project endpoint', () => {
   let AstroApiContext: APIContext;
 
   /**
-   * Mocked database response representing a stored collaborator entry.
+   * Mocked database response representing a stored project entry.
    * This simulates the expected result when querying the database.
    */
-  const MockCollaboratorRecord = generateManyTestCollaboratorMocks(3);
+  const MockProjectRecord = generateManyTestProjectMocks(3);
 
   /**
    * Simulated parsed response body.
@@ -36,16 +35,14 @@ describe('GET collaborator by not related project endpoint', () => {
    *
    * @example
    * const response = await apiCall();
-   * const parsedResponse = await response.json(); // Equivalent to ParsedCollaboratorResponse
+   * const parsedResponse = await response.json(); // Equivalent to ParsedProjectResponse
    */
-  const ParsedCollaboratorResponse: typeof MockCollaboratorRecord = JSON.parse(
-    JSON.stringify(MockCollaboratorRecord),
+  const ParsedProjectResponse: typeof MockProjectRecord = JSON.parse(
+    JSON.stringify(MockProjectRecord),
   );
 
   beforeEach(() => {
-    AstroApiContext = createMockApiContext({
-      params: { idProject: '1' },
-    });
+    AstroApiContext = createMockApiContext();
 
     vi.restoreAllMocks();
     vi.clearAllMocks();
@@ -53,31 +50,31 @@ describe('GET collaborator by not related project endpoint', () => {
   });
 
   afterEach(() => {
-    expect(databaseClient.collaborator.findMany).toHaveBeenCalled();
+    expect(databaseClient.project.findMany).toHaveBeenCalled();
   });
 
-  it('should return a list of collaborators when the project ID is valid', async () => {
-    vi.spyOn(databaseClient.collaborator, 'findMany').mockResolvedValue(MockCollaboratorRecord);
+  it('should return a list of projects when parameters are valid', async () => {
+    vi.spyOn(databaseClient.project, 'findMany').mockResolvedValue(MockProjectRecord);
 
     const response = await GET(AstroApiContext);
     const responseBody = await response.json();
 
-    expect(responseBody).toEqual(ParsedCollaboratorResponse);
+    expect(responseBody).toEqual(ParsedProjectResponse);
     expect(response.status).toBe(200);
   });
 
-  it('should return an empty list when no collaborators are found for the project ID', async () => {
-    vi.spyOn(databaseClient.collaborator, 'findMany').mockResolvedValue([]);
+  it('should return an empty list when no projects are found', async () => {
+    vi.spyOn(databaseClient.project, 'findMany').mockResolvedValue([]);
 
     const response = await GET(AstroApiContext);
     const responseBody = await response.json();
 
+    expect(response.status).toBe(200);
     expect(responseBody).toEqual([]);
-    expect(response.status).toBe(200);
   });
 
   it('should return a 500 error when an exception occurs during the database query', async () => {
-    vi.spyOn(databaseClient.collaborator, 'findMany').mockRejectedValue(
+    vi.spyOn(databaseClient.project, 'findMany').mockRejectedValue(
       new Error('This is a test error'),
     );
 
@@ -86,20 +83,5 @@ describe('GET collaborator by not related project endpoint', () => {
 
     expect(responseBody).toEqual({ error: 'This is a test error' });
     expect(response.status).toBe(500);
-  });
-});
-
-describe('getStaticPaths', () => {
-  it('should return a list of paths for all projects', async () => {
-    const PrismaProjectMock = generateManyTestProjectMocks(3);
-
-    vi.spyOn(databaseClient.project, 'findMany').mockResolvedValue(PrismaProjectMock);
-    const paths = await getStaticPaths();
-
-    expect(paths).toEqual(
-      PrismaProjectMock.map((project) => ({
-        params: { idProject: project.id },
-      })),
-    );
   });
 });
