@@ -2,11 +2,11 @@ import type { ErrorResponse } from '@/types/responses';
 import type { Stack } from '@prisma/client';
 import type { AxiosError } from 'axios';
 
+import { TEST_PROJECT_MOCK } from '__test__/__mock__/project.mock';
 import { AxiosHeaders, type AxiosResponse } from 'axios';
 import { describe, expect, it, vi } from 'vitest';
-import { TEST_PROJECT_MOCK } from '__test__/__mock__/project.mock';
 
-import { TEST_STACK_MOCK } from '../../__mock__/stack.mock';
+import { generateManyTestStackMocks } from '../../__mock__/stack.mock';
 
 import { apiClient } from '@/helpers/client/axios';
 import { getStacksByAssociatedProjects } from '@/services/stack/getStacksByAssociatedProjects';
@@ -15,9 +15,8 @@ import { getStacksByAssociatedProjects } from '@/services/stack/getStacksByAssoc
 vi.mock('@/helpers/client/axios');
 
 describe('getStacksByAssociatedProjects', () => {
-  const idStack = TEST_STACK_MOCK.id;
   const idProject = TEST_PROJECT_MOCK.id;
-  const APIUrl = `/api/stack/related/project/${idStack}.json`;
+  const APIUrl = `/api/stack/related/project/${idProject}.json`;
 
   it('should return stack data when the request is successful', async () => {
     // Simulating a successful response from apiClient
@@ -28,7 +27,7 @@ describe('getStacksByAssociatedProjects', () => {
       headers: {},
       status: 200,
       statusText: 'OK',
-      data: [TEST_STACK_MOCK, TEST_STACK_MOCK, TEST_STACK_MOCK],
+      data: generateManyTestStackMocks(3),
     };
 
     // Mocking the resolved value of apiClient.get for this test case

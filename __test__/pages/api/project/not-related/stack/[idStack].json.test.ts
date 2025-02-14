@@ -1,8 +1,8 @@
 import type { APIContext } from 'astro';
 
 import { createMockApiContext } from '__test__/__mock__/create-mock-api-context';
-import { TEST_STACK_MOCK } from '__test__/__mock__/stack.mock';
 import { TEST_PROJECT_MOCK } from '__test__/__mock__/project.mock';
+import { generateManyTestStackMocks } from '__test__/__mock__/stack.mock';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { databaseClient } from '@/helpers/client/prisma';
@@ -91,7 +91,7 @@ describe('GET project by not related stack endpoint', () => {
 
 describe('getStaticPaths', () => {
   it('should return a list of paths for all stacks', async () => {
-    const PrismaStackMock = [TEST_STACK_MOCK, TEST_STACK_MOCK, TEST_STACK_MOCK];
+    const PrismaStackMock = generateManyTestStackMocks(3);
 
     vi.spyOn(databaseClient.stack, 'findMany').mockResolvedValue(PrismaStackMock);
     const paths = await getStaticPaths();

@@ -2,8 +2,8 @@ import type { APIContext } from 'astro';
 
 import { createMockApiContext } from '__test__/__mock__/create-mock-api-context';
 import { TEST_PROJECT_MOCK } from '__test__/__mock__/project.mock';
+import { generateManyTestStackMocks } from '__test__/__mock__/stack.mock';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { TEST_STACK_MOCK } from '__test__/__mock__/stack.mock';
 
 import { databaseClient } from '@/helpers/client/prisma';
 import { DELETE, POST, getStaticPaths } from '@/pages/api/project/id/[id]/stack/[idStack]';
@@ -124,7 +124,7 @@ describe('DELETE relation with project endpoint', () => {
 describe('getStaticPaths', () => {
   it('should return a list of paths for all project and stack combinations', async () => {
     const PrismaProjectMock = [TEST_PROJECT_MOCK, TEST_PROJECT_MOCK, TEST_PROJECT_MOCK];
-    const PrismaStackMock = [TEST_STACK_MOCK, TEST_STACK_MOCK, TEST_STACK_MOCK];
+    const PrismaStackMock = generateManyTestStackMocks(3);
 
     vi.spyOn(databaseClient.project, 'findMany').mockResolvedValue(PrismaProjectMock);
     vi.spyOn(databaseClient.stack, 'findMany').mockResolvedValue(PrismaStackMock);

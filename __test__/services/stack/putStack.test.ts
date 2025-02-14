@@ -5,7 +5,7 @@ import type { AxiosError } from 'axios';
 import { AxiosHeaders, type AxiosResponse } from 'axios';
 import { describe, expect, it, vi } from 'vitest';
 
-import { TEST_STACK_MOCK } from '../../__mock__/stack.mock';
+import { generateTestStackMock } from '../../__mock__/stack.mock';
 
 import { apiClient } from '@/helpers/client/axios';
 import { putStack } from '@/services/stack/putStack';
@@ -15,7 +15,7 @@ vi.mock('@/helpers/client/axios');
 
 describe('putStack', () => {
   // Input data for the tests
-  const input = TEST_STACK_MOCK;
+  const input = generateTestStackMock();
   const APIUrl = `/api/stack/id/${input.id}`;
 
   it('should return a successful response when the request is correct', async () => {
@@ -27,7 +27,7 @@ describe('putStack', () => {
       headers: {},
       status: 200,
       statusText: 'OK',
-      data: TEST_STACK_MOCK,
+      data: input,
     };
 
     // Simulate a resolved promise for apiClient.put

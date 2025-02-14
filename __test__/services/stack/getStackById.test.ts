@@ -5,7 +5,7 @@ import type { AxiosError } from 'axios';
 import { AxiosHeaders, type AxiosResponse } from 'axios';
 import { describe, expect, it, vi } from 'vitest';
 
-import { TEST_STACK_MOCK } from '../../__mock__/stack.mock';
+import { generateTestStackMock } from '../../__mock__/stack.mock';
 
 import { apiClient } from '@/helpers/client/axios';
 import { getStackById } from '@/services/stack/getStackById';
@@ -14,7 +14,8 @@ import { getStackById } from '@/services/stack/getStackById';
 vi.mock('@/helpers/client/axios');
 
 describe('getStackById', () => {
-  const idStack = TEST_STACK_MOCK.id;
+  const stackMock = generateTestStackMock();
+  const idStack = stackMock.id;
   const APIUrl = `/api/stack/id/${idStack}.json`;
 
   it('should return stack data when the request is successful', async () => {
@@ -26,7 +27,7 @@ describe('getStackById', () => {
       headers: {},
       status: 200,
       statusText: 'OK',
-      data: TEST_STACK_MOCK,
+      data: stackMock,
     };
 
     // Mocking the resolved value of apiClient.get for this test case

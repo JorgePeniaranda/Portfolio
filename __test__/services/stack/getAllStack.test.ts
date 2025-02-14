@@ -5,7 +5,7 @@ import type { AxiosError } from 'axios';
 import { AxiosHeaders, type AxiosResponse } from 'axios';
 import { describe, expect, it, vi } from 'vitest';
 
-import { TEST_STACK_MOCK } from '../../__mock__/stack.mock';
+import { generateManyTestStackMocks } from '../../__mock__/stack.mock';
 
 import { apiClient } from '@/helpers/client/axios';
 import { getAllStack } from '@/services/stack/getAllStack';
@@ -25,7 +25,7 @@ describe('getAllStack', () => {
       headers: {},
       status: 200,
       statusText: 'OK',
-      data: [TEST_STACK_MOCK, TEST_STACK_MOCK, TEST_STACK_MOCK],
+      data: generateManyTestStackMocks(3),
     };
 
     // Mocking the resolved value of apiClient.get for this test case
