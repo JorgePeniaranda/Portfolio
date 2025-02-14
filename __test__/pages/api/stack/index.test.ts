@@ -33,8 +33,17 @@ vi.mock('@/helpers/error/api-handler', () => ({
 }));
 
 describe('CREATE stack endpoint', () => {
-  const PrismaStackMock = TEST_STACK_MOCK;
-  const RequestStackMock: StackCreateSchema = {
+  /**
+   * Mocked API context for Astro API requests.
+   * This context is initialized before each test to ensure isolation.
+   */
+  let AstroApiContext: APIContext;
+
+  /**
+   * Mocked request body representing a stack update payload.
+   * Used as input data when testing the API request handling.
+   */
+  const MockStackRequest: StackCreateSchema = {
     name: 'Test Stack',
     description: 'This is a test stack',
     key: 'test-stack',
@@ -42,14 +51,37 @@ describe('CREATE stack endpoint', () => {
     type: 'DATABASE',
     iconUrl: 'https://example.com/icon.png',
   };
-  const ParsedStackRequest: typeof RequestStackMock = JSON.parse(JSON.stringify(RequestStackMock));
-  let AstroApiContext: APIContext;
+
+  /**
+   * Parsed version of the request body.
+   * Simulates the actual result of calling `request.json()` in an API handler.
+   *
+   * @example
+   * const parsed = request.json(); // Equivalent to ParsedStackRequest
+   */
+  const ParsedStackRequest: typeof MockStackRequest = JSON.parse(JSON.stringify(MockStackRequest));
+
+  /**
+   * Mocked database response representing a stored stack entry.
+   * This simulates the expected result when querying the database.
+   */
+  const MockStackRecord = TEST_STACK_MOCK;
+
+  /**
+   * Simulated parsed response body.
+   * Represents the expected API response after processing the request.
+   *
+   * @example
+   * const response = await apiCall();
+   * const parsedResponse = await response.json(); // Equivalent to ParsedStackResponse
+   */
+  const ParsedStackResponse: typeof MockStackRecord = JSON.parse(JSON.stringify(MockStackRecord));
 
   beforeEach(() => {
     AstroApiContext = createMockApiContext({
       request: {
         method: '',
-        body: JSON.stringify(RequestStackMock),
+        body: JSON.stringify(MockStackRequest),
       },
     });
 
@@ -64,13 +96,13 @@ describe('CREATE stack endpoint', () => {
   });
 
   it('should return a stack when parameters are valid', async () => {
-    vi.spyOn(databaseClient.stack, 'create').mockResolvedValue(PrismaStackMock);
+    vi.spyOn(databaseClient.stack, 'create').mockResolvedValue(MockStackRecord);
     vi.spyOn(StackCreateSchema, 'parse').mockResolvedValue(ParsedStackRequest);
 
     const response = await POST(AstroApiContext);
     const responseBody = await response.json();
 
-    expect(responseBody).toEqual(ParsedStackRequest);
+    expect(responseBody).toEqual(ParsedStackResponse);
     expect(response.status).toBe(201);
   });
 
@@ -87,17 +119,31 @@ describe('CREATE stack endpoint', () => {
 });
 
 describe('DELETE stack endpoint', () => {
-  const RequestInputMock = [1, 2, 3];
-  const ResponseDeletedExpected = {
-    count: RequestInputMock.length,
-  };
+  /**
+   * Mocked API context for Astro API requests.
+   * This context is initialized before each test to ensure isolation.
+   */
   let AstroApiContext: APIContext;
+
+  /**
+   * Mocked request body representing a stack update payload.
+   * Used as input data when testing the API request handling.
+   */
+  const MockStackRequest = [1, 2, 3];
+
+  /**
+   * Mocked database response representing a deleted stack entry.
+   * This simulates the expected result when querying the database.
+   */
+  const DeletedResponse = {
+    count: MockStackRequest.length,
+  };
 
   beforeEach(() => {
     AstroApiContext = createMockApiContext({
       request: {
         method: 'DELETE',
-        body: JSON.stringify(RequestInputMock),
+        body: JSON.stringify(MockStackRequest),
       },
     });
 
@@ -111,13 +157,13 @@ describe('DELETE stack endpoint', () => {
   });
 
   it('should return a stack when parameters are valid', async () => {
-    vi.spyOn(databaseClient.stack, 'deleteMany').mockResolvedValue(ResponseDeletedExpected);
+    vi.spyOn(databaseClient.stack, 'deleteMany').mockResolvedValue(DeletedResponse);
 
     const response = await DELETE(AstroApiContext);
     const responseBody = await response.json();
 
     expect(response.status).toBe(200);
-    expect(responseBody).toEqual(ResponseDeletedExpected);
+    expect(responseBody).toEqual(DeletedResponse);
   });
 
   it('should return a 500 error if an exception occurs', async () => {
