@@ -27,6 +27,7 @@
     "vitest",
     "shadcn-ui"
   ],
+  "type":"module",
   "engines": {
     "node": ">=22"
   },
@@ -37,6 +38,7 @@
     "preview": "astro preview",
     "prisma:generate": "npx prisma generate",
     "prisma:migrate": "npx prisma migrate dev",
+    "prisma:seed": "npx prisma db seed",
     "prisma:studio": "npx prisma studio",
     "prisma:deploy": "npx prisma migrate deploy",
     "prisma:push": "npx prisma db push",
@@ -129,6 +131,7 @@
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-tailwindcss": "0.6.11",
     "prisma": "6.3.1",
+    "ts-node": "10.9.2",
     "typescript": "5.7.3",
     "typescript-eslint": "8.24.0",
     "vitest": "3.0.5"
@@ -137,5 +140,8 @@
     "*.{js,jsx,ts,tsx,astro}": [
       "eslint . --fix"
     ]
+  },
+  "prisma": {
+    "seed": "ts-node ./prisma/seed.ts"
   }
 }
