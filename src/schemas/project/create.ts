@@ -1,3 +1,5 @@
+import type { Prisma } from '@prisma/client';
+
 import { ProjectStatus, StackCategory } from '@prisma/client';
 import { z } from 'zod';
 
@@ -28,7 +30,7 @@ export const ProjectCreateSchema = z.object({
   }),
   demoUrl: z.string().optional().nullable(),
   githubUrl: z.string().optional().nullable(),
-});
+}) satisfies z.ZodType<Prisma.ProjectCreateInput>;
 
 export type ProjectCreateSchema = z.infer<typeof ProjectCreateSchema>;
 
