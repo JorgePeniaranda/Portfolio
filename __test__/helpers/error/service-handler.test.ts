@@ -15,6 +15,9 @@ vi.mock('axios', () => ({
 vi.mock('@/helpers/common/dev-console-log', () => ({
   devConsoleLog: {
     log: vi.fn(),
+    warn: vi.fn(),
+    info: vi.fn(),
+    error: vi.fn(),
   },
 }));
 
