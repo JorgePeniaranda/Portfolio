@@ -5,7 +5,7 @@ import type { AxiosError } from 'axios';
 import { AxiosHeaders, type AxiosResponse } from 'axios';
 import { describe, expect, it, vi } from 'vitest';
 
-import { TEST_COLLABORATOR_MOCK } from '../../__mock__/collaborator.mock';
+import { generateTestCollaboratorMock } from '../../__mock__/collaborator.mock';
 
 import { apiClient } from '@/helpers/client/axios';
 import { postCollaborator } from '@/services/collaborator/postCollaborator';
@@ -14,7 +14,7 @@ import { postCollaborator } from '@/services/collaborator/postCollaborator';
 vi.mock('@/helpers/client/axios');
 
 describe('postCollaborator', () => {
-  const input = TEST_COLLABORATOR_MOCK;
+  const input = generateTestCollaboratorMock();
   const APIUrl = '/api/collaborator';
 
   it('should return a successful response when the request is correct', async () => {
@@ -26,7 +26,7 @@ describe('postCollaborator', () => {
       headers: {},
       status: 201,
       statusText: 'OK',
-      data: TEST_COLLABORATOR_MOCK,
+      data: input,
     };
 
     // Simulate a resolved promise for apiClient.post

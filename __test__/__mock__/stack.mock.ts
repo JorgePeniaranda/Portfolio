@@ -1,7 +1,7 @@
 import { StackCategory, StackType, type Stack } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 
-export function generateTestStackMock(): Stack {
+export function generateTestStackMock(overrides: Partial<Stack> = {}): Stack {
   return {
     id: faker.number.int({ min: 1, max: 1000 }),
     name: faker.company.name(),
@@ -12,6 +12,7 @@ export function generateTestStackMock(): Stack {
     iconUrl: faker.image.url(),
     createdAt: faker.date.past(),
     updatedAt: faker.date.recent(),
+    ...overrides,
   };
 }
 

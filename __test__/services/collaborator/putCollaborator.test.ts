@@ -5,16 +5,17 @@ import type { AxiosError } from 'axios';
 import { AxiosHeaders, type AxiosResponse } from 'axios';
 import { describe, expect, it, vi } from 'vitest';
 
-import { TEST_COLLABORATOR_MOCK } from '../../__mock__/collaborator.mock';
+import { generateTestCollaboratorMock } from '../../__mock__/collaborator.mock';
 
-import { putCollaborator } from '@/services/collaborator/putCollaborator';
 import { apiClient } from '@/helpers/client/axios';
+import { putCollaborator } from '@/services/collaborator/putCollaborator';
 
 // Mock the apiClient module
 vi.mock('@/helpers/client/axios');
 
 describe('putCollaborator', () => {
-  const idCollaborator = TEST_COLLABORATOR_MOCK.id;
+  const mockCollaborator = generateTestCollaboratorMock();
+  const idCollaborator = mockCollaborator.id;
   const input = {
     nickname: 'John Doe',
   } as const;
@@ -29,13 +30,13 @@ describe('putCollaborator', () => {
       headers: {},
       status: 200,
       statusText: 'OK',
-      data: TEST_COLLABORATOR_MOCK,
+      data: mockCollaborator,
     };
 
     // Simulate a resolved promise for apiClient.put
     vi.mocked(apiClient.put).mockResolvedValueOnce(mockResponse);
     const response = await putCollaborator({
-      idCollaborator: 1,
+      idCollaborator: idCollaborator,
       updatedCollaborator: input,
     });
 

@@ -1,12 +1,12 @@
-import type { Collaborator } from '@prisma/client';
 import type { ErrorResponse } from '@/types/responses';
+import type { Collaborator } from '@prisma/client';
 import type { AxiosError } from 'axios';
 
+import { generateTestProjectMock } from '__test__/__mock__/project.mock';
 import { AxiosHeaders, type AxiosResponse } from 'axios';
 import { describe, expect, it, vi } from 'vitest';
-import { TEST_PROJECT_MOCK } from '__test__/__mock__/project.mock';
 
-import { TEST_COLLABORATOR_MOCK } from '../../__mock__/collaborator.mock';
+import { generateManyTestCollaboratorMocks } from '../../__mock__/collaborator.mock';
 
 import { apiClient } from '@/helpers/client/axios';
 import { getCollaboratorsByNotAssociatedProjects } from '@/services/collaborator/getCollaboratorsByNotAssociatedProjects';
@@ -15,9 +15,9 @@ import { getCollaboratorsByNotAssociatedProjects } from '@/services/collaborator
 vi.mock('@/helpers/client/axios');
 
 describe('getCollaboratorsByNotAssociatedProjects', () => {
-  const idCollaborator = TEST_COLLABORATOR_MOCK.id;
-  const idProject = TEST_PROJECT_MOCK.id;
-  const APIUrl = `/api/collaborator/not-related/project/${idCollaborator}.json`;
+  const projectMock = generateTestProjectMock();
+  const idProject = projectMock.id;
+  const APIUrl = `/api/collaborator/not-related/project/${idProject}.json`;
 
   it('should return collaborator data when the request is successful', async () => {
     // Simulating a successful response from apiClient
@@ -28,7 +28,7 @@ describe('getCollaboratorsByNotAssociatedProjects', () => {
       headers: {},
       status: 200,
       statusText: 'OK',
-      data: [TEST_COLLABORATOR_MOCK, TEST_COLLABORATOR_MOCK, TEST_COLLABORATOR_MOCK],
+      data: generateManyTestCollaboratorMocks(3),
     };
 
     // Mocking the resolved value of apiClient.get for this test case

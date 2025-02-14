@@ -4,7 +4,7 @@ import type { AxiosError } from 'axios';
 import { AxiosHeaders, type AxiosResponse } from 'axios';
 import { describe, expect, it, vi } from 'vitest';
 
-import { TEST_PROJECT_MOCK } from '../../__mock__/project.mock';
+import { generateTestProjectMock } from '../../__mock__/project.mock';
 
 import { apiClient } from '@/helpers/client/axios';
 import { postProject } from '@/services/project/postProject';
@@ -14,7 +14,7 @@ vi.mock('@/helpers/client/axios');
 
 describe('postProject', () => {
   // Input data for the tests
-  const input = TEST_PROJECT_MOCK;
+  const input = generateTestProjectMock();
   const APIUrl = '/api/project';
 
   it('should return a successful response when the request is correct', async () => {
@@ -26,7 +26,7 @@ describe('postProject', () => {
       headers: {},
       status: 200,
       statusText: 'OK',
-      data: TEST_PROJECT_MOCK,
+      data: input,
     };
 
     // Simulate a resolved promise for apiClient.post

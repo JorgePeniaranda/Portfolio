@@ -1,7 +1,7 @@
 import type { APIContext } from 'astro';
 
+import { generateManyTestCollaboratorMocks } from '__test__/__mock__/collaborator.mock';
 import { createMockApiContext } from '__test__/__mock__/create-mock-api-context';
-import { TEST_COLLABORATOR_MOCK } from '__test__/__mock__/collaborator.mock';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { databaseClient } from '@/helpers/client/prisma';
@@ -27,11 +27,7 @@ describe('GET all collaborators endpoint', () => {
    * Mocked database response representing a stored collaborator entry.
    * This simulates the expected result when querying the database.
    */
-  const MockCollaboratorRecord = [
-    TEST_COLLABORATOR_MOCK,
-    TEST_COLLABORATOR_MOCK,
-    TEST_COLLABORATOR_MOCK,
-  ];
+  const MockCollaboratorRecord = generateManyTestCollaboratorMocks(3);
 
   /**
    * Simulated parsed response body.

@@ -2,7 +2,7 @@ import type { ErrorResponse } from '@/types/responses';
 import type { Stack } from '@prisma/client';
 import type { AxiosError } from 'axios';
 
-import { TEST_PROJECT_MOCK } from '__test__/__mock__/project.mock';
+import { generateTestProjectMock } from '__test__/__mock__/project.mock';
 import { AxiosHeaders, type AxiosResponse } from 'axios';
 import { describe, expect, it, vi } from 'vitest';
 
@@ -15,7 +15,8 @@ import { getStacksByNotAssociatedProjects } from '@/services/stack/getStacksByNo
 vi.mock('@/helpers/client/axios');
 
 describe('getStacksByNotAssociatedProjects', () => {
-  const idProject = TEST_PROJECT_MOCK.id;
+  const projectMock = generateTestProjectMock();
+  const idProject = projectMock.id;
   const APIUrl = `/api/stack/not-related/project/${idProject}.json`;
 
   it('should return stack data when the request is successful', async () => {

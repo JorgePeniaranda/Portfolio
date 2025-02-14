@@ -1,7 +1,7 @@
 import type { APIContext } from 'astro';
 
 import { createMockApiContext } from '__test__/__mock__/create-mock-api-context';
-import { TEST_PROJECT_MOCK } from '__test__/__mock__/project.mock';
+import { generateManyTestProjectMocks } from '__test__/__mock__/project.mock';
 import { generateManyTestStackMocks } from '__test__/__mock__/stack.mock';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -28,7 +28,7 @@ describe('GET project by related stack endpoint', () => {
    * Mocked database response representing a stored project entry.
    * This simulates the expected result when querying the database.
    */
-  const MockProjectRecord = [TEST_PROJECT_MOCK, TEST_PROJECT_MOCK, TEST_PROJECT_MOCK];
+  const MockProjectRecord = generateManyTestProjectMocks(3);
 
   /**
    * Simulated parsed response body.

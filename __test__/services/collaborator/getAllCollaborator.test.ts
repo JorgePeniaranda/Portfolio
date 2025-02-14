@@ -1,11 +1,11 @@
-import type { Collaborator } from '@prisma/client';
 import type { ErrorResponse } from '@/types/responses';
+import type { Collaborator } from '@prisma/client';
 import type { AxiosError } from 'axios';
 
 import { AxiosHeaders, type AxiosResponse } from 'axios';
 import { describe, expect, it, vi } from 'vitest';
 
-import { TEST_COLLABORATOR_MOCK } from '../../__mock__/collaborator.mock';
+import { generateManyTestCollaboratorMocks } from '../../__mock__/collaborator.mock';
 
 import { apiClient } from '@/helpers/client/axios';
 import { getAllCollaborator } from '@/services/collaborator/getAllCollaborator';
@@ -25,7 +25,7 @@ describe('getAllCollaborator', () => {
       headers: {},
       status: 200,
       statusText: 'OK',
-      data: [TEST_COLLABORATOR_MOCK, TEST_COLLABORATOR_MOCK, TEST_COLLABORATOR_MOCK],
+      data: generateManyTestCollaboratorMocks(3),
     };
 
     // Mocking the resolved value of apiClient.get for this test case
