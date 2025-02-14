@@ -3,7 +3,7 @@ import type { Collaborator } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 
 export function generateTestCollaboratorMock(overrides: Partial<Collaborator> = {}): Collaborator {
-  const username = faker.internet.userName().toLowerCase(); // Para usar el mismo en GitHub y LinkedIn
+  const username = faker.internet.username().toLowerCase();
 
   return {
     id: faker.number.int({ min: 1, max: 1000 }),
@@ -12,7 +12,7 @@ export function generateTestCollaboratorMock(overrides: Partial<Collaborator> = 
     linkedinUsername: username,
     createdAt: faker.date.past(),
     updatedAt: faker.date.recent(),
-    ...overrides, // Permite personalizar valores específicos
+    ...overrides,
   };
 }
 
