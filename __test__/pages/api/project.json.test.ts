@@ -53,7 +53,7 @@ describe('GET all projects endpoint', () => {
     expect(databaseClient.project.findMany).toHaveBeenCalled();
   });
 
-  it('should return a paginated list of project when parameters are valid', async () => {
+  it('should return a list of projects when parameters are valid', async () => {
     vi.spyOn(databaseClient.project, 'findMany').mockResolvedValue(MockProjectRecord);
 
     const response = await GET(AstroApiContext);
@@ -63,7 +63,7 @@ describe('GET all projects endpoint', () => {
     expect(response.status).toBe(200);
   });
 
-  it('should return an empty list if no project are found', async () => {
+  it('should return an empty list when no projects are found', async () => {
     vi.spyOn(databaseClient.project, 'findMany').mockResolvedValue([]);
 
     const response = await GET(AstroApiContext);
@@ -73,7 +73,7 @@ describe('GET all projects endpoint', () => {
     expect(responseBody).toEqual([]);
   });
 
-  it('should return a 500 error if an exception occurs', async () => {
+  it('should return a 500 error when an exception occurs during the database query', async () => {
     vi.spyOn(databaseClient.project, 'findMany').mockRejectedValue(
       new Error('This is a test error'),
     );

@@ -54,7 +54,7 @@ describe('GET stack by not related project endpoint', () => {
     expect(databaseClient.stack.findMany).toHaveBeenCalled();
   });
 
-  it('should return a paginated list of stacks when parameters are valid', async () => {
+  it('should return a list of stacks when the project ID is valid', async () => {
     vi.spyOn(databaseClient.stack, 'findMany').mockResolvedValue(MockStackRecord);
 
     const response = await GET(AstroApiContext);
@@ -64,7 +64,7 @@ describe('GET stack by not related project endpoint', () => {
     expect(response.status).toBe(200);
   });
 
-  it('should return an empty list if no stacks are found', async () => {
+  it('should return an empty list when no stacks are found for the project ID', async () => {
     vi.spyOn(databaseClient.stack, 'findMany').mockResolvedValue([]);
 
     const response = await GET(AstroApiContext);
@@ -74,7 +74,7 @@ describe('GET stack by not related project endpoint', () => {
     expect(response.status).toBe(200);
   });
 
-  it('should return a 500 error if an exception occurs', async () => {
+  it('should return a 500 error when an exception occurs during the database query', async () => {
     vi.spyOn(databaseClient.stack, 'findMany').mockRejectedValue(new Error('This is a test error'));
 
     const response = await GET(AstroApiContext);
@@ -86,7 +86,7 @@ describe('GET stack by not related project endpoint', () => {
 });
 
 describe('getStaticPaths', () => {
-  it('should return a list of paths', async () => {
+  it('should return a list of paths for all projects', async () => {
     const PrismaProjectMock = [TEST_PROJECT_MOCK, TEST_PROJECT_MOCK, TEST_PROJECT_MOCK];
 
     vi.spyOn(databaseClient.project, 'findMany').mockResolvedValue(PrismaProjectMock);

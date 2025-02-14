@@ -50,7 +50,7 @@ describe('POST relation with stack endpoint', () => {
     expect(databaseClient.stack.update).toHaveBeenCalled();
   });
 
-  it('should return a stack when parameters are valid', async () => {
+  it('should successfully create a relation between a stack and a project when parameters are valid', async () => {
     vi.spyOn(databaseClient.stack, 'update').mockResolvedValue(MockStackRecord);
 
     const response = await POST(AstroApiContext);
@@ -58,7 +58,7 @@ describe('POST relation with stack endpoint', () => {
     expect(response.status).toBe(204);
   });
 
-  it('should return a 500 error if an exception occurs', async () => {
+  it('should return a 500 error when an exception occurs while creating a relation between a stack and a project', async () => {
     vi.spyOn(databaseClient.stack, 'update').mockRejectedValue(new Error('This is a test error'));
 
     const response = await POST(AstroApiContext);
@@ -89,7 +89,7 @@ describe('DELETE relation with stack endpoint', () => {
         idProject: '2',
       },
       request: {
-        method: 'POST',
+        method: 'DELETE',
       },
     });
 
@@ -102,7 +102,7 @@ describe('DELETE relation with stack endpoint', () => {
     expect(databaseClient.stack.update).toHaveBeenCalled();
   });
 
-  it('should return a stack when parameters are valid', async () => {
+  it('should successfully delete a relation between a stack and a project when parameters are valid', async () => {
     vi.spyOn(databaseClient.stack, 'update').mockResolvedValue(MockStackRecord);
 
     const response = await DELETE(AstroApiContext);
@@ -110,7 +110,7 @@ describe('DELETE relation with stack endpoint', () => {
     expect(response.status).toBe(204);
   });
 
-  it('should return a 500 error if an exception occurs', async () => {
+  it('should return a 500 error when an exception occurs while deleting a relation between a stack and a project', async () => {
     vi.spyOn(databaseClient.stack, 'update').mockRejectedValue(new Error('This is a test error'));
 
     const response = await DELETE(AstroApiContext);
@@ -122,7 +122,7 @@ describe('DELETE relation with stack endpoint', () => {
 });
 
 describe('getStaticPaths', () => {
-  it('should return a list of paths', async () => {
+  it('should return a list of paths for all stack and project combinations', async () => {
     const PrismaStackMock = [TEST_STACK_MOCK, TEST_STACK_MOCK, TEST_STACK_MOCK];
     const PrismaProjectMock = [TEST_PROJECT_MOCK, TEST_PROJECT_MOCK, TEST_PROJECT_MOCK];
 

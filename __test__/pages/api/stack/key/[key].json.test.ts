@@ -53,7 +53,7 @@ describe('GET stack by key endpoint', () => {
     expect(databaseClient.stack.findUnique).toHaveBeenCalled();
   });
 
-  it('should return a stack when parameters are valid', async () => {
+  it('should return the stack data when the key is valid', async () => {
     vi.spyOn(databaseClient.stack, 'findUnique').mockResolvedValue(MockStackRecord);
 
     const response = await GET(AstroApiContext);
@@ -63,7 +63,7 @@ describe('GET stack by key endpoint', () => {
     expect(response.status).toBe(200);
   });
 
-  it('should return null if no stack are found', async () => {
+  it('should return null when no stack is found for the given key', async () => {
     vi.spyOn(databaseClient.stack, 'findUnique').mockResolvedValue(null);
 
     const response = await GET(AstroApiContext);
@@ -73,7 +73,7 @@ describe('GET stack by key endpoint', () => {
     expect(response.status).toBe(200);
   });
 
-  it('should return a 500 error if an exception occurs', async () => {
+  it('should return a 500 error when an exception occurs during the database query', async () => {
     vi.spyOn(databaseClient.stack, 'findUnique').mockRejectedValue(
       new Error('This is a test error'),
     );
@@ -87,7 +87,7 @@ describe('GET stack by key endpoint', () => {
 });
 
 describe('getStaticPaths', () => {
-  it('should return a list of paths', async () => {
+  it('should return a list of paths for all stacks', async () => {
     const PrismaStackMock = [TEST_STACK_MOCK, TEST_STACK_MOCK, TEST_STACK_MOCK];
 
     vi.spyOn(databaseClient.stack, 'findMany').mockResolvedValue(PrismaStackMock);

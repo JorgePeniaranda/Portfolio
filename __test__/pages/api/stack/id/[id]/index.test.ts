@@ -80,7 +80,7 @@ describe('PUT stack endpoint', () => {
 
   afterEach(() => {});
 
-  it('should return a 200 status and update the stack when parameters are valid', async () => {
+  it('should return the updated stack data when the request is valid', async () => {
     vi.spyOn(databaseClient.stack, 'update').mockResolvedValue(MockStackRecord);
     vi.spyOn(StackUpdateSchema, 'parse').mockResolvedValue(ParsedStackRequest);
 
@@ -91,7 +91,7 @@ describe('PUT stack endpoint', () => {
     expect(response.status).toBe(200);
   });
 
-  it('should return a 500 error if an exception occurs', async () => {
+  it('should return a 500 error when an exception occurs during the update', async () => {
     vi.spyOn(databaseClient.stack, 'update').mockRejectedValue(new Error('This is a test error'));
     vi.spyOn(StackUpdateSchema, 'parse').mockResolvedValue(ParsedStackRequest);
 

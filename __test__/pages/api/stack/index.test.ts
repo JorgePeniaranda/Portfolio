@@ -95,7 +95,7 @@ describe('CREATE stack endpoint', () => {
     expect(databaseClient.stack.create).toHaveBeenCalled();
   });
 
-  it('should return a stack when parameters are valid', async () => {
+  it('should return the created stack when the request body is valid', async () => {
     vi.spyOn(databaseClient.stack, 'create').mockResolvedValue(MockStackRecord);
     vi.spyOn(StackCreateSchema, 'parse').mockResolvedValue(ParsedStackRequest);
 
@@ -106,7 +106,7 @@ describe('CREATE stack endpoint', () => {
     expect(response.status).toBe(201);
   });
 
-  it('should return a 500 error if an exception occurs', async () => {
+  it('should return a 500 error when an exception occurs during stack creation', async () => {
     vi.spyOn(databaseClient.stack, 'create').mockRejectedValue(new Error('This is a test error'));
     vi.spyOn(StackCreateSchema, 'parse').mockResolvedValue(ParsedStackRequest);
 
@@ -156,7 +156,7 @@ describe('DELETE stack endpoint', () => {
     expect(databaseClient.stack.deleteMany).toHaveBeenCalled();
   });
 
-  it('should return a stack when parameters are valid', async () => {
+  it('should return the count of deleted stacks when the request body is valid', async () => {
     vi.spyOn(databaseClient.stack, 'deleteMany').mockResolvedValue(DeletedResponse);
 
     const response = await DELETE(AstroApiContext);
@@ -166,7 +166,7 @@ describe('DELETE stack endpoint', () => {
     expect(responseBody).toEqual(DeletedResponse);
   });
 
-  it('should return a 500 error if an exception occurs', async () => {
+  it('should return a 500 error when an exception occurs during stack deletion', async () => {
     vi.spyOn(databaseClient.stack, 'deleteMany').mockRejectedValue(
       new Error('This is a test error'),
     );

@@ -57,7 +57,7 @@ describe('GET all collaborators endpoint', () => {
     expect(databaseClient.collaborator.findMany).toHaveBeenCalled();
   });
 
-  it('should return a paginated list of collaborator when parameters are valid', async () => {
+  it('should return a list of collaborators when parameters are valid', async () => {
     vi.spyOn(databaseClient.collaborator, 'findMany').mockResolvedValue(MockCollaboratorRecord);
 
     const response = await GET(AstroApiContext);
@@ -67,7 +67,7 @@ describe('GET all collaborators endpoint', () => {
     expect(response.status).toBe(200);
   });
 
-  it('should return an empty list if no collaborator are found', async () => {
+  it('should return an empty list when no collaborators are found', async () => {
     vi.spyOn(databaseClient.collaborator, 'findMany').mockResolvedValue([]);
 
     const response = await GET(AstroApiContext);
@@ -77,7 +77,7 @@ describe('GET all collaborators endpoint', () => {
     expect(responseBody).toEqual([]);
   });
 
-  it('should return a 500 error if an exception occurs', async () => {
+  it('should return a 500 error when an exception occurs during the database query', async () => {
     vi.spyOn(databaseClient.collaborator, 'findMany').mockRejectedValue(
       new Error('This is a test error'),
     );

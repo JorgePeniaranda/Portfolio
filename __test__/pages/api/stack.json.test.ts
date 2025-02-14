@@ -51,7 +51,7 @@ describe('GET all stacks endpoint', () => {
     expect(databaseClient.stack.findMany).toHaveBeenCalled();
   });
 
-  it('should return a paginated list of stack when parameters are valid', async () => {
+  it('should return a list of stacks when parameters are valid', async () => {
     vi.spyOn(databaseClient.stack, 'findMany').mockResolvedValue(MockStackRecord);
 
     const response = await GET(AstroApiContext);
@@ -61,7 +61,7 @@ describe('GET all stacks endpoint', () => {
     expect(response.status).toBe(200);
   });
 
-  it('should return an empty list if no stack are found', async () => {
+  it('should return an empty list when no stacks are found', async () => {
     vi.spyOn(databaseClient.stack, 'findMany').mockResolvedValue([]);
 
     const response = await GET(AstroApiContext);
@@ -71,7 +71,7 @@ describe('GET all stacks endpoint', () => {
     expect(responseBody).toEqual([]);
   });
 
-  it('should return a 500 error if an exception occurs', async () => {
+  it('should return a 500 error when an exception occurs during the database query', async () => {
     vi.spyOn(databaseClient.stack, 'findMany').mockRejectedValue(new Error('This is a test error'));
 
     const response = await GET(AstroApiContext);
