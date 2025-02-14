@@ -88,7 +88,7 @@ describe('handleServiceError', () => {
     vi.spyOn(axios, 'isAxiosError').mockReturnValue(true);
     vi.mocked(isNotDefined).mockReturnValue(false);
     vi.mocked(isErrorResponse).mockReturnValue(true);
-    (isDefined as unknown as Mock).mockImplementation((value) => value !== undefined);
+    vi.mocked(isDefined).mockImplementation((value) => value !== undefined);
 
     const result = handleServiceError({
       error: mockError,
@@ -115,7 +115,7 @@ describe('handleServiceError', () => {
     vi.spyOn(axios, 'isAxiosError').mockReturnValue(true);
     vi.mocked(isNotDefined).mockReturnValue(false);
     vi.mocked(isErrorResponse).mockReturnValue(true);
-    (isDefined as unknown as Mock).mockImplementation((value) => value !== undefined);
+    vi.mocked(isDefined).mockImplementation((value) => value !== undefined);
 
     const result = handleServiceError({
       error: mockError,
@@ -132,7 +132,7 @@ describe('handleServiceError', () => {
     vi.spyOn(axios, 'isAxiosError').mockReturnValue(true);
     vi.mocked(isNotDefined).mockReturnValue(false);
     vi.mocked(isErrorResponse).mockReturnValue(true);
-    (isDefined as unknown as Mock).mockReturnValue(false);
+    vi.mocked(isDefined).mockReturnValue(false);
 
     const result = handleServiceError({
       error: mockError,
