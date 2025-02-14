@@ -1,6 +1,6 @@
 import type { FieldError } from '@/types/responses';
 
-import { describe, it, expect, vi, type Mock, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { z } from 'zod';
 
 import { handleApiError } from '@/helpers/error/api-handler';

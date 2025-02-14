@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { beforeEach, describe, expect, it, vi, type Mock } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { devConsoleLog } from '@/helpers/common/dev-console-log';
 import { handleServiceError } from '@/helpers/error/service-handler';
