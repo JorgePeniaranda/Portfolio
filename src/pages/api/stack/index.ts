@@ -17,11 +17,11 @@ export const POST: APIRoute = async ({ request, url }) => {
     const body = await request.json();
     const validationResult = StackCreateSchema.parse(body);
 
-    const response = await databaseClient.stack.create({
+    const createdStack = await databaseClient.stack.create({
       data: validationResult,
     });
 
-    return Response.json(response, { status: 201 });
+    return Response.json(createdStack, { status: 201 });
   } catch (error) {
     return handleApiError(error, url);
   }

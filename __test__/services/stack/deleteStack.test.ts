@@ -1,6 +1,7 @@
 import type { DeleteResponse, ErrorResponse } from '@/types/responses';
+import type { AxiosError } from 'axios';
 
-import { AxiosError, AxiosHeaders, type AxiosResponse } from 'axios';
+import { AxiosHeaders, type AxiosResponse } from 'axios';
 import { describe, expect, it, vi } from 'vitest';
 
 import { apiClient } from '@/helpers/client/axios';
@@ -12,7 +13,7 @@ vi.mock('@/helpers/client/axios');
 describe('deleteStack', () => {
   // Input data for the tests
   const input = [0, 1];
-  const APIUrl = '/api/stack/delete';
+  const APIUrl = '/api/stack';
 
   it('should return a successful response when the request is correct', async () => {
     // Mock a successful response
@@ -28,13 +29,15 @@ describe('deleteStack', () => {
       },
     };
 
-    // Simulate a resolved promise for apiClient.post
-    vi.mocked(apiClient.post).mockResolvedValueOnce(mockResponse);
+    // Simulate a resolved promise for apiClient.delete
+    vi.mocked(apiClient.delete).mockResolvedValueOnce(mockResponse);
     const response = await deleteStack(input);
 
     // Validate response and apiClient call
     expect(response).toEqual(mockResponse.data);
-    expect(apiClient.post).toHaveBeenCalledWith(APIUrl, input);
+    expect(apiClient.delete).toHaveBeenCalledWith(APIUrl, {
+      data: input,
+    });
   });
 
   it('should handle errors correctly when the request fails', async () => {
@@ -60,8 +63,8 @@ describe('deleteStack', () => {
       },
     };
 
-    // Simulate a rejected promise for apiClient.post
-    vi.mocked(apiClient.post).mockRejectedValueOnce(mockError);
+    // Simulate a rejected promise for apiClient.delete
+    vi.mocked(apiClient.delete).mockRejectedValueOnce(mockError);
 
     try {
       await deleteStack(input);
@@ -73,6 +76,8 @@ describe('deleteStack', () => {
       }
     }
 
-    expect(apiClient.post).toHaveBeenCalledWith(APIUrl, input);
+    expect(apiClient.delete).toHaveBeenCalledWith(APIUrl, {
+      data: input,
+    });
   });
 });

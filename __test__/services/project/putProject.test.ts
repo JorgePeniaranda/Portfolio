@@ -1,7 +1,8 @@
 import type { ErrorResponse } from '@/types/responses';
 import type { Project } from '@prisma/client';
+import type { AxiosError } from 'axios';
 
-import { AxiosError, AxiosHeaders, type AxiosResponse } from 'axios';
+import { AxiosHeaders, type AxiosResponse } from 'axios';
 import { describe, expect, it, vi } from 'vitest';
 
 import { TEST_PROJECT_MOCK } from '../../__mock__/project.mock';
@@ -15,7 +16,7 @@ vi.mock('@/helpers/client/axios');
 describe('putProject', () => {
   // Input data for the tests
   const input = TEST_PROJECT_MOCK;
-  const APIUrl = '/api/project/update';
+  const APIUrl = `/api/project/id/${input.id}`;
 
   it('should return a successful response when the request is correct', async () => {
     // Mock a successful response
@@ -31,7 +32,10 @@ describe('putProject', () => {
 
     // Simulate a resolved promise for apiClient.put
     vi.mocked(apiClient.put).mockResolvedValueOnce(mockResponse);
-    const response = await putProject(input);
+    const response = await putProject({
+      idProject: input.id,
+      projectUpdateInput: input,
+    });
 
     // Validate response and apiClient call
     expect(response).toEqual(mockResponse.data);
@@ -65,7 +69,10 @@ describe('putProject', () => {
     vi.mocked(apiClient.put).mockRejectedValueOnce(mockError);
 
     try {
-      await putProject(input);
+      await putProject({
+        idProject: input.id,
+        projectUpdateInput: input,
+      });
     } catch (error) {
       // Validate error handling and apiClient call
       expect(error).toBeInstanceOf(Error);

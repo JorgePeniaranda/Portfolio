@@ -33,7 +33,6 @@ export default [
       'coverage',
       '.idea',
       'src/env.d.ts',
-      '__test__', // TO-DO: Remove test folder
     ],
   },
 

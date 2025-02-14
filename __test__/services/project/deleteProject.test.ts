@@ -1,6 +1,7 @@
 import type { DeleteResponse, ErrorResponse } from '@/types/responses';
+import type { AxiosError } from 'axios';
 
-import { AxiosError, AxiosHeaders, type AxiosResponse } from 'axios';
+import { AxiosHeaders, type AxiosResponse } from 'axios';
 import { describe, expect, it, vi } from 'vitest';
 
 import { apiClient } from '@/helpers/client/axios';
@@ -10,9 +11,8 @@ import { deleteProject } from '@/services/project/deleteProject';
 vi.mock('@/helpers/client/axios');
 
 describe('deleteProject', () => {
-  // Input data for the tests
   const input = [0, 1];
-  const APIUrl = '/api/project/delete';
+  const APIUrl = '/api/project';
 
   it('should return a successful response when the request is correct', async () => {
     // Mock a successful response
@@ -28,13 +28,15 @@ describe('deleteProject', () => {
       },
     };
 
-    // Simulate a resolved promise for apiClient.post
-    vi.mocked(apiClient.post).mockResolvedValueOnce(mockResponse);
+    // Simulate a resolved promise for apiClient.delete
+    vi.mocked(apiClient.delete).mockResolvedValueOnce(mockResponse);
     const response = await deleteProject(input);
 
     // Validate response and apiClient call
     expect(response).toEqual(mockResponse.data);
-    expect(apiClient.post).toHaveBeenCalledWith(APIUrl, input);
+    expect(apiClient.delete).toHaveBeenCalledWith(APIUrl, {
+      data: input,
+    });
   });
 
   it('should handle errors correctly when the request fails', async () => {
@@ -60,8 +62,8 @@ describe('deleteProject', () => {
       },
     };
 
-    // Simulate a rejected promise for apiClient.post
-    vi.mocked(apiClient.post).mockRejectedValueOnce(mockError);
+    // Simulate a rejected promise for apiClient.delete
+    vi.mocked(apiClient.delete).mockRejectedValueOnce(mockError);
 
     try {
       await deleteProject(input);
@@ -73,6 +75,8 @@ describe('deleteProject', () => {
       }
     }
 
-    expect(apiClient.post).toHaveBeenCalledWith(APIUrl, input);
+    expect(apiClient.delete).toHaveBeenCalledWith(APIUrl, {
+      data: input,
+    });
   });
 });

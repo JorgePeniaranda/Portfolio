@@ -1,6 +1,6 @@
 {
   "name": "jorgepeniaranda",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "private": true,
   "description": "Jorge Peñaranda's Portfolio",
   "author": "Jorge Peñaranda",
@@ -18,7 +18,14 @@
     "typescript",
     "react",
     "tailwind",
-    "css"
+    "css",
+    "html",
+    "javascript",
+    "eslint",
+    "prisma",
+    "prisma-orm",
+    "vitest",
+    "shadcn-ui"
   ],
   "engines": {
     "node": ">=22"
@@ -68,7 +75,7 @@
     "@radix-ui/react-tooltip": "1.1.8",
     "@tanstack/react-table": "8.21.2",
     "@xyflow/react": "12.4.3",
-    "astro": "5.2.6",
+    "astro": "5.3.0",
     "astro-icon": "1.1.5",
     "astro-robots-txt": "1.0.0",
     "astro-seo": "0.8.4",
@@ -117,7 +124,7 @@
     "jsdom": "^26.0.0",
     "postcss-import": "16.1.0",
     "postcss-nesting": "13.0.1",
-    "prettier": "3.5.0",
+    "prettier": "3.5.1",
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-tailwindcss": "0.6.11",
     "prisma": "6.3.1",

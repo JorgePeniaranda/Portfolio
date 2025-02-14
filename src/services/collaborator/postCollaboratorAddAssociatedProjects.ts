@@ -1,4 +1,4 @@
-import type { RelationshipsSchema } from '../../schemas/common/relationships';
+import type { EntityRelationSchema } from '../../schemas/common/entity-relation-schema';
 
 import { apiClient } from '@/helpers/client/axios';
 import { handleServiceError } from '@/helpers/error/service-handler';
@@ -11,12 +11,12 @@ import { handleServiceError } from '@/helpers/error/service-handler';
  * @throws An error if the collaborator and project data could not be added.
  */
 export async function postCollaboratorAddAssociatedProjects(
-  relationSchema: RelationshipsSchema,
+  relationSchema: EntityRelationSchema,
 ): Promise<void> {
   try {
-    const { idFrom, idTo } = relationSchema;
+    const { idSource, idTarget } = relationSchema;
     const { data: response } = await apiClient.post<void>(
-      `/api/collaborator/id/${idFrom}/project/${idTo}`,
+      `/api/collaborator/id/${idTarget}/project/${idSource}`,
     );
 
     return response;

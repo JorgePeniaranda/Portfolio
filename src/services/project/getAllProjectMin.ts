@@ -1,4 +1,3 @@
-import type { PaginationRequest } from '@/types/responses';
 import type { Project } from '@prisma/client';
 
 import { apiClient } from '@/helpers/client/axios';
@@ -11,20 +10,13 @@ export type IGetAllProjectMinResponse = Array<
 /**
  * Get all projects with minimal information.
  *
- * @param pagination - Pagination options
  * @returns A list of projects
  * @throws An error if the projects could not be retrieved
  */
-export async function getAllProjectMin(
-  pagination?: PaginationRequest,
-): Promise<IGetAllProjectMinResponse> {
+export async function getAllProjectMin(): Promise<IGetAllProjectMinResponse> {
   try {
-    const { data: response } = await apiClient.get<IGetAllProjectMinResponse>(
-      '/api/project/min.json',
-      {
-        params: pagination,
-      },
-    );
+    const { data: response } =
+      await apiClient.get<IGetAllProjectMinResponse>('/api/project/min.json');
 
     return response;
   } catch (error) {

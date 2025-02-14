@@ -1,7 +1,8 @@
 import type { ErrorResponse } from '@/types/responses';
 import type { Stack } from '@prisma/client';
+import type { AxiosError } from 'axios';
 
-import { AxiosError, AxiosHeaders, type AxiosResponse } from 'axios';
+import { AxiosHeaders, type AxiosResponse } from 'axios';
 import { describe, expect, it, vi } from 'vitest';
 
 import { TEST_STACK_MOCK } from '../../__mock__/stack.mock';
@@ -13,8 +14,7 @@ import { getAllStack } from '@/services/stack/getAllStack';
 vi.mock('@/helpers/client/axios');
 
 describe('getAllStack', () => {
-  const APIUrl = `/api/stack/get/all.json`;
-  const pagination = { page: 1, size: 10 };
+  const APIUrl = `/api/stack.json`;
 
   it('should return stack data when the request is successful', async () => {
     // Simulating a successful response from apiClient
@@ -31,14 +31,12 @@ describe('getAllStack', () => {
     // Mocking the resolved value of apiClient.get for this test case
     vi.mocked(apiClient.get).mockResolvedValueOnce(mockResponse);
 
-    const response = await getAllStack(pagination);
+    const response = await getAllStack();
 
     // Asserting that the response matches the mock data
     expect(response).toEqual(mockResponse.data);
     // Ensuring the API was called with the correct endpoint
-    expect(apiClient.get).toHaveBeenCalledWith(APIUrl, {
-      params: pagination,
-    });
+    expect(apiClient.get).toHaveBeenCalledWith(APIUrl);
   });
 
   it('should handle errors correctly when the request fails', async () => {
@@ -68,7 +66,7 @@ describe('getAllStack', () => {
     vi.mocked(apiClient.get).mockRejectedValueOnce(mockError);
 
     try {
-      await getAllStack(pagination);
+      await getAllStack();
     } catch (error) {
       // Validate error handling and apiClient call
       expect(error).toBeInstanceOf(Error);
@@ -77,8 +75,6 @@ describe('getAllStack', () => {
       }
     }
 
-    expect(apiClient.get).toHaveBeenCalledWith(APIUrl, {
-      params: pagination,
-    });
+    expect(apiClient.get).toHaveBeenCalledWith(APIUrl);
   });
 });

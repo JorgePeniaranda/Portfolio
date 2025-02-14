@@ -79,51 +79,25 @@ This project follows the **Git Flow** workflow for efficient development and dep
    git checkout production
    git merge main
    ```
-Here's the updated workflow, including the manual build and deployment process:
 
 ---
 
-### **Workflow: Astro Development and Deployment**
+### 🚀 Deployment
 
-1. **Work in `develop`**: Develop new features in feature branches derived from `develop`.  
-
-   ```bash
-   git checkout develop
-   git checkout -b feature/new-feature
-   ```
-
-2. **Preparation for testing**: Once a feature is ready, merge the feature branch into `develop` and create a release branch for final testing.  
-
-   ```bash
-   git checkout develop
-   git merge feature/new-feature
-   git checkout -b release/v1.0.0
-   ```
-
-3. **Testing in `main`**: After testing in the release branch, merge the changes into `main` for additional testing if necessary.  
-
-   ```bash
-   git checkout main
-   git merge release/v1.0.0
-   ```
-
-4. **Production deployment**: Once the changes in `main` have been validated, merge `main` into `production`.  
+1. **Production deployment**: Once the changes in `main` have been validated, merge `main` into `production`.  
 
    ```bash
    git checkout production
    git merge main
    ```
 
-5. **Build and deploy manually**: After merging into `production`, you need to generate the build and upload the `docs/` folder.
+2. **Generate the production build**: Start by running the build command to generate the static files needed for production. The build files will be generated in the `docs/` directory.
 
    ```bash
    npm run dev & npm run build  # Start dev server and build production files
-   git add -f docs/                 # Add the built files
-   git commit -m "Deploy to production"
-   git push origin production    # Push to production branch
    ```
-6. **Ensure `.nojekyll` exists**:  
-Before deploying to GitHub Pages, ensure that the `.nojekyll` file exists in the `docs/` folder to prevent Jekyll processing.
+
+3. **Ensure `.nojekyll` exists**: Before deploying to GitHub Pages, ensure that the `.nojekyll` file exists in the `docs/` folder to prevent Jekyll processing.
 
    #### **For Linux/macOS**:
    ```bash
@@ -135,67 +109,75 @@ Before deploying to GitHub Pages, ensure that the `.nojekyll` file exists in the
    echo "" > docs\.nojekyll  # Creates .nojekyll in the docs folder
    ```
 
+4. **Stage the built files**: After the build is complete, add the `docs/` folder (which contains the production build) to the staging area.
+
+   ```bash
+   git add -f docs/  # Stage the build files
+   ```
+
+5. **Commit and push the changes**: After staging the build files, commit them with a clear message and push them directly to the `production` branch to trigger the deployment.
+
+   ```bash
+   git commit -m "Deploy to production" && git push origin production  # Commit and push to production branch
+   ```
+
 Now, your `docs/` folder will be included in the `production` branch, making it ready for deployment to **GitHub Pages**. 🚀
-## 🚀 Deployment
+
+---
+
+## 🖥️ Running Locally
 
 You need the following programs before you start:
 
 - npm: https://www.npmjs.com/package/download
 - PostgreSQL: https://www.postgresql.org/download/
 
-1. Clone the repo
+1. **Clone the repo**:
 
-```sh
-git clone https://github.com/JorgePeniaranda/Portfolio
-```
+   ```sh
+   git clone https://github.com/JorgePeniaranda/Portfolio
+   ```
 
-2. Navigate to the project
+2. **Navigate to the project**:
 
-```sh
-cd ./Portfolio
-```
+   ```sh
+   cd ./Portfolio
+   ```
 
-3. Install NPM packages
+3. **Install NPM packages**:
 
-```sh
-npm install
-```
+   ```sh
+   npm install
+   ```
 
-4. Set up PostgreSQL:
+4. **Set up PostgreSQL**:
 
-- Make sure PostgreSQL is installed and running on your machine.
-- Create a new database for the project (e.g., portfolio_db).
+   - Make sure PostgreSQL is installed and running on your machine.
+   - Create a new database for the project (e.g., portfolio_db).
 
-5. Configure the database connection:
+5. **Configure the database connection**: In the .env file (or create one), set the DATABASE_URL environment variable to match your PostgreSQL connection string.
 
-- In the .env file (or create one), set the DATABASE_URL environment variable to match your
-  PostgreSQL connection string:
+   ```env
+   DATABASE_URL="postgresql://user:password@localhost:5432/portfolio_db?schema=public"
+   ```
 
-```env
-DATABASE_URL="postgresql://user:password@localhost:5432/portfolio_db?schema=public"
-```
+6. **Generate Prisma Client**: After configuring your .env file, run the following command to generate the Prisma Client:
+  
+   ```sh
+   npm run prisma:generate
+   ```
 
-6. Generate Prisma Client:
+7. **Migrate the database**: Run Prisma migrations to set up the database schema.
 
-- After configuring your .env file, run the following command to generate the Prisma Client:
+   ```sh
+   npm run prisma:migrate
+   ```
 
-```sh
-npm run prisma:generate
-```
+8. **Execute the project**
 
-7. Migrate the database:
-
-- Run Prisma migrations to set up the database schema:
-
-```sh
-npm run prisma:migrate
-```
-
-8. Execute the project
-
-```sh
-npm run dev
-```
+   ```sh
+   npm run dev
+   ```
 
 This will start the development server. You can now access your application at
 http://localhost:4321.
