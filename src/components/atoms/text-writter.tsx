@@ -6,6 +6,9 @@ interface IProps {
 
 /**
  * TextWritter component displays a typewriter effect with words from the provided list.
+ * @param params - Component props
+ * @param params.wordList - List of words to type
+ * @returns A TextWritter component
  */
 export function TextWritter({ wordList }: IProps) {
   return (

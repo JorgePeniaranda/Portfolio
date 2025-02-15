@@ -30,6 +30,15 @@ import { postCollaboratorAddAssociatedProjects } from '@/services/collaborator/p
 import { deleteCollaboratorRemoveAssociatedProjects } from '@/services/collaborator/deleteCollaboratorRemoveAssociatedProjects';
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 
+/**
+ * Form to update projects related to a collaborator.
+ * @param params - The component props
+ * @param params.currentCollaborator - The current collaborator
+ * @param params.associatedProjects - The associated projects
+ * @param params.availableProject - The available projects
+ * @param params.disableForm - Whether the form should be disabled
+ * @returns The update projects related to collaborator form
+ */
 export function UpdateProjectsRelatedToCollaborator({
   currentCollaborator,
   associatedProjects: initialAssociatedProjects,

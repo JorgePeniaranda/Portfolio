@@ -8,6 +8,9 @@ import { useSecretCodeStore } from '@/services/storage/secret-code';
 /**
  * Component that displays an interactive button to reveal a digit of a secret code.
  * If the code has already been fully discovered, it shows a reminder message.
+ * @param params - Component props
+ * @param params.position - The position of the digit in the secret code
+ * @returns A SecretCodeHint component
  */
 export function SecretCodeHint({ position }: { position: number }) {
   // Access the secret code and functions to unlock a digit.

@@ -5,6 +5,9 @@ import { handleApiError } from '@/helpers/error/api-handler';
 
 /**
  * GET handler to fetch a paginated list of stacks.
+ * @param params Function parameters
+ * @param params.url The request URL
+ * @returns A list of stacks
  */
 export const GET: APIRoute = async ({ url }) => {
   try {

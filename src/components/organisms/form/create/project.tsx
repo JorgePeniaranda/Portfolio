@@ -36,6 +36,12 @@ import { ProjectCreateDefaultValues, ProjectCreateSchema } from '@/schemas/proje
 import { postProject } from '@/services/project/postProject';
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 
+/**
+ * Form to show a project.
+ * @param params - The component props
+ * @param params.disableForm - Whether the form should be disabled
+ * @returns The show project form
+ */
 export function CreateProjectForm({ disableForm = false }: { disableForm?: boolean }) {
   const { toast } = useToast();
 

@@ -6,14 +6,14 @@ import { PERSONAL_ACCOUNTS } from './external';
  * @description
  * - Sections are separated by first-level arrays. ej: [ [], [] ]
  * - Each section is an object with the following properties:
- *  > icon: Icon name from Lucide Icons. ref: https://lucide.dev/icons/
- *  > label: Section label.
- *  > items: Array of links. ej: [ {}, {} ]
+ * > icon: Icon name from Lucide Icons. ref: https://lucide.dev/icons/
+ * > label: Section label.
+ * > items: Array of links. ej: [ {}, {} ]
  * - Each link is an object with the following properties:
- *  > icon: Icon name from Lucide Icons. ref: https://lucide.dev/icons/
- *  > label: Link label.
- *  > link: URL.
- *  > ...rest: Any other property that can be passed to an anchor element.
+ * > icon: Icon name from Lucide Icons. ref: https://lucide.dev/icons/
+ * > label: Link label.
+ * > link: URL.
+ * > ...rest: Any other property that can be passed to an anchor element.
  * - On implementation, the Navbar component will iterate over the sections and links to render the links. sections will be separated by a divider (<hr/>).
  * - For accessibility, the Navbar component will use the key of the first letter of the label as an accessKey for the link. remember to use unique labels.
  */

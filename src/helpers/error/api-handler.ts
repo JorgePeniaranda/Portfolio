@@ -8,10 +8,9 @@ import { prismaHandler } from './prisma-handler';
 
 /**
  * A helper function that formats API errors into a readable error response.
- *
- * @param {unknown} error - The error object to handle.
- * @param {URL} [url] - The URL object to include in the error response.
- * @returns {Response} A response object containing the error message and status code.
+ * @param error - The error object to handle
+ * @param [url] - The URL object to include in the error response
+ * @returns A response object containing the error message and status code
  */
 export function handleApiError(error: unknown, url?: URL): Response {
   // If the error is a Prisma error

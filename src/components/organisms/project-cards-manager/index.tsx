@@ -24,6 +24,9 @@ import { Button } from '@/components/ui/button';
 /**
  * Component that renders a list of project cards, sorted by favorites.
  * The list is sorted such that liked projects appear first.
+ * @param params - Function parameters
+ * @param params.projects - List of projects to render
+ * @returns A React component
  */
 export function ProjectCardsManager({
   projects,
@@ -158,7 +161,9 @@ export function ProjectCardsManager({
                 size='sm'
                 variant='secondary'
                 onClick={(e) => {
+                  e.preventDefault();
                   e.stopPropagation();
+
                   setStackFilter(undefined);
                   setStackKey(+new Date());
                 }}
@@ -201,7 +206,9 @@ export function ProjectCardsManager({
                 size='sm'
                 variant='secondary'
                 onClick={(e) => {
+                  e.preventDefault();
                   e.stopPropagation();
+
                   setStatusFilter(undefined);
                   setStatusKey(+new Date());
                 }}

@@ -19,6 +19,13 @@ import { CollaboratorUpdateSchema } from '@/schemas/collaborator/update';
 import { putCollaborator } from '@/services/collaborator/putCollaborator';
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 
+/**
+ * Form to update a collaborator.
+ * @param params - The component props
+ * @param params.currentCollaborator - The current collaborator to update
+ * @param params.disableForm - Whether the form should be disabled
+ * @returns The update collaborator form
+ */
 export function UpdateCollaboratorForm({
   currentCollaborator,
   disableForm,

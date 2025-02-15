@@ -30,6 +30,15 @@ import { postProjectAddAssociatedStack } from '@/services/project/postProjectAdd
 import { deleteProjectRemoveAssociatedStack } from '@/services/project/deleteProjectRemoveAssociatedStack';
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 
+/**
+ * Form to update stacks related to a project.
+ * @param params - The component props
+ * @param params.currentProject - The current project
+ * @param params.associatedStacks - The associated stacks
+ * @param params.availableStacks - The available stacks
+ * @param params.disableForm - Whether the form should be disabled
+ * @returns The update stacks related to project form
+ */
 export function UpdateStacksRelatedToProject({
   currentProject,
   associatedStacks: initialAssociatedStacks,

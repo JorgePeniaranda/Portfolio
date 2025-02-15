@@ -5,10 +5,9 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * This service is responsible for removing a project from a collaborator.
- *
- * @param relationSchema - Object with the collaborator and project data.
- * @returns A promise with the collaborator and project data.
- * @throws An error if the collaborator and project data could not be removed.
+ * @param relationSchema - Object with the collaborator and project data
+ * @returns A promise with the collaborator and project data
+ * @throws An error if the collaborator and project data could not be removed
  */
 export async function deleteCollaboratorRemoveAssociatedProjects(
   relationSchema: EntityRelationSchema,

@@ -37,12 +37,14 @@ interface Props {
 /**
  * A component that renders project details in an accordion format.
  * It includes sections for goals, technologies, contributions, collaborators, and resources.
- * @param contributions - A description of the contributions made to the project.
- * @param goals - A description of the goals for the project.
- * @param stackCategory - A list of technologies used in the project.
- * @param collaborators - A list of collaborators in the project.
- * @param githubUrl - The GitHub repository URL of the project.
- * @param demoUrl - The demo URL of the project.
+ * @param params - Component properties
+ * @param params.contributions - A description of the contributions made to the project
+ * @param params.goals - A description of the goals for the project
+ * @param params.stackCategory - A list of technologies used in the project
+ * @param params.collaborators - A list of collaborators in the project
+ * @param params.githubUrl - The GitHub repository URL of the project
+ * @param params.demoUrl - The demo URL of the project
+ * @returns A React component
  */
 export function ProjectAccordion({
   collaborators,

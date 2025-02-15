@@ -29,6 +29,13 @@ import { ENV } from '@/constants/env';
 import { DASHBOARD_NAVBAR_ITEMS } from '@/constants/navbar';
 import { isDefined } from '@/helpers/guards/is-defined';
 
+/**
+ * Dashboard layout.
+ * @param params - The component props
+ * @param params.children - The children of the dashboard layout
+ * @param params.breadcrumb - The breadcrumb items
+ * @returns The dashboard layout
+ */
 export function DashboardLayout({
   children,
   breadcrumb,

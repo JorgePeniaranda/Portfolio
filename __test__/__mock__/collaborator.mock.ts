@@ -2,6 +2,11 @@ import type { Collaborator } from '@prisma/client';
 
 import { faker } from '@faker-js/faker';
 
+/**
+ * Generate a test collaborator mock.
+ * @param overrides - The properties to override
+ * @returns A test collaborator mock
+ */
 export function generateTestCollaboratorMock(overrides: Partial<Collaborator> = {}): Collaborator {
   const username = faker.internet.username().toLowerCase();
 
@@ -16,6 +21,11 @@ export function generateTestCollaboratorMock(overrides: Partial<Collaborator> = 
   };
 }
 
+/**
+ * Generate many test collaborator mocks.
+ * @param count - The number of mocks to generate
+ * @returns An array of test collaborator mocks
+ */
 export function generateManyTestCollaboratorMocks(count: number): Collaborator[] {
   return Array.from({ length: count }, () => generateTestCollaboratorMock());
 }

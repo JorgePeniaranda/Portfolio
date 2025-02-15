@@ -4,7 +4,6 @@ import { isNotDefined } from './is-defined';
 
 /**
  * Type guard for the ErrorResponse type.
- *
  * @param error - The error to check
  * @returns True if the error is an ErrorResponse, false otherwise
  */

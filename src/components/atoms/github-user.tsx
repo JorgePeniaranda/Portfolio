@@ -9,6 +9,9 @@ interface Props extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 
 /**
  * GithubUser component renders a link to a GitHub profile along with the user's avatar.
+ * @param params - Component params
+ * @param params.username - The GitHub username
+ * @returns A GithubUser component
  */
 export default function GithubUser({ username, ...props }: Props) {
   return (

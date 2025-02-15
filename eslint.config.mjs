@@ -8,8 +8,10 @@
 import { fixupPluginRules } from '@eslint/compat';
 import vercelStyleGuideReact from '@vercel/style-guide/eslint/rules/react';
 import vercelStyleGuideTypescript from '@vercel/style-guide/eslint/typescript';
+import astroParser from 'astro-eslint-parser';
 import eslintPluginAstro from 'eslint-plugin-astro';
 import eslintPluginImport from 'eslint-plugin-import';
+import jsdoc from 'eslint-plugin-jsdoc';
 import eslintPluginJsxA11y from 'eslint-plugin-jsx-a11y';
 import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
 import eslintPluginReact from 'eslint-plugin-react';
@@ -17,7 +19,6 @@ import eslintPluginReactHooks from 'eslint-plugin-react-hooks';
 import tailwind from 'eslint-plugin-tailwindcss';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
-import astroParser from 'astro-eslint-parser';
 
 export default [
   /**
@@ -225,4 +226,32 @@ export default [
    * 🔹 Tailwind CSS configuration
    */
   ...[...tailwind.configs['flat/recommended']],
+
+  /**
+   * 🔹 JSDoc configuration
+   */
+  jsdoc.configs['flat/recommended-typescript-error'],
+  {
+    files: ['**/*.ts', '**/*.tsx'],
+    plugins: { jsdoc },
+    rules: {
+      'jsdoc/no-types': 'error',
+      'jsdoc/require-description': 'warn',
+      'jsdoc/check-alignment': 'warn',
+      'jsdoc/check-indentation': 'warn',
+      'jsdoc/check-line-alignment': 'warn',
+      'jsdoc/require-throws': 'error',
+      'jsdoc/require-jsdoc': [
+        'off',
+        {
+          publicOnly: true,
+          require: {
+            FunctionDeclaration: true,
+            MethodDefinition: true,
+            ClassDeclaration: true,
+          },
+        },
+      ],
+    },
+  },
 ];

@@ -2,12 +2,12 @@ import type { Project, Stack } from '@prisma/client';
 
 /**
  * Component that wraps the `StackDrawer` and provides a visual trigger for opening it.
- *
- * @param {Object} props - Component properties.
- * @param {Object} props.data - Data for rendering the stack drawer and its trigger.
- * @param {string} props.data.label - Accessible label for the trigger element.
- * @param {string} props.data.iconUrl - URL of the icon displayed in the trigger.
- * @param {Stack & {projects: Pick<Project, "id" | "key" | "name" | "logoUrl">[]}} props.data.stackData - Stack data to display in the drawer.
+ * @param params - Component properties
+ * @param params.data - Data for rendering the stack drawer and its trigger
+ * @param params.data.label - Accessible label for the trigger element
+ * @param params.data.iconUrl - URL of the icon displayed in the trigger
+ * @param params.data.stackData - Stack data to display in the drawer
+ * @returns A React component
  */
 export function StackWithDrawerNode({
   data,

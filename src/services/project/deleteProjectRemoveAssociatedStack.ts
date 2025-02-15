@@ -6,10 +6,9 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Remove a stack from a project.
- *
- * @param relationSchema - Relationships schema.
- * @returns A promise with the project data.
- * @throws An error if the stack could not be removed from the project.
+ * @param relationSchema - Relationships schema
+ * @returns A promise with the project data
+ * @throws An error if the stack could not be removed from the project
  */
 export async function deleteProjectRemoveAssociatedStack(
   relationSchema: EntityRelationSchema,

@@ -3,6 +3,12 @@ import type { Collaborator } from '@prisma/client';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardHeader } from '@/components/ui/card';
 
+/**
+ * Card to show a collaborator relationship.
+ * @param params - The component props
+ * @param params.collaborator - The collaborator to show
+ * @returns The collaborator relationship card
+ */
 export function CollaboratorRelationShipCard({ collaborator }: { collaborator: Collaborator }) {
   return (
     <Card className='my-5 flex w-max flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800'>

@@ -22,6 +22,12 @@ import {
 import { postCollaborator } from '@/services/collaborator/postCollaborator';
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 
+/**
+ * Form to show a collaborator.
+ * @param params - The component props
+ * @param params.disableForm - Whether the form should be disabled
+ * @returns The show collaborator form
+ */
 export function CreateCollaboratorForm({ disableForm = false }: { disableForm?: boolean }) {
   const { toast } = useToast();
 

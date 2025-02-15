@@ -5,8 +5,8 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Get projects by associated stack.
- *
- * @param idStack - The stack ID
+ * @param params - Function parameters
+ * @param params.idStack - The stack ID
  * @returns A list of projects
  * @throws An error if the projects could not be retrieved
  */

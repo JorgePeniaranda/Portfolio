@@ -1,4 +1,3 @@
-/** @type {import('tailwindcss').Config} */
 import TailwindCSSAnimate from 'tailwindcss-animate';
 import TailwindCSSTypography from '@tailwindcss/typography';
 

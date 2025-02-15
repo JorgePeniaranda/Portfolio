@@ -5,8 +5,8 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Get a project by its key.
- *
- * @param key - The key of the project
+ * @param params - Function parameters
+ * @param params.key - The key of the project
  * @returns The project with the given key, or null if it does not exist
  * @throws An error if the project could not be retrieved
  */

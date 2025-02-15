@@ -9,6 +9,10 @@ import { handleApiError } from '@/helpers/error/api-handler';
  * POST handler to add a collaborator to a project.
  * - Parses and validates the params.
  * - Connects the specified collaborator to the project in the database.
+ * @param params Function parameters
+ * @param params.params The request parameters
+ * @param params.url The request URL
+ * @returns A null response
  */
 export const POST: APIRoute = async ({ params, url }) => {
   try {
@@ -36,6 +40,10 @@ export const POST: APIRoute = async ({ params, url }) => {
  * DELETE handler to remove a collaborator from a project.
  * - Parses and validates the params.
  * - Disconnects the specified collaborator from the project in the database.
+ * @param params Function parameters
+ * @param params.params The request parameters
+ * @param params.url The request URL
+ * @returns A null response
  */
 export const DELETE: APIRoute = async ({ params, url }) => {
   try {

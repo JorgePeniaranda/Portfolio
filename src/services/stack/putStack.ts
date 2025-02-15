@@ -6,8 +6,9 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Update a stack
- *
- * @param stackUpdateInput - Stack data
+ * @param params - Function parameters
+ * @param params.idStack - Stack ID
+ * @param params.stackUpdateInput - Initial stack data
  * @returns Stack data
  * @throws An error if the stack could not be updated
  */

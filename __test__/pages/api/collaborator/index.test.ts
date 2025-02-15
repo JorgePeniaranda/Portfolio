@@ -52,7 +52,6 @@ describe('CREATE collaborator endpoint', () => {
   /**
    * Parsed version of the request body.
    * Simulates the actual result of calling `request.json()` in an API handler.
-   *
    * @example
    * const parsed = request.json(); // Equivalent to ParsedCollaboratorRequest
    */
@@ -69,7 +68,6 @@ describe('CREATE collaborator endpoint', () => {
   /**
    * Simulated parsed response body.
    * Represents the expected API response after processing the request.
-   *
    * @example
    * const response = await apiCall();
    * const parsedResponse = await response.json(); // Equivalent to ParsedCollaboratorResponse

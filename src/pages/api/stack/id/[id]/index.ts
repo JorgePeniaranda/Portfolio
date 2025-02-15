@@ -11,6 +11,11 @@ import { StackUpdateSchema } from '@/schemas/stack/update';
  * - Parses the request body.
  * - Validates it using the `StackUpdateSchema`.
  * - Updates the stack in the database.
+ * @param params Function parameters
+ * @param params.request The request parameters
+ * @param params.params The request parameters
+ * @param params.url The request URL
+ * @returns A stack
  */
 export const PUT: APIRoute = async ({ request, params, url }) => {
   try {

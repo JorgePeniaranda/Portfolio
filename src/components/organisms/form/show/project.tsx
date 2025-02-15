@@ -31,6 +31,12 @@ import {
 import { cn } from '@/helpers/common/classnames';
 import { ProjectUpdateSchema } from '@/schemas/project/update';
 
+/**
+ * Form to show a project.
+ * @param params - The component props
+ * @param params.currentProject - The current project to show
+ * @returns The show project form
+ */
 export function ShowProjectForm({ currentProject }: { currentProject: Project }) {
   const form = useForm<ProjectUpdateSchema>({
     resolver: zodResolver(ProjectUpdateSchema),

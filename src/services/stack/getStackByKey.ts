@@ -5,8 +5,8 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Get a stack by its key.
- *
- * @param key - The key of the stack
+ * @param params - Function parameters
+ * @param params.key - The key of the stack
  * @returns The stack with the given key, or null if it does not exist
  * @throws An error if the stack could not be retrieved
  */

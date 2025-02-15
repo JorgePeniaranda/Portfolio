@@ -11,6 +11,10 @@ import { CollaboratorCreateSchema } from '@/schemas/collaborator/create';
  * - Parses the request body.
  * - Validates it using the `CollaboratorCreateSchema`.
  * - Creates a new collaborator in the database.
+ * @param params Function parameters
+ * @param params.request The request parameters
+ * @param params.url The request URL
+ * @returns A collaborator
  */
 export const POST: APIRoute = async ({ request, url }) => {
   try {
@@ -32,6 +36,10 @@ export const POST: APIRoute = async ({ request, url }) => {
  * - Parses the request body.
  * - Validates it as an array of numbers (IDs).
  * - Deletes collaborators from the database.
+ * @param params Function parameters
+ * @param params.request The request parameters
+ * @param params.url The request URL
+ * @returns The number of deleted items
  */
 export const DELETE: APIRoute = async ({ request, url }) => {
   try {

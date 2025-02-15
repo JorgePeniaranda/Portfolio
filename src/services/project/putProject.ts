@@ -6,10 +6,11 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Updates a project.
- *
- * @param projectUpdateInput - The project data.
- * @returns The updated project.
- * @throws An error if the operation fails.
+ * @param params - Function parameters
+ * @param params.idProject - The project ID
+ * @param params.projectUpdateInput - The project data
+ * @returns The updated project
+ * @throws An error if the operation fails
  */
 export async function putProject({
   idProject,

@@ -9,7 +9,6 @@ export type IGetAllProjectMinResponse = Array<
 
 /**
  * Get all projects with minimal information.
- *
  * @returns A list of projects
  * @throws An error if the projects could not be retrieved
  */

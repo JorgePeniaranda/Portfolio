@@ -3,7 +3,6 @@ import packageJson from '@/../package.json';
 
 /**
  * Configuration object for environment-specific values.
- * @constant {object}
  */
 export const ENV = {
   appVersion: packageJson.version,

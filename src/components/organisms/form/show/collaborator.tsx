@@ -15,6 +15,12 @@ import {
 import { Input } from '@/components/ui/input';
 import { CollaboratorUpdateSchema } from '@/schemas/collaborator/update';
 
+/**
+ * Form to show a collaborator.
+ * @param params - The component props
+ * @param params.currentCollaborator - The current collaborator to show
+ * @returns The show collaborator form
+ */
 export function ShowCollaboratorForm({
   currentCollaborator,
 }: {

@@ -12,6 +12,11 @@ export interface Props {
 
 /**
  * ProjectCard component displays project details, allows the user to like/unlike it, and navigate to the project page.
+ * @param params - Component params
+ * @param params.projectKey - The project key
+ * @param params.name - The project name
+ * @param params.logoURL - The project logo URL
+ * @returns A React component
  */
 export function ProjectCard({ projectKey, name, logoURL }: Props) {
   // Destructure functions for managing the liked projects state
@@ -22,6 +27,7 @@ export function ProjectCard({ projectKey, name, logoURL }: Props) {
 
   // Function to toggle the liked state when the heart icon is clicked
   const handleClickHeart = (e: MouseEvent<SVGSVGElement, globalThis.MouseEvent>) => {
+    e.preventDefault();
     e.stopPropagation();
 
     if (isLiked) {

@@ -6,10 +6,9 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Create a new project.
- *
- * @param projectInput - The project data.
- * @returns The created project.
- * @throws An error if the operation fails.
+ * @param projectInput - The project data
+ * @returns The created project
+ * @throws An error if the operation fails
  */
 export async function postProject(projectInput: ProjectCreateSchema): Promise<Project> {
   try {
