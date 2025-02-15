@@ -34,7 +34,6 @@ export default [
       'coverage',
       '.idea',
       'src/env.d.ts',
-      'src/components/ui/',
     ],
   },
 
@@ -242,7 +241,17 @@ export default [
       'jsdoc/check-indentation': 'warn',
       'jsdoc/check-line-alignment': 'warn',
       'jsdoc/require-throws': 'error',
-      'jsdoc/require-jsdoc': 'off',
+      'jsdoc/require-jsdoc': [
+        'off',
+        {
+          publicOnly: true,
+          require: {
+            FunctionDeclaration: true,
+            MethodDefinition: true,
+            ClassDeclaration: true,
+          },
+        },
+      ],
     },
   },
 ];
