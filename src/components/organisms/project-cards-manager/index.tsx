@@ -161,7 +161,9 @@ export function ProjectCardsManager({
                 size='sm'
                 variant='secondary'
                 onClick={(e) => {
+                  e.preventDefault();
                   e.stopPropagation();
+
                   setStackFilter(undefined);
                   setStackKey(+new Date());
                 }}
@@ -204,7 +206,9 @@ export function ProjectCardsManager({
                 size='sm'
                 variant='secondary'
                 onClick={(e) => {
+                  e.preventDefault();
                   e.stopPropagation();
+
                   setStatusFilter(undefined);
                   setStatusKey(+new Date());
                 }}

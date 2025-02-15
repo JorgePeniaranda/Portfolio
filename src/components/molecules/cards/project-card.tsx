@@ -27,6 +27,7 @@ export function ProjectCard({ projectKey, name, logoURL }: Props) {
 
   // Function to toggle the liked state when the heart icon is clicked
   const handleClickHeart = (e: MouseEvent<SVGSVGElement, globalThis.MouseEvent>) => {
+    e.preventDefault();
     e.stopPropagation();
 
     if (isLiked) {
