@@ -26,6 +26,12 @@ import {
 } from '@/constants/transcriptions';
 import { StackCreateSchema } from '@/schemas/stack/create';
 
+/**
+ * Form to show a stack.
+ * @param params - The component props
+ * @param params.currentStack - The current stack to show
+ * @returns The show stack form
+ */
 export function ShowStackForm({ currentStack }: { currentStack: Stack }) {
   const form = useForm<StackCreateSchema>({
     resolver: zodResolver(StackCreateSchema),

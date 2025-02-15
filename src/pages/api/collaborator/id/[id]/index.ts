@@ -11,6 +11,11 @@ import { CollaboratorUpdateSchema } from '@/schemas/collaborator/update';
  * - Parses the request body.
  * - Validates it using the `CollaboratorUpdateSchema`.
  * - Updates the collaborator in the database.
+ * @param params - The request parameters
+ * @param params.request - The request parameters
+ * @param params.params - The request parameters
+ * @param params.url - The request URL
+ * @returns A collaborator
  */
 export const PUT: APIRoute = async ({ request, params, url }) => {
   try {

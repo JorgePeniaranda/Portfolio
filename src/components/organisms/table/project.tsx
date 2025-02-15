@@ -147,7 +147,13 @@ const columns: Array<ColumnDef<Project>> = [
 ];
 //#endregion
 
-// MARK: - Collaborator Table
+// MARK: - Project Table
+/**
+ * Project Table Component
+ * @param params - The component props
+ * @param params.data - The initial data to display in the table
+ * @returns The Project Table Component
+ */
 export function ProjectTable({ data: initialData }: { data: Project[] }) {
   const [data, setData] = useState<Project[]>(initialData);
 

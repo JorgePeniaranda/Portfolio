@@ -5,9 +5,8 @@ import { Prisma } from '@prisma/client';
  * It checks if the error is an instance of any known Prisma error types, such as `PrismaClientKnownRequestError`, `PrismaClientUnknownRequestError`,
  * `PrismaClientRustPanicError`, `PrismaClientInitializationError`, or `PrismaClientValidationError`.
  * If the error matches any of these types, it returns `true`; otherwise, it returns `false`.
- *
- * @param {unknown} error - The error object to check.
- * @returns {boolean} `true` if the error is an instance of a known Prisma error type, otherwise `false`.
+ * @param error - The error object to check
+ * @returns `true` if the error is an instance of a known Prisma error type, otherwise `false`
  */
 export function isPrismaError(
   error: unknown,

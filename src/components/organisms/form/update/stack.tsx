@@ -30,6 +30,13 @@ import { StackUpdateSchema } from '@/schemas/stack/update';
 import { putStack } from '@/services/stack/putStack';
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 
+/**
+ * Form to update a stack.
+ * @param params - The component props
+ * @param params.currentStack - The current stack to update
+ * @param params.disableForm - Whether the form should be disabled
+ * @returns The update stack form
+ */
 export function UpdateStackForm({
   currentStack,
   disableForm,

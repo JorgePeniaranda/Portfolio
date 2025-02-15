@@ -36,6 +36,15 @@ interface DataTableProps<TData, TValue> {
   meta?: TableMeta<TData>;
 }
 
+/**
+ * Data table component.
+ * @param params - The component props
+ * @param params.columns - The columns to show
+ * @param params.data - The data to show
+ * @param params.HeaderComponent - The header component
+ * @param params.meta - The table meta
+ * @returns The data table
+ */
 export function DataTable<TData, TValue>({
   columns,
   data,

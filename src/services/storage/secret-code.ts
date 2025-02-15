@@ -30,8 +30,7 @@ export const useSecretCodeStore = create<ISecretCodeStoreState & ISecretCodeStor
        * Unlocks the next number in the secret code if conditions are met:
        * - The index must be within the bounds of the secret code.
        * - The index must not already be unlocked.
-       *
-       * @param index - The index of the number to unlock.
+       * @param index - The index of the number to unlock
        */
       unlockOneNumber: (index: number) => {
         const { unlockedNumbers } = get();
@@ -60,9 +59,8 @@ export const useSecretCodeStore = create<ISecretCodeStoreState & ISecretCodeStor
 
       /**
        * Checks if the secret code is complete with the new index.
-       *
-       * @param index - The index of the number to check.
-       * @returns {boolean} True if the secret code is complete, false otherwise.
+       * @param index - The index of the number to check
+       * @returns True if the secret code is complete, false otherwise
        */
       checkIfCodeIsCompleteWithNewIndex: (index: number): boolean => {
         const { unlockedNumbers } = get();

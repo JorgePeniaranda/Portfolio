@@ -11,6 +11,10 @@ import { ProjectCreateSchema } from '@/schemas/project/create';
  * - Parses the request body.
  * - Validates it using the `ProjectCreateSchema`.
  * - Creates a new projects in the database.
+ * @param params Function parameters
+ * @param params.request The request parameters
+ * @param params.url The request URL
+ * @returns A projects
  */
 export const POST: APIRoute = async ({ request, url }) => {
   try {
@@ -32,6 +36,10 @@ export const POST: APIRoute = async ({ request, url }) => {
  * - Parses the request body.
  * - Validates it as an array of numbers (IDs).
  * - Deletes projects from the database.
+ * @param params Function parameters
+ * @param params.request The request parameters
+ * @param params.url The request URL
+ * @returns The number of deleted items
  */
 export const DELETE: APIRoute = async ({ request, url }) => {
   try {

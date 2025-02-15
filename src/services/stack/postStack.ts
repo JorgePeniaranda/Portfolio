@@ -6,10 +6,9 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Create a new stack.
- *
- * @param stackUpdateInput - The stack data.
- * @returns The created stack.
- * @throws An error if the operation fails.
+ * @param stackUpdateInput - The stack data
+ * @returns The created stack
+ * @throws An error if the operation fails
  */
 export async function postStack(stackUpdateInput: StackCreateSchema): Promise<Stack> {
   try {

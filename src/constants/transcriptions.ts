@@ -3,8 +3,6 @@ import type { ProjectStatus, StackCategory, StackType } from '@prisma/client';
 
 /**
  * A record that maps each `ProjectStatus` to a human-readable string translation.
- *
- * @constant {Record<ProjectStatus, string>}
  * @example
  * // Example usage:
  * const status = PROJECT_STATUS_TRANSCRIPTIONS.FINISHED; // "Terminado"
@@ -17,8 +15,6 @@ export const PROJECT_STATUS_TRANSCRIPTIONS: Record<ProjectStatus, string> = {
 
 /**
  * A record that maps each `StackCategory` to a human-readable string translation.
- *
- * @constant {Record<StackCategory, string>}
  * @example
  * // Example usage:
  * const stack = STACK_CATEGORY_TRANSCRIPTIONS.FULL_STACK; // "Full-Stack"
@@ -39,8 +35,6 @@ export const STACK_TYPE_TRANSCRIPTIONS: Record<StackType, string> = {
 
 /**
  * A record that maps each `ProjectSort` to a human-readable string translation.
- *
- * @constant {Record<ProjectSort, string>}
  * @example
  * // Example usage:
  * const sort = PROJECT_SORT_TRANSCRIPTIONS.LIKES; // "Favoritos"

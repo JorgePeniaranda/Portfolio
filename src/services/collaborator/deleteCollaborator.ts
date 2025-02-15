@@ -7,10 +7,9 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Deletes a list of collaborators from the database.
- *
- * @param {Array<Collaborator["id"]>} collaboratorIds - An array of collaborator IDs to delete.
- * @returns {Promise<DeleteResponse>} The number of items deleted.
- * @throws {Error} A generic error message if the operation fails.
+ * @param collaboratorIds - An array of collaborator IDs to delete
+ * @returns The number of items deleted
+ * @throws {Error} A generic error message if the operation fails
  */
 export async function deleteCollaborator(
   collaboratorIds: Array<Collaborator['id']>,

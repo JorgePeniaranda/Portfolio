@@ -6,10 +6,9 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Add a project to a stack.
- *
- * @param relationSchema - Relationships schema.
- * @returns A promise with the stack data.
- * @throws An error if the project could not be added to the stack.
+ * @param relationSchema - Relationships schema
+ * @returns A promise with the stack data
+ * @throws An error if the project could not be added to the stack
  */
 export async function postStackAddAssociatedProjects(
   relationSchema: EntityRelationSchema,

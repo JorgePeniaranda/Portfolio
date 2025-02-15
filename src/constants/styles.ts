@@ -7,8 +7,6 @@ import type { ProjectStatus, StackCategory } from '@prisma/client';
  *
  * - `transform`: Defines the transformation of the navbar's position based on scroll or other input.
  * - `spring`: Defines the spring physics for the animation, controlling the movement's smoothness and speed.
- *
- * @constant {object}
  */
 export const NavbarAnimationConfig = {
   transform: {
@@ -28,8 +26,6 @@ export const NavbarAnimationConfig = {
 /**
  * Defines the style for each project status using Tailwind CSS classes.
  * The styles are mapped to the `ProjectStatus` enum values.
- *
- * @constant {Record<ProjectStatus, string>}
  */
 const StatusStyle: Record<ProjectStatus, string> = {
   FINISHED: 'text-green-500', // Style for finished projects (green)
@@ -40,8 +36,6 @@ const StatusStyle: Record<ProjectStatus, string> = {
 /**
  * Defines the style for each project stack using Tailwind CSS classes.
  * The styles are mapped to the `StackCategory` enum values.
- *
- * @constant {Record<StackCategory, string>}
  */
 const StackStyle: Record<StackCategory, string> = {
   FULL_STACK: 'bg-red-500/70 text-white dark:bg-red-500', // Full-stack style (red background)
@@ -51,10 +45,8 @@ const StackStyle: Record<StackCategory, string> = {
 
 /**
  * Object containing styles for project status and stack.
- *
- * @constant {object} ProjectDetailsStyles
- * @property {Record<ProjectStatus, string>} StatusStyle - Styles for project statuses.
- * @property {Record<StackCategory, string>} StackStyle - Styles for project stacks.
+ * StatusStyle - Styles for project statuses.
+ * StackStyle - Styles for project stacks.
  */
 export const ProjectDetailsStyles = {
   StatusStyle,

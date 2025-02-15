@@ -1,6 +1,11 @@
 import { StackCategory, StackType, type Stack } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 
+/**
+ * Generate a test stack mock.
+ * @param overrides - The properties to override
+ * @returns A test stack mock
+ */
 export function generateTestStackMock(overrides: Partial<Stack> = {}): Stack {
   return {
     id: faker.number.int({ min: 1, max: 1000 }),
@@ -16,6 +21,11 @@ export function generateTestStackMock(overrides: Partial<Stack> = {}): Stack {
   };
 }
 
+/**
+ * Generate many test stack mocks.
+ * @param count - The number of mocks to generate
+ * @returns An array of test stack mocks
+ */
 export function generateManyTestStackMocks(count: number): Stack[] {
   return Array.from({ length: count }, () => generateTestStackMock());
 }

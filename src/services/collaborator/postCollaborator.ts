@@ -6,10 +6,9 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Create a new collaborator.
- *
- * @param newCollaborator - The collaborator to create.
- * @returns The created collaborator.
- * @throws An error if the operation fails.
+ * @param newCollaborator - The collaborator to create
+ * @returns The created collaborator
+ * @throws An error if the operation fails
  */
 export async function postCollaborator(
   newCollaborator: CollaboratorCreateSchema,

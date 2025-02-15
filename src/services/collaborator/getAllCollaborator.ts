@@ -5,7 +5,6 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Get all collaborators
- *
  * @returns A list of collaborators
  * @throws An error if the collaborators could not be retrieved
  */

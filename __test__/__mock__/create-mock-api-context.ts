@@ -7,6 +7,13 @@ interface ICommonCreateContext extends Partial<Omit<CreateContext, 'request' | '
   params?: Record<string, string>;
 }
 
+/**
+ * Create a mock API context for testing Astro API requests.
+ * @param params - Parameters for the mock context
+ * @param params.request - Request options for the mock context
+ * @param params.params - URL parameters for the mock context
+ * @returns A mock API context for testing Astro API requests
+ */
 export function createMockApiContext({
   request = {},
   params = {},

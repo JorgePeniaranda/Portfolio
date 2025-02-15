@@ -36,6 +36,14 @@ interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
   Separator?: LucideIcon;
 }
 
+/**
+ * Breadcrumb component that displays a list of breadcrumb items.
+ * @param params - The component props
+ * @param params.items - An array of breadcrumb items
+ * @param params.Separator - An optional custom separator icon
+ * @param params.props - Additional HTML attributes for the breadcrumb container
+ * @returns The breadcrumb component
+ */
 export function Breadcrumb({ items, Separator, ...props }: BreadcrumbProps) {
   return (
     <UIBreadcrumb {...props}>
@@ -67,6 +75,13 @@ interface CustomBreadcrumbItemProps extends React.HTMLAttributes<HTMLElement> {
   item: IBreadCrumb;
 }
 
+/**
+ * Custom breadcrumb item component that handles either a link or a page.
+ * @param params - The component props
+ * @param params.item - The breadcrumb item containing the label and optional href
+ * @param params.props - Additional HTML attributes for the breadcrumb item
+ * @returns The custom breadcrumb item component
+ */
 export function CustomBreadcrumbItem({ item, ...props }: CustomBreadcrumbItemProps) {
   if (item.href !== undefined) {
     // If href is defined, render a link

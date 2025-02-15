@@ -6,10 +6,11 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Update a collaborator.
- *
- * @param updatedCollaborator - The collaborator to update.
- * @returns The updated collaborator.
- * @throws An error if the operation fails.
+ * @param params - Function parameters
+ * @param params.idCollaborator - The collaborator ID
+ * @param params.updatedCollaborator - The collaborator to update
+ * @returns The updated collaborator
+ * @throws An error if the operation fails
  */
 export async function putCollaborator({
   idCollaborator,

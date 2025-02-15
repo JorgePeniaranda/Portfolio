@@ -7,6 +7,10 @@ import { handleApiError } from '@/helpers/error/api-handler';
 
 /**
  * GET handler to fetch a collaborator.
+ * @param params The request parameters
+ * @param params.params The request parameters
+ * @param params.url The request URL
+ * @returns A collaborator
  */
 export const GET: APIRoute = async ({ params, url }) => {
   try {

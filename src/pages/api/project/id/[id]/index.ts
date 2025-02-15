@@ -11,6 +11,11 @@ import { ProjectUpdateSchema } from '@/schemas/project/update';
  * - Parses the request body.
  * - Validates it using the `ProjectUpdateSchema`.
  * - Updates the project in the database.
+ * @param params Function parameters
+ * @param params.request The request parameters
+ * @param params.params The request parameters
+ * @param params.url The request URL
+ * @returns A project
  */
 export const PUT: APIRoute = async ({ request, params, url }) => {
   try {

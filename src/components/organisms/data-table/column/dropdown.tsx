@@ -24,6 +24,14 @@ interface DataTableColumnHeaderProps<TData, TValue> extends React.HTMLAttributes
   title: string;
 }
 
+/**
+ * Data table column header component.
+ * @param params - The component props
+ * @param params.column - The column
+ * @param params.title - The title
+ * @param params.className - The class name
+ * @returns The data table column header
+ */
 export function DataTableColumnHeader<TData, TValue>({
   column,
   title,

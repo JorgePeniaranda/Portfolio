@@ -2,6 +2,10 @@ import type { ColumnDef } from '@tanstack/react-table';
 
 import { Checkbox } from '@/components/ui/checkbox';
 
+/**
+ * Selection column definition.
+ * @returns The selection column definition
+ */
 export function selectionColumnDef<TData>() {
   const columnDef: ColumnDef<TData> = {
     id: 'select',

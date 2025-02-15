@@ -46,6 +46,8 @@ export const useThemeStore = create<IThemeStoreState & IThemeStoreActions>()(
 /**
  * Gets the next theme in the list of available themes.
  * If the current theme is not found, it defaults to the first theme in the list.
+ * @param currentTheme - The current theme to compare against
+ * @returns The next theme in the list
  */
 export function getNextTheme(currentTheme: theme): theme {
   const currentIndex = themesArray.indexOf(currentTheme);
@@ -58,6 +60,7 @@ export function getNextTheme(currentTheme: theme): theme {
 /**
  * Updates the theme class in the `<html>` element.
  * Adds or removes the appropriate class based on the selected theme.
+ * @param theme - The theme to apply to the HTML element.
  */
 function updateHTMLTheme(theme: theme) {
   const htmlClassList = document.documentElement.classList;

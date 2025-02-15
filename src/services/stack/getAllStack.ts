@@ -5,7 +5,6 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Get all stacks
- *
  * @returns A list of stacks
  * @throws An error if the stacks could not be retrieved
  */

@@ -5,10 +5,9 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * This service is responsible for adding a project to a collaborator.
- *
- * @param relationSchema - Object with the collaborator and project data.
- * @returns A promise with the collaborator and project data.
- * @throws An error if the collaborator and project data could not be added.
+ * @param relationSchema - Object with the collaborator and project data
+ * @returns A promise with the collaborator and project data
+ * @throws An error if the collaborator and project data could not be added
  */
 export async function postCollaboratorAddAssociatedProjects(
   relationSchema: EntityRelationSchema,

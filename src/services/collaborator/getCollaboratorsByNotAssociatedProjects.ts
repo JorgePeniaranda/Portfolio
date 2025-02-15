@@ -5,8 +5,8 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Get collaborators by not associated projects.
- *
- * @param idProject - The project ID
+ * @param params - Function parameters
+ * @param params.idProject - The project ID
  * @returns A list of collaborators
  * @throws An error if the collaborators could not be retrieved
  */

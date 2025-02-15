@@ -6,10 +6,9 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Delete a stack.
- *
- * @param stackIds - Stack ID.
- * @returns A promise with the delete response.
- * @throws An error if the stack could not be deleted.
+ * @param stackIds - Stack ID
+ * @returns A promise with the delete response
+ * @throws An error if the stack could not be deleted
  */
 export async function deleteStack(stackIds: Stack['id'][]): Promise<DeleteResponse> {
   try {

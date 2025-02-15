@@ -13,15 +13,15 @@ import { safeRedirect } from '@/helpers/common/safe-redirect';
  * Component that renders an interactive drawer to display detailed information about a Stack.
  * The drawer can be triggered by the `triggerChild` and displays stack data along with related projects.
  * It also allows navigation to a specific site and preserves state or navigates back based on the provided `returnToSiteOnClose` property.
- *
- * @param {Object} props - Component properties.
- * @param {Stack} props.stack - Stack data to be displayed in the drawer, including associated projects.
- * @param {Project[]} props.associatedProjects - Associated projects with current stack.
- * @param {React.ReactNode} [props.triggerChild] - Optional React node acting as a trigger to open the drawer.
- * @param {React.ComponentProps<typeof DrawerPrimitive.Root>} [props.drawerProps] - Optional props for controlling the DrawerPrimitive component, such as open state, close behavior, etc.
- * @param {Object} [props.returnToSiteOnClose] - Optional configuration for URL navigation when the drawer is closed.
- * @param {string} props.returnToSiteOnClose.site - The URL to navigate to when the drawer is closed.
- * @param {boolean} props.returnToSiteOnClose.keepState - Flag to indicate if the application state should be preserved when navigating to `site`.
+ * @param params - Component properties
+ * @param params.stack - Stack data to be displayed in the drawer, including associated projects
+ * @param params.associatedProjects - Associated projects with current stack
+ * @param params.triggerChild - Optional React node acting as a trigger to open the drawer
+ * @param params.drawerProps - Optional props for controlling the DrawerPrimitive component, such as open state, close behavior, etc
+ * @param params.returnToSiteOnClose - Optional configuration for URL navigation when the drawer is closed
+ * @param params.returnToSiteOnClose.site - The URL to navigate to when the drawer is closed
+ * @param params.returnToSiteOnClose.keepState - Flag to indicate if the application state should be preserved when navigating to `site`
+ * @returns A StackDrawer component.
  */
 export function StackDrawer({
   stack,

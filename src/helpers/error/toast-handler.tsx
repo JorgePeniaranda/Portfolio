@@ -7,10 +7,11 @@ import { toast } from '@/hooks/use-toast';
 
 /**
  * Handle an error and display a toast message.
- *
- * @param error - The error to handle.
- * @param title - The title of the toast message.
- * @param defaultErrorMessage - The default error message to use if the error does not contain one.
+ * @param params - Function parameters
+ * @param params.error - The error to handle
+ * @param params.title - The title of the toast message
+ * @param params.defaultErrorMessage - The default error message to use if the error does not contain one
+ * @param params.tryAgain - The function to call when the user clicks the try again button
  */
 export function handleErrorWithToast({
   error,

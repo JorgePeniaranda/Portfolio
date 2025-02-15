@@ -9,6 +9,10 @@ import { handleApiError } from '@/helpers/error/api-handler';
  * POST handler to add a relation between a project and a technology stack.
  * - Parses and validates the params.
  * - Connects the specified tech stack to the project in the database.
+ * @param params Function parameters
+ * @param params.params The request parameters
+ * @param params.url The request URL
+ * @returns A null response
  */
 export const POST: APIRoute = async ({ params, url }) => {
   try {
@@ -36,6 +40,10 @@ export const POST: APIRoute = async ({ params, url }) => {
  * DELETE handler to remove a relation between a project and a technology stack.
  * - Parses and validates the params.
  * - Disconnects the specified tech stack from the project in the database.
+ * @param params Function parameters
+ * @param params.params The request parameters
+ * @param params.url The request URL
+ * @returns A null response
  */
 export const DELETE: APIRoute = async ({ params, url }) => {
   try {

@@ -10,13 +10,9 @@ import '@xyflow/react/dist/style.css';
 
 /**
  * Component to render a flow diagram of stacks categorized by type and category.
- *
- * @param {Object} props - Component properties.
- * @param {Array<Stack & {
- *   associatedProjects: Pick<Project, "id" | "key" | "name" | "logoUrl">[];
- *   relatedFrom: { toStackStack: Stack }[];
- *   relatedTo: { fromStackStack: Stack }[];
- * }>} props.stacks - List of stacks including their relationships and related projects.
+ * @param params - Function parameters
+ * @param params.stacks - List of stacks including their relationships and related projects
+ * @returns A React component
  */
 export function StackFlow({
   stacks,

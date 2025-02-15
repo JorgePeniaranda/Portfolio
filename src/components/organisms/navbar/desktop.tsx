@@ -14,6 +14,9 @@ import { useThemeStore } from '@/services/storage/theme';
 
 /**
  * Desktop navigation bar component.
+ * @param params - Component properties
+ * @param params.items - List of navigation sections and links
+ * @returns A desktop navigation bar
  */
 export function DesktopNavbar({ items }: { items: INavbarSection[] }) {
   const { theme, toggleTheme } = useThemeStore();
@@ -142,6 +145,10 @@ export function DesktopNavbar({ items }: { items: INavbarSection[] }) {
 
 /**
  * A motion-enabled navigation item that animates based on mouse movement.
+ * @param params - Component properties
+ * @param params.mouseX - Motion value for the mouse X position
+ * @param params.children - Child elements to render inside the item
+ * @returns A motion-enabled navigation item
  */
 function NavbarItem({
   mouseX,
@@ -186,6 +193,7 @@ function NavbarItem({
 
 /**
  * A separator element between sections in the navigation bar.
+ * @returns A horizontal line element
  */
 function NavbarSeparator() {
   return <hr className='h-8 w-0.5 bg-neutral-400/20 dark:bg-neutral-600/20' />;

@@ -8,10 +8,11 @@ import { ENV } from '@/constants/env';
 
 /**
  * Handle an error from a service.
- *
- * @param error - The error to handle.
- * @param defaultErrorMessage - The default error message to use if the error does not contain one.
- * @returns An error with the message to display.
+ * @param params - Function parameters
+ * @param params.error - The error to handle
+ * @param params.defaultErrorMessage - The default error message to use if the error does not contain one
+ * @returns An error with the message to display
+ * @throws An error if the error is not an Axios error
  */
 export function handleServiceError({
   error,

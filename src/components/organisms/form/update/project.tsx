@@ -34,6 +34,13 @@ import { ProjectUpdateSchema } from '@/schemas/project/update';
 import { putProject } from '@/services/project/putProject';
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 
+/**
+ * Form to update a project.
+ * @param params - The component props
+ * @param params.currentProject - The current project to update
+ * @param params.disableForm - Whether the form should be disabled
+ * @returns The update project form
+ */
 export function UpdateProjectForm({
   currentProject,
   disableForm,

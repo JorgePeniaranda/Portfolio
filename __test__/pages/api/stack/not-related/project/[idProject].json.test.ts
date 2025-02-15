@@ -33,7 +33,6 @@ describe('GET stack by not related project endpoint', () => {
   /**
    * Simulated parsed response body.
    * Represents the expected API response after processing the request.
-   *
    * @example
    * const response = await apiCall();
    * const parsedResponse = await response.json(); // Equivalent to ParsedStackResponse

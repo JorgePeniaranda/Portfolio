@@ -8,6 +8,8 @@ const CAT_URLs = ['https://cataas.com/cat/gif', 'https://cataas.com/cat'];
 
 /**
  * CatAsAService component displays a random cat image, and allows the user to request a new one by clicking a button.
+ * @param props - Component props
+ * @returns A CatAsAService component
  */
 export function CatAsAService(props: HTMLAttributes<HTMLDivElement>) {
   const [loading, setLoading] = useState(true);

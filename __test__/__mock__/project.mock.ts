@@ -3,6 +3,11 @@ import type { Project } from '@prisma/client';
 import { ProjectStatus, StackCategory } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 
+/**
+ * Generate a test project mock.
+ * @param overrides - The properties to override
+ * @returns A test project mock
+ */
 export function generateTestProjectMock(overrides: Partial<Project> = {}): Project {
   return {
     id: faker.number.int({ min: 1, max: 1000 }),
@@ -25,6 +30,11 @@ export function generateTestProjectMock(overrides: Partial<Project> = {}): Proje
   };
 }
 
+/**
+ * Generate many test project mocks.
+ * @param count - The number of mocks to generate
+ * @returns An array of test project mocks
+ */
 export function generateManyTestProjectMocks(count: number): Project[] {
   return Array.from({ length: count }, () => generateTestProjectMock());
 }

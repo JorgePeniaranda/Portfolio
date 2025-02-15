@@ -32,6 +32,12 @@ import { StackCreateDefaultValues, StackCreateSchema } from '@/schemas/stack/cre
 import { postStack } from '@/services/stack/postStack';
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 
+/**
+ * Form to show a stack.
+ * @param params - The component props
+ * @param params.disableForm - Whether the form should be disabled
+ * @returns The show stack form
+ */
 export function CreateStackForm({ disableForm = false }: { disableForm?: boolean }) {
   const { toast } = useToast();
 

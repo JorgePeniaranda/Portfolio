@@ -79,6 +79,12 @@ const columns: Array<ColumnDef<Collaborator>> = [
 //#endregion
 
 // MARK: - Collaborator Table
+/**
+ * Collaborator Table Component
+ * @param params - The component props
+ * @param params.data - The initial data to display in the table
+ * @returns The Collaborator Table Component
+ */
 export function CollaboratorTable({ data: initialData }: { data: Collaborator[] }) {
   const [data, setData] = useState<Collaborator[]>(initialData);
 

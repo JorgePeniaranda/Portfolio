@@ -6,6 +6,11 @@ interface MockAxiosErrorParams<T> extends Partial<Omit<AxiosError<T>, 'response'
   response?: Partial<AxiosResponse<T>>;
 }
 
+/**
+ * Create a mock Axios error for testing.
+ * @param params - Parameters for the mock Axios error
+ * @returns A mock Axios error for testing
+ */
 export function createMockAxiosError<T = unknown>(
   params: MockAxiosErrorParams<T> = {},
 ): AxiosError<T> {

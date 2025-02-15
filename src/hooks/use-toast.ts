@@ -139,6 +139,11 @@ function dispatch(action: Action) {
 
 type Toast = Omit<ToasterToast, 'id'>;
 
+/**
+ * Create a new toast
+ * @param props Toast properties
+ * @returns Toast object with actions
+ */
 function toast({ ...props }: Toast) {
   const id = genId();
 
@@ -168,6 +173,10 @@ function toast({ ...props }: Toast) {
   };
 }
 
+/**
+ * Hook to use the toast state and actions
+ * @returns Hook state and actions
+ */
 function useToast() {
   const [state, setState] = React.useState<State>(memoryState);
 

@@ -6,10 +6,9 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Deletes a project.
- *
- * @param projectIds The project ID.
- * @returns The number of items deleted.
- * @throws An error if the operation fails.
+ * @param projectIds - The project IDs
+ * @returns The number of items deleted
+ * @throws An error if the operation fails
  */
 export async function deleteProject(projectIds: Project['id'][]): Promise<DeleteResponse> {
   try {

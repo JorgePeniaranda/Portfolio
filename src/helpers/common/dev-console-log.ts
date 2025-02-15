@@ -1,7 +1,8 @@
 /**
  * Log message to console in development environment
+ * @param type - The type of message to log
+ * @param input - The message to log
  */
-
 export function logMessage(type: 'log' | 'info' | 'warn' | 'error', input: unknown[]): void {
   if (process.env.NODE_ENV === 'development') {
     // eslint-disable-next-line no-console

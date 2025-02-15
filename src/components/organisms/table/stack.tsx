@@ -88,7 +88,13 @@ const columns: Array<ColumnDef<Stack>> = [
   },
 ];
 
-// MARK: - Collaborator Table
+// MARK: - Stack Table
+/**
+ * Stack Table Component
+ * @param params - The component props
+ * @param params.data - The initial data to display in the table
+ * @returns The Stack Table Component
+ */
 export function StackTable({ data: initialData }: { data: Stack[] }) {
   const [data, setData] = useState<Stack[]>(initialData);
 

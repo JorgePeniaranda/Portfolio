@@ -5,7 +5,6 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 
 /**
  * Get all projects
- *
  * @returns A list of projects
  * @throws An error if the projects could not be retrieved
  */

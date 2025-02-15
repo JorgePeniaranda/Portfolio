@@ -6,9 +6,8 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 // TO-DO: REPLACE WITH API CALL
 /**
  * Get all stacks with relations and projects.
- *
- * @returns A list of stacks with their associated projects and related stacks.
- * @throws An error if the stacks could not be retrieved.
+ * @returns A list of stacks with their associated projects and related stacks
+ * @throws An error if the stacks could not be retrieved
  */
 export async function getAllStackWithRelationsAndProjectsMin(): Promise<
   Array<
