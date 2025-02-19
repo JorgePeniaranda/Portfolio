@@ -27,7 +27,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { isDefined } from '@/helpers/guards/is-defined';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -63,7 +62,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      {isDefined(HeaderComponent) && HeaderComponent({ table })}
+      {HeaderComponent?.({ table })}
       <div className='rounded-md border'>
         <Table>
           <TableHeader>
