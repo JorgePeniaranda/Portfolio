@@ -1,15 +1,7 @@
 > @eslint/compat (1.1.1):
   - fails with the error ERESOLVE could not resolve due to a conflict between eslint versions.
   - The conflict arises because @eslint/compat@1.2.4 requires eslint@^9.10.0 as peerOptional.
-> husky (8.0.3):
-  - when incrementing the version in package.json (>= 8.0.4), an error occurs: MODULE_NOT_FOUND because the module husky/lib/bin.js is not found.
-
---- To be tested ---
-
 > eslint (8.57.1):
-  - updating eslint to version >= 8.57.2 will cause a dependency conflict as other dependencies may require eslint@8.57.1.
-> vitest (2.1.6): 
-  - on updating to version >= 2.1.7, an Unknown Error: [object Object] is thrown.
-  - ref: https://github.com/withastro/astro/issues/12384#issuecomment-2518269691
-> @vitest/coverage-v8 (2.1.6):
-  - Has a version compatibility issue with vitest, as both need to be at the same version.
+  - updating eslint to version >= 8.57.2 will cause a dependency conflict where @vercel/style-guide may require eslint@8.57.1.
+> tailwindcss (3.4.17):
+  - updating tailwindcss to version >= 3.4.17 will cause a dependency conflict where eslint-plugin-tailwindcss may require eslint@8.57.1.
