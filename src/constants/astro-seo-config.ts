@@ -2,7 +2,7 @@ import type { SEOProps } from 'astro-seo';
 
 import { DEFAULT_LANG } from '@/constants/common';
 import { ENV } from '@/constants/env';
-import { PERSONAL_ACCOUNTS } from '@/constants/external';
+import { PERSONAL_ACCOUNTS } from '@/constants/social-media';
 
 export const ORIGINAL_URL = ENV.site_url;
 
