@@ -23,7 +23,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { MIN_DATA_FORMAT } from '@/constants/common';
+import { DATA_FORMAT } from '@/constants/common';
 import {
   PROJECT_STATUS_TRANSCRIPTIONS,
   STACK_CATEGORY_TRANSCRIPTIONS,
@@ -77,7 +77,7 @@ const columns: Array<ColumnDef<Project>> = [
       return <DataTableColumnHeader column={column} title='Fecha de inicio' />;
     },
     cell({ row }) {
-      return moment(row.original.startDate).format(MIN_DATA_FORMAT);
+      return moment(row.original.startDate).format(DATA_FORMAT);
     },
   },
   {
@@ -91,7 +91,7 @@ const columns: Array<ColumnDef<Project>> = [
         return 'Sin fecha de fin';
       }
 
-      return moment(row.original.endDate).format(MIN_DATA_FORMAT);
+      return moment(row.original.endDate).format(DATA_FORMAT);
     },
   },
   {
