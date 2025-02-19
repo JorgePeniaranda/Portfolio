@@ -12,7 +12,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { safeRedirect } from '@/helpers/common/safe-redirect';
+import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
 import {
@@ -20,7 +20,6 @@ import {
   CollaboratorCreateSchema,
 } from '@/schemas/collaborator/create';
 import { postCollaborator } from '@/services/collaborator/postCollaborator';
-import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 
 /**
  * Form to show a collaborator.
@@ -52,7 +51,7 @@ export function CreateCollaboratorForm({ disableForm = false }: { disableForm?: 
 
       // Redirect to the collaborator view
       if (isDefined(newCollaboratorResult?.id)) {
-        safeRedirect(`/vault/views/collaborators/${newCollaboratorResult.id}`);
+        window?.location?.assign?.(`/vault/views/collaborators/${newCollaboratorResult.id}`);
       }
     } catch (error) {
       handleErrorWithToast({

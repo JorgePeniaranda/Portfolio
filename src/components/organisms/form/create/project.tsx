@@ -29,12 +29,11 @@ import {
   STACK_CATEGORY_TRANSCRIPTIONS,
 } from '@/constants/transcriptions';
 import { cn } from '@/helpers/common/classnames';
-import { safeRedirect } from '@/helpers/common/safe-redirect';
+import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
 import { ProjectCreateDefaultValues, ProjectCreateSchema } from '@/schemas/project/create';
 import { postProject } from '@/services/project/postProject';
-import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 
 /**
  * Form to show a project.
@@ -66,7 +65,7 @@ export function CreateProjectForm({ disableForm = false }: { disableForm?: boole
 
       // Redirect to the project view
       if (isDefined(response?.id)) {
-        safeRedirect(`/vault/views/project/${response.id}`);
+        window?.location?.assign?.(`/vault/views/project/${response.id}`);
       }
     } catch (error) {
       handleErrorWithToast({

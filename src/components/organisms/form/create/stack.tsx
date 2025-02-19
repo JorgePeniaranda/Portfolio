@@ -25,12 +25,11 @@ import {
   STACK_CATEGORY_TRANSCRIPTIONS,
   STACK_TYPE_TRANSCRIPTIONS,
 } from '@/constants/transcriptions';
-import { safeRedirect } from '@/helpers/common/safe-redirect';
+import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
 import { StackCreateDefaultValues, StackCreateSchema } from '@/schemas/stack/create';
 import { postStack } from '@/services/stack/postStack';
-import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 
 /**
  * Form to show a stack.
@@ -62,7 +61,7 @@ export function CreateStackForm({ disableForm = false }: { disableForm?: boolean
 
       // Redirect to the stack view
       if (isDefined(response?.id)) {
-        safeRedirect(`/vault/views/stack/${response.id}`);
+        window?.location?.assign?.(`/vault/views/stack/${response.id}`);
       }
     } catch (error) {
       handleErrorWithToast({

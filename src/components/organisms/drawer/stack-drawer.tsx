@@ -7,7 +7,6 @@ import * as React from 'react';
 import { MessageDisplay } from '@/components/atoms/message-display';
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 import { isDefined, isNotDefined } from '@/helpers/guards/is-defined';
-import { safeRedirect } from '@/helpers/common/safe-redirect';
 
 /**
  * Component that renders an interactive drawer to display detailed information about a Stack.
@@ -49,12 +48,12 @@ export function StackDrawer({
     }
 
     if (returnToSiteOnClose.keepState) {
-      history.pushState(null, '', returnToSiteOnClose.site);
+      history?.pushState?.(null, '', returnToSiteOnClose.site);
 
       return;
     }
 
-    safeRedirect(returnToSiteOnClose.site);
+    window?.location?.assign?.(returnToSiteOnClose.site);
   };
 
   return (
