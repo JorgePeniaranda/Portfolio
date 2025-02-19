@@ -40,25 +40,21 @@ export function StackDrawer({
   };
 }) {
   const handleDrawerClose = () => {
-    if (isDefined(returnToSiteOnClose)) {
-      if (returnToSiteOnClose.keepState) {
-        history.pushState(null, '', returnToSiteOnClose.site);
+    // Call the onClose callback if defined
+    drawerProps?.onClose?.();
 
-        return;
-      }
-
-      safeRedirect(returnToSiteOnClose.site);
-    }
-
-    // If drawerProps is not defined, exit the function
-    if (isNotDefined(drawerProps)) {
+    // Redirect to the site specified in the returnToSiteOnClose prop
+    if (isNotDefined(returnToSiteOnClose)) {
       return;
     }
 
-    // If onClose is defined in drawerProps, call it to close the drawer
-    if (isDefined(drawerProps.onClose)) {
-      drawerProps.onClose();
+    if (returnToSiteOnClose.keepState) {
+      history.pushState(null, '', returnToSiteOnClose.site);
+
+      return;
     }
+
+    safeRedirect(returnToSiteOnClose.site);
   };
 
   return (
