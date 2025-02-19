@@ -8,13 +8,13 @@ const { DEV, PROD, SITE, SSR, BASE_URL, ASSETS_PREFIX, MODE } = import.meta.env;
  */
 export const ENV = {
   appVersion: version,
+  mode: MODE,
   isProduction: PROD,
   isDevelopment: DEV,
   isServerSideEnable: SSR,
-  site_url: SITE,
-  base_url: BASE_URL,
-  assets_prefix: ASSETS_PREFIX,
-  mode: MODE,
-  api_url: 'http://localhost:4321',
+  assetsPrefix: ASSETS_PREFIX,
+  siteUrl: SITE,
+  baseUrl: BASE_URL,
+  apiUrl: 'http://localhost:4321',
   secret_code: getEnvValue('PUBLIC_SECRET_CODE', '7421'),
 } as const;
