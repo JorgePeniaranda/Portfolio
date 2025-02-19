@@ -23,7 +23,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
-import { isDefined, isNotDefined } from '@/helpers/guards/is-defined';
+import { isNotDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
 import { deleteCollaborator } from '@/services/collaborator/deleteCollaborator';
 
@@ -130,9 +130,7 @@ function TableHeaderComponent({ table }: { table: Table<Collaborator> }) {
       });
 
       // Remove the deleted collaborators from the table
-      if (isDefined(table.options.meta?.deleteRows)) {
-        table.options.meta.deleteRows(rows.map((row) => row.index));
-      }
+      table?.options?.meta?.deleteRows?.(rows.map((row) => row.index));
 
       // Clear the selected rows
       table.setRowSelection({});

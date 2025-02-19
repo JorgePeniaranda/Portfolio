@@ -27,7 +27,7 @@ import {
   STACK_TYPE_TRANSCRIPTIONS,
 } from '@/constants/transcriptions';
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
-import { isDefined, isNotDefined } from '@/helpers/guards/is-defined';
+import { isNotDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
 import { deleteStack } from '@/services/stack/deleteStack';
 
@@ -139,9 +139,7 @@ function TableHeaderComponent({ table }: { table: Table<Stack> }) {
       });
 
       // Remove the deleted stacks from the table
-      if (isDefined(table.options.meta?.deleteRows)) {
-        table.options.meta.deleteRows(rows.map((row) => row.index));
-      }
+      table?.options?.meta?.deleteRows?.(rows.map((row) => row.index));
 
       // Clear the selected rows
       table.setRowSelection({});
