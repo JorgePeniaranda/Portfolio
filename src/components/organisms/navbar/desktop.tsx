@@ -6,7 +6,7 @@ import { Loader, Moon, Sun, Volume2, VolumeX, icons } from 'lucide-react';
 import React, { Fragment, useRef } from 'react';
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { NavbarAnimationConfig } from '@/constants/styles';
+import { NavbarAnimationConfig } from '@/constants/app-styles';
 import { useSoundStore } from '@/services/storage/sound';
 import { useThemeStore } from '@/services/storage/theme';
 
