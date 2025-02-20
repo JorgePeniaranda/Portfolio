@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
-import type { IBreadCrumb } from '@/types/common';
+import type { IBreadCrumb } from '@/types/breadcrumb';
 
 import React from 'react';
 
