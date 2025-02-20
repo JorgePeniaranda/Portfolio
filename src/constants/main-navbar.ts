@@ -1,4 +1,4 @@
-import type { INavbarSection } from '@/components/organisms/navbar/navbar';
+import type { NavbarSection } from '@/types/navbar';
 
 import { PERSONAL_ACCOUNTS } from './social-media';
 
@@ -17,7 +17,7 @@ import { PERSONAL_ACCOUNTS } from './social-media';
  * - On implementation, the Navbar component will iterate over the sections and links to render the links. sections will be separated by a divider (<hr/>).
  * - For accessibility, the Navbar component will use the key of the first letter of the label as an accessKey for the link. remember to use unique labels.
  */
-export const NAVBAR_ITEMS: INavbarSection[] = [
+export const NAVBAR_ITEMS: NavbarSection[] = [
   {
     icon: 'Map',
     label: 'Site Navegation',

@@ -1,4 +1,4 @@
-import type { INavbarSection } from './navbar';
+import type { NavbarSection } from '../../../types/navbar';
 
 import { Loader, Moon, Settings, Sun, Volume2, VolumeX, icons } from 'lucide-react';
 
@@ -19,7 +19,7 @@ import { useThemeStore } from '@/services/storage/theme';
  * @param params.items - List of items to render
  * @returns A React component
  */
-export function MobileNavbar({ items }: { items: INavbarSection[] }) {
+export function MobileNavbar({ items }: { items: NavbarSection[] }) {
   const { theme, toggleTheme } = useThemeStore();
   const { isSoundEnabled, toggleSound } = useSoundStore();
 

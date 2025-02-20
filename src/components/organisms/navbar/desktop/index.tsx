@@ -1,4 +1,4 @@
-import type { INavbarSection } from '../navbar';
+import type { NavbarSection } from '../../../../types/navbar';
 
 import { motion, useMotionValue } from 'framer-motion';
 import { Loader, Moon, Sun, Volume2, VolumeX, icons } from 'lucide-react';
@@ -17,7 +17,7 @@ import { useThemeStore } from '@/services/storage/theme';
  * @param params.items - List of navigation sections and links
  * @returns A desktop navigation bar
  */
-export function DesktopNavbar({ items }: { items: INavbarSection[] }) {
+export function DesktopNavbar({ items }: { items: NavbarSection[] }) {
   const { theme, toggleTheme } = useThemeStore();
   const { isSoundEnabled, toggleSound } = useSoundStore();
 
