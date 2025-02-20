@@ -1,12 +1,22 @@
-import { getEnvValue } from '@/helpers/common/get-env';
 import { version } from '@/../package.json';
+import { EnvSchema } from '@/schemas/common/env';
 
-const { DEV, PROD, SITE, SSR, BASE_URL, ASSETS_PREFIX, MODE } = import.meta.env;
+const {
+  DEV,
+  PROD,
+  SITE,
+  SSR,
+  BASE_URL,
+  ASSETS_PREFIX,
+  MODE,
+  API_URL = 'http://localhost:4321',
+  PUBLIC_SECRET_CODE = '7421',
+} = import.meta.env;
 
 /**
  * Configuration object for environment-specific values.
  */
-export const ENV = {
+const rawEnv = {
   appVersion: version,
   mode: MODE,
   isProduction: PROD,
@@ -15,6 +25,9 @@ export const ENV = {
   assetsPrefix: ASSETS_PREFIX,
   siteUrl: SITE,
   baseUrl: BASE_URL,
-  apiUrl: 'http://localhost:4321',
-  secret_code: getEnvValue('PUBLIC_SECRET_CODE', '7421'),
+  apiUrl: API_URL,
+  secretCode: PUBLIC_SECRET_CODE,
 } as const;
+
+// Validated environment values.
+export const ENV = EnvSchema.parse(rawEnv);

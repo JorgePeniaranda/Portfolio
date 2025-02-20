@@ -4,7 +4,6 @@ import { Controls, MiniMap, ReactFlow, type Edge, type Node } from '@xyflow/reac
 import { useMemo } from 'react';
 
 import { StackWithDrawerNode } from '@/components/organisms/react-flow/nodes/stack-with-drawer';
-import { devConsoleLog } from '@/helpers/common/dev-console-log';
 
 import '@xyflow/react/dist/style.css';
 
@@ -147,7 +146,7 @@ export function StackFlow({
         StackWithIconNode: StackWithDrawerNode,
       }}
       nodes={initialNodes}
-      onNodeClick={() => devConsoleLog.log('Node clicked')}
+      // onNodeClick={() => console.log('Node clicked')}
     >
       <MiniMap />
       <Controls />
