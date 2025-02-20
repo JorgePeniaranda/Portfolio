@@ -1,3 +1,5 @@
+import type { PrismaError } from '@/types/common';
+
 import { Prisma } from '@prisma/client';
 
 /**
@@ -8,14 +10,7 @@ import { Prisma } from '@prisma/client';
  * @param error - The error object to check
  * @returns `true` if the error is an instance of a known Prisma error type, otherwise `false`
  */
-export function isPrismaError(
-  error: unknown,
-): error is
-  | Prisma.PrismaClientKnownRequestError
-  | Prisma.PrismaClientUnknownRequestError
-  | Prisma.PrismaClientRustPanicError
-  | Prisma.PrismaClientInitializationError
-  | Prisma.PrismaClientValidationError {
+export function isPrismaError(error: unknown): error is PrismaError {
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
     return true;
   }

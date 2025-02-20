@@ -60,10 +60,10 @@ export function handleApiError(error: unknown, url?: URL): Response {
   // Else, return a generic 500 error response
   return Response.json(
     {
-      detail: error instanceof Error ? error.message : 'Unknown error occurred.',
+      detail: error instanceof Error ? error.message : 'An internal server error occurred.',
       instance: url?.pathname,
       status: 500,
-      title: 'An internal server error occurred.',
+      title: 'Internal server error.',
       type: 'InternalServerError',
     } satisfies ErrorResponse,
     {

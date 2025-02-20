@@ -104,8 +104,10 @@ describe('handleApiError', () => {
     expect(response.status).toBe(500);
     expect(body).toEqual(
       expect.objectContaining({
-        detail: 'Unknown error occurred.',
+        detail: 'An internal server error occurred.',
         status: 500,
+        title: 'Internal server error.',
+        type: 'InternalServerError',
       }),
     );
   });

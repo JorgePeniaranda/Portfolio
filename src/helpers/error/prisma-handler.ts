@@ -1,3 +1,5 @@
+import type { PrismaError } from '@/types/common';
+
 import { Prisma } from '@prisma/client';
 
 import { PRISMA_ERROR_MESSAGES } from '@/messages/errors/prisma-errors';
@@ -11,15 +13,13 @@ import { PRISMA_STATUS_CODE_STATUS_CATEGORY } from '@/constants/common';
  * @returns The HTTP status code corresponding to the Prisma error code, or 500 if not found
  */
 export function getStatusCodeByPrismaErrorCode(prismaErrorCode: string): number {
-  // Iterate over the PRISMA_STATUS_CODE_STATUS_CATEGORY dictionary entries
   for (const [statusCode, errorCodes] of Object.entries(PRISMA_STATUS_CODE_STATUS_CATEGORY)) {
-    // Check if the prismaErrorCode exists in the list of error codes for the current status code
     if (errorCodes.includes(prismaErrorCode)) {
-      return parseInt(statusCode); // Return the status code as a number
+      return parseInt(statusCode);
     }
   }
 
-  return 500; // Default status code if the error code is not found
+  return 500;
 }
 
 /**
@@ -29,12 +29,7 @@ export function getStatusCodeByPrismaErrorCode(prismaErrorCode: string): number 
  * @param error - The error object thrown by Prisma.
  * @returns An object containing the HTTP status code and error message.
  */
-export function prismaHandler(
-  error:
-    | Prisma.PrismaClientKnownRequestError
-    | Prisma.PrismaClientUnknownRequestError
-    | Prisma.PrismaClientRustPanicError,
-): { statusCode: number; message: string } {
+export function prismaHandler(error: PrismaError): { statusCode: number; message: string } {
   if (
     error instanceof Prisma.PrismaClientKnownRequestError &&
     error.code in PRISMA_ERROR_MESSAGES
