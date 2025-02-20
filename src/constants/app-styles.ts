@@ -17,7 +17,7 @@ export const NavbarAnimationConfig = {
     stiffness: 150, // Defines the stiffness of the spring
     damping: 12, // Controls the damping (smoothness) of the animation
   },
-};
+} as const;
 //#endregion
 
 //#region Project-Details styles
@@ -49,5 +49,5 @@ const StackStyle: Record<StackCategory, string> = {
 export const ProjectDetailsStyles = {
   StatusStyle,
   StackStyle,
-};
+} as const;
 //#endregion

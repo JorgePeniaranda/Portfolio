@@ -1,4 +1,4 @@
 /**
  * External API to fetch cat images
  */
-export const CAT_URLs = ['https://cataas.com/cat/gif', 'https://cataas.com/cat'];
+export const CAT_URLs = ['https://cataas.com/cat/gif', 'https://cataas.com/cat'] as const;
