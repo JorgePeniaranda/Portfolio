@@ -1,3 +1,5 @@
+import type { DashboardNavbarItem } from '@/types/navbar';
+
 /**
  * @description Dashboard Navbar Items
  * - This object is used to generate the sidebar menu in the dashboard layout.
@@ -11,18 +13,7 @@
  * > isActive: Boolean to set the active state of the link.
  * - On implementation, the DashboardLayout component will iterate over the navMain array to render the sidebar menu.
  */
-
-export const DASHBOARD_NAVBAR_ITEMS: {
-  navMain: {
-    title: string;
-    url?: string;
-    items: {
-      title: string;
-      url: string;
-      isActive?: boolean;
-    }[];
-  }[];
-} = {
+export const DASHBOARD_NAVBAR_ITEMS = {
   navMain: [
     {
       title: 'Panel',
@@ -30,7 +21,6 @@ export const DASHBOARD_NAVBAR_ITEMS: {
         {
           title: 'Inicio',
           url: '/vault',
-          isActive: true,
         },
       ],
     },
@@ -63,4 +53,4 @@ export const DASHBOARD_NAVBAR_ITEMS: {
       ],
     },
   ],
-};
+} as const satisfies Record<string, DashboardNavbarItem[]>;
