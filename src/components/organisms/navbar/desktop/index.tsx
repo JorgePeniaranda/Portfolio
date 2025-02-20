@@ -1,16 +1,15 @@
-import type { INavbarSection } from './navbar';
-import type { MotionValue } from 'framer-motion';
+import type { INavbarSection } from '../navbar';
 
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useMotionValue } from 'framer-motion';
 import { Loader, Moon, Sun, Volume2, VolumeX, icons } from 'lucide-react';
-import React, { Fragment, useRef } from 'react';
+import { Fragment } from 'react';
+
+import { DesktopNavbarItem } from './item';
+import { DesktopNavbarSeparator } from './separator';
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { NavbarAnimationConfig } from '@/constants/app-styles';
 import { useSoundStore } from '@/services/storage/sound';
 import { useThemeStore } from '@/services/storage/theme';
-
-//#region NAVBAR
 
 /**
  * Desktop navigation bar component.
@@ -43,7 +42,7 @@ export function DesktopNavbar({ items }: { items: INavbarSection[] }) {
               const Icon = icons[icon];
 
               return (
-                <NavbarItem key={crypto.randomUUID()} mouseX={mouseX}>
+                <DesktopNavbarItem key={crypto.randomUUID()} mouseX={mouseX}>
                   <TooltipProvider>
                     <Tooltip delayDuration={0}>
                       <TooltipTrigger asChild>
@@ -62,21 +61,21 @@ export function DesktopNavbar({ items }: { items: INavbarSection[] }) {
                       <TooltipContent>{label}</TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
-                </NavbarItem>
+                </DesktopNavbarItem>
               );
             })}
           </ul>
-          {sectionIndex < items.length - 1 && <NavbarSeparator />}
+          {sectionIndex < items.length - 1 && <DesktopNavbarSeparator />}
         </Fragment>
       ))}
-      {items.length > 0 && <NavbarSeparator />}
+      {items.length > 0 && <DesktopNavbarSeparator />}
 
       {/* Render navigation buttons (theme and sound toggle) */}
       <ul
         aria-label='Site Configuration Buttons'
         className='flex items-center justify-center space-x-3'
       >
-        <NavbarItem mouseX={mouseX}>
+        <DesktopNavbarItem mouseX={mouseX}>
           <button
             aria-label='Toggle theme'
             className='grid size-full place-items-center rounded-full'
@@ -110,8 +109,8 @@ export function DesktopNavbar({ items }: { items: INavbarSection[] }) {
               </b>
             </span>
           </button>
-        </NavbarItem>
-        <NavbarItem mouseX={mouseX}>
+        </DesktopNavbarItem>
+        <DesktopNavbarItem mouseX={mouseX}>
           <button
             aria-label='Toggle sound'
             className='grid size-full place-items-center rounded-full'
@@ -134,68 +133,8 @@ export function DesktopNavbar({ items }: { items: INavbarSection[] }) {
               <b>{isSoundEnabled ? 'Sound On' : 'Sound Off'}</b>
             </span>
           </button>
-        </NavbarItem>
+        </DesktopNavbarItem>
       </ul>
     </motion.nav>
   );
 }
-//#endregion
-
-//#region NAVBAR ITEM
-
-/**
- * A motion-enabled navigation item that animates based on mouse movement.
- * @param params - Component properties
- * @param params.mouseX - Motion value for the mouse X position
- * @param params.children - Child elements to render inside the item
- * @returns A motion-enabled navigation item
- */
-function NavbarItem({
-  mouseX,
-  children,
-}: {
-  mouseX: MotionValue<number>;
-  children?: React.ReactNode;
-}) {
-  const ref = useRef<HTMLLIElement>(null);
-
-  // Calculate the distance between the mouse and the navbar item for animation purposes.
-  const distance = useTransform(mouseX, (val) => {
-    const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
-
-    return val - bounds.x - bounds.width / 2;
-  });
-
-  // Synchronize width with mouse distance, according to the configuration.
-  const widthSync = useTransform(
-    distance,
-    NavbarAnimationConfig.transform.inputRange,
-    NavbarAnimationConfig.transform.outputRange,
-  );
-
-  // Apply spring animation to width.
-  const width = useSpring(widthSync, NavbarAnimationConfig.spring);
-
-  return (
-    <motion.li
-      ref={ref}
-      aria-label='Navigation Item'
-      className='flex aspect-square items-center justify-center rounded-full border border-neutral-100 bg-neutral-100 text-center transition dark:border-neutral-700 dark:bg-neutral-900/80'
-      style={{ width }}
-    >
-      {children}
-    </motion.li>
-  );
-}
-//#endregion
-
-//#region NAVBAR SEPARATOR
-
-/**
- * A separator element between sections in the navigation bar.
- * @returns A horizontal line element
- */
-function NavbarSeparator() {
-  return <hr className='h-8 w-0.5 bg-neutral-400/20 dark:bg-neutral-600/20' />;
-}
-//#endregion
