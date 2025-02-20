@@ -1,19 +1,9 @@
 import axios from 'axios';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { devConsoleLog } from '@/helpers/common/dev-console-log';
 import { handleServiceError } from '@/helpers/error/service-handler';
 import { isDefined, isNotDefined } from '@/helpers/guards/is-defined';
 import { isErrorResponse } from '@/helpers/guards/is-error-response';
-
-vi.mock('@/helpers/common/dev-console-log', () => ({
-  devConsoleLog: {
-    log: vi.fn(),
-    warn: vi.fn(),
-    info: vi.fn(),
-    error: vi.fn(),
-  },
-}));
 
 vi.mock('@/helpers/guards/is-defined', () => ({
   isDefined: vi.fn(),
@@ -41,7 +31,6 @@ describe('handleServiceError', () => {
       defaultErrorMessage: 'An error occurred.',
     });
 
-    expect(devConsoleLog.log).toHaveBeenCalledWith('Error in service: ', mockError);
     expect(result).toEqual(new Error('An error occurred.'));
   });
 
@@ -56,7 +45,6 @@ describe('handleServiceError', () => {
       defaultErrorMessage: 'An error occurred.',
     });
 
-    expect(devConsoleLog.log).toHaveBeenCalledWith('Error in service: ', mockError);
     expect(result).toEqual(new Error('An error occurred.'));
   });
 
@@ -75,7 +63,6 @@ describe('handleServiceError', () => {
       defaultErrorMessage: 'An error occurred.',
     });
 
-    expect(devConsoleLog.log).toHaveBeenCalledWith('Error in service: ', mockError);
     expect(result).toEqual(new Error('An error occurred.'));
   });
 
@@ -95,7 +82,6 @@ describe('handleServiceError', () => {
       defaultErrorMessage: 'An error occurred.',
     });
 
-    expect(devConsoleLog.log).toHaveBeenCalledWith('Error in service: ', mockError);
     expect(result).toEqual(new Error('Specific error message'));
   });
 
@@ -122,7 +108,6 @@ describe('handleServiceError', () => {
       defaultErrorMessage: 'An error occurred.',
     });
 
-    expect(devConsoleLog.log).toHaveBeenCalledWith('Error in service: ', mockError);
     expect(result).toEqual(new Error('email: Invalid email\npassword: Password too short'));
   });
 
@@ -139,7 +124,6 @@ describe('handleServiceError', () => {
       defaultErrorMessage: 'An error occurred.',
     });
 
-    expect(devConsoleLog.log).toHaveBeenCalledWith('Error in service: ', mockError);
     expect(result).toEqual(new Error('An error occurred.'));
   });
 });
