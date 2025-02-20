@@ -1,3 +1,5 @@
+import type { IBreadCrumb } from '@/types/breadcrumb';
+
 import { ChevronRight, Database } from 'lucide-react';
 
 import {
@@ -41,10 +43,7 @@ export function DashboardLayout({
   breadcrumb,
 }: {
   children?: React.ReactNode;
-  breadcrumb?: Array<{
-    title: string;
-    url?: string;
-  }>;
+  breadcrumb?: Array<IBreadCrumb>;
 }) {
   return (
     <SidebarProvider>
@@ -109,10 +108,10 @@ export function DashboardLayout({
           {isDefined(breadcrumb) &&
             breadcrumb?.length > 0 &&
             breadcrumb.map((item, index) => (
-              <Breadcrumb key={item.title}>
+              <Breadcrumb key={item.label}>
                 <BreadcrumbList>
                   <BreadcrumbItem>
-                    <BreadcrumbLink href={item.url}>{item.title}</BreadcrumbLink>
+                    <BreadcrumbLink href={item.href}>{item.label}</BreadcrumbLink>
                   </BreadcrumbItem>
                   {index < breadcrumb.length - 1 && (
                     <BreadcrumbSeparator className='hidden md:block' />

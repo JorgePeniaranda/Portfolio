@@ -1,216 +1,212 @@
+import type { IBreadCrumb } from '@/types/breadcrumb';
+
 /**
  * @description Breadcrumb template for the dashboard
  * - This object is used to generate the breadcrumb in the dashboard layout.
  * - The object is structured as follows:
  * > key: URL path.
  * > value: Array of objects with the following properties:
- * > title: Breadcrumb title.
- * > url: Breadcrumb URL.
+ * > label: Breadcrumb title.
+ * > href: Breadcrumb URL.
  * - To implement, it is necessary to pass one of the arrays to the dashboard layout component to be rendered.
  */
-export const DASHBOARD_BREADCRUMB_TEMPLATE: Record<
-  string,
-  Array<{
-    title: string;
-    url?: string;
-  }>
-> = {
+export const DASHBOARD_BREADCRUMB_TEMPLATE = {
   '/vault': [
     {
-      title: 'Panel de control',
-      url: '/vault',
+      label: 'Panel de control',
+      href: '/vault',
     },
   ],
   '/vault/views/project': [
     {
-      title: 'Panel de control',
-      url: '/vault',
+      label: 'Panel de control',
+      href: '/vault',
     },
     {
-      title: 'Vistas',
+      label: 'Vistas',
     },
     {
-      title: 'Proyectos',
+      label: 'Proyectos',
     },
   ],
   '/vault/views/project/create': [
     {
-      title: 'Panel de control',
-      url: '/vault',
+      label: 'Panel de control',
+      href: '/vault',
     },
     {
-      title: 'Vistas',
+      label: 'Vistas',
     },
     {
-      title: 'Proyectos',
-      url: '/vault/views/project',
+      label: 'Proyectos',
+      href: '/vault/views/project',
     },
     {
-      title: 'Crear',
+      label: 'Crear',
     },
   ],
   '/vault/views/project/edit': [
     {
-      title: 'Panel de control',
-      url: '/vault',
+      label: 'Panel de control',
+      href: '/vault',
     },
     {
-      title: 'Vistas',
+      label: 'Vistas',
     },
     {
-      title: 'Proyectos',
-      url: '/vault/views/project',
+      label: 'Proyectos',
+      href: '/vault/views/project',
     },
     {
-      title: 'Editar',
+      label: 'Editar',
     },
   ],
   '/vault/views/project/details': [
     {
-      title: 'Panel de control',
-      url: '/vault',
+      label: 'Panel de control',
+      href: '/vault',
     },
     {
-      title: 'Vistas',
+      label: 'Vistas',
     },
     {
-      title: 'Proyectos',
-      url: '/vault/views/project',
+      label: 'Proyectos',
+      href: '/vault/views/project',
     },
     {
-      title: 'Detalles',
+      label: 'Detalles',
     },
   ],
   '/vault/views/stack': [
     {
-      title: 'Panel de control',
-      url: '/vault',
+      label: 'Panel de control',
+      href: '/vault',
     },
     {
-      title: 'Vistas',
+      label: 'Vistas',
     },
     {
-      title: 'Stack',
+      label: 'Stack',
     },
   ],
   '/vault/views/stack/create': [
     {
-      title: 'Panel de control',
-      url: '/vault',
+      label: 'Panel de control',
+      href: '/vault',
     },
     {
-      title: 'Vistas',
+      label: 'Vistas',
     },
     {
-      title: 'Stack',
-      url: '/vault/stack/collaborators',
+      label: 'Stack',
+      href: '/vault/stack/collaborators',
     },
     {
-      title: 'Crear',
+      label: 'Crear',
     },
   ],
   '/vault/views/stack/edit': [
     {
-      title: 'Panel de control',
-      url: '/vault',
+      label: 'Panel de control',
+      href: '/vault',
     },
     {
-      title: 'Vistas',
+      label: 'Vistas',
     },
     {
-      title: 'Stack',
-      url: '/vault/stack/collaborators',
+      label: 'Stack',
+      href: '/vault/stack/collaborators',
     },
     {
-      title: 'Editar',
+      label: 'Editar',
     },
   ],
   '/vault/views/stack/details': [
     {
-      title: 'Panel de control',
-      url: '/vault',
+      label: 'Panel de control',
+      href: '/vault',
     },
     {
-      title: 'Vistas',
+      label: 'Vistas',
     },
     {
-      title: 'Stack',
-      url: '/vault/stack/collaborators',
+      label: 'Stack',
+      href: '/vault/stack/collaborators',
     },
     {
-      title: 'Detalles',
+      label: 'Detalles',
     },
   ],
   '/vault/views/collaborators': [
     {
-      title: 'Panel de control',
-      url: '/vault',
+      label: 'Panel de control',
+      href: '/vault',
     },
     {
-      title: 'Vistas',
+      label: 'Vistas',
     },
     {
-      title: 'Colaboradores',
+      label: 'Colaboradores',
     },
   ],
   '/vault/views/collaborators/create': [
     {
-      title: 'Panel de control',
-      url: '/vault',
+      label: 'Panel de control',
+      href: '/vault',
     },
     {
-      title: 'Vistas',
+      label: 'Vistas',
     },
     {
-      title: 'Colaboradores',
-      url: '/vault/views/collaborators',
+      label: 'Colaboradores',
+      href: '/vault/views/collaborators',
     },
     {
-      title: 'Crear',
+      label: 'Crear',
     },
   ],
   '/vault/views/collaborators/edit': [
     {
-      title: 'Panel de control',
-      url: '/vault',
+      label: 'Panel de control',
+      href: '/vault',
     },
     {
-      title: 'Vistas',
+      label: 'Vistas',
     },
     {
-      title: 'Colaboradores',
-      url: '/vault/views/collaborators',
+      label: 'Colaboradores',
+      href: '/vault/views/collaborators',
     },
     {
-      title: 'Editar',
+      label: 'Editar',
     },
   ],
   '/vault/views/collaborators/details': [
     {
-      title: 'Panel de control',
-      url: '/vault',
+      label: 'Panel de control',
+      href: '/vault',
     },
     {
-      title: 'Vistas',
+      label: 'Vistas',
     },
     {
-      title: 'Colaboradores',
-      url: '/vault/views/collaborators',
+      label: 'Colaboradores',
+      href: '/vault/views/collaborators',
     },
     {
-      title: 'Detalles',
+      label: 'Detalles',
     },
   ],
   '/vault/design/stack-flow': [
     {
-      title: 'Panel de control',
-      url: '/vault',
+      label: 'Panel de control',
+      href: '/vault',
     },
     {
-      title: 'Diseño',
+      label: 'Diseño',
     },
     {
-      title: 'Stack Flow',
+      label: 'Stack Flow',
     },
   ],
-} as const;
+} as const satisfies Record<string, IBreadCrumb[]>;
