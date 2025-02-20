@@ -29,12 +29,11 @@ import {
   STACK_CATEGORY_TRANSCRIPTIONS,
 } from '@/constants/transcriptions';
 import { cn } from '@/helpers/common/classnames';
-import { safeRedirect } from '@/helpers/common/safe-redirect';
+import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
 import { ProjectCreateDefaultValues, ProjectCreateSchema } from '@/schemas/project/create';
 import { postProject } from '@/services/project/postProject';
-import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 
 /**
  * Form to show a project.
@@ -45,7 +44,6 @@ import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 export function CreateProjectForm({ disableForm = false }: { disableForm?: boolean }) {
   const { toast } = useToast();
 
-  // Create a form to create a project
   const form = useForm<ProjectCreateSchema>({
     resolver: zodResolver(ProjectCreateSchema),
     defaultValues: ProjectCreateDefaultValues,
@@ -53,20 +51,21 @@ export function CreateProjectForm({ disableForm = false }: { disableForm?: boole
 
   const onSubmit = async (values: ProjectCreateSchema) => {
     try {
-      // Send request to create a project
       const response = await postProject(values);
 
-      // If the request was successful, show a success toast
+      // Reset the form
       form.reset();
+
+      // Show a success toast
       toast({
         title: 'Proyecto creado',
         description: 'El proyecto ha sido creado exitosamente.',
         className: 'bg-green-500 text-black',
       });
 
-      // Redirect to the project view
+      // Redirect to the new project page
       if (isDefined(response?.id)) {
-        safeRedirect(`/vault/views/project/${response.id}`);
+        window?.location?.assign?.(`/vault/views/project/${response.id}`);
       }
     } catch (error) {
       handleErrorWithToast({

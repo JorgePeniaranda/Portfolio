@@ -24,11 +24,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
-import { postProjectAddAssociatedStack } from '@/services/project/postProjectAddAssociatedStack';
 import { deleteProjectRemoveAssociatedStack } from '@/services/project/deleteProjectRemoveAssociatedStack';
-import { handleErrorWithToast } from '@/helpers/error/toast-handler';
+import { postProjectAddAssociatedStack } from '@/services/project/postProjectAddAssociatedStack';
 
 /**
  * Form to update stacks related to a project.
@@ -52,15 +52,14 @@ export function UpdateStacksRelatedToProject({
 }) {
   const { toast } = useToast();
 
-  // Initialize local state for dialog visibility
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-  // Create a form to relate a stack to the project
+  // Form only used in the dialog to add a stack to the project
   const form = useForm<EntityRelationSchema>({
     defaultValues: {
       idTarget: currentProject.id,
     },
   });
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   // Create a function to relate a stack to the project
   const [associatedStacks, setAssociatedStacks] = useState<Stack[]>(initialAssociatedStacks);
@@ -68,14 +67,15 @@ export function UpdateStacksRelatedToProject({
 
   const onAddStack = async (values: EntityRelationSchema) => {
     try {
-      // Send request to associate the stack to the project
       await postProjectAddAssociatedStack({
         idSource: Number(values.idSource),
         idTarget: Number(values.idTarget),
       });
 
-      // If the request was successful, reset the form and show a success toast
+      // Reset the dialog form
       form.reset();
+
+      // Show a success toast
       toast({
         title: 'Stack relacionado con el proyecto',
         description: 'El stack ha sido relacionado con el proyecto exitosamente.',
@@ -104,13 +104,12 @@ export function UpdateStacksRelatedToProject({
 
   const onRemoveStack = async (stackId: number) => {
     try {
-      // Send request to dissociate the stack from the project
       await deleteProjectRemoveAssociatedStack({
         idTarget: currentProject.id,
         idSource: stackId,
       });
 
-      // If the request was successful, show a success toast
+      // Show a success toast
       toast({
         title: 'Stack eliminado',
         description: 'El stack ha sido eliminado del proyecto exitosamente.',

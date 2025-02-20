@@ -13,21 +13,12 @@ import { useSecretCodeStore } from '@/services/storage/secret-code';
  * @returns A SecretCodeHint component
  */
 export function SecretCodeHint({ position }: { position: number }) {
-  // Access the secret code and functions to unlock a digit.
+  const { toast } = useToast();
   const { secretCode, unlockOneNumber, isComplete, checkIfCodeIsCompleteWithNewIndex } =
     useSecretCodeStore();
 
-  // State to control if the secret code digit is visible.
   const [isCodeVisible, setIsCodeVisible] = useState(false);
 
-  // Hook to display toast messages.
-  const { toast } = useToast();
-
-  /**
-   * Handles the click on the scan button.
-   * - If the code is complete, it displays a message with the full code.
-   * - If not complete, it reveals the corresponding digit.
-   */
   const handleScanFaceClick = () => {
     if (isComplete) {
       toast({
@@ -55,12 +46,10 @@ export function SecretCodeHint({ position }: { position: number }) {
     unlockOneNumber(position);
   };
 
-  // If the code is visible, display the corresponding digit.
   if (isCodeVisible) {
     return null;
   }
 
-  // If not visible, display the scan button.
   return (
     <Button className='flex aspect-square items-center p-2' onClick={handleScanFaceClick}>
       <ScanFace />

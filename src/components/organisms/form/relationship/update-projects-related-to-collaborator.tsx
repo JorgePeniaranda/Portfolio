@@ -24,11 +24,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
-import { postCollaboratorAddAssociatedProjects } from '@/services/collaborator/postCollaboratorAddAssociatedProjects';
 import { deleteCollaboratorRemoveAssociatedProjects } from '@/services/collaborator/deleteCollaboratorRemoveAssociatedProjects';
-import { handleErrorWithToast } from '@/helpers/error/toast-handler';
+import { postCollaboratorAddAssociatedProjects } from '@/services/collaborator/postCollaboratorAddAssociatedProjects';
 
 /**
  * Form to update projects related to a collaborator.
@@ -52,20 +52,19 @@ export function UpdateProjectsRelatedToCollaborator({
 }) {
   const { toast } = useToast();
 
-  // Initialize local state for dialog visibility
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-  // Initialize local state for associated and available projects
-  const [associatedProjects, setAssociatedProjects] =
-    useState<Project[]>(initialAssociatedProjects);
-  const [availableProject, setAvailableProject] = useState<Project[]>(initialAvailableProject);
-
-  // Create a form to relate a project to the collaborator
+  // Form only used in the dialog to add a project to the collaborator
   const form = useForm<EntityRelationSchema>({
     defaultValues: {
       idTarget: currentCollaborator.id,
     },
   });
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  // Local state for associated and available projects
+  const [associatedProjects, setAssociatedProjects] =
+    useState<Project[]>(initialAssociatedProjects);
+  const [availableProject, setAvailableProject] = useState<Project[]>(initialAvailableProject);
 
   const onAddProject = async (values: EntityRelationSchema) => {
     try {
@@ -75,8 +74,10 @@ export function UpdateProjectsRelatedToCollaborator({
         idTarget: Number(values.idTarget),
       });
 
-      // If the request was successful, reset the form and show a success toast
+      // Reset the dialog form
       form.reset();
+
+      // Show a success toast
       toast({
         title: 'Proyecto relacionado con el colaborador',
         description: 'El proyecto ha sido relacionado con el colaborador exitosamente.',
@@ -116,7 +117,7 @@ export function UpdateProjectsRelatedToCollaborator({
         idSource: idProject,
       });
 
-      // If the request was successful, show a success toast
+      // Show a success toast
       toast({
         title: 'Proyecto eliminado',
         description: 'El proyecto ha sido eliminado del colaborador exitosamente.',

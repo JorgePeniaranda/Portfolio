@@ -24,11 +24,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
-import { postStackAddAssociatedProjects } from '@/services/stack/postStackAddAssociatedProjects';
 import { deleteStackRemoveAssociatedProjects } from '@/services/stack/deleteStackRemoveAssociatedProjects';
-import { handleErrorWithToast } from '@/helpers/error/toast-handler';
+import { postStackAddAssociatedProjects } from '@/services/stack/postStackAddAssociatedProjects';
 
 /**
  * Form to update projects related to a stack.
@@ -52,31 +52,31 @@ export function UpdateProjectsRelatedToStack({
 }) {
   const { toast } = useToast();
 
-  // Initialize local state for dialog visibility
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  // Initialize local state for associated and available projects
-  const [associatedProjects, setAssociatedProjects] =
-    useState<Project[]>(initialAssociatedProjects);
-  const [availableProject, setAvailableProject] = useState<Project[]>(initialAvailableProject);
-
-  // Create a form to relate a project to the stack
+  // Form only used in the dialog to add a project to the stack
   const form = useForm<EntityRelationSchema>({
     defaultValues: {
       idTarget: currentStack.id,
     },
   });
 
+  // Initialize local state for associated and available projects
+  const [associatedProjects, setAssociatedProjects] =
+    useState<Project[]>(initialAssociatedProjects);
+  const [availableProject, setAvailableProject] = useState<Project[]>(initialAvailableProject);
+
   const onAddProject = async (values: EntityRelationSchema) => {
     try {
-      // Send request to associate the project to the stack
       await postStackAddAssociatedProjects({
         idSource: Number(values.idSource),
         idTarget: Number(values.idTarget),
       });
 
-      // If the request was successful, reset the form and show a success toast
+      // Reset the dialog form
       form.reset();
+
+      // Show a success toast
       toast({
         title: 'Proyecto relacionado con el stack',
         description: 'El proyecto ha sido relacionado con el stack.',
@@ -109,13 +109,12 @@ export function UpdateProjectsRelatedToStack({
 
   const onRemoveProject = async (idProject: number) => {
     try {
-      // Send request to dissociate the project with the stack
       await deleteStackRemoveAssociatedProjects({
         idTarget: currentStack.id,
         idSource: idProject,
       });
 
-      // If the request was successful, show a success toast
+      // Show a success toast
       toast({
         title: 'Proyecto eliminado',
         description: 'El proyecto ha sido eliminado del stack.',

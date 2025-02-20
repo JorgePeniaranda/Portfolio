@@ -5,18 +5,18 @@ import { DEFAULT_THEME, THEME_CLASSNAME, THEME_STORE_KEY } from '@/constants/com
 import { themes, themesArray, type theme } from '@/types/common.d';
 
 // Define the shape of the store's state.
-export interface IThemeStoreState {
+export interface ThemeStoreState {
   theme: theme;
 }
 
 // Define the actions available in the store.
-export interface IThemeStoreActions {
+export interface ThemeStoreActions {
   resetTheme: () => void;
   toggleTheme: () => void;
 }
 
 // Create the theme store using Zustand and enable persistence.
-export const useThemeStore = create<IThemeStoreState & IThemeStoreActions>()(
+export const useThemeStore = create<ThemeStoreState & ThemeStoreActions>()(
   persist(
     (set) => ({
       theme: DEFAULT_THEME,

@@ -21,13 +21,11 @@ import { useSecretCodeStore } from '@/services/storage/secret-code';
  * @returns A SecretButton component
  */
 export function SecretButton() {
-  // Retrieves the stored secret code and initializes the state for the entered value.
+  const { toast } = useToast();
   const { secretCode } = useSecretCodeStore();
+
   const [value, setValue] = useState(`${secretCode[0]}`);
   const [isUnlocked, setIsUnlocked] = useState(false);
-
-  // Hook to display toast messages.
-  const { toast } = useToast();
 
   /**
    * Handles the validation of the entered code.
@@ -74,8 +72,10 @@ export function SecretButton() {
         <form
           className='flex w-full flex-col gap-5'
           onSubmit={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+
             handleSubmit();
-            event.preventDefault(); // Prevents the default form behavior.
           }}
         >
           {/* Input field for the secret code */}
@@ -84,7 +84,7 @@ export function SecretButton() {
               maxLength={4}
               pattern={REGEXP_ONLY_DIGITS}
               value={value}
-              onChange={(value) => setValue(value)} // Updates the state with the entered value.
+              onChange={(value) => setValue(value)}
             >
               <InputOTPSlot className='size-11' index={0} />
               <InputOTPSlot className='size-11' index={1} />

@@ -2,9 +2,7 @@ import { Loader, RotateCcw } from 'lucide-react';
 import { useState, type HTMLAttributes } from 'react';
 
 import { cn } from '@/helpers/common/classnames';
-
-// List of URLs for the cat images (gif and static)
-const CAT_URLs = ['https://cataas.com/cat/gif', 'https://cataas.com/cat'];
+import { CAT_URLs } from '@/constants/external-api';
 
 /**
  * CatAsAService component displays a random cat image, and allows the user to request a new one by clicking a button.
@@ -15,24 +13,16 @@ export function CatAsAService(props: HTMLAttributes<HTMLDivElement>) {
   const [loading, setLoading] = useState(true);
   const [currentURL, setCurrentURL] = useState('https://cataas.com/cat/gif');
 
-  /**
-   * Handler function triggered when the image is fully loaded.
-   * Hides the loader.
-   */
   const onLoad = () => {
     setLoading(false);
   };
 
-  /**
-   * Handler function triggered when the user clicks the button to get a new cat.
-   * Selects a random URL from the list and reloads the image.
-   */
   const handleClick = () => {
     const randomURL = CAT_URLs[Math.floor(Math.random() * CAT_URLs.length)];
     const params = `?size=square&${Date.now()}`; // Adding timestamp to prevent image caching
 
     setCurrentURL(randomURL + params);
-    setLoading(true); // Show the loader until the new image loads
+    setLoading(true);
   };
 
   return (

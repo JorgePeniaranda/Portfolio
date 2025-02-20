@@ -48,7 +48,7 @@ export const THEME_CLASSNAME = 'dark';
 /**
  * The format used for printing dates in the application.
  */
-export const MIN_DATA_FORMAT = 'DD-MM-YYYY';
+export const DATA_FORMAT = 'DD-MM-YYYY';
 
 /**
  * Constants for Prisma error codes and their corresponding HTTP status codes.

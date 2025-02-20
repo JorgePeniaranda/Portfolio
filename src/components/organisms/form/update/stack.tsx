@@ -46,7 +46,6 @@ export function UpdateStackForm({
 }) {
   const { toast } = useToast();
 
-  // Create a form to update the stack
   const form = useForm<StackUpdateSchema>({
     resolver: zodResolver(StackUpdateSchema),
     defaultValues: currentStack,
@@ -54,13 +53,12 @@ export function UpdateStackForm({
 
   const onSubmit = async (values: StackUpdateSchema) => {
     try {
-      // Send request to update the stack
       await putStack({
         idStack: currentStack.id,
         stackUpdateInput: values,
       });
 
-      // If the request was successful, show a success toast
+      // Show a success toast
       toast({
         title: 'Stack actualizado',
         description: 'El stack ha sido actualizado exitosamente.',

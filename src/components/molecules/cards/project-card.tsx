@@ -4,7 +4,7 @@ import { Heart, HeartOff } from 'lucide-react';
 
 import { useProjectLikedStore } from '@/services/storage/liked-projects';
 
-export interface Props {
+export interface ProjectCardProps {
   projectKey: string;
   name: string;
   logoURL: string;
@@ -18,14 +18,11 @@ export interface Props {
  * @param params.logoURL - The project logo URL
  * @returns A React component
  */
-export function ProjectCard({ projectKey, name, logoURL }: Props) {
-  // Destructure functions for managing the liked projects state
+export function ProjectCard({ projectKey, name, logoURL }: ProjectCardProps) {
   const { addLikedProject, checkLikedProject, removeLikedProject } = useProjectLikedStore();
 
-  // Check if the project is already liked
   const isLiked = checkLikedProject(projectKey);
 
-  // Function to toggle the liked state when the heart icon is clicked
   const handleClickHeart = (e: MouseEvent<SVGSVGElement, globalThis.MouseEvent>) => {
     e.preventDefault();
     e.stopPropagation();

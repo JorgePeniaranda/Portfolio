@@ -7,7 +7,6 @@ import * as React from 'react';
 import { MessageDisplay } from '@/components/atoms/message-display';
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 import { isDefined, isNotDefined } from '@/helpers/guards/is-defined';
-import { safeRedirect } from '@/helpers/common/safe-redirect';
 
 /**
  * Component that renders an interactive drawer to display detailed information about a Stack.
@@ -40,25 +39,21 @@ export function StackDrawer({
   };
 }) {
   const handleDrawerClose = () => {
-    if (isDefined(returnToSiteOnClose)) {
-      if (returnToSiteOnClose.keepState) {
-        history.pushState(null, '', returnToSiteOnClose.site);
+    // Call the onClose callback if defined
+    drawerProps?.onClose?.();
 
-        return;
-      }
-
-      safeRedirect(returnToSiteOnClose.site);
-    }
-
-    // If drawerProps is not defined, exit the function
-    if (isNotDefined(drawerProps)) {
+    if (isNotDefined(returnToSiteOnClose)) {
       return;
     }
 
-    // If onClose is defined in drawerProps, call it to close the drawer
-    if (isDefined(drawerProps.onClose)) {
-      drawerProps.onClose();
+    // Keep state means the application state should be preserved when navigating back to the site
+    if (returnToSiteOnClose.keepState) {
+      history?.pushState?.(null, '', returnToSiteOnClose.site);
+
+      return;
     }
+
+    window?.location?.assign?.(returnToSiteOnClose.site);
   };
 
   return (

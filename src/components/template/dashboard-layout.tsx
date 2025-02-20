@@ -26,7 +26,7 @@ import {
   SidebarTrigger,
 } from '@/components/ui/sidebar';
 import { ENV } from '@/constants/env';
-import { DASHBOARD_NAVBAR_ITEMS } from '@/constants/navbar';
+import { DASHBOARD_NAVBAR_ITEMS } from '@/constants/dashboard-navbar';
 import { isDefined } from '@/helpers/guards/is-defined';
 
 /**

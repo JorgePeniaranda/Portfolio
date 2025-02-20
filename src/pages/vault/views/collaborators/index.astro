@@ -1,8 +1,8 @@
 ---
-import Layout from '@/components/layouts/base.astro';
-import { DashboardLayout } from '@/components/layouts/dashboard-layout';
+import Layout from '@/components/template/base.astro';
+import { DashboardLayout } from '@/components/template/dashboard-layout';
 import { CollaboratorTable } from '@/components/organisms/table/collaborators';
-import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/breadcrumb';
+import { DASHBOARD_BREADCRUMB_TEMPLATE } from '@/constants/dashboard-breadcrumb';
 import { getAllCollaborator } from '@/services/collaborator/getAllCollaborator';
 
 const collaborators = await getAllCollaborator();

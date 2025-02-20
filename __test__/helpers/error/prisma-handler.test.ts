@@ -1,7 +1,7 @@
 import { Prisma } from '@prisma/client';
 import { describe, it, expect, vi } from 'vitest';
 
-import { getStatusCode, prismaHandler } from '@/helpers/error/prisma-handler';
+import { getStatusCodeByPrismaErrorCode, prismaHandler } from '@/helpers/error/prisma-handler';
 import { PRISMA_STATUS_CODE_STATUS_CATEGORY } from '@/constants/common';
 
 // Mocking the PRISMA_ERROR_MESSAGES for test purposes
@@ -63,19 +63,19 @@ describe('prismaHandler', () => {
 
 describe('getStatusCode', () => {
   it('should return correct status code for known error codes', () => {
-    expect(getStatusCode(PRISMA_STATUS_CODE_STATUS_CATEGORY[400][0])).toBe(400);
-    expect(getStatusCode(PRISMA_STATUS_CODE_STATUS_CATEGORY[404][0])).toBe(404);
-    expect(getStatusCode(PRISMA_STATUS_CODE_STATUS_CATEGORY[409][0])).toBe(409);
-    expect(getStatusCode(PRISMA_STATUS_CODE_STATUS_CATEGORY[422][0])).toBe(422);
+    expect(getStatusCodeByPrismaErrorCode(PRISMA_STATUS_CODE_STATUS_CATEGORY[400][0])).toBe(400);
+    expect(getStatusCodeByPrismaErrorCode(PRISMA_STATUS_CODE_STATUS_CATEGORY[404][0])).toBe(404);
+    expect(getStatusCodeByPrismaErrorCode(PRISMA_STATUS_CODE_STATUS_CATEGORY[409][0])).toBe(409);
+    expect(getStatusCodeByPrismaErrorCode(PRISMA_STATUS_CODE_STATUS_CATEGORY[422][0])).toBe(422);
   });
 
   it('should return 500 for unknown error codes', () => {
     // Test for an unknown error code, not present in STATUS_CODE
-    expect(getStatusCode('P9999')).toBe(500); // Should return default status code
+    expect(getStatusCodeByPrismaErrorCode('P9999')).toBe(500); // Should return default status code
   });
 
   it('should return 500 for error codes not found in any status group', () => {
     // Test for an error code that is not present in any of the groups
-    expect(getStatusCode('P2027')).toBe(500); // Should return default status code
+    expect(getStatusCodeByPrismaErrorCode('P2027')).toBe(500); // Should return default status code
   });
 });

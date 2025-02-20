@@ -25,12 +25,11 @@ import {
   STACK_CATEGORY_TRANSCRIPTIONS,
   STACK_TYPE_TRANSCRIPTIONS,
 } from '@/constants/transcriptions';
-import { safeRedirect } from '@/helpers/common/safe-redirect';
+import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
 import { StackCreateDefaultValues, StackCreateSchema } from '@/schemas/stack/create';
 import { postStack } from '@/services/stack/postStack';
-import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 
 /**
  * Form to show a stack.
@@ -41,7 +40,6 @@ import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 export function CreateStackForm({ disableForm = false }: { disableForm?: boolean }) {
   const { toast } = useToast();
 
-  // Create a form to create a stack
   const form = useForm<StackCreateSchema>({
     resolver: zodResolver(StackCreateSchema),
     defaultValues: StackCreateDefaultValues,
@@ -49,20 +47,21 @@ export function CreateStackForm({ disableForm = false }: { disableForm?: boolean
 
   const onSubmit = async (values: StackCreateSchema) => {
     try {
-      // Send request to create a stack
       const response = await postStack(values);
 
-      // If the request was successful, show a success toast
+      // Reset the form
       form.reset();
+
+      // Show a success toast
       toast({
         title: 'Stack creado',
         description: 'El stack ha sido creado exitosamente.',
         className: 'bg-green-500 text-black',
       });
 
-      // Redirect to the stack view
+      // Redirect to the new stack page
       if (isDefined(response?.id)) {
-        safeRedirect(`/vault/views/stack/${response.id}`);
+        window?.location?.assign?.(`/vault/views/stack/${response.id}`);
       }
     } catch (error) {
       handleErrorWithToast({

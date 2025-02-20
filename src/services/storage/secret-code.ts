@@ -4,13 +4,13 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 import { SECRET_CODE_STORE_KEY } from '@/constants/common';
 import { ENV } from '@/constants/env';
 
-export interface ISecretCodeStoreState {
+export interface SecretCodeStoreState {
   secretCode: string;
   unlockedNumbers: number[];
   isComplete: boolean;
 }
 
-export interface ISecretCodeStoreActions {
+export interface SecretCodeStoreActions {
   unlockOneNumber: (index: number) => void;
   resetSecretCode: () => void;
   checkIfCodeIsCompleteWithNewIndex: (index: number) => boolean;
@@ -19,7 +19,7 @@ export interface ISecretCodeStoreActions {
 /**
  * Secret code store using Zustand with persistence.
  */
-export const useSecretCodeStore = create<ISecretCodeStoreState & ISecretCodeStoreActions>()(
+export const useSecretCodeStore = create<SecretCodeStoreState & SecretCodeStoreActions>()(
   persist(
     (set, get) => ({
       secretCode: ENV.secret_code,

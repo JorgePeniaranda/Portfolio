@@ -12,7 +12,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { safeRedirect } from '@/helpers/common/safe-redirect';
+import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
 import {
@@ -20,7 +20,6 @@ import {
   CollaboratorCreateSchema,
 } from '@/schemas/collaborator/create';
 import { postCollaborator } from '@/services/collaborator/postCollaborator';
-import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 
 /**
  * Form to show a collaborator.
@@ -31,7 +30,6 @@ import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 export function CreateCollaboratorForm({ disableForm = false }: { disableForm?: boolean }) {
   const { toast } = useToast();
 
-  // Create a form to create a collaborator
   const form = useForm<CollaboratorCreateSchema>({
     resolver: zodResolver(CollaboratorCreateSchema),
     defaultValues: CollaboratorCreateDefaultValues,
@@ -39,20 +37,21 @@ export function CreateCollaboratorForm({ disableForm = false }: { disableForm?: 
 
   const onSubmit = async (values: CollaboratorCreateSchema) => {
     try {
-      // Send request to create a collaborator
       const newCollaboratorResult = await postCollaborator(values);
 
-      // If the request was successful, show a success toast
+      // Reset the form
       form.reset();
+
+      // Show a success toast
       toast({
         title: 'Colaborador creado',
         description: 'El colaborador ha sido creado exitosamente.',
         className: 'bg-green-500 text-black',
       });
 
-      // Redirect to the collaborator view
+      // Redirect to the new collaborator page
       if (isDefined(newCollaboratorResult?.id)) {
-        safeRedirect(`/vault/views/collaborators/${newCollaboratorResult.id}`);
+        window?.location?.assign?.(`/vault/views/collaborators/${newCollaboratorResult.id}`);
       }
     } catch (error) {
       handleErrorWithToast({

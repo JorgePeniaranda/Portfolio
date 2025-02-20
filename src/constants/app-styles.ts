@@ -1,7 +1,6 @@
 import type { ProjectStatus, StackCategory } from '@prisma/client';
 
 //#region Navbar
-
 /**
  * Configuration for the Navbar animation, including transform and spring properties.
  *
@@ -22,15 +21,14 @@ export const NavbarAnimationConfig = {
 //#endregion
 
 //#region Project-Details styles
-
 /**
  * Defines the style for each project status using Tailwind CSS classes.
  * The styles are mapped to the `ProjectStatus` enum values.
  */
 const StatusStyle: Record<ProjectStatus, string> = {
-  FINISHED: 'text-green-500', // Style for finished projects (green)
-  IN_PROGRESS: 'text-yellow-500', // Style for in-progress projects (yellow)
-  STALLED: 'text-red-500', // Style for stalled projects (red)
+  FINISHED: 'text-green-500',
+  IN_PROGRESS: 'text-yellow-500',
+  STALLED: 'text-red-500',
 } as const;
 
 /**
@@ -38,9 +36,9 @@ const StatusStyle: Record<ProjectStatus, string> = {
  * The styles are mapped to the `StackCategory` enum values.
  */
 const StackStyle: Record<StackCategory, string> = {
-  FULL_STACK: 'bg-red-500/70 text-white dark:bg-red-500', // Full-stack style (red background)
-  BACK_END: 'bg-blue-500/70 text-white dark:bg-blue-500', // Back-end style (blue background)
-  FRONT_END: 'bg-green-500/70 text-white dark:bg-green-500', // Front-end style (green background)
+  FULL_STACK: 'bg-red-500/70 text-white dark:bg-red-500',
+  BACK_END: 'bg-blue-500/70 text-white dark:bg-blue-500',
+  FRONT_END: 'bg-green-500/70 text-white dark:bg-green-500',
 } as const;
 
 /**
