@@ -1,13 +1,10 @@
-import type { Collaborator } from '@prisma/client';
-import type { ColumnDef, Table } from '@tanstack/react-table';
+import type { Project } from '@prisma/client';
+import type { Table } from '@tanstack/react-table';
 
 import { Eye, Pen, Plus, Trash } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import { ConditionalAnchor } from '@/components/atoms/conditional-anchor';
-import { DataTable } from '@/components/organisms/data-table';
-import { selectionColumnDef } from '@/components/organisms/data-table/column-def/selection';
-import { DataTableColumnHeader } from '@/components/organisms/data-table/column/dropdown';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -25,90 +22,11 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isNotDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
-import { deleteCollaborator } from '@/services/collaborator/deleteCollaborator';
+import { deleteProject } from '@/services/project/deleteProject';
 
-//#region Column Definitions
-const columns: Array<ColumnDef<Collaborator>> = [
-  selectionColumnDef<Collaborator>(),
-  {
-    id: 'nickname',
-    accessorKey: 'nickname',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Nickname' />;
-    },
-  },
-  {
-    id: 'githubUsername',
-    accessorKey: 'githubUsername',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Nickname de GitHub' />;
-    },
-    cell({ row }) {
-      return (
-        <a
-          className='text-blue-500'
-          href={`https://github.com/${row.original.githubUsername}`}
-          rel='noreferrer'
-          target='_blank'
-        >
-          {row.original.githubUsername}
-        </a>
-      );
-    },
-  },
-  {
-    id: 'linkedinUsername',
-    accessorKey: 'linkedinUsername',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Nickname de Linkedin' />;
-    },
-    cell({ row }) {
-      return (
-        <a
-          className='text-blue-500'
-          href={`https://www.linkedin.com/in/${row.original.linkedinUsername}`}
-          rel='noreferrer'
-          target='_blank'
-        >
-          {row.original.linkedinUsername}
-        </a>
-      );
-    },
-  },
-];
-//#endregion
-
-// MARK: - Collaborator Table
-/**
- * Collaborator Table Component
- * @param params - The component props
- * @param params.data - The initial data to display in the table
- * @returns The Collaborator Table Component
- */
-export function CollaboratorTable({ data: initialData }: { data: Collaborator[] }) {
-  const [data, setData] = useState<Collaborator[]>(initialData);
-
-  const deleteRows = (indexes: number[]) => {
-    setData((prevData) => {
-      return prevData.filter((_, i) => !indexes.includes(i));
-    });
-  };
-
-  return (
-    <DataTable
-      HeaderComponent={TableHeaderComponent}
-      columns={columns}
-      data={data}
-      meta={{
-        deleteRows,
-      }}
-    />
-  );
-}
-
-// MARK: - Table Header Component
-function TableHeaderComponent({ table }: { table: Table<Collaborator> }) {
+export function ProjectTableHeader({ table }: { table: Table<Project> }) {
   const { toast } = useToast();
+
   const selectedRowModel = table.getSelectedRowModel();
   const { rows, selectedCount } = useMemo(() => {
     return {
@@ -119,17 +37,16 @@ function TableHeaderComponent({ table }: { table: Table<Collaborator> }) {
 
   const handleDelete = async () => {
     try {
-      // Send request to delete the collaborator
-      await deleteCollaborator(rows.map((row) => row.original.id));
+      await deleteProject(rows.map((row) => row.original.id));
 
       // If the request was successful, show a success toast
       toast({
         title: 'Colaboradores eliminados',
-        description: 'Los colaboradores seleccionados se han eliminaron correctamente.',
+        description: 'Los proyectos seleccionados se han eliminado correctamente.',
         className: 'bg-green-500 text-black',
       });
 
-      // Remove the deleted collaborators from the table
+      // Remove the deleted projects from the table
       table?.options?.meta?.deleteRows?.(rows.map((row) => row.index));
 
       // Clear the selected rows
@@ -137,8 +54,8 @@ function TableHeaderComponent({ table }: { table: Table<Collaborator> }) {
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: 'Error al eliminar colaboradores',
-        defaultErrorMessage: 'Ha ocurrido un error al intentar eliminar los colaboradores.',
+        title: 'Error al eliminar proyectos',
+        defaultErrorMessage: 'Ha ocurrido un error al eliminar los proyectos.',
         tryAgain: () => handleDelete(),
       });
     }
@@ -149,9 +66,9 @@ function TableHeaderComponent({ table }: { table: Table<Collaborator> }) {
       <Input
         autoComplete='off'
         className='max-w-xs'
-        placeholder='Buscar por nickname...'
-        value={(table.getColumn('nickname')?.getFilterValue() as string) ?? ''}
-        onChange={(event) => table.getColumn('nickname')?.setFilterValue(event.target.value)}
+        placeholder='Buscar por nombre...'
+        value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
+        onChange={(event) => table.getColumn('name')?.setFilterValue(event.target.value)}
       />
       <ul className='ml-auto flex items-center space-x-2'>
         <li>
@@ -164,7 +81,7 @@ function TableHeaderComponent({ table }: { table: Table<Collaborator> }) {
                   disabledButtonProps={{
                     className: 'pointer-events-none opacity-50',
                   }}
-                  href='/vault/views/collaborators/create'
+                  href='/vault/views/project/create'
                 >
                   <Plus className='size-5' />
                 </ConditionalAnchor>
@@ -183,7 +100,7 @@ function TableHeaderComponent({ table }: { table: Table<Collaborator> }) {
                   disabledButtonProps={{
                     className: 'pointer-events-none opacity-50',
                   }}
-                  href={`/vault/views/collaborators/${rows[0]?.original.id}`}
+                  href={`/vault/views/project/${rows[0]?.original.id}`}
                 >
                   <Eye className='size-5' />
                 </ConditionalAnchor>
@@ -202,7 +119,7 @@ function TableHeaderComponent({ table }: { table: Table<Collaborator> }) {
                   disabledButtonProps={{
                     className: 'pointer-events-none opacity-50',
                   }}
-                  href={`/vault/views/collaborators/${rows[0]?.original.id}/edit`}
+                  href={`/vault/views/project/${rows[0]?.original.id}/edit`}
                 >
                   <Pen className='size-5' />
                 </ConditionalAnchor>
@@ -233,8 +150,8 @@ function TableHeaderComponent({ table }: { table: Table<Collaborator> }) {
               <AlertDialogHeader>
                 <AlertDialogTitle>¿Está completamente seguro?</AlertDialogTitle>
                 <AlertDialogDescription>
-                  Esta acción no se puede deshacer. Esto borrará permanentemente el/los
-                  colaboradores seleccionados.
+                  Esta acción no se puede deshacer. Esto borrará permanentemente el/los proyectos
+                  seleccionados.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>

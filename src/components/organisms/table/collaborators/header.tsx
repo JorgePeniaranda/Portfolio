@@ -1,13 +1,10 @@
-import type { Stack } from '@prisma/client';
-import type { ColumnDef, Table } from '@tanstack/react-table';
+import type { Collaborator } from '@prisma/client';
+import type { Table } from '@tanstack/react-table';
 
 import { Eye, Pen, Plus, Trash } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import { ConditionalAnchor } from '@/components/atoms/conditional-anchor';
-import { DataTable } from '@/components/organisms/data-table';
-import { selectionColumnDef } from '@/components/organisms/data-table/column-def/selection';
-import { DataTableColumnHeader } from '@/components/organisms/data-table/column/dropdown';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -22,103 +19,14 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import {
-  STACK_CATEGORY_TRANSCRIPTIONS,
-  STACK_TYPE_TRANSCRIPTIONS,
-} from '@/constants/transcriptions';
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isNotDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
-import { deleteStack } from '@/services/stack/deleteStack';
+import { deleteCollaborator } from '@/services/collaborator/deleteCollaborator';
 
-//#region Column Definitions
-const columns: Array<ColumnDef<Stack>> = [
-  selectionColumnDef<Stack>(),
-  {
-    id: 'name',
-    accessorKey: 'name',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Nombre' />;
-    },
-  },
-  {
-    id: 'key',
-    accessorKey: 'key',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Key' />;
-    },
-  },
-  {
-    id: 'description',
-    accessorKey: 'description',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Descripción' />;
-    },
-  },
-  {
-    id: 'category',
-    accessorKey: 'category',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Categoria' />;
-    },
-    cell({ row }) {
-      if (
-        isNotDefined(row.original?.category) ||
-        !(row.original?.category in STACK_CATEGORY_TRANSCRIPTIONS)
-      ) {
-        return 'Sin categoría';
-      }
-
-      return STACK_CATEGORY_TRANSCRIPTIONS[row.original.category];
-    },
-  },
-  {
-    id: 'type',
-    accessorKey: 'type',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Tipo' />;
-    },
-    cell({ row }) {
-      if (isNotDefined(row.original?.type) || !(row.original?.type in STACK_TYPE_TRANSCRIPTIONS)) {
-        return 'Sin categoría';
-      }
-
-      return STACK_TYPE_TRANSCRIPTIONS[row.original.type];
-    },
-  },
-];
-
-// MARK: - Stack Table
-/**
- * Stack Table Component
- * @param params - The component props
- * @param params.data - The initial data to display in the table
- * @returns The Stack Table Component
- */
-export function StackTable({ data: initialData }: { data: Stack[] }) {
-  const [data, setData] = useState<Stack[]>(initialData);
-
-  const deleteRows = (indexes: number[]) => {
-    setData((prevData) => {
-      return prevData.filter((_, i) => !indexes.includes(i));
-    });
-  };
-
-  return (
-    <DataTable
-      HeaderComponent={TableHeaderComponent}
-      columns={columns}
-      data={data}
-      meta={{
-        deleteRows,
-      }}
-    />
-  );
-}
-
-// MARK: - Table Header Component
-function TableHeaderComponent({ table }: { table: Table<Stack> }) {
+export function CollaboratorsTableHeader({ table }: { table: Table<Collaborator> }) {
   const { toast } = useToast();
+
   const selectedRowModel = table.getSelectedRowModel();
   const { rows, selectedCount } = useMemo(() => {
     return {
@@ -129,16 +37,17 @@ function TableHeaderComponent({ table }: { table: Table<Stack> }) {
 
   const handleDelete = async () => {
     try {
-      // Send request to delete the stack
-      await deleteStack(rows.map((row) => row.original.id));
+      // Send request to delete the collaborator
+      await deleteCollaborator(rows.map((row) => row.original.id));
+
       // If the request was successful, show a success toast
       toast({
         title: 'Colaboradores eliminados',
-        description: 'Los stack seleccionados se han eliminado correctamente.',
+        description: 'Los colaboradores seleccionados se han eliminaron correctamente.',
         className: 'bg-green-500 text-black',
       });
 
-      // Remove the deleted stacks from the table
+      // Remove the deleted collaborators from the table
       table?.options?.meta?.deleteRows?.(rows.map((row) => row.index));
 
       // Clear the selected rows
@@ -146,8 +55,8 @@ function TableHeaderComponent({ table }: { table: Table<Stack> }) {
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: 'Error al eliminar los stack',
-        defaultErrorMessage: 'Ha ocurrido un error al intentar eliminar los stacks seleccionados.',
+        title: 'Error al eliminar colaboradores',
+        defaultErrorMessage: 'Ha ocurrido un error al intentar eliminar los colaboradores.',
         tryAgain: () => handleDelete(),
       });
     }
@@ -158,9 +67,9 @@ function TableHeaderComponent({ table }: { table: Table<Stack> }) {
       <Input
         autoComplete='off'
         className='max-w-xs'
-        placeholder='Buscar por nombre...'
-        value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
-        onChange={(event) => table.getColumn('name')?.setFilterValue(event.target.value)}
+        placeholder='Buscar por nickname...'
+        value={(table.getColumn('nickname')?.getFilterValue() as string) ?? ''}
+        onChange={(event) => table.getColumn('nickname')?.setFilterValue(event.target.value)}
       />
       <ul className='ml-auto flex items-center space-x-2'>
         <li>
@@ -173,7 +82,7 @@ function TableHeaderComponent({ table }: { table: Table<Stack> }) {
                   disabledButtonProps={{
                     className: 'pointer-events-none opacity-50',
                   }}
-                  href='/vault/views/stack/create'
+                  href='/vault/views/collaborators/create'
                 >
                   <Plus className='size-5' />
                 </ConditionalAnchor>
@@ -192,7 +101,7 @@ function TableHeaderComponent({ table }: { table: Table<Stack> }) {
                   disabledButtonProps={{
                     className: 'pointer-events-none opacity-50',
                   }}
-                  href={`/vault/views/stack/${rows[0]?.original.id}`}
+                  href={`/vault/views/collaborators/${rows[0]?.original.id}`}
                 >
                   <Eye className='size-5' />
                 </ConditionalAnchor>
@@ -211,7 +120,7 @@ function TableHeaderComponent({ table }: { table: Table<Stack> }) {
                   disabledButtonProps={{
                     className: 'pointer-events-none opacity-50',
                   }}
-                  href={`/vault/views/stack/${rows[0]?.original.id}/edit`}
+                  href={`/vault/views/collaborators/${rows[0]?.original.id}/edit`}
                 >
                   <Pen className='size-5' />
                 </ConditionalAnchor>
@@ -242,8 +151,8 @@ function TableHeaderComponent({ table }: { table: Table<Stack> }) {
               <AlertDialogHeader>
                 <AlertDialogTitle>¿Está completamente seguro?</AlertDialogTitle>
                 <AlertDialogDescription>
-                  Esta acción no se puede deshacer. Esto borrará permanentemente el/los stacks
-                  seleccionados.
+                  Esta acción no se puede deshacer. Esto borrará permanentemente el/los
+                  colaboradores seleccionados.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>

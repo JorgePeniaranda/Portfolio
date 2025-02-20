@@ -1,14 +1,10 @@
-import type { Project } from '@prisma/client';
-import type { ColumnDef, Table } from '@tanstack/react-table';
+import type { Stack } from '@prisma/client';
+import type { Table } from '@tanstack/react-table';
 
 import { Eye, Pen, Plus, Trash } from 'lucide-react';
-import moment from 'moment';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import { ConditionalAnchor } from '@/components/atoms/conditional-anchor';
-import { DataTable } from '@/components/organisms/data-table';
-import { selectionColumnDef } from '@/components/organisms/data-table/column-def/selection';
-import { DataTableColumnHeader } from '@/components/organisms/data-table/column/dropdown';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -23,160 +19,12 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { DATA_FORMAT } from '@/constants/common';
-import {
-  PROJECT_STATUS_TRANSCRIPTIONS,
-  STACK_CATEGORY_TRANSCRIPTIONS,
-} from '@/constants/transcriptions';
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isNotDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
-import { deleteProject } from '@/services/project/deleteProject';
+import { deleteStack } from '@/services/stack/deleteStack';
 
-//#region Column Definitions
-const columns: Array<ColumnDef<Project>> = [
-  selectionColumnDef<Project>(),
-  {
-    id: 'name',
-    accessorKey: 'name',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Nombre' />;
-    },
-  },
-  {
-    id: 'key',
-    accessorKey: 'key',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Key' />;
-    },
-  },
-  {
-    id: 'status',
-    accessorKey: 'status',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Estado' />;
-    },
-    cell({ row }) {
-      return PROJECT_STATUS_TRANSCRIPTIONS[row.original.status];
-    },
-  },
-  {
-    id: 'stackCategory',
-    accessorKey: 'stackCategory',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Stack' />;
-    },
-    cell({ row }) {
-      return STACK_CATEGORY_TRANSCRIPTIONS[row.original.stackCategory];
-    },
-  },
-  {
-    id: 'startDate',
-    accessorKey: 'startDate',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Fecha de inicio' />;
-    },
-    cell({ row }) {
-      return moment(row.original.startDate).format(DATA_FORMAT);
-    },
-  },
-  {
-    id: 'endDate',
-    accessorKey: 'endDate',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Fecha de fin' />;
-    },
-    cell({ row }) {
-      if (isNotDefined(row.original.endDate)) {
-        return 'Sin fecha de fin';
-      }
-
-      return moment(row.original.endDate).format(DATA_FORMAT);
-    },
-  },
-  {
-    id: 'primaryColor',
-    accessorKey: 'primaryColor',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Color primario' />;
-    },
-    cell({ row }) {
-      return (
-        <div className='flex items-center gap-1'>
-          <div
-            className='size-5 rounded-full'
-            style={{ backgroundColor: row.original.primaryColor }}
-          />
-          <span>({row.original.primaryColor})</span>
-        </div>
-      );
-    },
-  },
-  {
-    id: 'demoUrl',
-    accessorKey: 'demoUrl',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Demo URL' />;
-    },
-    cell({ row }) {
-      const value = row.original.demoUrl ?? '#';
-
-      return (
-        <a className='text-blue-500' href={value} rel='noreferrer' target='_blank'>
-          {value}
-        </a>
-      );
-    },
-  },
-  {
-    id: 'githubUrl',
-    accessorKey: 'githubUrl',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='GitHub URL' />;
-    },
-    cell({ row }) {
-      const value = row.original.demoUrl ?? '#';
-
-      return (
-        <a className='text-blue-500' href={value} rel='noreferrer' target='_blank'>
-          {value}
-        </a>
-      );
-    },
-  },
-];
-//#endregion
-
-// MARK: - Project Table
-/**
- * Project Table Component
- * @param params - The component props
- * @param params.data - The initial data to display in the table
- * @returns The Project Table Component
- */
-export function ProjectTable({ data: initialData }: { data: Project[] }) {
-  const [data, setData] = useState<Project[]>(initialData);
-
-  const deleteRows = (indexes: number[]) => {
-    setData((prevData) => {
-      return prevData.filter((_, i) => !indexes.includes(i));
-    });
-  };
-
-  return (
-    <DataTable
-      HeaderComponent={TableHeaderComponent}
-      columns={columns}
-      data={data}
-      meta={{
-        deleteRows,
-      }}
-    />
-  );
-}
-
-// MARK: - Table Header Component
-function TableHeaderComponent({ table }: { table: Table<Project> }) {
+export function StackTableHeader({ table }: { table: Table<Stack> }) {
   const { toast } = useToast();
   const selectedRowModel = table.getSelectedRowModel();
   const { rows, selectedCount } = useMemo(() => {
@@ -188,16 +36,16 @@ function TableHeaderComponent({ table }: { table: Table<Project> }) {
 
   const handleDelete = async () => {
     try {
-      await deleteProject(rows.map((row) => row.original.id));
-
+      // Send request to delete the stack
+      await deleteStack(rows.map((row) => row.original.id));
       // If the request was successful, show a success toast
       toast({
         title: 'Colaboradores eliminados',
-        description: 'Los proyectos seleccionados se han eliminado correctamente.',
+        description: 'Los stack seleccionados se han eliminado correctamente.',
         className: 'bg-green-500 text-black',
       });
 
-      // Remove the deleted projects from the table
+      // Remove the deleted stacks from the table
       table?.options?.meta?.deleteRows?.(rows.map((row) => row.index));
 
       // Clear the selected rows
@@ -205,8 +53,8 @@ function TableHeaderComponent({ table }: { table: Table<Project> }) {
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: 'Error al eliminar proyectos',
-        defaultErrorMessage: 'Ha ocurrido un error al eliminar los proyectos.',
+        title: 'Error al eliminar los stack',
+        defaultErrorMessage: 'Ha ocurrido un error al intentar eliminar los stacks seleccionados.',
         tryAgain: () => handleDelete(),
       });
     }
@@ -232,7 +80,7 @@ function TableHeaderComponent({ table }: { table: Table<Project> }) {
                   disabledButtonProps={{
                     className: 'pointer-events-none opacity-50',
                   }}
-                  href='/vault/views/project/create'
+                  href='/vault/views/stack/create'
                 >
                   <Plus className='size-5' />
                 </ConditionalAnchor>
@@ -251,7 +99,7 @@ function TableHeaderComponent({ table }: { table: Table<Project> }) {
                   disabledButtonProps={{
                     className: 'pointer-events-none opacity-50',
                   }}
-                  href={`/vault/views/project/${rows[0]?.original.id}`}
+                  href={`/vault/views/stack/${rows[0]?.original.id}`}
                 >
                   <Eye className='size-5' />
                 </ConditionalAnchor>
@@ -270,7 +118,7 @@ function TableHeaderComponent({ table }: { table: Table<Project> }) {
                   disabledButtonProps={{
                     className: 'pointer-events-none opacity-50',
                   }}
-                  href={`/vault/views/project/${rows[0]?.original.id}/edit`}
+                  href={`/vault/views/stack/${rows[0]?.original.id}/edit`}
                 >
                   <Pen className='size-5' />
                 </ConditionalAnchor>
@@ -301,7 +149,7 @@ function TableHeaderComponent({ table }: { table: Table<Project> }) {
               <AlertDialogHeader>
                 <AlertDialogTitle>¿Está completamente seguro?</AlertDialogTitle>
                 <AlertDialogDescription>
-                  Esta acción no se puede deshacer. Esto borrará permanentemente el/los proyectos
+                  Esta acción no se puede deshacer. Esto borrará permanentemente el/los stacks
                   seleccionados.
                 </AlertDialogDescription>
               </AlertDialogHeader>
