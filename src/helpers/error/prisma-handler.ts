@@ -10,7 +10,7 @@ import { PRISMA_STATUS_CODE_STATUS_CATEGORY } from '@/constants/common';
  * @param prismaErrorCode - The error code from Prisma to map to an HTTP status code
  * @returns The HTTP status code corresponding to the Prisma error code, or 500 if not found
  */
-export function getStatusCode(prismaErrorCode: string): number {
+export function getStatusCodeByPrismaErrorCode(prismaErrorCode: string): number {
   // Iterate over the PRISMA_STATUS_CODE_STATUS_CATEGORY dictionary entries
   for (const [statusCode, errorCodes] of Object.entries(PRISMA_STATUS_CODE_STATUS_CATEGORY)) {
     // Check if the prismaErrorCode exists in the list of error codes for the current status code
@@ -40,7 +40,7 @@ export function prismaHandler(
     error.code in PRISMA_ERROR_MESSAGES
   ) {
     return {
-      statusCode: getStatusCode(error.code),
+      statusCode: getStatusCodeByPrismaErrorCode(error.code),
       message: PRISMA_ERROR_MESSAGES[error.code],
     };
   }
