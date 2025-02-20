@@ -3,7 +3,7 @@ import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/helpers/common/classnames';
 
-interface Props extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+interface GithubUserProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   username: string;
 }
 
@@ -13,7 +13,7 @@ interface Props extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
  * @param params.username - The GitHub username
  * @returns A GithubUser component
  */
-export default function GithubUser({ username, ...props }: Props) {
+export default function GithubUser({ username, ...props }: GithubUserProps) {
   return (
     <a
       aria-label={username}

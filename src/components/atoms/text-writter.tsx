@@ -1,6 +1,6 @@
 import { Typewriter } from 'react-simple-typewriter';
 
-interface IProps {
+interface TextWritterProps {
   wordList: string[];
 }
 
@@ -10,7 +10,7 @@ interface IProps {
  * @param params.wordList - List of words to type
  * @returns A TextWritter component
  */
-export function TextWritter({ wordList }: IProps) {
+export function TextWritter({ wordList }: TextWritterProps) {
   return (
     <Typewriter
       cursor // Shows a cursor during typing

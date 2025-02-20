@@ -11,7 +11,6 @@ import React from 'react';
  * @returns A React component that displays a message with line breaks
  */
 export function MessageDisplay({ message }: { message: string }) {
-  // Split the message by newline characters and map each line to a <br />
   return message.split('\n').map((line, index) => (
     // eslint-disable-next-line react/no-array-index-key
     <React.Fragment key={index}>

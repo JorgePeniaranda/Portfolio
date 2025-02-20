@@ -14,16 +14,7 @@ import { isDefined } from '@/helpers/guards/is-defined';
 import { isNoEmptyString } from '@/helpers/guards/is-no-empty-string';
 
 //#region TYPES
-/**
- * The props for the ProjectAccordion component.
- * @param contributions - A description of the contributions made to the project.
- * @param goals - A description of the goals for the project.
- * @param stackCategory - A list of technologies used in the project.
- * @param collaborators - A list of collaborators in the project.
- * @param githubUrl - The GitHub repository URL of the project.
- * @param demoUrl - The demo URL of the project.
- */
-interface Props {
+interface ProjectAccordionProps {
   contributions: string;
   goals: string;
   stackCategory: Stack[];
@@ -53,7 +44,7 @@ export function ProjectAccordion({
   goals,
   stackCategory,
   contributions,
-}: Props) {
+}: ProjectAccordionProps) {
   return (
     <UIAccordion className='w-full' type='multiple'>
       {/* Render goals section if there are goals */}

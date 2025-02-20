@@ -42,11 +42,11 @@ export function StackDrawer({
     // Call the onClose callback if defined
     drawerProps?.onClose?.();
 
-    // Redirect to the site specified in the returnToSiteOnClose prop
     if (isNotDefined(returnToSiteOnClose)) {
       return;
     }
 
+    // Keep state means the application state should be preserved when navigating back to the site
     if (returnToSiteOnClose.keepState) {
       history?.pushState?.(null, '', returnToSiteOnClose.site);
 

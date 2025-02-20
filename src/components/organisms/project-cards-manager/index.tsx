@@ -33,33 +33,29 @@ export function ProjectCardsManager({
 }: {
   projects: Pick<Project, 'id' | 'key' | 'name' | 'logoUrl' | 'stackCategory' | 'status'>[];
 }) {
-  // Retrieves the list of liked projects from the store
   const { likedKeyProjects } = useProjectLikedStore();
 
-  // State for sorting type, stack filter, and status filter
   const [sortType, setSortType] = useState<ProjectSortType>('liked');
   const [stackFilter, setStackFilter] = useState<StackCategory>();
   const [statusFilter, setStatusFilter] = useState<ProjectStatus>();
 
-  // key to select
   const [stackKey, setStackKey] = useState(+new Date());
   const [statusKey, setStatusKey] = useState(+new Date());
 
-  // Memoized sorting of projects based on filters and sort type
   const sortedProjects = useMemo(() => {
     let newProjects = structuredClone(projects);
 
-    // Filter by stack
+    // ---  Filter by stack ---
     if (isDefined(stackFilter)) {
       newProjects = newProjects.filter((project) => project.stackCategory === stackFilter);
     }
 
-    // Filter by status
+    // --- Filter by status ---
     if (isDefined(statusFilter)) {
       newProjects = newProjects.filter((project) => project.status === statusFilter);
     }
 
-    // Sort projects based on the selected sort type
+    // ---  Sort projects ---
     newProjects = newProjects.sort((a, b) => {
       if (sortType === 'liked') {
         const getLikedIndex = (key: string) => likedKeyProjects.indexOf(key);
@@ -82,11 +78,11 @@ export function ProjectCardsManager({
       }
 
       if (sortType === 'A-Z') {
-        return a.name.localeCompare(b.name); // Sort alphabetically A-Z
+        return a.name.localeCompare(b.name);
       }
 
       if (sortType === 'Z-A') {
-        return b.name.localeCompare(a.name); // Sort alphabetically Z-A
+        return b.name.localeCompare(a.name);
       }
 
       return 0; // Default case (no sorting)
@@ -97,7 +93,6 @@ export function ProjectCardsManager({
 
   return (
     <div className='mt-16 flex flex-col gap-8'>
-      {/* Filters for sorting and project attributes */}
       <ul className='flex w-full items-center justify-center gap-10 overflow-x-auto'>
         {/* Sort filter */}
         <li className='flex items-center gap-2'>
