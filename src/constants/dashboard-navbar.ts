@@ -26,7 +26,6 @@ export const DASHBOARD_NAVBAR_ITEMS = {
     },
     {
       title: 'Vistas',
-      url: '#',
       items: [
         {
           title: 'Proyectos',
@@ -44,7 +43,6 @@ export const DASHBOARD_NAVBAR_ITEMS = {
     },
     {
       title: 'Diseño',
-      url: '#',
       items: [
         {
           title: 'Stack flow',

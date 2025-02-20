@@ -15,10 +15,5 @@ export interface NavbarLink extends Omit<React.AnchorHTMLAttributes<HTMLAnchorEl
 export interface DashboardNavbarItem {
   title: string;
   url?: string;
-  items: DashboardNavbarSubItem[];
-}
-
-export interface DashboardNavbarSubItem {
-  title: string;
-  url: string;
+  items: Omit<DashboardNavbarItem, 'items'>[];
 }
