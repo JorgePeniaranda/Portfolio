@@ -10,3 +10,8 @@ export const themesArray = Object.values(themes);
 
 // Type representing a boolean value for the sound state
 export type ISoundState = boolean;
+
+export interface IBreadCrumb {
+  label: string;
+  href?: string;
+}
