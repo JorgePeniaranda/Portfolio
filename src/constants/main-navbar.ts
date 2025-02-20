@@ -76,4 +76,4 @@ export const NAVBAR_ITEMS: NavbarSection[] = [
       },
     ],
   },
-];
+] as const;
