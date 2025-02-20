@@ -6,12 +6,12 @@ import { persist } from 'zustand/middleware';
 import { PROJECT_LIKED_STORE_KEY } from '@/constants/common';
 
 // Define the shape of the store's state.
-export interface ILikedStoreState {
+export interface LikedStoreState {
   likedKeyProjects: Project['key'][];
 }
 
 // Define the actions available in the store.
-export interface ILikedStoreActions {
+export interface LikedStoreActions {
   addLikedProject(key: Project['key']): void;
   removeLikedProject(key: Project['key']): void;
   checkLikedProject(key: Project['key']): boolean;
@@ -20,7 +20,7 @@ export interface ILikedStoreActions {
 
 // Create the liked projects store using Zustand with persistence enabled.
 export const useProjectLikedStore = create(
-  persist<ILikedStoreState & ILikedStoreActions>(
+  persist<LikedStoreState & LikedStoreActions>(
     (set, get) => ({
       likedKeyProjects: [],
 
