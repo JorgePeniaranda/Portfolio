@@ -50,7 +50,6 @@ export function UpdateProjectForm({
 }) {
   const { toast } = useToast();
 
-  // Create a form to update the project
   const form = useForm<ProjectUpdateSchema>({
     resolver: zodResolver(ProjectUpdateSchema),
     defaultValues: currentProject,
@@ -58,13 +57,12 @@ export function UpdateProjectForm({
 
   const onSubmit = async (values: ProjectUpdateSchema) => {
     try {
-      // Send request to update the project
       await putProject({
         idProject: currentProject.id,
         projectUpdateInput: values,
       });
 
-      // If the request was successful, show a success toast
+      // Show a success toast
       toast({
         title: 'Proyecto creado',
         description: 'El proyecto ha sido creado exitosamente.',

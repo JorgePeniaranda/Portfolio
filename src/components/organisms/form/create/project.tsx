@@ -44,7 +44,6 @@ import { postProject } from '@/services/project/postProject';
 export function CreateProjectForm({ disableForm = false }: { disableForm?: boolean }) {
   const { toast } = useToast();
 
-  // Create a form to create a project
   const form = useForm<ProjectCreateSchema>({
     resolver: zodResolver(ProjectCreateSchema),
     defaultValues: ProjectCreateDefaultValues,
@@ -52,18 +51,19 @@ export function CreateProjectForm({ disableForm = false }: { disableForm?: boole
 
   const onSubmit = async (values: ProjectCreateSchema) => {
     try {
-      // Send request to create a project
       const response = await postProject(values);
 
-      // If the request was successful, show a success toast
+      // Reset the form
       form.reset();
+
+      // Show a success toast
       toast({
         title: 'Proyecto creado',
         description: 'El proyecto ha sido creado exitosamente.',
         className: 'bg-green-500 text-black',
       });
 
-      // Redirect to the project view
+      // Redirect to the new project page
       if (isDefined(response?.id)) {
         window?.location?.assign?.(`/vault/views/project/${response.id}`);
       }

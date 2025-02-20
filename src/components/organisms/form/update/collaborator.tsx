@@ -35,7 +35,6 @@ export function UpdateCollaboratorForm({
 }) {
   const { toast } = useToast();
 
-  // Create a form to update the collaborator
   const form = useForm<CollaboratorUpdateSchema>({
     resolver: zodResolver(CollaboratorUpdateSchema),
     defaultValues: currentCollaborator,
@@ -43,13 +42,12 @@ export function UpdateCollaboratorForm({
 
   const onSubmit = async (values: CollaboratorUpdateSchema) => {
     try {
-      // Send request to update the collaborator
       await putCollaborator({
         idCollaborator: currentCollaborator.id,
         updatedCollaborator: values,
       });
 
-      // If the request was successful, show a success toast
+      // Show a success toast
       toast({
         title: 'Colaborador actualizado',
         description: 'El colaborador ha sido actualizado exitosamente.',
