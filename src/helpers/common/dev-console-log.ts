@@ -6,7 +6,7 @@ import { ENV } from '@/constants/env';
  * @param input - The message to log
  */
 export function logMessage(type: 'log' | 'info' | 'warn' | 'error', input: unknown[]): void {
-  if (ENV.is_development) {
+  if (ENV.isDevelopment) {
     // eslint-disable-next-line no-console
     console[type](...input);
   }
