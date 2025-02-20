@@ -24,14 +24,14 @@ describe('useSecretCodeStore', () => {
   it('should not unlock a number out of bounds', () => {
     // Try unlocking a number out of bounds
     useSecretCodeStore.getState().unlockOneNumber(-1); // Invalid index
-    useSecretCodeStore.getState().unlockOneNumber(ENV.secret_code.length); // Invalid index
+    useSecretCodeStore.getState().unlockOneNumber(ENV.secretCode.length); // Invalid index
 
     expect(useSecretCodeStore.getState().unlockedNumbers).toEqual([0]);
   });
 
   it('should mark the code as complete when all numbers are unlocked', () => {
     // Unlock all numbers in the secret code
-    ENV.secret_code.split('').forEach((_, index) => {
+    ENV.secretCode.split('').forEach((_, index) => {
       useSecretCodeStore.getState().unlockOneNumber(index);
     });
 

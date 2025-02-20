@@ -22,7 +22,7 @@ export interface SecretCodeStoreActions {
 export const useSecretCodeStore = create<SecretCodeStoreState & SecretCodeStoreActions>()(
   persist(
     (set, get) => ({
-      secretCode: ENV.secret_code,
+      secretCode: ENV.secretCode,
       unlockedNumbers: [0], // Start with the first number unlocked.
       isComplete: false,
 
@@ -36,7 +36,7 @@ export const useSecretCodeStore = create<SecretCodeStoreState & SecretCodeStoreA
         const { unlockedNumbers } = get();
 
         // Check if the index is out of bounds for the secret code.
-        if (index >= ENV.secret_code.length || index < 0) {
+        if (index >= ENV.secretCode.length || index < 0) {
           return;
         }
 
@@ -49,7 +49,7 @@ export const useSecretCodeStore = create<SecretCodeStoreState & SecretCodeStoreA
           const newUnlockedNumbers = [...state.unlockedNumbers, index];
 
           // Mark the state as complete if all numbers are unlocked.
-          if (newUnlockedNumbers.length === ENV.secret_code.length) {
+          if (newUnlockedNumbers.length === ENV.secretCode.length) {
             return { unlockedNumbers: newUnlockedNumbers, isComplete: true };
           }
 
@@ -71,7 +71,7 @@ export const useSecretCodeStore = create<SecretCodeStoreState & SecretCodeStoreA
 
         const newUnlockedNumbers = [...unlockedNumbers, index];
 
-        return newUnlockedNumbers.length === ENV.secret_code.length;
+        return newUnlockedNumbers.length === ENV.secretCode.length;
       },
 
       resetSecretCode: () => {
