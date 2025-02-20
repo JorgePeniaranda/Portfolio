@@ -1,6 +1,7 @@
 import type { IBreadCrumb } from '@/types/breadcrumb';
 
 import { ChevronRight, Database } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 import {
   Breadcrumb,
@@ -45,6 +46,12 @@ export function DashboardLayout({
   children?: React.ReactNode;
   breadcrumb?: Array<IBreadCrumb>;
 }) {
+  const [currentPathname, setCurrentPathname] = useState('');
+
+  useEffect(() => {
+    setCurrentPathname(window.location.pathname);
+  }, []);
+
   return (
     <SidebarProvider>
       <Sidebar>
@@ -86,7 +93,7 @@ export function DashboardLayout({
                     <SidebarMenuSub className='gap-0'>
                       {item.items.map((item) => (
                         <SidebarMenuSubItem key={item.title}>
-                          <SidebarMenuSubButton asChild isActive={item.isActive}>
+                          <SidebarMenuSubButton asChild isActive={item.url === currentPathname}>
                             <a href={item.url}>{item.title}</a>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
