@@ -75,4 +75,4 @@ export const PRISMA_STATUS_CODE_STATUS_CATEGORY = {
     'P2036',
     'P2037',
   ],
-} as const;
+} as Readonly<Record<string, string[]>>;
