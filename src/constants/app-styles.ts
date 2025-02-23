@@ -49,5 +49,5 @@ const StackStyle: Record<StackCategory, string> = {
 export const ProjectDetailsStyles = {
   StatusStyle,
   StackStyle,
-};
+} as const;
 //#endregion

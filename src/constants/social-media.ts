@@ -1,4 +1,3 @@
-//#region Personal Accounts
 export const PERSONAL_ACCOUNTS = {
   github: {
     url: 'https://github.com/JorgePeniaranda',
@@ -26,8 +25,3 @@ export const PERSONAL_ACCOUNTS = {
     username: 'JorgePeniaranda',
   },
 } as const;
-//#endregion
-
-//#region API URLs
-export const GITHUB_GET_USERS_URL = 'https://api.github.com/users';
-//#endregion

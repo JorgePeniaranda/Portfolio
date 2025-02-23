@@ -26,6 +26,9 @@ import { deleteStack } from '@/services/stack/deleteStack';
 
 export function StackTableHeader({ table }: { table: Table<Stack> }) {
   const { toast } = useToast();
+
+  const tableFilterValue = table.getColumn('name')?.getFilterValue();
+
   const selectedRowModel = table.getSelectedRowModel();
   const { rows, selectedCount } = useMemo(() => {
     return {
@@ -66,7 +69,11 @@ export function StackTableHeader({ table }: { table: Table<Stack> }) {
         autoComplete='off'
         className='max-w-xs'
         placeholder='Buscar por nombre...'
-        value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
+        value={
+          typeof tableFilterValue === 'string' || typeof tableFilterValue === 'number'
+            ? tableFilterValue
+            : ''
+        }
         onChange={(event) => table.getColumn('name')?.setFilterValue(event.target.value)}
       />
       <ul className='ml-auto flex items-center space-x-2'>

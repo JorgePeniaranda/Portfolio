@@ -27,6 +27,8 @@ import { deleteCollaborator } from '@/services/collaborator/deleteCollaborator';
 export function CollaboratorsTableHeader({ table }: { table: Table<Collaborator> }) {
   const { toast } = useToast();
 
+  const tableFilterValue = table.getColumn('nickname')?.getFilterValue();
+
   const selectedRowModel = table.getSelectedRowModel();
   const { rows, selectedCount } = useMemo(() => {
     return {
@@ -68,7 +70,11 @@ export function CollaboratorsTableHeader({ table }: { table: Table<Collaborator>
         autoComplete='off'
         className='max-w-xs'
         placeholder='Buscar por nickname...'
-        value={(table.getColumn('nickname')?.getFilterValue() as string) ?? ''}
+        value={
+          typeof tableFilterValue === 'string' || typeof tableFilterValue === 'number'
+            ? tableFilterValue
+            : ''
+        }
         onChange={(event) => table.getColumn('nickname')?.setFilterValue(event.target.value)}
       />
       <ul className='ml-auto flex items-center space-x-2'>

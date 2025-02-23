@@ -6,8 +6,8 @@ import { Checkbox } from '@/components/ui/checkbox';
  * Selection column definition.
  * @returns The selection column definition
  */
-export function selectionColumnDef<TData>() {
-  const columnDef: ColumnDef<TData> = {
+export function selectionColumnDef<TData>(): ColumnDef<TData> {
+  return {
     id: 'select',
     header: ({ table }) => (
       <Checkbox
@@ -30,6 +30,4 @@ export function selectionColumnDef<TData>() {
     enableSorting: false,
     enableHiding: false,
   };
-
-  return columnDef;
 }

@@ -43,4 +43,4 @@ export const PROJECT_SORT_TRANSCRIPTIONS: Record<ProjectSortType, string> = {
   'liked': 'Favoritos',
   'A-Z': 'A-Z',
   'Z-A': 'Z-A',
-};
+} as const;

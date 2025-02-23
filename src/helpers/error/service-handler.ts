@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-import { isDefined, isNotDefined } from '../guards/is-defined';
+import { isDefined } from '../guards/is-defined';
 import { isErrorResponse } from '../guards/is-error-response';
+import { isNoEmptyString } from '../guards/is-no-empty-string';
 
 import { ENV } from '@/constants/env';
 
@@ -24,28 +25,23 @@ export function handleServiceError({
     throw new Error('No se puede realizar cambios por ser un sitio estático');
   }
 
-  if (!axios.isAxiosError(error)) {
+  if (!axios.isAxiosError(error) || !isErrorResponse(error.response?.data)) {
     return new Error(defaultErrorMessage);
   }
 
-  if (isNotDefined(error.response?.data)) {
-    return new Error(defaultErrorMessage);
-  }
+  const { data: errorResponseData } = error.response;
 
-  const { data: responseData } = error.response;
-
-  if (!isErrorResponse(responseData)) {
-    return new Error(defaultErrorMessage);
-  }
-
-  if (isDefined(responseData.fieldErrors?.length) && responseData.fieldErrors.length > 0) {
+  if (
+    isDefined(errorResponseData.fieldErrors?.length) &&
+    errorResponseData.fieldErrors.length > 0
+  ) {
     return new Error(
-      responseData.fieldErrors.map((error) => `${error.field}: ${error.message}`).join('\n'),
+      errorResponseData.fieldErrors.map((error) => `${error.field}: ${error.message}`).join('\n'),
     );
   }
 
-  if (isDefined(responseData.title)) {
-    return new Error(responseData.title);
+  if (isDefined(errorResponseData.title) && isNoEmptyString(errorResponseData.title)) {
+    return new Error(errorResponseData.title);
   }
 
   return new Error(defaultErrorMessage);

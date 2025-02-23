@@ -16,7 +16,7 @@ export const SITE_INFO = {
   icon_folder: `${ORIGINAL_URL}/icons`,
   banner: `${ORIGINAL_URL}/assets/images/banner.png`,
   color: '#bf5454',
-};
+} as const;
 
 export const SEO_INFO: SEOProps = {
   canonical: ORIGINAL_URL,
