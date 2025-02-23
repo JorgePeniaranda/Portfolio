@@ -66,7 +66,7 @@ export const ProjectTableColumns: Array<ColumnDef<Project>> = [
     },
     cell({ row }) {
       if (isNotDefined(row.original.endDate)) {
-        return 'Sin fecha de fin';
+        return;
       }
 
       return moment(row.original.endDate).format(DATA_FORMAT);
@@ -97,6 +97,10 @@ export const ProjectTableColumns: Array<ColumnDef<Project>> = [
       return <DataTableColumnHeader column={column} title='Demo URL' />;
     },
     cell({ row }) {
+      if (isNotDefined(row.original.demoUrl)) {
+        return;
+      }
+
       const value = row.original.demoUrl ?? '#';
 
       return (
@@ -113,7 +117,11 @@ export const ProjectTableColumns: Array<ColumnDef<Project>> = [
       return <DataTableColumnHeader column={column} title='GitHub URL' />;
     },
     cell({ row }) {
-      const value = row.original.demoUrl ?? '#';
+      if (isNotDefined(row.original.githubUrl)) {
+        return;
+      }
+
+      const value = row.original.githubUrl;
 
       return (
         <a className='text-blue-500' href={value} rel='noreferrer' target='_blank'>

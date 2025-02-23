@@ -3,6 +3,7 @@ import type { ColumnDef } from '@tanstack/react-table';
 
 import { selectionColumnDef } from '@/components/organisms/data-table/column-def/selection';
 import { DataTableColumnHeader } from '@/components/organisms/data-table/column/dropdown';
+import { isNotDefined } from '@/helpers/guards/is-defined';
 
 export const CollaboratorsTableColumns: Array<ColumnDef<Collaborator>> = [
   selectionColumnDef<Collaborator>(),
@@ -20,6 +21,10 @@ export const CollaboratorsTableColumns: Array<ColumnDef<Collaborator>> = [
       return <DataTableColumnHeader column={column} title='Nickname de GitHub' />;
     },
     cell({ row }) {
+      if (isNotDefined(row.original.githubUsername)) {
+        return null;
+      }
+
       return (
         <a
           className='text-blue-500'
@@ -39,6 +44,10 @@ export const CollaboratorsTableColumns: Array<ColumnDef<Collaborator>> = [
       return <DataTableColumnHeader column={column} title='Nickname de Linkedin' />;
     },
     cell({ row }) {
+      if (isNotDefined(row.original.linkedinUsername)) {
+        return null;
+      }
+
       return (
         <a
           className='text-blue-500'

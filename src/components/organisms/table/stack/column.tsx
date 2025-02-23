@@ -43,7 +43,7 @@ export const StackTableColumns: Array<ColumnDef<Stack>> = [
         isNotDefined(row.original?.category) ||
         !(row.original?.category in STACK_CATEGORY_TRANSCRIPTIONS)
       ) {
-        return 'Sin categoría';
+        return;
       }
 
       return STACK_CATEGORY_TRANSCRIPTIONS[row.original.category];
@@ -57,7 +57,7 @@ export const StackTableColumns: Array<ColumnDef<Stack>> = [
     },
     cell({ row }) {
       if (isNotDefined(row.original?.type) || !(row.original?.type in STACK_TYPE_TRANSCRIPTIONS)) {
-        return 'Sin categoría';
+        return;
       }
 
       return STACK_TYPE_TRANSCRIPTIONS[row.original.type];
