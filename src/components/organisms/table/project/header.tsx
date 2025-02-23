@@ -27,6 +27,8 @@ import { deleteProject } from '@/services/project/deleteProject';
 export function ProjectTableHeader({ table }: { table: Table<Project> }) {
   const { toast } = useToast();
 
+  const tableFilterValue = table.getColumn('name')?.getFilterValue();
+
   const selectedRowModel = table.getSelectedRowModel();
   const { rows, selectedCount } = useMemo(() => {
     return {
@@ -67,7 +69,11 @@ export function ProjectTableHeader({ table }: { table: Table<Project> }) {
         autoComplete='off'
         className='max-w-xs'
         placeholder='Buscar por nombre...'
-        value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
+        value={
+          typeof tableFilterValue === 'string' || typeof tableFilterValue === 'number'
+            ? tableFilterValue
+            : ''
+        }
         onChange={(event) => table.getColumn('name')?.setFilterValue(event.target.value)}
       />
       <ul className='ml-auto flex items-center space-x-2'>
