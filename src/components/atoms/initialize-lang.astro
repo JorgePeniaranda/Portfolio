@@ -1,0 +1,18 @@
+---
+import { langStore } from '@/services/storage/lang';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+
+langStore.set(lang); // Update the language store in the server side
+---
+
+<script>
+  import { langStore } from '@/services/storage/lang';
+
+  // Update the language store in the client side
+  langStore.set(document.documentElement.lang);
+</script>
