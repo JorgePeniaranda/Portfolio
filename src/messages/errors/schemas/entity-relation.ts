@@ -1,4 +1,4 @@
-import type { TranslationKey } from '@/messages/translation';
+import type { TranslationKey } from '@/types/translation';
 
 export const EntityRelationSchemaErrorMessages = {
   idSource: {
