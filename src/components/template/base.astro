@@ -2,10 +2,11 @@
 import { SEO } from 'astro-seo';
 import { ClientRouter } from 'astro:transitions';
 
+import { SEO_INFO } from '../../constants/astro-seo-config';
 import { DEFAULT_LANG } from '../../constants/common';
 import { NAVBAR_ITEMS } from '../../constants/main-navbar';
-import { SEO_INFO } from '../../constants/astro-seo-config';
 import '../../styles/globals.css';
+import InitializeLang from '../atoms/initialize-lang.astro';
 import ThemePreference from '../atoms/theme-preference.astro';
 import { DesktopNavbar } from '../organisms/navbar/desktop';
 import { MobileNavbar } from '../organisms/navbar/mobile';
@@ -32,6 +33,7 @@ const { title, description, lang = DEFAULT_LANG, body, html } = Astro.props;
     <meta content={Astro.generator} name='generator' />
     <ClientRouter />
     <ThemePreference />
+    <InitializeLang lang={lang} />
   </head>
   <body class={cn('w-full min-h-screen antialiased font-Baloo', body?.class)} {...body}>
     <slot />
