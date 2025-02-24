@@ -1,0 +1,49 @@
+{
+  "error": {
+    "validation-message": {
+      "env": {
+        "appVersion": {
+          "string": "La versión de la aplicación debe ser un texto.",
+          "required_error": "La versión de la aplicación es obligatoria."
+        },
+        "mode": {
+          "string": "El modo debe ser un texto.",
+          "required_error": "El modo es obligatorio."
+        },
+        "isProduction": {
+          "boolean": "El valor debe ser un booleano.",
+          "required_error": "El campo de producción es obligatorio."
+        },
+        "isDevelopment": {
+          "boolean": "El valor debe ser un booleano.",
+          "required_error": "El campo de desarrollo es obligatorio."
+        },
+        "isServerSideEnable": {
+          "boolean": "El valor debe ser un booleano.",
+          "required_error": "El campo de habilitación del lado del servidor es obligatorio."
+        },
+        "assetsPrefix": {
+          "string": "El prefijo de los recursos debe ser un texto."
+        },
+        "siteUrl": {
+          "string": "La URL del sitio debe ser un texto.",
+          "url": "La URL del sitio no es válida.",
+          "required_error": "La URL del sitio es obligatoria."
+        },
+        "baseUrl": {
+          "string": "La URL base debe ser un texto.",
+          "required_error": "La URL base es obligatoria."
+        },
+        "apiUrl": {
+          "string": "La URL de la API debe ser un texto.",
+          "url": "La URL de la API no es válida.",
+          "required_error": "La URL de la API es obligatoria."
+        },
+        "secretCode": {
+          "string": "El código secreto debe ser un texto.",
+          "required_error": "El código secreto es obligatorio."
+        }
+      }
+    }
+  }
+}
