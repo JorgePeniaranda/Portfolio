@@ -104,6 +104,46 @@ export interface Translation {
       'select-placeholder': string;
       'submit-button': string;
     };
+    'update-stacks-related-project': {
+      'success-title': string;
+      'success-description': string;
+      'error-title': string;
+      'error-description': string;
+      'remove-success-title': string;
+      'remove-success-description': string;
+      'remove-error-title': string;
+      'remove-error-description': string;
+      'remove-button-aria': string;
+      'remove-button': string;
+      'add-button-aria': string;
+      'dialog-title': string;
+      'dialog-description': string;
+      'select-placeholder': string;
+      'submit-button': string;
+      'aria-label': {
+        'stack-logo': string;
+      };
+    };
+    'update-projects-related-stack': {
+      'success-title': string;
+      'success-description': string;
+      'error-title': string;
+      'error-description': string;
+      'remove-success-title': string;
+      'remove-success-description': string;
+      'remove-error-title': string;
+      'remove-error-description': string;
+      'remove-button-aria': string;
+      'remove-button': string;
+      'add-button-aria': string;
+      'dialog-title': string;
+      'dialog-description': string;
+      'select-placeholder': string;
+      'submit-button': string;
+      'aria-label': {
+        'project-logo': string;
+      };
+    };
     'create-stack-form': {
       'key': string;
       'key-placeholder': string;
@@ -173,6 +213,53 @@ export interface Translation {
       'error-title': string;
       'error-description': string;
     };
+    'update-project-form': {
+      'key': string;
+      'key-placeholder': string;
+      'key-aria': string;
+      'name': string;
+      'name-placeholder': string;
+      'name-aria': string;
+      'status': string;
+      'status-placeholder': string;
+      'status-aria': string;
+      'stack': string;
+      'stack-placeholder': string;
+      'stack-aria': string;
+      'start-date': string;
+      'start-date-aria': string;
+      'select-start-date': string;
+      'end-date': string;
+      'end-date-aria': string;
+      'select-end-date': string;
+      'description': string;
+      'description-placeholder': string;
+      'description-aria': string;
+      'goals': string;
+      'goals-placeholder': string;
+      'goals-aria': string;
+      'contributions': string;
+      'contributions-placeholder': string;
+      'contributions-aria': string;
+      'logo-url': string;
+      'logo-url-placeholder': string;
+      'logo-url-aria': string;
+      'primary-color': string;
+      'primary-color-placeholder': string;
+      'primary-color-aria': string;
+      'demo-url': string;
+      'demo-url-placeholder': string;
+      'demo-url-aria': string;
+      'github-url': string;
+      'github-url-placeholder': string;
+      'github-url-aria': string;
+      'submit': string;
+      'submit-aria': string;
+      'success-title': string;
+      'success-description': string;
+      'error-title': string;
+      'error-description': string;
+    };
     'data-table-column-header': {
       sort: {
         asc: string;
@@ -199,12 +286,25 @@ export interface Translation {
     'stack-drawer': {
       'description': string;
       'related-projects': string;
+      'aria-label': {
+        'close': string;
+        'stack-logo': string;
+        'project-logo': string;
+        'project-link': string;
+      };
     };
     'create-collaborator-form': {
       'nickname': string;
+      'nickname-placeholder': string;
+      'nickname-aria': string;
       'github-username': string;
+      'github-username-placeholder': string;
+      'github-username-aria': string;
       'linkedin-username': string;
+      'linkedin-username-placeholder': string;
+      'linkedin-username-aria': string;
       'submit': string;
+      'submit-aria': string;
       'success-title': string;
       'success-description': string;
       'error-title': string;
@@ -240,17 +340,100 @@ export interface Translation {
       'confirm-description': string;
       'cancel': string;
     };
+    'mobile-navbar': {
+      'site-config': string;
+      'config-title': string;
+      'toggle-theme': string;
+      'toggle-sound': string;
+      'theme': {
+        dark: string;
+        light: string;
+        loading: string;
+      };
+      'sound': {
+        on: string;
+        off: string;
+      };
+      'aria-label': {
+        'main': string;
+        'site-config': string;
+        'toggle-theme': string;
+        'toggle-sound': string;
+        'theme-icon': string;
+        'sound-icon': string;
+      };
+    };
+    'project-cards-manager': {
+      'sort': {
+        label: string;
+        placeholder: string;
+      };
+      'stack': {
+        label: string;
+        placeholder: string;
+      };
+      'status': {
+        label: string;
+        placeholder: string;
+      };
+      'clear': string;
+      'aria-label': {
+        'sort-select': string;
+        'stack-select': string;
+        'status-select': string;
+        'clear-stack': string;
+        'clear-status': string;
+        'projects-grid': string;
+      };
+    };
+    'desktop-navbar': {
+      'aria-label': {
+        'main': string;
+        'link-list': string;
+        'config-buttons': string;
+        'toggle-theme': string;
+        'toggle-sound': string;
+        'theme-icon': string;
+        'sound-icon': string;
+        'link-icon': string;
+      };
+      'theme': {
+        current: string;
+        light: string;
+        dark: string;
+        loading: string;
+      };
+      'sound': {
+        current: string;
+        on: string;
+        off: string;
+      };
+    };
+    'update-stack-form': {
+      'key': string;
+      'key-placeholder': string;
+      'key-aria': string;
+      'name': string;
+      'name-placeholder': string;
+      'name-aria': string;
+      'description': string;
+      'description-placeholder': string;
+      'description-aria': string;
+      'category': string;
+      'category-placeholder': string;
+      'type': string;
+      'type-placeholder': string;
+      'icon-url': string;
+      'icon-url-placeholder': string;
+      'icon-url-aria': string;
+      'submit': string;
+      'submit-aria': string;
+      'success-title': string;
+      'success-description': string;
+      'error-title': string;
+      'error-description': string;
+    };
   };
-  // 'services': {
-  //   test: {
-  //     bla: string;
-  //   };
-  // };
-  // 'http-response': {
-  //   response: {
-  //     'not-found': string;
-  //   };
-  // };
   error: {
     'validation-message': {
       'collaborator': {

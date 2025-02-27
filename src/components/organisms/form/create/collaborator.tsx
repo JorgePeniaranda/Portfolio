@@ -78,8 +78,9 @@ export function CreateCollaboratorForm({ disableForm = false }: { disableForm?: 
                 <FormControl>
                   <Input
                     disabled={disableForm}
-                    placeholder={t('components.create-collaborator-form.nickname')}
+                    placeholder={t('components.create-collaborator-form.nickname-placeholder')}
                     {...field}
+                    aria-label={t('components.create-collaborator-form.nickname-aria')}
                   />
                 </FormControl>
                 <FormMessage />
@@ -95,8 +96,11 @@ export function CreateCollaboratorForm({ disableForm = false }: { disableForm?: 
                 <FormControl>
                   <Input
                     disabled={disableForm}
-                    placeholder={t('components.create-collaborator-form.github-username')}
+                    placeholder={t(
+                      'components.create-collaborator-form.github-username-placeholder',
+                    )}
                     {...field}
+                    aria-label={t('components.create-collaborator-form.github-username-aria')}
                     value={field.value === null ? undefined : field.value}
                   />
                 </FormControl>
@@ -113,8 +117,11 @@ export function CreateCollaboratorForm({ disableForm = false }: { disableForm?: 
                 <FormControl>
                   <Input
                     disabled={disableForm}
-                    placeholder={t('components.create-collaborator-form.linkedin-username')}
+                    placeholder={t(
+                      'components.create-collaborator-form.linkedin-username-placeholder',
+                    )}
                     {...field}
+                    aria-label={t('components.create-collaborator-form.linkedin-username-aria')}
                     value={field.value === null ? undefined : field.value}
                   />
                 </FormControl>
@@ -124,6 +131,7 @@ export function CreateCollaboratorForm({ disableForm = false }: { disableForm?: 
           />
         </div>
         <Button
+          aria-label={t('components.create-collaborator-form.submit-aria')}
           className='flex size-max items-center gap-2 rounded-lg bg-lime-600 p-2 text-white hover:bg-lime-700 dark:bg-lime-600 dark:hover:bg-lime-700'
           disabled={disableForm}
           type='submit'

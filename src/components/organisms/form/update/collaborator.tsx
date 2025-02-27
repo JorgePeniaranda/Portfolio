@@ -77,6 +77,7 @@ export function UpdateCollaboratorForm({
                 <FormLabel>{t('components.update-collaborator-form.nickname')}</FormLabel>
                 <FormControl>
                   <Input
+                    aria-label={t('components.update-collaborator-form.nickname')}
                     disabled={disableForm}
                     placeholder={t('components.update-collaborator-form.nickname')}
                     {...field}
@@ -94,6 +95,7 @@ export function UpdateCollaboratorForm({
                 <FormLabel>{t('components.update-collaborator-form.github-username')}</FormLabel>
                 <FormControl>
                   <Input
+                    aria-label={t('components.update-collaborator-form.github-username')}
                     disabled={disableForm}
                     placeholder={t('components.update-collaborator-form.github-username')}
                     {...field}
@@ -112,6 +114,7 @@ export function UpdateCollaboratorForm({
                 <FormLabel>{t('components.update-collaborator-form.linkedin-username')}</FormLabel>
                 <FormControl>
                   <Input
+                    aria-label={t('components.update-collaborator-form.linkedin-username')}
                     disabled={disableForm}
                     placeholder={t('components.update-collaborator-form.linkedin-username')}
                     {...field}
@@ -124,6 +127,7 @@ export function UpdateCollaboratorForm({
           />
         </div>
         <Button
+          aria-label={t('components.update-collaborator-form.submit')}
           className='flex size-max items-center gap-2 rounded-lg bg-lime-600 p-2 text-white hover:bg-lime-700 dark:bg-lime-600 dark:hover:bg-lime-700'
           disabled={disableForm}
           type='submit'

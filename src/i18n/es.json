@@ -93,6 +93,46 @@
       "select-placeholder": "Seleccionar proyecto",
       "submit-button": "Relacionar"
     },
+    "update-stacks-related-project": {
+      "success-title": "Stack relacionado con el proyecto",
+      "success-description": "El stack ha sido relacionado con el proyecto exitosamente.",
+      "error-title": "No se pudo relacionar el stack",
+      "error-description": "Ocurrió un error al intentar relacionar el stack con el proyecto.",
+      "remove-success-title": "Stack eliminado",
+      "remove-success-description": "El stack ha sido eliminado del proyecto exitosamente.",
+      "remove-error-title": "No se pudo eliminar el stack",
+      "remove-error-description": "Ocurrió un error al intentar eliminar el stack del proyecto.",
+      "remove-button-aria": "Eliminar relación",
+      "remove-button": "Eliminar relación",
+      "add-button-aria": "Relacionar stack",
+      "dialog-title": "Relacionar stack",
+      "dialog-description": "Selecciona un stack para relacionar con el proyecto.",
+      "select-placeholder": "Seleccionar stack",
+      "submit-button": "Relacionar",
+      "aria-label": {
+        "stack-logo": "Logo de {{name}}"
+      }
+    },
+    "update-projects-related-stack": {
+      "success-title": "Proyecto relacionado con el stack",
+      "success-description": "El proyecto ha sido relacionado con el stack.",
+      "error-title": "No se pudo relacionar el proyecto",
+      "error-description": "Ocurrió un error al intentar relacionar el proyecto con el stack.",
+      "remove-success-title": "Proyecto eliminado",
+      "remove-success-description": "El proyecto ha sido eliminado del stack.",
+      "remove-error-title": "No se pudo eliminar el proyecto",
+      "remove-error-description": "Ocurrió un error al intentar eliminar el proyecto del stack.",
+      "remove-button-aria": "Eliminar relación",
+      "remove-button": "Eliminar relación",
+      "add-button-aria": "Relacionar proyecto con stack",
+      "dialog-title": "Relacionar proyecto",
+      "dialog-description": "Selecciona un proyecto para relacionar con el stack.",
+      "select-placeholder": "Seleccionar proyecto",
+      "submit-button": "Relacionar",
+      "aria-label": {
+        "project-logo": "Logo del proyecto {{name}}"
+      }
+    },
     "create-stack-form": {
       "key": "Clave",
       "key-placeholder": "Clave",
@@ -187,13 +227,26 @@
     },
     "stack-drawer": {
       "description": "Descripción",
-      "related-projects": "Proyectos relacionados"
+      "related-projects": "Proyectos relacionados",
+      "aria-label": {
+        "close": "Cerrar drawer",
+        "stack-logo": "Logo de {{name}}",
+        "project-logo": "Logo del proyecto {{name}}",
+        "project-link": "Ver proyecto {{name}}"
+      }
     },
     "create-collaborator-form": {
       "nickname": "Apodo",
+      "nickname-placeholder": "Ingresa el apodo",
+      "nickname-aria": "Campo para ingresar el apodo del colaborador",
       "github-username": "Usuario de GitHub",
+      "github-username-placeholder": "Ingresa el usuario de GitHub",
+      "github-username-aria": "Campo para ingresar el usuario de GitHub del colaborador",
       "linkedin-username": "Usuario de LinkedIn",
+      "linkedin-username-placeholder": "Ingresa el usuario de LinkedIn",
+      "linkedin-username-aria": "Campo para ingresar el usuario de LinkedIn del colaborador",
       "submit": "Crear",
+      "submit-aria": "Botón para crear el colaborador",
       "success-title": "Colaborador creado",
       "success-description": "El colaborador ha sido creado correctamente.",
       "error-title": "Error",
@@ -228,6 +281,146 @@
       "confirm-title": "Confirmar eliminación",
       "confirm-description": "¿Estás seguro de que quieres eliminar este elemento?",
       "cancel": "Cancelar"
+    },
+    "mobile-navbar": {
+      "site-config": "Configuraciones del sitio",
+      "config-title": "Configuraciones",
+      "toggle-theme": "Alternar tema",
+      "toggle-sound": "Alternar sonido",
+      "theme": {
+        "dark": "Activar Modo Claro",
+        "light": "Activar Modo Oscuro",
+        "loading": "Cargando..."
+      },
+      "sound": {
+        "on": "Desactivar Sonido",
+        "off": "Activar Sonido"
+      },
+      "aria-label": {
+        "main": "Navegación principal",
+        "site-config": "Configuraciones del sitio",
+        "toggle-theme": "Alternar tema",
+        "toggle-sound": "Alternar sonido",
+        "theme-icon": "Icono de tema",
+        "sound-icon": "Icono de sonido"
+      }
+    },
+    "project-cards-manager": {
+      "sort": {
+        "label": "Ordenar por",
+        "placeholder": "Ordenar"
+      },
+      "stack": {
+        "label": "Stack",
+        "placeholder": "Filtrar por stack"
+      },
+      "status": {
+        "label": "Estado",
+        "placeholder": "Filtrar por status"
+      },
+      "clear": "Limpiar",
+      "aria-label": {
+        "sort-select": "Selector de ordenamiento",
+        "stack-select": "Selector de stack",
+        "status-select": "Selector de estado",
+        "clear-stack": "Limpiar filtro de stack",
+        "clear-status": "Limpiar filtro de estado",
+        "projects-grid": "Cuadrícula de proyectos"
+      }
+    },
+    "desktop-navbar": {
+      "aria-label": {
+        "main": "Navegación principal",
+        "link-list": "Lista de enlaces",
+        "config-buttons": "Botones de configuración del sitio",
+        "toggle-theme": "Alternar tema",
+        "toggle-sound": "Alternar sonido",
+        "theme-icon": "Icono de tema",
+        "sound-icon": "Icono de sonido",
+        "link-icon": "Icono de {{label}}"
+      },
+      "theme": {
+        "current": "Actual",
+        "light": "Claro",
+        "dark": "Oscuro",
+        "loading": "Cargando"
+      },
+      "sound": {
+        "current": "Actual",
+        "on": "Sonido activado",
+        "off": "Sonido desactivado"
+      }
+    },
+    "update-stack-form": {
+      "key": "Clave",
+      "key-placeholder": "Clave",
+      "key-aria": "Campo para editar la clave del stack",
+      "name": "Nombre",
+      "name-placeholder": "Nombre",
+      "name-aria": "Campo para editar el nombre del stack",
+      "description": "Descripción",
+      "description-placeholder": "Descripción",
+      "description-aria": "Campo para editar la descripción del stack",
+      "category": "Categoría",
+      "category-placeholder": "Categoría",
+      "type": "Tipo",
+      "type-placeholder": "Tipo",
+      "icon-url": "URL del icono",
+      "icon-url-placeholder": "URL del icono",
+      "icon-url-aria": "Campo para editar la URL del icono del stack",
+      "submit": "Guardar",
+      "submit-aria": "Botón para guardar cambios del stack",
+      "success-title": "Stack actualizado",
+      "success-description": "El stack ha sido actualizado exitosamente.",
+      "error-title": "No se pudo actualizar el stack",
+      "error-description": "Ha ocurrido un error al intentar actualizar el stack."
+    },
+    "update-project-form": {
+      "key": "Clave",
+      "key-placeholder": "Clave",
+      "key-aria": "Campo para editar la clave del proyecto",
+      "name": "Nombre",
+      "name-placeholder": "Nombre",
+      "name-aria": "Campo para editar el nombre del proyecto",
+      "status": "Estado",
+      "status-placeholder": "Estado",
+      "status-aria": "Campo para editar el estado del proyecto",
+      "stack": "Stack",
+      "stack-placeholder": "Stack",
+      "stack-aria": "Campo para editar el stack del proyecto",
+      "start-date": "Fecha de inicio",
+      "start-date-aria": "Selector de fecha de inicio del proyecto",
+      "select-start-date": "Seleccionar fecha de inicio",
+      "end-date": "Fecha de fin",
+      "end-date-aria": "Selector de fecha de finalización del proyecto",
+      "select-end-date": "Seleccionar fecha de fin",
+      "description": "Descripción",
+      "description-placeholder": "Descripción",
+      "description-aria": "Campo para editar la descripción del proyecto",
+      "goals": "Objetivos",
+      "goals-placeholder": "Objetivos",
+      "goals-aria": "Campo para editar los objetivos del proyecto",
+      "contributions": "Contribuciones",
+      "contributions-placeholder": "Contribuciones",
+      "contributions-aria": "Campo para editar las contribuciones al proyecto",
+      "logo-url": "URL del logo",
+      "logo-url-placeholder": "URL del logo",
+      "logo-url-aria": "Campo para editar la URL del logo del proyecto",
+      "primary-color": "Color primario",
+      "primary-color-placeholder": "Color primario",
+      "primary-color-aria": "Selector de color primario del proyecto",
+      "demo-url": "URL de la demo",
+      "demo-url-placeholder": "URL de la demo",
+      "demo-url-aria": "Campo para editar la URL de la demo del proyecto",
+      "github-url": "URL de GitHub",
+      "github-url-placeholder": "URL de GitHub",
+      "github-url-aria": "Campo para editar la URL de GitHub del proyecto",
+      "submit": "Guardar",
+      "submit-aria": "Botón para guardar cambios del proyecto",
+      "success-title": "Proyecto actualizado",
+      "success-description": "El proyecto ha sido actualizado exitosamente.",
+      "error-title": "No se pudo actualizar el proyecto",
+      "error-description": "Ha ocurrido un error al intentar actualizar el proyecto."
     }
   },
   "error": {

@@ -26,6 +26,7 @@ import {
   STACK_TYPE_TRANSCRIPTIONS,
 } from '@/constants/transcriptions';
 import { useToast } from '@/hooks/use-toast';
+import useTranslations from '@/hooks/use-translations';
 import { StackUpdateSchema } from '@/schemas/stack/update';
 import { putStack } from '@/services/stack/putStack';
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
@@ -45,6 +46,7 @@ export function UpdateStackForm({
   disableForm?: boolean;
 }) {
   const { toast } = useToast();
+  const { t } = useTranslations();
 
   const form = useForm<StackUpdateSchema>({
     resolver: zodResolver(StackUpdateSchema),
@@ -60,15 +62,15 @@ export function UpdateStackForm({
 
       // Show a success toast
       toast({
-        title: 'Stack actualizado',
-        description: 'El stack ha sido actualizado exitosamente.',
+        title: t('components.update-stack-form.success-title'),
+        description: t('components.update-stack-form.success-description'),
         className: 'bg-green-500 text-black',
       });
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: 'No se pudo actualizar el stack',
-        defaultErrorMessage: 'Ha ocurrido un error al intentar actualizar el stack.',
+        title: t('components.update-stack-form.error-title'),
+        defaultErrorMessage: t('components.update-stack-form.error-description'),
         tryAgain: () => onSubmit(values),
       });
     }
@@ -83,9 +85,14 @@ export function UpdateStackForm({
             name='key'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Key</FormLabel>
+                <FormLabel>{t('components.update-stack-form.key')}</FormLabel>
                 <FormControl>
-                  <Input disabled={disableForm} placeholder='Key' {...field} />
+                  <Input
+                    disabled={disableForm}
+                    placeholder={t('components.update-stack-form.key-placeholder')}
+                    {...field}
+                    aria-label={t('components.update-stack-form.key-aria')}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -96,12 +103,13 @@ export function UpdateStackForm({
             name='name'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nombre</FormLabel>
+                <FormLabel>{t('components.update-stack-form.name')}</FormLabel>
                 <FormControl>
                   <Input
                     disabled={disableForm}
-                    placeholder='Nombre'
+                    placeholder={t('components.update-stack-form.name-placeholder')}
                     {...field}
+                    aria-label={t('components.update-stack-form.name-aria')}
                     value={field.value === null ? undefined : field.value}
                   />
                 </FormControl>
@@ -114,12 +122,13 @@ export function UpdateStackForm({
             name='description'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Descripción</FormLabel>
+                <FormLabel>{t('components.update-stack-form.description')}</FormLabel>
                 <FormControl>
                   <Textarea
                     disabled={disableForm}
-                    placeholder='Descripción'
+                    placeholder={t('components.update-stack-form.description-placeholder')}
                     {...field}
+                    aria-label={t('components.update-stack-form.description-aria')}
                     value={field.value === null ? undefined : field.value}
                   />
                 </FormControl>
@@ -132,7 +141,7 @@ export function UpdateStackForm({
             name='category'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Categoria</FormLabel>
+                <FormLabel>{t('components.update-stack-form.category')}</FormLabel>
                 <Select
                   defaultValue={field.value === null ? undefined : field.value}
                   disabled={disableForm}
@@ -142,7 +151,9 @@ export function UpdateStackForm({
                 >
                   <FormControl>
                     <SelectTrigger className='w-[180px]'>
-                      <SelectValue placeholder='Descripción' />
+                      <SelectValue
+                        placeholder={t('components.update-stack-form.category-placeholder')}
+                      />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -162,7 +173,7 @@ export function UpdateStackForm({
             name='type'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Tipo</FormLabel>
+                <FormLabel>{t('components.update-stack-form.type')}</FormLabel>
                 <Select
                   defaultValue={field.value === null ? undefined : field.value}
                   disabled={disableForm}
@@ -172,7 +183,9 @@ export function UpdateStackForm({
                 >
                   <FormControl>
                     <SelectTrigger className='w-[180px]'>
-                      <SelectValue placeholder='Tipo' />
+                      <SelectValue
+                        placeholder={t('components.update-stack-form.type-placeholder')}
+                      />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -192,12 +205,13 @@ export function UpdateStackForm({
             name='iconUrl'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>URL de icono</FormLabel>
+                <FormLabel>{t('components.update-stack-form.icon-url')}</FormLabel>
                 <FormControl>
                   <Input
                     disabled={disableForm}
-                    placeholder='iconURL'
+                    placeholder={t('components.update-stack-form.icon-url-placeholder')}
                     {...field}
+                    aria-label={t('components.update-stack-form.icon-url-aria')}
                     value={field.value === null ? undefined : field.value}
                   />
                 </FormControl>
@@ -207,12 +221,13 @@ export function UpdateStackForm({
           />
         </div>
         <Button
+          aria-label={t('components.update-stack-form.submit-aria')}
           className='flex size-max items-center gap-2 rounded-lg bg-lime-600 p-2 text-white hover:bg-lime-700 dark:bg-lime-600 dark:hover:bg-lime-700'
           disabled={disableForm}
           type='submit'
         >
           <Save className='size-7' />
-          <span className='text-lg'>Guardar</span>
+          <span className='text-lg'>{t('components.update-stack-form.submit')}</span>
         </Button>
       </form>
     </Form>
