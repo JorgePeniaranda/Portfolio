@@ -9,6 +9,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import useTranslations from '@/hooks/use-translations';
 import { useSoundStore } from '@/services/storage/sound';
 import { useThemeStore } from '@/services/storage/theme';
 
@@ -22,10 +23,11 @@ import { useThemeStore } from '@/services/storage/theme';
 export function MobileNavbar({ items }: { items: NavbarSection[] }) {
   const { theme, toggleTheme } = useThemeStore();
   const { isSoundEnabled, toggleSound } = useSoundStore();
+  const { t } = useTranslations();
 
   return (
     <nav
-      aria-label='Main navigation'
+      aria-label={t('components.mobile-navbar.aria-label.main')}
       className='fixed bottom-0 z-50 flex h-16 w-full items-center justify-around space-x-3 bg-neutral-100 p-4 ring-1 ring-neutral-300 dark:bg-neutral-900 dark:ring-neutral-700 md:hidden'
     >
       {/* ========= NAVEGATION LINKS ITEMS =========   */}
@@ -60,64 +62,70 @@ export function MobileNavbar({ items }: { items: NavbarSection[] }) {
 
       {/* ========= NAVEGATION BUTTONS ITEMS =========   */}
       <DropdownMenu key={crypto.randomUUID()}>
-        <DropdownMenuTrigger aria-label='Site Configurations'>
+        <DropdownMenuTrigger aria-label={t('components.mobile-navbar.aria-label.site-config')}>
           <Settings className='mr-2 size-6' />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel asChild>
-            <span>Configuraciones</span>
+            <span>{t('components.mobile-navbar.config-title')}</span>
           </DropdownMenuLabel>
           <DropdownMenuItem asChild>
             <button
-              aria-label='Toggle theme'
+              aria-label={t('components.mobile-navbar.aria-label.toggle-theme')}
               className='size-full'
               type='button'
               onClick={toggleTheme}
             >
               {theme === 'light' && (
                 <Sun
-                  aria-label='light'
+                  aria-label={t('components.mobile-navbar.aria-label.theme-icon')}
                   className='mr-2 size-4 text-neutral-500 transition dark:text-neutral-300'
                 />
               )}
               {theme === 'dark' && (
                 <Moon
-                  aria-label='dark'
+                  aria-label={t('components.mobile-navbar.aria-label.theme-icon')}
                   className='mr-2 size-4 text-neutral-500 transition dark:text-neutral-300'
                 />
               )}
               {theme !== 'dark' && theme !== 'light' && (
                 <Loader
-                  aria-label='loading'
+                  aria-label={t('components.mobile-navbar.aria-label.theme-icon')}
                   className='mr-2 size-4 animate-spin text-neutral-500 transition dark:text-neutral-300'
                 />
               )}
               <span>
-                {theme === 'light' && 'Activar Modo Oscuro'}
-                {theme === 'dark' && 'Activar Modo Claro'}
-                {theme !== 'dark' && theme !== 'light' && 'Cargando...'}
+                {theme === 'light' && t('components.mobile-navbar.theme.light')}
+                {theme === 'dark' && t('components.mobile-navbar.theme.dark')}
+                {theme !== 'dark' &&
+                  theme !== 'light' &&
+                  t('components.mobile-navbar.theme.loading')}
               </span>
             </button>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <button
-              aria-label='Toggle sound'
+              aria-label={t('components.mobile-navbar.aria-label.toggle-sound')}
               className='size-full'
               type='button'
               onClick={toggleSound}
             >
               {isSoundEnabled ? (
                 <Volume2
-                  aria-label='system'
+                  aria-label={t('components.mobile-navbar.aria-label.sound-icon')}
                   className='mr-2 size-4 text-neutral-500 transition dark:text-neutral-300'
                 />
               ) : (
                 <VolumeX
-                  aria-label='system'
+                  aria-label={t('components.mobile-navbar.aria-label.sound-icon')}
                   className='mr-2 size-4 text-neutral-500 transition dark:text-neutral-300'
                 />
               )}
-              <span>{isSoundEnabled ? 'Desactivar Sonido' : 'Activar Sonido'}</span>
+              <span>
+                {isSoundEnabled
+                  ? t('components.mobile-navbar.sound.on')
+                  : t('components.mobile-navbar.sound.off')}
+              </span>
             </button>
           </DropdownMenuItem>
         </DropdownMenuContent>

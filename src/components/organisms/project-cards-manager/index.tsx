@@ -17,6 +17,7 @@ import {
   STACK_CATEGORY_TRANSCRIPTIONS,
 } from '@/constants/transcriptions';
 import { isDefined } from '@/helpers/guards/is-defined';
+import useTranslations from '@/hooks/use-translations';
 import { useProjectLikedStore } from '@/services/storage/liked-projects';
 import { ProjectSortType } from '@/types/project.d';
 import { Button } from '@/components/ui/button';
@@ -34,6 +35,7 @@ export function ProjectCardsManager({
   projects: Pick<Project, 'id' | 'key' | 'name' | 'logoUrl' | 'stackCategory' | 'status'>[];
 }) {
   const { likedKeyProjects } = useProjectLikedStore();
+  const { t } = useTranslations();
 
   const [sortType, setSortType] = useState<ProjectSortType>('liked');
   const [stackFilter, setStackFilter] = useState<StackCategory>();
@@ -97,17 +99,21 @@ export function ProjectCardsManager({
         {/* Sort filter */}
         <li className='flex items-center gap-2'>
           <label className='whitespace-nowrap text-sm text-gray-400/80' htmlFor='sort-select'>
-            Ordenar por:
+            {t('components.project-cards-manager.sort.label')}:
           </label>
           <Select
             defaultValue={sortType}
             value={sortType}
             onValueChange={(value: ProjectSortType) => {
-              setSortType(value); // Update the sort type
+              setSortType(value);
             }}
           >
-            <SelectTrigger className='w-[180px]' id='sort-select'>
-              <SelectValue placeholder='Ordenar' />
+            <SelectTrigger
+              aria-label={t('components.project-cards-manager.aria-label.sort-select')}
+              className='w-[180px]'
+              id='sort-select'
+            >
+              <SelectValue placeholder={t('components.project-cards-manager.sort.placeholder')} />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value={ProjectSortType.LIKED}>
@@ -126,17 +132,22 @@ export function ProjectCardsManager({
         {/* Stack filter */}
         <li className='flex items-center gap-2'>
           <label className='whitespace-nowrap text-sm text-gray-400/80' htmlFor='stack-select'>
-            Stack:
+            {t('components.project-cards-manager.stack.label')}:
           </label>
           <Select
             key={stackKey}
             value={stackFilter}
             onValueChange={(value: StackCategory) => {
-              setStackFilter(value); // Update the stack filter
+              setStackFilter(value);
             }}
           >
-            <SelectTrigger className='w-[180px]' id='stack-select' unselectable='on'>
-              <SelectValue placeholder='Filtrar por stack' />
+            <SelectTrigger
+              aria-label={t('components.project-cards-manager.aria-label.stack-select')}
+              className='w-[180px]'
+              id='stack-select'
+              unselectable='on'
+            >
+              <SelectValue placeholder={t('components.project-cards-manager.stack.placeholder')} />
             </SelectTrigger>
             <SelectContent unselectable='on'>
               <SelectGroup>
@@ -152,6 +163,7 @@ export function ProjectCardsManager({
                 <SelectSeparator />
               </SelectGroup>
               <Button
+                aria-label={t('components.project-cards-manager.aria-label.clear-stack')}
                 className='w-full px-2'
                 size='sm'
                 variant='secondary'
@@ -163,7 +175,7 @@ export function ProjectCardsManager({
                   setStackKey(+new Date());
                 }}
               >
-                Limpiar
+                {t('components.project-cards-manager.clear')}
               </Button>
             </SelectContent>
           </Select>
@@ -172,17 +184,21 @@ export function ProjectCardsManager({
         {/* Status filter */}
         <li className='flex items-center gap-2'>
           <label className='whitespace-nowrap text-sm text-gray-400/80' htmlFor='status-select'>
-            Estado:
+            {t('components.project-cards-manager.status.label')}:
           </label>
           <Select
             key={statusKey}
             value={statusFilter}
             onValueChange={(value: ProjectStatus) => {
-              setStatusFilter(value); // Update the status filter
+              setStatusFilter(value);
             }}
           >
-            <SelectTrigger className='w-[180px]' id='status-select'>
-              <SelectValue placeholder='Filtrar por status' />
+            <SelectTrigger
+              aria-label={t('components.project-cards-manager.aria-label.status-select')}
+              className='w-[180px]'
+              id='status-select'
+            >
+              <SelectValue placeholder={t('components.project-cards-manager.status.placeholder')} />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
@@ -197,6 +213,7 @@ export function ProjectCardsManager({
                 </SelectItem>
               </SelectGroup>
               <Button
+                aria-label={t('components.project-cards-manager.aria-label.clear-status')}
                 className='w-full px-2'
                 size='sm'
                 variant='secondary'
@@ -208,7 +225,7 @@ export function ProjectCardsManager({
                   setStatusKey(+new Date());
                 }}
               >
-                Limpiar
+                {t('components.project-cards-manager.clear')}
               </Button>
             </SelectContent>
           </Select>
@@ -216,7 +233,10 @@ export function ProjectCardsManager({
       </ul>
 
       {/* Render sorted project cards */}
-      <section className='grid max-w-full grid-cols-1 gap-2 md:grid-cols-2 lg:gap-8 xl:grid-cols-3'>
+      <section
+        aria-label={t('components.project-cards-manager.aria-label.projects-grid')}
+        className='grid max-w-full grid-cols-1 gap-2 md:grid-cols-2 lg:gap-8 xl:grid-cols-3'
+      >
         {sortedProjects.map((project) => (
           <ProjectCard
             key={project.key}

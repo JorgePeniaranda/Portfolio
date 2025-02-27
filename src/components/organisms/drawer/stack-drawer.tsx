@@ -67,12 +67,15 @@ export function StackDrawer({
           {/* Header with the stack logo and name */}
           <div className='relative flex items-center space-x-2'>
             <img
-              alt={`${stack.name} stack logo`}
+              alt={t('components.stack-drawer.aria-label.stack-logo', { name: stack.name })}
               className='aspect-square size-10 rounded-sm'
               src={stack.iconUrl}
             />
             <h3 className='text-4xl font-bold'>{stack.name}</h3>
-            <DrawerClose className='absolute right-0 top-0 p-2'>
+            <DrawerClose
+              aria-label={t('components.stack-drawer.aria-label.close')}
+              className='absolute right-0 top-0 p-2'
+            >
               <X />
             </DrawerClose>
           </div>
@@ -99,13 +102,18 @@ export function StackDrawer({
                 {associatedProjects?.map((project) => (
                   <li key={project.id}>
                     <a
+                      aria-label={t('components.stack-drawer.aria-label.project-link', {
+                        name: project.name,
+                      })}
                       className='flex items-center gap-2 rounded-md transition-all ease-linear hover:translate-x-2'
                       href={`/projects/${project.key}`}
                       rel='noreferrer'
                       target='_blank'
                     >
                       <img
-                        alt={`${project.name} logo`}
+                        alt={t('components.stack-drawer.aria-label.project-logo', {
+                          name: project.name,
+                        })}
                         className='size-14 rounded-full'
                         src={project.logoUrl}
                       />

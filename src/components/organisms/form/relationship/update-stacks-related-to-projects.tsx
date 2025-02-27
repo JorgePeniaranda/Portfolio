@@ -27,6 +27,7 @@ import {
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
+import useTranslations from '@/hooks/use-translations';
 import { deleteProjectRemoveAssociatedStack } from '@/services/project/deleteProjectRemoveAssociatedStack';
 import { postProjectAddAssociatedStack } from '@/services/project/postProjectAddAssociatedStack';
 
@@ -51,6 +52,7 @@ export function UpdateStacksRelatedToProject({
   disableForm?: boolean;
 }) {
   const { toast } = useToast();
+  const { t } = useTranslations();
 
   // Form only used in the dialog to add a stack to the project
   const form = useForm<EntityRelationSchema>({
@@ -77,8 +79,8 @@ export function UpdateStacksRelatedToProject({
 
       // Show a success toast
       toast({
-        title: 'Stack relacionado con el proyecto',
-        description: 'El stack ha sido relacionado con el proyecto exitosamente.',
+        title: t('components.update-stacks-related-project.success-title'),
+        description: t('components.update-stacks-related-project.success-description'),
         className: 'bg-green-500 text-black',
       });
 
@@ -95,8 +97,8 @@ export function UpdateStacksRelatedToProject({
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: 'No se pudo relacionar el stack',
-        defaultErrorMessage: 'Ocurrió un error al intentar relacionar el stack con el proyecto.',
+        title: t('components.update-stacks-related-project.error-title'),
+        defaultErrorMessage: t('components.update-stacks-related-project.error-description'),
         tryAgain: () => onAddStack(values),
       });
     }
@@ -111,8 +113,8 @@ export function UpdateStacksRelatedToProject({
 
       // Show a success toast
       toast({
-        title: 'Stack eliminado',
-        description: 'El stack ha sido eliminado del proyecto exitosamente.',
+        title: t('components.update-stacks-related-project.remove-success-title'),
+        description: t('components.update-stacks-related-project.remove-success-description'),
         className: 'bg-green-500 text-black',
       });
 
@@ -129,8 +131,8 @@ export function UpdateStacksRelatedToProject({
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: 'No se pudo eliminar el stack',
-        defaultErrorMessage: 'Ocurrió un error al intentar eliminar el stack del proyecto.',
+        title: t('components.update-stacks-related-project.remove-error-title'),
+        defaultErrorMessage: t('components.update-stacks-related-project.remove-error-description'),
         tryAgain: () => onRemoveStack(stackId),
       });
     }
@@ -143,15 +145,23 @@ export function UpdateStacksRelatedToProject({
           <Card className='my-5 flex w-max flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800'>
             <CardHeader className='relative'>
               <Button
-                aria-label='eliminar relacion'
+                aria-label={t('components.update-stacks-related-project.remove-button-aria')}
                 className='absolute -right-2.5 -top-2.5 m-0 flex aspect-square size-8 items-center justify-center rounded-full bg-red-500 p-0 text-center text-white hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-500'
                 disabled={disableForm}
                 onClick={() => onRemoveStack(stack.id)}
               >
                 <X />
-                <span className='sr-only'>eliminar relacion</span>
+                <span className='sr-only'>
+                  {t('components.update-stacks-related-project.remove-button')}
+                </span>
               </Button>
-              <img alt={`${stack.name} logo`} className='size-20 rounded-lg' src={stack.iconUrl} />
+              <img
+                alt={t('components.update-stacks-related-project.aria-label.stack-logo', {
+                  name: stack.name,
+                })}
+                className='size-20 rounded-lg'
+                src={stack.iconUrl}
+              />
             </CardHeader>
           </Card>
         </li>
@@ -160,7 +170,7 @@ export function UpdateStacksRelatedToProject({
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <button
-              aria-label='Relacionar stack'
+              aria-label={t('components.update-stacks-related-project.add-button-aria')}
               className='my-5 flex aspect-square w-max flex-col items-center justify-center rounded-lg bg-zinc-300 p-6 shadow dark:bg-zinc-800'
               type='button'
             >
@@ -169,9 +179,11 @@ export function UpdateStacksRelatedToProject({
           </DialogTrigger>
           <DialogContent className='sm:max-w-[425px]'>
             <DialogHeader>
-              <DialogTitle className='text-center'>Relacionar stack</DialogTitle>
+              <DialogTitle className='text-center'>
+                {t('components.update-stacks-related-project.dialog-title')}
+              </DialogTitle>
               <DialogDescription>
-                Selecciona un stack para relacionar con el proyecto.
+                {t('components.update-stacks-related-project.dialog-description')}
               </DialogDescription>
             </DialogHeader>
             <Form {...form}>
@@ -194,14 +206,21 @@ export function UpdateStacksRelatedToProject({
                             value={String(field.value)}
                           >
                             <SelectTrigger className='w-[180px]'>
-                              <SelectValue placeholder='Seleccionar stack' />
+                              <SelectValue
+                                placeholder={t(
+                                  'components.update-stacks-related-project.select-placeholder',
+                                )}
+                              />
                             </SelectTrigger>
                             <SelectContent>
                               {availableStacks.map((stack) => (
                                 <SelectItem key={stack.id} value={String(stack.id)}>
                                   <div className='flex items-center gap-2'>
                                     <img
-                                      alt={`${stack.name} logo`}
+                                      alt={t(
+                                        'components.update-stacks-related-project.aria-label.stack-logo',
+                                        { name: stack.name },
+                                      )}
                                       className='size-6'
                                       src={stack.iconUrl}
                                     />
@@ -226,7 +245,7 @@ export function UpdateStacksRelatedToProject({
                 type='submit'
                 typeof='submit'
               >
-                Relacionar
+                {t('components.update-stacks-related-project.submit-button')}
               </Button>
             </DialogFooter>
           </DialogContent>
