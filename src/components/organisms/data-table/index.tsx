@@ -28,6 +28,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import useTranslations from '@/hooks/use-translations';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -51,6 +52,8 @@ export function DataTable<TData, TValue>({
   HeaderComponent,
   meta,
 }: DataTableProps<TData, TValue>) {
+  const { t } = useTranslations();
+
   // Memoize columns and data to avoid unnecessary recalculations
   const memoizedColumns = useMemo(() => columns, [columns]);
   const memoizedData = useMemo(() => data, [data]);
@@ -109,7 +112,7 @@ export function DataTable<TData, TValue>({
             ) : (
               <TableRow>
                 <TableCell className='h-24 text-center' colSpan={columns.length}>
-                  Sin datos.
+                  {t('components.data-table.no-data')}
                 </TableCell>
               </TableRow>
             )}
@@ -117,12 +120,14 @@ export function DataTable<TData, TValue>({
         </Table>
         <div className='flex items-center justify-between px-2'>
           <div className='flex-1 text-sm text-muted-foreground'>
-            {table.getFilteredSelectedRowModel().rows.length} de{' '}
-            {table.getFilteredRowModel().rows.length} fila(s) seleccionadas.
+            {t('components.data-table.selected-rows', {
+              selected: table.getFilteredSelectedRowModel().rows.length,
+              total: table.getFilteredRowModel().rows.length,
+            })}
           </div>
           <div className='flex items-center space-x-6 py-2 lg:space-x-8'>
             <div className='flex items-center space-x-2'>
-              <p className='text-sm font-medium'>Filas por página</p>
+              <p className='text-sm font-medium'>{t('components.data-table.rows-per-page')}</p>
               <Select
                 value={`${table.getState().pagination.pageSize}`}
                 onValueChange={handlePageSizeChange}
@@ -140,7 +145,10 @@ export function DataTable<TData, TValue>({
               </Select>
             </div>
             <div className='flex w-[100px] items-center justify-center text-sm font-medium'>
-              Página {table.getState().pagination.pageIndex + 1} de {table.getPageCount()}
+              {t('components.data-table.page-info', {
+                current: table.getState().pagination.pageIndex + 1,
+                total: table.getPageCount(),
+              })}
             </div>
             <div className='flex items-center space-x-2'>
               <Button
@@ -149,7 +157,7 @@ export function DataTable<TData, TValue>({
                 variant='outline'
                 onClick={handleFirstPage}
               >
-                <span className='sr-only'>Ir a la primera página</span>
+                <span className='sr-only'>{t('components.data-table.first-page')}</span>
                 <ChevronsLeft />
               </Button>
               <Button
@@ -158,7 +166,7 @@ export function DataTable<TData, TValue>({
                 variant='outline'
                 onClick={handlePrevPage}
               >
-                <span className='sr-only'>Ir a la página anterior</span>
+                <span className='sr-only'>{t('components.data-table.previous-page')}</span>
                 <ChevronLeft />
               </Button>
               <Button
@@ -167,7 +175,7 @@ export function DataTable<TData, TValue>({
                 variant='outline'
                 onClick={handleNextPage}
               >
-                <span className='sr-only'>Ir a la página siguiente</span>
+                <span className='sr-only'>{t('components.data-table.next-page')}</span>
                 <ChevronRight />
               </Button>
               <Button
@@ -176,7 +184,7 @@ export function DataTable<TData, TValue>({
                 variant='outline'
                 onClick={handleLastPage}
               >
-                <span className='sr-only'>Ir a la última página</span>
+                <span className='sr-only'>{t('components.data-table.last-page')}</span>
                 <ChevronsRight />
               </Button>
             </div>

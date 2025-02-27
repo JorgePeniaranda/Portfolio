@@ -14,6 +14,7 @@ import {
 import { InputOTP, InputOTPSlot } from '@/components/ui/input-otp';
 import { useToast } from '@/hooks/use-toast';
 import { useSecretCodeStore } from '@/services/storage/secret-code';
+import useTranslations from '@/hooks/use-translations';
 
 /**
  * Component that displays an interactive button to open a modal for entering a secret code.
@@ -21,6 +22,7 @@ import { useSecretCodeStore } from '@/services/storage/secret-code';
  * @returns A SecretButton component
  */
 export function SecretButton() {
+  const { t } = useTranslations();
   const { toast } = useToast();
   const { secretCode } = useSecretCodeStore();
 
@@ -35,8 +37,8 @@ export function SecretButton() {
   const handleSubmit = () => {
     if (secretCode !== value) {
       toast({
-        title: 'Código incorrecto',
-        description: '¡Arrr! El código secreto no es correcto. ¡Inténtalo de nuevo!',
+        title: t('components.secret-button.error-message'),
+        description: t('components.secret-button.error-description'),
         variant: 'destructive',
       });
 
@@ -44,8 +46,8 @@ export function SecretButton() {
     }
 
     toast({
-      title: 'Código correcto',
-      description: 'Enhorabuena. Has descubierto el código secreto. Bienvenido al panel secreto.',
+      title: t('components.secret-button.success-message'),
+      description: t('components.secret-button.success-description'),
       variant: 'default',
       className: 'bg-green-500 text-black',
     });
@@ -57,16 +59,16 @@ export function SecretButton() {
     <Dialog>
       {/* Button to open the modal */}
       <DialogTrigger className='hover: flex items-center gap-2 rounded-lg bg-[#580001] px-3 py-2 text-white shadow-sm dark:bg-[#780001]'>
-        Acá se esconde algo
+        <span>{t('components.secret-button.button-text')}</span>
         <ScanFace />
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className='text-center text-2xl'>¡Aventura en alta mar!</DialogTitle>
+          <DialogTitle className='text-center text-2xl'>
+            {t('components.secret-button.modal-title')}
+          </DialogTitle>
           <DialogDescription className='text-center'>
-            Para abrir las puertas del dashboard secreto, necesitas el número clave. Ingresa el
-            código y accede a toda la información oculta en las profundidades. ¡Prepárate para
-            navegar por un mar de datos exclusivos!
+            {t('components.secret-button.modal-description')}
           </DialogDescription>
         </DialogHeader>
         <form
@@ -98,11 +100,11 @@ export function SecretButton() {
               className='inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white ring-offset-background transition-colors hover:bg-green-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
               href='/vault'
             >
-              Ir al panel secreto
+              {t('components.secret-button.modal-unlock-button')}
             </a>
           ) : (
             <Button className='bg-[#282828] text-white hover:bg-[#323232]' type='submit'>
-              Probar Código Secreto
+              {t('components.secret-button.modal-submit-button')}
             </Button>
           )}
         </form>

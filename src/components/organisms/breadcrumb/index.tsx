@@ -10,6 +10,7 @@ import {
   BreadcrumbSeparator,
   Breadcrumb as UIBreadcrumb,
 } from '@/components/ui/breadcrumb';
+import useTranslations from '@/hooks/use-translations';
 
 interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
   items: IBreadCrumb[];
@@ -25,8 +26,10 @@ interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
  * @returns The breadcrumb component
  */
 export function Breadcrumb({ items, Separator, ...props }: BreadcrumbProps) {
+  const { t } = useTranslations();
+
   return (
-    <UIBreadcrumb {...props}>
+    <UIBreadcrumb {...props} aria-label={t('components.breadcrumb.aria-label')}>
       <BreadcrumbList className='text-inherit'>
         {items.map((item, index) => {
           return (

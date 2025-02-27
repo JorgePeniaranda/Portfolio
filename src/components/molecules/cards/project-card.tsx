@@ -3,6 +3,7 @@ import type { MouseEvent } from 'react';
 import { Heart, HeartOff } from 'lucide-react';
 
 import { useProjectLikedStore } from '@/services/storage/liked-projects';
+import useTranslations from '@/hooks/use-translations';
 
 export interface ProjectCardProps {
   projectKey: string;
@@ -19,6 +20,7 @@ export interface ProjectCardProps {
  * @returns A React component
  */
 export function ProjectCard({ projectKey, name, logoURL }: ProjectCardProps) {
+  const { t } = useTranslations();
   const { addLikedProject, checkLikedProject, removeLikedProject } = useProjectLikedStore();
 
   const isLiked = checkLikedProject(projectKey);
@@ -35,7 +37,14 @@ export function ProjectCard({ projectKey, name, logoURL }: ProjectCardProps) {
   };
 
   return (
-    <article className='group flex flex-col justify-between rounded-lg shadow-sm'>
+    <article
+      aria-label={
+        isLiked
+          ? t('components.project-card.aria-label-liked')
+          : t('components.project-card.aria-label')
+      }
+      className='group flex flex-col justify-between rounded-lg shadow-sm'
+    >
       <a
         className='relative flex aspect-video overflow-hidden rounded-t-lg'
         href={`/projects/${projectKey}`}
@@ -44,7 +53,7 @@ export function ProjectCard({ projectKey, name, logoURL }: ProjectCardProps) {
         <img alt={name} className='size-full' src={logoURL} />
       </a>
       <div className='flex h-1/5 items-center justify-between rounded-b-lg bg-gray-200 p-4 dark:bg-zinc-800'>
-        <h3 className='font-medium tracking-tight text-gray-500 dark:text-gray-400'>{name}</h3>{' '}
+        <h3 className='font-medium tracking-tight text-gray-500 dark:text-gray-400'>{name}</h3>
         <button aria-label={isLiked ? 'Remove from liked' : 'Add to liked'} type='button'>
           {/* Conditionally render filled or empty heart based on the liked state */}
           {isLiked ? (

@@ -3,6 +3,7 @@ import type { IBreadCrumb } from '@/types/breadcrumb';
 import React from 'react';
 
 import { BreadcrumbItem, BreadcrumbLink, BreadcrumbPage } from '@/components/ui/breadcrumb';
+import useTranslations from '@/hooks/use-translations';
 
 interface CustomBreadcrumbItemProps extends React.HTMLAttributes<HTMLElement> {
   item: IBreadCrumb;
@@ -16,11 +17,17 @@ interface CustomBreadcrumbItemProps extends React.HTMLAttributes<HTMLElement> {
  * @returns The custom breadcrumb item component
  */
 export function CustomBreadcrumbItem({ item, ...props }: CustomBreadcrumbItemProps) {
+  const { t } = useTranslations();
+
   if (item.href !== undefined) {
     return (
       <BreadcrumbItem {...props}>
         <BreadcrumbLink asChild>
-          <a className='text-inherit' href={item.href}>
+          <a
+            aria-label={t('components.breadcrumb-item.link-aria-label', { label: item.label })}
+            className='text-inherit'
+            href={item.href}
+          >
             {item.label}
           </a>
         </BreadcrumbLink>
@@ -30,7 +37,12 @@ export function CustomBreadcrumbItem({ item, ...props }: CustomBreadcrumbItemPro
 
   return (
     <BreadcrumbItem {...props}>
-      <BreadcrumbPage className='text-inherit'>{item.label}</BreadcrumbPage>
+      <BreadcrumbPage
+        aria-label={t('components.breadcrumb-item.page-aria-label', { label: item.label })}
+        className='text-inherit'
+      >
+        {item.label}
+      </BreadcrumbPage>
     </BreadcrumbItem>
   );
 }

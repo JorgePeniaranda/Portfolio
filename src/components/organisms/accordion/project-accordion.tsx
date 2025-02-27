@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/accordion';
 import { isDefined } from '@/helpers/guards/is-defined';
 import { isNoEmptyString } from '@/helpers/guards/is-no-empty-string';
+import useTranslations from '@/hooks/use-translations';
 
 //#region TYPES
 interface ProjectAccordionProps {
@@ -45,12 +46,14 @@ export function ProjectAccordion({
   stackCategory,
   contributions,
 }: ProjectAccordionProps) {
+  const { t } = useTranslations();
+
   return (
     <UIAccordion className='w-full' type='multiple'>
       {/* Render goals section if there are goals */}
       {isDefined(goals) && isNoEmptyString(goals) ? (
         <AccordionItem value='goals'>
-          <AccordionTrigger>Objetivos</AccordionTrigger>
+          <AccordionTrigger>{t('components.project-accordion.goals.title')}</AccordionTrigger>
           <div />
           <AccordionContent className='space-y-3'>
             <p>
@@ -63,7 +66,9 @@ export function ProjectAccordion({
       {/* Render tech stack section if there are technologies */}
       {stackCategory.length > 0 && (
         <AccordionItem value='technologies'>
-          <AccordionTrigger>Tecnologías</AccordionTrigger>
+          <AccordionTrigger>
+            {t('components.project-accordion.technologies.title')}
+          </AccordionTrigger>
           <AccordionContent>
             <ul className='list-disc pl-4'>
               {stackCategory.map((stack) => (
@@ -87,7 +92,9 @@ export function ProjectAccordion({
       {/* Render contributions section if there are contributions */}
       {isDefined(contributions) && isNoEmptyString(contributions) && (
         <AccordionItem value='contribution'>
-          <AccordionTrigger>¿Qué aporté?</AccordionTrigger>
+          <AccordionTrigger>
+            {t('components.project-accordion.contributions.title')}
+          </AccordionTrigger>
           <AccordionContent className='space-y-3'>
             <p>
               <MessageDisplay message={contributions} />
@@ -99,7 +106,9 @@ export function ProjectAccordion({
       {/* Render collaborators section if there are collaborators */}
       {collaborators.length > 0 && (
         <AccordionItem value='collaborators'>
-          <AccordionTrigger>Colaboradores</AccordionTrigger>
+          <AccordionTrigger>
+            {t('components.project-accordion.collaborators.title')}
+          </AccordionTrigger>
           <AccordionContent>
             <ul className='space-y-3 pl-5'>
               {collaborators.map((collaborator) => (
@@ -116,12 +125,14 @@ export function ProjectAccordion({
       {((isDefined(githubUrl) && isNoEmptyString(githubUrl)) ||
         (isDefined(demoUrl) && isNoEmptyString(demoUrl))) && (
         <AccordionItem value='resources'>
-          <AccordionTrigger>Recursos</AccordionTrigger>
+          <AccordionTrigger>{t('components.project-accordion.resources.title')}</AccordionTrigger>
           <AccordionContent>
             <ul className='space-y-3 pl-5'>
               {isDefined(githubUrl) && isNoEmptyString(githubUrl) ? (
                 <li aria-label='Code Link' className='flex items-center gap-1'>
-                  <span className='font-bold'>Código: </span>
+                  <span className='font-bold'>
+                    {t('components.project-accordion.resources.code-subtitle')}:
+                  </span>
                   <a
                     className='flex items-center gap-1'
                     href={githubUrl}
@@ -135,7 +146,9 @@ export function ProjectAccordion({
               ) : null}
               {isDefined(demoUrl) && isNoEmptyString(demoUrl) ? (
                 <li aria-label='Demo Link' className='flex items-center gap-1'>
-                  <span className='font-bold'>Demo: </span>
+                  <span className='font-bold'>
+                    {t('components.project-accordion.resources.demo-subtitle')}:
+                  </span>
                   <a
                     className='flex items-center gap-1'
                     href={demoUrl}

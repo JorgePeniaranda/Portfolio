@@ -18,6 +18,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/helpers/common/classnames';
+import useTranslations from '@/hooks/use-translations';
 
 interface DataTableColumnHeaderProps<TData, TValue> extends React.HTMLAttributes<HTMLDivElement> {
   column: Column<TData, TValue>;
@@ -37,6 +38,8 @@ export function DataTableColumnHeader<TData, TValue>({
   title,
   className,
 }: DataTableColumnHeaderProps<TData, TValue>) {
+  const { t } = useTranslations();
+
   if (!column.getCanSort()) {
     return <div className={cn(className)}>{title}</div>;
   }
@@ -59,20 +62,20 @@ export function DataTableColumnHeader<TData, TValue>({
         <DropdownMenuContent align='start'>
           <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
             <ArrowUp className='mr-1 size-3.5 text-muted-foreground/70' />
-            Asc
+            {t('components.data-table-column-header.sort.asc')}
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
             <ArrowDown className='mr-1 size-3.5 text-muted-foreground/70' />
-            Desc
+            {t('components.data-table-column-header.sort.desc')}
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => column.toggleSorting()}>
             <X className='mr-1 size-3.5 text-muted-foreground/70' />
-            None
+            {t('components.data-table-column-header.sort.none')}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
             <EyeOff className='mr-1 size-3.5 text-muted-foreground/70' />
-            Hide
+            {t('components.data-table-column-header.visibility.hide')}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
