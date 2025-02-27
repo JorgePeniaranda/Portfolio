@@ -192,6 +192,9 @@ export interface Translation {
       'previous-page': string;
       'next-page': string;
       'last-page': string;
+      'aria-label': string;
+      'rows-per-page-select': string;
+      'pagination-controls': string;
     };
     'stack-drawer': {
       'description': string;

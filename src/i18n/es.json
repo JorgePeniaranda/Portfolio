@@ -174,13 +174,16 @@
     },
     "data-table": {
       "no-data": "Sin resultados",
-      "selected-rows": "{{count}} filas seleccionadas",
+      "selected-rows": "{{selected}} de {{total}} filas seleccionadas",
       "rows-per-page": "Filas por página",
-      "page-info": "Mostrando {{from}} a {{to}} de {{count}} registros",
+      "page-info": "Página {{current}} de {{total}}",
       "first-page": "Primera página",
       "previous-page": "Página anterior",
       "next-page": "Página siguiente",
-      "last-page": "Última página"
+      "last-page": "Última página",
+      "aria-label": "Tabla de datos",
+      "rows-per-page-select": "Selector de filas por página",
+      "pagination-controls": "Controles de paginación"
     },
     "stack-drawer": {
       "description": "Descripción",

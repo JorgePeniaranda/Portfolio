@@ -84,7 +84,7 @@ export function DataTable<TData, TValue>({
     <>
       {HeaderComponent?.({ table })}
       <div className='rounded-md border'>
-        <Table>
+        <Table aria-label={t('components.data-table.aria-label')}>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -129,6 +129,7 @@ export function DataTable<TData, TValue>({
             <div className='flex items-center space-x-2'>
               <p className='text-sm font-medium'>{t('components.data-table.rows-per-page')}</p>
               <Select
+                aria-label={t('components.data-table.rows-per-page-select')}
                 value={`${table.getState().pagination.pageSize}`}
                 onValueChange={handlePageSizeChange}
               >
@@ -150,8 +151,12 @@ export function DataTable<TData, TValue>({
                 total: table.getPageCount(),
               })}
             </div>
-            <div className='flex items-center space-x-2'>
+            <div
+              aria-label={t('components.data-table.pagination-controls')}
+              className='flex items-center space-x-2'
+            >
               <Button
+                aria-label={t('components.data-table.first-page')}
                 className='hidden size-8 p-0 lg:flex'
                 disabled={!table.getCanPreviousPage()}
                 variant='outline'
@@ -161,6 +166,7 @@ export function DataTable<TData, TValue>({
                 <ChevronsLeft />
               </Button>
               <Button
+                aria-label={t('components.data-table.previous-page')}
                 className='size-8 p-0'
                 disabled={!table.getCanPreviousPage()}
                 variant='outline'
@@ -170,6 +176,7 @@ export function DataTable<TData, TValue>({
                 <ChevronLeft />
               </Button>
               <Button
+                aria-label={t('components.data-table.next-page')}
                 className='size-8 p-0'
                 disabled={!table.getCanNextPage()}
                 variant='outline'
@@ -179,6 +186,7 @@ export function DataTable<TData, TValue>({
                 <ChevronRight />
               </Button>
               <Button
+                aria-label={t('components.data-table.last-page')}
                 className='hidden size-8 p-0 lg:flex'
                 disabled={!table.getCanNextPage()}
                 variant='outline'
