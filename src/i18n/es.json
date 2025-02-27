@@ -1,6 +1,246 @@
 {
+  "components": {
+    "cat-as-a-service": {
+      "aria-label": "Servicio de gatos aleatorios"
+    },
+    "conditional-anchor": {
+      "disabled-aria-label": "Enlace deshabilitado"
+    },
+    "github-user": {
+      "aria-label": "Perfil de GitHub de {{username}}"
+    },
+    "text-writter": {
+      "aria-label": "Texto con efecto de escritura automática"
+    },
+    "secret-code-hint": {
+      "aria-label": "Pista del código secreto"
+    },
+    "collaborator-relationship-card": {
+      "aria-label": "Tarjeta de relación de colaborador"
+    },
+    "project-card": {
+      "aria-label": "Tarjeta del proyecto",
+      "aria-label-liked": "Tarjeta del proyecto favorito"
+    },
+    "secret-button": {
+      "error-description": "No has introducido el código correcto.",
+      "error-message": "Código incorrecto",
+      "success-description": "Has desbloqueado el contenido secreto.",
+      "success-message": "Código correcto",
+      "button-text": "Desbloquear contenido secreto",
+      "modal-title": "Código secreto",
+      "modal-description": "Introduce el código secreto para desbloquear el contenido oculto.",
+      "modal-unlock-button": "Desbloquear",
+      "modal-submit-button": "Enviar"
+    },
+    "project-accordion": {
+      "goals": {
+        "title": "Objetivos"
+      },
+      "technologies": {
+        "title": "Tecnologías"
+      },
+      "contributions": {
+        "title": "Contribuciones"
+      },
+      "collaborators": {
+        "title": "Colaboradores"
+      },
+      "resources": {
+        "title": "Recursos",
+        "code-subtitle": "Código",
+        "demo-subtitle": "Demo"
+      }
+    },
+    "breadcrumb": {
+      "aria-label": "Navegación de migas de pan"
+    },
+    "breadcrumb-item": {
+      "link-aria-label": "Enlace a {{label}}",
+      "page-aria-label": "Página actual: {{label}}"
+    },
+    "update-collaborator-related-project": {
+      "success-title": "Colaborador relacionado correctamente",
+      "success-description": "El colaborador ha sido relacionado con el proyecto exitosamente.",
+      "error-title": "Error al relacionar colaborador",
+      "error-description": "Ocurrió un error al intentar relacionar el colaborador con el proyecto.",
+      "remove-success-title": "Colaborador eliminado",
+      "remove-success-description": "El colaborador ha sido eliminado del proyecto exitosamente.",
+      "remove-error-title": "Error al eliminar colaborador",
+      "remove-error-description": "Ocurrió un error al intentar eliminar el colaborador del proyecto.",
+      "remove-button-aria": "Eliminar relación con colaborador",
+      "remove-button": "Eliminar relación",
+      "add-button-aria": "Añadir nuevo colaborador al proyecto",
+      "dialog-title": "Relacionar colaborador",
+      "dialog-description": "Selecciona un colaborador para relacionar con el proyecto.",
+      "select-placeholder": "Seleccionar colaborador",
+      "submit-button": "Relacionar"
+    },
+    "update-projects-related-collaborator": {
+      "success-title": "Proyecto relacionado correctamente",
+      "success-description": "El proyecto ha sido relacionado con el colaborador exitosamente.",
+      "error-title": "Error al relacionar proyecto",
+      "error-description": "Ocurrió un error al intentar relacionar el proyecto con el colaborador.",
+      "remove-success-title": "Proyecto eliminado",
+      "remove-success-description": "El proyecto ha sido eliminado del colaborador exitosamente.",
+      "remove-error-title": "Error al eliminar proyecto",
+      "remove-error-description": "Ocurrió un error al intentar eliminar el proyecto del colaborador.",
+      "remove-button-aria": "Eliminar relación con proyecto",
+      "remove-button": "Eliminar relación",
+      "add-button-aria": "Añadir nuevo proyecto al colaborador",
+      "dialog-title": "Relacionar proyecto",
+      "dialog-description": "Selecciona un proyecto para relacionar con el colaborador.",
+      "select-placeholder": "Seleccionar proyecto",
+      "submit-button": "Relacionar"
+    },
+    "create-stack-form": {
+      "key": "Clave",
+      "key-placeholder": "Clave",
+      "key-aria": "Campo para ingresar la clave del stack",
+      "name": "Nombre",
+      "name-placeholder": "Nombre",
+      "name-aria": "Campo para ingresar el nombre del stack",
+      "description": "Descripción",
+      "description-placeholder": "Descripción",
+      "description-aria": "Campo para ingresar la descripción del stack",
+      "category": "Categoría",
+      "category-placeholder": "Categoría",
+      "type": "Tipo",
+      "type-placeholder": "Tipo",
+      "icon-url": "URL del icono",
+      "icon-url-placeholder": "URL del icono",
+      "icon-url-aria": "Campo para ingresar la URL del icono del stack",
+      "submit": "Crear",
+      "submit-aria": "Botón para crear el stack",
+      "success-title": "Stack creado",
+      "success-description": "El stack ha sido creado exitosamente.",
+      "error-title": "Error al crear stack",
+      "error-description": "Ha ocurrido un error al intentar crear el stack."
+    },
+    "create-project-form": {
+      "key": "Clave",
+      "key-placeholder": "Clave",
+      "key-aria": "Campo para ingresar la clave del proyecto",
+      "name": "Nombre",
+      "name-placeholder": "Nombre",
+      "name-aria": "Campo para ingresar el nombre del proyecto",
+      "status": "Estado",
+      "status-placeholder": "Estado",
+      "stack": "Stack",
+      "stack-placeholder": "Stack",
+      "start-date": "Fecha de inicio",
+      "start-date-aria": "Selector de fecha de inicio",
+      "select-start-date": "Seleccionar fecha de inicio",
+      "end-date": "Fecha de fin",
+      "end-date-aria": "Selector de fecha de finalización",
+      "select-end-date": "Seleccionar fecha de fin",
+      "description": "Descripción",
+      "description-placeholder": "Descripción",
+      "description-aria": "Campo para ingresar la descripción del proyecto",
+      "goals": "Objetivos",
+      "goals-placeholder": "Objetivos",
+      "goals-aria": "Campo para ingresar los objetivos del proyecto",
+      "contributions": "Contribuciones",
+      "contributions-placeholder": "Contribuciones",
+      "contributions-aria": "Campo para ingresar las contribuciones al proyecto",
+      "logo-url": "URL del logo",
+      "logo-url-placeholder": "URL del logo",
+      "logo-url-aria": "Campo para ingresar la URL del logo del proyecto",
+      "primary-color": "Color primario",
+      "primary-color-placeholder": "Color primario",
+      "primary-color-aria": "Selector de color primario del proyecto",
+      "demo-url": "URL de la demo",
+      "demo-url-placeholder": "URL de la demo",
+      "demo-url-aria": "Campo para ingresar la URL de la demo del proyecto",
+      "github-url": "URL de GitHub",
+      "github-url-placeholder": "URL de GitHub",
+      "github-url-aria": "Campo para ingresar la URL de GitHub del proyecto",
+      "submit": "Crear",
+      "submit-aria": "Botón para crear el proyecto",
+      "success-title": "Proyecto creado",
+      "success-description": "El proyecto ha sido creado exitosamente.",
+      "error-title": "Error al crear proyecto",
+      "error-description": "Ha ocurrido un error al intentar crear el proyecto."
+    },
+    "data-table-column-header": {
+      "sort": {
+        "asc": "Ordenar ascendente",
+        "desc": "Ordenar descendente",
+        "none": "Eliminar ordenación"
+      },
+      "visibility": {
+        "hide": "Ocultar columna"
+      }
+    },
+    "data-table": {
+      "no-data": "Sin resultados",
+      "selected-rows": "{{count}} filas seleccionadas",
+      "rows-per-page": "Filas por página",
+      "page-info": "Mostrando {{from}} a {{to}} de {{count}} registros",
+      "first-page": "Primera página",
+      "previous-page": "Página anterior",
+      "next-page": "Página siguiente",
+      "last-page": "Última página"
+    },
+    "stack-drawer": {
+      "description": "Descripción",
+      "related-projects": "Proyectos relacionados"
+    },
+    "create-collaborator-form": {
+      "nickname": "Apodo",
+      "github-username": "Usuario de GitHub",
+      "linkedin-username": "Usuario de LinkedIn",
+      "submit": "Crear",
+      "success-title": "Colaborador creado",
+      "success-description": "El colaborador ha sido creado correctamente.",
+      "error-title": "Error",
+      "error-description": "Ha ocurrido un error al crear el colaborador."
+    },
+    "show-collaborator-form": {
+      "nickname": "Apodo",
+      "github-username": "Usuario de GitHub",
+      "linkedin-username": "Usuario de LinkedIn",
+      "edit": "Editar"
+    },
+    "update-collaborator-form": {
+      "nickname": "Apodo",
+      "github-username": "Usuario de GitHub",
+      "linkedin-username": "Usuario de LinkedIn",
+      "submit": "Actualizar",
+      "success-title": "Colaborador actualizado",
+      "success-description": "El colaborador ha sido actualizado correctamente.",
+      "error-title": "Error",
+      "error-description": "Ha ocurrido un error al actualizar el colaborador."
+    },
+    "stack-table-header": {
+      "success-title": "Operación exitosa",
+      "success-description": "La operación se ha realizado correctamente.",
+      "error-title": "Error",
+      "error-description": "Ha ocurrido un error durante la operación.",
+      "search-placeholder": "Buscar...",
+      "create": "Crear",
+      "view-details": "Ver detalles",
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "confirm-title": "Confirmar eliminación",
+      "confirm-description": "¿Estás seguro de que quieres eliminar este elemento?",
+      "cancel": "Cancelar"
+    }
+  },
   "error": {
     "validation-message": {
+      "collaborator": {
+        "nickname": {
+          "string": "El apodo debe ser un texto.",
+          "required_error": "El apodo es obligatorio."
+        },
+        "githubUsername": {
+          "string": "El nombre de usuario de GitHub debe ser un texto."
+        },
+        "linkedinUsername": {
+          "string": "El nombre de usuario de LinkedIn debe ser un texto."
+        }
+      },
       "env": {
         "appVersion": {
           "string": "La versión de la aplicación debe ser un texto.",
@@ -11,23 +251,23 @@
           "required_error": "El modo es obligatorio."
         },
         "isProduction": {
-          "boolean": "El valor debe ser un booleano.",
-          "required_error": "El campo de producción es obligatorio."
+          "boolean": "Debe ser un valor booleano.",
+          "required_error": "El valor de producción es obligatorio."
         },
         "isDevelopment": {
-          "boolean": "El valor debe ser un booleano.",
-          "required_error": "El campo de desarrollo es obligatorio."
+          "boolean": "Debe ser un valor booleano.",
+          "required_error": "El valor de desarrollo es obligatorio."
         },
         "isServerSideEnable": {
-          "boolean": "El valor debe ser un booleano.",
-          "required_error": "El campo de habilitación del lado del servidor es obligatorio."
+          "boolean": "Debe ser un valor booleano.",
+          "required_error": "El estado de habilitación del servidor es obligatorio."
         },
         "assetsPrefix": {
-          "string": "El prefijo de los recursos debe ser un texto."
+          "string": "El prefijo de los assets debe ser un texto."
         },
         "siteUrl": {
           "string": "La URL del sitio debe ser un texto.",
-          "url": "La URL del sitio no es válida.",
+          "url": "Debe ser una URL válida.",
           "required_error": "La URL del sitio es obligatoria."
         },
         "baseUrl": {
@@ -36,12 +276,96 @@
         },
         "apiUrl": {
           "string": "La URL de la API debe ser un texto.",
-          "url": "La URL de la API no es válida.",
+          "url": "Debe ser una URL válida.",
           "required_error": "La URL de la API es obligatoria."
         },
         "secretCode": {
           "string": "El código secreto debe ser un texto.",
           "required_error": "El código secreto es obligatorio."
+        }
+      },
+      "entity-relation": {
+        "idSource": {
+          "number": "El ID de origen debe ser un número.",
+          "required_error": "El ID de origen es obligatorio."
+        },
+        "idTarget": {
+          "number": "El ID de destino debe ser un número.",
+          "required_error": "El ID de destino es obligatorio."
+        }
+      },
+      "project": {
+        "key": {
+          "string": "La clave del proyecto debe ser un texto.",
+          "required_error": "La clave del proyecto es obligatoria."
+        },
+        "name": {
+          "string": "El nombre del proyecto debe ser un texto.",
+          "required_error": "El nombre del proyecto es obligatorio."
+        },
+        "status": {
+          "enum": "El estado debe ser un valor válido."
+        },
+        "stackCategory": {
+          "enum": "La categoría del stack debe ser un valor válido."
+        },
+        "startDate": {
+          "date": "La fecha de inicio debe ser una fecha válida.",
+          "required_error": "La fecha de inicio es obligatoria."
+        },
+        "endDate": {
+          "date": "La fecha de finalización debe ser una fecha válida."
+        },
+        "description": {
+          "string": "La descripción debe ser un texto.",
+          "required_error": "La descripción es obligatoria."
+        },
+        "goals": {
+          "string": "Los objetivos deben ser un texto.",
+          "required_error": "Los objetivos son obligatorios."
+        },
+        "contributions": {
+          "string": "Las contribuciones deben ser un texto.",
+          "required_error": "Las contribuciones son obligatorias."
+        },
+        "logoUrl": {
+          "string": "La URL del logo debe ser un texto.",
+          "required_error": "La URL del logo es obligatoria."
+        },
+        "primaryColor": {
+          "string": "El color principal debe ser un texto.",
+          "required_error": "El color principal es obligatorio.",
+          "invalid_hex_color": "Debe ser un color hexadecimal válido."
+        },
+        "demoUrl": {
+          "string": "La URL de la demo debe ser un texto."
+        },
+        "githubUrl": {
+          "string": "La URL de GitHub debe ser un texto."
+        }
+      },
+      "stack": {
+        "key": {
+          "string": "La clave del stack debe ser un texto.",
+          "required_error": "La clave del stack es obligatoria."
+        },
+        "name": {
+          "string": "El nombre del stack debe ser un texto.",
+          "required_error": "El nombre del stack es obligatorio."
+        },
+        "description": {
+          "string": "La descripción del stack debe ser un texto.",
+          "required_error": "La descripción del stack es obligatoria."
+        },
+        "category": {
+          "enum": "La categoría debe ser un valor válido."
+        },
+        "type": {
+          "enum": "El tipo debe ser un valor válido."
+        },
+        "iconUrl": {
+          "string": "La URL del ícono debe ser un texto.",
+          "required_error": "La URL del ícono es obligatoria."
         }
       }
     }
