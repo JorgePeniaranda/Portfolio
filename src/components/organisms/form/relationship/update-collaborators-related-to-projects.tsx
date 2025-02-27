@@ -28,6 +28,7 @@ import {
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
+import useTranslations from '@/hooks/use-translations';
 import { deleteProjectRemoveAssociatedCollaborator } from '@/services/project/deleteProjectRemoveAssociatedCollaborator';
 import { postProjectAddAssociatedCollaborator } from '@/services/project/postProjectAddAssociatedCollaborator';
 
@@ -52,6 +53,7 @@ export function UpdateCollaboratorRelatedToProject({
   disableForm?: boolean;
 }) {
   const { toast } = useToast();
+  const { t } = useTranslations();
 
   // Form only used in the dialog to add a collaborator to the project
   const form = useForm<EntityRelationSchema>({
@@ -82,8 +84,8 @@ export function UpdateCollaboratorRelatedToProject({
 
       // Show a success toast
       toast({
-        title: 'El colaborador ha sido relacionado',
-        description: 'El colaborador ha sido relacionado con el proyecto exitosamente.',
+        title: t('components.update-collaborator-related-project.success-title'),
+        description: t('components.update-collaborator-related-project.success-description'),
         className: 'bg-green-500 text-black',
       });
 
@@ -104,9 +106,8 @@ export function UpdateCollaboratorRelatedToProject({
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: 'No se pudo relacionar el proyecto con el colaborador',
-        defaultErrorMessage:
-          'Ocurrió un error al intentar relacionar el proyecto con el colaborador.',
+        title: t('components.update-collaborator-related-project.error-title'),
+        defaultErrorMessage: t('components.update-collaborator-related-project.error-description'),
         tryAgain: () => onAddCollaborator(values),
       });
     }
@@ -122,8 +123,8 @@ export function UpdateCollaboratorRelatedToProject({
 
       // Show a success toast
       toast({
-        title: 'Colaborador eliminado',
-        description: 'El colaborador ha sido eliminado del proyecto.',
+        title: t('components.update-collaborator-related-project.remove-success-title'),
+        description: t('components.update-collaborator-related-project.remove-success-description'),
         className: 'bg-green-500 text-black',
       });
 
@@ -144,9 +145,10 @@ export function UpdateCollaboratorRelatedToProject({
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: 'No se pudo eliminar el proyecto del colaborador',
-        defaultErrorMessage:
-          'Ocurrió un error al intentar eliminar el proyecto con el colaborador.',
+        title: t('components.update-collaborator-related-project.remove-error-title'),
+        defaultErrorMessage: t(
+          'components.update-collaborator-related-project.remove-error-description',
+        ),
         tryAgain: () => onRemoveCollaborator(collaboratorId),
       });
     }
@@ -159,13 +161,15 @@ export function UpdateCollaboratorRelatedToProject({
           <Card className='my-5 flex w-max flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800'>
             <CardHeader className='relative flex items-center gap-2'>
               <Button
-                aria-label='eliminar relacion'
+                aria-label={t('components.update-collaborator-related-project.remove-button-aria')}
                 className='absolute -right-2.5 -top-2.5 m-0 flex aspect-square size-8 items-center justify-center rounded-full bg-red-500 p-0 text-center text-white hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-500'
                 disabled={disableForm}
                 onClick={() => onRemoveCollaborator(collaborator.id)}
               >
                 <X />
-                <span className='sr-only'>eliminar relacion</span>
+                <span className='sr-only'>
+                  {t('components.update-collaborator-related-project.remove-button')}
+                </span>
               </Button>
               <Avatar className='size-16 shrink-0'>
                 <AvatarImage
@@ -182,7 +186,7 @@ export function UpdateCollaboratorRelatedToProject({
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <button
-              aria-label='Relacionar colaborador'
+              aria-label={t('components.update-collaborator-related-project.add-button-aria')}
               className='my-5 flex aspect-square w-max flex-col items-center justify-center rounded-lg bg-zinc-300 p-6 shadow dark:bg-zinc-800'
               type='button'
             >
@@ -191,9 +195,11 @@ export function UpdateCollaboratorRelatedToProject({
           </DialogTrigger>
           <DialogContent className='sm:max-w-[425px]'>
             <DialogHeader>
-              <DialogTitle className='text-center'>Relacionar colaborador</DialogTitle>
+              <DialogTitle className='text-center'>
+                {t('components.update-collaborator-related-project.dialog-title')}
+              </DialogTitle>
               <DialogDescription>
-                Selecciona un colaborador para relacionar con el proyecto.
+                {t('components.update-collaborator-related-project.dialog-description')}
               </DialogDescription>
             </DialogHeader>
 
@@ -217,7 +223,11 @@ export function UpdateCollaboratorRelatedToProject({
                             value={String(field.value)}
                           >
                             <SelectTrigger className='w-[180px]'>
-                              <SelectValue placeholder='Seleccionar colaborador' />
+                              <SelectValue
+                                placeholder={t(
+                                  'components.update-collaborator-related-project.select-placeholder',
+                                )}
+                              />
                             </SelectTrigger>
                             <SelectContent>
                               {availableCollaborators.map((stack) => (
@@ -249,7 +259,7 @@ export function UpdateCollaboratorRelatedToProject({
                 type='submit'
                 typeof='submit'
               >
-                Relacionar
+                {t('components.update-collaborator-related-project.submit-button')}
               </Button>
             </DialogFooter>
           </DialogContent>

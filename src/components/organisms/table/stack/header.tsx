@@ -23,8 +23,10 @@ import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isNotDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
 import { deleteStack } from '@/services/stack/deleteStack';
+import useTranslations from '@/hooks/use-translations';
 
 export function StackTableHeader({ table }: { table: Table<Stack> }) {
+  const { t } = useTranslations();
   const { toast } = useToast();
 
   const tableFilterValue = table.getColumn('name')?.getFilterValue();
@@ -43,8 +45,8 @@ export function StackTableHeader({ table }: { table: Table<Stack> }) {
       await deleteStack(rows.map((row) => row.original.id));
       // If the request was successful, show a success toast
       toast({
-        title: 'Colaboradores eliminados',
-        description: 'Los stack seleccionados se han eliminado correctamente.',
+        title: t('components.stack-table-header.success-title'),
+        description: t('components.stack-table-header.success-description'),
         className: 'bg-green-500 text-black',
       });
 
@@ -56,8 +58,8 @@ export function StackTableHeader({ table }: { table: Table<Stack> }) {
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: 'Error al eliminar los stack',
-        defaultErrorMessage: 'Ha ocurrido un error al intentar eliminar los stacks seleccionados.',
+        title: t('components.stack-table-header.error-title'),
+        defaultErrorMessage: t('components.stack-table-header.error-description'),
         tryAgain: () => handleDelete(),
       });
     }
@@ -68,7 +70,7 @@ export function StackTableHeader({ table }: { table: Table<Stack> }) {
       <Input
         autoComplete='off'
         className='max-w-xs'
-        placeholder='Buscar por nombre...'
+        placeholder={t('components.stack-table-header.search-placeholder')}
         value={
           typeof tableFilterValue === 'string' || typeof tableFilterValue === 'number'
             ? tableFilterValue
@@ -92,7 +94,7 @@ export function StackTableHeader({ table }: { table: Table<Stack> }) {
                   <Plus className='size-5' />
                 </ConditionalAnchor>
               </TooltipTrigger>
-              <TooltipContent>Crear</TooltipContent>
+              <TooltipContent>{t('components.stack-table-header.create')}</TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </li>
@@ -111,7 +113,7 @@ export function StackTableHeader({ table }: { table: Table<Stack> }) {
                   <Eye className='size-5' />
                 </ConditionalAnchor>
               </TooltipTrigger>
-              <TooltipContent>Ver detalles</TooltipContent>
+              <TooltipContent>{t('components.stack-table-header.view-details')}</TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </li>
@@ -130,7 +132,7 @@ export function StackTableHeader({ table }: { table: Table<Stack> }) {
                   <Pen className='size-5' />
                 </ConditionalAnchor>
               </TooltipTrigger>
-              <TooltipContent>Editar</TooltipContent>
+              <TooltipContent>{t('components.stack-table-header.edit')}</TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </li>
@@ -148,25 +150,26 @@ export function StackTableHeader({ table }: { table: Table<Stack> }) {
                       <Trash className='size-5' />
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent>Eliminar</TooltipContent>
+                  <TooltipContent>{t('components.stack-table-header.delete')}</TooltipContent>
                 </Tooltip>
               </TooltipProvider>
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
-                <AlertDialogTitle>¿Está completamente seguro?</AlertDialogTitle>
+                <AlertDialogTitle>
+                  {t('components.stack-table-header.confirm-title')}
+                </AlertDialogTitle>
                 <AlertDialogDescription>
-                  Esta acción no se puede deshacer. Esto borrará permanentemente el/los stacks
-                  seleccionados.
+                  {t('components.stack-table-header.confirm-description')}
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                <AlertDialogCancel>{t('components.stack-table-header.cancel')}</AlertDialogCancel>
                 <AlertDialogAction
                   className='bg-red-500 text-white hover:bg-red-600 hover:text-white dark:text-white dark:hover:bg-red-400'
                   onClick={handleDelete}
                 >
-                  Borrar
+                  {t('components.stack-table-header.delete')}
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>

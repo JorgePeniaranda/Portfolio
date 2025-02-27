@@ -18,6 +18,7 @@ import { useToast } from '@/hooks/use-toast';
 import { CollaboratorUpdateSchema } from '@/schemas/collaborator/update';
 import { putCollaborator } from '@/services/collaborator/putCollaborator';
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
+import useTranslations from '@/hooks/use-translations';
 
 /**
  * Form to update a collaborator.
@@ -33,6 +34,7 @@ export function UpdateCollaboratorForm({
   currentCollaborator: Collaborator;
   disableForm?: boolean;
 }) {
+  const { t } = useTranslations();
   const { toast } = useToast();
 
   const form = useForm<CollaboratorUpdateSchema>({
@@ -49,15 +51,15 @@ export function UpdateCollaboratorForm({
 
       // Show a success toast
       toast({
-        title: 'Colaborador actualizado',
-        description: 'El colaborador ha sido actualizado exitosamente.',
+        title: t('components.update-collaborator-form.success-title'),
+        description: t('components.update-collaborator-form.success-description'),
         className: 'bg-green-500 text-black',
       });
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: 'No se pudo actualizar el Colaborador',
-        defaultErrorMessage: 'Ha ocurrido un error al intentar actualizar el Colaborador.',
+        title: t('components.update-collaborator-form.error-title'),
+        defaultErrorMessage: t('components.update-collaborator-form.error-description'),
         tryAgain: () => onSubmit(values),
       });
     }
@@ -72,9 +74,13 @@ export function UpdateCollaboratorForm({
             name='nickname'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nickname</FormLabel>
+                <FormLabel>{t('components.update-collaborator-form.nickname')}</FormLabel>
                 <FormControl>
-                  <Input disabled={disableForm} placeholder='Nickname' {...field} />
+                  <Input
+                    disabled={disableForm}
+                    placeholder={t('components.update-collaborator-form.nickname')}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -85,11 +91,11 @@ export function UpdateCollaboratorForm({
             name='githubUsername'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Usuario de Github</FormLabel>
+                <FormLabel>{t('components.update-collaborator-form.github-username')}</FormLabel>
                 <FormControl>
                   <Input
                     disabled={disableForm}
-                    placeholder='Usuario de Github'
+                    placeholder={t('components.update-collaborator-form.github-username')}
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />
@@ -103,11 +109,11 @@ export function UpdateCollaboratorForm({
             name='linkedinUsername'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Usuario de Linkedin</FormLabel>
+                <FormLabel>{t('components.update-collaborator-form.linkedin-username')}</FormLabel>
                 <FormControl>
                   <Input
                     disabled={disableForm}
-                    placeholder='Usuario de Linkedin'
+                    placeholder={t('components.update-collaborator-form.linkedin-username')}
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />
@@ -123,7 +129,7 @@ export function UpdateCollaboratorForm({
           type='submit'
         >
           <Save className='size-7' />
-          <span className='text-lg'>Guardar</span>
+          <span className='text-lg'>{t('components.update-collaborator-form.submit')}</span>
         </Button>
       </form>
     </Form>

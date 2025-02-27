@@ -28,6 +28,7 @@ import {
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
+import useTranslations from '@/hooks/use-translations';
 import { StackCreateDefaultValues, StackCreateSchema } from '@/schemas/stack/create';
 import { postStack } from '@/services/stack/postStack';
 
@@ -39,6 +40,7 @@ import { postStack } from '@/services/stack/postStack';
  */
 export function CreateStackForm({ disableForm = false }: { disableForm?: boolean }) {
   const { toast } = useToast();
+  const { t } = useTranslations();
 
   const form = useForm<StackCreateSchema>({
     resolver: zodResolver(StackCreateSchema),
@@ -54,8 +56,8 @@ export function CreateStackForm({ disableForm = false }: { disableForm?: boolean
 
       // Show a success toast
       toast({
-        title: 'Stack creado',
-        description: 'El stack ha sido creado exitosamente.',
+        title: t('components.create-stack-form.success-title'),
+        description: t('components.create-stack-form.success-description'),
         className: 'bg-green-500 text-black',
       });
 
@@ -66,8 +68,8 @@ export function CreateStackForm({ disableForm = false }: { disableForm?: boolean
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: 'No se pudo crear el stack',
-        defaultErrorMessage: 'Ha ocurrido un error al intentar crear el stack.',
+        title: t('components.create-stack-form.error-title'),
+        defaultErrorMessage: t('components.create-stack-form.error-description'),
         tryAgain: () => onSubmit(values),
       });
     }
@@ -82,9 +84,14 @@ export function CreateStackForm({ disableForm = false }: { disableForm?: boolean
             name='key'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Key</FormLabel>
+                <FormLabel>{t('components.create-stack-form.key')}</FormLabel>
                 <FormControl>
-                  <Input disabled={disableForm} placeholder='Key' {...field} />
+                  <Input
+                    disabled={disableForm}
+                    placeholder={t('components.create-stack-form.key-placeholder')}
+                    {...field}
+                    aria-label={t('components.create-stack-form.key-aria')}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -95,12 +102,13 @@ export function CreateStackForm({ disableForm = false }: { disableForm?: boolean
             name='name'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nombre</FormLabel>
+                <FormLabel>{t('components.create-stack-form.name')}</FormLabel>
                 <FormControl>
                   <Input
                     disabled={disableForm}
-                    placeholder='Nombre'
+                    placeholder={t('components.create-stack-form.name-placeholder')}
                     {...field}
+                    aria-label={t('components.create-stack-form.name-aria')}
                     value={field.value === null ? undefined : field.value}
                   />
                 </FormControl>
@@ -113,12 +121,13 @@ export function CreateStackForm({ disableForm = false }: { disableForm?: boolean
             name='description'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Descripción</FormLabel>
+                <FormLabel>{t('components.create-stack-form.description')}</FormLabel>
                 <FormControl>
                   <Textarea
                     disabled={disableForm}
-                    placeholder='Descripción'
+                    placeholder={t('components.create-stack-form.description-placeholder')}
                     {...field}
+                    aria-label={t('components.create-stack-form.description-aria')}
                     value={field.value === null ? undefined : field.value}
                   />
                 </FormControl>
@@ -131,7 +140,7 @@ export function CreateStackForm({ disableForm = false }: { disableForm?: boolean
             name='category'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Categoria</FormLabel>
+                <FormLabel>{t('components.create-stack-form.category')}</FormLabel>
                 <Select
                   defaultValue={field.value === null ? undefined : field.value}
                   disabled={disableForm}
@@ -141,7 +150,9 @@ export function CreateStackForm({ disableForm = false }: { disableForm?: boolean
                 >
                   <FormControl>
                     <SelectTrigger className='w-[180px]'>
-                      <SelectValue placeholder='Descripción' />
+                      <SelectValue
+                        placeholder={t('components.create-stack-form.category-placeholder')}
+                      />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -161,7 +172,7 @@ export function CreateStackForm({ disableForm = false }: { disableForm?: boolean
             name='type'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Tipo</FormLabel>
+                <FormLabel>{t('components.create-stack-form.type')}</FormLabel>
                 <Select
                   defaultValue={field.value === null ? undefined : field.value}
                   disabled={disableForm}
@@ -171,7 +182,9 @@ export function CreateStackForm({ disableForm = false }: { disableForm?: boolean
                 >
                   <FormControl>
                     <SelectTrigger className='w-[180px]'>
-                      <SelectValue placeholder='Tipo' />
+                      <SelectValue
+                        placeholder={t('components.create-stack-form.type-placeholder')}
+                      />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -191,12 +204,13 @@ export function CreateStackForm({ disableForm = false }: { disableForm?: boolean
             name='iconUrl'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>URL de icono</FormLabel>
+                <FormLabel>{t('components.create-stack-form.icon-url')}</FormLabel>
                 <FormControl>
                   <Input
                     disabled={disableForm}
-                    placeholder='iconURL'
+                    placeholder={t('components.create-stack-form.icon-url-placeholder')}
                     {...field}
+                    aria-label={t('components.create-stack-form.icon-url-aria')}
                     value={field.value === null ? undefined : field.value}
                   />
                 </FormControl>
@@ -206,12 +220,13 @@ export function CreateStackForm({ disableForm = false }: { disableForm?: boolean
           />
         </div>
         <Button
+          aria-label={t('components.create-stack-form.submit-aria')}
           className='flex size-max items-center gap-2 rounded-lg bg-lime-600 p-2 text-white hover:bg-lime-700 dark:bg-lime-600 dark:hover:bg-lime-700'
           disabled={disableForm}
           type='submit'
         >
           <Save className='size-7' />
-          <span className='text-lg'>Crear</span>
+          <span className='text-lg'>{t('components.create-stack-form.submit')}</span>
         </Button>
       </form>
     </Form>

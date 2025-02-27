@@ -15,6 +15,7 @@ import { Input } from '@/components/ui/input';
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
+import useTranslations from '@/hooks/use-translations';
 import {
   CollaboratorCreateDefaultValues,
   CollaboratorCreateSchema,
@@ -28,6 +29,7 @@ import { postCollaborator } from '@/services/collaborator/postCollaborator';
  * @returns The show collaborator form
  */
 export function CreateCollaboratorForm({ disableForm = false }: { disableForm?: boolean }) {
+  const { t } = useTranslations();
   const { toast } = useToast();
 
   const form = useForm<CollaboratorCreateSchema>({
@@ -44,8 +46,8 @@ export function CreateCollaboratorForm({ disableForm = false }: { disableForm?: 
 
       // Show a success toast
       toast({
-        title: 'Colaborador creado',
-        description: 'El colaborador ha sido creado exitosamente.',
+        title: t('components.create-collaborator-form.success-title'),
+        description: t('components.create-collaborator-form.success-description'),
         className: 'bg-green-500 text-black',
       });
 
@@ -56,8 +58,8 @@ export function CreateCollaboratorForm({ disableForm = false }: { disableForm?: 
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: 'No se pudo crear el colaborador',
-        defaultErrorMessage: 'Ha ocurrido un error al intentar crear el colaborador.',
+        title: t('components.create-collaborator-form.error-title'),
+        defaultErrorMessage: t('components.create-collaborator-form.error-description'),
         tryAgain: () => onSubmit(values),
       });
     }
@@ -72,9 +74,13 @@ export function CreateCollaboratorForm({ disableForm = false }: { disableForm?: 
             name='nickname'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nickname</FormLabel>
+                <FormLabel>{t('components.create-collaborator-form.nickname')}</FormLabel>
                 <FormControl>
-                  <Input disabled={disableForm} placeholder='Nickname' {...field} />
+                  <Input
+                    disabled={disableForm}
+                    placeholder={t('components.create-collaborator-form.nickname')}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -85,11 +91,11 @@ export function CreateCollaboratorForm({ disableForm = false }: { disableForm?: 
             name='githubUsername'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Usuario de Github</FormLabel>
+                <FormLabel>{t('components.create-collaborator-form.github-username')}</FormLabel>
                 <FormControl>
                   <Input
                     disabled={disableForm}
-                    placeholder='Usuario de Github'
+                    placeholder={t('components.create-collaborator-form.github-username')}
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />
@@ -103,11 +109,11 @@ export function CreateCollaboratorForm({ disableForm = false }: { disableForm?: 
             name='linkedinUsername'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Usuario de Linkedin</FormLabel>
+                <FormLabel>{t('components.create-collaborator-form.linkedin-username')}</FormLabel>
                 <FormControl>
                   <Input
                     disabled={disableForm}
-                    placeholder='Usuario de Linkedin'
+                    placeholder={t('components.create-collaborator-form.linkedin-username')}
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />
@@ -123,7 +129,7 @@ export function CreateCollaboratorForm({ disableForm = false }: { disableForm?: 
           type='submit'
         >
           <Save className='size-7' />
-          <span className='text-lg'>Crear</span>
+          <span className='text-lg'>{t('components.create-collaborator-form.submit')}</span>
         </Button>
       </form>
     </Form>

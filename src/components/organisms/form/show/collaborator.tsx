@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { CollaboratorUpdateSchema } from '@/schemas/collaborator/update';
+import useTranslations from '@/hooks/use-translations';
 
 /**
  * Form to show a collaborator.
@@ -26,6 +27,7 @@ export function ShowCollaboratorForm({
 }: {
   currentCollaborator: Collaborator;
 }) {
+  const { t } = useTranslations();
   const form = useForm<CollaboratorUpdateSchema>({
     resolver: zodResolver(CollaboratorUpdateSchema),
     defaultValues: currentCollaborator,
@@ -40,9 +42,13 @@ export function ShowCollaboratorForm({
             name='nickname'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nickname</FormLabel>
+                <FormLabel>{t('components.show-collaborator-form.nickname')}</FormLabel>
                 <FormControl>
-                  <Input disabled placeholder='Nickname' {...field} />
+                  <Input
+                    disabled
+                    placeholder={t('components.show-collaborator-form.nickname')}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -53,11 +59,11 @@ export function ShowCollaboratorForm({
             name='githubUsername'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Usuario de Github</FormLabel>
+                <FormLabel>{t('components.show-collaborator-form.github-username')}</FormLabel>
                 <FormControl>
                   <Input
                     disabled
-                    placeholder='Usuario de Github'
+                    placeholder={t('components.show-collaborator-form.github-username')}
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />
@@ -71,11 +77,11 @@ export function ShowCollaboratorForm({
             name='linkedinUsername'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Usuario de Linkedin</FormLabel>
+                <FormLabel>{t('components.show-collaborator-form.linkedin-username')}</FormLabel>
                 <FormControl>
                   <Input
                     disabled
-                    placeholder='Usuario de Linkedin'
+                    placeholder={t('components.show-collaborator-form.linkedin-username')}
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />
@@ -90,7 +96,7 @@ export function ShowCollaboratorForm({
           href={`/vault/views/collaborators/${currentCollaborator.id}/edit`}
         >
           <Pen className='size-5' />
-          <span className='text-lg'>Editar</span>
+          <span className='text-lg'>{t('components.show-collaborator-form.edit')}</span>
         </a>
       </form>
     </Form>
