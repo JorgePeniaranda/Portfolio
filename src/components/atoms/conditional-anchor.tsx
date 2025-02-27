@@ -1,4 +1,5 @@
 import { cn } from '@/helpers/common/classnames';
+import useTranslations from '@/hooks/use-translations';
 
 interface ConditionalAnchor extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   disabledButtonProps: React.HTMLAttributes<HTMLSpanElement>;
@@ -21,11 +22,13 @@ export function ConditionalAnchor({
   children,
   ...props
 }: ConditionalAnchor) {
+  const { t } = useTranslations();
+
   if (disabled) {
     return (
       <span
         {...disabledButtonProps}
-        aria-label='disabled link button'
+        aria-label={t('components.conditional-anchor.disabled-aria-label')}
         className={cn(props.className, disabledButtonProps.className)}
       >
         {children}

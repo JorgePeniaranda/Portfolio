@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { useSecretCodeStore } from '@/services/storage/secret-code';
+import useTranslations from '@/hooks/use-translations';
 
 /**
  * Component that displays an interactive button to reveal a digit of a secret code.
@@ -13,6 +14,7 @@ import { useSecretCodeStore } from '@/services/storage/secret-code';
  * @returns A SecretCodeHint component
  */
 export function SecretCodeHint({ position }: { position: number }) {
+  const { t } = useTranslations();
   const { toast } = useToast();
   const { secretCode, unlockOneNumber, isComplete, checkIfCodeIsCompleteWithNewIndex } =
     useSecretCodeStore();
@@ -51,7 +53,11 @@ export function SecretCodeHint({ position }: { position: number }) {
   }
 
   return (
-    <Button className='flex aspect-square items-center p-2' onClick={handleScanFaceClick}>
+    <Button
+      aria-label={t('components.secret-code-hint.aria-label')}
+      className='flex aspect-square items-center p-2'
+      onClick={handleScanFaceClick}
+    >
       <ScanFace />
     </Button>
   );

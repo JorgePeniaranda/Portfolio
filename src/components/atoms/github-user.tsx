@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/helpers/common/classnames';
+import useTranslations from '@/hooks/use-translations';
 
 interface GithubUserProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   username: string;
@@ -14,9 +15,11 @@ interface GithubUserProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> 
  * @returns A GithubUser component
  */
 export default function GithubUser({ username, ...props }: GithubUserProps) {
+  const { t } = useTranslations();
+
   return (
     <a
-      aria-label={username}
+      aria-label={t('components.github-user.aria-label', { username })}
       className={cn('flex size-max items-center gap-2', props.className)}
       href={`https://github.com/${username}`}
       rel='noopener noreferrer'

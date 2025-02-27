@@ -3,6 +3,7 @@ import { useState, type HTMLAttributes } from 'react';
 
 import { CAT_URLs } from '@/constants/external-api';
 import { cn } from '@/helpers/common/classnames';
+import useTranslations from '@/hooks/use-translations';
 
 /**
  * CatAsAService component displays a random cat image, and allows the user to request a new one by clicking a button.
@@ -10,6 +11,8 @@ import { cn } from '@/helpers/common/classnames';
  * @returns A CatAsAService component
  */
 export function CatAsAService(props: HTMLAttributes<HTMLDivElement>) {
+  const { t } = useTranslations();
+
   const [loading, setLoading] = useState(true);
   const [currentURL, setCurrentURL] = useState('https://cataas.com/cat/gif');
 
@@ -29,6 +32,7 @@ export function CatAsAService(props: HTMLAttributes<HTMLDivElement>) {
     <div
       className={cn('flex flex-col items-center justify-center gap-5', props.className)}
       {...props}
+      aria-label={t('components.cat-as-a-service.aria-label')}
     >
       <picture className='flex size-72 items-center justify-center rounded'>
         {loading ? (
