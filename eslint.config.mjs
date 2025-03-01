@@ -6,8 +6,6 @@
  */
 
 import { fixupPluginRules } from '@eslint/compat';
-import vercelStyleGuideReact from '@vercel/style-guide/eslint/rules/react';
-import vercelStyleGuideTypescript from '@vercel/style-guide/eslint/typescript';
 import astroParser from 'astro-eslint-parser';
 import eslintPluginAstro from 'eslint-plugin-astro';
 import eslintPluginImport from 'eslint-plugin-import';
@@ -16,7 +14,6 @@ import eslintPluginJsxA11y from 'eslint-plugin-jsx-a11y';
 import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
 import eslintPluginReact from 'eslint-plugin-react';
 import eslintPluginReactHooks from 'eslint-plugin-react-hooks';
-import tailwind from 'eslint-plugin-tailwindcss';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
@@ -85,7 +82,6 @@ export default [
       ...eslintPluginReact.configs.recommended.rules,
       ...eslintPluginJsxA11y.configs.recommended.rules,
       ...eslintPluginReactHooks.configs.recommended.rules,
-      ...vercelStyleGuideReact.rules,
 
       // 🚀 Best practices
       'react/prop-types': 'off',
@@ -115,7 +111,6 @@ export default [
     ...tseslint.configs.recommended,
     {
       rules: {
-        ...vercelStyleGuideTypescript.rules,
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/no-shadow': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
@@ -130,7 +125,8 @@ export default [
             argsIgnorePattern: '^_.*?$',
           },
         ],
-        '@typescript-eslint/consistent-type-imports': 'warn', // Enforce type-only imports when possible
+        '@typescript-eslint/consistent-type-imports': 'warn',
+        '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
       },
     },
   ],
@@ -147,6 +143,7 @@ export default [
           // Same configuration as .prettierrc.mjs
           {
             plugins: ['prettier-plugin-astro', 'prettier-plugin-tailwindcss'],
+            tailwindFunctions: ['clsx', 'tw', 'twMerge', 'cn'],
             overrides: [
               {
                 files: '*.astro',
@@ -221,11 +218,6 @@ export default [
     },
     plugins: { ...eslintPluginAstro.configs.recommended },
   },
-
-  /**
-   * 🔹 Tailwind CSS configuration
-   */
-  ...[...tailwind.configs['flat/recommended']],
 
   /**
    * 🔹 JSDoc configuration

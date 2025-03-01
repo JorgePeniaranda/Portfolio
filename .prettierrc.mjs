@@ -1,5 +1,6 @@
 export default {
   plugins: ['prettier-plugin-astro', 'prettier-plugin-tailwindcss'],
+  tailwindFunctions: ['clsx', 'tw', 'twMerge', 'cn'],
   overrides: [
     {
       files: '*.astro',
