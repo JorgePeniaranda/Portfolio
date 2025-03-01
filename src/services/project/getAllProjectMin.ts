@@ -3,9 +3,10 @@ import type { Project } from '@prisma/client';
 import { apiClient } from '@/helpers/client/axios';
 import { handleServiceError } from '@/helpers/error/service-handler';
 
-export type IGetAllProjectMinResponse = Array<
-  Pick<Project, 'id' | 'key' | 'name' | 'logoUrl' | 'stackCategory' | 'status'>
->;
+export type IGetAllProjectMinResponse = Pick<
+  Project,
+  'id' | 'key' | 'name' | 'logoUrl' | 'stackCategory' | 'status'
+>[];
 
 /**
  * Get all projects with minimal information.

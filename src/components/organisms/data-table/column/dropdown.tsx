@@ -60,20 +60,36 @@ export function DataTableColumnHeader<TData, TValue>({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align='start'>
-          <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
+          <DropdownMenuItem
+            onClick={() => {
+              column.toggleSorting(false);
+            }}
+          >
             <ArrowUp className='text-muted-foreground/70 mr-1 size-3.5' />
             {t('components.data-table-column-header.sort.asc')}
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
+          <DropdownMenuItem
+            onClick={() => {
+              column.toggleSorting(true);
+            }}
+          >
             <ArrowDown className='text-muted-foreground/70 mr-1 size-3.5' />
             {t('components.data-table-column-header.sort.desc')}
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => column.toggleSorting()}>
+          <DropdownMenuItem
+            onClick={() => {
+              column.toggleSorting();
+            }}
+          >
             <X className='text-muted-foreground/70 mr-1 size-3.5' />
             {t('components.data-table-column-header.sort.none')}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
+          <DropdownMenuItem
+            onClick={() => {
+              column.toggleVisibility(false);
+            }}
+          >
             <EyeOff className='text-muted-foreground/70 mr-1 size-3.5' />
             {t('components.data-table-column-header.visibility.hide')}
           </DropdownMenuItem>

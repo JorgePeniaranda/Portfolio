@@ -1,4 +1,6 @@
 ---
+import type { HTMLAttributes } from 'astro/types';
+
 import { SEO } from 'astro-seo';
 import { ClientRouter } from 'astro:transitions';
 
@@ -18,8 +20,8 @@ interface Props {
   title?: string;
   description?: string;
   lang?: string;
-  body?: astroHTML.JSX.HTMLAttributes;
-  html?: astroHTML.JSX.HtmlHTMLAttributes;
+  body?: HTMLAttributes<'body'>;
+  html?: HTMLAttributes<'html'>;
 }
 
 // Extract props passed to the Astro component

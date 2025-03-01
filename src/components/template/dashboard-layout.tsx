@@ -44,7 +44,7 @@ export function DashboardLayout({
   breadcrumb,
 }: {
   children?: React.ReactNode;
-  breadcrumb?: Array<IBreadCrumb>;
+  breadcrumb?: IBreadCrumb[];
 }) {
   const [currentPathname, setCurrentPathname] = useState('');
 
@@ -91,10 +91,13 @@ export function DashboardLayout({
                 <CollapsibleContent>
                   <SidebarGroupContent>
                     <SidebarMenuSub className='gap-0'>
-                      {item.items.map((item) => (
-                        <SidebarMenuSubItem key={item.title}>
-                          <SidebarMenuSubButton asChild isActive={item.url === currentPathname}>
-                            <a href={item.url}>{item.title}</a>
+                      {item.items.map((sidebarItem) => (
+                        <SidebarMenuSubItem key={sidebarItem.title}>
+                          <SidebarMenuSubButton
+                            asChild
+                            isActive={sidebarItem.url === currentPathname}
+                          >
+                            <a href={sidebarItem.url}>{sidebarItem.title}</a>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
                       ))}

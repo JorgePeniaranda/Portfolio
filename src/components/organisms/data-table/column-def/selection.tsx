@@ -16,7 +16,9 @@ export function selectionColumnDef<TData>(): ColumnDef<TData> {
           table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')
         }
         className='border-black data-[state=checked]:bg-white dark:border-white'
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        onCheckedChange={(value) => {
+          table.toggleAllPageRowsSelected(!!value);
+        }}
       />
     ),
     cell: ({ row }) => (
@@ -24,7 +26,9 @@ export function selectionColumnDef<TData>(): ColumnDef<TData> {
         aria-label='Select row'
         checked={row.getIsSelected()}
         className='border-black data-[state=checked]:bg-white dark:border-white'
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        onCheckedChange={(value) => {
+          row.toggleSelected(!!value);
+        }}
       />
     ),
     enableSorting: false,

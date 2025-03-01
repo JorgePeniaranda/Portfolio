@@ -2,7 +2,7 @@ import type { APIContext } from 'astro';
 
 import { createMockApiContext } from '__test__/__mock__/create-mock-api-context';
 import { generateManyTestStackMocks, generateTestStackMock } from '__test__/__mock__/stack.mock';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { databaseClient } from '@/helpers/client/prisma';
 import { PUT, getStaticPaths } from '@/pages/api/stack/id/[id]';
@@ -75,8 +75,6 @@ describe('PUT stack endpoint', () => {
     vi.clearAllMocks();
     vi.resetAllMocks();
   });
-
-  afterEach(() => {});
 
   it('should return the updated stack data when the request is valid', async () => {
     vi.spyOn(databaseClient.stack, 'update').mockResolvedValue(MockStackRecord);

@@ -5,7 +5,7 @@ import { selectionColumnDef } from '@/components/organisms/data-table/column-def
 import { DataTableColumnHeader } from '@/components/organisms/data-table/column/dropdown';
 import { isNotDefined } from '@/helpers/guards/is-defined';
 
-export const CollaboratorsTableColumns: Array<ColumnDef<Collaborator>> = [
+export const CollaboratorsTableColumns: ColumnDef<Collaborator>[] = [
   selectionColumnDef<Collaborator>(),
   {
     id: 'nickname',

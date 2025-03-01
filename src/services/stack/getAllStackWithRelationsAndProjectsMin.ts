@@ -10,17 +10,15 @@ import { handleServiceError } from '@/helpers/error/service-handler';
  * @throws An error if the stacks could not be retrieved
  */
 export async function getAllStackWithRelationsAndProjectsMin(): Promise<
-  Array<
-    Stack & {
-      associatedProjects: Pick<Project, 'id' | 'key' | 'name' | 'logoUrl'>[];
-      relatedFrom: {
-        toStackStack: Stack;
-      }[];
-      relatedTo: {
-        fromStackStack: Stack;
-      }[];
-    }
-  >
+  (Stack & {
+    associatedProjects: Pick<Project, 'id' | 'key' | 'name' | 'logoUrl'>[];
+    relatedFrom: {
+      toStackStack: Stack;
+    }[];
+    relatedTo: {
+      fromStackStack: Stack;
+    }[];
+  })[]
 > {
   try {
     const response = await databaseClient.stack.findMany({

@@ -82,12 +82,7 @@ export function SecretButton() {
         >
           {/* Input field for the secret code */}
           <div className='mx-auto'>
-            <InputOTP
-              maxLength={4}
-              pattern={REGEXP_ONLY_DIGITS}
-              value={value}
-              onChange={(value) => setValue(value)}
-            >
+            <InputOTP maxLength={4} pattern={REGEXP_ONLY_DIGITS} value={value} onChange={setValue}>
               <InputOTPSlot className='size-11' index={0} />
               <InputOTPSlot className='size-11' index={1} />
               <InputOTPSlot className='size-11' index={2} />

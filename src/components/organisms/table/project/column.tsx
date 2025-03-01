@@ -12,7 +12,7 @@ import {
 } from '@/constants/transcriptions';
 import { isNotDefined } from '@/helpers/guards/is-defined';
 
-export const ProjectTableColumns: Array<ColumnDef<Project>> = [
+export const ProjectTableColumns: ColumnDef<Project>[] = [
   selectionColumnDef<Project>(),
   {
     id: 'name',

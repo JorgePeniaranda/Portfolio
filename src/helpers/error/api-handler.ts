@@ -38,10 +38,10 @@ export function handleApiError(error: unknown, url?: URL): Response {
   if (error instanceof z.ZodError) {
     return Response.json(
       {
-        detail: error.errors.map((error) => `${error.path}: ${error.message}`).join(', '),
-        fieldErrors: error.errors.map((error) => ({
-          field: error.path.join('.'),
-          message: error.message,
+        detail: error.errors.map((zodError) => `${zodError.path}: ${zodError.message}`).join(', '),
+        fieldErrors: error.errors.map((zodError) => ({
+          field: zodError.path.join('.'),
+          message: zodError.message,
         })),
         instance: url?.pathname,
         status: 400,

@@ -94,8 +94,8 @@ export const reducer = (state: State, action: Action): State => {
       if (toastId) {
         addToRemoveQueue(toastId);
       } else {
-        state.toasts.forEach((toast) => {
-          addToRemoveQueue(toast.id);
+        state.toasts.forEach((toastInState) => {
+          addToRemoveQueue(toastInState.id);
         });
       }
 
@@ -126,7 +126,7 @@ export const reducer = (state: State, action: Action): State => {
   }
 };
 
-const listeners: Array<(state: State) => void> = [];
+const listeners: ((state: State) => void)[] = [];
 
 let memoryState: State = { toasts: [] };
 
@@ -144,7 +144,7 @@ type Toast = Omit<ToasterToast, 'id'>;
  * @param props Toast properties
  * @returns Toast object with actions
  */
-function toast({ ...props }: Toast) {
+function toast({ ...restProps }: Toast) {
   const id = genId();
 
   const update = (props: ToasterToast) => {
@@ -160,7 +160,7 @@ function toast({ ...props }: Toast) {
   dispatch({
     type: 'ADD_TOAST',
     toast: {
-      ...props,
+      ...restProps,
       id,
       open: true,
       onOpenChange: (open) => {

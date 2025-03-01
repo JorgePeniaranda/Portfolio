@@ -5,7 +5,7 @@ import {
   generateTestCollaboratorMock,
 } from '__test__/__mock__/collaborator.mock';
 import { createMockApiContext } from '__test__/__mock__/create-mock-api-context';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { databaseClient } from '@/helpers/client/prisma';
 import { PUT, getStaticPaths } from '@/pages/api/collaborator/id/[id]';
@@ -79,8 +79,6 @@ describe('PUT collaborator endpoint', () => {
     vi.clearAllMocks();
     vi.resetAllMocks();
   });
-
-  afterEach(() => {});
 
   it('should return the updated collaborator data when the request is valid', async () => {
     vi.spyOn(databaseClient.collaborator, 'update').mockResolvedValue(MockCollaboratorRecord);

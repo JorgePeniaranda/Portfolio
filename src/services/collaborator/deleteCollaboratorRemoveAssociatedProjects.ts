@@ -6,7 +6,6 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 /**
  * This service is responsible for removing a project from a collaborator.
  * @param relationSchema - Object with the collaborator and project data
- * @returns A promise with the collaborator and project data
  * @throws An error if the collaborator and project data could not be removed
  */
 export async function deleteCollaboratorRemoveAssociatedProjects(
@@ -14,11 +13,8 @@ export async function deleteCollaboratorRemoveAssociatedProjects(
 ): Promise<void> {
   try {
     const { idSource, idTarget } = relationSchema;
-    const { data: response } = await apiClient.delete<void>(
-      `/api/collaborator/id/${idTarget}/project/${idSource}`,
-    );
 
-    return response;
+    await apiClient.delete<null>(`/api/collaborator/id/${idTarget}/project/${idSource}`);
   } catch (error) {
     throw handleServiceError({
       error,

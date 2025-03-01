@@ -71,14 +71,24 @@ export function DataTable<TData, TValue>({
 
   // Callback handlers to prevent unnecessary re-renders
   const handlePageSizeChange = useCallback(
-    (value: string) => table.setPageSize(Number(value)),
+    (value: string) => {
+      table.setPageSize(Number(value));
+    },
     [table],
   );
 
-  const handleFirstPage = useCallback(() => table.setPageIndex(0), [table]);
-  const handlePrevPage = useCallback(() => table.previousPage(), [table]);
-  const handleNextPage = useCallback(() => table.nextPage(), [table]);
-  const handleLastPage = useCallback(() => table.setPageIndex(table.getPageCount() - 1), [table]);
+  const handleFirstPage = useCallback(() => {
+    table.setPageIndex(0);
+  }, [table]);
+  const handlePrevPage = useCallback(() => {
+    table.previousPage();
+  }, [table]);
+  const handleNextPage = useCallback(() => {
+    table.nextPage();
+  }, [table]);
+  const handleLastPage = useCallback(() => {
+    table.setPageIndex(table.getPageCount() - 1);
+  }, [table]);
 
   return (
     <>

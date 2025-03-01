@@ -16,16 +16,14 @@ import '@xyflow/react/dist/style.css';
 export function StackFlow({
   stacks,
 }: {
-  stacks: Array<
-    Stack & {
-      relatedFrom: {
-        toStackStack: Stack;
-      }[];
-      relatedTo: {
-        fromStackStack: Stack;
-      }[];
-    }
-  >;
+  stacks: (Stack & {
+    relatedFrom: {
+      toStackStack: Stack;
+    }[];
+    relatedTo: {
+      fromStackStack: Stack;
+    }[];
+  })[];
 }) {
   // Agrupar los stacks por categoría y tipo usando useMemo
   const groupedStacks = useMemo(() => {

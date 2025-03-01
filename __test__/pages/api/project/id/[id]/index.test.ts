@@ -5,7 +5,7 @@ import {
   generateManyTestProjectMocks,
   generateTestProjectMock,
 } from '__test__/__mock__/project.mock';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { databaseClient } from '@/helpers/client/prisma';
 import { PUT, getStaticPaths } from '@/pages/api/project/id/[id]';
@@ -89,8 +89,6 @@ describe('PUT project endpoint', () => {
     vi.clearAllMocks();
     vi.resetAllMocks();
   });
-
-  afterEach(() => {});
 
   it('should return the updated project data when the request is valid', async () => {
     vi.spyOn(databaseClient.project, 'update').mockResolvedValue(MockProjectRecord);

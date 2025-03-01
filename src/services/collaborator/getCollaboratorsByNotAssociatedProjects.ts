@@ -14,7 +14,7 @@ export async function getCollaboratorsByNotAssociatedProjects({
   idProject,
 }: {
   idProject: Project['id'];
-}): Promise<Array<Collaborator>> {
+}): Promise<Collaborator[]> {
   try {
     const { data: response } = await apiClient.get<Collaborator[]>(
       `/api/collaborator/not-related/project/${idProject}.json`,

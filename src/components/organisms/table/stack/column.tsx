@@ -9,7 +9,7 @@ import {
 } from '@/constants/transcriptions';
 import { isNotDefined } from '@/helpers/guards/is-defined';
 
-export const StackTableColumns: Array<ColumnDef<Stack>> = [
+export const StackTableColumns: ColumnDef<Stack>[] = [
   selectionColumnDef<Stack>(),
   {
     id: 'name',

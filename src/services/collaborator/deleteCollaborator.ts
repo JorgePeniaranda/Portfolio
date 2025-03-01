@@ -12,7 +12,7 @@ import { handleServiceError } from '@/helpers/error/service-handler';
  * @throws {Error} A generic error message if the operation fails
  */
 export async function deleteCollaborator(
-  collaboratorIds: Array<Collaborator['id']>,
+  collaboratorIds: Collaborator['id'][],
 ): Promise<DeleteResponse> {
   try {
     const { data: response } = await apiClient.delete<DeleteResponse>('/api/collaborator', {
