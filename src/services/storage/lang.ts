@@ -2,4 +2,6 @@ import type { AvailableLanguages } from '@/types/translation';
 
 import { atom } from 'nanostores';
 
-export const langStore = atom<AvailableLanguages>('es');
+import { DEFAULT_LANG } from '@/constants/common';
+
+export const langStore = atom<AvailableLanguages>(DEFAULT_LANG);

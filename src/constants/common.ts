@@ -1,7 +1,8 @@
 import type { SoundState, theme } from '@/types/common.d';
+import type { AvailableLanguages } from '@/types/translation';
 
 // MARK: default values
-export const DEFAULT_LANG = 'es';
+export const DEFAULT_LANG: AvailableLanguages = 'es';
 
 export const DEFAULT_THEME: theme = 'light';
 
