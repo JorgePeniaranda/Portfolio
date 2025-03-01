@@ -1,8 +1,10 @@
 ---
+import type { AvailableLanguages } from '@/types/translation';
+
 import { langStore } from '@/services/storage/lang';
 
 interface Props {
-  lang: string;
+  lang: AvailableLanguages;
 }
 
 const { lang } = Astro.props;
@@ -12,7 +14,8 @@ langStore.set(lang); // Update the language store in the server side
 
 <script>
   import { langStore } from '@/services/storage/lang';
+  import type { AvailableLanguages } from '@/types/translation';
 
   // Update the language store in the client side
-  langStore.set(document.documentElement.lang);
+  langStore.set(document.documentElement.lang as AvailableLanguages);
 </script>
