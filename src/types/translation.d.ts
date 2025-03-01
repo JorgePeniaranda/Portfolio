@@ -29,6 +29,10 @@ export interface Translation {
     };
     'secret-code-hint': {
       'aria-label': string;
+      'already-discovered-title': string;
+      'already-discovered-description': string;
+      'congratulations-title': string;
+      'congratulations-description': string;
     };
     'collaborator-relationship-card': {
       'aria-label': string;
@@ -351,6 +355,28 @@ export interface Translation {
       'aria-label': string;
       'rows-per-page-select': string;
       'pagination-controls': string;
+      'rows': {
+        'aria-label': string;
+        'selected': string;
+        'per-page': string;
+      };
+      'column-header': {
+        sort: {
+          asc: string;
+          desc: string;
+          none: string;
+        };
+        visibility: string;
+      };
+      'pagination': {
+        'aria-label': string;
+        'info': string;
+        'first-page': string;
+        'last-page': string;
+        'next-page': string;
+        'previous-page': string;
+      };
+      'no-results': string;
     };
     'stack-drawer': {
       'description': string;
@@ -394,20 +420,6 @@ export interface Translation {
       'success-description': string;
       'error-title': string;
       'error-description': string;
-    };
-    'stack-table-header': {
-      'success-title': string;
-      'success-description': string;
-      'error-title': string;
-      'error-description': string;
-      'search-placeholder': string;
-      'create': string;
-      'view-details': string;
-      'edit': string;
-      'delete': string;
-      'confirm-title': string;
-      'confirm-description': string;
-      'cancel': string;
     };
     'mobile-navbar': {
       'site-config': string;
@@ -501,6 +513,100 @@ export interface Translation {
       'success-description': string;
       'error-title': string;
       'error-description': string;
+    };
+    'table': {
+      collaborators: {
+        columns: {
+          nickname: string;
+          github: string;
+          linkedin: string;
+        };
+        actions: {
+          create: string;
+          view: string;
+          edit: string;
+          delete: string;
+        };
+        buttons: {
+          delete: string;
+          cancel: string;
+        };
+        placeholders: {
+          search: string;
+        };
+        messages: {
+          'success-title': string;
+          'success-description': string;
+          'error-title': string;
+          'error-description': string;
+          'confirm-title': string;
+          'confirm-description': string;
+        };
+      };
+      projects: {
+        columns: {
+          'name': string;
+          'key': string;
+          'status': string;
+          'stack': string;
+          'start-date': string;
+          'end-date': string;
+          'primary-color': string;
+          'demo-url': string;
+          'github-url': string;
+        };
+        actions: {
+          create: string;
+          view: string;
+          edit: string;
+          delete: string;
+        };
+        buttons: {
+          delete: string;
+          cancel: string;
+        };
+        placeholders: {
+          search: string;
+        };
+        messages: {
+          'success-title': string;
+          'success-description': string;
+          'error-title': string;
+          'error-description': string;
+          'confirm-title': string;
+          'confirm-description': string;
+        };
+      };
+      stack: {
+        columns: {
+          name: string;
+          key: string;
+          description: string;
+          category: string;
+          type: string;
+        };
+        actions: {
+          create: string;
+          view: string;
+          edit: string;
+          delete: string;
+        };
+        buttons: {
+          delete: string;
+          cancel: string;
+        };
+        placeholders: {
+          search: string;
+        };
+        messages: {
+          'success-title': string;
+          'success-description': string;
+          'error-title': string;
+          'error-description': string;
+          'confirm-title': string;
+          'confirm-description': string;
+        };
+      };
     };
   };
   error: {

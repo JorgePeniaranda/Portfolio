@@ -13,14 +13,19 @@
       "aria-label": "Texto con efecto de escritura automática"
     },
     "secret-code-hint": {
-      "aria-label": "Pista del código secreto"
+      "aria-label": "Botón para revelar un dígito del código secreto",
+      "already-discovered-title": "Ya has descubierto el código secreto",
+      "already-discovered-description": "Recuerda, el código secreto es: {{code}}!",
+      "congratulations-title": "¡Enhorabuena!",
+      "congratulations-description": "Has descubierto el código secreto: {{code}}!",
+      "button-aria": "Revelar un dígito del código secreto"
     },
     "collaborator-relationship-card": {
       "aria-label": "Tarjeta de relación de colaborador"
     },
     "project-card": {
-      "aria-label": "Tarjeta del proyecto",
-      "aria-label-liked": "Tarjeta del proyecto favorito"
+      "aria-label": "Tarjeta del proyecto {{name}}",
+      "aria-label-liked": "Tarjeta del proyecto {{name}} favorito"
     },
     "secret-button": {
       "error-description": "No has introducido el código correcto.",
@@ -223,7 +228,29 @@
       "last-page": "Última página",
       "aria-label": "Tabla de datos",
       "rows-per-page-select": "Selector de filas por página",
-      "pagination-controls": "Controles de paginación"
+      "pagination-controls": "Controles de paginación",
+      "rows": {
+        "aria-label": "Fila de datos",
+        "selected": "{{count}} filas seleccionadas",
+        "per-page": "Filas por página"
+      },
+      "column-header": {
+        "sort": {
+          "asc": "Ordenar ascendente",
+          "desc": "Ordenar descendente",
+          "none": "Sin ordenar"
+        },
+        "visibility": "Ocultar columna"
+      },
+      "pagination": {
+        "aria-label": "Paginación de la tabla",
+        "info": "Página {{current}} de {{total}}",
+        "first-page": "Primera página",
+        "last-page": "Última página",
+        "next-page": "Siguiente página",
+        "previous-page": "Página anterior"
+      },
+      "no-results": "No se encontraron resultados"
     },
     "stack-drawer": {
       "description": "Descripción",
@@ -267,20 +294,6 @@
       "success-description": "El colaborador ha sido actualizado correctamente.",
       "error-title": "Error",
       "error-description": "Ha ocurrido un error al actualizar el colaborador."
-    },
-    "stack-table-header": {
-      "success-title": "Operación exitosa",
-      "success-description": "La operación se ha realizado correctamente.",
-      "error-title": "Error",
-      "error-description": "Ha ocurrido un error durante la operación.",
-      "search-placeholder": "Buscar...",
-      "create": "Crear",
-      "view-details": "Ver detalles",
-      "edit": "Editar",
-      "delete": "Eliminar",
-      "confirm-title": "Confirmar eliminación",
-      "confirm-description": "¿Estás seguro de que quieres eliminar este elemento?",
-      "cancel": "Cancelar"
     },
     "mobile-navbar": {
       "site-config": "Configuraciones del sitio",
@@ -486,6 +499,114 @@
       "icon-url-aria": "Campo de URL del icono del stack",
       "edit": "Editar",
       "edit-aria": "Editar stack"
+    },
+    "table": {
+      "collaborators": {
+        "columns": {
+          "nickname": "Nickname",
+          "github": "Nickname de GitHub",
+          "linkedin": "Nickname de LinkedIn"
+        },
+        "actions": {
+          "create": "Crear",
+          "view": "Ver detalles",
+          "edit": "Editar",
+          "delete": "Eliminar"
+        },
+        "buttons": {
+          "delete": "Eliminar",
+          "cancel": "Cancelar"
+        },
+        "placeholders": {
+          "search": "Buscar por nickname..."
+        },
+        "messages": {
+          "success-title": "Operación exitosa",
+          "success-description": "La operación se ha realizado correctamente.",
+          "error-title": "Error",
+          "error-description": "Ha ocurrido un error durante la operación.",
+          "confirm-title": "¿Está completamente seguro?",
+          "confirm-description": "Esta acción no se puede deshacer. Esto borrará permanentemente el/los colaboradores seleccionados."
+        }
+      },
+      "projects": {
+        "columns": {
+          "name": "Nombre",
+          "key": "Key",
+          "status": "Estado",
+          "stack": "Stack",
+          "start-date": "Fecha de inicio",
+          "end-date": "Fecha de fin",
+          "primary-color": "Color primario",
+          "demo-url": "Demo URL",
+          "github-url": "GitHub URL"
+        },
+        "actions": {
+          "create": "Crear",
+          "view": "Ver detalles",
+          "edit": "Editar",
+          "delete": "Eliminar"
+        },
+        "buttons": {
+          "delete": "Eliminar",
+          "cancel": "Cancelar"
+        },
+        "placeholders": {
+          "search": "Buscar por nombre..."
+        },
+        "messages": {
+          "success-title": "Operación exitosa",
+          "success-description": "La operación se ha realizado correctamente.",
+          "error-title": "Error",
+          "error-description": "Ha ocurrido un error durante la operación.",
+          "confirm-title": "¿Está completamente seguro?",
+          "confirm-description": "Esta acción no se puede deshacer. Esto borrará permanentemente el/los proyectos seleccionados."
+        }
+      },
+      "stack": {
+        "columns": {
+          "name": "Nombre",
+          "key": "Key",
+          "description": "Descripción",
+          "category": "Categoría",
+          "type": "Tipo"
+        },
+        "actions": {
+          "create": "Crear",
+          "view": "Ver detalles",
+          "edit": "Editar",
+          "delete": "Eliminar"
+        },
+        "buttons": {
+          "delete": "Eliminar",
+          "cancel": "Cancelar"
+        },
+        "placeholders": {
+          "search": "Buscar por nombre..."
+        },
+        "messages": {
+          "success-title": "Operación exitosa",
+          "success-description": "La operación se ha realizado correctamente.",
+          "error-title": "Error",
+          "error-description": "Ha ocurrido un error durante la operación.",
+          "confirm-title": "¿Está completamente seguro?",
+          "confirm-description": "Esta acción no se puede deshacer. Esto borrará permanentemente el/los stacks seleccionados."
+        }
+      },
+      "data-table": {
+        "aria-label": "Tabla de datos",
+        "selected": "{{count}} filas seleccionadas",
+        "rows-per-page": "Filas por página",
+        "page-info": "Página {{current}} de {{total}}",
+        "no-data": "No hay datos",
+        "header": {
+          "sort": {
+            "asc": "Ordenar ascendente",
+            "desc": "Ordenar descendente",
+            "none": "Sin ordenar"
+          }
+        }
+      }
     }
   },
   "error": {
