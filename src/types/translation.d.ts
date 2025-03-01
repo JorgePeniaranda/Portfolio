@@ -446,8 +446,11 @@ export interface Translation {
     };
     'project-cards-manager': {
       'sort': {
-        label: string;
-        placeholder: string;
+        'label': string;
+        'placeholder': string;
+        'liked-label': string;
+        'A-Z-label': string;
+        'Z-A-label': string;
       };
       'stack': {
         label: string;

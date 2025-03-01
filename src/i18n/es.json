@@ -321,7 +321,11 @@
     "project-cards-manager": {
       "sort": {
         "label": "Ordenar por",
-        "placeholder": "Ordenar"
+        "placeholder": "Ordenar",
+        "liked-label": "Favoritos",
+        "A-Z-label": "De A a Z",
+        "Z-A-label": "De Z a A"
+        
       },
       "stack": {
         "label": "Stack",

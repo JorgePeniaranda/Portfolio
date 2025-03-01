@@ -12,15 +12,15 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import {
-  PROJECT_SORT_TRANSCRIPTIONS,
   PROJECT_STATUS_TRANSCRIPTIONS,
   STACK_CATEGORY_TRANSCRIPTIONS,
 } from '@/constants/transcriptions';
 import { isDefined } from '@/helpers/guards/is-defined';
 import useTranslations from '@/hooks/use-translations';
 import { useProjectLikedStore } from '@/services/storage/liked-projects';
-import { ProjectSortType } from '@/types/project.d';
 import { Button } from '@/components/ui/button';
+
+type ProjectSortType = 'liked' | 'A-Z' | 'Z-A';
 
 /**
  * Component that renders a list of project cards, sorted by favorites.
@@ -34,8 +34,8 @@ export function ProjectCardsManager({
 }: {
   projects: Pick<Project, 'id' | 'key' | 'name' | 'logoUrl' | 'stackCategory' | 'status'>[];
 }) {
-  const { likedKeyProjects } = useProjectLikedStore();
   const { t } = useTranslations();
+  const { likedKeyProjects } = useProjectLikedStore();
 
   const [sortType, setSortType] = useState<ProjectSortType>('liked');
   const [stackFilter, setStackFilter] = useState<StackCategory>();
@@ -116,14 +116,14 @@ export function ProjectCardsManager({
               <SelectValue placeholder={t('components.project-cards-manager.sort.placeholder')} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value={ProjectSortType.LIKED}>
-                {PROJECT_SORT_TRANSCRIPTIONS.liked}
+              <SelectItem value={'liked' satisfies ProjectSortType}>
+                {t('components.project-cards-manager.sort.liked-label')}
               </SelectItem>
-              <SelectItem value={ProjectSortType.A_Z}>
-                {PROJECT_SORT_TRANSCRIPTIONS['A-Z']}
+              <SelectItem value={'A-Z' satisfies ProjectSortType}>
+                {t('components.project-cards-manager.sort.A-Z-label')}
               </SelectItem>
-              <SelectItem value={ProjectSortType.Z_A}>
-                {PROJECT_SORT_TRANSCRIPTIONS['Z-A']}
+              <SelectItem value={'Z-A' satisfies ProjectSortType}>
+                {t('components.project-cards-manager.sort.Z-A-label')}
               </SelectItem>
             </SelectContent>
           </Select>
