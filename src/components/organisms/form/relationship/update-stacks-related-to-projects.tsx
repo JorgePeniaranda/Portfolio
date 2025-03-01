@@ -142,7 +142,7 @@ export function UpdateStacksRelatedToProject({
     <ul className='mt-4 flex flex-wrap gap-4'>
       {associatedStacks?.map((stack) => (
         <li key={stack.id}>
-          <Card className='my-5 flex w-max flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800'>
+          <Card className='my-5 flex w-max flex-col items-center justify-center rounded-lg bg-zinc-300 shadow-sm dark:bg-zinc-800'>
             <CardHeader className='relative'>
               <Button
                 aria-label={t('components.update-stacks-related-project.remove-button-aria')}
@@ -171,7 +171,7 @@ export function UpdateStacksRelatedToProject({
           <DialogTrigger asChild>
             <button
               aria-label={t('components.update-stacks-related-project.add-button-aria')}
-              className='my-5 flex aspect-square w-max flex-col items-center justify-center rounded-lg bg-zinc-300 p-6 shadow dark:bg-zinc-800'
+              className='my-5 flex aspect-square w-max flex-col items-center justify-center rounded-lg bg-zinc-300 p-6 shadow-sm dark:bg-zinc-800'
               type='button'
             >
               <Plus className='size-20' />

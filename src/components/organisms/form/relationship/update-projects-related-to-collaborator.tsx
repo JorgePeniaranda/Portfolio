@@ -153,7 +153,7 @@ export function UpdateProjectsRelatedToCollaborator({
     <ul className='mt-4 flex flex-wrap gap-4'>
       {associatedProjects?.map((project) => (
         <li key={project.id}>
-          <Card className='my-5 flex flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800'>
+          <Card className='my-5 flex flex-col items-center justify-center rounded-lg bg-zinc-300 shadow-sm dark:bg-zinc-800'>
             <CardHeader className='relative flex items-center gap-2'>
               <Button
                 aria-label={t('components.update-projects-related-collaborator.remove-button-aria')}
@@ -181,7 +181,7 @@ export function UpdateProjectsRelatedToCollaborator({
           <DialogTrigger asChild>
             <button
               aria-label={t('components.update-projects-related-collaborator.add-button-aria')}
-              className='my-5 flex aspect-square w-max flex-col items-center justify-center rounded-lg bg-zinc-300 p-6 shadow dark:bg-zinc-800'
+              className='my-5 flex aspect-square w-max flex-col items-center justify-center rounded-lg bg-zinc-300 p-6 shadow-sm dark:bg-zinc-800'
               type='button'
             >
               <Plus className='size-20' />

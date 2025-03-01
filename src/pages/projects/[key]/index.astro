@@ -99,8 +99,8 @@ const textColor = GetTextColorForBackground(project.primaryColor);
         class:list={[
           'relative z-50 flex h-full flex-1 flex-col',
           {
-            '!text-white': textColor === 'white',
-            '!text-black': textColor === 'black',
+            'text-white!': textColor === 'white',
+            'text-black!': textColor === 'black',
           },
         ]}
       >

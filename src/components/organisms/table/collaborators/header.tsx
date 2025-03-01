@@ -83,7 +83,7 @@ export function CollaboratorsTableHeader({ table }: { table: Table<Collaborator>
             <Tooltip delayDuration={0}>
               <TooltipTrigger asChild>
                 <ConditionalAnchor
-                  className='ring-offset-background focus-visible:ring-ring inline-flex size-max items-center justify-center rounded-full bg-lime-600 p-2 text-sm font-medium whitespace-nowrap text-white transition-colors hover:bg-lime-700 hover:text-white focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none dark:text-white dark:hover:bg-lime-500'
+                  className='ring-offset-background focus-visible:ring-ring inline-flex size-max items-center justify-center rounded-full bg-lime-600 p-2 text-sm font-medium whitespace-nowrap text-white transition-colors hover:bg-lime-700 hover:text-white focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden dark:text-white dark:hover:bg-lime-500'
                   disabled={selectedCount !== 0}
                   disabledButtonProps={{
                     className: 'pointer-events-none opacity-50',
@@ -102,7 +102,7 @@ export function CollaboratorsTableHeader({ table }: { table: Table<Collaborator>
             <Tooltip delayDuration={0}>
               <TooltipTrigger asChild>
                 <ConditionalAnchor
-                  className='ring-offset-background focus-visible:ring-ring inline-flex size-max items-center justify-center rounded-full bg-blue-600 p-2 text-sm font-medium whitespace-nowrap text-white transition-colors hover:bg-blue-700 hover:text-white focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none dark:text-white dark:hover:bg-blue-500'
+                  className='ring-offset-background focus-visible:ring-ring inline-flex size-max items-center justify-center rounded-full bg-blue-600 p-2 text-sm font-medium whitespace-nowrap text-white transition-colors hover:bg-blue-700 hover:text-white focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden dark:text-white dark:hover:bg-blue-500'
                   disabled={selectedCount !== 1 || isNotDefined(rows[0]?.original.id)}
                   disabledButtonProps={{
                     className: 'pointer-events-none opacity-50',
@@ -121,7 +121,7 @@ export function CollaboratorsTableHeader({ table }: { table: Table<Collaborator>
             <Tooltip delayDuration={0}>
               <TooltipTrigger asChild>
                 <ConditionalAnchor
-                  className='ring-offset-background focus-visible:ring-ring inline-flex size-max items-center justify-center rounded-full bg-gray-600 p-2 text-sm font-medium whitespace-nowrap text-white transition-colors hover:bg-gray-700 hover:text-white focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none dark:text-white dark:hover:bg-gray-500'
+                  className='ring-offset-background focus-visible:ring-ring inline-flex size-max items-center justify-center rounded-full bg-gray-600 p-2 text-sm font-medium whitespace-nowrap text-white transition-colors hover:bg-gray-700 hover:text-white focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden dark:text-white dark:hover:bg-gray-500'
                   disabled={selectedCount !== 1 || isNotDefined(rows[0]?.original.id)}
                   disabledButtonProps={{
                     className: 'pointer-events-none opacity-50',

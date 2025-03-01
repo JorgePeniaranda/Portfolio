@@ -58,7 +58,7 @@ export function SecretButton() {
   return (
     <Dialog>
       {/* Button to open the modal */}
-      <DialogTrigger className='hover: flex items-center gap-2 rounded-lg bg-[#580001] px-3 py-2 text-white shadow-sm dark:bg-[#780001]'>
+      <DialogTrigger className='hover: flex items-center gap-2 rounded-lg bg-[#580001] px-3 py-2 text-white shadow-xs dark:bg-[#780001]'>
         <span>{t('components.secret-button.button-text')}</span>
         <ScanFace />
       </DialogTrigger>
@@ -92,7 +92,7 @@ export function SecretButton() {
           {/* Button to submit the form */}
           {isUnlocked ? (
             <a
-              className='ring-offset-background focus-visible:ring-ring inline-flex h-10 items-center justify-center rounded-md bg-green-700 px-4 py-2 text-sm font-medium whitespace-nowrap text-white transition-colors hover:bg-green-600 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50'
+              className='ring-offset-background focus-visible:ring-ring inline-flex h-10 items-center justify-center rounded-md bg-green-700 px-4 py-2 text-sm font-medium whitespace-nowrap text-white transition-colors hover:bg-green-600 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50'
               href='/vault'
             >
               {t('components.secret-button.modal-unlock-button')}

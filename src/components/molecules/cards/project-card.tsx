@@ -43,7 +43,7 @@ export function ProjectCard({ projectKey, name, logoURL }: ProjectCardProps) {
           ? t('components.project-card.aria-label-liked')
           : t('components.project-card.aria-label')
       }
-      className='group flex flex-col justify-between rounded-lg shadow-sm'
+      className='group flex flex-col justify-between rounded-lg shadow-xs'
     >
       <a
         className='relative flex aspect-video overflow-hidden rounded-t-lg'

@@ -16,7 +16,7 @@ export function CollaboratorRelationShipCard({ collaborator }: { collaborator: C
   return (
     <Card
       aria-label={t('components.collaborator-relationship-card.aria-label')}
-      className='my-5 flex w-max flex-col items-center justify-center rounded-lg bg-zinc-300 shadow dark:bg-zinc-800'
+      className='my-5 flex w-max flex-col items-center justify-center rounded-lg bg-zinc-300 shadow-sm dark:bg-zinc-800'
     >
       <CardHeader className='relative flex items-center gap-2'>
         <Avatar className='size-16 shrink-0'>
