@@ -1,4 +1,5 @@
 ---
+import type { AvailableLanguages } from '@/types/translation';
 import type { HTMLAttributes } from 'astro/types';
 
 import { SEO } from 'astro-seo';
@@ -19,7 +20,7 @@ import { cn } from '@/helpers/common/classnames';
 interface Props {
   title?: string;
   description?: string;
-  lang?: string;
+  lang?: AvailableLanguages;
   body?: HTMLAttributes<'body'>;
   html?: HTMLAttributes<'html'>;
 }
