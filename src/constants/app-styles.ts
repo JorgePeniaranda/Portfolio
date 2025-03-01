@@ -1,6 +1,6 @@
 import type { ProjectStatus, StackCategory } from '@prisma/client';
 
-//#region Navbar
+// MARK: Navbar
 /**
  * Configuration for the Navbar animation, including transform and spring properties.
  *
@@ -18,9 +18,8 @@ export const NavbarAnimationConfig = {
     damping: 12, // Controls the damping (smoothness) of the animation
   },
 };
-//#endregion
 
-//#region Project-Details styles
+// MARK: Project-Details styles
 /**
  * Defines the style for each project status using Tailwind CSS classes.
  * The styles are mapped to the `ProjectStatus` enum values.
@@ -50,4 +49,3 @@ export const ProjectDetailsStyles = {
   StatusStyle,
   StackStyle,
 } as const;
-//#endregion

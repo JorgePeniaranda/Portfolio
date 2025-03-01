@@ -1,4 +1,23 @@
 {
+  "enums": {
+    "project-status": {
+      "finished": "Finalizado",
+      "in-progress": "En progreso",
+      "stalled": "Pausado"
+    },
+    "stack-category": {
+      "full-stack": "Full-stack",
+      "front-end": "Front-end",
+      "back-end": "Back-end"
+    },
+    "stack-type": {
+      "database": "Base de datos",
+      "framework": "Framework",
+      "language": "Lenguaje",
+      "library": "Librería",
+      "tool": "Herramienta"
+    }
+  },
   "components": {
     "cat-as-a-service": {
       "aria-label": "Servicio de gatos aleatorios"

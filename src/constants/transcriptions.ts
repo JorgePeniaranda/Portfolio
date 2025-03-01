@@ -1,33 +1,22 @@
+import type { TranslationKey } from '@/types/translation';
 import type { ProjectStatus, StackCategory, StackType } from '@prisma/client';
 
-/**
- * A record that maps each `ProjectStatus` to a human-readable string translation.
- * @example
- * // Example usage:
- * const status = PROJECT_STATUS_TRANSCRIPTIONS.FINISHED; // "Terminado"
- */
-export const PROJECT_STATUS_TRANSCRIPTIONS: Record<ProjectStatus, string> = {
-  FINISHED: 'Terminado', // Status for finished projects
-  IN_PROGRESS: 'En Desarrollo', // Status for projects in progress
-  STALLED: 'Pausado', // Status for stalled projects
+export const PROJECT_STATUS_TRANSCRIPTIONS: Record<ProjectStatus, TranslationKey> = {
+  FINISHED: 'enums.project-status.finished', // Status for finished projects
+  IN_PROGRESS: 'enums.project-status.in-progress', // Status for projects in progress
+  STALLED: 'enums.project-status.stalled', // Status for stalled projects
 } as const;
 
-/**
- * A record that maps each `StackCategory` to a human-readable string translation.
- * @example
- * // Example usage:
- * const stack = STACK_CATEGORY_TRANSCRIPTIONS.FULL_STACK; // "Full-Stack"
- */
-export const STACK_CATEGORY_TRANSCRIPTIONS: Record<StackCategory, string> = {
-  FULL_STACK: 'Full-Stack', // Full-stack development
-  BACK_END: 'Back-End', // Back-end development
-  FRONT_END: 'Front-End', // Front-end development
+export const STACK_CATEGORY_TRANSCRIPTIONS: Record<StackCategory, TranslationKey> = {
+  FULL_STACK: 'enums.stack-category.full-stack',
+  BACK_END: 'enums.stack-category.back-end',
+  FRONT_END: 'enums.stack-category.front-end',
 } as const;
 
-export const STACK_TYPE_TRANSCRIPTIONS: Record<StackType, string> = {
-  DATABASE: 'Base de datos',
-  FRAMEWORK: 'Framework',
-  LANGUAGE: 'Lenguaje',
-  LIBRARY: 'Librería',
-  TOOL: 'Herramienta',
+export const STACK_TYPE_TRANSCRIPTIONS: Record<StackType, TranslationKey> = {
+  DATABASE: 'enums.stack-type.database',
+  FRAMEWORK: 'enums.stack-type.framework',
+  LANGUAGE: 'enums.stack-type.language',
+  LIBRARY: 'enums.stack-type.library',
+  TOOL: 'enums.stack-type.tool',
 } as const;

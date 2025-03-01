@@ -152,13 +152,13 @@ export function ProjectCardsManager({
             <SelectContent unselectable='on'>
               <SelectGroup>
                 <SelectItem value={StackCategory.FULL_STACK}>
-                  {STACK_CATEGORY_TRANSCRIPTIONS.FULL_STACK}
+                  {t(STACK_CATEGORY_TRANSCRIPTIONS.FULL_STACK)}
                 </SelectItem>
                 <SelectItem value={StackCategory.FRONT_END}>
-                  {STACK_CATEGORY_TRANSCRIPTIONS.FRONT_END}
+                  {t(STACK_CATEGORY_TRANSCRIPTIONS.FRONT_END)}
                 </SelectItem>
                 <SelectItem value={StackCategory.BACK_END}>
-                  {STACK_CATEGORY_TRANSCRIPTIONS.BACK_END}
+                  {t(STACK_CATEGORY_TRANSCRIPTIONS.BACK_END)}
                 </SelectItem>
                 <SelectSeparator />
               </SelectGroup>
@@ -203,13 +203,13 @@ export function ProjectCardsManager({
             <SelectContent>
               <SelectGroup>
                 <SelectItem value={ProjectStatus.FINISHED}>
-                  {PROJECT_STATUS_TRANSCRIPTIONS.FINISHED}
+                  {t(PROJECT_STATUS_TRANSCRIPTIONS.FINISHED)}
                 </SelectItem>
                 <SelectItem value={ProjectStatus.IN_PROGRESS}>
-                  {PROJECT_STATUS_TRANSCRIPTIONS.IN_PROGRESS}
+                  {t(PROJECT_STATUS_TRANSCRIPTIONS.IN_PROGRESS)}
                 </SelectItem>
                 <SelectItem value={ProjectStatus.STALLED}>
-                  {PROJECT_STATUS_TRANSCRIPTIONS.STALLED}
+                  {t(PROJECT_STATUS_TRANSCRIPTIONS.STALLED)}
                 </SelectItem>
               </SelectGroup>
               <Button

@@ -14,6 +14,25 @@ type GetTranslationKey<T, P extends string = ''> = T extends string | number | b
 export type TranslationKey = GetTranslationKey<Translation>;
 
 export interface Translation {
+  enums: {
+    'project-status': {
+      'finished': string;
+      'in-progress': string;
+      'stalled': string;
+    };
+    'stack-category': {
+      'full-stack': string;
+      'back-end': string;
+      'front-end': string;
+    };
+    'stack-type': {
+      database: string;
+      framework: string;
+      language: string;
+      library: string;
+      tool: string;
+    };
+  };
   components: {
     'cat-as-a-service': {
       'aria-label': string;
