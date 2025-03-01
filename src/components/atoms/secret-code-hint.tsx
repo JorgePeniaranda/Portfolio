@@ -24,8 +24,10 @@ export function SecretCodeHint({ position }: { position: number }) {
   const handleScanFaceClick = () => {
     if (isComplete) {
       toast({
-        title: 'Ya has descubierto el código secreto',
-        description: `Recuerda, el código secreto es: ${secretCode}!`,
+        title: t('components.secret-code-hint.already-discovered-title'),
+        description: t('components.secret-code-hint.already-discovered-description', {
+          code: secretCode,
+        }),
         variant: 'default',
         className: 'bg-orange-500',
       });
@@ -37,8 +39,10 @@ export function SecretCodeHint({ position }: { position: number }) {
 
     if (checkIfCodeIsCompleteWithNewIndex(position)) {
       toast({
-        title: 'Enhorabuena!',
-        description: `Has descubierto el código secreto: ${secretCode}!`,
+        title: t('components.secret-code-hint.congratulations-title'),
+        description: t('components.secret-code-hint.congratulations-description', {
+          code: secretCode,
+        }),
         variant: 'default',
         className: 'bg-green-500 text-black',
       });

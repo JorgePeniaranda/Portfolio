@@ -40,8 +40,8 @@ export function ProjectCard({ projectKey, name, logoURL }: ProjectCardProps) {
     <article
       aria-label={
         isLiked
-          ? t('components.project-card.aria-label-liked')
-          : t('components.project-card.aria-label')
+          ? t('components.project-card.aria-label-liked', { name })
+          : t('components.project-card.aria-label', { name })
       }
       className='group flex flex-col justify-between rounded-lg shadow-xs'
     >
