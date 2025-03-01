@@ -44,8 +44,11 @@ export const ProjectTableColumns: ColumnDef<Project>[] = [
 
       return <DataTableColumnHeader column={column} title={translatedTitle ?? translationKey} />;
     },
-    cell({ row }) {
-      return PROJECT_STATUS_TRANSCRIPTIONS[row.original.status];
+    cell({ row, table }) {
+      const translationKey: TranslationKey = PROJECT_STATUS_TRANSCRIPTIONS[row.original.status];
+      const translatedTitle = table.options?.meta?.translateFn?.(translationKey);
+
+      return translatedTitle ?? translationKey;
     },
   },
   {
@@ -57,8 +60,12 @@ export const ProjectTableColumns: ColumnDef<Project>[] = [
 
       return <DataTableColumnHeader column={column} title={translatedTitle ?? translationKey} />;
     },
-    cell({ row }) {
-      return STACK_CATEGORY_TRANSCRIPTIONS[row.original.stackCategory];
+    cell({ row, table }) {
+      const translationKey: TranslationKey =
+        STACK_CATEGORY_TRANSCRIPTIONS[row.original.stackCategory];
+      const translatedTitle = table.options?.meta?.translateFn?.(translationKey);
+
+      return translatedTitle ?? translationKey;
     },
   },
   {
