@@ -1,22 +1,21 @@
 import type { TranslationKey } from '@/types/translation';
 
 import { useStore } from '@nanostores/react';
+import { useMemo } from 'react';
 
+import { I18N_TRANSLATIONS } from '@/constants/i18n';
 import { langStore } from '@/services/storage/lang';
+import { extractTransaction } from '@/helpers/common/extract-transaction';
 
 export default function useTranslations() {
   const lang = useStore(langStore);
 
+  const currentTranslations = useMemo(() => {
+    return I18N_TRANSLATIONS[lang];
+  }, [lang]);
+
   function t(key: TranslationKey, vars?: Record<string, string | number>): string {
-    let translatedText: string = key;
-
-    if (vars) {
-      Object.entries(vars).forEach(([k, v]) => {
-        translatedText = translatedText.replace(`{{${k}}}`, String(v));
-      });
-    }
-
-    return translatedText;
+    return extractTransaction(key, currentTranslations, vars);
   }
 
   return {
