@@ -2,9 +2,9 @@ import type { TranslationKey } from '@/types/translation';
 import type { ProjectStatus, StackCategory, StackType } from '@prisma/client';
 
 export const PROJECT_STATUS_TRANSCRIPTIONS: Record<ProjectStatus, TranslationKey> = {
-  FINISHED: 'enums.project-status.finished', // Status for finished projects
-  IN_PROGRESS: 'enums.project-status.in-progress', // Status for projects in progress
-  STALLED: 'enums.project-status.stalled', // Status for stalled projects
+  FINISHED: 'enums.project-status.finished',
+  IN_PROGRESS: 'enums.project-status.in-progress',
+  STALLED: 'enums.project-status.stalled',
 } as const;
 
 export const STACK_CATEGORY_TRANSCRIPTIONS: Record<StackCategory, TranslationKey> = {
