@@ -1,7 +1,2 @@
-> @eslint/compat (1.1.1):
-  - fails with the error ERESOLVE could not resolve due to a conflict between eslint versions.
-  - The conflict arises because @eslint/compat@1.2.4 requires eslint@^9.10.0 as peerOptional.
-> eslint (8.57.1):
-  - updating eslint to version >= 8.57.2 will cause a dependency conflict where @vercel/style-guide may require eslint@8.57.1.
-> tailwindcss (3.4.17):
-  - updating tailwindcss to version >= 3.4.17 will cause a dependency conflict where eslint-plugin-tailwindcss may require eslint@8.57.1.
+> typescript (5.7.3):
+  - peer typescript@">=4.8.4 <5.8.0" from @typescript-eslint/parser@8.25.0
