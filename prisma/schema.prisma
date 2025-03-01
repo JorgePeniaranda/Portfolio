@@ -11,6 +11,8 @@ enum ProjectStatus {
   FINISHED
   IN_PROGRESS
   STALLED
+  // PLANNED
+  // CANCELED
 }
 
 enum StackCategory {
