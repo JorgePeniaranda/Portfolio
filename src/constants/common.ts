@@ -1,4 +1,4 @@
-import type { ISoundState, theme } from '@/types/common.d';
+import type { SoundState, theme } from '@/types/common.d';
 
 export const DEFAULT_LANG = 'es';
 
@@ -16,7 +16,7 @@ export const DEFAULT_THEME: theme = 'light';
  *
  * The sound state is initially set to `true`, meaning sound is enabled by default.
  */
-export const DEFAULT_SOUND_STATE: ISoundState = true;
+export const DEFAULT_SOUND_STATE: SoundState = true;
 
 /**
  * The key used to store the theme preference in the local storage.

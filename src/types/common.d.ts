@@ -9,7 +9,7 @@ export type theme = (typeof themes)[keyof typeof themes];
 
 export const themesArray = Object.values(themes);
 
-export type ISoundState = boolean;
+export type SoundState = boolean;
 
 export type PrismaError =
   | Prisma.PrismaClientKnownRequestError

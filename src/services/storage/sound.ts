@@ -1,4 +1,4 @@
-import type { ISoundState } from '@/types/common.d';
+import type { SoundState } from '@/types/common.d';
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
@@ -7,7 +7,7 @@ import { DEFAULT_SOUND_STATE, SOUND_STORE_KEY } from '@/constants/common';
 
 // Define the shape of the store's state.
 export interface SoundStoreState {
-  isSoundEnabled: ISoundState; // Boolean indicating if sound is enabled or not.
+  isSoundEnabled: SoundState; // Boolean indicating if sound is enabled or not.
 }
 
 // Define the actions available in the store.
