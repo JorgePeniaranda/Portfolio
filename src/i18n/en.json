@@ -1,0 +1,777 @@
+{
+  "enums": {
+    "project-status": {
+      "finished": "Finished",
+      "in-progress": "In Progress",
+      "stalled": "Paused"
+    },
+    "stack-category": {
+      "full-stack": "Full-stack",
+      "front-end": "Front-end",
+      "back-end": "Back-end"
+    },
+    "stack-type": {
+      "database": "Database",
+      "framework": "Framework",
+      "language": "Language",
+      "library": "Library",
+      "tool": "Tool"
+    }
+  },
+  "components": {
+    "cat-as-a-service": {
+      "aria-label": "Random cat service"
+    },
+    "conditional-anchor": {
+      "disabled-aria-label": "Disabled link"
+    },
+    "github-user": {
+      "aria-label": "GitHub profile of {{username}}"
+    },
+    "text-writter": {
+      "aria-label": "Text with auto-typing effect"
+    },
+    "secret-code-hint": {
+      "aria-label": "Button to reveal a digit of the secret code",
+      "already-discovered-title": "You already discovered the secret code",
+      "already-discovered-description": "Remember, the secret code is: {{code}}!",
+      "congratulations-title": "Congratulations!",
+      "congratulations-description": "You discovered the secret code: {{code}}!",
+      "button-aria": "Reveal a digit of the secret code"
+    },
+    "collaborator-relationship-card": {
+      "aria-label": "Collaborator relationship card"
+    },
+    "project-card": {
+      "aria-label": "Project card for {{name}}",
+      "aria-label-liked": "Favorite project card for {{name}}"
+    },
+    "secret-button": {
+      "error-description": "You did not enter the correct code.",
+      "error-message": "Incorrect code",
+      "success-description": "You unlocked the secret content.",
+      "success-message": "Correct code",
+      "button-text": "Unlock secret content",
+      "modal-title": "Secret code",
+      "modal-description": "Enter the secret code to unlock hidden content.",
+      "modal-unlock-button": "Unlock",
+      "modal-submit-button": "Submit"
+    },
+    "project-accordion": {
+      "goals": {
+        "title": "Goals"
+      },
+      "technologies": {
+        "title": "Technologies"
+      },
+      "contributions": {
+        "title": "Contributions"
+      },
+      "collaborators": {
+        "title": "Collaborators"
+      },
+      "resources": {
+        "title": "Resources",
+        "code-subtitle": "Code",
+        "demo-subtitle": "Demo"
+      }
+    },
+    "breadcrumb": {
+      "aria-label": "Breadcrumb navigation"
+    },
+    "breadcrumb-item": {
+      "link-aria-label": "Link to {{label}}",
+      "page-aria-label": "Current page: {{label}}"
+    },
+    "update-collaborator-related-project": {
+      "success-title": "Collaborator successfully linked",
+      "success-description": "The collaborator has been linked to the project successfully.",
+      "error-title": "Error linking collaborator",
+      "error-description": "An error occurred while linking the collaborator to the project.",
+      "remove-success-title": "Collaborator removed",
+      "remove-success-description": "The collaborator has been removed from the project successfully.",
+      "remove-error-title": "Error removing collaborator",
+      "remove-error-description": "An error occurred while removing the collaborator from the project.",
+      "remove-button-aria": "Remove collaborator relationship",
+      "remove-button": "Remove relationship",
+      "add-button-aria": "Add new collaborator to project",
+      "dialog-title": "Link collaborator",
+      "dialog-description": "Select a collaborator to link to the project.",
+      "select-placeholder": "Select collaborator",
+      "submit-button": "Link"
+    },
+    "update-projects-related-collaborator": {
+      "success-title": "Project successfully linked",
+      "success-description": "The project has been linked to the collaborator successfully.",
+      "error-title": "Error linking project",
+      "error-description": "An error occurred while linking the project to the collaborator.",
+      "remove-success-title": "Project removed",
+      "remove-success-description": "The project has been removed from the collaborator successfully.",
+      "remove-error-title": "Error removing project",
+      "remove-error-description": "An error occurred while removing the project from the collaborator.",
+      "remove-button-aria": "Remove project relationship",
+      "remove-button": "Remove relationship",
+      "add-button-aria": "Add new project to collaborator",
+      "dialog-title": "Link project",
+      "dialog-description": "Select a project to link to the collaborator.",
+      "select-placeholder": "Select project",
+      "submit-button": "Link"
+    },
+    "update-stacks-related-project": {
+      "success-title": "Stack linked to project",
+      "success-description": "The stack has been linked to the project successfully.",
+      "error-title": "Error linking stack",
+      "error-description": "An error occurred while linking the stack to the project.",
+      "remove-success-title": "Stack removed",
+      "remove-success-description": "The stack has been removed from the project successfully.",
+      "remove-error-title": "Error removing stack",
+      "remove-error-description": "An error occurred while removing the stack from the project.",
+      "remove-button-aria": "Remove relationship",
+      "remove-button": "Remove relationship",
+      "add-button-aria": "Link stack",
+      "dialog-title": "Link stack",
+      "dialog-description": "Select a stack to link to the project.",
+      "select-placeholder": "Select stack",
+      "submit-button": "Link",
+      "aria-label": {
+        "stack-logo": "{{name}} logo"
+      }
+    },
+    "update-projects-related-stack": {
+      "success-title": "Project linked to stack",
+      "success-description": "The project has been linked to the stack.",
+      "error-title": "Error linking project",
+      "error-description": "An error occurred while linking the project to the stack.",
+      "remove-success-title": "Project removed",
+      "remove-success-description": "The project has been removed from the stack.",
+      "remove-error-title": "Error removing project",
+      "remove-error-description": "An error occurred while removing the project from the stack.",
+      "remove-button-aria": "Remove relationship",
+      "remove-button": "Remove relationship",
+      "add-button-aria": "Link project to stack",
+      "dialog-title": "Link project",
+      "dialog-description": "Select a project to link to the stack.",
+      "select-placeholder": "Select project",
+      "submit-button": "Link",
+      "aria-label": {
+        "project-logo": "{{name}} project logo"
+      }
+    },
+    "create-stack-form": {
+      "key": "Key",
+      "key-placeholder": "Key",
+      "key-aria": "Field to enter stack key",
+      "name": "Name",
+      "name-placeholder": "Name",
+      "name-aria": "Field to enter stack name",
+      "description": "Description",
+      "description-placeholder": "Description",
+      "description-aria": "Field to enter stack description",
+      "category": "Category",
+      "category-placeholder": "Category",
+      "type": "Type",
+      "type-placeholder": "Type",
+      "icon-url": "Icon URL",
+      "icon-url-placeholder": "Icon URL",
+      "icon-url-aria": "Field to enter stack icon URL",
+      "submit": "Create",
+      "submit-aria": "Button to create stack",
+      "success-title": "Stack created",
+      "success-description": "The stack has been created successfully.",
+      "error-title": "Error creating stack",
+      "error-description": "An error occurred while creating the stack."
+    },
+    "create-project-form": {
+      "key": "Key",
+      "key-placeholder": "Key",
+      "key-aria": "Field to enter project key",
+      "name": "Name",
+      "name-placeholder": "Name",
+      "name-aria": "Field to enter project name",
+      "status": "Status",
+      "status-placeholder": "Status",
+      "stack": "Stack",
+      "stack-placeholder": "Stack",
+      "start-date": "Start date",
+      "start-date-aria": "Start date picker",
+      "select-start-date": "Select start date",
+      "end-date": "End date",
+      "end-date-aria": "End date picker",
+      "select-end-date": "Select end date",
+      "description": "Description",
+      "description-placeholder": "Description",
+      "description-aria": "Field to enter project description",
+      "goals": "Goals",
+      "goals-placeholder": "Goals",
+      "goals-aria": "Field to enter project goals",
+      "contributions": "Contributions",
+      "contributions-placeholder": "Contributions",
+      "contributions-aria": "Field to enter project contributions",
+      "logo-url": "Logo URL",
+      "logo-url-placeholder": "Logo URL",
+      "logo-url-aria": "Field to enter project logo URL",
+      "primary-color": "Primary color",
+      "primary-color-placeholder": "Primary color",
+      "primary-color-aria": "Project primary color picker",
+      "demo-url": "Demo URL",
+      "demo-url-placeholder": "Demo URL",
+      "demo-url-aria": "Field to enter project demo URL",
+      "github-url": "GitHub URL",
+      "github-url-placeholder": "GitHub URL",
+      "github-url-aria": "Field to enter project GitHub URL",
+      "submit": "Create",
+      "submit-aria": "Button to create project",
+      "success-title": "Project created",
+      "success-description": "The project has been created successfully.",
+      "error-title": "Error creating project",
+      "error-description": "An error occurred while creating the project."
+    },
+    "data-table-column-header": {
+      "sort": {
+        "asc": "Sort ascending",
+        "desc": "Sort descending",
+        "none": "Clear sorting"
+      },
+      "visibility": {
+        "hide": "Hide column"
+      }
+    },
+    "data-table": {
+      "no-data": "No results",
+      "selected-rows": "{{selected}} of {{total}} rows selected",
+      "rows-per-page": "Rows per page",
+      "page-info": "Page {{current}} of {{total}}",
+      "first-page": "First page",
+      "previous-page": "Previous page",
+      "next-page": "Next page",
+      "last-page": "Last page",
+      "aria-label": "Data table",
+      "rows-per-page-select": "Rows per page selector",
+      "pagination-controls": "Pagination controls",
+      "rows": {
+        "aria-label": "Data row",
+        "selected": "{{count}} rows selected",
+        "per-page": "Rows per page"
+      },
+      "column-header": {
+        "sort": {
+          "asc": "Sort ascending",
+          "desc": "Sort descending",
+          "none": "Unsorted"
+        },
+        "visibility": "Hide column"
+      },
+      "pagination": {
+        "aria-label": "Table pagination",
+        "info": "Page {{current}} of {{total}}",
+        "first-page": "First page",
+        "last-page": "Last page",
+        "next-page": "Next page",
+        "previous-page": "Previous page"
+      },
+      "no-results": "No results found"
+    },
+    "stack-drawer": {
+      "description": "Description",
+      "related-projects": "Related projects",
+      "aria-label": {
+        "close": "Close drawer",
+        "stack-logo": "{{name}} logo",
+        "project-logo": "{{name}} project logo",
+        "project-link": "View {{name}} project"
+      }
+    },
+    "create-collaborator-form": {
+      "nickname": "Nickname",
+      "nickname-placeholder": "Enter nickname",
+      "nickname-aria": "Field to enter collaborator nickname",
+      "github-username": "GitHub username",
+      "github-username-placeholder": "Enter GitHub username",
+      "github-username-aria": "Field to enter collaborator GitHub username",
+      "linkedin-username": "LinkedIn username",
+      "linkedin-username-placeholder": "Enter LinkedIn username",
+      "linkedin-username-aria": "Field to enter collaborator LinkedIn username",
+      "submit": "Create",
+      "submit-aria": "Button to create collaborator",
+      "success-title": "Collaborator created",
+      "success-description": "The collaborator has been created successfully.",
+      "error-title": "Error",
+      "error-description": "An error occurred while creating the collaborator."
+    },
+    "show-collaborator-form": {
+      "nickname": "Nickname",
+      "github-username": "GitHub username",
+      "linkedin-username": "LinkedIn username",
+      "edit": "Edit"
+    },
+    "update-collaborator-form": {
+      "nickname": "Nickname",
+      "github-username": "GitHub username",
+      "linkedin-username": "LinkedIn username",
+      "submit": "Update",
+      "success-title": "Collaborator updated",
+      "success-description": "The collaborator has been updated successfully.",
+      "error-title": "Error",
+      "error-description": "An error occurred while updating the collaborator."
+    },
+    "mobile-navbar": {
+      "site-config": "Site settings",
+      "config-title": "Settings",
+      "toggle-theme": "Toggle theme",
+      "toggle-sound": "Toggle sound",
+      "theme": {
+        "dark": "Enable Light Mode",
+        "light": "Enable Dark Mode",
+        "loading": "Loading..."
+      },
+      "sound": {
+        "on": "Turn sound off",
+        "off": "Turn sound on"
+      },
+      "aria-label": {
+        "main": "Main navigation",
+        "site-config": "Site settings",
+        "toggle-theme": "Toggle theme",
+        "toggle-sound": "Toggle sound",
+        "theme-icon": "Theme icon",
+        "sound-icon": "Sound icon"
+      }
+    },
+    "project-cards-manager": {
+      "sort": {
+        "label": "Sort by",
+        "placeholder": "Sort",
+        "liked-label": "Favorites",
+        "A-Z-label": "A to Z",
+        "Z-A-label": "Z to A"
+      },
+      "stack": {
+        "label": "Stack",
+        "placeholder": "Filter by stack"
+      },
+      "status": {
+        "label": "Status",
+        "placeholder": "Filter by status"
+      },
+      "clear": "Clear",
+      "aria-label": {
+        "sort-select": "Sort selector",
+        "stack-select": "Stack selector",
+        "status-select": "Status selector",
+        "clear-stack": "Clear stack filter",
+        "clear-status": "Clear status filter",
+        "projects-grid": "Projects grid"
+      }
+    },
+    "desktop-navbar": {
+      "aria-label": {
+        "main": "Main navigation",
+        "link-list": "Links list",
+        "config-buttons": "Site settings buttons",
+        "toggle-theme": "Toggle theme",
+        "toggle-sound": "Toggle sound",
+        "theme-icon": "Theme icon",
+        "sound-icon": "Sound icon",
+        "link-icon": "{{label}} icon"
+      },
+      "theme": {
+        "current": "Current",
+        "light": "Light",
+        "dark": "Dark",
+        "loading": "Loading"
+      },
+      "sound": {
+        "current": "Current",
+        "on": "Sound on",
+        "off": "Sound off"
+      }
+    },
+    "update-stack-form": {
+      "key": "Key",
+      "key-placeholder": "Key",
+      "key-aria": "Field to edit stack key",
+      "name": "Name",
+      "name-placeholder": "Name",
+      "name-aria": "Field to edit stack name",
+      "description": "Description",
+      "description-placeholder": "Description",
+      "description-aria": "Field to edit stack description",
+      "category": "Category",
+      "category-placeholder": "Category",
+      "type": "Type",
+      "type-placeholder": "Type",
+      "icon-url": "Icon URL",
+      "icon-url-placeholder": "Icon URL",
+      "icon-url-aria": "Field to edit stack icon URL",
+      "submit": "Save",
+      "submit-aria": "Button to save stack changes",
+      "success-title": "Stack updated",
+      "success-description": "The stack has been updated successfully.",
+      "error-title": "Error updating stack",
+      "error-description": "An error occurred while updating the stack."
+    },
+    "update-project-form": {
+      "key": "Key",
+      "key-placeholder": "Key",
+      "key-aria": "Field to edit project key",
+      "name": "Name",
+      "name-placeholder": "Name",
+      "name-aria": "Field to edit project name",
+      "status": "Status",
+      "status-placeholder": "Status",
+      "status-aria": "Field to edit project status",
+      "stack": "Stack",
+      "stack-placeholder": "Stack",
+      "stack-aria": "Field to edit project stack",
+      "start-date": "Start date",
+      "start-date-aria": "Project start date picker",
+      "select-start-date": "Select start date",
+      "end-date": "End date",
+      "end-date-aria": "Project end date picker",
+      "select-end-date": "Select end date",
+      "description": "Description",
+      "description-placeholder": "Description",
+      "description-aria": "Field to edit project description",
+      "goals": "Goals",
+      "goals-placeholder": "Goals",
+      "goals-aria": "Field to edit project goals",
+      "contributions": "Contributions",
+      "contributions-placeholder": "Contributions",
+      "contributions-aria": "Field to edit project contributions",
+      "logo-url": "Logo URL",
+      "logo-url-placeholder": "Logo URL",
+      "logo-url-aria": "Field to edit project logo URL",
+      "primary-color": "Primary color",
+      "primary-color-placeholder": "Primary color",
+      "primary-color-aria": "Project primary color picker",
+      "demo-url": "Demo URL",
+      "demo-url-placeholder": "Demo URL",
+      "demo-url-aria": "Field to edit project demo URL",
+      "github-url": "GitHub URL",
+      "github-url-placeholder": "GitHub URL",
+      "github-url-aria": "Field to edit project GitHub URL",
+      "submit": "Save",
+      "submit-aria": "Button to save project changes",
+      "success-title": "Project updated",
+      "success-description": "The project has been updated successfully.",
+      "error-title": "Error updating project",
+      "error-description": "An error occurred while updating the project."
+    },
+    "show-project-form": {
+      "key": "Key",
+      "key-placeholder": "Key",
+      "key-aria": "Project key field",
+      "name": "Name",
+      "name-placeholder": "Name",
+      "name-aria": "Project name field",
+      "status": "Status",
+      "status-placeholder": "Status",
+      "status-aria": "Project status field",
+      "stack": "Stack",
+      "stack-placeholder": "Stack",
+      "stack-aria": "Project stack field",
+      "start-date": "Start date",
+      "start-date-aria": "Project start date field",
+      "no-start-date": "No start date",
+      "end-date": "End date",
+      "end-date-aria": "Project end date field",
+      "no-end-date": "No end date",
+      "description": "Description",
+      "description-placeholder": "Description",
+      "description-aria": "Project description field",
+      "goals": "Goals",
+      "goals-placeholder": "Goals",
+      "goals-aria": "Project goals field",
+      "contributions": "Contributions",
+      "contributions-placeholder": "Contributions",
+      "contributions-aria": "Project contributions field",
+      "logo-url": "Logo URL",
+      "logo-url-placeholder": "Logo URL",
+      "logo-url-aria": "Project logo URL field",
+      "primary-color": "Primary Color",
+      "primary-color-placeholder": "Primary Color",
+      "primary-color-aria": "Project primary color picker",
+      "demo-url": "Demo URL",
+      "demo-url-placeholder": "Demo URL",
+      "demo-url-aria": "Project demo URL field",
+      "github-url": "GitHub URL",
+      "github-url-placeholder": "GitHub URL",
+      "github-url-aria": "Project GitHub URL field",
+      "edit": "Edit",
+      "edit-aria": "Edit project"
+    },
+    "show-stack-form": {
+      "key": "Key",
+      "key-placeholder": "Key",
+      "key-aria": "Stack key field",
+      "name": "Name",
+      "name-placeholder": "Name",
+      "name-aria": "Stack name field",
+      "description": "Description",
+      "description-placeholder": "Description",
+      "description-aria": "Stack description field",
+      "category": "Category",
+      "category-placeholder": "Category",
+      "category-aria": "Stack category field",
+      "type": "Type",
+      "type-placeholder": "Type",
+      "type-aria": "Stack type field",
+      "icon-url": "Icon URL",
+      "icon-url-placeholder": "Icon URL",
+      "icon-url-aria": "Stack icon URL field",
+      "edit": "Edit",
+      "edit-aria": "Edit stack"
+    },
+    "table": {
+      "collaborators": {
+        "columns": {
+          "nickname": "Nickname",
+          "github": "GitHub Username",
+          "linkedin": "LinkedIn Username"
+        },
+        "actions": {
+          "create": "Create",
+          "view": "View details",
+          "edit": "Edit",
+          "delete": "Delete"
+        },
+        "buttons": {
+          "delete": "Delete",
+          "cancel": "Cancel"
+        },
+        "placeholders": {
+          "search": "Search by nickname..."
+        },
+        "messages": {
+          "success-title": "Operation successful",
+          "success-description": "The operation was completed successfully.",
+          "error-title": "Error",
+          "error-description": "An error occurred during the operation.",
+          "confirm-title": "Are you absolutely sure?",
+          "confirm-description": "This action cannot be undone. This will permanently delete the selected collaborator(s)."
+        }
+      },
+      "projects": {
+        "columns": {
+          "name": "Name",
+          "key": "Key",
+          "status": "Status",
+          "stack": "Stack",
+          "start-date": "Start Date",
+          "end-date": "End Date",
+          "primary-color": "Primary Color",
+          "demo-url": "Demo URL",
+          "github-url": "GitHub URL"
+        },
+        "actions": {
+          "create": "Create",
+          "view": "View details",
+          "edit": "Edit",
+          "delete": "Delete"
+        },
+        "buttons": {
+          "delete": "Delete",
+          "cancel": "Cancel"
+        },
+        "placeholders": {
+          "search": "Search by name..."
+        },
+        "messages": {
+          "success-title": "Operation successful",
+          "success-description": "The operation was completed successfully.",
+          "error-title": "Error",
+          "error-description": "An error occurred during the operation.",
+          "confirm-title": "Are you absolutely sure?",
+          "confirm-description": "This action cannot be undone. This will permanently delete the selected project(s)."
+        }
+      },
+      "stack": {
+        "columns": {
+          "name": "Name",
+          "key": "Key",
+          "description": "Description",
+          "category": "Category",
+          "type": "Type"
+        },
+        "actions": {
+          "create": "Create",
+          "view": "View details",
+          "edit": "Edit",
+          "delete": "Delete"
+        },
+        "buttons": {
+          "delete": "Delete",
+          "cancel": "Cancel"
+        },
+        "placeholders": {
+          "search": "Search by name..."
+        },
+        "messages": {
+          "success-title": "Operation successful",
+          "success-description": "The operation was completed successfully.",
+          "error-title": "Error",
+          "error-description": "An error occurred during the operation.",
+          "confirm-title": "Are you absolutely sure?",
+          "confirm-description": "This action cannot be undone. This will permanently delete the selected stack(s)."
+        }
+      },
+      "data-table": {
+        "aria-label": "Data table",
+        "selected": "{{count}} rows selected",
+        "rows-per-page": "Rows per page",
+        "page-info": "Page {{current}} of {{total}}",
+        "no-data": "No data",
+        "header": {
+          "sort": {
+            "asc": "Sort ascending",
+            "desc": "Sort descending",
+            "none": "Unsorted"
+          }
+        }
+      }
+    }
+  },
+  "error": {
+    "validation-message": {
+      "collaborator": {
+        "nickname": {
+          "string": "Nickname must be a string.",
+          "required_error": "Nickname is required."
+        },
+        "githubUsername": {
+          "string": "GitHub username must be a string."
+        },
+        "linkedinUsername": {
+          "string": "LinkedIn username must be a string."
+        }
+      },
+      "env": {
+        "appVersion": {
+          "string": "App version must be a string.",
+          "required_error": "App version is required."
+        },
+        "mode": {
+          "string": "Mode must be a string.",
+          "required_error": "Mode is required."
+        },
+        "isProduction": {
+          "boolean": "Must be a boolean value.",
+          "required_error": "Production value is required."
+        },
+        "isDevelopment": {
+          "boolean": "Must be a boolean value.",
+          "required_error": "Development value is required."
+        },
+        "isServerSideEnable": {
+          "boolean": "Must be a boolean value.",
+          "required_error": "Server enable status is required."
+        },
+        "assetsPrefix": {
+          "string": "Assets prefix must be a string."
+        },
+        "siteUrl": {
+          "string": "Site URL must be a string.",
+          "url": "Must be a valid URL.",
+          "required_error": "Site URL is required."
+        },
+        "baseUrl": {
+          "string": "Base URL must be a string.",
+          "required_error": "Base URL is required."
+        },
+        "apiUrl": {
+          "string": "API URL must be a string.",
+          "url": "Must be a valid URL.",
+          "required_error": "API URL is required."
+        },
+        "secretCode": {
+          "string": "Secret code must be a string.",
+          "required_error": "Secret code is required."
+        }
+      },
+      "entity-relation": {
+        "idSource": {
+          "number": "Source ID must be a number.",
+          "required_error": "Source ID is required."
+        },
+        "idTarget": {
+          "number": "Target ID must be a number.",
+          "required_error": "Target ID is required."
+        }
+      },
+      "project": {
+        "key": {
+          "string": "Project key must be a string.",
+          "required_error": "Project key is required."
+        },
+        "name": {
+          "string": "Project name must be a string.",
+          "required_error": "Project name is required."
+        },
+        "status": {
+          "enum": "Status must be a valid value."
+        },
+        "stackCategory": {
+          "enum": "Stack category must be a valid value."
+        },
+        "startDate": {
+          "date": "Start date must be a valid date.",
+          "required_error": "Start date is required."
+        },
+        "endDate": {
+          "date": "End date must be a valid date."
+        },
+        "description": {
+          "string": "Description must be a string.",
+          "required_error": "Description is required."
+        },
+        "goals": {
+          "string": "Goals must be a string.",
+          "required_error": "Goals are required."
+        },
+        "contributions": {
+          "string": "Contributions must be a string.",
+          "required_error": "Contributions are required."
+        },
+        "logoUrl": {
+          "string": "Logo URL must be a string.",
+          "required_error": "Logo URL is required."
+        },
+        "primaryColor": {
+          "string": "Primary color must be a string.",
+          "required_error": "Primary color is required.",
+          "invalid_hex_color": "Must be a valid hex color."
+        },
+        "demoUrl": {
+          "string": "Demo URL must be a string."
+        },
+        "githubUrl": {
+          "string": "GitHub URL must be a string."
+        }
+      },
+      "stack": {
+        "key": {
+          "string": "Stack key must be a string.",
+          "required_error": "Stack key is required."
+        },
+        "name": {
+          "string": "Stack name must be a string.",
+          "required_error": "Stack name is required."
+        },
+        "description": {
+          "string": "Stack description must be a string.",
+          "required_error": "Stack description is required."
+        },
+        "category": {
+          "enum": "Category must be a valid value."
+        },
+        "type": {
+          "enum": "Type must be a valid value."
+        },
+        "iconUrl": {
+          "string": "Icon URL must be a string.",
+          "required_error": "Icon URL is required."
+        }
+      }
+    }
+  }
+}
