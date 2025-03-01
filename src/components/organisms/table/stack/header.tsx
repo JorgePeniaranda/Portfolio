@@ -45,8 +45,8 @@ export function StackTableHeader({ table }: { table: Table<Stack> }) {
       await deleteStack(rows.map((row) => row.original.id));
       // If the request was successful, show a success toast
       toast({
-        title: t('components.stack-table-header.success-title'),
-        description: t('components.stack-table-header.success-description'),
+        title: t('components.table.collaborators.messages.success-title'),
+        description: t('components.table.collaborators.messages.success-description'),
         className: 'bg-green-500 text-black',
       });
 
@@ -58,8 +58,8 @@ export function StackTableHeader({ table }: { table: Table<Stack> }) {
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: t('components.stack-table-header.error-title'),
-        defaultErrorMessage: t('components.stack-table-header.error-description'),
+        title: t('components.table.collaborators.messages.error-title'),
+        defaultErrorMessage: t('components.table.collaborators.messages.error-description'),
         tryAgain: () => handleDelete(),
       });
     }
@@ -70,7 +70,7 @@ export function StackTableHeader({ table }: { table: Table<Stack> }) {
       <Input
         autoComplete='off'
         className='max-w-xs'
-        placeholder={t('components.stack-table-header.search-placeholder')}
+        placeholder={t('components.table.stack.placeholders.search')}
         value={
           typeof tableFilterValue === 'string' || typeof tableFilterValue === 'number'
             ? tableFilterValue
@@ -94,7 +94,7 @@ export function StackTableHeader({ table }: { table: Table<Stack> }) {
                   <Plus className='size-5' />
                 </ConditionalAnchor>
               </TooltipTrigger>
-              <TooltipContent>{t('components.stack-table-header.create')}</TooltipContent>
+              <TooltipContent>{t('components.table.stack.actions.create')}</TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </li>
@@ -113,7 +113,7 @@ export function StackTableHeader({ table }: { table: Table<Stack> }) {
                   <Eye className='size-5' />
                 </ConditionalAnchor>
               </TooltipTrigger>
-              <TooltipContent>{t('components.stack-table-header.view-details')}</TooltipContent>
+              <TooltipContent>{t('components.table.stack.actions.view')}</TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </li>
@@ -132,7 +132,7 @@ export function StackTableHeader({ table }: { table: Table<Stack> }) {
                   <Pen className='size-5' />
                 </ConditionalAnchor>
               </TooltipTrigger>
-              <TooltipContent>{t('components.stack-table-header.edit')}</TooltipContent>
+              <TooltipContent>{t('components.table.stack.actions.edit')}</TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </li>
@@ -150,26 +150,26 @@ export function StackTableHeader({ table }: { table: Table<Stack> }) {
                       <Trash className='size-5' />
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent>{t('components.stack-table-header.delete')}</TooltipContent>
+                  <TooltipContent>{t('components.table.stack.actions.delete')}</TooltipContent>
                 </Tooltip>
               </TooltipProvider>
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
                 <AlertDialogTitle>
-                  {t('components.stack-table-header.confirm-title')}
+                  {t('components.table.stack.messages.confirm-title')}
                 </AlertDialogTitle>
                 <AlertDialogDescription>
-                  {t('components.stack-table-header.confirm-description')}
+                  {t('components.table.stack.messages.confirm-description')}
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>{t('components.stack-table-header.cancel')}</AlertDialogCancel>
+                <AlertDialogCancel>{t('components.table.stack.buttons.cancel')}</AlertDialogCancel>
                 <AlertDialogAction
                   className='bg-red-500 text-white hover:bg-red-600 hover:text-white dark:text-white dark:hover:bg-red-400'
                   onClick={handleDelete}
                 >
-                  {t('components.stack-table-header.delete')}
+                  {t('components.table.stack.buttons.delete')}
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>

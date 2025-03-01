@@ -6,6 +6,7 @@ import { ProjectTableColumns } from './column';
 import { ProjectTableHeader } from './header';
 
 import { DataTable } from '@/components/organisms/data-table';
+import useTranslations from '@/hooks/use-translations';
 
 /**
  * Project Table Component
@@ -14,6 +15,8 @@ import { DataTable } from '@/components/organisms/data-table';
  * @returns The Project Table Component
  */
 export function ProjectTable({ data: initialData }: { data: Project[] }) {
+  const { t } = useTranslations();
+
   const [data, setData] = useState<Project[]>(initialData);
 
   const deleteRows = (indexes: number[]) => {
@@ -29,6 +32,7 @@ export function ProjectTable({ data: initialData }: { data: Project[] }) {
       data={data}
       meta={{
         deleteRows,
+        translateFn: t,
       }}
     />
   );

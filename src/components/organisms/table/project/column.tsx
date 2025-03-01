@@ -1,5 +1,6 @@
 import type { Project } from '@prisma/client';
 import type { ColumnDef } from '@tanstack/react-table';
+import type { TranslationKey } from '@/types/translation';
 
 import moment from 'moment';
 
@@ -17,22 +18,31 @@ export const ProjectTableColumns: ColumnDef<Project>[] = [
   {
     id: 'name',
     accessorKey: 'name',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Nombre' />;
+    header({ column, table }) {
+      const translationKey: TranslationKey = 'components.table.projects.columns.name';
+      const translatedTitle = table.options?.meta?.translateFn?.(translationKey);
+
+      return <DataTableColumnHeader column={column} title={translatedTitle ?? translationKey} />;
     },
   },
   {
     id: 'key',
     accessorKey: 'key',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Key' />;
+    header({ column, table }) {
+      const translationKey: TranslationKey = 'components.table.projects.columns.key';
+      const translatedTitle = table.options?.meta?.translateFn?.(translationKey);
+
+      return <DataTableColumnHeader column={column} title={translatedTitle ?? translationKey} />;
     },
   },
   {
     id: 'status',
     accessorKey: 'status',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Estado' />;
+    header({ column, table }) {
+      const translationKey: TranslationKey = 'components.table.projects.columns.status';
+      const translatedTitle = table.options?.meta?.translateFn?.(translationKey);
+
+      return <DataTableColumnHeader column={column} title={translatedTitle ?? translationKey} />;
     },
     cell({ row }) {
       return PROJECT_STATUS_TRANSCRIPTIONS[row.original.status];
@@ -41,8 +51,11 @@ export const ProjectTableColumns: ColumnDef<Project>[] = [
   {
     id: 'stackCategory',
     accessorKey: 'stackCategory',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Stack' />;
+    header({ column, table }) {
+      const translationKey: TranslationKey = 'components.table.projects.columns.stack';
+      const translatedTitle = table.options?.meta?.translateFn?.(translationKey);
+
+      return <DataTableColumnHeader column={column} title={translatedTitle ?? translationKey} />;
     },
     cell({ row }) {
       return STACK_CATEGORY_TRANSCRIPTIONS[row.original.stackCategory];
@@ -51,8 +64,11 @@ export const ProjectTableColumns: ColumnDef<Project>[] = [
   {
     id: 'startDate',
     accessorKey: 'startDate',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Fecha de inicio' />;
+    header({ column, table }) {
+      const translationKey: TranslationKey = 'components.table.projects.columns.start-date';
+      const translatedTitle = table.options?.meta?.translateFn?.(translationKey);
+
+      return <DataTableColumnHeader column={column} title={translatedTitle ?? translationKey} />;
     },
     cell({ row }) {
       return moment(row.original.startDate).format(DATA_FORMAT);
@@ -61,8 +77,11 @@ export const ProjectTableColumns: ColumnDef<Project>[] = [
   {
     id: 'endDate',
     accessorKey: 'endDate',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Fecha de fin' />;
+    header({ column, table }) {
+      const translationKey: TranslationKey = 'components.table.projects.columns.end-date';
+      const translatedTitle = table.options?.meta?.translateFn?.(translationKey);
+
+      return <DataTableColumnHeader column={column} title={translatedTitle ?? translationKey} />;
     },
     cell({ row }) {
       if (isNotDefined(row.original.endDate)) {
@@ -75,8 +94,11 @@ export const ProjectTableColumns: ColumnDef<Project>[] = [
   {
     id: 'primaryColor',
     accessorKey: 'primaryColor',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Color primario' />;
+    header({ column, table }) {
+      const translationKey: TranslationKey = 'components.table.projects.columns.primary-color';
+      const translatedTitle = table.options?.meta?.translateFn?.(translationKey);
+
+      return <DataTableColumnHeader column={column} title={translatedTitle ?? translationKey} />;
     },
     cell({ row }) {
       return (
@@ -93,8 +115,11 @@ export const ProjectTableColumns: ColumnDef<Project>[] = [
   {
     id: 'demoUrl',
     accessorKey: 'demoUrl',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Demo URL' />;
+    header({ column, table }) {
+      const translationKey: TranslationKey = 'components.table.projects.columns.demo-url';
+      const translatedTitle = table.options?.meta?.translateFn?.(translationKey);
+
+      return <DataTableColumnHeader column={column} title={translatedTitle ?? translationKey} />;
     },
     cell({ row }) {
       if (isNotDefined(row.original.demoUrl)) {
@@ -113,8 +138,11 @@ export const ProjectTableColumns: ColumnDef<Project>[] = [
   {
     id: 'githubUrl',
     accessorKey: 'githubUrl',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='GitHub URL' />;
+    header({ column, table }) {
+      const translationKey: TranslationKey = 'components.table.projects.columns.github-url';
+      const translatedTitle = table.options?.meta?.translateFn?.(translationKey);
+
+      return <DataTableColumnHeader column={column} title={translatedTitle ?? translationKey} />;
     },
     cell({ row }) {
       if (isNotDefined(row.original.githubUrl)) {

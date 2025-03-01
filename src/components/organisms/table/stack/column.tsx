@@ -1,5 +1,6 @@
 import type { Stack } from '@prisma/client';
 import type { ColumnDef } from '@tanstack/react-table';
+import type { TranslationKey } from '@/types/translation';
 
 import { selectionColumnDef } from '@/components/organisms/data-table/column-def/selection';
 import { DataTableColumnHeader } from '@/components/organisms/data-table/column/dropdown';
@@ -14,29 +15,41 @@ export const StackTableColumns: ColumnDef<Stack>[] = [
   {
     id: 'name',
     accessorKey: 'name',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Nombre' />;
+    header({ column, table }) {
+      const translationKey: TranslationKey = 'components.table.stack.columns.name';
+      const translatedTitle = table.options?.meta?.translateFn?.(translationKey);
+
+      return <DataTableColumnHeader column={column} title={translatedTitle ?? translationKey} />;
     },
   },
   {
     id: 'key',
     accessorKey: 'key',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Key' />;
+    header({ column, table }) {
+      const translationKey: TranslationKey = 'components.table.stack.columns.key';
+      const translatedTitle = table.options?.meta?.translateFn?.(translationKey);
+
+      return <DataTableColumnHeader column={column} title={translatedTitle ?? translationKey} />;
     },
   },
   {
     id: 'description',
     accessorKey: 'description',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Descripción' />;
+    header({ column, table }) {
+      const translationKey: TranslationKey = 'components.table.stack.columns.description';
+      const translatedTitle = table.options?.meta?.translateFn?.(translationKey);
+
+      return <DataTableColumnHeader column={column} title={translatedTitle ?? translationKey} />;
     },
   },
   {
     id: 'category',
     accessorKey: 'category',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Categoria' />;
+    header({ column, table }) {
+      const translationKey: TranslationKey = 'components.table.stack.columns.category';
+      const translatedTitle = table.options?.meta?.translateFn?.(translationKey);
+
+      return <DataTableColumnHeader column={column} title={translatedTitle ?? translationKey} />;
     },
     cell({ row }) {
       if (
@@ -52,8 +65,11 @@ export const StackTableColumns: ColumnDef<Stack>[] = [
   {
     id: 'type',
     accessorKey: 'type',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Tipo' />;
+    header({ column, table }) {
+      const translationKey: TranslationKey = 'components.table.stack.columns.type';
+      const translatedTitle = table.options?.meta?.translateFn?.(translationKey);
+
+      return <DataTableColumnHeader column={column} title={translatedTitle ?? translationKey} />;
     },
     cell({ row }) {
       if (isNotDefined(row.original?.type) || !(row.original?.type in STACK_TYPE_TRANSCRIPTIONS)) {

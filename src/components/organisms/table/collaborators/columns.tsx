@@ -1,3 +1,4 @@
+import type { TranslationKey } from '@/types/translation';
 import type { Collaborator } from '@prisma/client';
 import type { ColumnDef } from '@tanstack/react-table';
 
@@ -10,15 +11,21 @@ export const CollaboratorsTableColumns: ColumnDef<Collaborator>[] = [
   {
     id: 'nickname',
     accessorKey: 'nickname',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Nickname' />;
+    header({ column, table }) {
+      const translationKey: TranslationKey = 'components.table.collaborators.columns.nickname';
+      const translatedTitle = table.options?.meta?.translateFn?.(translationKey);
+
+      return <DataTableColumnHeader column={column} title={translatedTitle ?? translationKey} />;
     },
   },
   {
     id: 'githubUsername',
     accessorKey: 'githubUsername',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Nickname de GitHub' />;
+    header({ column, table }) {
+      const translationKey: TranslationKey = 'components.table.collaborators.columns.github';
+      const translatedTitle = table.options?.meta?.translateFn?.(translationKey);
+
+      return <DataTableColumnHeader column={column} title={translatedTitle ?? translationKey} />;
     },
     cell({ row }) {
       if (isNotDefined(row.original.githubUsername)) {
@@ -40,8 +47,11 @@ export const CollaboratorsTableColumns: ColumnDef<Collaborator>[] = [
   {
     id: 'linkedinUsername',
     accessorKey: 'linkedinUsername',
-    header({ column }) {
-      return <DataTableColumnHeader column={column} title='Nickname de Linkedin' />;
+    header({ column, table }) {
+      const translationKey: TranslationKey = 'components.table.collaborators.columns.linkedin';
+      const translatedTitle = table.options?.meta?.translateFn?.(translationKey);
+
+      return <DataTableColumnHeader column={column} title={translatedTitle ?? translationKey} />;
     },
     cell({ row }) {
       if (isNotDefined(row.original.linkedinUsername)) {

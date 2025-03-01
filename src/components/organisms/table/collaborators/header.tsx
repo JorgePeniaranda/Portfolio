@@ -23,8 +23,10 @@ import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isNotDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
 import { deleteCollaborator } from '@/services/collaborator/deleteCollaborator';
+import useTranslations from '@/hooks/use-translations';
 
 export function CollaboratorsTableHeader({ table }: { table: Table<Collaborator> }) {
+  const { t } = useTranslations();
   const { toast } = useToast();
 
   const tableFilterValue = table.getColumn('nickname')?.getFilterValue();
@@ -44,8 +46,8 @@ export function CollaboratorsTableHeader({ table }: { table: Table<Collaborator>
 
       // If the request was successful, show a success toast
       toast({
-        title: 'Colaboradores eliminados',
-        description: 'Los colaboradores seleccionados se han eliminaron correctamente.',
+        title: t('components.table.collaborators.messages.success-title'),
+        description: t('components.table.collaborators.messages.success-description'),
         className: 'bg-green-500 text-black',
       });
 
@@ -57,8 +59,8 @@ export function CollaboratorsTableHeader({ table }: { table: Table<Collaborator>
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: 'Error al eliminar colaboradores',
-        defaultErrorMessage: 'Ha ocurrido un error al intentar eliminar los colaboradores.',
+        title: t('components.table.collaborators.messages.error-title'),
+        defaultErrorMessage: t('components.table.collaborators.messages.error-description'),
         tryAgain: () => handleDelete(),
       });
     }
@@ -69,7 +71,7 @@ export function CollaboratorsTableHeader({ table }: { table: Table<Collaborator>
       <Input
         autoComplete='off'
         className='max-w-xs'
-        placeholder='Buscar por nickname...'
+        placeholder={t('components.table.collaborators.placeholders.search')}
         value={
           typeof tableFilterValue === 'string' || typeof tableFilterValue === 'number'
             ? tableFilterValue
@@ -93,7 +95,7 @@ export function CollaboratorsTableHeader({ table }: { table: Table<Collaborator>
                   <Plus className='size-5' />
                 </ConditionalAnchor>
               </TooltipTrigger>
-              <TooltipContent>Crear</TooltipContent>
+              <TooltipContent>{t('components.table.collaborators.actions.create')}</TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </li>
@@ -112,7 +114,7 @@ export function CollaboratorsTableHeader({ table }: { table: Table<Collaborator>
                   <Eye className='size-5' />
                 </ConditionalAnchor>
               </TooltipTrigger>
-              <TooltipContent>Ver detalles</TooltipContent>
+              <TooltipContent>{t('components.table.collaborators.actions.view')}</TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </li>
@@ -131,7 +133,7 @@ export function CollaboratorsTableHeader({ table }: { table: Table<Collaborator>
                   <Pen className='size-5' />
                 </ConditionalAnchor>
               </TooltipTrigger>
-              <TooltipContent>Editar</TooltipContent>
+              <TooltipContent>{t('components.table.collaborators.actions.edit')}</TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </li>
@@ -149,25 +151,30 @@ export function CollaboratorsTableHeader({ table }: { table: Table<Collaborator>
                       <Trash className='size-5' />
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent>Eliminar</TooltipContent>
+                  <TooltipContent>
+                    {t('components.table.collaborators.actions.delete')}
+                  </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
-                <AlertDialogTitle>¿Está completamente seguro?</AlertDialogTitle>
+                <AlertDialogTitle>
+                  {t('components.table.collaborators.messages.confirm-title')}
+                </AlertDialogTitle>
                 <AlertDialogDescription>
-                  Esta acción no se puede deshacer. Esto borrará permanentemente el/los
-                  colaboradores seleccionados.
+                  {t('components.table.collaborators.messages.confirm-description')}
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                <AlertDialogCancel>
+                  {t('components.table.collaborators.buttons.cancel')}
+                </AlertDialogCancel>
                 <AlertDialogAction
                   className='bg-red-500 text-white hover:bg-red-600 hover:text-white dark:text-white dark:hover:bg-red-400'
                   onClick={handleDelete}
                 >
-                  Borrar
+                  {t('components.table.collaborators.buttons.delete')}
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>

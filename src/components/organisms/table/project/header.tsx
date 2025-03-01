@@ -23,8 +23,10 @@ import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isNotDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
 import { deleteProject } from '@/services/project/deleteProject';
+import useTranslations from '@/hooks/use-translations';
 
 export function ProjectTableHeader({ table }: { table: Table<Project> }) {
+  const { t } = useTranslations();
   const { toast } = useToast();
 
   const tableFilterValue = table.getColumn('name')?.getFilterValue();
@@ -43,8 +45,8 @@ export function ProjectTableHeader({ table }: { table: Table<Project> }) {
 
       // If the request was successful, show a success toast
       toast({
-        title: 'Colaboradores eliminados',
-        description: 'Los proyectos seleccionados se han eliminado correctamente.',
+        title: t('components.table.projects.messages.success-title'),
+        description: t('components.table.projects.messages.success-description'),
         className: 'bg-green-500 text-black',
       });
 
@@ -56,8 +58,8 @@ export function ProjectTableHeader({ table }: { table: Table<Project> }) {
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: 'Error al eliminar proyectos',
-        defaultErrorMessage: 'Ha ocurrido un error al eliminar los proyectos.',
+        title: t('components.table.projects.messages.error-title'),
+        defaultErrorMessage: t('components.table.projects.messages.error-description'),
         tryAgain: () => handleDelete(),
       });
     }
@@ -68,7 +70,7 @@ export function ProjectTableHeader({ table }: { table: Table<Project> }) {
       <Input
         autoComplete='off'
         className='max-w-xs'
-        placeholder='Buscar por nombre...'
+        placeholder={t('components.table.projects.placeholders.search')}
         value={
           typeof tableFilterValue === 'string' || typeof tableFilterValue === 'number'
             ? tableFilterValue
@@ -92,7 +94,7 @@ export function ProjectTableHeader({ table }: { table: Table<Project> }) {
                   <Plus className='size-5' />
                 </ConditionalAnchor>
               </TooltipTrigger>
-              <TooltipContent>Crear</TooltipContent>
+              <TooltipContent>{t('components.table.projects.actions.create')}</TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </li>
@@ -111,7 +113,7 @@ export function ProjectTableHeader({ table }: { table: Table<Project> }) {
                   <Eye className='size-5' />
                 </ConditionalAnchor>
               </TooltipTrigger>
-              <TooltipContent>Ver detalles</TooltipContent>
+              <TooltipContent>{t('components.table.projects.actions.view')}</TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </li>
@@ -130,7 +132,7 @@ export function ProjectTableHeader({ table }: { table: Table<Project> }) {
                   <Pen className='size-5' />
                 </ConditionalAnchor>
               </TooltipTrigger>
-              <TooltipContent>Editar</TooltipContent>
+              <TooltipContent>{t('components.table.projects.actions.edit')}</TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </li>
@@ -148,25 +150,28 @@ export function ProjectTableHeader({ table }: { table: Table<Project> }) {
                       <Trash className='size-5' />
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent>Eliminar</TooltipContent>
+                  <TooltipContent>{t('components.table.projects.actions.delete')}</TooltipContent>
                 </Tooltip>
               </TooltipProvider>
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
-                <AlertDialogTitle>¿Está completamente seguro?</AlertDialogTitle>
+                <AlertDialogTitle>
+                  {t('components.table.projects.messages.confirm-title')}
+                </AlertDialogTitle>
                 <AlertDialogDescription>
-                  Esta acción no se puede deshacer. Esto borrará permanentemente el/los proyectos
-                  seleccionados.
+                  {t('components.table.projects.messages.confirm-description')}
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                <AlertDialogCancel>
+                  {t('components.table.projects.buttons.cancel')}
+                </AlertDialogCancel>
                 <AlertDialogAction
                   className='bg-red-500 text-white hover:bg-red-600 hover:text-white dark:text-white dark:hover:bg-red-400'
                   onClick={handleDelete}
                 >
-                  Borrar
+                  {t('components.table.projects.buttons.delete')}
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>

@@ -6,6 +6,7 @@ import { CollaboratorsTableColumns } from './columns';
 import { CollaboratorsTableHeader } from './header';
 
 import { DataTable } from '@/components/organisms/data-table';
+import useTranslations from '@/hooks/use-translations';
 
 /**
  * Collaborator Table Component
@@ -14,6 +15,8 @@ import { DataTable } from '@/components/organisms/data-table';
  * @returns The Collaborator Table Component
  */
 export function CollaboratorTable({ data: initialData }: { data: Collaborator[] }) {
+  const { t } = useTranslations();
+
   const [data, setData] = useState<Collaborator[]>(initialData);
 
   const deleteRows = (indexes: number[]) => {
@@ -29,6 +32,7 @@ export function CollaboratorTable({ data: initialData }: { data: Collaborator[] 
       data={data}
       meta={{
         deleteRows,
+        translateFn: t,
       }}
     />
   );
