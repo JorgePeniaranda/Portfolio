@@ -48,7 +48,7 @@ export function DataTableColumnHeader<TData, TValue>({
     <div className={cn('flex items-center space-x-2', className)}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button className='-ml-3 h-8 data-[state=open]:bg-accent' size='sm' variant='ghost'>
+          <Button className='data-[state=open]:bg-accent -ml-3 h-8' size='sm' variant='ghost'>
             <span>{title}</span>
             {column.getIsSorted() === 'desc' ? (
               <ArrowDownIcon className='ml-2 size-4' />
@@ -61,20 +61,20 @@ export function DataTableColumnHeader<TData, TValue>({
         </DropdownMenuTrigger>
         <DropdownMenuContent align='start'>
           <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
-            <ArrowUp className='mr-1 size-3.5 text-muted-foreground/70' />
+            <ArrowUp className='text-muted-foreground/70 mr-1 size-3.5' />
             {t('components.data-table-column-header.sort.asc')}
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
-            <ArrowDown className='mr-1 size-3.5 text-muted-foreground/70' />
+            <ArrowDown className='text-muted-foreground/70 mr-1 size-3.5' />
             {t('components.data-table-column-header.sort.desc')}
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => column.toggleSorting()}>
-            <X className='mr-1 size-3.5 text-muted-foreground/70' />
+            <X className='text-muted-foreground/70 mr-1 size-3.5' />
             {t('components.data-table-column-header.sort.none')}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
-            <EyeOff className='mr-1 size-3.5 text-muted-foreground/70' />
+            <EyeOff className='text-muted-foreground/70 mr-1 size-3.5' />
             {t('components.data-table-column-header.visibility.hide')}
           </DropdownMenuItem>
         </DropdownMenuContent>

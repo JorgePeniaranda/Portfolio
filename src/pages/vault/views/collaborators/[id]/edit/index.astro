@@ -56,7 +56,7 @@ const availableProjects = await getProjectsByNotAssociatedCollaborator({
     client:load
     breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/collaborators/edit']}
   >
-    <main class='container mx-auto flex size-full flex-col gap-5 pl-7 pt-7'>
+    <main class='container mx-auto flex size-full flex-col gap-5 pt-7 pl-7'>
       <h1 class='text-4xl font-medium'>Editar Colaborador</h1>
       <UpdateCollaboratorForm client:load currentCollaborator={collaborator} />
       <div class='mt-10'>

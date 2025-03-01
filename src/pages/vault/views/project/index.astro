@@ -10,7 +10,7 @@ const projects = await getAllProjects();
 
 <Layout title='Proyectos'>
   <DashboardLayout client:load breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/project']}>
-    <main class='container mx-auto flex size-full flex-col pl-7 pt-7'>
+    <main class='container mx-auto flex size-full flex-col pt-7 pl-7'>
       <h1 class='text-4xl font-medium'>Proyectos</h1>
       <ProjectTable client:load data={projects} />
     </main>

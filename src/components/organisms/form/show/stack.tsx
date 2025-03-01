@@ -171,7 +171,7 @@ export function ShowStackForm({ currentStack }: { currentStack: Stack }) {
           />
         </div>
         <a
-          className='flex size-max items-center gap-2 rounded-md border border-input bg-gray-500 p-2 px-4 text-white hover:bg-gray-600 hover:text-white dark:text-white dark:hover:bg-gray-400'
+          className='border-input flex size-max items-center gap-2 rounded-md border bg-gray-500 p-2 px-4 text-white hover:bg-gray-600 hover:text-white dark:text-white dark:hover:bg-gray-400'
           href={`/vault/views/stack/${currentStack.id}/edit`}
         >
           <Pen className='size-5' />

@@ -98,7 +98,7 @@ export function ProjectCardsManager({
       <ul className='flex w-full items-center justify-center gap-10 overflow-x-auto'>
         {/* Sort filter */}
         <li className='flex items-center gap-2'>
-          <label className='whitespace-nowrap text-sm text-gray-400/80' htmlFor='sort-select'>
+          <label className='text-sm whitespace-nowrap text-gray-400/80' htmlFor='sort-select'>
             {t('components.project-cards-manager.sort.label')}:
           </label>
           <Select
@@ -131,7 +131,7 @@ export function ProjectCardsManager({
 
         {/* Stack filter */}
         <li className='flex items-center gap-2'>
-          <label className='whitespace-nowrap text-sm text-gray-400/80' htmlFor='stack-select'>
+          <label className='text-sm whitespace-nowrap text-gray-400/80' htmlFor='stack-select'>
             {t('components.project-cards-manager.stack.label')}:
           </label>
           <Select
@@ -183,7 +183,7 @@ export function ProjectCardsManager({
 
         {/* Status filter */}
         <li className='flex items-center gap-2'>
-          <label className='whitespace-nowrap text-sm text-gray-400/80' htmlFor='status-select'>
+          <label className='text-sm whitespace-nowrap text-gray-400/80' htmlFor='status-select'>
             {t('components.project-cards-manager.status.label')}:
           </label>
           <Select

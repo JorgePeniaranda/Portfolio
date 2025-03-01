@@ -60,7 +60,7 @@ export function DashboardLayout({
             className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground'
             size='lg'
           >
-            <div className='flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground'>
+            <div className='bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg'>
               <Database className='size-4' />
             </div>
             <div className='flex flex-col gap-0.5 leading-none'>
@@ -81,7 +81,7 @@ export function DashboardLayout({
               <SidebarGroup>
                 <SidebarGroupLabel
                   asChild
-                  className='group/label text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                  className='group/label text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sm'
                 >
                   <CollapsibleTrigger>
                     {item.title}{' '}
@@ -108,7 +108,7 @@ export function DashboardLayout({
         <SidebarRail />
       </Sidebar>
       <SidebarInset>
-        <header className='sticky top-0 flex h-16 shrink-0 items-center gap-2 border-b bg-background px-4'>
+        <header className='bg-background sticky top-0 flex h-16 shrink-0 items-center gap-2 border-b px-4'>
           <SidebarTrigger className='-ml-1' />
           <Separator className='mr-2 h-4' orientation='vertical' />
           {/* Show breadcrumb if is defined */}

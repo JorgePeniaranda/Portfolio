@@ -29,7 +29,7 @@ export function DesktopNavbar({ items }: { items: NavbarSection[] }) {
   return (
     <motion.nav
       aria-label={t('components.desktop-navbar.aria-label.main')}
-      className='fixed bottom-6 left-1/2 z-50 hidden h-14 -translate-x-1/2 items-center justify-evenly space-x-3 rounded-3xl bg-neutral-50/90 p-3 ring-1 ring-neutral-300 backdrop-blur-2xl transition dark:bg-neutral-950/50 dark:ring-neutral-700 md:flex'
+      className='fixed bottom-6 left-1/2 z-50 hidden h-14 -translate-x-1/2 items-center justify-evenly space-x-3 rounded-3xl bg-neutral-50/90 p-3 ring-1 ring-neutral-300 backdrop-blur-2xl transition md:flex dark:bg-neutral-950/50 dark:ring-neutral-700'
       // Reset mouseX on mouse leave
       onMouseLeave={() => mouseX.set(Infinity)}
       // Update mouseX on mouse move for hover effect

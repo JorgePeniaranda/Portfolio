@@ -112,10 +112,10 @@ const textColor = GetTextColorForBackground(project.primaryColor);
             {project.name}
           </h1>
           <div class='my-2 flex items-center gap-2 text-lg font-light'>
-            <h2 class:list={StatusStyle[project.status]} class='font-medium leading-none'>
+            <h2 class:list={StatusStyle[project.status]} class='leading-none font-medium'>
               {PROJECT_STATUS_TRANSCRIPTIONS[project.status]}
             </h2>
-            <small class='rounded-md p-1 text-base capitalize leading-none'>
+            <small class='rounded-md p-1 text-base leading-none capitalize'>
               {moment(project.startDate).locale('es').format('MMM YYYY')}
               {' - '}
               {
@@ -126,7 +126,7 @@ const textColor = GetTextColorForBackground(project.primaryColor);
             </small>
             <h3
               class:list={[StackStyle[project.stackCategory]]}
-              class='rounded-md p-1 text-base font-medium leading-none'
+              class='rounded-md p-1 text-base leading-none font-medium'
             >
               {STACK_CATEGORY_TRANSCRIPTIONS[project.stackCategory]}
             </h3>

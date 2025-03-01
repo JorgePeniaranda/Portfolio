@@ -62,7 +62,7 @@ export function StackDrawer({
   return (
     <Drawer {...drawerProps} onClose={handleDrawerClose}>
       <DrawerTrigger asChild>{triggerChild}</DrawerTrigger>
-      <DrawerContent className='overflow-y-auto overflow-x-hidden px-6 py-2'>
+      <DrawerContent className='overflow-x-hidden overflow-y-auto px-6 py-2'>
         <section className='space-y-4'>
           {/* Header with the stack logo and name */}
           <div className='relative flex items-center space-x-2'>
@@ -74,7 +74,7 @@ export function StackDrawer({
             <h3 className='text-4xl font-bold'>{stack.name}</h3>
             <DrawerClose
               aria-label={t('components.stack-drawer.aria-label.close')}
-              className='absolute right-0 top-0 p-2'
+              className='absolute top-0 right-0 p-2'
             >
               <X />
             </DrawerClose>
@@ -86,7 +86,7 @@ export function StackDrawer({
               <h4 className='text-lg font-bold underline underline-offset-2'>
                 {t('components.stack-drawer.description')}
               </h4>
-              <p className='text-pretty indent-4'>
+              <p className='indent-4 text-pretty'>
                 <MessageDisplay message={stack.description} />
               </p>
             </article>
@@ -117,7 +117,7 @@ export function StackDrawer({
                         className='size-14 rounded-full'
                         src={project.logoUrl}
                       />
-                      <h5 className='whitespace-nowrap text-xl'>{project.name}</h5>
+                      <h5 className='text-xl whitespace-nowrap'>{project.name}</h5>
                     </a>
                   </li>
                 ))}

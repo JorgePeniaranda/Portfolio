@@ -53,7 +53,7 @@ const associatedProjects = await getProjectsByAssociatedCollaborator({
     client:load
     breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/collaborators/details']}
   >
-    <main class='container mx-auto flex size-full flex-col gap-5 pl-7 pt-7'>
+    <main class='container mx-auto flex size-full flex-col gap-5 pt-7 pl-7'>
       <h1 class='text-4xl font-medium'>Detalles de Colaborador</h1>
       <ShowCollaboratorForm client:load currentCollaborator={collaborator} />
 

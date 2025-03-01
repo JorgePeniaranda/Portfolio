@@ -13,7 +13,7 @@ const collaborators = await getAllCollaborator();
     client:load
     breadcrumb={DASHBOARD_BREADCRUMB_TEMPLATE['/vault/views/collaborators']}
   >
-    <main class='container mx-auto flex size-full flex-col pl-7 pt-7'>
+    <main class='container mx-auto flex size-full flex-col pt-7 pl-7'>
       <h1 class='text-4xl font-medium'>Colaboradores</h1>
       <CollaboratorTable client:load data={collaborators} />
     </main>

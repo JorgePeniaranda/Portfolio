@@ -28,7 +28,7 @@ export function MobileNavbar({ items }: { items: NavbarSection[] }) {
   return (
     <nav
       aria-label={t('components.mobile-navbar.aria-label.main')}
-      className='fixed bottom-0 z-50 flex h-16 w-full items-center justify-around space-x-3 bg-neutral-100 p-4 ring-1 ring-neutral-300 dark:bg-neutral-900 dark:ring-neutral-700 md:hidden'
+      className='fixed bottom-0 z-50 flex h-16 w-full items-center justify-around space-x-3 bg-neutral-100 p-4 ring-1 ring-neutral-300 md:hidden dark:bg-neutral-900 dark:ring-neutral-700'
     >
       {/* ========= NAVEGATION LINKS ITEMS =========   */}
       {items.map((section) => {

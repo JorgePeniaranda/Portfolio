@@ -157,7 +157,7 @@ export function UpdateProjectsRelatedToCollaborator({
             <CardHeader className='relative flex items-center gap-2'>
               <Button
                 aria-label={t('components.update-projects-related-collaborator.remove-button-aria')}
-                className='absolute -right-2.5 -top-2.5 m-0 flex aspect-square size-8 items-center justify-center rounded-full bg-red-500 p-0 text-center text-white hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-500'
+                className='absolute -top-2.5 -right-2.5 m-0 flex aspect-square size-8 items-center justify-center rounded-full bg-red-500 p-0 text-center text-white hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-500'
                 disabled={disableForm}
                 onClick={() => onRemoveProject(project.id)}
               >

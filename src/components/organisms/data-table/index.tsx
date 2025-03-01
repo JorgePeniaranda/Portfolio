@@ -119,7 +119,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
         <div className='flex items-center justify-between px-2'>
-          <div className='flex-1 text-sm text-muted-foreground'>
+          <div className='text-muted-foreground flex-1 text-sm'>
             {t('components.data-table.selected-rows', {
               selected: table.getFilteredSelectedRowModel().rows.length,
               total: table.getFilteredRowModel().rows.length,

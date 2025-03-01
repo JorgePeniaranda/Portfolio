@@ -35,7 +35,7 @@ const { title, description, lang = DEFAULT_LANG, body, html } = Astro.props;
     <ThemePreference />
     <InitializeLang lang={lang} />
   </head>
-  <body class={cn('w-full min-h-screen antialiased font-Baloo', body?.class)} {...body}>
+  <body class={cn('font-Baloo min-h-screen w-full antialiased', body?.class)} {...body}>
     <slot />
     <DesktopNavbar client:idle items={NAVBAR_ITEMS} transition:name='main-desktop-navbar' />
     <div class='flex h-16 md:hidden'>
