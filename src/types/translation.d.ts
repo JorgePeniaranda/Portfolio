@@ -1,3 +1,7 @@
+import type { AVAILABLE_LANGUAGES } from '@/constants/i18n';
+
+export type AvailableLanguages = (typeof AVAILABLE_LANGUAGES)[number];
+
 type GetTranslationKey<T, P extends string = ''> = T extends string | number | boolean
   ? P
   : {
@@ -62,6 +66,71 @@ export interface Translation {
         'code-subtitle': string;
         'demo-subtitle': string;
       };
+    };
+    'show-project-form': {
+      'key': string;
+      'key-placeholder': string;
+      'key-aria': string;
+      'name': string;
+      'name-placeholder': string;
+      'name-aria': string;
+      'status': string;
+      'status-placeholder': string;
+      'status-aria': string;
+      'stack': string;
+      'stack-placeholder': string;
+      'stack-aria': string;
+      'start-date': string;
+      'start-date-aria': string;
+      'no-start-date': string;
+      'end-date': string;
+      'end-date-aria': string;
+      'no-end-date': string;
+      'description': string;
+      'description-placeholder': string;
+      'description-aria': string;
+      'goals': string;
+      'goals-placeholder': string;
+      'goals-aria': string;
+      'contributions': string;
+      'contributions-placeholder': string;
+      'contributions-aria': string;
+      'logo-url': string;
+      'logo-url-placeholder': string;
+      'logo-url-aria': string;
+      'primary-color': string;
+      'primary-color-placeholder': string;
+      'primary-color-aria': string;
+      'demo-url': string;
+      'demo-url-placeholder': string;
+      'demo-url-aria': string;
+      'github-url': string;
+      'github-url-placeholder': string;
+      'github-url-aria': string;
+      'edit': string;
+      'edit-aria': string;
+    };
+    'show-stack-form': {
+      'key': string;
+      'key-placeholder': string;
+      'key-aria': string;
+      'name': string;
+      'name-placeholder': string;
+      'name-aria': string;
+      'description': string;
+      'description-placeholder': string;
+      'description-aria': string;
+      'category': string;
+      'category-placeholder': string;
+      'category-aria': string;
+      'type': string;
+      'type-placeholder': string;
+      'type-aria': string;
+      'icon-url': string;
+      'icon-url-placeholder': string;
+      'icon-url-aria': string;
+      'edit': string;
+      'edit-aria': string;
     };
     'breadcrumb': {
       'aria-label': string;

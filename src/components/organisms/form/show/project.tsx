@@ -30,6 +30,7 @@ import {
 } from '@/constants/transcriptions';
 import { cn } from '@/helpers/common/classnames';
 import { ProjectUpdateSchema } from '@/schemas/project/update';
+import useTranslations from '@/hooks/use-translations';
 
 /**
  * Form to show a project.
@@ -38,6 +39,7 @@ import { ProjectUpdateSchema } from '@/schemas/project/update';
  * @returns The show project form
  */
 export function ShowProjectForm({ currentProject }: { currentProject: Project }) {
+  const { t } = useTranslations();
   const form = useForm<ProjectUpdateSchema>({
     resolver: zodResolver(ProjectUpdateSchema),
     defaultValues: currentProject,
@@ -52,9 +54,14 @@ export function ShowProjectForm({ currentProject }: { currentProject: Project })
             name='key'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Key</FormLabel>
+                <FormLabel>{t('components.show-project-form.key')}</FormLabel>
                 <FormControl>
-                  <Input disabled placeholder='Key' {...field} />
+                  <Input
+                    disabled
+                    aria-label={t('components.show-project-form.key-aria')}
+                    placeholder={t('components.show-project-form.key-placeholder')}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -65,11 +72,12 @@ export function ShowProjectForm({ currentProject }: { currentProject: Project })
             name='name'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nombre</FormLabel>
+                <FormLabel>{t('components.show-project-form.name')}</FormLabel>
                 <FormControl>
                   <Input
                     disabled
-                    placeholder='Nombre'
+                    aria-label={t('components.show-project-form.name-aria')}
+                    placeholder={t('components.show-project-form.name-placeholder')}
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />
@@ -83,7 +91,7 @@ export function ShowProjectForm({ currentProject }: { currentProject: Project })
             name='status'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Estado</FormLabel>
+                <FormLabel>{t('components.show-project-form.status')}</FormLabel>
                 <Select
                   disabled
                   defaultValue={field.value === null ? undefined : field.value}
@@ -93,7 +101,9 @@ export function ShowProjectForm({ currentProject }: { currentProject: Project })
                 >
                   <FormControl>
                     <SelectTrigger className='w-[180px]'>
-                      <SelectValue placeholder='Estado' />
+                      <SelectValue
+                        placeholder={t('components.show-project-form.status-placeholder')}
+                      />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -113,7 +123,7 @@ export function ShowProjectForm({ currentProject }: { currentProject: Project })
             name='stackCategory'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Stack</FormLabel>
+                <FormLabel>{t('components.show-project-form.stack')}</FormLabel>
                 <Select
                   disabled
                   defaultValue={field.value === null ? undefined : field.value}
@@ -123,7 +133,9 @@ export function ShowProjectForm({ currentProject }: { currentProject: Project })
                 >
                   <FormControl>
                     <SelectTrigger className='w-[180px]'>
-                      <SelectValue placeholder='Stack' />
+                      <SelectValue
+                        placeholder={t('components.show-project-form.stack-placeholder')}
+                      />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -143,12 +155,13 @@ export function ShowProjectForm({ currentProject }: { currentProject: Project })
             name='startDate'
             render={({ field }) => (
               <FormItem className='flex flex-col'>
-                <FormLabel>Fecha de inicio</FormLabel>
+                <FormLabel>{t('components.show-project-form.start-date')}</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
                       <Button
                         disabled
+                        aria-label={t('components.show-project-form.start-date-aria')}
                         className={cn(
                           'w-[240px] pl-3 text-left font-normal',
                           !field.value && 'text-muted-foreground',
@@ -158,7 +171,7 @@ export function ShowProjectForm({ currentProject }: { currentProject: Project })
                         {field.value ? (
                           format(field.value, 'PPP')
                         ) : (
-                          <span>Sin fecha de inicio</span>
+                          <span>{t('components.show-project-form.no-start-date')}</span>
                         )}
                         <CalendarIcon className='ml-auto size-4 opacity-50' />
                       </Button>
@@ -177,19 +190,24 @@ export function ShowProjectForm({ currentProject }: { currentProject: Project })
             name='endDate'
             render={({ field }) => (
               <FormItem className='flex flex-col'>
-                <FormLabel>Fecha de fin</FormLabel>
+                <FormLabel>{t('components.show-project-form.end-date')}</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
                       <Button
                         disabled
+                        aria-label={t('components.show-project-form.end-date-aria')}
                         className={cn(
                           'w-[240px] pl-3 text-left font-normal',
                           !field.value && 'text-muted-foreground',
                         )}
                         variant='outline'
                       >
-                        {field.value ? format(field.value, 'PPP') : <span>Sin fecha de fin</span>}
+                        {field.value ? (
+                          format(field.value, 'PPP')
+                        ) : (
+                          <span>{t('components.show-project-form.no-end-date')}</span>
+                        )}
                         <CalendarIcon className='ml-auto size-4 opacity-50' />
                       </Button>
                     </FormControl>
@@ -211,11 +229,12 @@ export function ShowProjectForm({ currentProject }: { currentProject: Project })
             name='description'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Descripción</FormLabel>
+                <FormLabel>{t('components.show-project-form.description')}</FormLabel>
                 <FormControl>
                   <Textarea
                     disabled
-                    placeholder='Descripción'
+                    aria-label={t('components.show-project-form.description-aria')}
+                    placeholder={t('components.show-project-form.description-placeholder')}
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />
@@ -229,11 +248,12 @@ export function ShowProjectForm({ currentProject }: { currentProject: Project })
             name='goals'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Objetivos</FormLabel>
+                <FormLabel>{t('components.show-project-form.goals')}</FormLabel>
                 <FormControl>
                   <Textarea
                     disabled
-                    placeholder='Objetivos'
+                    aria-label={t('components.show-project-form.goals-aria')}
+                    placeholder={t('components.show-project-form.goals-placeholder')}
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />
@@ -247,11 +267,12 @@ export function ShowProjectForm({ currentProject }: { currentProject: Project })
             name='contributions'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Contribuciones</FormLabel>
+                <FormLabel>{t('components.show-project-form.contributions')}</FormLabel>
                 <FormControl>
                   <Textarea
                     disabled
-                    placeholder='Contribuciones'
+                    aria-label={t('components.show-project-form.contributions-aria')}
+                    placeholder={t('components.show-project-form.contributions-placeholder')}
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />
@@ -265,11 +286,12 @@ export function ShowProjectForm({ currentProject }: { currentProject: Project })
             name='logoUrl'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>URL de logo</FormLabel>
+                <FormLabel>{t('components.show-project-form.logo-url')}</FormLabel>
                 <FormControl>
                   <Input
                     disabled
-                    placeholder='URL de logo'
+                    aria-label={t('components.show-project-form.logo-url-aria')}
+                    placeholder={t('components.show-project-form.logo-url-placeholder')}
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />
@@ -283,11 +305,12 @@ export function ShowProjectForm({ currentProject }: { currentProject: Project })
             name='primaryColor'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Color Primario</FormLabel>
+                <FormLabel>{t('components.show-project-form.primary-color')}</FormLabel>
                 <FormControl>
                   <Input
                     disabled
-                    placeholder='Color Primario'
+                    aria-label={t('components.show-project-form.primary-color-aria')}
+                    placeholder={t('components.show-project-form.primary-color-placeholder')}
                     type='color'
                     {...field}
                     value={field.value === null ? undefined : field.value}
@@ -302,11 +325,12 @@ export function ShowProjectForm({ currentProject }: { currentProject: Project })
             name='demoUrl'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>URL de demo</FormLabel>
+                <FormLabel>{t('components.show-project-form.demo-url')}</FormLabel>
                 <FormControl>
                   <Input
                     disabled
-                    placeholder='URL de demo'
+                    aria-label={t('components.show-project-form.demo-url-aria')}
+                    placeholder={t('components.show-project-form.demo-url-placeholder')}
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />
@@ -320,11 +344,12 @@ export function ShowProjectForm({ currentProject }: { currentProject: Project })
             name='githubUrl'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>URL de Github</FormLabel>
+                <FormLabel>{t('components.show-project-form.github-url')}</FormLabel>
                 <FormControl>
                   <Input
                     disabled
-                    placeholder='URL de Github'
+                    aria-label={t('components.show-project-form.github-url-aria')}
+                    placeholder={t('components.show-project-form.github-url-placeholder')}
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />
@@ -335,11 +360,12 @@ export function ShowProjectForm({ currentProject }: { currentProject: Project })
           />
         </div>
         <a
+          aria-label={t('components.show-project-form.edit-aria')}
           className='border-input flex size-max items-center gap-2 rounded-md border bg-gray-500 p-2 px-4 text-white hover:bg-gray-600 hover:text-white dark:text-white dark:hover:bg-gray-400'
           href={`/vault/views/project/${currentProject.id}/edit`}
         >
           <Pen className='size-5' />
-          <span className='text-lg'>Editar</span>
+          <span className='text-lg'>{t('components.show-project-form.edit')}</span>
         </a>
       </form>
     </Form>

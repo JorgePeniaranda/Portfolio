@@ -25,6 +25,7 @@ import {
   STACK_TYPE_TRANSCRIPTIONS,
 } from '@/constants/transcriptions';
 import { StackCreateSchema } from '@/schemas/stack/create';
+import useTranslations from '@/hooks/use-translations';
 
 /**
  * Form to show a stack.
@@ -33,6 +34,7 @@ import { StackCreateSchema } from '@/schemas/stack/create';
  * @returns The show stack form
  */
 export function ShowStackForm({ currentStack }: { currentStack: Stack }) {
+  const { t } = useTranslations();
   const form = useForm<StackCreateSchema>({
     resolver: zodResolver(StackCreateSchema),
     defaultValues: currentStack,
@@ -47,9 +49,14 @@ export function ShowStackForm({ currentStack }: { currentStack: Stack }) {
             name='key'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Key</FormLabel>
+                <FormLabel>{t('components.show-stack-form.key')}</FormLabel>
                 <FormControl>
-                  <Input disabled placeholder='Key' {...field} />
+                  <Input
+                    disabled
+                    aria-label={t('components.show-stack-form.key-aria')}
+                    placeholder={t('components.show-stack-form.key-placeholder')}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -60,11 +67,12 @@ export function ShowStackForm({ currentStack }: { currentStack: Stack }) {
             name='name'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nombre</FormLabel>
+                <FormLabel>{t('components.show-stack-form.name')}</FormLabel>
                 <FormControl>
                   <Input
                     disabled
-                    placeholder='Nombre'
+                    aria-label={t('components.show-stack-form.name-aria')}
+                    placeholder={t('components.show-stack-form.name-placeholder')}
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />
@@ -78,11 +86,12 @@ export function ShowStackForm({ currentStack }: { currentStack: Stack }) {
             name='description'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Descripción</FormLabel>
+                <FormLabel>{t('components.show-stack-form.description')}</FormLabel>
                 <FormControl>
                   <Textarea
                     disabled
-                    placeholder='Descripción'
+                    aria-label={t('components.show-stack-form.description-aria')}
+                    placeholder={t('components.show-stack-form.description-placeholder')}
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />
@@ -96,7 +105,7 @@ export function ShowStackForm({ currentStack }: { currentStack: Stack }) {
             name='category'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Categoria</FormLabel>
+                <FormLabel>{t('components.show-stack-form.category')}</FormLabel>
                 <Select
                   disabled
                   defaultValue={field.value === null ? undefined : field.value}
@@ -106,7 +115,9 @@ export function ShowStackForm({ currentStack }: { currentStack: Stack }) {
                 >
                   <FormControl>
                     <SelectTrigger className='w-[180px]'>
-                      <SelectValue placeholder='Descripción' />
+                      <SelectValue
+                        placeholder={t('components.show-stack-form.category-placeholder')}
+                      />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -126,7 +137,7 @@ export function ShowStackForm({ currentStack }: { currentStack: Stack }) {
             name='type'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Tipo</FormLabel>
+                <FormLabel>{t('components.show-stack-form.type')}</FormLabel>
                 <Select
                   disabled
                   defaultValue={field.value === null ? undefined : field.value}
@@ -136,7 +147,7 @@ export function ShowStackForm({ currentStack }: { currentStack: Stack }) {
                 >
                   <FormControl>
                     <SelectTrigger className='w-[180px]'>
-                      <SelectValue placeholder='Tipo' />
+                      <SelectValue placeholder={t('components.show-stack-form.type-placeholder')} />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -156,11 +167,12 @@ export function ShowStackForm({ currentStack }: { currentStack: Stack }) {
             name='iconUrl'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>URL de icono</FormLabel>
+                <FormLabel>{t('components.show-stack-form.icon-url')}</FormLabel>
                 <FormControl>
                   <Input
                     disabled
-                    placeholder='iconURL'
+                    aria-label={t('components.show-stack-form.icon-url-aria')}
+                    placeholder={t('components.show-stack-form.icon-url-placeholder')}
                     {...field}
                     value={field.value === null ? undefined : field.value}
                   />
@@ -171,11 +183,12 @@ export function ShowStackForm({ currentStack }: { currentStack: Stack }) {
           />
         </div>
         <a
+          aria-label={t('components.show-stack-form.edit-aria')}
           className='border-input flex size-max items-center gap-2 rounded-md border bg-gray-500 p-2 px-4 text-white hover:bg-gray-600 hover:text-white dark:text-white dark:hover:bg-gray-400'
           href={`/vault/views/stack/${currentStack.id}/edit`}
         >
           <Pen className='size-5' />
-          <span className='text-lg'>Editar</span>
+          <span className='text-lg'>{t('components.show-stack-form.edit')}</span>
         </a>
       </form>
     </Form>
