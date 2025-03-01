@@ -6,6 +6,7 @@
  */
 
 import { fixupPluginRules } from '@eslint/compat';
+import eslint from '@eslint/js';
 import astroParser from 'astro-eslint-parser';
 import eslintPluginAstro from 'eslint-plugin-astro';
 import eslintPluginImport from 'eslint-plugin-import';
@@ -37,23 +38,26 @@ export default [
   /**
    * 🔹 General ESLint rules
    */
-  {
-    rules: {
-      'padding-line-between-statements': [
-        'warn',
-        { blankLine: 'always', prev: '*', next: ['return', 'export'] },
-        { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
-        {
-          blankLine: 'any',
-          prev: ['const', 'let', 'var'],
-          next: ['const', 'let', 'var'],
-        },
-      ],
-      'no-console': 'warn',
-      'prefer-const': 'error',
-      'no-var': 'error',
+  ...[
+    eslint.configs.recommended,
+    {
+      rules: {
+        'padding-line-between-statements': [
+          'warn',
+          { blankLine: 'always', prev: '*', next: ['return', 'export'] },
+          { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
+          {
+            blankLine: 'any',
+            prev: ['const', 'let', 'var'],
+            next: ['const', 'let', 'var'],
+          },
+        ],
+        'no-console': 'warn',
+        'prefer-const': 'error',
+        'no-var': 'error',
+      },
     },
-  },
+  ],
 
   /**
    * 🔹 React-specific ESLint rules
@@ -80,6 +84,7 @@ export default [
     rules: {
       // ✅ Recommended rules
       ...eslintPluginReact.configs.recommended.rules,
+      ...eslintPluginReact.configs['jsx-runtime'].rules,
       ...eslintPluginJsxA11y.configs.recommended.rules,
       ...eslintPluginReactHooks.configs.recommended.rules,
 
@@ -108,27 +113,14 @@ export default [
    * 🔹 TypeScript-specific ESLint rules
    */
   ...[
-    ...tseslint.configs.recommended,
-    {
-      rules: {
-        '@typescript-eslint/no-non-null-assertion': 'off',
-        '@typescript-eslint/no-shadow': 'off',
-        '@typescript-eslint/explicit-function-return-type': 'off',
-        '@typescript-eslint/require-await': 'off',
-        '@typescript-eslint/no-floating-promises': 'off',
-        '@typescript-eslint/no-confusing-void-expression': 'off',
-        '@typescript-eslint/no-unused-vars': [
-          'warn',
-          {
-            args: 'after-used',
-            ignoreRestSiblings: false,
-            argsIgnorePattern: '^_.*?$',
-          },
-        ],
-        '@typescript-eslint/consistent-type-imports': 'warn',
-        '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
-      },
-    },
+    ...tseslint.configs.strict,
+    ...tseslint.configs.stylistic,
+    // {
+    //   rules: {
+    //     '@typescript-eslint/consistent-type-exports': 'warn',
+    //     '@typescript-eslint/consistent-type-imports': 'warn',
+    //   },
+    // },
   ],
 
   /**
@@ -180,7 +172,6 @@ export default [
       import: fixupPluginRules(eslintPluginImport),
     },
     rules: {
-      'import/no-default-export': 'off',
       'import/order': [
         'warn',
         {

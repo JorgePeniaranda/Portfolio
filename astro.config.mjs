@@ -12,7 +12,8 @@ export default defineConfig({
   // base: '/Portfolio/',
   integrations: [react(), sitemap(), tailwind(), playformCompress(), icon(), robotsTxt()],
   compressHTML: true,
-  output: process.env.NODE_ENV === 'development' ? 'server' : 'static',
+  // eslint-disable-next-line no-undef
+  output: process?.env?.NODE_ENV === 'development' ? 'server' : 'static',
   outDir: 'docs',
   build: {
     assets: 'static',
