@@ -21,4 +21,8 @@ export default defineConfig({
   build: {
     assets: 'static',
   },
+  i18n: {
+    locales: ['en', 'es'],
+    defaultLocale: 'es',
+  },
 });
