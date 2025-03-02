@@ -27,7 +27,7 @@ import {
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 import { deleteStackRemoveAssociatedProjects } from '@/services/stack/deleteStackRemoveAssociatedProjects';
 import { postStackAddAssociatedProjects } from '@/services/stack/postStackAddAssociatedProjects';
 

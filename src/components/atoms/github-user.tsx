@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/helpers/common/classnames';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 interface GithubUserProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   username: string;

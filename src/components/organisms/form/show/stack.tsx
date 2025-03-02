@@ -25,7 +25,7 @@ import {
   STACK_TYPE_TRANSCRIPTIONS,
 } from '@/constants/transcriptions';
 import { StackCreateSchema } from '@/schemas/stack/create';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 /**
  * Form to show a stack.

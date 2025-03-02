@@ -10,7 +10,7 @@ import { DesktopNavbarSeparator } from './separator';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useSoundStore } from '@/services/storage/sound';
 import { useThemeStore } from '@/services/storage/theme';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 /**
  * Desktop navigation bar component.

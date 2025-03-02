@@ -1,5 +1,5 @@
 import { cn } from '@/helpers/common/classnames';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 interface ConditionalAnchor extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   disabledButtonProps: React.HTMLAttributes<HTMLSpanElement>;

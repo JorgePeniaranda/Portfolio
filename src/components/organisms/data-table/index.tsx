@@ -28,7 +28,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

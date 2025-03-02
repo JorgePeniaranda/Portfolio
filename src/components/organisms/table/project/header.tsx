@@ -23,7 +23,7 @@ import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isNotDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
 import { deleteProject } from '@/services/project/deleteProject';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 export function ProjectTableHeader({ table }: { table: Table<Project> }) {
   const { t } = useTranslations();

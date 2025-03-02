@@ -7,7 +7,7 @@ import { langStore } from '@/services/storage/lang';
 import { extractTransaction } from '@/helpers/common/extract-transaction';
 import { I18N_TRANSLATIONS } from '@/constants/i18n';
 
-export default function useTranslations() {
+export function useTranslations() {
   const lang = useStore(langStore);
 
   const currentTranslations = useMemo(() => {

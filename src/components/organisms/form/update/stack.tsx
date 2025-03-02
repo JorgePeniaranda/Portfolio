@@ -26,7 +26,7 @@ import {
   STACK_TYPE_TRANSCRIPTIONS,
 } from '@/constants/transcriptions';
 import { useToast } from '@/hooks/use-toast';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 import { StackUpdateSchema } from '@/schemas/stack/update';
 import { putStack } from '@/services/stack/putStack';
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';

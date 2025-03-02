@@ -32,7 +32,7 @@ import { cn } from '@/helpers/common/classnames';
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 import { ProjectCreateDefaultValues, ProjectCreateSchema } from '@/schemas/project/create';
 import { postProject } from '@/services/project/postProject';
 

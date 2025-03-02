@@ -1,6 +1,6 @@
 import { Typewriter } from 'react-simple-typewriter';
 
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 interface TextWritterProps {
   wordList: string[];

@@ -15,7 +15,7 @@ import {
 import { Label } from './label';
 
 import { cn } from '@/helpers/common/classnames';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 const Form = FormProvider;
 

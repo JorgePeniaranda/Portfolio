@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/accordion';
 import { isDefined } from '@/helpers/guards/is-defined';
 import { isNoEmptyString } from '@/helpers/guards/is-no-empty-string';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 //#region TYPES
 interface ProjectAccordionProps {

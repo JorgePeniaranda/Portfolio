@@ -23,7 +23,7 @@ import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isNotDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
 import { deleteStack } from '@/services/stack/deleteStack';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 export function StackTableHeader({ table }: { table: Table<Stack> }) {
   const { t } = useTranslations();

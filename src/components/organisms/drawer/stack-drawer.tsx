@@ -7,7 +7,7 @@ import * as React from 'react';
 import { MessageDisplay } from '@/components/atoms/message-display';
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 import { isDefined, isNotDefined } from '@/helpers/guards/is-defined';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 /**
  * Component that renders an interactive drawer to display detailed information about a Stack.

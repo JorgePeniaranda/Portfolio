@@ -30,7 +30,7 @@ import {
 } from '@/constants/transcriptions';
 import { cn } from '@/helpers/common/classnames';
 import { ProjectUpdateSchema } from '@/schemas/project/update';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 /**
  * Form to show a project.

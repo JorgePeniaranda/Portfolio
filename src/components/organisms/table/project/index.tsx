@@ -6,7 +6,7 @@ import { ProjectTableColumns } from './column';
 import { ProjectTableHeader } from './header';
 
 import { DataTable } from '@/components/organisms/data-table';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 /**
  * Project Table Component

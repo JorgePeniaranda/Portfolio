@@ -1,6 +1,6 @@
 import type { TranslationKey } from '@/types/translation';
 
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 export function TranslateText({
   key,

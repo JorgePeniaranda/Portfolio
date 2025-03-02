@@ -28,7 +28,7 @@ import {
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 import { StackCreateDefaultValues, StackCreateSchema } from '@/schemas/stack/create';
 import { postStack } from '@/services/stack/postStack';
 

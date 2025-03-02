@@ -10,7 +10,7 @@ import {
   BreadcrumbSeparator,
   Breadcrumb as UIBreadcrumb,
 } from '@/components/ui/breadcrumb';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
   items: IBreadCrumb[];

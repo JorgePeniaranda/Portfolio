@@ -16,7 +16,7 @@ import {
   STACK_CATEGORY_TRANSCRIPTIONS,
 } from '@/constants/transcriptions';
 import { isDefined } from '@/helpers/guards/is-defined';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 import { useProjectLikedStore } from '@/services/storage/liked-projects';
 import { Button } from '@/components/ui/button';
 

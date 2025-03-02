@@ -3,7 +3,7 @@ import { useState, type HTMLAttributes } from 'react';
 
 import { CAT_URLs } from '@/constants/external-api';
 import { cn } from '@/helpers/common/classnames';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 /**
  * CatAsAService component displays a random cat image, and allows the user to request a new one by clicking a button.

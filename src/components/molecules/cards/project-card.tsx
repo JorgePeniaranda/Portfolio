@@ -3,7 +3,7 @@ import type { MouseEvent } from 'react';
 import { Heart, HeartOff } from 'lucide-react';
 
 import { useProjectLikedStore } from '@/services/storage/liked-projects';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 export interface ProjectCardProps {
   projectKey: string;

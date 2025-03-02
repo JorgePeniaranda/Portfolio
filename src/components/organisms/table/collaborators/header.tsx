@@ -23,7 +23,7 @@ import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isNotDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
 import { deleteCollaborator } from '@/services/collaborator/deleteCollaborator';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 export function CollaboratorsTableHeader({ table }: { table: Table<Collaborator> }) {
   const { t } = useTranslations();

@@ -15,7 +15,7 @@ import { Input } from '@/components/ui/input';
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
 import { isDefined } from '@/helpers/guards/is-defined';
 import { useToast } from '@/hooks/use-toast';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 import {
   CollaboratorCreateDefaultValues,
   CollaboratorCreateSchema,

@@ -2,7 +2,7 @@ import type { Collaborator } from '@prisma/client';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardHeader } from '@/components/ui/card';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 /**
  * Card to show a collaborator relationship.

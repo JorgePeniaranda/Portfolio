@@ -6,7 +6,7 @@ import { StackTableColumns } from './column';
 import { StackTableHeader } from './header';
 
 import { DataTable } from '@/components/organisms/data-table';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 /**
  * Stack Table Component

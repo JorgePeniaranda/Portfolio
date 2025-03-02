@@ -6,7 +6,7 @@ import { CollaboratorsTableColumns } from './columns';
 import { CollaboratorsTableHeader } from './header';
 
 import { DataTable } from '@/components/organisms/data-table';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 /**
  * Collaborator Table Component

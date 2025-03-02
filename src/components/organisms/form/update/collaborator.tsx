@@ -18,7 +18,7 @@ import { useToast } from '@/hooks/use-toast';
 import { CollaboratorUpdateSchema } from '@/schemas/collaborator/update';
 import { putCollaborator } from '@/services/collaborator/putCollaborator';
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 /**
  * Form to update a collaborator.

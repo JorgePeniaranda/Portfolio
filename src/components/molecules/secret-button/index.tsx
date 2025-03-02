@@ -14,7 +14,7 @@ import {
 import { InputOTP, InputOTPSlot } from '@/components/ui/input-otp';
 import { useToast } from '@/hooks/use-toast';
 import { useSecretCodeStore } from '@/services/storage/secret-code';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 /**
  * Component that displays an interactive button to open a modal for entering a secret code.

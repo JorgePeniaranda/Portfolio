@@ -3,7 +3,7 @@ import type { IBreadCrumb } from '@/types/breadcrumb';
 import React from 'react';
 
 import { BreadcrumbItem, BreadcrumbLink, BreadcrumbPage } from '@/components/ui/breadcrumb';
-import useTranslations from '@/hooks/use-translations';
+import { useTranslations } from '@/hooks/use-translations';
 
 interface CustomBreadcrumbItemProps extends React.HTMLAttributes<HTMLElement> {
   item: IBreadCrumb;
