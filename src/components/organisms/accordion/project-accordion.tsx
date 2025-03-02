@@ -2,7 +2,7 @@ import type { Collaborator, Project, Stack } from '@prisma/client';
 
 import { ExternalLink } from 'lucide-react';
 
-import GithubUser from '@/components/atoms/github-user';
+import { GithubUser } from '@/components/atoms/github-user';
 import { MessageDisplay } from '@/components/atoms/message-display';
 import {
   AccordionContent,

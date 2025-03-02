@@ -14,7 +14,7 @@ interface GithubUserProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> 
  * @param params.username - The GitHub username
  * @returns A GithubUser component
  */
-export default function GithubUser({ username, ...props }: GithubUserProps) {
+export function GithubUser({ username, ...props }: GithubUserProps) {
   const { t } = useTranslations();
 
   return (
