@@ -18,7 +18,7 @@ export async function getStackById({ id }: { id: Stack['id'] }): Promise<Stack |
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo obtener el stack.',
+      defaultErrorMessage: 'services.stack.get-stack-by-id.operation-failed',
     });
   }
 }

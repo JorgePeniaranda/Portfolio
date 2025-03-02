@@ -29,7 +29,7 @@ export async function putProject({
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo actualizar el proyecto.',
+      defaultErrorMessage: 'services.project.put-project.operation-failed',
     });
   }
 }

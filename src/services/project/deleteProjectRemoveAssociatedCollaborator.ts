@@ -18,7 +18,8 @@ export async function deleteProjectRemoveAssociatedCollaborator(
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo eliminar el colaborador del proyecto.',
+      defaultErrorMessage:
+        'services.project.delete-project-remove-associated-collaborator.operation-failed',
     });
   }
 }

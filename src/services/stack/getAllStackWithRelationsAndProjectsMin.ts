@@ -5,8 +5,8 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 
 // TO-DO: REPLACE WITH API CALL
 /**
- * Get all stacks with relations and projects.
- * @returns A list of stacks with their associated projects and related stacks
+ * Get all stacks with relations and projects with minimal data.
+ * @returns A list of stacks with relations and projects with minimal data
  * @throws An error if the stacks could not be retrieved
  */
 export async function getAllStackWithRelationsAndProjectsMin(): Promise<
@@ -48,7 +48,8 @@ export async function getAllStackWithRelationsAndProjectsMin(): Promise<
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo obtener la lista de stacks.',
+      defaultErrorMessage:
+        'services.stack.get-all-stack-with-relations-and-projects-min.operation-failed',
     });
   }
 }

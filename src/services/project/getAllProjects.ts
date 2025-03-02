@@ -16,7 +16,7 @@ export async function getAllProjects(): Promise<Project[]> {
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo obtener la lista de proyectos.',
+      defaultErrorMessage: 'services.project.get-all-projects.operation-failed',
     });
   }
 }

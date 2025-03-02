@@ -23,7 +23,7 @@ export async function postCollaborator(
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo crear el colaborador.',
+      defaultErrorMessage: 'services.collaborator.post-collaborator.operation-failed',
     });
   }
 }

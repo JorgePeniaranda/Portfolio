@@ -29,7 +29,7 @@ export async function putStack({
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo actualizar el stack.',
+      defaultErrorMessage: 'services.stack.put-stack.operation-failed',
     });
   }
 }

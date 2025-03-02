@@ -23,7 +23,7 @@ export async function deleteCollaborator(
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo eliminar el colaborador.',
+      defaultErrorMessage: 'services.collaborator.delete-collaborator.operation-failed',
     });
   }
 }

@@ -18,7 +18,7 @@ export async function getProjectById({ id }: { id: Project['id'] }): Promise<Pro
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo obtener el proyecto.',
+      defaultErrorMessage: 'services.project.get-project-by-id.operation-failed',
     });
   }
 }

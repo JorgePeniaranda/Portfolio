@@ -18,7 +18,7 @@ export async function getProjectByKey({ key }: { key: Project['key'] }): Promise
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo obtener el proyecto.',
+      defaultErrorMessage: 'services.project.get-project-by-key.operation-failed',
     });
   }
 }

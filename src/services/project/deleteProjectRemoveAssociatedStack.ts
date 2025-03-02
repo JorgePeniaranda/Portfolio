@@ -18,7 +18,8 @@ export async function deleteProjectRemoveAssociatedStack(
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo eliminar el stack del proyecto.',
+      defaultErrorMessage:
+        'services.project.delete-project-remove-associated-stack.operation-failed',
     });
   }
 }

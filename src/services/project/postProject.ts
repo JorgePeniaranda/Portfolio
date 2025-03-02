@@ -18,7 +18,7 @@ export async function postProject(projectInput: ProjectCreateSchema): Promise<Pr
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo crear el proyecto.',
+      defaultErrorMessage: 'services.project.post-project.operation-failed',
     });
   }
 }

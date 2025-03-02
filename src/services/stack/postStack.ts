@@ -18,7 +18,7 @@ export async function postStack(stackUpdateInput: StackCreateSchema): Promise<St
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo crear el stack.',
+      defaultErrorMessage: 'services.stack.post-stack.operation-failed',
     });
   }
 }

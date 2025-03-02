@@ -16,7 +16,7 @@ export async function getAllStack(): Promise<Stack[]> {
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo obtener la lista de stacks.',
+      defaultErrorMessage: 'services.stack.get-all-stack.operation-failed',
     });
   }
 }

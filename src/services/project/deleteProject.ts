@@ -20,7 +20,7 @@ export async function deleteProject(projectIds: Project['id'][]): Promise<Delete
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo eliminar el proyecto.',
+      defaultErrorMessage: 'services.project.delete-project.operation-failed',
     });
   }
 }

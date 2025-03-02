@@ -1,4 +1,4 @@
-import type { Collaborator, Project } from '@prisma/client';
+import type { Project, Stack } from '@prisma/client';
 
 import { apiClient } from '@/helpers/client/axios';
 import { handleServiceError } from '@/helpers/error/service-handler';
@@ -13,7 +13,7 @@ import { handleServiceError } from '@/helpers/error/service-handler';
 export async function getProjectsByNotAssociatedStack({
   idStack,
 }: {
-  idStack: Collaborator['id'];
+  idStack: Stack['id'];
 }): Promise<Project[]> {
   try {
     const { data: response } = await apiClient.get<Project[]>(
@@ -24,7 +24,7 @@ export async function getProjectsByNotAssociatedStack({
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo obtener la lista de proyectos.',
+      defaultErrorMessage: 'services.project.get-projects-by-not-associated-stack.operation-failed',
     });
   }
 }

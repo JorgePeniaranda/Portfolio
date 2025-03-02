@@ -18,7 +18,7 @@ export async function postStackAddAssociatedProjects(
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo agregar el proyecto al stack.',
+      defaultErrorMessage: 'services.stack.post-stack-add-associated-projects.operation-failed',
     });
   }
 }

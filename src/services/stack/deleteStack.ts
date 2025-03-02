@@ -20,7 +20,7 @@ export async function deleteStack(stackIds: Stack['id'][]): Promise<DeleteRespon
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo eliminar el stack.',
+      defaultErrorMessage: 'services.stack.delete-stack.operation-failed',
     });
   }
 }

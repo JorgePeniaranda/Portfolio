@@ -24,7 +24,8 @@ export async function getProjectsByNotAssociatedCollaborator({
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo obtener la lista de proyectos.',
+      defaultErrorMessage:
+        'services.project.get-projects-by-not-associated-collaborator.operation-failed',
     });
   }
 }

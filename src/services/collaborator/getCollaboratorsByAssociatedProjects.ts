@@ -24,7 +24,8 @@ export async function getCollaboratorsByAssociatedProjects({
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo obtener la lista de colaboradores.',
+      defaultErrorMessage:
+        'services.collaborator.get-collaborators-by-associated-projects.operation-failed',
     });
   }
 }

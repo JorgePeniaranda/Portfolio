@@ -29,7 +29,7 @@ export async function putCollaborator({
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo actualizar el colaborador.',
+      defaultErrorMessage: 'services.collaborator.put-collaborator.operation-failed',
     });
   }
 }

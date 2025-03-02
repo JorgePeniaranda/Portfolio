@@ -18,7 +18,8 @@ export async function postCollaboratorAddAssociatedProjects(
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo agregar el proyecto al colaborador.',
+      defaultErrorMessage:
+        'services.collaborator.post-collaborator-add-associated-projects.operation-failed',
     });
   }
 }

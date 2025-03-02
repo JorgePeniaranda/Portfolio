@@ -16,7 +16,7 @@ export async function getAllCollaborator(): Promise<Collaborator[]> {
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo obtener la lista de colaboradores.',
+      defaultErrorMessage: 'services.collaborator.get-all-collaborator.operation-failed',
     });
   }
 }

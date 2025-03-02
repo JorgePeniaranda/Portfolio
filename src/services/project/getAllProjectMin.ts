@@ -9,8 +9,8 @@ export type GetAllProjectMinResponse = Pick<
 >[];
 
 /**
- * Get all projects with minimal information.
- * @returns A list of projects
+ * Get all projects with minimal data
+ * @returns A list of projects with minimal data
  * @throws An error if the projects could not be retrieved
  */
 export async function getAllProjectMin(): Promise<GetAllProjectMinResponse> {
@@ -22,7 +22,7 @@ export async function getAllProjectMin(): Promise<GetAllProjectMinResponse> {
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo obtener la lista de proyectos.',
+      defaultErrorMessage: 'services.project.get-all-project-min.operation-failed',
     });
   }
 }

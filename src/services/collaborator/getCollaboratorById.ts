@@ -24,7 +24,7 @@ export async function getCollaboratorById({
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo obtener el colaborador.',
+      defaultErrorMessage: 'services.collaborator.get-collaborator-by-id.operation-failed',
     });
   }
 }

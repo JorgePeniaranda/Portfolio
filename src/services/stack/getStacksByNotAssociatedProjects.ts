@@ -24,7 +24,7 @@ export async function getStacksByNotAssociatedProjects({
   } catch (error) {
     throw handleServiceError({
       error,
-      defaultErrorMessage: 'No se pudo obtener la lista de stacks.',
+      defaultErrorMessage: 'services.stack.get-stacks-by-not-associated-projects.operation-failed',
     });
   }
 }
