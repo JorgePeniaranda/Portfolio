@@ -764,6 +764,27 @@
       }
     }
   },
+  "pages": {
+    "home": {
+      "h1-title": "Portfolio de Full-Stack Developer especializado en Front-End y Back-End",
+      "h2-title": "De tus ideas a",
+      "word-list": {
+        "results": "Resultados",
+        "solutions": "Soluciones",
+        "innovations": "Innovaciones",
+        "creations": "Creaciones",
+        "projects": "Proyectos",
+        "achievements": "Logros",
+        "applications": "Aplicaciones",
+        "improvements": "Mejoras",
+        "success": "El éxito"
+      },
+      "description": "¿Buscas soluciones web prácticas y efectivas? Descubre cómo mi experiencia puede darle a tus proyectos el impulso que necesitan para destacar.",
+      "button": {
+        "know-projects": "Conoce mis proyectos"
+      }
+    }
+  },
   "error": {
     "api": {
       "operationFailed": "La operación ha fallado. Por favor, intenta nuevamente.",

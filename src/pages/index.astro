@@ -1,4 +1,6 @@
 ---
+import type { AvailableLanguages } from '@/types/translation';
+
 import Bird1 from '@/assets/svg/draws/Bird-1.astro';
 import Bird2 from '@/assets/svg/draws/Bird-2.astro';
 import Bird3 from '@/assets/svg/draws/Bird-3.astro';
@@ -10,17 +12,20 @@ import Logo from '@/assets/svg/logos/Logo.astro';
 import { TextWritter } from '@/components/atoms/text-writter';
 import { SecretButton } from '@/components/molecules/secret-button';
 import Layout from '@/components/template/base.astro';
+import { useAstroTraslation } from '@/helpers/common/use-astro-traslation';
+
+const { t } = useAstroTraslation(Astro.currentLocale);
 
 const TITLE_WORD_LIST = [
-  'Resultados',
-  'Soluciones',
-  'Innovaciones',
-  'Creaciones',
-  'Proyectos',
-  'Logros',
-  'Aplicaciones',
-  'Mejoras',
-  'El éxito',
+  t('pages.home.word-list.results'),
+  t('pages.home.word-list.solutions'),
+  t('pages.home.word-list.innovations'),
+  t('pages.home.word-list.creations'),
+  t('pages.home.word-list.projects'),
+  t('pages.home.word-list.achievements'),
+  t('pages.home.word-list.applications'),
+  t('pages.home.word-list.improvements'),
+  t('pages.home.word-list.success'),
 ];
 ---
 
@@ -29,26 +34,32 @@ const TITLE_WORD_LIST = [
     class:
       'bg-linear-to-r from-rose-200 to-teal-200 dark:from-[rgba(136,19,55,0.8)] dark:dark:to-[rgba(4,120,87,0.8)] dark:to-gray-800 transition-colors ease-linear',
   }}
+  lang={Astro.currentLocale as AvailableLanguages}
 >
   <nav class='flex h-max items-center justify-between px-20 pt-2'>
     <Logo class='aspect-square w-28' />
     <SecretButton client:visible />
   </nav>
   <header class='my-14 mb-20 flex h-max flex-col items-center gap-1 text-center' id='header'>
-    <h1 class='sr-only'>Portfolio de Full-Stack Developer especializado en Front-End y Back-End</h1>
+    <h1 class='sr-only'>
+      {t('pages.home.h1-title')}
+    </h1>
     <h2 class='text-6xl font-medium'>
-      De tus ideas a <b class='text-primary'>
+      {t('pages.home.h2-title')}
+      {' '}
+      <b class='text-primary'>
         <TextWritter client:load wordList={TITLE_WORD_LIST} />
       </b>
     </h2>
     <p class='max-w-2xl text-xl'>
-      ¿Buscas soluciones web prácticas y efectivas? Descubre cómo mi experiencia puede darle a tus
-      proyectos el impulso que necesitan para destacar.
+      {t('pages.home.description')}
     </p>
     <a
       class='bg-primary mt-10 rounded-md px-5 py-2.5 text-2xl font-semibold text-white transition-transform hover:scale-105'
-      href='/projects'>Conoce mis Proyectos</a
+      href='/projects'
     >
+      {t('pages.home.button.know-projects')}
+    </a>
   </header>
   <section
     aria-label='Header Illustration'

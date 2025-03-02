@@ -651,6 +651,27 @@ export interface Translation {
       };
     };
   };
+  pages: {
+    home: {
+      'h1-title': string;
+      'h2-title': string;
+      'word-list': {
+        results: string;
+        solutions: string;
+        innovations: string;
+        creations: string;
+        projects: string;
+        achievements: string;
+        applications: string;
+        improvements: string;
+        success: string;
+      };
+      'description': string;
+      'button': {
+        'know-projects': string;
+      };
+    };
+  };
   services: {
     collaborator: {
       'delete-collaborator': {
