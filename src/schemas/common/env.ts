@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { EnvSchemaErrorMessages } from '@/messages/errors/schemas/env';
+import { EnvSchemaErrorMessages } from '@/messages/schemas/env';
 
 export const EnvSchema = z.object({
   appVersion: z.string({

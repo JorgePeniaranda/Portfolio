@@ -2,7 +2,7 @@ import type { PrismaError } from '@/types/common';
 
 import { Prisma } from '@prisma/client';
 
-import { PRISMA_ERROR_MESSAGES } from '@/messages/errors/prisma-errors';
+import { PRISMA_ERROR_MESSAGES } from '@/messages/errors/prisma';
 import { PRISMA_STATUS_CODE_STATUS_CATEGORY } from '@/constants/common';
 
 /**

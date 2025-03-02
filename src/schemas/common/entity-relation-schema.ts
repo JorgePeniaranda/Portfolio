@@ -1,6 +1,6 @@
 import z from 'zod';
 
-import { EntityRelationSchemaErrorMessages } from '@/messages/errors/schemas/entity-relation';
+import { EntityRelationSchemaErrorMessages } from '@/messages/schemas/entity-relation';
 
 export const EntityRelationSchema = z.object({
   idSource: z.number({

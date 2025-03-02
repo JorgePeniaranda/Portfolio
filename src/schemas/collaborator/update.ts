@@ -2,7 +2,7 @@ import type { Prisma } from '@prisma/client';
 
 import { z } from 'zod';
 
-import { CollaboratorSchemaErrorMessages } from '@/messages/errors/schemas/collaborator';
+import { CollaboratorSchemaErrorMessages } from '@/messages/schemas/collaborator';
 
 export const CollaboratorUpdateSchema = z.object({
   nickname: z

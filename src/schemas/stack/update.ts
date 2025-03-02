@@ -3,7 +3,7 @@ import type { Prisma } from '@prisma/client';
 import { StackCategory, StackType } from '@prisma/client';
 import { z } from 'zod';
 
-import { StackSchemaErrorMessages } from '@/messages/errors/schemas/stack';
+import { StackSchemaErrorMessages } from '@/messages/schemas/stack';
 
 const stackCategoryValues = Object.values(StackCategory) as [
   (typeof StackCategory)[keyof typeof StackCategory],

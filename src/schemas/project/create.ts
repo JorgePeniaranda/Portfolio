@@ -4,7 +4,7 @@ import { ProjectStatus, StackCategory } from '@prisma/client';
 import { z } from 'zod';
 
 import { isHexadecimal } from '@/helpers/guards/is-hexadecimal';
-import { ProjectSchemaErrorMessages } from '@/messages/errors/schemas/project';
+import { ProjectSchemaErrorMessages } from '@/messages/schemas/project';
 
 const stackCategoryValues = Object.values(StackCategory) as [
   (typeof StackCategory)[keyof typeof StackCategory],
