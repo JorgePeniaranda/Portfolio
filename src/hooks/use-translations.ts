@@ -3,9 +3,9 @@ import type { TranslationKey } from '@/types/translation';
 import { useStore } from '@nanostores/react';
 import { useMemo } from 'react';
 
-import { I18N_TRANSLATIONS } from '@/constants/i18n';
 import { langStore } from '@/services/storage/lang';
 import { extractTransaction } from '@/helpers/common/extract-transaction';
+import { I18N_TRANSLATIONS } from '@/constants/i18n';
 
 export default function useTranslations() {
   const lang = useStore(langStore);

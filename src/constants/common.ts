@@ -18,6 +18,8 @@ export const SECRET_CODE_STORE_KEY = 'secretCode';
 export const PROJECT_LIKED_STORE_KEY = 'likedProjects';
 
 // MARK: constants
+export const AVAILABLE_LANGUAGES = ['es', 'en'] as const;
+
 export const THEME_CLASSNAME = 'dark';
 
 export const DATA_FORMAT = 'DD-MM-YYYY';

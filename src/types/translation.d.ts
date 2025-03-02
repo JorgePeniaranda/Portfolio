@@ -1,4 +1,4 @@
-import type { AVAILABLE_LANGUAGES } from '@/constants/i18n';
+import type { AVAILABLE_LANGUAGES } from '@/constants/common';
 
 export type AvailableLanguages = (typeof AVAILABLE_LANGUAGES)[number];
 
