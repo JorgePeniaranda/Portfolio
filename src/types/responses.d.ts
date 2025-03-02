@@ -1,3 +1,5 @@
+import type { TranslationKey } from './translation';
+
 export interface ErrorResponse {
   type: string;
   title: string;
@@ -5,6 +7,7 @@ export interface ErrorResponse {
   detail?: string;
   instance?: string;
   fieldErrors?: FieldError[];
+  i18nKey: TranslationKey;
 }
 
 export interface FieldError {

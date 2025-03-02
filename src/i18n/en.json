@@ -631,7 +631,32 @@
       }
     }
   },
+  "handler": {
+    "service": {
+      "generic-error": "An error occurred. Please try again.",
+      "static-error": "No changes can be made as it is a static site.",
+      "validation-error": "A validation error occurred. Please check the entered data."
+    },
+    "prisma": {
+      "generic-error": "An error occurred. Please try again."
+    },
+    "toast": {
+      "error": {
+        "status-messages": {
+          "generic-error": "An unexpected error occurred."
+        }
+      },
+      "button": {
+        "try-again": "Try again"
+      }
+    }
+  },
   "error": {
+    "api": {
+      "operationFailed": "An operation failed. Please try again.",
+      "generic": "An error occurred. Please try again.",
+      "validation": "A validation error occurred. Please check the entered data."
+    },
     "validation-message": {
       "collaborator": {
         "nickname": {
@@ -825,6 +850,10 @@
       "P2035": "There was an unexpected problem with the data.",
       "P2036": "An error occurred in an external component.",
       "P2037": "There are too many open connections to the database."
+    },
+    "status-messages": {
+      "unknown": "An unknown error occurred.",
+      "generic-error": "An unexpected error has occurred."
     }
   }
 }

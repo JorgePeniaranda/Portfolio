@@ -631,7 +631,32 @@ export interface Translation {
       };
     };
   };
+  handler: {
+    service: {
+      'generic-error': string;
+      'static-error': string;
+      'validation-error': string;
+    };
+    prisma: {
+      'generic-error': string;
+    };
+    toast: {
+      error: {
+        'status-messages': {
+          'generic-error': string;
+        };
+      };
+      button: {
+        'try-again': string;
+      };
+    };
+  };
   error: {
+    'api': {
+      operationFailed: string;
+      generic: string;
+      validation: string;
+    };
     'validation-message': {
       'collaborator': {
         nickname: {

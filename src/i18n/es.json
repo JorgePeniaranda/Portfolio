@@ -631,7 +631,32 @@
       }
     }
   },
+  "handler": {
+    "service": {
+      "generic-error": "Ha ocurrido un error. Por favor, intenta nuevamente.",
+      "static-error": "No se puede realizar cambios por ser un sitio estático",
+      "validation-error": "Ha ocurrido un error de validación. Por favor, verifica los datos ingresados."
+    },
+    "prisma": {
+      "generic-error": "Ha ocurrido un error. Por favor, intenta nuevamente."
+    },
+    "toast": {
+      "error": {
+        "status-messages": {
+          "generic-error": "Ha ocurrido un error. Por favor, intenta nuevamente."
+        }
+      },
+      "button": {
+        "try-again": "Intenta de nuevo"
+      }
+    }
+  },
   "error": {
+    "api": {
+      "operationFailed": "La operación ha fallado. Por favor, intenta nuevamente.",
+      "generic": "Ha ocurrido un error. Por favor, intenta nuevamente.",
+      "validation": "Ha ocurrido un error de validación. Por favor, verifica los datos ingresados."
+    },
     "validation-message": {
       "collaborator": {
         "nickname": {
@@ -825,6 +850,10 @@
       "P2035": "Hubo un problema inesperado con los datos.",
       "P2036": "Se produjo un error en un componente externo.",
       "P2037": "Hay demasiadas conexiones abiertas a la base de datos."
+    },
+    "status-messages": {
+      "unknown": "Ocurrió un error desconocido.",
+      "generic-error": "Se ha producido un error inesperado."
     }
   }
 }
