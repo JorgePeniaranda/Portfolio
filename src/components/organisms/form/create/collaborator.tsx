@@ -58,8 +58,8 @@ export function CreateCollaboratorForm({ disableForm = false }: { disableForm?: 
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: t('components.create-collaborator-form.error-title'),
-        defaultErrorMessage: t('components.create-collaborator-form.error-description'),
+        title: 'components.create-collaborator-form.error-title',
+        defaultErrorMessage: 'components.create-collaborator-form.error-description',
         tryAgain: () => onSubmit(values),
       });
     }

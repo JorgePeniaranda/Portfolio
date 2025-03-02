@@ -68,8 +68,8 @@ export function CreateStackForm({ disableForm = false }: { disableForm?: boolean
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: t('components.create-stack-form.error-title'),
-        defaultErrorMessage: t('components.create-stack-form.error-description'),
+        title: 'components.create-stack-form.error-title',
+        defaultErrorMessage: 'components.create-stack-form.error-description',
         tryAgain: () => onSubmit(values),
       });
     }

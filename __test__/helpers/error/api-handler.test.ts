@@ -1,4 +1,5 @@
 import type { FieldError } from '@/types/responses';
+import type { TranslationKey } from '@/types/translation';
 
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { z } from 'zod';
@@ -30,7 +31,7 @@ describe('handleApiError', () => {
     const mockError = { code: 'P2002' };
     const mockPrismaResponse = {
       statusCode: 409,
-      message: 'Unique constraint failed',
+      message: 'Unique constraint failed' as TranslationKey,
     };
 
     vi.mocked(isPrismaError).mockReturnValue(true);

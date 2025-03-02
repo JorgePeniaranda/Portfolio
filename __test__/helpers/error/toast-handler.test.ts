@@ -1,3 +1,5 @@
+import type { TranslationKey } from '@/types/translation';
+
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { handleErrorWithToast } from '@/helpers/error/toast-handler';
@@ -20,7 +22,7 @@ describe('handleErrorWithToast', () => {
 
   it('should display a toast with the message of an Error', () => {
     const mockError = new Error('Test error message');
-    const mockTitle = 'Error occurred';
+    const mockTitle: TranslationKey = 'handler.toast.error.status-messages.generic-error';
 
     handleErrorWithToast({
       error: mockError,
@@ -33,8 +35,8 @@ describe('handleErrorWithToast', () => {
 
   it('should display a toast with the default message for a generic error', () => {
     const mockError = { code: 500 };
-    const mockTitle = 'Unknown error';
-    const mockDefaultErrorMessage = 'Default error message';
+    const mockTitle = 'Unknown error' as TranslationKey;
+    const mockDefaultErrorMessage = 'Default error message' as TranslationKey;
 
     handleErrorWithToast({
       error: mockError,

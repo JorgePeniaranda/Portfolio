@@ -102,8 +102,8 @@ export function UpdateProjectsRelatedToStack({
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: t('components.update-projects-related-stack.error-title'),
-        defaultErrorMessage: t('components.update-projects-related-stack.error-description'),
+        title: 'components.update-projects-related-stack.error-title',
+        defaultErrorMessage: 'components.update-projects-related-stack.error-description',
         tryAgain: () => onAddProject(values),
       });
     }
@@ -136,8 +136,8 @@ export function UpdateProjectsRelatedToStack({
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: t('components.update-projects-related-stack.remove-error-title'),
-        defaultErrorMessage: t('components.update-projects-related-stack.remove-error-description'),
+        title: 'components.update-projects-related-stack.remove-error-title',
+        defaultErrorMessage: 'components.update-projects-related-stack.remove-error-description',
         tryAgain: () => onRemoveProject(idProject),
       });
     }

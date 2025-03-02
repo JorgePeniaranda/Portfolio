@@ -58,8 +58,8 @@ export function StackTableHeader({ table }: { table: Table<Stack> }) {
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: t('components.table.collaborators.messages.error-title'),
-        defaultErrorMessage: t('components.table.collaborators.messages.error-description'),
+        title: 'components.table.collaborators.messages.error-title',
+        defaultErrorMessage: 'components.table.collaborators.messages.error-description',
         tryAgain: () => handleDelete(),
       });
     }

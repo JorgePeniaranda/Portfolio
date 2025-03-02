@@ -73,8 +73,8 @@ export function UpdateProjectForm({
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: t('components.update-project-form.error-title'),
-        defaultErrorMessage: t('components.update-project-form.error-description'),
+        title: 'components.update-project-form.error-title',
+        defaultErrorMessage: 'components.update-project-form.error-description',
         tryAgain: () => onSubmit(values),
       });
     }

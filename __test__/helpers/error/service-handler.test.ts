@@ -1,3 +1,5 @@
+import type { TranslationKey } from '@/types/translation';
+
 import axios from 'axios';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -28,7 +30,7 @@ describe('handleServiceError', () => {
 
     const result = handleServiceError({
       error: mockError,
-      defaultErrorMessage: 'An error occurred.',
+      defaultErrorMessage: 'An error occurred.' as TranslationKey,
     });
 
     expect(result).toEqual(new Error('An error occurred.'));
@@ -42,7 +44,7 @@ describe('handleServiceError', () => {
 
     const result = handleServiceError({
       error: mockError,
-      defaultErrorMessage: 'An error occurred.',
+      defaultErrorMessage: 'An error occurred.' as TranslationKey,
     });
 
     expect(result).toEqual(new Error('An error occurred.'));
@@ -60,7 +62,7 @@ describe('handleServiceError', () => {
 
     const result = handleServiceError({
       error: mockError,
-      defaultErrorMessage: 'An error occurred.',
+      defaultErrorMessage: 'An error occurred.' as TranslationKey,
     });
 
     expect(result).toEqual(new Error('An error occurred.'));
@@ -79,7 +81,7 @@ describe('handleServiceError', () => {
 
     const result = handleServiceError({
       error: mockError,
-      defaultErrorMessage: 'An error occurred.',
+      defaultErrorMessage: 'An error occurred.' as TranslationKey,
     });
 
     expect(result).toEqual(new Error('Specific error message'));
@@ -105,7 +107,7 @@ describe('handleServiceError', () => {
 
     const result = handleServiceError({
       error: mockError,
-      defaultErrorMessage: 'An error occurred.',
+      defaultErrorMessage: 'An error occurred.' as TranslationKey,
     });
 
     expect(result).toEqual(new Error('email: Invalid email\npassword: Password too short'));
@@ -121,7 +123,7 @@ describe('handleServiceError', () => {
 
     const result = handleServiceError({
       error: mockError,
-      defaultErrorMessage: 'An error occurred.',
+      defaultErrorMessage: 'An error occurred.' as TranslationKey,
     });
 
     expect(result).toEqual(new Error('An error occurred.'));

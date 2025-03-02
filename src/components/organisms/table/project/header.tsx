@@ -58,8 +58,8 @@ export function ProjectTableHeader({ table }: { table: Table<Project> }) {
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: t('components.table.projects.messages.error-title'),
-        defaultErrorMessage: t('components.table.projects.messages.error-description'),
+        title: 'components.table.projects.messages.error-title',
+        defaultErrorMessage: 'components.table.projects.messages.error-description',
         tryAgain: () => handleDelete(),
       });
     }

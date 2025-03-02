@@ -69,8 +69,8 @@ export function UpdateStackForm({
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: t('components.update-stack-form.error-title'),
-        defaultErrorMessage: t('components.update-stack-form.error-description'),
+        title: 'components.update-stack-form.error-title',
+        defaultErrorMessage: 'components.update-stack-form.error-description',
         tryAgain: () => onSubmit(values),
       });
     }

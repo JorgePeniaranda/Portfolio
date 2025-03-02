@@ -58,8 +58,8 @@ export function UpdateCollaboratorForm({
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: t('components.update-collaborator-form.error-title'),
-        defaultErrorMessage: t('components.update-collaborator-form.error-description'),
+        title: 'components.update-collaborator-form.error-title',
+        defaultErrorMessage: 'components.update-collaborator-form.error-description',
         tryAgain: () => onSubmit(values),
       });
     }

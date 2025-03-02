@@ -72,8 +72,8 @@ export function CreateProjectForm({ disableForm = false }: { disableForm?: boole
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: t('components.create-project-form.error-title'),
-        defaultErrorMessage: t('components.create-project-form.error-description'),
+        title: 'components.create-project-form.error-title',
+        defaultErrorMessage: 'components.create-project-form.error-description',
         tryAgain: () => onSubmit(values),
       });
     }

@@ -103,8 +103,8 @@ export function UpdateProjectsRelatedToCollaborator({
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: t('components.update-projects-related-collaborator.error-title'),
-        defaultErrorMessage: t('components.update-projects-related-collaborator.error-description'),
+        title: 'components.update-projects-related-collaborator.error-title',
+        defaultErrorMessage: 'components.update-projects-related-collaborator.error-description',
         tryAgain: () => onAddProject(values),
       });
     }
@@ -140,10 +140,9 @@ export function UpdateProjectsRelatedToCollaborator({
     } catch (error) {
       handleErrorWithToast({
         error,
-        title: t('components.update-projects-related-collaborator.remove-error-title'),
-        defaultErrorMessage: t(
+        title: 'components.update-projects-related-collaborator.remove-error-title',
+        defaultErrorMessage:
           'components.update-projects-related-collaborator.remove-error-description',
-        ),
         tryAgain: () => onRemoveProject(idProject),
       });
     }
