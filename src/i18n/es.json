@@ -651,6 +651,119 @@
       }
     }
   },
+  "services": {
+    "collaborator": {
+      "delete-collaborator": {
+        "operation-failed": "No se pudo eliminar el colaborador"
+      },
+      "get-collaborator-by-id": {
+        "operation-failed": "No se pudo recuperar el colaborador"
+      },
+      "get-all-collaborator": {
+        "operation-failed": "No se pudo recuperar la lista de colaboradores"
+      },
+      "post-collaborator": {
+        "operation-failed": "No se pudo crear el colaborador"
+      },
+      "put-collaborator": {
+        "operation-failed": "No se pudo actualizar el colaborador"
+      },
+      "delete-collaborator-remove-associated-projects": {
+        "operation-failed": "No se pudo eliminar el proyecto del colaborador"
+      },
+      "get-collaborators-by-not-associated-projects": {
+        "operation-failed": "No se pudo recuperar los colaboradores no asociados al proyecto"
+      },
+      "get-collaborators-by-associated-projects": {
+        "operation-failed": "No se pudo recuperar los colaboradores asociados al proyecto"
+      },
+      "post-collaborator-add-associated-projects": {
+        "operation-failed": "No se pudo agregar el proyecto al colaborador"
+      }
+    },
+    "project": {
+      "delete-project-remove-associated-collaborator": {
+        "operation-failed": "No se pudo eliminar el colaborador del proyecto"
+      },
+      "get-projects-by-associated-collaborator": {
+        "operation-failed": "No se pudo recuperar los proyectos asociados al colaborador"
+      },
+      "get-projects-by-not-associated-collaborator": {
+        "operation-failed": "No se pudo recuperar los proyectos no asociados al colaborador"
+      },
+      "get-projects-by-associated-stack": {
+        "operation-failed": "No se pudo recuperar los proyectos asociados al stack"
+      },
+      "get-projects-by-not-associated-stack": {
+        "operation-failed": "No se pudo recuperar los proyectos no asociados al stack"
+      },
+      "post-project-add-associated-collaborator": {
+        "operation-failed": "No se pudo agregar el colaborador al proyecto"
+      },
+      "post-project-add-associated-stack": {
+        "operation-failed": "No se pudo agregar el stack al proyecto"
+      },
+      "delete-project-remove-associated-stack": {
+        "operation-failed": "No se pudo eliminar el stack del proyecto"
+      },
+      "get-all-projects": {
+        "operation-failed": "No se pudo recuperar la lista de proyectos"
+      },
+      "get-all-project-min": {
+        "operation-failed": "No se pudo recuperar la lista mínima de proyectos"
+      },
+      "get-project-by-id": {
+        "operation-failed": "No se pudo recuperar el proyecto"
+      },
+      "get-project-by-key": {
+        "operation-failed": "No se pudo recuperar el proyecto"
+      },
+      "post-project": {
+        "operation-failed": "No se pudo crear el proyecto"
+      },
+      "put-project": {
+        "operation-failed": "No se pudo actualizar el proyecto"
+      },
+      "delete-project": {
+        "operation-failed": "No se pudo eliminar el proyecto"
+      }
+    },
+    "stack": {
+      "get-all-stack": {
+        "operation-failed": "No se pudo recuperar la lista de stacks"
+      },
+      "get-all-stack-with-relations-and-projects-min": {
+        "operation-failed": "No se pudo recuperar la lista de stacks con sus relaciones"
+      },
+      "get-stack-by-id": {
+        "operation-failed": "No se pudo recuperar el stack"
+      },
+      "get-stack-by-key": {
+        "operation-failed": "No se pudo recuperar el stack"
+      },
+      "get-stacks-by-associated-projects": {
+        "operation-failed": "No se pudo recuperar los stacks asociados al proyecto"
+      },
+      "get-stacks-by-not-associated-projects": {
+        "operation-failed": "No se pudo recuperar los stacks no asociados al proyecto"
+      },
+      "post-stack": {
+        "operation-failed": "No se pudo crear el stack"
+      },
+      "post-stack-add-associated-projects": {
+        "operation-failed": "No se pudo agregar el proyecto al stack"
+      },
+      "put-stack": {
+        "operation-failed": "No se pudo actualizar el stack"
+      },
+      "delete-stack": {
+        "operation-failed": "No se pudo eliminar el stack"
+      },
+      "delete-stack-remove-associated-projects": {
+        "operation-failed": "No se pudo eliminar el proyecto del stack"
+      }
+    }
+  },
   "error": {
     "api": {
       "operationFailed": "La operación ha fallado. Por favor, intenta nuevamente.",

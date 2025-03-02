@@ -651,6 +651,119 @@ export interface Translation {
       };
     };
   };
+  services: {
+    collaborator: {
+      'delete-collaborator': {
+        'operation-failed': string;
+      };
+      'get-collaborator-by-id': {
+        'operation-failed': string;
+      };
+      'get-all-collaborator': {
+        'operation-failed': string;
+      };
+      'post-collaborator': {
+        'operation-failed': string;
+      };
+      'put-collaborator': {
+        'operation-failed': string;
+      };
+      'delete-collaborator-remove-associated-projects': {
+        'operation-failed': string;
+      };
+      'get-collaborators-by-not-associated-projects': {
+        'operation-failed': string;
+      };
+      'get-collaborators-by-associated-projects': {
+        'operation-failed': string;
+      };
+      'post-collaborator-add-associated-projects': {
+        'operation-failed': string;
+      };
+    };
+    project: {
+      'delete-project-remove-associated-collaborator': {
+        'operation-failed': string;
+      };
+      'get-projects-by-associated-collaborator': {
+        'operation-failed': string;
+      };
+      'get-projects-by-not-associated-collaborator': {
+        'operation-failed': string;
+      };
+      'get-projects-by-associated-stack': {
+        'operation-failed': string;
+      };
+      'get-projects-by-not-associated-stack': {
+        'operation-failed': string;
+      };
+      'post-project-add-associated-collaborator': {
+        'operation-failed': string;
+      };
+      'post-project-add-associated-stack': {
+        'operation-failed': string;
+      };
+      'delete-project-remove-associated-stack': {
+        'operation-failed': string;
+      };
+      'get-all-projects': {
+        'operation-failed': string;
+      };
+      'get-all-project-min': {
+        'operation-failed': string;
+      };
+      'get-project-by-id': {
+        'operation-failed': string;
+      };
+      'get-project-by-key': {
+        'operation-failed': string;
+      };
+      'post-project': {
+        'operation-failed': string;
+      };
+      'put-project': {
+        'operation-failed': string;
+      };
+      'delete-project': {
+        'operation-failed': string;
+      };
+    };
+    stack: {
+      'get-all-stack': {
+        'operation-failed': string;
+      };
+      'get-all-stack-with-relations-and-projects-min': {
+        'operation-failed': string;
+      };
+      'get-stack-by-id': {
+        'operation-failed': string;
+      };
+      'get-stack-by-key': {
+        'operation-failed': string;
+      };
+      'get-stacks-by-associated-projects': {
+        'operation-failed': string;
+      };
+      'get-stacks-by-not-associated-projects': {
+        'operation-failed': string;
+      };
+      'post-stack': {
+        'operation-failed': string;
+      };
+      'post-stack-add-associated-projects': {
+        'operation-failed': string;
+      };
+      'put-stack': {
+        'operation-failed': string;
+      };
+      'delete-stack': {
+        'operation-failed': string;
+      };
+      'delete-stack-remove-associated-projects': {
+        'operation-failed': string;
+      };
+    };
+  };
   error: {
     'api': {
       operationFailed: string;
