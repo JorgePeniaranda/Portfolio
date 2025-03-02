@@ -1,4 +1,5 @@
 import type { PrismaError } from '@/types/common';
+import type { TranslationKey } from '@/types/translation';
 
 import { Prisma } from '@prisma/client';
 
@@ -29,7 +30,7 @@ export function getStatusCodeByPrismaErrorCode(prismaErrorCode: string): number 
  * @param error - The error object thrown by Prisma.
  * @returns An object containing the HTTP status code and error message.
  */
-export function prismaHandler(error: PrismaError): { statusCode: number; message: string } {
+export function prismaHandler(error: PrismaError): { statusCode: number; message: TranslationKey } {
   if (
     error instanceof Prisma.PrismaClientKnownRequestError &&
     error.code in PRISMA_ERROR_MESSAGES
@@ -42,6 +43,6 @@ export function prismaHandler(error: PrismaError): { statusCode: number; message
 
   return {
     statusCode: 500,
-    message: 'Internal server error.',
+    message: 'handler.prisma.generic-error',
   };
 }

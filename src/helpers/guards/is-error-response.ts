@@ -32,5 +32,11 @@ export function isErrorResponse(error: unknown): error is ErrorResponse {
     predicate ||= false;
   }
 
+  if ('i18n' in error && typeof error.i18n === 'string') {
+    predicate ||= true;
+  } else {
+    predicate ||= false;
+  }
+
   return predicate;
 }

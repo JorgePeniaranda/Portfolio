@@ -24,6 +24,7 @@ export function handleApiError(error: unknown, url?: URL): Response {
         status: statusCode,
         title: 'An operation failed while processing the request.',
         type: 'OperationFailedError',
+        i18nKey: 'error.api.operationFailed',
       } satisfies ErrorResponse,
       {
         status: statusCode,
@@ -47,6 +48,7 @@ export function handleApiError(error: unknown, url?: URL): Response {
         status: 400,
         title: 'A validation error occurred.',
         type: 'ValidationError',
+        i18nKey: 'error.api.validation',
       } satisfies ErrorResponse,
       {
         status: 400,
@@ -65,6 +67,7 @@ export function handleApiError(error: unknown, url?: URL): Response {
       status: 500,
       title: 'Internal server error.',
       type: 'InternalServerError',
+      i18nKey: 'error.api.generic',
     } satisfies ErrorResponse,
     {
       status: 500,

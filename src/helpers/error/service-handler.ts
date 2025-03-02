@@ -1,8 +1,11 @@
+import type { TranslationKey } from '@/types/translation';
+
 import axios from 'axios';
 
 import { isDefined } from '../guards/is-defined';
 import { isErrorResponse } from '../guards/is-error-response';
-import { isNoEmptyString } from '../guards/is-no-empty-string';
+
+import { ServiceError, type ErrorServiceValidationError } from './service-error';
 
 import { ENV } from '@/constants/env';
 
@@ -16,17 +19,17 @@ import { ENV } from '@/constants/env';
  */
 export function handleServiceError({
   error,
-  defaultErrorMessage = 'Ha ocurrido un error.',
+  defaultErrorMessage = 'handler.service.generic-error',
 }: {
   error: unknown;
-  defaultErrorMessage?: string;
+  defaultErrorMessage?: TranslationKey;
 }): Error {
   if (ENV.isServerSideEnable === false) {
-    throw new Error('No se puede realizar cambios por ser un sitio estático');
+    throw new ServiceError('handler.service.static-error');
   }
 
   if (!axios.isAxiosError(error) || !isErrorResponse(error.response?.data)) {
-    return new Error(defaultErrorMessage);
+    return new ServiceError(defaultErrorMessage);
   }
 
   const { data: errorResponseData } = error.response;
@@ -35,14 +38,21 @@ export function handleServiceError({
     isDefined(errorResponseData.fieldErrors?.length) &&
     errorResponseData.fieldErrors.length > 0
   ) {
-    return new Error(
-      errorResponseData.fieldErrors.map((error) => `${error.field}: ${error.message}`).join('\n'),
+    const fieldsErrors: ErrorServiceValidationError[] = errorResponseData.fieldErrors.map(
+      (error) => {
+        return {
+          field: error.field,
+          message: error.message as TranslationKey,
+        };
+      },
     );
+
+    return new ServiceError(defaultErrorMessage, fieldsErrors);
   }
 
-  if (isDefined(errorResponseData.title) && isNoEmptyString(errorResponseData.title)) {
-    return new Error(errorResponseData.title);
+  if (isDefined(errorResponseData.i18nKey)) {
+    return new ServiceError(errorResponseData.i18nKey);
   }
 
-  return new Error(defaultErrorMessage);
+  return new ServiceError(defaultErrorMessage);
 }
