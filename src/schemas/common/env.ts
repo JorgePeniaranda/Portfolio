@@ -64,4 +64,4 @@ export const EnvSchema = z.object({
   }),
 });
 
-export type EnvSchemaSchema = z.infer<typeof EnvSchema>;
+export type EnvSchema = z.infer<typeof EnvSchema>;
