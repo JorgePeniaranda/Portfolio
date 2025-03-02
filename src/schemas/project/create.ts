@@ -20,6 +20,7 @@ export const ProjectCreateSchema = z.object({
     .string({
       message: ProjectSchemaErrorMessages.key.string,
       required_error: ProjectSchemaErrorMessages.key.required_error,
+      invalid_type_error: ProjectSchemaErrorMessages.key.string,
     })
     .min(1, {
       message: ProjectSchemaErrorMessages.key.required_error,
@@ -28,23 +29,28 @@ export const ProjectCreateSchema = z.object({
     .string({
       message: ProjectSchemaErrorMessages.name.string,
       required_error: ProjectSchemaErrorMessages.name.required_error,
+      invalid_type_error: ProjectSchemaErrorMessages.name.string,
     })
     .min(1, {
       message: ProjectSchemaErrorMessages.name.required_error,
     }),
   status: z.enum(projectStatusValues, {
     message: ProjectSchemaErrorMessages.status.enum,
+    invalid_type_error: ProjectSchemaErrorMessages.status.enum,
   }),
   stackCategory: z.enum(stackCategoryValues, {
     message: ProjectSchemaErrorMessages.stackCategory.enum,
+    invalid_type_error: ProjectSchemaErrorMessages.stackCategory.enum,
   }),
   startDate: z.coerce.date({
     message: ProjectSchemaErrorMessages.startDate.date,
     required_error: ProjectSchemaErrorMessages.startDate.required_error,
+    invalid_type_error: ProjectSchemaErrorMessages.startDate.date,
   }),
   endDate: z.coerce
     .date({
       message: ProjectSchemaErrorMessages.endDate.date,
+      invalid_type_error: ProjectSchemaErrorMessages.endDate.date,
     })
     .optional()
     .nullable(),
@@ -52,6 +58,7 @@ export const ProjectCreateSchema = z.object({
     .string({
       message: ProjectSchemaErrorMessages.description.string,
       required_error: ProjectSchemaErrorMessages.description.required_error,
+      invalid_type_error: ProjectSchemaErrorMessages.description.string,
     })
     .min(1, {
       message: ProjectSchemaErrorMessages.description.required_error,
@@ -60,6 +67,7 @@ export const ProjectCreateSchema = z.object({
     .string({
       message: ProjectSchemaErrorMessages.goals.string,
       required_error: ProjectSchemaErrorMessages.goals.required_error,
+      invalid_type_error: ProjectSchemaErrorMessages.goals.string,
     })
     .min(1, {
       message: ProjectSchemaErrorMessages.goals.required_error,
@@ -68,6 +76,7 @@ export const ProjectCreateSchema = z.object({
     .string({
       message: ProjectSchemaErrorMessages.contributions.string,
       required_error: ProjectSchemaErrorMessages.contributions.required_error,
+      invalid_type_error: ProjectSchemaErrorMessages.contributions.string,
     })
     .min(1, {
       message: ProjectSchemaErrorMessages.contributions.required_error,
@@ -76,6 +85,7 @@ export const ProjectCreateSchema = z.object({
     .string({
       message: ProjectSchemaErrorMessages.logoUrl.string,
       required_error: ProjectSchemaErrorMessages.logoUrl.required_error,
+      invalid_type_error: ProjectSchemaErrorMessages.logoUrl.string,
     })
     .min(1, {
       message: ProjectSchemaErrorMessages.logoUrl.required_error,
@@ -84,6 +94,7 @@ export const ProjectCreateSchema = z.object({
     .string({
       message: ProjectSchemaErrorMessages.primaryColor.string,
       required_error: ProjectSchemaErrorMessages.primaryColor.required_error,
+      invalid_type_error: ProjectSchemaErrorMessages.primaryColor.string,
     })
     .refine(isHexadecimal, {
       message: ProjectSchemaErrorMessages.primaryColor.invalid_hex_color,
@@ -91,12 +102,14 @@ export const ProjectCreateSchema = z.object({
   demoUrl: z
     .string({
       message: ProjectSchemaErrorMessages.demoUrl.string,
+      invalid_type_error: ProjectSchemaErrorMessages.demoUrl.string,
     })
     .optional()
     .nullable(),
   githubUrl: z
     .string({
       message: ProjectSchemaErrorMessages.githubUrl.string,
+      invalid_type_error: ProjectSchemaErrorMessages.githubUrl.string,
     })
     .optional()
     .nullable(),

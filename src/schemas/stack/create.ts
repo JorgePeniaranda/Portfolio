@@ -19,6 +19,7 @@ export const StackCreateSchema = z.object({
     .string({
       message: StackSchemaErrorMessages.key.string,
       required_error: StackSchemaErrorMessages.key.required_error,
+      invalid_type_error: StackSchemaErrorMessages.key.string,
     })
     .min(1, {
       message: StackSchemaErrorMessages.key.required_error,
@@ -27,6 +28,7 @@ export const StackCreateSchema = z.object({
     .string({
       message: StackSchemaErrorMessages.name.string,
       required_error: StackSchemaErrorMessages.name.required_error,
+      invalid_type_error: StackSchemaErrorMessages.name.string,
     })
     .min(1, {
       message: StackSchemaErrorMessages.name.required_error,
@@ -35,6 +37,7 @@ export const StackCreateSchema = z.object({
     .string({
       message: StackSchemaErrorMessages.description.string,
       required_error: StackSchemaErrorMessages.description.required_error,
+      invalid_type_error: StackSchemaErrorMessages.description.string,
     })
     .min(1, {
       message: StackSchemaErrorMessages.description.required_error,
@@ -42,12 +45,14 @@ export const StackCreateSchema = z.object({
   category: z
     .enum(stackCategoryValues, {
       message: StackSchemaErrorMessages.category.enum,
+      invalid_type_error: StackSchemaErrorMessages.category.enum,
     })
     .optional()
     .nullable(),
   type: z
     .enum(stackTypeValues, {
       message: StackSchemaErrorMessages.type.enum,
+      invalid_type_error: StackSchemaErrorMessages.type.enum,
     })
     .optional()
     .nullable(),
@@ -55,6 +60,7 @@ export const StackCreateSchema = z.object({
     .string({
       message: StackSchemaErrorMessages.iconUrl.string,
       required_error: StackSchemaErrorMessages.iconUrl.required_error,
+      invalid_type_error: StackSchemaErrorMessages.iconUrl.string,
     })
     .min(1, {
       message: StackSchemaErrorMessages.iconUrl.required_error,

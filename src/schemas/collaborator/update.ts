@@ -8,17 +8,20 @@ export const CollaboratorUpdateSchema = z.object({
   nickname: z
     .string({
       message: CollaboratorSchemaErrorMessages.nickname.string,
+      invalid_type_error: CollaboratorSchemaErrorMessages.nickname.string,
     })
     .optional(),
   githubUsername: z
     .string({
       message: CollaboratorSchemaErrorMessages.githubUsername.string,
+      invalid_type_error: CollaboratorSchemaErrorMessages.githubUsername.string,
     })
     .optional()
     .nullable(),
   linkedinUsername: z
     .string({
       message: CollaboratorSchemaErrorMessages.linkedinUsername.string,
+      invalid_type_error: CollaboratorSchemaErrorMessages.linkedinUsername.string,
     })
     .optional()
     .nullable(),
