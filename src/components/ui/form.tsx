@@ -1,4 +1,5 @@
 import type * as LabelPrimitive from '@radix-ui/react-label';
+import type { TranslationKey } from '@/types/translation';
 
 import { Slot } from '@radix-ui/react-slot';
 import * as React from 'react';
@@ -14,6 +15,7 @@ import {
 import { Label } from './label';
 
 import { cn } from '@/helpers/common/classnames';
+import useTranslations from '@/hooks/use-translations';
 
 const Form = FormProvider;
 
@@ -137,13 +139,20 @@ FormDescription.displayName = 'FormDescription';
 
 const FormMessage = React.forwardRef<
   HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
->(({ className, children, ...props }, ref) => {
+  React.HTMLAttributes<HTMLParagraphElement> & { noTranslate?: boolean }
+>(({ className, children, noTranslate = false, ...props }, ref) => {
+  const { t } = useTranslations();
   const { error, formMessageId } = useFormField();
   const body = error ? String(error?.message) : children;
 
   if (!body) {
     return null;
+  }
+
+  let message = body;
+
+  if (typeof body === 'string' && !noTranslate) {
+    message = t(body as TranslationKey);
   }
 
   return (
@@ -153,7 +162,7 @@ const FormMessage = React.forwardRef<
       id={formMessageId}
       {...props}
     >
-      {body}
+      {message}
     </p>
   );
 });
